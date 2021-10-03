@@ -1,27 +1,52 @@
 import './App.css';
 import React from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {withCookies} from "react-cookie";
+import LoginPage from "./Components/LoginPage";
+import DashboardPage from "./Components/DashboardPage";
+
+
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-  constructor(props) {
-    super(props);
-    this.state = {msg: undefined}
-  }
+    render() {
+        const is_auth = localStorage.getItem('is_auth') === 'true';
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Switch>
+                        <Route
+                            exact
+                            path='/'
+                            render={() => (
+                                <h1>Landing Page</h1>
+                            )}
+                        />
+                        <Route
+                            exact
+                            path='/login'
+                            render={() => (
+                                is_auth ?
+                                    <Redirect to='/dashboard'/> :
+                                    <LoginPage />
+                            )}
+                        />
+                        <Route
+                            exact
+                            path='/dashboard'
+                            render={() => (
+                                <DashboardPage cookies={this.props.cookies} />
+                            )}
+                        />
+                    </Switch>
+                </div>
+            </BrowserRouter>
 
-  componentDidMount() {
-    fetch("/index").then(response => response.json().then(obj => this.setState({msg: obj[0][1]})));
-
-  }
-  render() {
-
-  return (
-      <div className="App">
-        <header className="App-header">
-        {this.state.msg}
-        </header>
-      </div>
-    );
-  }
+        );
+    }
 }
 
-export default App;
+export default withCookies(App);
