@@ -1,28 +1,28 @@
-import './App.css';
+
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
+import NavBar from './Components/NavBar';
 
 
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
-                <div className="App">
+                <div>
                     <Switch>
                         <Route
                             exact
                             path='/'
                             render={() => (
+                                <React.Fragment>
+                                <NavBar />
                                 <h1>Landing Page</h1>
+                                </React.Fragment>
                             )}
                         />
                         <Route
@@ -36,11 +36,12 @@ class App extends React.Component {
                         />
                         <Route
                             exact
-                            path='/dashboard'
+                            path='/jobdashboard'
                             render={() => (
                                 <DashboardPage cookies={this.props.cookies} />
                             )}
                         />
+
                     </Switch>
                 </div>
             </BrowserRouter>

@@ -1,49 +1,39 @@
-import { Component } from 'react'
-import { Redirect } from "react-router-dom";
+import React, { Component } from 'react'
+import { Link } from "react-router-dom"
+import logo from "../Static/Images/Pa_RapidoLogo.png"
 
-class LoginPage extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            logout_success: false,
-        };
-
-        this.handleLogout = this.handleLogout.bind(this);
-    }
-
-    handleLogout() {
-        fetch(
-            '/logout',
-            {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers:{
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                }
-            }
-        ).then(response => {
-            if(response.ok) {
-                localStorage.setItem('is_auth', 'false');
-                response.json().then(data => {
-                    localStorage.removeItem('user_id');
-                    localStorage.removeItem('type');
-                    this.setState({logout_success: true});
-                })}
-        })
-    }
-
+export class NavBar extends Component {
     render() {
-        const { logout_success } = this.state;
         return (
-            <div className="NavBar">
-                {logout_success &&
-                    <Redirect to='/'/>
-                }
-                <button onClick={this.handleLogout}>Log out!!!!!</button>
-            </div>
+            <nav > 
+                <img style={logoStyle} src={logo} alt="Logo" />
+                <ul style={{listStyleType: "none"}}> 
+                <li>
+                <Link to="/">Main</Link>
+                </li>           
+                <li>
+                <Link to="/jobdashboard">Job Dashboard</Link>
+                </li>
+                <li>
+                <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                <Link to="/"> Sign Out </Link>
+                </li>
+                </ul>
+            </nav>
         )
     }
 }
 
-export default LoginPage
+const logoStyle = {
+    background: "black", 
+    width: 60,
+    height: 60, 
+    left: 7,
+    top: 5,
+    position: "absolute"
+}
+
+
+export default NavBar;
