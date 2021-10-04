@@ -1,0 +1,51 @@
+/* prevent web page issues */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* Logo */
+
+.logostyle {
+  width: 80px;
+  height: 80px;
+  margin-left: 20px;
+  margin-top: 2.5px;
+}
+
+/* Parent element - This control the box on the back -
+ all the other elements derived from this*/
+
+.nav {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  background-color: #2e856e;
+  font-family: "Times New Roman";
+  font-weight: 500;
+  font-size: 18px;
+  gap: 15px;
+  margin-bottom: 40px; /* moves the elements below the nav bar */
+}
+
+/* Child element - This controls the smaller box 
+from the parent meaning the links */
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  width: 40%;
+}
+
+/*Remove bullets */
+.nav-links li {
+  list-style: none;
+}
+
+/*Each link style */
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  letter-spacing: 1px;
+}
