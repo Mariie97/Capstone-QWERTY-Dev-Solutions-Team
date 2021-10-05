@@ -4,20 +4,26 @@ import logo from "../Static/Images/Pa_RapidoLogo.png"
 import "../Layouts/NavBar.css"
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
+
+
 export class NavBar extends Component {
+    
     
     constructor(props) {
         super(props);
      
         this.state = {
-            signout_success: false,
+            logout_success: false,
             
         };
 
-        this.handleSignOut = this.handleSignOut.bind(this);
+        this.handleLogOut = this.handleLogOut.bind(this);
+
     }
 
-    handleSignOut() {
+    //method to handle logging out 
+    
+    handleLogOut() {
         
         fetch(
             '/logout',
@@ -36,39 +42,64 @@ export class NavBar extends Component {
                 response.json().then(data => {
                     localStorage.removeItem('user_id');
                     localStorage.removeItem('type');
-                    this.setState({signout_success: true});
+                    this.setState({logout_success: true});
 
                 })}
         })
     }
+
+
+    // method to slide small nav bar from menu icon in website
+
+    navSlide = () =>{
+   
+    const nav = document.querySelector('.nav-links')
+
+    // toggle menu button 
+
+    nav.classList.toggle('nav-active');
+    const navLinks = document.querySelectorAll(".nav-links li")
+
+    // animate links
+
+    navLinks.forEach((link, index) =>{
+        if(link.style.animation){
+            link.style.animation = ``
+        }
+        else{
+            link.style.animation = `navLinksFade 0.4s ease forwards ${index/5}s`
+        }
+       
+
+    })
+
+}
+  
     
 
     render() {
-        const { signout_success } = this.state;
-        
+        const { logout_success } = this.state;
         return (
-            <nav className="NavBar"> 
+            <nav className="NavBar" > 
                 <div className="nav">
-                <img className="logostyle" src={logo} alt="Logo" />
-
-                <ul className="nav-links"> 
-                   
-                <li>
-                <Link to="/jobdashboard">Job Dashboard</Link>
-                </li>
-                <li>
-                <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                <div>
-                {signout_success && <Redirect to='/'/>}   
-                <div onClick = {this.handleSignOut} id="signout"> Sign Out </div>
+                    <img className="logostyle" src={logo} alt="Logo" />
+                        <ul className="nav-links"> 
+                        
+                            <li>
+                                <Link to="/jobdashboard">Job Dashboard</Link>
+                            </li>
+                            <li>
+                                <Link to="/profile">Profile</Link>
+                            </li>
+                            <li>
+                                <div>
+                                {logout_success && <Redirect to='/'/>}   
+                                <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
+                                </div>
+                            </li>
+                        </ul>
+                    <div className="menuopen" onClick={this.navSlide}><MenuOpenIcon/></div>
                 </div>
-                </li>
-                </ul>
-                <div className="menuopen"><MenuOpenIcon/></div>
-                </div>
-              
             </nav>
         )
     }
