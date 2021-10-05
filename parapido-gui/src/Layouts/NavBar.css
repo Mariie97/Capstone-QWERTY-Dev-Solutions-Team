@@ -44,8 +44,19 @@ from the parent meaning the links */
 }
 
 /*Each link style */
-.nav-links a {
+.nav-links a,
+#signout {
   color: white;
   text-decoration: none;
   letter-spacing: 1px;
+}
+
+@media screen and (max-width: 800px) {
+  .nav-links {
+    background-color: #2e856e;
+    position: absolute;
+    right: 0px;
+    min-height: 95vh;
+    top: 50px;
+  }
 }

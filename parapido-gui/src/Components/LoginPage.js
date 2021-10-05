@@ -35,7 +35,7 @@ class LoginPage extends Component {
         return (
             <div>
                 {login_success ?
-                    <Redirect to='/dashboard' /> :
+                    <Redirect to='/jobdashboard'/> :
                     <button onClick={this.handleOnClick}>Log in</button>
                 }
             </div>

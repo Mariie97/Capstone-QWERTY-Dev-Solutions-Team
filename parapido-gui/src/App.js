@@ -19,8 +19,8 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>
-                                <NavBar />
+                                <React.Fragment>                       
+                                 <NavBar cookies={this.props.cookies}/>
                                 <h1>Landing Page</h1>
                                 </React.Fragment>
                             )}
@@ -30,7 +30,7 @@ class App extends React.Component {
                             path='/login'
                             render={() => (
                                 is_auth ?
-                                    <Redirect to='/dashboard'/> :
+                                    <Redirect to='/jobdashboard'/> :
                                     <LoginPage />
                             )}
                         />
@@ -38,7 +38,9 @@ class App extends React.Component {
                             exact
                             path='/jobdashboard'
                             render={() => (
-                                <DashboardPage cookies={this.props.cookies} />
+                                <React.Fragment>
+                                <DashboardPage/>
+                               </React.Fragment>
                             )}
                         />
 
