@@ -1,5 +1,5 @@
 import { Component } from 'react'
-// import LogOut from "./LogOut";
+
 
 class LoginPage extends Component {
 
@@ -9,7 +9,7 @@ class LoginPage extends Component {
         return (
             <div className="Dashboard">
                 <h1>Job Dashboard</h1>
-                {/* <LogOut cookies={this.props.cookies} /> */}
+                
             </div>
         )
     }

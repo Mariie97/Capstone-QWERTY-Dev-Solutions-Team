@@ -1,8 +1,8 @@
-import React, { Component, Redirect } from 'react'
-import {Link} from "react-router-dom"
+import React, { Component } from 'react'
+import {Link, Redirect} from "react-router-dom"
 import logo from "../Static/Images/Pa_RapidoLogo.png"
 import "../Layouts/NavBar.css"
-
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 
 export class NavBar extends Component {
     
@@ -36,7 +36,7 @@ export class NavBar extends Component {
                 response.json().then(data => {
                     localStorage.removeItem('user_id');
                     localStorage.removeItem('type');
-                    this.setState({signout_success:true});
+                    this.setState({signout_success: true});
 
                 })}
         })
@@ -45,7 +45,7 @@ export class NavBar extends Component {
 
     render() {
         const { signout_success } = this.state;
-
+        
         return (
             <nav className="NavBar"> 
                 <div className="nav">
@@ -60,14 +60,15 @@ export class NavBar extends Component {
                 <Link to="/profile">Profile</Link>
                 </li>
                 <li>
-                <div className="NavBar">
+                <div>
                 {signout_success && <Redirect to='/'/>}   
                 <div onClick = {this.handleSignOut} id="signout"> Sign Out </div>
                 </div>
                 </li>
                 </ul>
+                <div className="menuopen"><MenuOpenIcon/></div>
                 </div>
-                
+              
             </nav>
         )
     }
@@ -75,4 +76,4 @@ export class NavBar extends Component {
 
 
 
-export default NavBar;
+export default NavBar

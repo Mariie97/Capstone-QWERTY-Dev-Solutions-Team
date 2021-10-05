@@ -51,6 +51,15 @@ from the parent meaning the links */
   letter-spacing: 1px;
 }
 
+.menuopen {
+  color: white;
+  margin: 5px;
+}
+
+.menuopen {
+  display: none;
+}
+
 @media screen and (max-width: 800px) {
   .nav-links {
     background-color: #2e856e;
