@@ -1,48 +1,23 @@
 import React, {Component} from 'react';
 import {Grid} from "@material-ui/core";
-import Select from "react-select";
-import Dropdown from "react-dropdown";
+
+import SecurityQuestion from "./SecurityQuestion";
+
 
 class UserRegistrationPage extends Component {
-
-    options = [
-        {value: "questionOne", label: "Question One"},
-        {value: "questionTwo", label: "Question Two"},
-        {value: "questionThree", label: "Question Three"},
-
-    ]
-
 
     constructor(props){
         super(props);
         this.state={
-            firstName: undefined,
-            lastName: undefined,
-            email: undefined,
-            password: undefined,
-            confirmPassword: undefined,
-            questionOne: undefined,
-            answerOne: undefined,
-            questionTwo: undefined,
-            questionThree: undefined,
-            answerTwo: undefined,
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            questionOneRef: React.createRef(),
+            questionTwoRef: React.createRef(),
         };
     }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    };
-
-/*    handleChange = (e) => {
-        this.setState({ e }, () => (
-            this.props.onChange({[e.name]: e.value})))
-        this.setState({
-                [e.name]: e.value
-            }
-        )
-    };*/
 
     change = e =>{
         this.props.onChange({[e.target.name]: e.target.value});
@@ -165,7 +140,7 @@ class UserRegistrationPage extends Component {
             width: "636px",
             height: "52px",
             left: "1047px",
-            top: "735px",
+            top: "718px",
 
             //background: "#FFFFFF",
         };
@@ -197,15 +172,15 @@ class UserRegistrationPage extends Component {
             left: "162px",
             top: "872px",
 
-/*            fontFamily: "Grand",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "24px",
-            lineHeight: "27px",*/
+            /*            fontFamily: "Grand",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        fontSize: "24px",
+                        lineHeight: "27px",*/
 
 
-        //color: #FFFFFF;
-    };
+            //color: #FFFFFF;
+        };
 
         const studentCheckboxStyle = {
             position: "absolute",
@@ -238,11 +213,11 @@ class UserRegistrationPage extends Component {
             left: "375px",
             top: "872px",
 
-/*            fontFamily: "Grand",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "24px",
-            lineHeight: "27px",*/
+            /*            fontFamily: "Grand",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        fontSize: "24px",
+                        lineHeight: "27px",*/
 
             //background: "#FFFFFF",
         };
@@ -277,125 +252,115 @@ class UserRegistrationPage extends Component {
 
 
 
-        const{firstName, lastName, email, password, confirmPassword, answerOne, answerTwo, questionOne, questionTwo}=this.state;
+        const {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            questionOneRef,
+            questionTwoRef } = this.state;
 
+        console.log("Question 1 value: ", questionOneRef.current?.state.question);
+        console.log("Question 2 value: ", questionTwoRef.current?.state.question);
 
-           return (
-               <div>
+        return (
+            <div>
 
-                           <form>
-           <Grid container>
-               <Grid item xs={6}>
+                <form>
+                    <Grid container>
+                        <Grid item xs={6}>
 
-                   <h1 style={titleStyle}>
-                       Create Account
-                   </h1>
+                            <h1 style={titleStyle}>
+                                Create Account
+                            </h1>
 
-                   <input
-                       type="text"
-                       name="firstName"
-                       placeholder="First Name"
-                       width = "100%"
-                       value = {firstName}
-                       onChange={e => this.change(e)}
-                       style={firstNameStyle}
-                   />
-                   <br />
+                            <input
+                                type="text"
+                                name="firstName"
+                                placeholder="First Name"
+                                width = "100%"
+                                value = {firstName}
+                                onChange={e => this.change(e)}
+                                style={firstNameStyle}
+                            />
+                            <br />
 
-                   <input
-                       type="text"
-                       name="lastName"
-                       placeholder="Last Name"
-                       value = {lastName}
-                       onChange={e => this.change(e)}
-                       style={lastNameStyle}
-                   />
-                   <br />
+                            <input
+                                type="text"
+                                name="lastName"
+                                placeholder="Last Name"
+                                value = {lastName}
+                                onChange={e => this.change(e)}
+                                style={lastNameStyle}
+                            />
+                            <br />
 
-                   <input
-                       type="text"
-                       name="email"
-                       placeholder="Email"
-                       value = {email}
-                       onChange={e => this.change(e)}
-                       style={emailStyle}
-                   />
-                   <br />
+                            <input
+                                type="text"
+                                name="email"
+                                placeholder="Email"
+                                value = {email}
+                                onChange={e => this.change(e)}
+                                style={emailStyle}
+                            />
+                            <br />
 
-                   <input
-                       type="password"
-                       name="password"
-                       placeholder="Password"
-                       value = {password}
-                       onChange={e => this.change(e)}
-                       style={passwordStyle}
-                   />
-                   <br />
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                value = {password}
+                                onChange={e => this.change(e)}
+                                style={passwordStyle}
+                            />
+                            <br />
 
-                   <input
-                       type="password"
-                       name="confirmPassword"
-                       placeholder="Confirm Password"
-                       value = {confirmPassword}
-                       onChange={e => this.change(e)}
-                       style={confirmPasswordStyle}
-                   />
-                   <br />
+                            <input
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirm Password"
+                                value = {confirmPassword}
+                                onChange={e => this.change(e)}
+                                style={confirmPasswordStyle}
+                            />
+                            <br />
 
-                   <p style={accountTypeStyle}>Account Type: </p>
-                   <input type="checkbox" value="Student" style={studentCheckboxStyle}/><span style={studentTextStyle}>Student</span>
-                   <input type="checkbox" value="Client" style={clientCheckboxStyle} /><span style={clientTextStyle}>Client</span>
-                   <br />
-                   <br />
+                            <p style={accountTypeStyle}>Account Type: </p>
+                            <input type="checkbox" value="Student" style={studentCheckboxStyle}/><span style={studentTextStyle}>Student</span>
+                            <input type="checkbox" value="Client" style={clientCheckboxStyle} /><span style={clientTextStyle}>Client</span>
+                            <br />
+                            <br />
 
-                   <button style={createButtonStyle} onClick={e => this.onSubmit(e)}>Create</button>
+                            <button style={createButtonStyle} onClick={e => this.onSubmit(e)}>Create</button>
 
-               </Grid>
-               <Grid item xs={6}>
-                   <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
+                            <SecurityQuestion
+                                num={1}
+                                style_q={questionOneStyle}
+                                style_a={answerOneStyle}
+                                ref={questionOneRef}
+                            />
+                            <br />
+                            <br />
+                            <SecurityQuestion
+                                num={2}
+                                style_q={questionTwoStyle}
+                                style_a={answerTwoStyle}
+                                ref={questionTwoRef}
+                            />
+                            <br />
+                        </Grid>
 
-                   <div style={questionOneStyle}>
-                       <Select name="questionOne" value={questionOne} placeholder="Choose a security question" options={this.options} onChange={this.handleChange} >
+                    </Grid>
+                </form>
+            </div>
 
-                       </Select>
-                   </div>
-
-                   <br />
-                   <input
-                       type="text"
-                       name="answerOne"
-                       placeholder="Answer"
-                       value = {answerOne}
-                       onChange={e => this.change(e)}
-                       style={answerOneStyle}
-                   />
-                   <br />
-
-                   <div style={questionTwoStyle} >
-                       <Select name="questionTwo" value={questionTwo} placeholder="Choose a security question" options={this.options} onChange={e => this.handleChange(e)} >
-
-                       </Select>
-                   </div>
-
-                   <input
-                       type="text"
-                       name="answerTwo"
-                       placeholder="Answer"
-                       value = {answerTwo}
-                       onChange={e => this.change(e)}
-                       style={answerTwoStyle}
-                   />
-                   <br />
-
-               </Grid>
-
-           </Grid>
-        </form>
-               </div>
-
-    );
-};
-    }
+        );
+    };
+}
 
 
 export default UserRegistrationPage;
