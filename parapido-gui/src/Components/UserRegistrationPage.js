@@ -6,9 +6,9 @@ import Dropdown from "react-dropdown";
 class UserRegistrationPage extends Component {
 
     options = [
-        {value: "QuestionOne", label: "Question One"},
-        {value: "QuestionTwo", label: "Question Two"},
-        {value: "QuestionThree", label: "Question Three"},
+        {value: "questionOne", label: "Question One"},
+        {value: "questionTwo", label: "Question Two"},
+        {value: "questionThree", label: "Question Three"},
 
     ]
 
@@ -24,25 +24,25 @@ class UserRegistrationPage extends Component {
             questionOne: undefined,
             answerOne: undefined,
             questionTwo: undefined,
+            questionThree: undefined,
             answerTwo: undefined,
         };
     }
 
-/*    handleChange = (e) => {
-        this.setState({e})
-        this.setState({
-            [e.name]: e.value
-        })
-    };*/
-
     handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    };
+
+/*    handleChange = (e) => {
         this.setState({ e }, () => (
             this.props.onChange({[e.name]: e.value})))
         this.setState({
                 [e.name]: e.value
             }
         )
-    };
+    };*/
 
     change = e =>{
         this.props.onChange({[e.target.name]: e.target.value});
@@ -354,9 +354,11 @@ class UserRegistrationPage extends Component {
                <Grid item xs={6}>
                    <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
 
-                   <Select name="questionOne" value={questionOne} placeholder="Choose a security question" options={this.options} style={questionOneStyle} onChange={this.handleChange} >
+                   <div style={questionOneStyle}>
+                       <Select name="questionOne" value={questionOne} placeholder="Choose a security question" options={this.options} onChange={this.handleChange} >
 
-                   </Select>
+                       </Select>
+                   </div>
 
                    <br />
                    <input
@@ -369,9 +371,11 @@ class UserRegistrationPage extends Component {
                    />
                    <br />
 
-                   <Select name="questionTwo" value={questionTwo} placeholder="Choose a security question" options={this.options} style={questionTwoStyle} onChange={e => this.handleChange(e)} >
+                   <div style={questionTwoStyle} >
+                       <Select name="questionTwo" value={questionTwo} placeholder="Choose a security question" options={this.options} onChange={e => this.handleChange(e)} >
 
-                   </Select>
+                       </Select>
+                   </div>
 
                    <input
                        type="text"
