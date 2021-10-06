@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
+import UserRegistrationPage from "./Components/UserRegistrationPage";
 
 
 
@@ -11,6 +12,19 @@ class App extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    state = {
+        fields: {}
+    };
+
+    onChange = (updatedValue) =>{
+
+        this.setState({fields:{
+                ...this.state.fields,
+                ...updatedValue
+            }})
+
+    };
 
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
@@ -41,6 +55,24 @@ class App extends React.Component {
                                 <DashboardPage cookies={this.props.cookies} />
                             )}
                         />
+
+                        <Route
+
+                            exact
+                            path='/signup'
+                            render={() => (
+                                <div>
+                                    <UserRegistrationPage onChange={fields => this.onChange(fields)}/>
+                                <p>
+                            {JSON.stringify(this.state.fields, null, 2)}
+                                </p>
+
+                                </div>
+
+
+                            )}
+                        />
+
                     </Switch>
                 </div>
             </BrowserRouter>
