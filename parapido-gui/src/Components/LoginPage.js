@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import {Redirect} from "react-router-dom";
 
-class LoginPage extends Component {
+class Login extends Component {
 
     constructor(props) {
         super(props);
@@ -34,13 +34,13 @@ class LoginPage extends Component {
         const { login_success } = this.state;
         return (
             <div>
-                {login_success ?
+            {login_success ?
                     <Redirect to='/jobdashboard'/> :
                     <button onClick={this.handleOnClick}>Log in</button>
-                }
+            }
             </div>
         )
     }
 }
 
-export default LoginPage
+export default Login

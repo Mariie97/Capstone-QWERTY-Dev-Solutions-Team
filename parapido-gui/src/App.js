@@ -3,7 +3,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LoginPage from "./Components/LoginPage";
-import DashboardPage from "./Components/DashboardPage";
+import Profile from "./Components/ProfilePage";
+import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 
 
@@ -20,7 +21,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>                       
-                                 <NavBar cookies={this.props.cookies}/>
+                                <NavBar cookies={this.props.cookies}/>
                                 <h1>Landing Page</h1>
                                 </React.Fragment>
                             )}
@@ -31,7 +32,16 @@ class App extends React.Component {
                             render={() => (
                                 is_auth ?
                                     <Redirect to='/jobdashboard'/> :
-                                    <LoginPage />
+                                    <LoginPage />           
+                            )}
+                        />
+                           <Route
+                            exact
+                            path='/profile'
+                            render={() => (
+                                is_auth ?
+                                    <Redirect to='/profile'/> :
+                                    <Profile />                          
                             )}
                         />
                         <Route
@@ -39,7 +49,7 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                <DashboardPage/>
+                                <JobDashboardPage />
                                </React.Fragment>
                             )}
                         />
