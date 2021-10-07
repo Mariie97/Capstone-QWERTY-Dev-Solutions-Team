@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
-
-/* black box on the back */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display=swap");
+/* invisible parent box on the back */
 
 .body-profile {
 	box-sizing: border-box;
@@ -9,14 +9,15 @@
 	height: 400px;
 	display: grid;
 	place-items: center;
-	background-color: black;
+	/* testing */
+	/* background-color: black; */
 	letter-spacing: 1px;
 	line-height: 1.5;
 
 	margin-left: 50px;
 }
 
-/* invisible square holding text and image inside */
+/* square holding text and image inside */
 
 .card {
 	/* testing */
@@ -25,29 +26,26 @@
 	width: 95%;
 	height: 95%;
 	color: white;
-
+	background-color: black;
 	font-family: "Jost";
 	font-weight: "bold";
-
 	display: flex;
 	flex-direction: column;
-
 	text-align: center;
 	place-items: center;
 	border: 3px solid #ffebcc;
-
 	border-radius: 20px;
 }
 
-/*header text */
+/* header text username and rating */
 
 .header-list {
 	display: flex;
 	flex-direction: column;
 	list-style: none;
 	margin: 0;
-	margin-top: 80px;
-	margin-bottom: 80px;
+	margin-top: 120px;
+	margin-bottom: 65px;
 	padding: 0px;
 	line-height: 2;
 }
@@ -56,14 +54,37 @@
 
 .profile-image {
 	border-radius: 50%;
+	border: 0.5mm solid #ffebcc;
 }
 
-/* box on header */
+/* box in header */
 
 .box-top {
-	width: 290.99px;
+	width: 290px;
 	height: 80px;
 	background: #ffebcc;
 	border-top-left-radius: 19px;
 	border-top-right-radius: 19px;
+}
+
+/*footer line */
+
+.footer-line {
+	flex-wrap: wrap;
+	width: 100%;
+	flex-basis: 100%;
+	border-top: 2px solid #ffebcc;
+
+	/* moves the box inside the box in the footer */
+	padding-bottom: 0px;
+	padding-top: 4px;
+}
+
+/* top card lettering */
+
+.top-card-lettering {
+	font-family: "Garamond";
+	color: white;
+	font-size: 30px;
+	letter-spacing: 1px;
 }
