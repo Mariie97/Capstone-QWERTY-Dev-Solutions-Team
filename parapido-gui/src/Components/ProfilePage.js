@@ -35,12 +35,12 @@ export class Profile extends Component {
 
     render() {
 
-        const {first_name} = this.state.user;
+        // const {first_name} = this.state.user;
 
         return (
             <div>
-                <h1 style={{color:'white'}}> Hello Profile </h1>
-                <h2 style={{marginBottom : 50 }}>{first_name}</h2>
+                <h1 style={{color:'white', marginBottom : 50}}> Hello Profile </h1>
+                {/* <h2 style={{marginBottom : 50 }}>{first_name}</h2> */}
                 <ProfileCard />
             </div>
         )
