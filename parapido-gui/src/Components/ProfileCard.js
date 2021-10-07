@@ -17,17 +17,17 @@ const ProfileCard = (props) => {
     const last_name = "Doe"
     const rating_value = "2.91"
     const cancelled_jobs = 120;
-    const account_type = 3;
+    const account_type = 1;
 
     let acc_type;
   
 
     if(account_type === 1 ){
-        acc_type = "CLIENT";
+        acc_type = "STUDENT";
       
     }
     else if(account_type === 2){
-        acc_type = "STUDENT"
+        acc_type = "CLIENT"
        
     }
     else{
@@ -41,7 +41,7 @@ const ProfileCard = (props) => {
         <React.Fragment>
 
         <div className= "top-card-lettering"> 
-        {account_type === 2 ? <img src= {school_bag} alt="school bag" style={schoolbag}/> : account_type === 1 ? <img src= {_employer} alt="employer" style={employer}/> 
+        {account_type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/> : account_type === 2 ? <img src= {_employer} alt="employer" style={employer}/> 
         :<img src= {_admin} alt="admin" style={admin}/>}
         
         {acc_type}  </div>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import ProfileCard from './ProfileCard'
+import "../Layouts/ProfilePage.css"
+
 
 export class Profile extends Component {    
 
@@ -35,17 +37,22 @@ export class Profile extends Component {
 
     render() {
 
-        // const {first_name} = this.state.user;
+        const {first_name, last_name } = this.state.user;
 
         return (
-            <div>
-                <h1 style={{color:'white', marginBottom : 50}}> Hello Profile </h1>
-                {/* <h2 style={{marginBottom : 50 }}>{first_name}</h2> */}
-                <ProfileCard />
-            </div>
+            
+            <React.Fragment>
+                 <h1 className="profile-header">{first_name} {last_name} </h1>
+                 <ProfileCard />
+            </React.Fragment>
+               
+                
+           
         )
     }
 }
+
+
 
 export default Profile
 

@@ -20,8 +20,7 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>                       
-                                <NavBar cookies={this.props.cookies}/>
+                                <React.Fragment>                      
                                 <h1>Landing Page</h1>
                                 </React.Fragment>
                             )}
@@ -32,7 +31,7 @@ class App extends React.Component {
                             render={() => (
                                 is_auth ?
                                     <Redirect to='/jobdashboard'/> :
-                                    <LoginPage />           
+                                        <LoginPage />           
                             )}
                         />
                            <Route
@@ -40,8 +39,11 @@ class App extends React.Component {
                             path='/profile'
                             render={() => (
                                 is_auth ?
-                                    <Redirect to='/profile'/> :
-                                    <Profile />                          
+                                    <Redirect to='/profile'/> :      
+                                       <React.Fragment>
+                                            <NavBar cookies= {this.props.cookies} />
+                                            <Profile />
+                                       </React.Fragment>                      
                             )}
                         />
                         <Route
@@ -49,7 +51,7 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                <JobDashboardPage />
+                                    <JobDashboardPage />
                                </React.Fragment>
                             )}
                         />

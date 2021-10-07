@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+
+.profile-header {
+	font-family: "Jost";
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 60px;
+	text-align: center;
+	color: white;
+	border-bottom: 1px solid white;
+	width: 700px;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	margin-bottom: 40px;
+}
