@@ -10,6 +10,7 @@ class Login extends Component {
         this.handleOnClick = this.handleOnClick.bind(this);
     }
 
+
     handleOnClick() {
         fetch('/login',{
             method: 'POST',
@@ -17,6 +18,7 @@ class Login extends Component {
             body: JSON.stringify({
                 email: 'test1@upr.edu',
                 password: 'test1234'
+                
             })
         }).then(response => {
             if(response.status === 200) {

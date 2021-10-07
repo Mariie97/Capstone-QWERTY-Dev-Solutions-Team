@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ProfileCard from './ProfileCard'
 
 export class Profile extends Component {    
 
@@ -6,16 +7,17 @@ export class Profile extends Component {
             super(props)
 
 
-            this.state = { users : [
-                // first_name : '',
-                // last_name : '',
-                // email : '',
-                // about : '',
-                // type  :'',
-                // image : '', 
-                // jobs_cancelled : '',
-                // rating_value : '',
-            ]
+            this.state = { user : {
+                first_name : 'Jane',
+                last_name : 'Doe',
+                email : 'jane.doe1000@upr.edu',
+                about : ' I am the best!!!!',
+                type  :' 1 ',
+                image : ' ', 
+                address: ' Urb.Stephanie calle Caoba Ponce, PR 00680',
+                jobs_cancelled : ' 50 ',
+                rating_value : ' 3.5 ',
+            }
             }
     }
     
@@ -25,16 +27,21 @@ export class Profile extends Component {
 
         document.body.style.backgroundColor = "#2F2D4A"
 
-        //get from servers the specific user
+        // get from the server the specific user - 
+        // hasn't been implemented by the Back-End
 
-        fetch("/users").then(res => res.json()).then(ress=> console.log(ress.data));
-      
+        
     }
 
     render() {
+
+        const {first_name} = this.state.user;
+
         return (
             <div>
-                <h1 style={{color:'white', marginTop: 20, marginLeft: 30}}> Hello Profile </h1>
+                <h1 style={{color:'white'}}> Hello Profile </h1>
+                <h2 style={{marginBottom : 50 }}>{first_name}</h2>
+                <ProfileCard />
             </div>
         )
     }

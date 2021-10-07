@@ -3,7 +3,7 @@ import {Link, Redirect} from "react-router-dom"
 import logo from "../Static/Images/Pa_RapidoLogo.png"
 import "../Layouts/NavBar.css"
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-
+import CancelIcon from '@material-ui/icons/Cancel';
 
 
 export class NavBar extends Component {
@@ -14,6 +14,7 @@ export class NavBar extends Component {
      
         this.state = {
             logout_success: false,
+            menu_open: false
             
         };
 
@@ -59,10 +60,14 @@ export class NavBar extends Component {
 
     nav.classList.toggle('nav-active');
     const navLinks = document.querySelectorAll(".nav-links li")
+    this.setState({menu_open: !this.state.menu_open})
 
     // animate links
 
     navLinks.forEach((link, index) =>{
+
+        
+
         if(link.style.animation){
             link.style.animation = ``
         }
@@ -75,12 +80,11 @@ export class NavBar extends Component {
 
 }
   
-    
-
     render() {
         const { logout_success } = this.state;
+        const { menu_open } = this.state;
         return (
-            <nav className="NavBar" > 
+            <nav  > 
                 <div className="nav">
                     <img className="logostyle" src={logo} alt="Logo" />
                         <ul className="nav-links"> 
@@ -98,7 +102,11 @@ export class NavBar extends Component {
                                 </div>
                             </li>
                         </ul>
-                    <div className="menuopen" onClick={this.navSlide}><MenuOpenIcon/></div>
+                    <div className="menuopen" onClick={this.navSlide}>
+                         
+                        {menu_open && <CancelIcon />}
+                        {!menu_open && <MenuOpenIcon/>}
+                   </div>
                 </div>
             </nav>
         )
