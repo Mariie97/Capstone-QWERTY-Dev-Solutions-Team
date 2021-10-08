@@ -48,6 +48,16 @@ class App extends React.Component {
                         />
                         <Route
                             exact
+                            path='/editprofile'
+                            render={() => (
+                                <React.Fragment>
+                                   <h1>Edit Profile</h1>
+                               </React.Fragment>
+                            )}
+                        />
+
+                        <Route
+                            exact
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>

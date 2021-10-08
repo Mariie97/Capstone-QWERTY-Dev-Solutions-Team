@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ProfileCard from './ProfileCard'
 import "../Layouts/ProfilePage.css"
+import { Link } from 'react-router-dom';
+
 
 
 export class Profile extends Component {    
@@ -42,15 +44,23 @@ export class Profile extends Component {
         return (
             
             <React.Fragment>
+                  <div className="child3-flex-container">
+                        <Link to={"/jobdashboard"} className="button" style={{margin: 20}}> My Jobs</Link>
+                        <Link to={"/editprofile"} className="button" > Edit Profile </Link>
+                    </div>
+                    
                  <h1 className="profile-header">{first_name} {last_name} </h1>
+
                  <div className = "parent-flex-container">
+               
                     <div className="child1-flex-container"><ProfileCard /></div>
-                    <div className = "child2-flex-container">
+
+                    <div className = "child2-flex-container" style={{width: 800, marginLeft: 114}}>
                         <ul className = "bullet-removal">
                         <li>
                             <ul className="body-flex">
                                 <li className= "child-body-flex">Name: </li>
-                                <li className="keeptext">Jane Doe </li>
+                                <li className="break-text">Jane Doe </li>
                             </ul>
         
                         </li>
@@ -58,25 +68,29 @@ export class Profile extends Component {
                         <li>
                             <ul className="body-flex">
                                 <li  className= "child1-body-flex"> E-mail: </li>
-                                <li className="keeptext"> jnedoe@stephanierocks.com </li>
+                                <li className="break-text"> jnedoe@stephanierocks.com </li>
                             </ul>
                         </li>
                         <li>
                             <ul className="body-flex">
                                 <li className= "child2-body-flex"> Address: </li>
-                                <li className="keeptext"> Street Steph Ponce 00680 </li>
+                                <li className="break-text"> Street Steph Ponce 00680 </li>
                             </ul>
                         
                         </li>
                             <ul className="body-flex">
                                 <li className= "child1-body-flex">About:</li>
-                                <p className="keeptext" >I am a really hard working person and am interested in working cleaning different things like plates and stuff. 
+                                <p className="break-text" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaning different things like plates and stuff. 
                                 </p>
                             </ul>
                       
                         </ul>
                     </div>
+
+                    
+                    
                  </div>
+                
             </React.Fragment>
                
                 
@@ -85,7 +99,6 @@ export class Profile extends Component {
     }
 }
 
-   
 
 
 export default Profile

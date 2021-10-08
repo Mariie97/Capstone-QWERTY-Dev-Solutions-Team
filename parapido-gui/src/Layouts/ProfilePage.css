@@ -14,7 +14,7 @@
 	width: 700px;
 	margin: 0 auto;
 	padding-bottom: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 
 /* parent - flex between profile - body text - buttons */
@@ -44,13 +44,47 @@
 .child2-flex-container {
 	margin-top: 85px;
 	font-family: "Cormorant Garamond";
-	font-size: 20px;
+	font-size: 30px;
 	font-weight: 200;
 	color: white;
 	line-height: 50px;
 }
 
-/* flex withn the body text for bold and spacing */
+/* buttons */
+
+.button {
+	display: inline-block;
+	padding-right: 40px;
+	padding-left: 40px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	margin: 0.1em;
+	border: 0.2em solid black;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: "Jost";
+	font-weight: bold;
+	color: black;
+	background-color: #ffebcc;
+	text-align: center;
+	position: relative;
+	border-radius: 2%;
+}
+
+.button:hover {
+	border-color: white;
+}
+
+.button:active {
+	background-color: #2e856e;
+}
+
+.child3-flex-container {
+	margin-top: 0px;
+	margin-left: 60px;
+}
+
+/* flex within the body text for bold and spacing */
 
 .body-flex {
 	list-style: none;
@@ -79,19 +113,18 @@
 	margin-right: 29px;
 }
 
-.keeptext {
-	width: 60%;
+.break-text {
+	width: 80%;
 	padding-top: 10px;
 
 	/* testing */
-	/* border-style: solid; */
-	/* border-color: #336699; */
+	/* border-style: solid;
+	border-color: white; */
 
 	border-width: 1px;
 	padding-left: 5px;
 	padding-bottom: 10px;
 	text-align: justify;
 	word-break: break-all;
-
 	line-height: 1.5;
 }
