@@ -60,7 +60,7 @@ export class Profile extends Component {
                         <li>
                             <ul className="body-flex">
                                 <li className= "child-body-flex">Name: </li>
-                                <li className="break-text">Jane Doe </li>
+                                <li className="break-text" style={{paddingTop: 1, paddingLeft: 14}}>Jane Doe </li>
                             </ul>
         
                         </li>
@@ -68,13 +68,13 @@ export class Profile extends Component {
                         <li>
                             <ul className="body-flex">
                                 <li  className= "child1-body-flex"> E-mail: </li>
-                                <li className="break-text"> jnedoe@stephanierocks.com </li>
+                                <li className="break-text" style={{paddingTop: 1, paddingLeft: 10}}> jnedoe@stephanierocks.com </li>
                             </ul>
                         </li>
                         <li>
                             <ul className="body-flex">
-                                <li className= "child2-body-flex"> Address: </li>
-                                <li className="break-text"> Street Steph Ponce 00680 </li>
+                                <li className= "child2-body-flex" > Address: </li>
+                                <li className="break-text" style={{paddingTop: 2}}> Street Steph Ponce 00680 </li>
                             </ul>
                         
                         </li>
