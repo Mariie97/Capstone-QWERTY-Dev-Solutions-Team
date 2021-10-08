@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+/* title and line  */
 
 .profile-header {
 	font-family: "Jost";
@@ -12,4 +15,83 @@
 	margin: 0 auto;
 	padding-bottom: 20px;
 	margin-bottom: 40px;
+}
+
+/* parent - flex between profile - body text - buttons */
+
+.parent-flex-container {
+	display: flex;
+
+	/* testing purposes */
+	/* background-color: red; */
+}
+
+/* card */
+
+.child1-flex-container {
+	margin-right: 60px;
+	margin-left: 83px;
+}
+
+/* remove bullets */
+
+.bullet-removal {
+	list-style: none;
+}
+
+/* body text */
+
+.child2-flex-container {
+	margin-top: 85px;
+	font-family: "Cormorant Garamond";
+	font-size: 20px;
+	font-weight: 200;
+	color: white;
+	line-height: 50px;
+}
+
+/* flex withn the body text for bold and spacing */
+
+.body-flex {
+	list-style: none;
+	display: flex;
+
+	/* text-align: justify; */
+	/* testing purposes */
+	/* background-color: thistle; */
+}
+
+.child-body-flex {
+	font-family: "Times New Roman";
+	font-weight: bold;
+	margin-right: 50px;
+}
+
+.child1-body-flex {
+	font-family: "Times New Roman";
+	font-weight: bold;
+	margin-right: 43px;
+}
+
+.child2-body-flex {
+	font-family: "Times New Roman";
+	font-weight: bold;
+	margin-right: 29px;
+}
+
+.keeptext {
+	width: 60%;
+	padding-top: 10px;
+
+	/* testing */
+	/* border-style: solid; */
+	/* border-color: #336699; */
+
+	border-width: 1px;
+	padding-left: 5px;
+	padding-bottom: 10px;
+	text-align: justify;
+	word-break: break-all;
+
+	line-height: 1.5;
 }

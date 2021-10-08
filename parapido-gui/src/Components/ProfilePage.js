@@ -43,7 +43,40 @@ export class Profile extends Component {
             
             <React.Fragment>
                  <h1 className="profile-header">{first_name} {last_name} </h1>
-                 <ProfileCard />
+                 <div className = "parent-flex-container">
+                    <div className="child1-flex-container"><ProfileCard /></div>
+                    <div className = "child2-flex-container">
+                        <ul className = "bullet-removal">
+                        <li>
+                            <ul className="body-flex">
+                                <li className= "child-body-flex">Name: </li>
+                                <li className="keeptext">Jane Doe </li>
+                            </ul>
+        
+                        </li>
+
+                        <li>
+                            <ul className="body-flex">
+                                <li  className= "child1-body-flex"> E-mail: </li>
+                                <li className="keeptext"> jnedoe@stephanierocks.com </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul className="body-flex">
+                                <li className= "child2-body-flex"> Address: </li>
+                                <li className="keeptext"> Street Steph Ponce 00680 </li>
+                            </ul>
+                        
+                        </li>
+                            <ul className="body-flex">
+                                <li className= "child1-body-flex">About:</li>
+                                <p className="keeptext" >I am a really hard working person and am interested in working cleaning different things like plates and stuff. 
+                                </p>
+                            </ul>
+                      
+                        </ul>
+                    </div>
+                 </div>
             </React.Fragment>
                
                 
@@ -52,6 +85,7 @@ export class Profile extends Component {
     }
 }
 
+   
 
 
 export default Profile

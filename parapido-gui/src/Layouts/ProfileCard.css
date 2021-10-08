@@ -83,12 +83,11 @@
 /* top card lettering */
 
 .top-card-lettering {
-	font-family: "Garamond";
+	font-family: "Cormorant Garamond";
 	font-style: "Italic";
-	font-weight: 400;
+	font-weight: bold;
 	color: white;
-	font-size: 30px;
-	letter-spacing: 1px;
+	font-size: 40px;
 
 	/* small container for lettering to be centered all the time no matter change*/
 

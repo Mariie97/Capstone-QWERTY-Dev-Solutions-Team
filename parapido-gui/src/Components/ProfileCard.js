@@ -16,7 +16,7 @@ const ProfileCard = (props) => {
     const user_name = "Jane"
     const last_name = "Doe"
     const rating_value = "2.91"
-    const cancelled_jobs = 120;
+    const cancelled_jobs = 10;
     const account_type = 1;
 
     let acc_type;
