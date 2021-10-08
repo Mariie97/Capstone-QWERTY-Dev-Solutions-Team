@@ -25,21 +25,33 @@ class SecurityQuestion extends Component {
         this.setState({
             answer: event.target.value
         });
+
+
+
     }
+
+
 
     render () {
         const { question } = this.state;
         const { num, style_q, style_a, answer } = this.props;
+        const dropDownStyle = {
+            background:"#FFFFFF"
+        }
+        const textStyle = {
+            color:"#FFFFFF"
+        }
         return (
 
             <div >
                 <div style={style_q}>
-                    <InputLabel id={"question_" + num + "_label"}>Question {num}</InputLabel>
+                    <InputLabel id={"question_" + num + "_label"} style={textStyle}>Question {num}</InputLabel>
                     <Select
                         labelId="question_one_label"
                         id={"question_" + num}
                         value={question}
                         onChange={this.onChangeQuestion}
+                        style={dropDownStyle}
                     >
                         <MenuItem value={1}>In what city were you born? </MenuItem>
                         <MenuItem value={2}>What high school did you attend?</MenuItem>
@@ -47,14 +59,15 @@ class SecurityQuestion extends Component {
                     </Select>
                 </div>
 
-                <input
+{/*                <input
                     type="text"
                     name={"answer_" + num}
                     placeholder="Answer"
                     value = {answer}
                     onChange={this.onChangeAnswer}
                     style={style_a}
-                />
+                />*/}
+
             </div>
         )
     }
