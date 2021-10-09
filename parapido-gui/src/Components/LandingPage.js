@@ -19,19 +19,19 @@ export class Landing extends Component {
 					<ul className="landingnavlinks">
 						<li className="miniflexcontactus">
 							<div style={{ marginRight: 15 }}>Contact Us</div>
-							<div style={{ color: "#ffebcc" }}>parapidopr@gmail.com</div>
+							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail" >parapidopr@gmail.com</a>
 						</li>
 
 						<li>
-							<Link to="/about">Why PaRapido?</Link>
+							<Link to="/about" id="link" >Why PaRapido?</Link>
 						</li>
 
 						<li>
-							<Link to="/login">Login</Link>
+							<Link to="/login" id="link" >Login</Link>
 						</li>
 					</ul>
 				</div>
-				
+
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="firstpoint">An easier way of finding and providing</div>
 				<p className="secondpoint">Flexible Jobs.</p>
@@ -49,5 +49,8 @@ const studentimage = {
 	width: 1205,
 	float: "right",
 };
+
+
+
 
 export default Landing;

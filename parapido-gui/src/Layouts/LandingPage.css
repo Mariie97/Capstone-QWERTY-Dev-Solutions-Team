@@ -25,6 +25,14 @@
 	/* background-color: crimson; */
 }
 
+#parapidoemail {
+	color: #ffebcc;
+	text-decoration: underline;
+}
+#parapidoemail:hover {
+	color: black;
+}
+
 /* each item on the navbar except the logo*/
 
 .landingnavlinks {
@@ -45,13 +53,13 @@
 	list-style: none;
 }
 
-.landingnavlinks a {
+.landingnavlinks #link {
 	color: white;
 	text-decoration: none;
 	letter-spacing: 1px;
 }
 
-.landingnavlinks a:hover {
+.landingnavlinks #link:hover {
 	color: burlywood;
 }
 
