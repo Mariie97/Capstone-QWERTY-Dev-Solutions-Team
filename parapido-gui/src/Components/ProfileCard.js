@@ -1,5 +1,5 @@
 import React from 'react'
-import default_picture from '../Static/Images/defaultprofilepicture.svg'
+import defaultPicture from '../Static/Images/defaultprofilepicture.svg'
 import school_bag from '../Static/Images/school_bag_transparentbg.png'
 import _employer from '../Static/Images/employer.png'
 import _admin from '../Static/Images/admin.png'
@@ -17,7 +17,7 @@ const ProfileCard = (props) => {
     const last_name = "Doe"
     const rating_value = "2.91"
     const cancelled_jobs = 10;
-    const account_type = 1;
+    const account_type = 3;
 
     let acc_type;
   
@@ -49,7 +49,7 @@ const ProfileCard = (props) => {
         <div className = "card">
 
                 <div className = "box-top">
-                    <img className = "profile-image" style={image_resize} src= {default_picture} alt="profile" />  
+                    <img className = "profile-image" style={image_resize} src= {defaultPicture} alt="profile" />  
                 </div>
 
                 <ul className = "header-list"> 

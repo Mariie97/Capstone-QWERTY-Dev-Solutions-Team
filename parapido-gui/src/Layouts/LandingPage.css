@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+/* nav box */
+
+.landingnav {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	font-family: "Cormorant Garamond";
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 40px; /* moves the elements below the nav bar */
+	position: fixed;
+	width: 100%;
+}
+
+/* contact and email */
+
+.miniflexcontactus {
+	display: flex;
+	flex-direction: row;
+	color: white;
+
+	/* testing purposes*/
+	/* background-color: crimson; */
+}
+
+/* each item on the nav bar excpt the logo*/
+
+.landingnavlinks {
+	display: block;
+
+	/* testing purposes */
+	/* background-color: turquoise; */
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	color: white;
+	width: 40%;
+}
+
+.landingnavlinks li {
+	list-style: none;
+}
+
+.landingnavlinks a {
+	color: white;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+
+.landingnavlinks a:hover {
+	color: burlywood;
+}
+
+/* body text*/
+
+.firstparagraph {
+	color: white;
+	position: fixed;
+	top: 300px;
+	left: 450px;
+	font-family: "Times New Roman";
+	font-size: 25px;
+	white-space: pre;
+
+	/* it does it on big screen - break the text */
+
+	/* white-space: pre-wrap;
+	width: 400px;
+	height:10px;
+	padding: 10px;
+	border: solid 1px #ccc;
+	word-break: break-all; */
+}

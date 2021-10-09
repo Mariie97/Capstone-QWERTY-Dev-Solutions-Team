@@ -27,9 +27,8 @@ class Login extends Component {
                     localStorage.setItem('user_id', data.user_id);
                     localStorage.setItem('type', data.type);
                     this.setState({login_success: true});
-                })}
+                })}         
         })
-
     }
 
     render() {

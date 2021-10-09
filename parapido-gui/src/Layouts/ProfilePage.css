@@ -81,7 +81,7 @@
 
 .child3-flex-container {
 	margin-top: 0px;
-	margin-left: 60px;
+	float: right;
 }
 
 /* flex within the body text for bold and spacing */
@@ -125,6 +125,10 @@
 	padding-left: 5px;
 	padding-bottom: 10px;
 	text-align: justify;
-	word-break: break-all;
-	line-height: 1.5;
+	/* word-break: break-all; */
+	word-break: break-word;
+	hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
 }

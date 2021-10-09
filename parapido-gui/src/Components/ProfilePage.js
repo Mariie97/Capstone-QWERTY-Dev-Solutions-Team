@@ -46,7 +46,7 @@ export class Profile extends Component {
             <React.Fragment>
                   <div className="child3-flex-container">
                         <Link to={"/jobdashboard"} className="button" style={{margin: 20}}> My Jobs</Link>
-                        <Link to={"/editprofile"} className="button" > Edit Profile </Link>
+                        <Link to={"/editprofile"} className="button" style={{marginRight: 70}}> Edit Profile </Link>
                     </div>
                     
                  <h1 className="profile-header">{first_name} {last_name} </h1>
@@ -60,7 +60,7 @@ export class Profile extends Component {
                         <li>
                             <ul className="body-flex">
                                 <li className= "child-body-flex">Name: </li>
-                                <li className="break-text" style={{paddingTop: 1, paddingLeft: 14}}>Jane Doe </li>
+                                <li   className="break-text" style={{paddingTop: 1, paddingLeft: 14}}>Jane Doe </li>
                             </ul>
         
                         </li>
@@ -80,7 +80,7 @@ export class Profile extends Component {
                         </li>
                             <ul className="body-flex">
                                 <li className= "child1-body-flex">About:</li>
-                                <p className="break-text" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaning different things like plates and stuff. 
+                                <p className="break-text" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaninfffkf kkrkkfr rfrormrfrmfrf frjrofjrofrfrrojfrojfr frofjfrfg different things like plates and stuff. 
                                 </p>
                             </ul>
                       
