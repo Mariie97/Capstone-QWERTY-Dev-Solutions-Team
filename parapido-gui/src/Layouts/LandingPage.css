@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
-/* nav box */
+/* navbar box */
 
 .landingnav {
 	display: flex;
@@ -8,13 +8,13 @@
 	height: 50px;
 	font-family: "Cormorant Garamond";
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 14px;
 	margin-bottom: 40px; /* moves the elements below the nav bar */
 	position: fixed;
 	width: 100%;
 }
 
-/* contact and email */
+/* contact and email container */
 
 .miniflexcontactus {
 	display: flex;
@@ -25,13 +25,14 @@
 	/* background-color: crimson; */
 }
 
-/* each item on the nav bar excpt the logo*/
+/* each item on the navbar except the logo*/
 
 .landingnavlinks {
 	display: block;
 
 	/* testing purposes */
 	/* background-color: turquoise; */
+
 	position: relative;
 	width: 100%;
 	display: flex;
@@ -56,7 +57,7 @@
 
 /* body text*/
 
-.firstparagraph {
+.firstpoint {
 	color: white;
 	position: fixed;
 	top: 300px;
@@ -73,4 +74,35 @@
 	padding: 10px;
 	border: solid 1px #ccc;
 	word-break: break-all; */
+}
+
+.secondpoint {
+	color: #91eb8f;
+	position: fixed;
+	top: 335px;
+	left: 450px;
+	white-space: pre;
+	font-family: "Times New Roman";
+	font-size: 40px;
+	font-weight: bold;
+	white-space: pre;
+}
+
+.firstparagraph {
+	color: white;
+	position: fixed;
+	top: 420px;
+	left: 450px;
+	font-family: "Times New Roman";
+	font-size: 16px;
+	width: 700px;
+
+	/* border: solid 1px #ccc; */
+	text-align: justify;
+	word-break: break-word;
+	hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	line-height: 22px;
 }

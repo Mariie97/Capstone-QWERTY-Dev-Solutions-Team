@@ -31,13 +31,19 @@ export class Landing extends Component {
 						</li>
 					</ul>
 				</div>
+				
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
-				<div className="firstparagraph">An easier way of finding and providing</div>
-				<p>Flexible Jobs.</p>
+				<div className="firstpoint">An easier way of finding and providing</div>
+				<p className="secondpoint">Flexible Jobs.</p>
+				<p className="firstparagraph">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students 
+				  from the UPR system. Also, we give employers the opportunity of helping 
+				  the students by providing jobs in our platform.</p>
 			</div>
 		);
 	}
 }
+
+// logo styling
 
 const studentimage = {
 	width: 1205,
