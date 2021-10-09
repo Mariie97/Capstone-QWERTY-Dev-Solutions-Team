@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "../Layouts/LandingPage.css";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
-import { Link } from "react-router-dom";
+import EmailIcon from '@material-ui/icons/Mail';
 
 export class Landing extends Component {
 	componentDidMount() {
@@ -18,8 +19,9 @@ export class Landing extends Component {
 					<img className="logostyle" src={logo} alt="Logo" />
 					<ul className="landingnavlinks">
 						<li className="miniflexcontactus">
-							<div style={{ marginRight: 15 }}>Contact Us</div>
-							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail" >parapidopr@gmail.com</a>
+							<div style={{ marginRight: 15, position: "relative", top: 2}}>Contact Us</div>
+							<EmailIcon style={mail}/> 
+							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail"> parapidopr@gmail.com</a>
 						</li>
 
 						<li>
@@ -38,17 +40,29 @@ export class Landing extends Component {
 				<p className="firstparagraph">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students 
 				  from the UPR system. Also, we give employers the opportunity of helping 
 				  the students by providing jobs in our platform.</p>
+
+				<Link to={"/signup"} className="buttonlandingpage"> Try PaRapido for FREE </Link>
 			</div>
+
+			
 		);
 	}
 }
 
-// logo styling
+// image styling
 
 const studentimage = {
 	width: 1205,
 	float: "right",
 };
+
+// small icons & elements css
+
+const mail = {
+    color: "#ffebcc",
+    paddingRight: 10,
+	height: 20,
+}
 
 
 

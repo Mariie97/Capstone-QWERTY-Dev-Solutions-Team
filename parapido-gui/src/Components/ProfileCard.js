@@ -54,7 +54,7 @@ const ProfileCard = (props) => {
 
                 <ul className = "header-list"> 
                    <li style= {{fontWeight : "bold"}}> {user_name} {last_name} </li>
-                   <li> <StarIcon style = {staricon}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>            
+                   <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>            
                 </ul>
                 
                 {/* footer */}
@@ -87,7 +87,7 @@ const thumbsupdown = {
     left:2
 }
 
-const staricon = {
+const star = {
     color: "yellow",
     position: "relative",
     width: 19,
