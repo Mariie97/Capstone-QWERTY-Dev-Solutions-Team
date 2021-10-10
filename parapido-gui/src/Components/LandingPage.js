@@ -5,11 +5,28 @@ import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import EmailIcon from '@material-ui/icons/Mail';
 
+import LoginModal from './LoginModal';
+
 export class Landing extends Component {
+
+	constructor(props){
+		super(props);
+		this.showLoginModal = this.showLoginModal.bind(this);
+
+	this.state = {
+		showLogin: false
+	}
+
+	}
+
 	componentDidMount() {
 		// webpage background color
 
 		document.body.style.backgroundColor = "#2F2D4A";
+	}
+
+	showLoginModal(){
+		this.setState({showLogin: true});
 	}
 
 	render() {
@@ -29,7 +46,8 @@ export class Landing extends Component {
 						</li>
 
 						<li>
-							<Link to="/login" id="link" >Login</Link>
+							<div id="link" onClick={this.showLoginModal} >Login</div>
+							{this.state.showLogin && <LoginModal/>}
 						</li>
 					</ul>
 				</div>

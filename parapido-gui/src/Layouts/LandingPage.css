@@ -57,6 +57,7 @@
 	color: white;
 	text-decoration: none;
 	letter-spacing: 1px;
+	cursor: pointer;
 }
 
 .landingnavlinks #link:hover {
