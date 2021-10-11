@@ -39,7 +39,7 @@ export class Landing extends Component {
 						<li className="miniflexcontactus">
 							<div style={{ marginRight: 15, position: "relative", top: 2}}>Contact Us</div>
 							<EmailIcon style={mail}/> 
-							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail"> parapidopr@gmail.com</a>
+							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="parapidoemail"> parapidopr@gmail.com</a>
 						</li>
 
 						<li>
