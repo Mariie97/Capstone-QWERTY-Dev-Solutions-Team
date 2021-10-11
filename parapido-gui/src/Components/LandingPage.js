@@ -32,6 +32,7 @@ export class Landing extends Component {
 	render() {
 		return (
 			<div>
+				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landingnav">
 					<img className="logostyle" src={logo} alt="Logo" />
 					<ul className="landingnavlinks">
@@ -52,7 +53,7 @@ export class Landing extends Component {
 					</ul>
 				</div>
 
-				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
+			
 				<div className="firstpoint">An easier way of finding and providing</div>
 				<p className="secondpoint">Flexible Jobs.</p>
 				<p className="firstparagraph">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students 
