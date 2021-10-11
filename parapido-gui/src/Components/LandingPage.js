@@ -70,8 +70,10 @@ export class Landing extends Component {
 // image styling
 
 const studentimage = {
-	width: 1205,
-	float: "right",
+	position: "absolute",
+	right: "0%",
+	height: "100vh",
+	objectFit: "contain",
 };
 
 // small icons & elements css

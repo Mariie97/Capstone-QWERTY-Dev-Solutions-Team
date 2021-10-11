@@ -11,9 +11,14 @@ import NavBar from './Components/NavBar';
 
 
 class App extends React.Component {
+
+    
+
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
+
         return (
+
             <BrowserRouter>
                 <div>
                     <Switch>
@@ -35,15 +40,20 @@ class App extends React.Component {
                                         <LoginPage />           
                             )}
                         />
+
+                        {/* TODO */}
+                        {/* {is_auth &&} else redirect to landing page */}
+                       
+
                            <Route
                             exact
                             path='/profile'
                             render={() => (
-                                is_auth ?
-                                    <Redirect to='/profile'/> :      
+                                !is_auth ?
+                                    <Redirect to='/'/> :      
                                        <React.Fragment>
                                             <NavBar cookies= {this.props.cookies} />
-                                            <ProfilePage />
+                                            <ProfilePage  cookies={this.props.cookies}/>
                                        </React.Fragment>                      
                             )}
                         />

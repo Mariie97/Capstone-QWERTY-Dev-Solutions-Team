@@ -7,23 +7,33 @@ import { Link } from 'react-router-dom';
 
 export class Profile extends Component {    
 
+       
         constructor(props){
             super(props)
 
 
             this.state = { user : {
-                first_name : 'Jane',
-                last_name : 'Doe',
-                email : 'jane.doe1000@upr.edu',
-                about : ' I am the best!!!!',
-                type  :' 1 ',
-                image : ' ', 
-                address: ' Urb.Stephanie calle Caoba Ponce, PR 00680',
-                jobs_cancelled : ' 50 ',
-                rating_value : ' 3.5 ',
+                first_name : '',
+                last_name : '',
+                email : '',
+                image : '', 
+                type  :'',
+                about : '',
+                jobs_cancelled : '',
+                street: '',
+                city: '',  
+                zipcode:'',
+                rating_value : '',
+          
             }
             }
+
+         
     }
+
+ 
+  
+
     
     componentDidMount(){
 
@@ -33,11 +43,60 @@ export class Profile extends Component {
 
         // get from the server the specific user - 
         // hasn't been implemented by the Back-End
+        fetch('/user_info',{
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: {'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+             },
+        
+            data: JSON.stringify({
+                user_id: localStorage.getItem('user_id')
+            })
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(data =>
+                    {
+                        
+                        this.setState({ user: {
+                            first_name: data.first_name,
+                            last_name : data.last_name,
+                            email : data.email,
+                            image : data.image, 
+                            type  : data.type,
+                            about : data.about,
+                            jobs_cancelled : data.cancellations,
+                            street: data.street,
+                            city: data.city,  
+                            zipcode: data.zipcode,
+                            rating_value : data.rate,
+                        }
+                        });
 
+                        console.log(this.state);
+                    }
+                    ).catch((e) => {
+                        console.log(e);
+                        throw(e);
+                    });
+                }         
+        })
         
     }
 
     render() {
+
+        //TODO: object variable with cities 
+
+        // e.g.    const cities =  {
+        //     1 : "ponce",   
+        // }
+
+        // const cities = { city :{
+        //     1: "ponce",
+        // }
+
+        // }
 
         const {first_name, last_name } = this.state.user;
 
@@ -53,7 +112,7 @@ export class Profile extends Component {
 
                  <div className = "parent-flex-container">
                
-                    <div className="child1-flex-container"><ProfileCard /></div>
+                    <div className="child1-flex-container"><ProfileCard user={this.state.user} /></div>
 
                     <div className = "child2-flex-container" style={{width: 800, marginLeft: 114}}>
                         <ul className = "bullet-removal">

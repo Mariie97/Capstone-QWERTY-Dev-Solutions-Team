@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {Component} from "react";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import { Box } from "@material-ui/core";
 import { Typography } from '@material-ui/core';
@@ -18,34 +18,53 @@ const style = {
     p: 4,
 
 }
-export default function BasicModal(){
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-  
-    return (
-      <StyledEngineProvider injectFirst>
-      <div>
-        <div onClick={handleOpen}>Open modal</div>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Text in a modal
-            </Typography>
-          </Box>
-        </Modal>
-      </div>
-      </StyledEngineProvider>
-    );
+export class LoginModal extends Component {
 
+    constructor(props){
+      super(props);
 
+      this.state = {
+        open: false
+      }
+
+      this.toggleModal= this.toggleModal.bind(this);
+
+    }
+
+    toggleModal(){
+      this.setState({
+        open : !this.state.open
+      })
+    }
+
+    render() {
+
+      const {open} = this.state;
+      return (
+        <StyledEngineProvider injectFirst>
+        <div>
+          <div onClick={this.toggleModal}>Open modal</div>
+          <Modal
+            open={open}
+            onClose={this.toggleModal}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Text in a modal
+              </Typography>
+            </Box>
+          </Modal>
+        </div>
+        </StyledEngineProvider>
+      );
+    }
 }
+
+export default LoginModal;
+
 
 
  

@@ -16,13 +16,22 @@ class Login extends Component {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: 'test1@upr.edu',
+                email: 'test32@upr.edu',
                 password: 'test1234'
                 
             })
         }).then(response => {
             if(response.status === 200) {
                 localStorage.setItem('is_auth', 'true');
+
+//ALgorithm for authenticate user check
+// localStorage.getItem('is_auth') == "true"{
+//landing page
+// }
+// else{
+//   make a state
+// }
+
                 response.json().then(data => {
                     localStorage.setItem('user_id', data.user_id);
                     localStorage.setItem('type', data.type);
