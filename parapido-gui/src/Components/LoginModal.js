@@ -4,7 +4,6 @@ import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import { Box } from "@material-ui/core";
 import { Typography } from '@material-ui/core';
 import { Modal } from '@material-ui/core';
-
 const style = {
     
     position: 'absolute',
@@ -21,39 +20,21 @@ const style = {
 
 export class LoginModal extends Component {
 
-    constructor(props){
-      super(props);
-
-      this.state = {
-        open: false
-      }
-
-      this.toggleModal= this.toggleModal.bind(this);
-
-    }
-
-    toggleModal(){
-      this.setState({
-        open : !this.state.open
-      })
-    }
-
     render() {
+      const {isOpen, toggle} = this.props;
 
-      const {open} = this.state;
       return (
         <StyledEngineProvider injectFirst>
         <div>
-          <div onClick={this.toggleModal}>Open modal</div>
           <Modal
-            open={open}
-            onClose={this.toggleModal}
+            open={isOpen}
+            onClose={toggle}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
+                This was hard
               </Typography>
             </Box>
           </Modal>

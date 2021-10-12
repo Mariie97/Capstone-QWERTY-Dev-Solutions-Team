@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component } from 'react';
 import {Redirect} from "react-router-dom";
 
 class Login extends Component {
@@ -23,15 +23,6 @@ class Login extends Component {
         }).then(response => {
             if(response.status === 200) {
                 localStorage.setItem('is_auth', 'true');
-
-//ALgorithm for authenticate user check
-// localStorage.getItem('is_auth') == "true"{
-//landing page
-// }
-// else{
-//   make a state
-// }
-
                 response.json().then(data => {
                     localStorage.setItem('user_id', data.user_id);
                     localStorage.setItem('type', data.type);
@@ -53,4 +44,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Login;

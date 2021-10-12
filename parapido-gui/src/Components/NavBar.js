@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import {Link, Redirect} from "react-router-dom"
-import logo from "../Static/Images/Pa_RapidoLogo.png"
-import "../Layouts/NavBar.css"
+import React, { Component } from 'react';
+import {Link, Redirect} from "react-router-dom";
+import "../Layouts/NavBar.css";
+import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 
 export class NavBar extends Component {
-    
-    
+     
     constructor(props) {
         super(props);
      
@@ -102,7 +101,7 @@ export class NavBar extends Component {
                                 </div>
                             </li>
                         </ul>
-                    <div className="menuopen" onClick={this.navSlide}>
+                    <div className="menu-open" onClick={this.navSlide}>
                          
                         {menu_open && <CancelIcon />}
                         {!menu_open && <MenuOpenIcon/>}
@@ -113,6 +112,4 @@ export class NavBar extends Component {
     }
 }
 
-
-
-export default NavBar
+export default NavBar;

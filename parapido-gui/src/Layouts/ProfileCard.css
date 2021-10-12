@@ -3,15 +3,17 @@
 
 /* invisible parent box on the back */
 
-.body-profile {
+.body-profile-card {
 	box-sizing: border-box;
 	border-radius: 20px;
 	width: 300px;
 	height: 400px;
 	display: grid;
 	place-items: center;
+
 	/* testing */
 	/* background-color: black; */
+
 	letter-spacing: 1px;
 	line-height: 1.5;
 
@@ -20,7 +22,8 @@
 
 /* square holding text and image inside */
 
-.card {
+.profile-card {
+
 	/* testing */
 	/* box-shadow: 0px 0px 20px white; */
 
@@ -29,18 +32,20 @@
 	color: white;
 	background-color: black;
 	font-family: "Jost";
-	font-weight: "bold";
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 	place-items: center;
 	border: 3px solid #036800;
 	border-radius: 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 /* header text username and rating */
 
-.header-list {
+.header-list-profile-card {
 	display: flex;
 	flex-direction: column;
 	list-style: none;
@@ -49,18 +54,22 @@
 	margin-bottom: 65px;
 	padding: 0px;
 	line-height: 2;
+
+	
+
+	
 }
 
 /* profile picture */
 
-.profile-image {
+.profile-card-image {
 	border-radius: 50%;
 	border: 0.5mm solid #ffebcc;
 }
 
 /* box in header */
 
-.box-top {
+.box-top-profile-card {
 	width: 290px;
 	height: 80px;
 	background: #036800;
@@ -68,22 +77,29 @@
 	border-top-right-radius: 19px;
 }
 
-/*footer line */
+/* footer line */
 
-.footer-line {
+.footer-line-profile-card {
 	flex-wrap: wrap;
 	width: 100%;
 	flex-basis: 100%;
 	border-top: 2px solid #036800;
 
 	/* moves the box inside the box in the footer */
+
 	padding-bottom: 0px;
 	padding-top: 4px;
+
+	/* makes text not overflow from the card and gives 3 dots */
+
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
 }
 
 /* top card lettering */
 
-.top-card-lettering {
+.top-profile-card-lettering {
 	font-family: "Cormorant Garamond";
 	font-style: "Italic";
 	font-weight: bold;
@@ -94,6 +110,7 @@
 
 	/* testing pusposes */
 	/* background: black; */
+	
 	box-sizing: border-box;
 	border-radius: 20px;
 	width: 300px;

@@ -3,7 +3,7 @@
 
 /* title and line  */
 
-.profile-header {
+.profile-page-header {
 	font-family: "Jost";
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -19,7 +19,7 @@
 
 /* parent - flex between profile - body text - buttons */
 
-.parent-flex-container {
+.parent-flex-container-profile-page {
 	display: flex;
 
 	/* testing purposes */
@@ -28,20 +28,20 @@
 
 /* card */
 
-.child1-flex-container {
+.child1-flex-container-profile-page {
 	margin-right: 60px;
 	margin-left: 83px;
 }
 
 /* remove bullets */
 
-.bullet-removal {
+.bullet-removal-profile-page {
 	list-style: none;
 }
 
 /* body text */
 
-.child2-flex-container {
+.child2-flex-container-profile-page {
 	margin-top: 85px;
 	font-family: "Cormorant Garamond";
 	font-size: 30px;
@@ -52,7 +52,7 @@
 
 /* buttons */
 
-.button {
+.button-profile-page {
 	display: inline-block;
 	padding-right: 40px;
 	padding-left: 40px;
@@ -71,22 +71,22 @@
 	border-radius: 2%;
 }
 
-.button:hover {
+.button-profile-page:hover {
 	border-color: white;
 }
 
-.button:active {
+.button-profile-page:active {
 	background-color: #2e856e;
 }
 
-.child3-flex-container {
+.button-profile-page-flex-container {
 	margin-top: 0px;
 	float: right;
 }
 
 /* flex within the body text for bold and spacing */
 
-.body-flex {
+.body-flex-profile-page {
 	list-style: none;
 	display: flex;
 
@@ -95,25 +95,25 @@
 	/* background-color: thistle; */
 }
 
-.child-body-flex {
+.child-body-flex-profile-page {
 	font-family: "Times New Roman";
 	font-weight: bold;
 	margin-right: 50px;
 }
 
-.child1-body-flex {
+.child1-body-flex-profile-page {
 	font-family: "Times New Roman";
 	font-weight: bold;
 	margin-right: 43px;
 }
 
-.child2-body-flex {
+.child2-body-flex-profile-page {
 	font-family: "Times New Roman";
 	font-weight: bold;
 	margin-right: 29px;
 }
 
-.break-text {
+.break-text-profile-page {
 	width: 80%;
 	padding-top: 10px;
 

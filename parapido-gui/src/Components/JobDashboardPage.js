@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component } from 'react';
 
 
 class JobDashboard extends Component {
@@ -14,4 +14,4 @@ class JobDashboard extends Component {
     }
 }
 
-export default JobDashboard
+export default JobDashboard;
