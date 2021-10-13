@@ -39,10 +39,10 @@ class SecurityQuestionsPage extends Component {
     }
 
     componentDidMount() {
-                document.body.style.backgroundColor = "#2F2D4A"
-/*
-        document.body.style.backgroundColor = "#FFFFFF"
-*/
+        document.body.style.backgroundColor = "#2F2D4A"
+        /*
+                document.body.style.backgroundColor = "#FFFFFF"
+        */
     }
 
     change = e =>{
@@ -67,20 +67,20 @@ class SecurityQuestionsPage extends Component {
             errors.answerOneError = "Please submit a response";
         }
 
-/*        if(this.state.answerOne == ""){
-            isError = true;
-            errors.answerOneError = "Answers do not match";
-        }*/
+        /*        if(this.state.answerOne == ""){
+                    isError = true;
+                    errors.answerOneError = "Answers do not match";
+                }*/
 
         if(this.state.answerTwo == ""){
             isError = true;
             errors.answerTwoError = "Please submit a response";
         }
 
-/*        if(this.state.answerTwo == ""){
-            isError = true;
-            errors.answerTwoError = "Answers do not match";
-        }*/
+        /*        if(this.state.answerTwo == ""){
+                    isError = true;
+                    errors.answerTwoError = "Answers do not match";
+                }*/
 
         this.setState({
             ...this.state,
@@ -114,21 +114,23 @@ class SecurityQuestionsPage extends Component {
             errors.emailError = "Email is not associated with an account"
         }*/
 
-        fetch('/edit_user',{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                password: this.state.password
-            })
-        }).then(response => {
-            if(response.status === 200) {
-                //Success
-            }
-            else {
-                isError = true;
-                errors.fetchError = true
-            }
-        })
+        /*
+                fetch('/change_password',{
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        password: this.state.password
+                    })
+                }).then(response => {
+                    if(response.status === 200) {
+                        //Success get data
+                        //changeSuccess = true
+                    }
+                    else {
+                        isError = true;
+                        errors.fetchError = true
+                    }
+                })*/
 
         this.setState({
             ...this.state,
@@ -160,9 +162,48 @@ class SecurityQuestionsPage extends Component {
         return isError
     }
 
-     handleClose = () => {
+    validateFetch = () => {
+        let isError = false;
+
+        const errors = {
+            fetchError: '',
+        };
+
+        fetch('/change_password',{
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'},
+            data: JSON.stringify({
+                email: this.state.email
+            })
+        }).then(response => {
+            if(response.status === 200) {
+
+                //Success get data
+                response.json().then(data => {
+                    localStorage.getItem("email")
+                    localStorage.getItem("ans1")
+                    localStorage.getItem("ans2")
+
+                })
+            }
+            else {
+                isError = true;
+                errors.fetchError = true
+            }
+        })
+
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+
+        return isError
+
+    }
+
+    handleClose = () => {
         if(this.state.password === this.state.confirmPassword && this.state.password !== "" && this.state.confirmPassword !== "")
-        this.setState({open: false})
+            this.setState({open: false})
     };
 
 
@@ -180,18 +221,18 @@ class SecurityQuestionsPage extends Component {
             this.setState({open: true})
             this.setState({correctAnswers: true})
 
-/*
-            this.setState({
-                email: '',
-                emailError: '',
-                questionOne: '',
-                questionTwo: '',
-                answerOne: '',
-                answerOneError: '',
-                answerTwo: '',
-                answerTwoError: '',
-                emailIsValid: false,
-            })*/
+            /*
+                        this.setState({
+                            email: '',
+                            emailError: '',
+                            questionOne: '',
+                            questionTwo: '',
+                            answerOne: '',
+                            answerOneError: '',
+                            answerTwo: '',
+                            answerTwoError: '',
+                            emailIsValid: false,
+                        })*/
             this.props.onChange({
                 email: undefined,
                 questionOne: undefined,
@@ -210,6 +251,9 @@ class SecurityQuestionsPage extends Component {
 
         if (!err) {
 
+        const fetchErr = this.validateFetch()
+
+            if (!fetchErr) {
                 this.state.emailIsValid = true;
 
                 this.setState({
@@ -224,8 +268,8 @@ class SecurityQuestionsPage extends Component {
                 })
 
 
+            }
         }
-
 
 
     };
@@ -241,10 +285,10 @@ class SecurityQuestionsPage extends Component {
             //success message
             this.setState({changeSuccess: true})
 
-/*            this.setState({
-                password: '',
-                confirmPassword: '',
-            })*/
+            /*            this.setState({
+                            password: '',
+                            confirmPassword: '',
+                        })*/
 
 
         }
@@ -398,6 +442,17 @@ class SecurityQuestionsPage extends Component {
             //background: "#FFFFFF",
         };
 
+        const errorStyle = {
+            position: "absolute",
+            width: "429px",
+            height: "52px",
+            left: "600px",
+            top: "800px",
+            zIndex: -1,
+
+            //background: "#FFFFFF",
+        };
+
         if(this.state.emailIsValid){
 
             renderQuestionOne = <TextField
@@ -465,6 +520,15 @@ class SecurityQuestionsPage extends Component {
                         helperText={this.state.confirmPasswordError}
                         style={confirmPasswordStyle}
                     />
+
+
+                    {changeSuccess &&
+
+                    <Stack sx={{width: '100%'}} spacing={2}>
+                        <Alert severity="success" style={errorStyle}>This is a success alert — check it out!</Alert>
+                    </Stack>
+
+                    }
                     <Button variant="contained" style={changePasswordStyle} onClick={e => this.onSubmitPassword(e)}>Change Password</Button>
                 </form>
             </div>
@@ -483,15 +547,8 @@ class SecurityQuestionsPage extends Component {
 
                 }
 
-                {changeSuccess &&
-
-                <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="success" style={errorStyle}>This is a success alert — check it out!</Alert>
-                </Stack>
-
-                }
-{/*
-                {changeSuccess && add redirect}
+                {/*
+                {changeSuccess && add redirect to landing}
 */}
 
                 <form>
