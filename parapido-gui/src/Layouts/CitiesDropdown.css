@@ -1,0 +1,10 @@
+#cities-dropdown-label {
+    color: white;
+}
+
+#cities-dropdown {
+    color: black;
+    margin-bottom: 35px;
+    background-color: white;
+    width: 32vh;
+}

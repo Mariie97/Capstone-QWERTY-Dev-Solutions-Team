@@ -8,7 +8,6 @@ import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 
 
-
 class App extends React.Component {
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
@@ -20,8 +19,8 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>                      
-                                <h1>Landing Page</h1>
+                                <React.Fragment>
+                                    <h1>Landing Page</h1>
                                 </React.Fragment>
                             )}
                         />
@@ -31,19 +30,18 @@ class App extends React.Component {
                             render={() => (
                                 is_auth ?
                                     <Redirect to='/jobdashboard'/> :
-                                        <LoginPage />           
+                                    <LoginPage />
                             )}
                         />
-                           <Route
+                        <Route
                             exact
-                            path='/profile'
-                            render={() => (
-                                is_auth ?
-                                    <Redirect to='/profile'/> :      
-                                       <React.Fragment>
-                                            <NavBar cookies= {this.props.cookies} />
-                                            <Profile />
-                                       </React.Fragment>                      
+                            path='/profile/:user_id'
+                            render={(props) => (
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <Profile user_id={props.match.params.user_id} />
+                                </React.Fragment>
+
                             )}
                         />
                         <Route
@@ -51,8 +49,8 @@ class App extends React.Component {
                             path='/editprofile'
                             render={() => (
                                 <React.Fragment>
-                                   <h1>Edit Profile</h1>
-                               </React.Fragment>
+                                    <h1>Edit Profile</h1>
+                                </React.Fragment>
                             )}
                         />
 
@@ -62,7 +60,7 @@ class App extends React.Component {
                             render={() => (
                                 <React.Fragment>
                                     <JobDashboardPage />
-                               </React.Fragment>
+                                </React.Fragment>
                             )}
                         />
 

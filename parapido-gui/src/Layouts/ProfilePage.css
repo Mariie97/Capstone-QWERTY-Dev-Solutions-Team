@@ -128,3 +128,68 @@
 	word-break: break-all;
 	line-height: 1.5;
 }
+
+
+.child2-grid-container {
+	width: 60%;
+	margin-top: 30px;
+}
+
+.edit-info-grid-container {
+	grid-template-columns: 30% 30% 30%;
+	grid-template-rows: 40% 40% 40%;
+	display: grid;
+	grid-gap: 10px 120px;
+	/*background-color: black;*/
+}
+.grid-edit-info-item1 {
+	grid-column-start: 1;
+	grid-row-start: 2;
+}
+.grid-edit-info-item2 {
+	grid-column-start: 1;
+	grid-row-start: 3
+}
+.grid-edit-info-item3 {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 4;
+}
+
+.grid-edit-info-item4 {
+	grid-column-start: 2;
+	grid-row-start: 2;
+}
+
+.grid-edit-info-item5 {
+	grid-column-start: 2;
+	grid-row-start: 3;
+}
+
+.grid-edit-info-item6 {
+	grid-column-start: 2;
+	grid-row-start: 4;
+}
+
+.grid-edit-info-item7 {
+	grid-column-start: 1;
+	grid-row-start: 1;
+}
+
+.grid-edit-info-item8 {
+	grid-column-start: 2;
+	grid-row-start: 1;
+}
+
+h2.edit-subheaders {
+	color: white;
+	margin-bottom: 25px;
+}
+
+.save-change-button {
+	float: right;
+}
+
+#profile-pic-label {
+	color: white;
+}
