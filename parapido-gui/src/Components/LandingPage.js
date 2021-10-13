@@ -10,12 +10,13 @@ export class Landing extends Component {
 
 	constructor(props){
 		super(props);
-		this.showLoginModal = this.showLoginModal.bind(this);
+		
 
 	this.state = {
 		showLogin: false
 	}
 
+	this.showLoginModal = this.showLoginModal.bind(this);
 	}
 
 	componentDidMount() {

@@ -96,8 +96,8 @@ export class NavBar extends Component {
                             </li>
                             <li>
                                 <div>
-                                {logout_success && <Redirect to='/'/>}   
                                 <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
+                                {logout_success && <Redirect to='/'/>}   
                                 </div>
                             </li>
                         </ul>
