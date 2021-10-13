@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import { Link, Redirect} from "react-router-dom";
 import "../Layouts/LoginModal.css"
 import Alert from '@material-ui/lab/Alert';
-
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import { Box } from "@material-ui/core";
 import { Modal } from '@material-ui/core';
