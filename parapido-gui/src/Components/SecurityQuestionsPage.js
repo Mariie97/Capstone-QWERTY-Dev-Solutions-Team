@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Alert,
     Backdrop,
     Button, Fade, FilledInput,
     FormControl,
@@ -8,7 +9,7 @@ import {
     FormLabel,
     Grid, InputLabel, Modal, OutlinedInput,
     Radio,
-    RadioGroup
+    RadioGroup, Stack
 } from "@material-ui/core";
 import {TextField} from "@material-ui/core";
 
@@ -268,6 +269,7 @@ class SecurityQuestionsPage extends Component {
             password,
             confirmPassword,
             changeSuccess,
+            fetchError,
         } = this.state;
 
 
@@ -473,6 +475,21 @@ class SecurityQuestionsPage extends Component {
         return (
             <div>
 
+                {fetchError &&
+
+                <Stack sx={{width: '100%'}} spacing={2}>
+                    <Alert severity="error" style={errorStyle}>DB Error Try Again</Alert>
+                </Stack>
+
+                }
+
+                {changeSuccess &&
+
+                <Stack sx={{width: '100%'}} spacing={2}>
+                    <Alert severity="success" style={errorStyle}>This is a success alert — check it out!</Alert>
+                </Stack>
+
+                }
 {/*
                 {changeSuccess && add redirect}
 */}
