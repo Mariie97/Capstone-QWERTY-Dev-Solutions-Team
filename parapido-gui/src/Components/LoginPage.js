@@ -16,7 +16,7 @@ class Login extends Component {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: 'test1@upr.edu',
+                email: 'test32@upr.edu',
                 password: 'test1234'
                 
             })
