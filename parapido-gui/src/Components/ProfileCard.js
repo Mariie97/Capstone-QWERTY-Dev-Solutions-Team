@@ -19,7 +19,7 @@ class ProfileCard extends Component {
 
     render(){
 
-        const {first_name,last_name,rating_value,jobs_cancelled,type} = this.props.user
+        const {first_name,last_name,rating_value,jobs_cancelled,type, image} = this.props.user
 
         return (
             <React.Fragment>

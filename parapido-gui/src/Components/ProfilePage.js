@@ -16,8 +16,10 @@ export class Profile extends Component {
                 about : '',
                 type  :'',
                 image : ' ', 
-                address: '',
                 jobs_cancelled : '',
+                street: '',
+                city: '',
+                zipcode: '',
                 rating_value : '',
             }
             }
@@ -75,15 +77,97 @@ export class Profile extends Component {
 
     render() {
 
-        const {first_name, last_name } = this.state.user;
+        const {first_name, last_name, email, about , type , image , street, city, zipcode , jobs_cancelled, rating_value } = this.state.user;
 
         //TODO: object variable with cities 
+        const municipalities = [
+            "Adjuntas",
+            "Aguada",
+            "Aguadilla",
+            "Aguas Buenas",
+            "Aibonito",
+            "Añasco",
+            "Arecibo",
+            "Arroyo",
+            "Barceloneta",
+            "Barranquitas",
+            "Bayamon",
+            "Cabo Rojo",
+            "Caguas",
+            "Camuy",
+            "Canovanas",
+            "Carolina",
+            "Cataño",
+            "Cayey",
+            "Ceiba",
+            "Ciales",
+            "Cidra",
+            "Coamo",
+            "Comerio",
+            "Corozal",
+            "Culebra",
+            "Dorado",
+            "Fajardo",
+            "Florida",
+            "Guanica",
+            "Guayama",
+            "Guayanilla",
+            "Guaynabo",
+            "Gurabo",
+            "Hatillo",
+            "Hormigueros",
+            "Humacao",
+            "Isabela",
+            "Jayuya",
+            "Juana Diaz",
+            "Juncos",
+            "Lajas",
+            "Lares",
+            "Las Marias",
+            "Las Piedras",
+            "Loiza",
+            "Luquillo",
+            "Manati",
+            "Maricao",
+            "Maunabo",
+            "Mayaguez",
+            "Moca",
+            "Morovis",
+            "Naguabo",
+            "Naranjito",
+            "Orocovis",
+            "Patillas",
+            "Peñuelas",
+            "Ponce",
+            "Quebradillas",
+            "Rincon",
+            "Rio Grande",
+            "Sabana Grande",
+            "Salinas",
+            "San German",
+            "San Juan",
+            "San Lorenzo",
+            "San Sebastian",
+            "Santa Isabel",
+            "Toa Alta",
+            "Toa Baja",
+            "Trujillo Alto",
+            "Utuado",
+            "Vega Alta",
+            "Vega Baja",
+            "Vieques",
+            "Villalba",
+            "Yabucoa",
+            "Yauco",
 
+        ]
+
+      
         return (
             
             <React.Fragment>
                     <div className="button-profile-page-flex-container">
-                        <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs</Link>
+                        <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
                         <Link to={"/editprofile"} className="button-profile-page" style={{marginRight: 70}}> Edit Profile </Link>
                     </div>
                     
@@ -98,27 +182,27 @@ export class Profile extends Component {
                             <li>
                                 <ul className="body-flex-profile-page">
                                     <li className= "child-body-flex-profile-page">Name: </li>
-                                    <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 14}}>Jane Doe </li>
+                                    <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 14}}> {first_name} {last_name} </li>
                                 </ul>
                             </li>
 
                             <li>
                                 <ul className="body-flex-profile-page">
-                                    <li  className= "child1-body-flex-profile-page"> E-mail: </li>
-                                    <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 10}}> jnedoe@stephanierocks.com </li>
+                                    <li  className= "child1-body-flex-profile-page"> Email: </li>
+                                    <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 19}}> {email} </li>
                                 </ul>
                             </li>
 
                             <li>
                                 <ul className="body-flex-profile-page">
                                     <li className= "child2-body-flex-profile-page" > Address: </li>
-                                    <li className="break-text-profile-page" style={{paddingTop: 2}}> Street Steph Ponce 00680 </li>
+                                    <li className="break-text-profile-page" style={{paddingTop: 2}}> {street} {municipalities[city]} PR, {zipcode} </li>
                                 </ul>
                             </li>
 
                             <ul className="body-flex-profile-page">
                                     <li className= "child1-body-flex-profile-page">About:</li>
-                                    <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaninfffkf kkrkkfr rfrormrfrmfrf frjrofjrofrfrrojfrojfrfrofjfrfg different things like plates and stuff.</p>
+                                    <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}} > {about} </p>
                             </ul>
                         </ul>
                     </div>                    
