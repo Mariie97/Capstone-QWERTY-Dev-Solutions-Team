@@ -111,16 +111,14 @@ export class Profile extends Component {
 
                             <li>
                                 <ul className="body-flex-profile-page">
-                                    <li className= "child2-body-flex" > Address: </li>
+                                    <li className= "child2-body-flex-profile-page" > Address: </li>
                                     <li className="break-text-profile-page" style={{paddingTop: 2}}> Street Steph Ponce 00680 </li>
                                 </ul>
                             </li>
 
                             <ul className="body-flex-profile-page">
                                     <li className= "child1-body-flex-profile-page">About:</li>
-                                    <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working 
-                                    person and am interested in working cleaninfffkf kkrkkfr rfrormrfrmfrf frjrofjrofrfrrojfrojfr 
-                                    frofjfrfg different things like plates and stuff.</p>
+                                    <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaninfffkf kkrkkfr rfrormrfrmfrf frjrofjrofrfrrojfrojfrfrofjfrfg different things like plates and stuff.</p>
                             </ul>
                         </ul>
                     </div>                    
