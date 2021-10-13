@@ -77,7 +77,7 @@ export class Profile extends Component {
 
     render() {
 
-        const {first_name, last_name, email, about , type , image , street, city, zipcode , jobs_cancelled, rating_value } = this.state.user;
+        const {first_name, last_name, email, about , street, city, zipcode} = this.state.user;
 
         //TODO: object variable with cities 
         const municipalities = [
