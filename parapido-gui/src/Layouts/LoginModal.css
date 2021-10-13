@@ -61,6 +61,19 @@
     outline: none;
 }
 
+
+.input-login-modal-error {
+    font-family: "Jost";
+    width: 95%;
+    padding: 12px 20px;
+    padding-bottom: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid red;
+    outline: none;
+    box-shadow:inset 0 0 0.5px 0.5px #888; 
+}
+
 .input-login-modal:focus{
     background-color: #FFEBCC;
 }
@@ -74,6 +87,12 @@
     background-color: #FFEBCC;
     border: 2px solid #FFEBCC;
     border-radius: 10px;
+}
+
+
+.login-modal-continue-button:hover{
+    cursor: pointer;
+    border: 2px solid black;  
 }
 
 .text-button-login-modal{

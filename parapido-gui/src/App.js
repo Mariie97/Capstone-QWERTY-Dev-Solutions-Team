@@ -66,7 +66,6 @@ class App extends React.Component {
                     <NavBar cookies= {this.props.cookies} />
                     <JobDashboardPage />
                     </React.Fragment>
-
                 )}
                     />
                     </div>: <Redirect to=""/>                          

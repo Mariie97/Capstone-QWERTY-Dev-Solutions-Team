@@ -2,6 +2,8 @@
 import React, {Component} from "react";
 import { Link, Redirect} from "react-router-dom";
 import "../Layouts/LoginModal.css"
+import Alert from '@material-ui/lab/Alert';
+
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import { Box } from "@material-ui/core";
 import { Modal } from '@material-ui/core';
@@ -29,7 +31,8 @@ export class LoginModal extends Component {
        this.state = {
          email : '',
          password: '',
-         login_success: false
+         login_success: false,
+         login_failed: false,
        }
 
        this.handleChange = this.handleChange.bind(this);
@@ -53,9 +56,15 @@ export class LoginModal extends Component {
               response.json().then(data => {
                   localStorage.setItem('user_id', data.user_id);
                   localStorage.setItem('type', data.type);
-                  this.setState({login_success: true});
-              })}         
-      })
+                  this.setState({login_success: true,
+                  login_failed:false});
+              })}
+          else{
+              this.setState({login_failed: true})
+          }         
+      
+            }
+      )
   }
 
     handleChange(event){
@@ -68,7 +77,7 @@ export class LoginModal extends Component {
     render() {
 
       const {isOpen, toggle} = this.props;
-      const { login_success } = this.state;
+      const { login_success, login_failed } = this.state;
 
       return (
         <StyledEngineProvider injectFirst>
@@ -79,36 +88,46 @@ export class LoginModal extends Component {
             onClose={toggle}
             style={{textAlign:"center"}}
           >
-            <Box sx={style}>       
+            <Box sx={style}>   
+                {login_failed &&  <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                        Yikes!!! 😬 Incorrect email or Password.
+                                  </Alert>}    
+
                 <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                 <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                 <div className="second-point-login-modal">
                 <div className="first-text-login-modal"> Log in to have</div>
                 <div className="second-text-login-modal"> FUN.</div>
                 </div>
-
+            
+             
                 <div className="body-container-login-modal">
                 <label className="third-point-login-modal"> Enter E-mail: </label>
-                <input className="input-login-modal" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange}></input>
+                {login_failed ? <input className="input-login-modal-error" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange}></input>:
+                  <input className="input-login-modal" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange}></input>
+                }
+               
                 <label className="third-point-login-modal"> Enter Password: </label>
-                <input className="input-login-modal" type="text" id="password" name="password" placeholder="Password" onChange={this.handleChange}></input>
+                {login_failed ? <input className="input-login-modal-error" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange}></input>:
+                  <input className="input-login-modal" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange}></input>}
+               
                 <button onClick={this.handleOnClick} className="login-modal-continue-button"> 
                 <div className="text-button-login-modal">
                   CONTINUE    
                 </div>
+                <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
                 </button>
                 </div>
-               
-                <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+
                 <hr className="line-login-modal"></hr>
                 <ul className="footer-flex-login-modal">
                 <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
-                <Link to={"#"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
+                <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
                 </ul>
             </Box>
           </Modal>
         </div>
-    }
+      }
         </StyledEngineProvider>
       );
     }
@@ -126,7 +145,7 @@ export class LoginModal extends Component {
 const continue_arrow_image_resize = {
   height: 80, 
   width: 100,
-  position: "inherit",
+  position: "fixed",
   bottom: 25,
   left: 300,
 }
