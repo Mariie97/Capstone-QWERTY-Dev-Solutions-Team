@@ -34,16 +34,18 @@ export class Profile extends Component {
         // get from the server the specific user - 
         // hasn't been implemented by the Back-End
 
-                fetch('/user_info',{
+
+                fetch('/users/' + localStorage.getItem('user_id'),{
                         method: 'GET',
                         credentials: 'same-origin',
                         headers: {'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                         },
-            
-                        data: JSON.stringify({
-                            user_id: localStorage.getItem('user_id')
-                        })
+                         }
+               
+                        // data: JSON.stringify({
+                        //     user_id: localStorage.getItem('user_id')
+                        // })
+                        
                     }).then(response => {
                         if(response.status === 200) {
                             response.json().then(data =>
@@ -78,8 +80,7 @@ export class Profile extends Component {
     render() {
 
         const {first_name, last_name, email, about , street, city, zipcode} = this.state.user;
-
-        //TODO: object variable with cities 
+ 
         const municipalities = [
             "Adjuntas",
             "Aguada",
