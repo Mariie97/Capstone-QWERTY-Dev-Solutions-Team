@@ -33,6 +33,7 @@ class SecurityQuestionsPage extends Component {
             confirmPasswordError: '',
             correctAnswers: false,
             changeSuccess: false,
+            fetchError: false,
         };
     }
 
@@ -95,6 +96,7 @@ class SecurityQuestionsPage extends Component {
 
         const errors = {
             emailError: '',
+            fetchError: false,
         };
 
         if (typeof this.state.email !== "undefined") {
@@ -110,6 +112,22 @@ class SecurityQuestionsPage extends Component {
             isError=true;
             errors.emailError = "Email is not associated with an account"
         }*/
+
+        fetch('/edit_user',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                password: this.state.password
+            })
+        }).then(response => {
+            if(response.status === 200) {
+                //Success
+            }
+            else {
+                isError = true;
+                errors.fetchError = true
+            }
+        })
 
         this.setState({
             ...this.state,
