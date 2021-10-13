@@ -12,7 +12,7 @@ class App extends React.Component {
         super(props);
     }
 
-/*    state = {
+    state = {
         fields: {}
     };
 
@@ -23,7 +23,7 @@ class App extends React.Component {
                 ...updatedValue
             }})
 
-    };*/
+    };
 
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
@@ -55,22 +55,22 @@ class App extends React.Component {
                             )}
                         />
 
-{/*                        <Route
+                        <Route
 
                             exact
                             path='/security-questions'
                             render={() => (
                                 <div>
                                     <SecurityQuestionsPage onChange={fields => this.onChange(fields)}/>
-                                <p>
-                            {JSON.stringify(this.state.fields, null, 2)}
-                                </p>
+                                    <p>
+                                        {JSON.stringify(this.state.fields, null, 2)}
+                                    </p>
 
                                 </div>
 
 
                             )}
-                        />*/}
+                        />
 
                     </Switch>
                 </div>

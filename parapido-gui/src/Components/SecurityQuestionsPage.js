@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {
-    Button, FilledInput,
+    Backdrop,
+    Button, Fade, FilledInput,
     FormControl,
     FormControlLabel,
     FormHelperText,
     FormLabel,
-    Grid, InputLabel, OutlinedInput,
+    Grid, InputLabel, Modal, OutlinedInput,
     Radio,
     RadioGroup
 } from "@material-ui/core";
 import {TextField} from "@material-ui/core";
-
 
 class SecurityQuestionsPage extends Component {
 
@@ -26,6 +26,13 @@ class SecurityQuestionsPage extends Component {
             answerTwo: '',
             answerTwoError: '',
             emailIsValid: false,
+            open: false,
+            password: '',
+            passwordError: '',
+            confirmPassword: '',
+            confirmPasswordError: '',
+            correctAnswers: false,
+            changeSuccess: false,
         };
     }
 
@@ -52,22 +59,6 @@ class SecurityQuestionsPage extends Component {
             answerOneError: '',
             answerTwoError: '',
         };
-
-
-
-        if (typeof this.state.email !== "undefined") {
-            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(this.state.email)) {
-                isError = true;
-                errors.emailError = "Please enter valid email address.";
-            }
-
-        }
-
-/*        if(!emailExists){
-            isError=true;
-            errors.emailError = "Email i snot associated with an account"
-        }*/
 
         if(this.state.answerOne == ""){
             isError = true;
@@ -99,6 +90,62 @@ class SecurityQuestionsPage extends Component {
 
     };
 
+    validateEmail = () => {
+        let isError = false;
+
+        const errors = {
+            emailError: '',
+        };
+
+        if (typeof this.state.email !== "undefined") {
+            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(this.state.email)) {
+                isError = true;
+                errors.emailError = "Please enter valid email address.";
+            }
+
+        }
+
+        /*        if(!emailExists){
+            isError=true;
+            errors.emailError = "Email is not associated with an account"
+        }*/
+
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+
+        return isError
+    }
+
+    validatePassword = () => {
+        let isError = false;
+
+        const errors = {
+            passwordError: '',
+            confirmPasswordError: '',
+        };
+
+        if (this.state.password !== this.state.confirmPassword) {
+            isError = true;
+            errors.passwordError = "Passwords do not match!"
+            errors.confirmPasswordError = "Passwords do not match!"
+        }
+
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+
+        return isError
+    }
+
+     handleClose = () => {
+        if(this.state.password === this.state.confirmPassword && this.state.password !== "" && this.state.confirmPassword !== "")
+        this.setState({open: false})
+    };
+
 
     onSubmit = (e) => {
         e.preventDefault();
@@ -111,7 +158,10 @@ class SecurityQuestionsPage extends Component {
             //clear
             //this.state.questionOneRef.clear;
             //this.state.questionTwoRef.clear;
+            this.setState({open: true})
+            this.setState({correctAnswers: true})
 
+/*
             this.setState({
                 email: '',
                 emailError: '',
@@ -122,7 +172,7 @@ class SecurityQuestionsPage extends Component {
                 answerTwo: '',
                 answerTwoError: '',
                 emailIsValid: false,
-            })
+            })*/
             this.props.onChange({
                 email: undefined,
                 questionOne: undefined,
@@ -136,31 +186,24 @@ class SecurityQuestionsPage extends Component {
 
     onSubmitEmail = (e) => {
         //Here we make sure the email is valid and exists. Also fetch the questions and answers
-        e.preventDefault();
-        //this.props.onSubmit(this.state)
+        e.preventDefault();//this.props.onSubmit(this.state)
+        const err = this.validateEmail()
 
-        const errors = {
-            emailError: '',
-        };
+        if (!err) {
 
-        if (typeof this.state.email !== "undefined") {
-            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (pattern.test(this.state.email)) {
                 this.state.emailIsValid = true;
-                errors.emailError = "Please enter valid email address.";
-
 
                 this.setState({
                     emailError: '',
-                    questionOne: "Question 1",
-                    questionTwo: "Question 2",
+                    questionOne: "Question 1 placeholder",
+                    questionTwo: "Question placeholder",
                     answerOne: "",
                     answerOneError: '',
                     answerTwo: "",
                     answerTwoError: '',
                     emailIsValid: true,
                 })
-            }
+
 
         }
 
@@ -168,6 +211,28 @@ class SecurityQuestionsPage extends Component {
 
     };
 
+    onSubmitPassword = (e) => {
+        //Here we make sure the email is valid and exists. Also fetch the questions and answers
+        e.preventDefault();//this.props.onSubmit(this.state)
+        const err = this.validatePassword()
+
+        if (!err) {
+
+            //redirect
+            //success message
+            this.setState({changeSuccess: true})
+
+/*            this.setState({
+                password: '',
+                confirmPassword: '',
+            })*/
+
+
+        }
+
+
+
+    };
 
 
 
@@ -181,6 +246,10 @@ class SecurityQuestionsPage extends Component {
             email,
             answerOne,
             answerTwo,
+            open,
+            password,
+            confirmPassword,
+            changeSuccess,
         } = this.state;
 
 
@@ -241,16 +310,6 @@ class SecurityQuestionsPage extends Component {
             //background: "#FFFFFF",
         };
 
-        const createButtonStyleEmail = {
-            position: "absolute",
-            width: "190px",
-            height: "80px",
-            left: "1200px",
-            top: "900px",
-
-            //background: "#FFFFFF",
-        };
-
         const securityQuestionTextStyle = {
             position: "absolute",
             left: "643px",
@@ -272,10 +331,58 @@ class SecurityQuestionsPage extends Component {
 
         }
 
+        const modalStyle = {
+            left: "643px",
+            top: "200px",
+            width: "1000px",
+            height: "1000px",
+            position: "absolute",
+            backgroundColor: "#2F2D4A",
+
+        }
+
+        const modalButtonStyle = {
+            top: "327px",
+            left: "600px",
+            position: "absolute"
+
+        }
+
+        const confirmPasswordStyle = {
+            position: "absolute",
+            width: "400px",
+            top: "300px",
+            left: "100px",
+            //backgroundColor: "#FFFFFF",
+
+            background: "#FFFFFF",
+        };
+
+        const passwordStyle = {
+            position: "absolute",
+            width: "400px",
+            top: "200px",
+            left: "100px",
+            //backgroundColor: "#FFFFFF",
+
+            background: "#FFFFFF",
+        };
+
+        const changePasswordStyle = {
+            position: "absolute",
+            width: "190px",
+            height: "80px",
+            top: "400px",
+            left: "200px",
+
+            //background: "#FFFFFF",
+        };
+
         if(this.state.emailIsValid){
 
             renderQuestionOne = <TextField
                 required
+                disabled = {this.state.correctAnswers}
                 error = {this.state.answerOneError}
                 variant="filled"
                 label={this.state.questionOne}
@@ -289,6 +396,7 @@ class SecurityQuestionsPage extends Component {
 
             renderQuestionTwo = <TextField
                 required
+                disabled = {this.state.correctAnswers}
                 error = {this.state.answerTwoError}
                 variant="filled"
                 label={this.state.questionTwo}
@@ -307,10 +415,49 @@ class SecurityQuestionsPage extends Component {
         }
         else  button = <Button variant="contained" style={createButtonStyle} onClick={e => this.onSubmit(e)}>Submit</Button>
 
+        const body = (
+            <div >
+                <form>
+                    <TextField
+                        required
+                        error = {this.state.passwordError}
+                        variant="filled"
+                        label="Password"
+                        type="password"
+                        name="password"
+                        defaultValue=""
+                        value = {password}
+                        onChange={e => this.change(e)}
+                        helperText={this.state.passwordError}
+                        style={passwordStyle}
+                    />
+
+                    <TextField
+                        required
+                        error = {this.state.confirmPasswordError}
+                        variant="filled"
+                        label="Confirm Password"
+                        type="password"
+                        name="confirmPassword"
+                        defaultValue=""
+                        value = {confirmPassword}
+                        onChange={e => this.change(e)}
+                        helperText={this.state.confirmPasswordError}
+                        style={confirmPasswordStyle}
+                    />
+                    <Button variant="contained" style={changePasswordStyle} onClick={e => this.onSubmitPassword(e)}>Change Password</Button>
+                </form>
+            </div>
+        );
+
 
 
         return (
             <div>
+
+{/*
+                {changeSuccess && add redirect}
+*/}
 
                 <form>
                     <div style={outerGridStyle}>
@@ -346,6 +493,18 @@ class SecurityQuestionsPage extends Component {
 
 
                         <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
+
+                        <div>
+                            <Modal
+                                open={open}
+                                onClose={this.handleClose}
+                                aria-labelledby="simple-modal-title"
+                                aria-describedby="simple-modal-description"
+                                style={modalStyle}
+                            >
+                                {body}
+                            </Modal>
+                        </div>
 
 
                     </div>
