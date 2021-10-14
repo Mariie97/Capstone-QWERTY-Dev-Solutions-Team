@@ -70,20 +70,20 @@ class SecurityQuestionsPage extends Component {
             errors.answerOneError = "Please submit a response";
         }
 
-        /*        if(this.state.answerOne != this.state.questionOneAnswer){
-                    isError = true;
-                    errors.answerOneError = "Answers do not match";
-                }*/
+        if(this.state.answerOne != this.state.questionOneAnswer){
+            isError = true;
+            errors.answerOneError = "Answers do not match";
+        }
 
         if(this.state.answerTwo == ""){
             isError = true;
             errors.answerTwoError = "Please submit a response";
         }
 
-        /*        if(this.state.answerTwo != this.state.questionTwoAnswer){
-                    isError = true;
-                    errors.answerTwoError = "Answers do not match";
-                }*/
+        if(this.state.answerTwo != this.state.questionTwoAnswer){
+            isError = true;
+            errors.answerTwoError = "Answers do not match";
+        }
 
         this.setState({
             ...this.state,
@@ -201,11 +201,14 @@ class SecurityQuestionsPage extends Component {
 
                     //Success get data
                     response.json().then(data => {
-                        console.log(localStorage.getItem("ans1"))
-                        this.setState({questionOne: localStorage.getItem("question_1")})
-                        this.setState({questionTwo: localStorage.getItem("question_2")})
-                        this.setState({questionOneAnswer: localStorage.getItem("asn1")})
-                        this.setState({questionTwoAnswer: localStorage.getItem("ans2")})
+
+/*                        console.log(data["answer_1"])
+                        console.log(data["answer_2"])*/
+
+                        this.setState({questionOne: data["question_1"]})
+                        this.setState({questionTwo: data["question_2"]})
+                        this.setState({questionOneAnswer: data["answer_1"]})
+                        this.setState({questionTwoAnswer: data["answer_2"]})
                     })
                 }
                 else{
@@ -426,7 +429,7 @@ class SecurityQuestionsPage extends Component {
                 disabled = {this.state.correctAnswers}
                 error = {this.state.answerTwoError}
                 variant="filled"
-                label={this.state.questionTwo}
+                label={this.chooseQuestion(this.state.questionTwo)}
                 helperText={this.state.answerTwoError}
                 type="text"
                 name="answerTwo"
