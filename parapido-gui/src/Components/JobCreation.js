@@ -23,7 +23,7 @@ export class JobCreation extends Component {
                     </div>
                     <div className="selected">
                         <label className="label-job-creation"> *Street: </label>
-                        <input className="input-1-job-creation" style={{ width:"160%" }} type="text" id="street" name="street" placeholder="Street"></input>
+                        <input className="input-1-job-creation" style={{ width:"150%" }} type="text" id="street" name="street" placeholder="Street"></input>
                         <div className="mini-flex-box-job-creation">
                             <div>
                             <label className="label-job-creation"> *Municipality: </label>
