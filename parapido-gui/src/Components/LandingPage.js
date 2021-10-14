@@ -5,7 +5,6 @@ import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import EmailIcon from '@material-ui/icons/Mail';
 
-import LoginModal from './LoginModal';
 
 export class Landing extends Component {
 
