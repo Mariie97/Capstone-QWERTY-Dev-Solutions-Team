@@ -40,14 +40,8 @@ export class Landing extends Component {
 							<EmailIcon style={mail}/> 
 							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail"> parapidopr@gmail.com</a>
 						</li>
-
-						<li>
-							<Link to="/about" id="link" >Why PaRapido?</Link>
-						</li>
-
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
-							{this.state.showLogin && <LoginModal/>}
 						</li>
 					</ul>
 				</div>

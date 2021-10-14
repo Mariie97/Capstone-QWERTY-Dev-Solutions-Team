@@ -42,23 +42,21 @@ export class NavBar extends Component {
     navSlide = () =>{
         const nav = document.querySelector('.nav-links')
 
-    // toggle menu button
-    nav.classList.toggle('nav-active');
-    const navLinks = document.querySelectorAll(".nav-links li")
-    this.setState({menu_open: !this.state.menu_open})
+        // toggle menu button
+        nav.classList.toggle('nav-active');
+        const navLinks = document.querySelectorAll(".nav-links li")
+        this.setState({menu_open: !this.state.menu_open})
 
-    // animate links
-
-    navLinks.forEach((link, index) =>{
-        if(link.style.animation){
-            link.style.animation = ``
-        }
-        else{
-            link.style.animation = `navLinksFade 0.4s ease forwards ${index/5}s`
-        }
-    })
-
-}
+        // animate links
+        navLinks.forEach((link, index) =>{
+            if(link.style.animation){
+                link.style.animation = ``
+            }
+            else{
+                link.style.animation = `navLinksFade 0.4s ease forwards ${index/5}s`
+            }
+        })
+    }
 
     render() {
         const { logout_success } = this.state;
@@ -78,14 +76,13 @@ export class NavBar extends Component {
                             <div>
                                 {logout_success && <Redirect to='/'/>}
                                 <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </li>
+                    </ul>
                     <div className="menuopen" onClick={this.navSlide}>
-
                         {menu_open && <CancelIcon />}
                         {!menu_open && <MenuOpenIcon/>}
-                   </div>
+                    </div>
                 </div>
             </nav>
         )
