@@ -56,7 +56,6 @@ class App extends React.Component {
                                 </React.Fragment>
                             )}
                         />
-
                     </Switch>
                 </div>
             </BrowserRouter>
