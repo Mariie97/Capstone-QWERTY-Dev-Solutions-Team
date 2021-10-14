@@ -20,10 +20,16 @@ export class JobCreation extends Component {
                         <label className="label-job-creation"> *Description: </label>
                         <textarea className="input-2-job-creation" type="text" id="description" name="description" placeholder="Description"></textarea>
                     </div>
-                    <div>
-                        <h5> street </h5>
-                        <h5> city </h5>
-                        <h5> zipcode </h5>
+                    <div className="selected">
+                        <label className="label-job-creation"> *Street: </label>
+                        <input className="input-1-job-creation" type="text" id="street" name="street" placeholder="Street"></input>
+                        <div className="mini-flex-box-job-creation">
+                            <h5> city </h5>
+                            <div>
+                                <label className="label-job-creation"> *Zipcode: </label>
+                                <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"></input>
+                            </div>
+                        </div>
                     </div>
                   
                 </div>

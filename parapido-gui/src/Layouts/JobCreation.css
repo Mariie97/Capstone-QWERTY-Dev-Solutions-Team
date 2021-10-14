@@ -26,11 +26,21 @@
 
 	/* testing purposes */
 
-	/* background-color: red; */
+	background-color: red;
 	width: 85%;
 	margin-left: 150px;
 	flex-direction: row;
 	justify-content: space-between;
+}
+
+.big-flexbox-for-2-flexbox-containers .selected {
+	position: relative;
+	right: 400px;
+	top: px;
+	display: flex;
+	flex-direction: column;
+	line-height: 2.5;
+	text-align: left;
 }
 
 /* title and description */
@@ -93,10 +103,31 @@
 		background-color: #FFEBCC;
 }
 
+/* municipality and zipcode */
 
-.right-body-container-2-job-creation{
+.mini-flex-box-job-creation{
 	display: flex;
-    flex-direction: column;
-    line-height: 2.5;
-    text-align: left;
+	flex-direction: row;
+	justify-content: space-between; 
+	gap: 30%;
+}
+
+.input-3-job-creation{
+	font-family: "Jost";
+	width: 100%;
+	padding: 12px 20px;
+	padding-bottom: 6px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+	text-align: center;
+}
+
+.input-3-job-creation:focus{
+		background-color: #FFEBCC;
 }
