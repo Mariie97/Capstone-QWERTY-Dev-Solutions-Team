@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {Link, Redirect} from "react-router-dom"
 import logo from "../Static/Images/Pa_RapidoLogo.png"
 import "../Layouts/NavBar.css"
