@@ -2,9 +2,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
+import NavBar from './Components/NavBar';
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
-import NavBar from './Components/NavBar';
+import JobCreation from './Components/JobCreation';
+
 
 
 
@@ -40,6 +42,16 @@ class App extends React.Component {
                             render={() => (
                                 <React.Fragment>
                                 <DashboardPage/>
+                               </React.Fragment>
+                            )}
+                        />
+                         <Route
+                            exact
+                            path='/jobcreation'
+                            render={() => (
+                                <React.Fragment>
+                                    <NavBar cookies={this.props.cookies}/>
+                                    <JobCreation />
                                </React.Fragment>
                             )}
                         />
