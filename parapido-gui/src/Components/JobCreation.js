@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "../Layouts/JobCreation.css";
+import MunicipalitiesDropdown from "./MunicipalitiesDropdown.js"
 
 export class JobCreation extends Component {
 
@@ -22,9 +23,12 @@ export class JobCreation extends Component {
                     </div>
                     <div className="selected">
                         <label className="label-job-creation"> *Street: </label>
-                        <input className="input-1-job-creation" type="text" id="street" name="street" placeholder="Street"></input>
+                        <input className="input-1-job-creation" style={{ width:"160%" }} type="text" id="street" name="street" placeholder="Street"></input>
                         <div className="mini-flex-box-job-creation">
-                            <h5> city </h5>
+                            <div>
+                            <label className="label-job-creation"> *Municipality: </label>
+                            <MunicipalitiesDropdown />
+                            </div>
                             <div>
                                 <label className="label-job-creation"> *Zipcode: </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"></input>
