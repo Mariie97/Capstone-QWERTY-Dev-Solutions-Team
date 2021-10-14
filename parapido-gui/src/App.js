@@ -1,17 +1,15 @@
-
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LandingPage from "./Components/LandingPage"
 import LoginPage from "./Components/LoginPage";
 import JobDashboardPage from "./Components/JobDashboardPage";
+import DashboardPage from "./Components/JobDashboard";
 import NavBar from './Components/NavBar';
-
 
 
 class App extends React.Component {
     render() {
-        const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
                 <div>
@@ -20,8 +18,8 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>  
-                                <LandingPage />                    
+                                <React.Fragment>
+                                <LandingPage />
                                 </React.Fragment>
                             )}
                         />
@@ -31,7 +29,7 @@ class App extends React.Component {
                             render={() => (
                                 is_auth ?
                                     <Redirect to='/jobdashboard'/> :
-                                        <LoginPage />           
+                                        <LoginPage />
                             )}
                         />
                            <Route
@@ -39,10 +37,10 @@ class App extends React.Component {
                             path='/profile'
                             render={() => (
                                 is_auth ?
-                                    <Redirect to='/profile'/> :      
+                                    <Redirect to='/profile'/> :
                                        <React.Fragment>
-                                            <NavBar cookies= {this.props.cookies} />            
-                                       </React.Fragment>                      
+                                            <NavBar cookies= {this.props.cookies} />
+                                       </React.Fragment>
                             )}
                         />
                         <Route
@@ -64,11 +62,10 @@ class App extends React.Component {
                                </React.Fragment>
                             )}
                         />
- 
+
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }
