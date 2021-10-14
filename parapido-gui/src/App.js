@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LandingPage from "./Components/LandingPage"
 import LoginPage from "./Components/LoginPage";
-import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 
@@ -42,8 +41,7 @@ class App extends React.Component {
                                 is_auth ?
                                     <Redirect to='/profile'/> :      
                                        <React.Fragment>
-                                            <NavBar cookies= {this.props.cookies} />
-                                            <ProfilePage />
+                                            <NavBar cookies= {this.props.cookies} />            
                                        </React.Fragment>                      
                             )}
                         />
