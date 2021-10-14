@@ -1,16 +1,12 @@
-
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import {withCookies} from "react-cookie";
-import LoginPage from "./Components/LoginPage";
-import DashboardPage from "./Components/DashboardPage";
+import DashboardPage from "./Components/JobDashboard";
 import NavBar from './Components/NavBar';
-
 
 
 class App extends React.Component {
     render() {
-        const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
                 <div>
@@ -19,19 +15,10 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>                       
-                                 <NavBar cookies={this.props.cookies}/>
-                                <h1>Landing Page</h1>
+                                <React.Fragment>
+                                    <NavBar cookies={this.props.cookies}/>
+                                    <h1>Landing Page</h1>
                                 </React.Fragment>
-                            )}
-                        />
-                        <Route
-                            exact
-                            path='/login'
-                            render={() => (
-                                is_auth ?
-                                    <Redirect to='/jobdashboard'/> :
-                                    <LoginPage />
                             )}
                         />
                         <Route
@@ -39,15 +26,13 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                <DashboardPage/>
-                               </React.Fragment>
+                                    <DashboardPage/>
+                                </React.Fragment>
                             )}
                         />
-
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }
