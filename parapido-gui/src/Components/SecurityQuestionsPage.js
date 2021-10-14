@@ -12,6 +12,7 @@ import {
     RadioGroup, Stack
 } from "@material-ui/core";
 import {TextField} from "@material-ui/core";
+import {Redirect} from "react-router-dom";
 
 class SecurityQuestionsPage extends Component {
 
@@ -35,6 +36,8 @@ class SecurityQuestionsPage extends Component {
             correctAnswers: false,
             changeSuccess: false,
             fetchError: false,
+            questionOneAnswer: undefined,
+            questionTwoAnswer: undefined,
         };
     }
 
@@ -67,7 +70,7 @@ class SecurityQuestionsPage extends Component {
             errors.answerOneError = "Please submit a response";
         }
 
-        /*        if(this.state.answerOne == ""){
+        /*        if(this.state.answerOne != this.state.questionOneAnswer){
                     isError = true;
                     errors.answerOneError = "Answers do not match";
                 }*/
@@ -77,7 +80,7 @@ class SecurityQuestionsPage extends Component {
             errors.answerTwoError = "Please submit a response";
         }
 
-        /*        if(this.state.answerTwo == ""){
+        /*        if(this.state.answerTwo != this.state.questionTwoAnswer){
                     isError = true;
                     errors.answerTwoError = "Answers do not match";
                 }*/
@@ -97,7 +100,6 @@ class SecurityQuestionsPage extends Component {
 
         const errors = {
             emailError: '',
-            fetchError: false,
         };
 
         if (typeof this.state.email !== "undefined") {
@@ -108,29 +110,6 @@ class SecurityQuestionsPage extends Component {
             }
 
         }
-
-        /*        if(!emailExists){
-            isError=true;
-            errors.emailError = "Email is not associated with an account"
-        }*/
-
-        /*
-                fetch('/change_password',{
-                    method: 'PUT',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        password: this.state.password
-                    })
-                }).then(response => {
-                    if(response.status === 200) {
-                        //Success get data
-                        //changeSuccess = true
-                    }
-                    else {
-                        isError = true;
-                        errors.fetchError = true
-                    }
-                })*/
 
         this.setState({
             ...this.state,
@@ -160,45 +139,6 @@ class SecurityQuestionsPage extends Component {
         })
 
         return isError
-    }
-
-    validateFetch = () => {
-        let isError = false;
-
-        const errors = {
-            fetchError: '',
-        };
-
-        fetch('/change_password',{
-            method: 'GET',
-            headers: {'Content-Type': 'application/json'},
-            data: JSON.stringify({
-                email: this.state.email
-            })
-        }).then(response => {
-            if(response.status === 200) {
-
-                //Success get data
-                response.json().then(data => {
-                    localStorage.getItem("email")
-                    localStorage.getItem("ans1")
-                    localStorage.getItem("ans2")
-
-                })
-            }
-            else {
-                isError = true;
-                errors.fetchError = true
-            }
-        })
-
-        this.setState({
-            ...this.state,
-            ...errors
-        })
-
-        return isError
-
     }
 
     handleClose = () => {
@@ -245,34 +185,45 @@ class SecurityQuestionsPage extends Component {
     };
 
     onSubmitEmail = (e) => {
-        //Here we make sure the email is valid and exists. Also fetch the questions and answers
+        //Make sure the email is valid and exists. Also fetch the questions and answers]
+
         e.preventDefault();//this.props.onSubmit(this.state)
         const err = this.validateEmail()
 
         if (!err) {
+            console.log(this.state.email)
 
-        const fetchErr = this.validateFetch()
+            fetch('/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
+                console.log(response.status)
+                if(response.status === 200) {
+                    this.setState({emailIsValid: true})
+                    this.setState({fetchError: false})
 
-            if (!fetchErr) {
-                this.state.emailIsValid = true;
+                    //Success get data
+                    response.json().then(data => {
+                        console.log(localStorage.getItem("ans1"))
+                        this.setState({questionOne: localStorage.getItem("question_1")})
+                        this.setState({questionTwo: localStorage.getItem("question_2")})
+                        this.setState({questionOneAnswer: localStorage.getItem("asn1")})
+                        this.setState({questionTwoAnswer: localStorage.getItem("ans2")})
+                    })
+                }
+                else{
+                    this.setState({fetchError: true})
+                }
 
-                this.setState({
-                    emailError: '',
-                    questionOne: "Question 1 placeholder",
-                    questionTwo: "Question placeholder",
-                    answerOne: "",
-                    answerOneError: '',
-                    answerTwo: "",
-                    answerTwoError: '',
-                    emailIsValid: true,
-                })
-
-
-            }
+            })
         }
 
 
     };
+
+    chooseQuestion = (e) => {
+
+        if(e == 1) return "In what city were you born?"
+        if(e == 2) return "What high school did you attend?"
+        if(e == 3) return "What was your favorite food as a child?"
+    }
 
     onSubmitPassword = (e) => {
         //Here we make sure the email is valid and exists. Also fetch the questions and answers
@@ -280,15 +231,26 @@ class SecurityQuestionsPage extends Component {
         const err = this.validatePassword()
 
         if (!err) {
-
             //redirect
-            //success message
-            this.setState({changeSuccess: true})
+            fetch('/change_password',{
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    password: this.state.password,
+                    email: this.state.email
+                })
+            }).then(response => {
+                if(response.status === 200) {
 
-            /*            this.setState({
-                            password: '',
-                            confirmPassword: '',
-                        })*/
+                    this.setState({changeSuccess: true})
+
+                }
+                else {
+                    //fetch error
+                    this.setState({passwordError: "DB Error Try Again"})
+                }
+            })
+
 
 
         }
@@ -296,7 +258,6 @@ class SecurityQuestionsPage extends Component {
 
 
     };
-
 
 
     render(){
@@ -307,8 +268,6 @@ class SecurityQuestionsPage extends Component {
 
         const {
             email,
-            answerOne,
-            answerTwo,
             open,
             password,
             confirmPassword,
@@ -395,20 +354,13 @@ class SecurityQuestionsPage extends Component {
 
         }
 
-        const modalStyle = {
-            left: "643px",
+        const backdropStyle = {
+            left: "700px",
             top: "200px",
-            width: "1000px",
-            height: "1000px",
+            width: "500px",
+            height: "600px",
             position: "absolute",
             backgroundColor: "#2F2D4A",
-
-        }
-
-        const modalButtonStyle = {
-            top: "327px",
-            left: "600px",
-            position: "absolute"
 
         }
 
@@ -416,7 +368,7 @@ class SecurityQuestionsPage extends Component {
             position: "absolute",
             width: "400px",
             top: "300px",
-            left: "100px",
+            left: "50px",
             //backgroundColor: "#FFFFFF",
 
             background: "#FFFFFF",
@@ -426,7 +378,7 @@ class SecurityQuestionsPage extends Component {
             position: "absolute",
             width: "400px",
             top: "200px",
-            left: "100px",
+            left: "50px",
             //backgroundColor: "#FFFFFF",
 
             background: "#FFFFFF",
@@ -437,7 +389,7 @@ class SecurityQuestionsPage extends Component {
             width: "190px",
             height: "80px",
             top: "400px",
-            left: "200px",
+            left: "150px",
 
             //background: "#FFFFFF",
         };
@@ -446,8 +398,8 @@ class SecurityQuestionsPage extends Component {
             position: "absolute",
             width: "429px",
             height: "52px",
-            left: "600px",
-            top: "800px",
+            left: "730px",
+            top: "600px",
             zIndex: -1,
 
             //background: "#FFFFFF",
@@ -460,7 +412,7 @@ class SecurityQuestionsPage extends Component {
                 disabled = {this.state.correctAnswers}
                 error = {this.state.answerOneError}
                 variant="filled"
-                label={this.state.questionOne}
+                label={this.chooseQuestion(this.state.questionOne)}
                 helperText={this.state.answerOneError}
                 type="text"
                 name="answerOne"
@@ -547,9 +499,9 @@ class SecurityQuestionsPage extends Component {
 
                 }
 
-                {/*
-                {changeSuccess && add redirect to landing}
-*/}
+
+                {changeSuccess && <Redirect to='/'/>}
+
 
                 <form>
                     <div style={outerGridStyle}>
@@ -587,14 +539,18 @@ class SecurityQuestionsPage extends Component {
                         <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
 
                         <div>
+
                             <Modal
                                 open={open}
                                 onClose={this.handleClose}
                                 aria-labelledby="simple-modal-title"
                                 aria-describedby="simple-modal-description"
-                                style={modalStyle}
+                                //style={modalStyle}
                             >
-                                {body}
+                                <Backdrop open={open} style={backdropStyle}>
+                                    {body}
+                                </Backdrop>
+
                             </Modal>
                         </div>
 
