@@ -35,7 +35,7 @@ export class Profile extends Component {
         // hasn't been implemented by the Back-End
 
 
-                fetch('/users/' + localStorage.getItem('user_id'),{
+                fetch('/user_info/' + localStorage.getItem('user_id'),{
                         method: 'GET',
                         credentials: 'same-origin',
                         headers: {'Content-Type': 'application/json',
