@@ -1,18 +1,14 @@
-
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
+import LandingPage from "./Components/LandingPage"
+import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
-import LoginPage from "./Components/LoginPage";
-import DashboardPage from "./Components/DashboardPage";
-import JobCreation from './Components/JobCreation';
-
-
+import ProfilePage from "./Components/ProfilePage";
 
 
 class App extends React.Component {
     render() {
-        const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
                 <div>
@@ -21,19 +17,19 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>                       
-                                 <NavBar cookies={this.props.cookies}/>
-                                <h1>Landing Page</h1>
+                                <React.Fragment>
+                                    <LandingPage />
                                 </React.Fragment>
                             )}
                         />
                         <Route
                             exact
-                            path='/login'
+                            path='/profile'
                             render={() => (
-                                is_auth ?
-                                    <Redirect to='/jobdashboard'/> :
-                                    <LoginPage />
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <ProfilePage cookies= {this.props.cookies} />
+                                </React.Fragment>
                             )}
                         />
                         <Route
@@ -41,8 +37,8 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                <DashboardPage/>
-                               </React.Fragment>
+                                    <JobDashboardPage />
+                                </React.Fragment>
                             )}
                         />
                          <Route
@@ -59,7 +55,6 @@ class App extends React.Component {
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }
