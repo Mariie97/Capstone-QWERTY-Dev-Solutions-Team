@@ -4,6 +4,7 @@ import {withCookies} from "react-cookie";
 import LandingPage from "./Components/LandingPage"
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
+import ProfilePage from "./Components/ProfilePage";
 
 
 class App extends React.Component {
@@ -17,32 +18,17 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-                                    <LandingPage/>
+                                    <LandingPage />
                                 </React.Fragment>
-                            )}
-                        />
-                        <Route
-                            exact
-                            path='/login'
-                            render={() => (
-                                    <Redirect to='/jobdashboard'/>
                             )}
                         />
                         <Route
                             exact
                             path='/profile'
                             render={() => (
-                                    <React.Fragment>
-                                        <NavBar cookies={this.props.cookies}/>
-                                    </React.Fragment>
-                            )}
-                        />
-                        <Route
-                            exact
-                            path='/editprofile'
-                            render={() => (
                                 <React.Fragment>
-                                    <h1>Edit Profile</h1>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <ProfilePage cookies= {this.props.cookies} />
                                 </React.Fragment>
                             )}
                         />
@@ -51,11 +37,10 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                    <JobDashboardPage/>
+                                    <JobDashboardPage />
                                 </React.Fragment>
                             )}
                         />
-
                     </Switch>
                 </div>
             </BrowserRouter>

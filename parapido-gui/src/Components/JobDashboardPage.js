@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import verifyUserAuth from "../Utilities";
 
 
-class JobDashboard extends Component {
+class JobDashboardPage extends Component {
 
     constructor(props) {
         super(props);
@@ -29,4 +29,4 @@ class JobDashboard extends Component {
     }
 }
 
-export default JobDashboard;
+export default JobDashboardPage;

@@ -6,13 +6,13 @@ import logo from "../Static/Images/Pa_RapidoLogo.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import verifyUserAuth from "../Utilities";
 
-export class Landing extends Component {
+class LandingPage extends Component {
 
 	constructor(props){
 		super(props);
 		this.state = {
 			showLogin: false,
-			is_auth: true,
+			is_auth: false,
 		}
 
 		this.showLoginModal = this.showLoginModal.bind(this);
@@ -35,7 +35,7 @@ export class Landing extends Component {
 		const {is_auth} = this.state;
 		return (
 			<div>
-				{!is_auth && <Redirect to='/' />}
+				{is_auth && <Redirect to='/jobdashboard' />}
 				<div className="landingnav">
 					<img className="logostyle" src={logo} alt="Logo" />
 					<ul className="landingnavlinks">
@@ -56,11 +56,8 @@ export class Landing extends Component {
 				<p className="firstparagraph">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students
 					from the UPR system. Also, we give employers the opportunity of helping
 					the students by providing jobs in our platform.</p>
-
 				<Link to={"/signup"} className="buttonlandingpage"> Try PaRapido for FREE </Link>
 			</div>
-
-
 		);
 	}
 }
@@ -78,4 +75,4 @@ const mail = {
 	height: 20,
 }
 
-export default Landing;
+export default LandingPage;
