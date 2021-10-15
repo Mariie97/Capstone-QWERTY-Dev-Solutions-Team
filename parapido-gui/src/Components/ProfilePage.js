@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import "../Layouts/ProfilePage.css"
 import {Link, Redirect} from 'react-router-dom';
 import ProfileCard from './ProfileCard'
-import verifyUserAuth from "../Utilities";
+import verifyUserAuth, {cities} from "../Utilities";
 
-class Profile extends Component {
+class ProfilePage extends Component {
 
     constructor(props){
         super(props)
@@ -68,87 +68,6 @@ class Profile extends Component {
     render() {
         const {first_name, last_name, email, about , street, city, zipcode} = this.state.user;
         const {is_auth} = this.state;
-        const municipalities = [
-            "Adjuntas",
-            "Aguada",
-            "Aguadilla",
-            "Aguas Buenas",
-            "Aibonito",
-            "Añasco",
-            "Arecibo",
-            "Arroyo",
-            "Barceloneta",
-            "Barranquitas",
-            "Bayamon",
-            "Cabo Rojo",
-            "Caguas",
-            "Camuy",
-            "Canovanas",
-            "Carolina",
-            "Cataño",
-            "Cayey",
-            "Ceiba",
-            "Ciales",
-            "Cidra",
-            "Coamo",
-            "Comerio",
-            "Corozal",
-            "Culebra",
-            "Dorado",
-            "Fajardo",
-            "Florida",
-            "Guanica",
-            "Guayama",
-            "Guayanilla",
-            "Guaynabo",
-            "Gurabo",
-            "Hatillo",
-            "Hormigueros",
-            "Humacao",
-            "Isabela",
-            "Jayuya",
-            "Juana Diaz",
-            "Juncos",
-            "Lajas",
-            "Lares",
-            "Las Marias",
-            "Las Piedras",
-            "Loiza",
-            "Luquillo",
-            "Manati",
-            "Maricao",
-            "Maunabo",
-            "Mayaguez",
-            "Moca",
-            "Morovis",
-            "Naguabo",
-            "Naranjito",
-            "Orocovis",
-            "Patillas",
-            "Peñuelas",
-            "Ponce",
-            "Quebradillas",
-            "Rincon",
-            "Rio Grande",
-            "Sabana Grande",
-            "Salinas",
-            "San German",
-            "San Juan",
-            "San Lorenzo",
-            "San Sebastian",
-            "Santa Isabel",
-            "Toa Alta",
-            "Toa Baja",
-            "Trujillo Alto",
-            "Utuado",
-            "Vega Alta",
-            "Vega Baja",
-            "Vieques",
-            "Villalba",
-            "Yabucoa",
-            "Yauco",
-        ]
-
 
         return (
             <React.Fragment>
@@ -177,7 +96,7 @@ class Profile extends Component {
                             <li>
                                 <ul className="body-flex-profile-page">
                                     <li className= "child2-body-flex-profile-page" > Address: </li>
-                                    <li className="break-text-profile-page" style={{paddingTop: 2}}> {street} {municipalities[city]} PR, {zipcode} </li>
+                                    <li className="break-text-profile-page" style={{paddingTop: 2}}> {street} {cities[city]} PR, {zipcode} </li>
                                 </ul>
                             </li>
                             <ul className="body-flex-profile-page">
@@ -192,5 +111,5 @@ class Profile extends Component {
     }
 }
 
-export default Profile
+export default ProfilePage;
 

@@ -6,7 +6,7 @@ import logo from "../Static/Images/Pa_RapidoLogo.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import verifyUserAuth from "../Utilities";
 
-export class Landing extends Component {
+class LandingPage extends Component {
 
 	constructor(props){
 		super(props);
@@ -75,4 +75,4 @@ const mail = {
 	height: 20,
 }
 
-export default Landing;
+export default LandingPage;

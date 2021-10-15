@@ -5,7 +5,7 @@ import "../Layouts/NavBar.css"
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
 
-export class NavBar extends Component {
+class NavBar extends Component {
 
     constructor(props) {
         super(props);
@@ -19,9 +19,7 @@ export class NavBar extends Component {
 
     //method to handle logging out
     handleLogOut() {
-        fetch(
-            '/logout',
-            {
+        fetch('/logout', {
                 method: 'POST',
                 credentials: 'same-origin',
                 headers:{
@@ -89,4 +87,4 @@ export class NavBar extends Component {
     }
 }
 
-export default NavBar
+export default NavBar;
