@@ -18,41 +18,28 @@ class ProfileCard extends Component {
     }
 
     render() {
-
         const {first_name,last_name,rating_value,jobs_cancelled,type} = this.props.user
 
-
         return (
-
-
             <React.Fragment>
-
-             {/* Display text on who it's (student, client or admin) */}
-
-            <div className= "top-profile-card-lettering">
-            {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
-            :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
-            :<img src= {_admin} alt="admin" style={admin}/>}
-            {this.acc_type[type]}
-
-            </div>
-            <div className="body-profile-card">
-            <div className = "profile-card">
-
-                    <div className = "box-top-profile-card">
-                        <img className = "profile-card-image" style={image_resize} src= {defaultPicture} alt="profile" />
+                <div className= "top-profile-card-lettering">
+                    {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
+                        :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
+                            :<img src= {_admin} alt="admin" style={admin}/>}
+                    {this.acc_type[type]}
+                </div>
+                <div className="body-profile-card">
+                    <div className = "profile-card">
+                        <div className = "box-top-profile-card">
+                            <img className = "profile-card-image" style={image_resize} src= {defaultPicture} alt="profile" />
+                        </div>
+                        <ul className = "header-list-profile-card">
+                            <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
+                            <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                        </ul>
+                        <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
                     </div>
-
-                    <ul className = "header-list-profile-card">
-                       <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                       <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
-                    </ul>
-
-                    {/* footer */}
-
-                    <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
-            </div>
-            </div>
+                </div>
             </React.Fragment>
         )
     }
@@ -63,7 +50,7 @@ const trashcan = {
     color: "red",
     position: "relative",
     top: 7,
-}
+};
 
 const thumbsupdown = {
     color: "burlywood",
@@ -71,7 +58,7 @@ const thumbsupdown = {
     width: 15,
     top: 6,
     left:2
-}
+};
 
 const star = {
     color: "yellow",
@@ -79,27 +66,27 @@ const star = {
     width: 19,
     top: 6,
     left:2
-}
+};
 
 const image_resize = {
     height: 180,
     width: 180,
-}
+};
 
 const schoolbag = {
     height: 70,
     width: 60,
-}
+};
 
 const employer = {
     height: 70,
     width: 70,
     backgroundColor: "white"
-}
+};
 
 const admin = {
     height: 70,
     width: 70,
-}
+};
 
 export default ProfileCard;

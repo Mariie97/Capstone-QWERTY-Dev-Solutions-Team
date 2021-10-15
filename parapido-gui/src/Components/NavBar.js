@@ -11,7 +11,7 @@ class NavBar extends Component {
         super(props);
         this.state = {
             logout_success: false,
-            menu_open: false
+            menu_open: false,
         };
 
         this.handleLogOut = this.handleLogOut.bind(this);
@@ -38,12 +38,12 @@ class NavBar extends Component {
 
     // method to slide small nav bar from menu icon in website
     navSlide = () =>{
-        const nav = document.querySelector('.nav-links')
+        const nav = document.querySelector('.nav-links');
 
         // toggle menu button
         nav.classList.toggle('nav-active');
-        const navLinks = document.querySelectorAll(".nav-links li")
-        this.setState({menu_open: !this.state.menu_open})
+        const navLinks = document.querySelectorAll(".nav-links li");
+        this.setState({menu_open: !this.state.menu_open});
 
         // animate links
         navLinks.forEach((link, index) =>{
@@ -53,7 +53,7 @@ class NavBar extends Component {
             else{
                 link.style.animation = `navLinksFade 0.4s ease forwards ${index/5}s`
             }
-        })
+        });
     }
 
     render() {
@@ -64,19 +64,19 @@ class NavBar extends Component {
                 {logout_success && <Redirect to='/'/>}
                 <div className="nav">
                     <img className="logostyle" src={logo} alt="Logo" />
-                        <ul className="nav-links">
-                            <li>
-                                <Link to="/jobdashboard">Job Dashboard</Link>
-                            </li>
-                            <li>
-                                <Link to="/profile">Profile</Link>
-                            </li>
-                            <li>
-                                <div>
+                    <ul className="nav-links">
+                        <li>
+                            <Link to="/jobdashboard">Job Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to="/profile">Profile</Link>
+                        </li>
+                        <li>
+                            <div>
                                 <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </li>
+                    </ul>
                     <div className="menu-open" onClick={this.navSlide}>
                         {menu_open ? <CancelIcon /> : <MenuOpenIcon/>}
                     </div>

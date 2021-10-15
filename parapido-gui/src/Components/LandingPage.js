@@ -14,9 +14,9 @@ class LandingPage extends Component {
 		this.state = {
 			showLogin: false,
 			is_auth: false,
-		}
+		};
 
-	this.showLoginModal = this.showLoginModal.bind(this);
+		this.showLoginModal = this.showLoginModal.bind(this);
 	}
 
 	componentDidMount() {
@@ -52,14 +52,11 @@ class LandingPage extends Component {
 						</li>
 					</ul>
 				</div>
-
-
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
 				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students
-				  from the UPR system. Also, we give employers the opportunity of helping
-				  the students by providing jobs in our platform.</p>
-
+					from the UPR system. Also, we give employers the opportunity of helping
+					the students by providing jobs in our platform.</p>
 				<Link to={"/signup"} className="button-landing"> Try PaRapido for FREE </Link>
 			</div>
 		);
@@ -68,8 +65,8 @@ class LandingPage extends Component {
 
 // small icons and elements css
 const mail = {
-    color: "#ffebcc",
-    paddingRight: 10,
+	color: "#ffebcc",
+	paddingRight: 10,
 	height: 20,
 }
 
