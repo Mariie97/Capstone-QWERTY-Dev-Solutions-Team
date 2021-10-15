@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import "../Layouts/ProfilePage.css";
+import verifyUserAuth, {cities} from "../Utilities";
 import ProfileCard from './ProfileCard';
+
+
 
 class ProfilePage extends Component {
 
@@ -31,7 +34,6 @@ class ProfilePage extends Component {
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A"
 
-        // get from the server the specific user hasn't been implemented by the Back-End
         fetch('/user_info/' + localStorage.getItem('user_id'),{
             method: 'GET',
             credentials: 'same-origin',

@@ -18,7 +18,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-                                    <LandingPage />
+                                    <LandingPage cookies= {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
@@ -38,7 +38,7 @@ class App extends React.Component {
                             render={() => (
                                 <React.Fragment>
                                     <NavBar cookies= {this.props.cookies} />
-                                    <JobDashboardPage />
+                                    <JobDashboardPage cookies= {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
