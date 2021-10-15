@@ -16,7 +16,6 @@
 
 	letter-spacing: 1px;
 	line-height: 1.5;
-
 	margin-left: 50px;
 }
 
@@ -54,10 +53,6 @@
 	margin-bottom: 65px;
 	padding: 0px;
 	line-height: 2;
-
-	
-
-	
 }
 
 /* profile picture */
@@ -107,10 +102,6 @@
 	font-size: 40px;
 
 	/* small container for lettering to be centered all the time no matter change*/
-
-	/* testing pusposes */
-	/* background: black; */
-	
 	box-sizing: border-box;
 	border-radius: 20px;
 	width: 300px;
@@ -124,6 +115,5 @@
 	align-content: space-around;
 	gap: 10px;
 	justify-content: center;
-
 	margin-bottom: 20px;
 }

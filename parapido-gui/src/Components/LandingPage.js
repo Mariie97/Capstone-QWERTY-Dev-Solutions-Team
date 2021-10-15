@@ -1,27 +1,30 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import LoginModal from './LoginModal';
 
-export class Landing extends Component {
+
+class LandingPage extends Component {
 
 	constructor(props){
 		super(props);
-		
-
-	this.state = {
-		showLogin: false
-	}
+		this.state = {
+			showLogin: false,
+			is_auth: false,
+		}
 
 	this.showLoginModal = this.showLoginModal.bind(this);
 	}
 
 	componentDidMount() {
-		// webpage background color
+		this.setState({
+			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+		});
 
+		// webpage background color
 		document.body.style.backgroundColor = "#2F2D4A";
 	}
 
@@ -29,49 +32,41 @@ export class Landing extends Component {
 		this.setState({showLogin: !this.state.showLogin});
 	}
 
-	
-
 	render() {
+		const {is_auth} = this.state;
 		return (
 			<div>
+				{is_auth && <Redirect to='/jobdashboard' />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
 					<img className="logostyle" src={logo} alt="Logo" />
 					<ul className="landing-nav-links">
 						<li className="mini-flex-contactus">
 							<div style={contactuslink}>Contact Us</div>
-							<EmailIcon style={mail}/> 
+							<EmailIcon style={mail}/>
 							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="parapido-email"> parapidopr@gmail.com</a>
 						</li>
-
-						<li>
-							<Link to="/about" id="link" >Why PaRapido?</Link>
-						</li>
-
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
 							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>
-							
-						
 						</li>
 					</ul>
 				</div>
 
-			
+
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
-				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students 
-				  from the UPR system. Also, we give employers the opportunity of helping 
+				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students
+				  from the UPR system. Also, we give employers the opportunity of helping
 				  the students by providing jobs in our platform.</p>
 
 				<Link to={"/signup"} className="button-landing"> Try PaRapido for FREE </Link>
-			</div>		
+			</div>
 		);
 	}
 }
 
 // small icons and elements css
-
 const mail = {
     color: "#ffebcc",
     paddingRight: 10,
@@ -91,4 +86,4 @@ const contactuslink = {
 	top: 2
 }
 
-export default Landing;
+export default LandingPage;
