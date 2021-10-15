@@ -1,31 +1,29 @@
-import React, {Component, createRef} from 'react'
+import React, {Component} from 'react'
+import "../Layouts/ProfilePage.css"
+import {Link, Redirect} from 'react-router-dom';
 import ProfileCard from './ProfileCard'
-import "../Layouts/ProfilePage.css";
-import { Link } from 'react-router-dom';
-import Input from './Input';
-import CitiesDropdown from "./CitiesDropdown";
+import verifyUserAuth, {cities} from "../Utilities";
 
-
-export class Profile extends Component {
+class ProfilePage extends Component {
     current_user = localStorage.getItem('user_id');
     current_user_type = localStorage.getItem('type');
 
-
     constructor(props){
         super(props);
-
-        this.state = {
-            user : {
-                first_name : 'Jane',
-                last_name : 'Doe',
-                email : 'jane.doe1000@upr.edu',
-                about : ' I am the best!!!!',
-                type  :' 1 ',
+        this.state = { user : {
+                first_name : '',
+                last_name : '',
+                email : '',
+                about : '',
+                type  :'',
                 image : ' ',
-                jobs_cancelled : ' 50 ',
-                rating_value : ' 3.5 ',
+                jobs_cancelled : '',
+                street: '',
+                city: '',
+                zipcode: '',
+                rating_value : '',
             },
-
+            is_auth: true,
             edit: true,
             change_about: '',
             change_first_name : '',
@@ -38,7 +36,7 @@ export class Profile extends Component {
             lastNameError: undefined,
             streetError: undefined,
             zipcodeError: undefined,
-        };
+        }
 
         this.toggleEdit = this.toggleEdit.bind(this);
 
@@ -51,33 +49,47 @@ export class Profile extends Component {
     }
 
     componentDidMount(){
+        this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
         // webpage background color
-        document.body.style.backgroundColor = "#2F2D4A";
+        document.body.style.backgroundColor = "#2F2D4A"
 
-
-        // get from the server the specific user -
-        // hasn't been implemented by the Back-End
-    }
-
-    toggleEdit() {
-        this.setState(prevState => {
-            return {
-                ...prevState,
-                edit: !prevState.edit
-            };
+        // get from the server the specific user hasn't been implemented by the Back-End
+        fetch('/user_info/' + localStorage.getItem('user_id'),{
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: {'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(data => {
+                        this.setState({ user: {
+                                first_name: data.first_name,
+                                last_name : data.last_name,
+                                email : data.email,
+                                image : data.image,
+                                type  : data.type,
+                                about : data.about,
+                                jobs_cancelled : data.cancellations,
+                                street: data.street,
+                                city: data.city,
+                                zipcode: data.zipcode,
+                                rating_value : data.rate,
+                            }
+                        });
+                    }
+                ).catch((e) => {
+                    console.log(e);
+                    throw(e);
+                });
+            }
         })
     }
 
     render() {
-        const { user_id } = this.props
-        const {first_name,
-            last_name,
-            email,
-            about,
-            type,
-            image,
-            jobs_cancelled,
-            rating_value} = this.state.user;
+        const {first_name, last_name, email, about , street, city, zipcode} = this.state.user;
         const {
             edit,
             change_about,
@@ -90,56 +102,55 @@ export class Profile extends Component {
             firstNameError,
             lastNameError,
             streetError,
-            zipcodeError,} = this.state;
+            zipcodeError,
+        is_auth} = this.state;
+
+        const {user_id} = this.props;
 
         return (
-
             <React.Fragment>
-                <div className="child3-flex-container">
-                    <Link to={"/jobdashboard"} className="button" style={{margin: 20}}> My Jobs</Link>
+                {!is_auth && <Redirect to='/' />}
+                <div className="button-profile-page-flex-container">
+                    <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
                     {user_id === this.current_user || this.current_user_type==='3' &&
                     <div className="button" onClick={this.toggleEdit} > {edit? 'Edit Profile': 'Cancel Edit'} </div>
                     }
                 </div>
-
-                <h1 className="profile-header">{first_name} {last_name} </h1>
-
-                <div className = "parent-flex-container">
-
-                    <div className="child1-flex-container"><ProfileCard /></div>
-                    {edit ?
-                        <div className = "child2-flex-container" style={{width: 800, marginLeft: 114}}>
-                            <ul className = "bullet-removal">
+                <h1 className="profile-page-header">{first_name} {last_name} </h1>
+                <div className = "parent-flex-container-profile-page">
+                    <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
+                    {!edit ?
+                        <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
+                            <ul className="bullet-removal-profile-page">
                                 <li>
-                                    <ul className="body-flex">
-                                        <li className= "child-body-flex">Name: </li>
-                                        <li className="break-text" style={{paddingTop: 1, paddingLeft: 14}}>Jane Doe </li>
-                                    </ul>
-
-                                </li>
-
-                                <li>
-                                    <ul className="body-flex">
-                                        <li  className= "child1-body-flex"> E-mail: </li>
-                                        <li className="break-text" style={{paddingTop: 1, paddingLeft: 10}}> jnedoe@stephanierocks.com </li>
+                                    <ul className="body-flex-profile-page">
+                                        <li className="child-body-flex-profile-page">Name:</li>
+                                        <li className="break-text-profile-page"
+                                            style={{paddingTop: 1, paddingLeft: 14}}> {first_name} {last_name} </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <ul className="body-flex">
-                                        <li className= "child2-body-flex" > Address: </li>
-                                        <li className="break-text" style={{paddingTop: 2}}> Street Steph Ponce 00680 </li>
+                                    <ul className="body-flex-profile-page">
+                                        <li className="child1-body-flex-profile-page"> Email:</li>
+                                        <li className="break-text-profile-page"
+                                            style={{paddingTop: 1, paddingLeft: 19}}> {email} </li>
                                     </ul>
-
                                 </li>
-                                <ul className="body-flex">
-                                    <li className= "child1-body-flex">About:</li>
-                                    <p className="break-text" style={{paddingLeft: 17 , paddingTop: 2.5}} >I am a really hard working person and am interested in working cleaning different things like plates and stuff.
-                                    </p>
+                                <li>
+                                    <ul className="body-flex-profile-page">
+                                        <li className="child2-body-flex-profile-page"> Address:</li>
+                                        <li className="break-text-profile-page"
+                                            style={{paddingTop: 2}}> {street} {cities[city]} PR, {zipcode} </li>
+                                    </ul>
+                                </li>
+                                <ul className="body-flex-profile-page">
+                                    <li className="child1-body-flex-profile-page">About:</li>
+                                    <p className="break-text-profile-page"
+                                       style={{paddingLeft: 17, paddingTop: 2.5}}> {about} </p>
                                 </ul>
-
                             </ul>
-                        </div> :
-                        <div className = "child2-grid-container">
+                        </div>:
+                       <div className = "child2-grid-container">
                             <div className="edit-info-grid-container">
                                 <div className="grid-edit-info-item7">
                                     <h2 className="edit-subheaders">Personal information</h2>
@@ -378,8 +389,5 @@ export class Profile extends Component {
     }
 
 }
-
-
-
-export default Profile;
+export default ProfilePage;
 

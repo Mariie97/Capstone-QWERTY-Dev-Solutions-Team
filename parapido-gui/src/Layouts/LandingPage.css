@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+/* navbar box */
+
+.landingnav {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	font-family: "Cormorant Garamond";
+	font-weight: bold;
+	font-size: 14px;
+	margin-bottom: 40px; /* moves the elements below the nav bar */
+	position: fixed;
+	width: 100%;
+}
+
+/* contact and email container */
+
+.miniflexcontactus {
+	display: flex;
+	flex-direction: row;
+	color: white;
+
+	/* testing purposes*/
+	/* background-color: crimson; */
+}
+
+#parapidoemail {
+	color: #ffebcc;
+	text-decoration: underline;
+}
+#parapidoemail:hover {
+	color: black;
+}
+
+/* each item on the navbar except the logo*/
+
+.landingnavlinks {
+	display: block;
+
+	/* testing purposes */
+	/* background-color: turquoise; */
+
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	color: white;
+	width: 40%;
+}
+
+.landingnavlinks li {
+	list-style: none;
+}
+
+.landingnavlinks #link {
+	color: white;
+	text-decoration: none;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.landingnavlinks #link:hover {
+	color: burlywood;
+}
+
+/* body text*/
+
+.firstpoint {
+	color: white;
+	position: fixed;
+	top: 250px;
+	left: 450px;
+	font-family: "Times New Roman";
+	font-size: 25px;
+	white-space: pre;
+
+	/* it does it on big screen - break the text */
+
+	/* white-space: pre-wrap;
+	width: 400px;
+	height:10px;
+	padding: 10px;
+	border: solid 1px #ccc;
+	word-break: break-all; */
+}
+
+.secondpoint {
+	color: #91eb8f;
+	position: fixed;
+	top: 290px;
+	left: 450px;
+	white-space: pre;
+	font-family: "Times New Roman";
+	font-size: 40px;
+	font-weight: bold;
+	white-space: pre;
+}
+
+.firstparagraph {
+	color: white;
+	position: fixed;
+	top: 370px;
+	left: 450px;
+	font-family: "Times New Roman";
+	font-size: 16px;
+	width: 700px;
+
+	/* border: solid 1px #ccc; */
+	text-align: justify;
+	word-break: break-word;
+	hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	-webkit-hyphens: auto;
+	line-height: 22px;
+}
+
+/* landing page button */
+
+.buttonlandingpage {
+	display: inline-block;
+	padding-right: 45px;
+	padding-left: 45px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	margin: 0.1em;
+	border: 0.2em solid black;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: "Jost";
+	font-weight: bold;
+	font-size: 20px;
+	color: black;
+	background-color: #ffebcc;
+	text-align: center;
+	position: relative;
+	top: 540px;
+	left: 600px;
+}
+
+.buttonlandingpage:hover {
+	border-color: white;
+}
+
+.buttonlandingpage:active {
+	background-color: #2e856e;
+}
