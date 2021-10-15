@@ -1,18 +1,14 @@
-
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
-import LoginPage from "./Components/LoginPage";
-import Profile from "./Components/ProfilePage";
+import LandingPage from "./Components/LandingPage"
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
-
+import ProfilePage from "./Components/ProfilePage";
 
 
 class App extends React.Component {
     render() {
-        const is_auth = localStorage.getItem('is_auth') === 'true';
-        
         return (
             <BrowserRouter>
                 <div>
@@ -21,54 +17,33 @@ class App extends React.Component {
                             exact
                             path='/'
                             render={() => (
-                                <React.Fragment>                      
-                                <h1>Landing Page</h1>
+                                <React.Fragment>
+                                    <LandingPage />
                                 </React.Fragment>
                             )}
                         />
                         <Route
                             exact
-                            path='/login'
-                            render={() => (
-                                is_auth ?
-                                    <Redirect to='/jobdashboard'/> :
-                                        <LoginPage />           
-                            )}
-                        />
-                           <Route
-                            exact
                             path='/profile'
-                            render={() => (     
-                                       <React.Fragment>
-                                            <NavBar cookies= {this.props.cookies} />
-                                            <Profile cookies= {this.props.cookies} />
-                                       </React.Fragment>                      
-                            )}
-                        />
-                        <Route
-                            exact
-                            path='/editprofile'
                             render={() => (
                                 <React.Fragment>
-                                   <h1>Edit Profile</h1>
-                               </React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <ProfilePage cookies= {this.props.cookies} />
+                                </React.Fragment>
                             )}
                         />
-
                         <Route
                             exact
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
                                     <JobDashboardPage />
-                               </React.Fragment>
+                                </React.Fragment>
                             )}
                         />
-
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }
