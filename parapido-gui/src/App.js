@@ -5,11 +5,7 @@ import LandingPage from "./Components/LandingPage"
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
-<<<<<<< HEAD
-import ProfilePage from "./Components/ProfilePage";
 import JobCreation from "./Components/JobCreation";
-=======
->>>>>>> origin
 
 
 class App extends React.Component {
@@ -23,11 +19,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-<<<<<<< HEAD
                                     <LandingPage cookies= {this.props.cookies} />
-=======
-                                    <LandingPage cookies= {this.props.cookies}/>
->>>>>>> origin
                                 </React.Fragment>
                             )}
                         />
@@ -51,7 +43,6 @@ class App extends React.Component {
                                 </React.Fragment>
                             )}
                         />
-<<<<<<< HEAD
                          <Route
                             exact
                             path='/jobcreation'
@@ -63,17 +54,15 @@ class App extends React.Component {
                             )}
                         />
 
-=======
-                    <Route
-                    exact
-                    path='/signup'
-                    render={() => (
-                    <React.Fragment>
-                    <h1>Register Account</h1>
-                    </React.Fragment>
-                )}
-                    />
->>>>>>> origin
+                        <Route
+                        exact
+                        path='/signup'
+                        render={() => (
+                        <React.Fragment>
+                        <h1>Register Account</h1>
+                        </React.Fragment>
+                    )}
+                        />
                     </Switch>
                 </div>
             </BrowserRouter>
