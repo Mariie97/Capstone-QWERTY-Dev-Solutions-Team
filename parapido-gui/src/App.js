@@ -1,13 +1,17 @@
-import './App.css';
 import React from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LoginPage from "./Components/LoginPage";
 import DashboardPage from "./Components/DashboardPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
+import LandingPage from "./Components/LandingPage"
+import ProfilePage from "./Components/ProfilePage";
+import JobDashboardPage from "./Components/JobDashboardPage";
+import NavBar from './Components/NavBar';
 
 
 class App extends React.Component {
+
     constructor(props) {
         super(props);
     }
@@ -26,32 +30,37 @@ class App extends React.Component {
     };
 
     render() {
-        const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
-                <div className="App">
+                <div>
                     <Switch>
                         <Route
                             exact
                             path='/'
                             render={() => (
-                                <h1>Landing Page</h1>
+                                <React.Fragment>
+                                    <LandingPage cookies= {this.props.cookies}/>
+                                </React.Fragment>
                             )}
                         />
                         <Route
                             exact
-                            path='/login'
+                            path='/profile'
                             render={() => (
-                                is_auth ?
-                                    <Redirect to='/dashboard'/> :
-                                    <LoginPage />
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <ProfilePage cookies= {this.props.cookies} />
+                                </React.Fragment>
                             )}
                         />
                         <Route
                             exact
-                            path='/dashboard'
+                            path='/jobdashboard'
                             render={() => (
-                                <DashboardPage cookies={this.props.cookies} />
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobDashboardPage cookies= {this.props.cookies}/>
+                                </React.Fragment>
                             )}
                         />
 
@@ -72,10 +81,20 @@ class App extends React.Component {
                             )}
                         />
 
+
+                    <Route
+                    exact
+                    path='/signup'
+                    render={() => (
+                    <React.Fragment>
+                    <h1>Register Account</h1>
+                    </React.Fragment>
+                )}
+                    />
+
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }
