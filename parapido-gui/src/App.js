@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LandingPage from "./Components/LandingPage"
 import JobDashboardPage from "./Components/JobDashboardPage";
@@ -18,7 +18,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-                                    <LandingPage />
+                                    <LandingPage cookies= {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
