@@ -1,12 +1,17 @@
-import React, {Component} from 'react'
+import React, {Component, createRef} from 'react'
 import "../Layouts/ProfilePage.css"
 import {Link, Redirect} from 'react-router-dom';
 import ProfileCard from './ProfileCard'
 import verifyUserAuth, {cities} from "../Utilities";
+import Input from "./Input";
+import CitiesDropdown from "./CitiesDropdown";
+import {Box, CircularProgress} from "@material-ui/core";
 
 class ProfilePage extends Component {
-    current_user = localStorage.getItem('user_id');
-    current_user_type = localStorage.getItem('type');
+    current_user = {
+        id: localStorage.getItem('user_id'),
+        type: localStorage.getItem('type'),
+    };
 
     constructor(props){
         super(props);
@@ -23,8 +28,9 @@ class ProfilePage extends Component {
                 zipcode: '',
                 rating_value : '',
             },
+            pageLoaded: false,
             is_auth: true,
-            edit: true,
+            edit: false,
             change_about: '',
             change_first_name : '',
             change_last_name : '',
@@ -56,7 +62,7 @@ class ProfilePage extends Component {
         document.body.style.backgroundColor = "#2F2D4A"
 
         // get from the server the specific user hasn't been implemented by the Back-End
-        fetch('/user_info/' + localStorage.getItem('user_id'),{
+        fetch('/user_info/' + this.props.user_id,{
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -67,17 +73,18 @@ class ProfilePage extends Component {
                 response.json().then(data => {
                         this.setState({ user: {
                                 first_name: data.first_name,
-                                last_name : data.last_name,
-                                email : data.email,
-                                image : data.image,
-                                type  : data.type,
-                                about : data.about,
-                                jobs_cancelled : data.cancellations,
+                                last_name: data.last_name,
+                                email: data.email,
+                                image: data.image,
+                                type: data.type,
+                                about: data.about,
+                                jobs_cancelled: data.cancellations,
                                 street: data.street,
                                 city: data.city,
                                 zipcode: data.zipcode,
-                                rating_value : data.rate,
-                            }
+                                rating_value: data.rate,
+                            },
+                            pageLoaded: true,
                         });
                     }
                 ).catch((e) => {
@@ -95,7 +102,6 @@ class ProfilePage extends Component {
             change_about,
             change_first_name,
             change_last_name,
-            change_image,
             change_city,
             change_zipcode,
             change_street,
@@ -103,178 +109,220 @@ class ProfilePage extends Component {
             lastNameError,
             streetError,
             zipcodeError,
-        is_auth} = this.state;
+            is_auth,
+            pageLoaded} = this.state;
 
         const {user_id} = this.props;
 
         return (
             <React.Fragment>
-                {!is_auth && <Redirect to='/' />}
-                <div className="button-profile-page-flex-container">
-                    <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
-                    {user_id === this.current_user || this.current_user_type==='3' &&
-                    <div className="button" onClick={this.toggleEdit} > {edit? 'Edit Profile': 'Cancel Edit'} </div>
-                    }
-                </div>
-                <h1 className="profile-page-header">{first_name} {last_name} </h1>
-                <div className = "parent-flex-container-profile-page">
-                    <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
-                    {!edit ?
-                        <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
-                            <ul className="bullet-removal-profile-page">
-                                <li>
-                                    <ul className="body-flex-profile-page">
-                                        <li className="child-body-flex-profile-page">Name:</li>
-                                        <li className="break-text-profile-page"
-                                            style={{paddingTop: 1, paddingLeft: 14}}> {first_name} {last_name} </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul className="body-flex-profile-page">
-                                        <li className="child1-body-flex-profile-page"> Email:</li>
-                                        <li className="break-text-profile-page"
-                                            style={{paddingTop: 1, paddingLeft: 19}}> {email} </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul className="body-flex-profile-page">
-                                        <li className="child2-body-flex-profile-page"> Address:</li>
-                                        <li className="break-text-profile-page"
-                                            style={{paddingTop: 2}}> {street} {cities[city]} PR, {zipcode} </li>
-                                    </ul>
-                                </li>
-                                <ul className="body-flex-profile-page">
-                                    <li className="child1-body-flex-profile-page">About:</li>
-                                    <p className="break-text-profile-page"
-                                       style={{paddingLeft: 17, paddingTop: 2.5}}> {about} </p>
-                                </ul>
-                            </ul>
-                        </div>:
-                       <div className = "child2-grid-container">
-                            <div className="edit-info-grid-container">
-                                <div className="grid-edit-info-item7">
-                                    <h2 className="edit-subheaders">Personal information</h2>
-                                </div>
-                                <div className="grid-edit-info-item1">
-                                    <Input
-                                        required
-                                        label="First Name"
-                                        value={change_first_name}
-                                        id="change-first-name"
-                                        onChange={(event) => {
-                                            if (event.target.value.length <= 15 ) {
-                                                this.setState({
-                                                    change_first_name: event.target.value
-                                                });
-                                            }
-                                        }}
-                                        onBlur={this.validateFirstName}
-                                        error={firstNameError!==undefined}
-                                        helperText={firstNameError}
-                                    />
-                                </div>
-                                <div className="grid-edit-info-item2">
-                                    <Input
-                                        required
-                                        label="Last Name"
-                                        value={change_last_name}
-                                        id="change-last-name"
-                                        onChange={(event) => {
-                                            if (event.target.value.length <= 15 ) {
-                                                this.setState({
-                                                    change_last_name: event.target.value
-                                                });
-                                            }
-                                        }}
-                                        onBlur={this.validateLastName}
-                                        error={lastNameError!==undefined}
-                                        helperText={lastNameError}
-                                    />
-                                </div>
-                                <div className="grid-edit-info-item3">
-                                    <Input
-                                        id="change-about"
-                                        label="About"
-                                        multiline={true}
-                                        rows={6}
-                                        value={change_about}
-                                        onChange={(event) => {
-                                            if (event.target.value.length <= 250 ) {
-                                                this.setState({
-                                                    change_about: event.target.value
-                                                });
-                                            }
-                                        }}
-
-                                    />
-                                </div>
-                                <div className="grid-edit-info-item8">
-                                    <h2 className="edit-subheaders"> Address</h2>
-                                </div>
-                                <div className="grid-edit-info-item4">
-                                    <Input
-                                        label="Street"
-                                        value={change_street}
-                                        id="change-street-address"
-                                        onChange={(event) => {
-                                            if (event.target.value.length <= 30 ) {
-                                                this.setState({
-                                                    change_street: event.target.value
-                                                });
-                                            }}
-                                        }
-                                        onBlur={this.validateStreet}
-                                        error={streetError!==undefined}
-                                        helperText={streetError}
-                                    />
-                                </div>
-                                <div className="grid-edit-info-item5">
-                                    <CitiesDropdown
-                                        ref={change_city}
-                                    />
-
-                                </div>
-                                <div className="grid-edit-info-item6">
-                                    <Input
-                                        label="Zipcode"
-                                        value={change_zipcode}
-                                        id="change-zipcode-address"
-                                        onChange={(event) => {
-                                            const value = event.target.value;
-                                            if (value.length <= 5  && !isNaN(value)) {
-                                                this.setState({
-                                                    change_zipcode: value
-                                                });
-                                            }
-                                        }}
-                                        onBlur={this.validateZipcode}
-                                        error={zipcodeError!==undefined}
-                                        helperText={zipcodeError}
-                                    />
-                                    <label id="profile-pic-label">Profile picture</label>
-                                    <input
-                                        id="profile-pic"
-                                        type="file"
-                                        name="file"
-                                        accept="image/*"
-                                        onChange={(event) => {
-                                            this.setState({
-                                                change_image: event.target.files[0]
-                                            });}
-                                        }
-                                    />
-
-                                </div>
+                {!pageLoaded ?
+                    <div className='loading-icon'>
+                        <Box sx={{display: 'flex'}}>
+                            <CircularProgress />
+                        </Box>
+                    </div>:
+                    <div>
+                        {!is_auth && <Redirect to='/' />}
+                        <div className="button-profile-page-flex-container">
+                            {user_id === this.current_user.id|| this.current_user.type==='3' &&
+                            <div className='button-container'>
+                                <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
+                                <button className="button-profile-page" onClick={this.toggleEdit} >
+                                    {edit? 'Cancel Edit' : 'Edit Profile'}
+                                </button>
                             </div>
-                            <button className="button save-change-button" onClick={this.saveChanges} > Save changes </button>
+                            }
                         </div>
-                    }
-                </div>
+                        <h1 className="profile-page-header">{first_name} {last_name} </h1>
+                        <div className = "parent-flex-container-profile-page">
+                            <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
+                            {!edit ?
+                                <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
+                                    <ul className="bullet-removal-profile-page">
+                                        <li>
+                                            <ul className="body-flex-profile-page">
+                                                <li className="child-body-flex-profile-page">Name:</li>
+                                                <li className="break-text-profile-page"
+                                                    style={{paddingTop: 1, paddingLeft: 14}}> {first_name} {last_name} </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul className="body-flex-profile-page">
+                                                <li className="child1-body-flex-profile-page"> Email:</li>
+                                                <li className="break-text-profile-page"
+                                                    style={{paddingTop: 1, paddingLeft: 19}}> {email} </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul className="body-flex-profile-page">
+                                                <li className="child2-body-flex-profile-page"> Address:</li>
+                                                {zipcode!==null &&
+                                                    <li className="break-text-profile-page"
+                                                        style={{paddingTop: 2}}> {street} {cities[city - 1]} PR, {zipcode}
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </li>
+                                        <ul className="body-flex-profile-page">
+                                            <li className="child1-body-flex-profile-page">About:</li>
+                                            <p className="break-text-profile-page"
+                                               style={{paddingLeft: 17, paddingTop: 2.5}}> {about} </p>
+                                        </ul>
+                                    </ul>
+                                </div>:
+                                <div className = "child2-grid-container">
+                                    <div className="edit-info-grid-container">
+                                        <div className="grid-edit-info-item7">
+                                            <h2 className="edit-subheaders">Personal information</h2>
+                                        </div>
+                                        <div className="grid-edit-info-item1">
+                                            <Input
+                                                required
+                                                label="First Name"
+                                                value={change_first_name}
+                                                id="change-first-name"
+                                                onChange={(event) => {
+                                                    if (event.target.value.length <= 15 ) {
+                                                        this.setState({
+                                                            change_first_name: event.target.value
+                                                        });
+                                                    }
+                                                }}
+                                                onBlur={this.validateFirstName}
+                                                error={firstNameError!==undefined}
+                                                helperText={firstNameError}
+                                            />
+                                        </div>
+                                        <div className="grid-edit-info-item2">
+                                            <Input
+                                                required
+                                                label="Last Name"
+                                                value={change_last_name}
+                                                id="change-last-name"
+                                                onChange={(event) => {
+                                                    if (event.target.value.length <= 15 ) {
+                                                        this.setState({
+                                                            change_last_name: event.target.value
+                                                        });
+                                                    }
+                                                }}
+                                                onBlur={this.validateLastName}
+                                                error={lastNameError!==undefined}
+                                                helperText={lastNameError}
+                                            />
+                                        </div>
+                                        <div className="grid-edit-info-item3">
+                                            <Input
+                                                id="change-about"
+                                                label="About"
+                                                multiline={true}
+                                                rows={6}
+                                                value={change_about}
+                                                onChange={(event) => {
+                                                    if (event.target.value.length <= 250 ) {
+                                                        this.setState({
+                                                            change_about: event.target.value
+                                                        });
+                                                    }
+                                                }}
 
+                                            />
+                                        </div>
+                                        <div className="grid-edit-info-item8">
+                                            <h2 className="edit-subheaders"> Address</h2>
+                                        </div>
+                                        <div className="grid-edit-info-item4">
+                                            <Input
+                                                label="Street"
+                                                value={change_street}
+                                                id="change-street-address"
+                                                onChange={(event) => {
+                                                    if (event.target.value.length <= 30 ) {
+                                                        this.setState({
+                                                            change_street: event.target.value
+                                                        });
+                                                    }}
+                                                }
+                                                onBlur={this.validateStreet}
+                                                error={streetError!==undefined}
+                                                helperText={streetError}
+                                            />
+                                        </div>
+                                        <div className="grid-edit-info-item5">
+                                            <CitiesDropdown
+                                                initial_value={city}
+                                                ref={change_city}
+                                            />
+
+                                        </div>
+                                        <div className="grid-edit-info-item6">
+                                            <Input
+                                                label="Zipcode"
+                                                value={change_zipcode}
+                                                id="change-zipcode-address"
+                                                onChange={(event) => {
+                                                    const value = event.target.value;
+                                                    if (value.length <= 5  && !isNaN(value)) {
+                                                        this.setState({
+                                                            change_zipcode: value
+                                                        });
+                                                    }
+                                                }}
+                                                onBlur={this.validateZipcode}
+                                                error={zipcodeError!==undefined}
+                                                helperText={zipcodeError}
+                                            />
+                                            <label id="profile-pic-label">Profile picture</label>
+                                            <input
+                                                id="profile-pic"
+                                                type="file"
+                                                name="file"
+                                                accept="image/*"
+                                                onChange={(event) => {
+                                                    this.setState({
+                                                        change_image: event.target.files[0]
+                                                    });}
+                                                }
+                                            />
+
+                                        </div>
+                                    </div>
+                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} > Save changes </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
             </React.Fragment>
         )
     }
 
+    toggleEdit() {
+        const {edit, change_city, user} = this.state;
+        if(!edit) {
+            change_city.current?.changeCity(user.city.toString());
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    change_about: prevState.user.about,
+                    change_first_name: prevState.user.first_name,
+                    change_last_name: prevState.user.last_name,
+                    change_zipcode: prevState.user.zipcode,
+                    change_street: prevState.user.street,
+                    edit: !prevState.edit
+                };
+            });
+        }
+        else {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    edit: !prevState.edit
+                };
+            });
+        }
+    }
 
     validateFirstName(event){
         if (this.state.change_first_name.length===0) {
@@ -339,7 +387,6 @@ class ProfilePage extends Component {
     }
 
     saveChanges() {
-
         const val1= this.validateLastName();
         const val2= this.validateFirstName();
         const val3= this.validateStreet();
@@ -363,8 +410,8 @@ class ProfilePage extends Component {
         data.append("street", this.state.change_street);
         data.append("zipcode", this.state.change_zipcode);
         data.append("city", city);
-        // Get id from props
-        fetch('/edit_user/'+'<user_id>', {
+
+        fetch('/edit_user/' + this.props.user_id, {
             method: 'PUT',
             body: data,
         }).then(response => {
@@ -372,20 +419,9 @@ class ProfilePage extends Component {
                 alert("Error");
             }
             else {
-                this.toggleEdit();
-                this.setState({
-                    change_about: '',
-                    change_first_name: '',
-                    change_last_name: '',
-                    change_image: '',
-                    change_city: '',
-                    change_zipcode: '',
-                    change_street: '',
-                });
+                window.location.reload();
             }
-
         });
-        return true;
     }
 
 }

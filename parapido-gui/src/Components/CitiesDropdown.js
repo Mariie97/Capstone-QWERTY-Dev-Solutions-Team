@@ -9,17 +9,11 @@ class CitiesDropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: '1'
+            city: this.props.initial_value!==''? this.props.initial_value : undefined
         };
 
         this.handleOnchangeCity = this.handleOnchangeCity.bind(this);
-    }
-
-    handleOnchangeCity(event) {
-        this.setState({
-            city: event.target.value.toString()
-        });
-        this.props.onChange();
+        this.changeCity = this.changeCity.bind(this);
     }
 
     render() {
@@ -115,6 +109,16 @@ class CitiesDropdown extends Component {
                 </Select>
             </div>
         )
+    }
+
+    handleOnchangeCity(event) {
+        this.changeCity(event.target.value.toString());
+    }
+
+    changeCity(value) {
+        this.setState({
+            city: value
+        });
     }
 }
 

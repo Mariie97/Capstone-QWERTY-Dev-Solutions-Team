@@ -196,3 +196,10 @@ h2.edit-subheaders {
 #profile-pic-label {
 	color: white;
 }
+
+.loading-icon {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}

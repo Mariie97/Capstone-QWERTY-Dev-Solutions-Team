@@ -18,7 +18,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-                                    <LandingPage />
+                                    <LandingPage cookies={this.props.cookies} />
                                 </React.Fragment>
                             )}
                         />
@@ -27,9 +27,9 @@ class App extends React.Component {
                             path='/profile/:user_id'
                             render={(props) => (
                                 <React.Fragment>
-                                    <NavBar cookies= {this.props.cookies} />
+                                    <NavBar cookies={this.props.cookies} />
                                     <ProfilePage
-                                        cookies= {this.props.cookies}
+                                        cookies={this.props.cookies}
                                         user_id={props.match.params.user_id}
                                     />
                                 </React.Fragment>
