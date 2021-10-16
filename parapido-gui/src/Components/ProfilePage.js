@@ -58,7 +58,7 @@ class ProfilePage extends Component {
                         });
                     }
                 ).catch((e) => {
-                    console.log(e);
+                    console.log("Network error: " + e);
                     throw(e);
                 });
             }
