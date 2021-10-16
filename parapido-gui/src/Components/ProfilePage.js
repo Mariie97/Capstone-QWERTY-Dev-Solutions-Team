@@ -62,7 +62,7 @@ class ProfilePage extends Component {
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A"
 
-       fetch('/user_info/' + this.props.user_id, {
+        fetch('/user_info/' + this.props.user_id, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -113,6 +113,7 @@ class ProfilePage extends Component {
             pageLoaded} = this.state;
 
         const {user_id} = this.props;
+        const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
 
         return (
             <React.Fragment>
@@ -125,12 +126,19 @@ class ProfilePage extends Component {
                     <div>
                         {!is_auth && <Redirect to='/' />}
                         <div className="button-profile-page-flex-container">
-                            {user_id === this.current_user.id|| this.current_user.type==='3' &&
+                            {showButtons &&
                             <div className='button-container'>
-                                <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
+                                <Link to={"/jobdashboard"} >
+                                    <button className="button-profile-page" onClick={this.toggleEdit} >My Jobs</button>
+                                </Link>
                                 <button className="button-profile-page" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
+                                {this.current_user.type === '3' &&
+                                <button className="button-profile-page button-delete" onClick={this.onClickDelete}>
+                                    Delete
+                                </button>
+                                }
                             </div>
                             }
                         </div>
@@ -158,9 +166,9 @@ class ProfilePage extends Component {
                                             <ul className="body-flex-profile-page">
                                                 <li className="child2-body-flex-profile-page"> Address:</li>
                                                 {zipcode!==null &&
-                                                    <li className="break-text-profile-page"
-                                                        style={{paddingTop: 2}}> {street} {cities[city - 1]} PR, {zipcode}
-                                                    </li>
+                                                <li className="break-text-profile-page"
+                                                    style={{paddingTop: 2}}> {street} {cities[city - 1]} PR, {zipcode}
+                                                </li>
                                                 }
                                             </ul>
                                         </li>
@@ -296,6 +304,10 @@ class ProfilePage extends Component {
                 }
             </React.Fragment>
         )
+    }
+
+    onClickDelete(){
+        //    TODO: Call api to delete user: this.props.user_id
     }
 
     toggleEdit() {

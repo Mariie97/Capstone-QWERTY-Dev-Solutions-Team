@@ -71,6 +71,7 @@
 	text-align: center;
 	position: relative;
 	border-radius: 2%;
+	margin-right: 25px;
 }
 
 .button-profile-page:hover {
@@ -200,8 +201,12 @@ h2.edit-subheaders {
 }
 
 .loading-icon {
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  height: 100vh;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.button-delete {
+	background-color: #ac1212;
 }
