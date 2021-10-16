@@ -1,11 +1,12 @@
 import React, {Component, createRef} from 'react'
 import "../Layouts/ProfilePage.css"
 import {Link, Redirect} from 'react-router-dom';
-import ProfileCard from './ProfileCard'
 import verifyUserAuth, {cities} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
+import ProfileCard from './ProfileCard';
+
 
 class ProfilePage extends Component {
     current_user = {
@@ -61,8 +62,7 @@ class ProfilePage extends Component {
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A"
 
-        // get from the server the specific user hasn't been implemented by the Back-End
-        fetch('/user_info/' + this.props.user_id,{
+       fetch('/user_info/' + this.props.user_id, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',

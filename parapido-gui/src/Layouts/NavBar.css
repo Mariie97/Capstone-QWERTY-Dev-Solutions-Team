@@ -3,6 +3,7 @@
 * {
 	margin: 0px;
 	padding: 0px;
+
 	/* box-sizing: border-box; */
 }
 
@@ -16,7 +17,7 @@
 }
 
 /* parent element - This control the box on the back -
- all the other elements derived from this*/
+ all the other elements derived from this */
 
 .nav {
 	display: flex;
@@ -64,11 +65,11 @@ from the parent meaning the links */
 
 /* menu style and not displaying */
 
-.menuopen {
+.menu-open {
 	display: none;
 }
 
-.menuopen {
+.menu-open {
 	color: white;
 	transform: scale(1.6);
 }
@@ -86,7 +87,9 @@ from the parent meaning the links */
 		background-color: #2e856e;
 		position: absolute;
 		text-align: center;
+
 		/* padding-left: 10px; */
+		
 		right: 0px;
 		min-height: 92vh;
 		top: 50px;
@@ -102,7 +105,7 @@ from the parent meaning the links */
 		opacity: 0;
 	}
 
-	.menuopen {
+	.menu-open {
 		cursor: pointer;
 		position: relative;
 		top: 2px;
@@ -117,7 +120,7 @@ from the parent meaning the links */
 	transform: translateX(0%);
 }
 
-/* Links fading in animation */
+/* links fading in animation */
 
 @keyframes navLinksFade {
 	from {
