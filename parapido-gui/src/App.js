@@ -1,10 +1,10 @@
 import React from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
 import LandingPage from "./Components/LandingPage"
+import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
-import ProfilePage from "./Components/ProfilePage";
 
 
 class App extends React.Component {
@@ -18,7 +18,7 @@ class App extends React.Component {
                             path='/'
                             render={() => (
                                 <React.Fragment>
-                                    <LandingPage />
+                                    <LandingPage cookies= {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
@@ -37,10 +37,20 @@ class App extends React.Component {
                             path='/jobdashboard'
                             render={() => (
                                 <React.Fragment>
-                                    <JobDashboardPage />
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobDashboardPage cookies= {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
+                    <Route
+                    exact
+                    path='/signup'
+                    render={() => (
+                    <React.Fragment>
+                    <h1>Register Account</h1>
+                    </React.Fragment>
+                )}
+                    />
                     </Switch>
                 </div>
             </BrowserRouter>

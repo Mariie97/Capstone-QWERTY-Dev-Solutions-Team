@@ -2,7 +2,7 @@
 
 /* navbar box */
 
-.landingnav {
+.landing-nav {
 	display: flex;
 	align-items: center;
 	height: 50px;
@@ -16,7 +16,7 @@
 
 /* contact and email container */
 
-.miniflexcontactus {
+.mini-flex-contactus {
 	display: flex;
 	flex-direction: row;
 	color: white;
@@ -25,17 +25,17 @@
 	/* background-color: crimson; */
 }
 
-#parapidoemail {
+#parapido-email {
 	color: #ffebcc;
 	text-decoration: underline;
 }
-#parapidoemail:hover {
+#parapido-email:hover {
 	color: black;
 }
 
 /* each item on the navbar except the logo*/
 
-.landingnavlinks {
+.landing-nav-links {
 	display: block;
 
 	/* testing purposes */
@@ -46,27 +46,27 @@
 	display: flex;
 	justify-content: space-around;
 	color: white;
-	width: 40%;
+	width: 25%;
 }
 
-.landingnavlinks li {
+.landing-nav-links li {
 	list-style: none;
 }
 
-.landingnavlinks #link {
+.landing-nav-links #link {
 	color: white;
 	text-decoration: none;
 	letter-spacing: 1px;
 	cursor: pointer;
 }
 
-.landingnavlinks #link:hover {
+.landing-nav-links #link:hover {
 	color: burlywood;
 }
 
-/* body text*/
+/* body text */
 
-.firstpoint {
+.first-point-landing {
 	color: white;
 	position: fixed;
 	top: 250px;
@@ -85,7 +85,7 @@
 	word-break: break-all; */
 }
 
-.secondpoint {
+.second-point-landing {
 	color: #91eb8f;
 	position: fixed;
 	top: 290px;
@@ -97,14 +97,14 @@
 	white-space: pre;
 }
 
-.firstparagraph {
+.first-paragraph-landing {
 	color: white;
 	position: fixed;
 	top: 370px;
 	left: 450px;
 	font-family: "Times New Roman";
 	font-size: 16px;
-	width: 700px;
+	width: 540px;
 
 	/* border: solid 1px #ccc; */
 	text-align: justify;
@@ -118,7 +118,7 @@
 
 /* landing page button */
 
-.buttonlandingpage {
+.button-landing {
 	display: inline-block;
 	padding-right: 45px;
 	padding-left: 45px;
@@ -139,10 +139,10 @@
 	left: 600px;
 }
 
-.buttonlandingpage:hover {
+.button-landing:hover {
 	border-color: white;
 }
 
-.buttonlandingpage:active {
+.button-landing:active {
 	background-color: #2e856e;
 }
