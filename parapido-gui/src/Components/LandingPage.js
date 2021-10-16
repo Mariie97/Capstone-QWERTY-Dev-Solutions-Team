@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
-import studentLandingPage from "../Static/Images/Student_LandingPage.png";
-import logo from "../Static/Images/Pa_RapidoLogo.png";
-import EmailIcon from '@material-ui/icons/Mail';
 import verifyUserAuth from "../Utilities";
+import logo from "../Static/Images/Pa_RapidoLogo.png";
+import studentLandingPage from "../Static/Images/Student_LandingPage.png";
+import EmailIcon from '@material-ui/icons/Mail';
+import LoginModal from './LoginModal';
+
 
 class LandingPage extends Component {
 
@@ -13,7 +15,7 @@ class LandingPage extends Component {
 		this.state = {
 			showLogin: false,
 			is_auth: false,
-		}
+		};
 
 		this.showLoginModal = this.showLoginModal.bind(this);
 	}
@@ -28,7 +30,7 @@ class LandingPage extends Component {
 	}
 
 	showLoginModal(){
-		this.setState({showLogin: true});
+		this.setState({showLogin: !this.state.showLogin});
 	}
 
 	render() {
@@ -36,43 +38,50 @@ class LandingPage extends Component {
 		return (
 			<div>
 				{is_auth && <Redirect to='/jobdashboard' />}
-				<div className="landingnav">
+				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
+				<div className="landing-nav">
 					<img className="logostyle" src={logo} alt="Logo" />
-					<ul className="landingnavlinks">
-						<li className="miniflexcontactus">
-							<div style={{ marginRight: 15, position: "relative", top: 2}}>Contact Us</div>
+					<ul className="landing-nav-links">
+						<li className="mini-flex-contactus">
+							<div style={contactuslink}>Contact Us</div>
 							<EmailIcon style={mail}/>
-							<a href="mailTo:parapidopr@gmail.com"  id="parapidoemail"> parapidopr@gmail.com</a>
+							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="parapido-email"> parapidopr@gmail.com</a>
 						</li>
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
+							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>
 						</li>
 					</ul>
 				</div>
-
-				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
-				<div className="firstpoint">An easier way of finding and providing</div>
-				<p className="secondpoint">Flexible Jobs.</p>
-				<p className="firstparagraph">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students
+				<div className="first-point-landing">An easier way of finding and providing</div>
+				<p className="second-point-landing">Flexible Jobs.</p>
+				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students
 					from the UPR system. Also, we give employers the opportunity of helping
 					the students by providing jobs in our platform.</p>
-				<Link to={"/signup"} className="buttonlandingpage"> Try PaRapido for FREE </Link>
+				<Link to={"/signup"} className="button-landing"> Try PaRapido for FREE </Link>
 			</div>
 		);
 	}
 }
 
-// image styling
-const studentimage = {
-	width: 1205,
-	float: "right",
-};
-
-// small icons & elements css
+// small icons and elements css
 const mail = {
 	color: "#ffebcc",
 	paddingRight: 10,
 	height: 20,
+}
+
+const studentimage = {
+	position: "absolute",
+	right: "0%",
+	height: "100vh",
+	objectFit: "contain",
+};
+
+const contactuslink = {
+	marginRight: 15,
+	position: "relative",
+	top: 2
 }
 
 export default LandingPage;

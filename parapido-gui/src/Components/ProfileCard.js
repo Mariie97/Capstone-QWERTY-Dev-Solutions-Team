@@ -11,14 +11,14 @@ import StarIcon from '@material-ui/icons/Star';
 
 class ProfileCard extends Component {
 
-    acc_type = {
+    acc_type ={
         1: "STUDENT",
         2: "CLIENT",
         3: "ADMIN"
-    };
+    }
 
-    render(){
-        const {first_name,last_name,rating_value,jobs_cancelled,type, image} = this.props.user;
+    render() {
+        const {first_name,last_name,rating_value,jobs_cancelled,type} = this.props.user
 
         return (
             <React.Fragment>
@@ -31,19 +31,17 @@ class ProfileCard extends Component {
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
-                            {image === null ?  <div> <img className = "profile-card-image" style={image_resize} src= {defaultPicture} alt="profile" /></div>:
-                                <img className = "profile-card-image" style={image_resize} src= {image} alt="profile" />
-                            }
+                            <img className = "profile-card-image" style={image_resize} src= {defaultPicture} alt="profile" />
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                            <li> <StarIcon style = {star}/> Rating: {rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                            <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
                         </ul>
                         <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
                     </div>
                 </div>
             </React.Fragment>
-        );
+        )
     }
 }
 
@@ -52,7 +50,7 @@ const trashcan = {
     color: "red",
     position: "relative",
     top: 7,
-}
+};
 
 const thumbsupdown = {
     color: "burlywood",
@@ -60,7 +58,7 @@ const thumbsupdown = {
     width: 15,
     top: 6,
     left:2
-}
+};
 
 const star = {
     color: "yellow",
@@ -68,27 +66,27 @@ const star = {
     width: 19,
     top: 6,
     left:2
-}
+};
 
 const image_resize = {
     height: 180,
     width: 180,
-}
+};
 
 const schoolbag = {
     height: 70,
     width: 60,
-}
+};
 
 const employer = {
     height: 70,
     width: 70,
     backgroundColor: "white"
-}
+};
 
 const admin = {
     height: 70,
     width: 70,
-}
+};
 
 export default ProfileCard;

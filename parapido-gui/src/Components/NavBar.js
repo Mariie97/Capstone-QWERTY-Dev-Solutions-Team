@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {Link, Redirect} from "react-router-dom"
-import logo from "../Static/Images/Pa_RapidoLogo.png"
-import "../Layouts/NavBar.css"
+import React, {Component} from 'react';
+import {Link, Redirect} from "react-router-dom";
+import "../Layouts/NavBar.css";
+import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
 
@@ -11,7 +11,7 @@ class NavBar extends Component {
         super(props);
         this.state = {
             logout_success: false,
-            menu_open: false
+            menu_open: false,
         };
 
         this.handleLogOut = this.handleLogOut.bind(this);
@@ -38,12 +38,12 @@ class NavBar extends Component {
 
     // method to slide small nav bar from menu icon in website
     navSlide = () =>{
-        const nav = document.querySelector('.nav-links')
+        const nav = document.querySelector('.nav-links');
 
         // toggle menu button
         nav.classList.toggle('nav-active');
-        const navLinks = document.querySelectorAll(".nav-links li")
-        this.setState({menu_open: !this.state.menu_open})
+        const navLinks = document.querySelectorAll(".nav-links li");
+        this.setState({menu_open: !this.state.menu_open});
 
         // animate links
         navLinks.forEach((link, index) =>{
@@ -53,14 +53,15 @@ class NavBar extends Component {
             else{
                 link.style.animation = `navLinksFade 0.4s ease forwards ${index/5}s`
             }
-        })
+        });
     }
 
     render() {
         const { logout_success } = this.state;
         const { menu_open } = this.state;
         return (
-            <nav  >
+            <nav>
+                {logout_success && <Redirect to='/'/>}
                 <div className="nav">
                     <img className="logostyle" src={logo} alt="Logo" />
                     <ul className="nav-links">
@@ -72,14 +73,12 @@ class NavBar extends Component {
                         </li>
                         <li>
                             <div>
-                                {logout_success && <Redirect to='/'/>}
                                 <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
                             </div>
                         </li>
                     </ul>
-                    <div className="menuopen" onClick={this.navSlide}>
-                        {menu_open && <CancelIcon />}
-                        {!menu_open && <MenuOpenIcon/>}
+                    <div className="menu-open" onClick={this.navSlide}>
+                        {menu_open ? <CancelIcon /> : <MenuOpenIcon/>}
                     </div>
                 </div>
             </nav>
