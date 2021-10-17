@@ -141,12 +141,13 @@
 
 .job-creation-dropdown{
 	width: 100%;
-	background-color: white;
+	background-color: #FFEBCC;
 	box-sizing: border-box;
 	border: 3px solid black;
 	outline: none;
 	font-family: "Jost";
 	font-size: 16px;
+	margin-top: 9px;
 }
 
 .MuiSelect-root{
@@ -160,7 +161,41 @@
 }
 
 .MuiInputBase-input{
+	/* text-align: center; */
+	/* position: relative;
+	top: 10px; */
+	animation-name: none;
+	animation-duration: 0ms;
+
+}
+
+/* arrow icon in Material ui dropdown */
+.MuiSelect-icon{
+	color: darkblue;
+	
+}
+
+/*what changes when you select something */
+
+.MuiSelect-select{
+	background-color:white ;
+	display: grid;
+	align-content: center;
 	text-align: center;
-	position: relative;
-	top: 10px;
+	
+}
+
+/* inside Material ui dropdown */
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
 }

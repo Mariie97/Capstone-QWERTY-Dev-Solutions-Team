@@ -16,7 +16,7 @@ class ProfilePage extends Component {
                 email : '',
                 about : '',
                 type  :'',
-                image : ' ',
+                image : '',
                 jobs_cancelled : '',
                 street: '',
                 city: '',
