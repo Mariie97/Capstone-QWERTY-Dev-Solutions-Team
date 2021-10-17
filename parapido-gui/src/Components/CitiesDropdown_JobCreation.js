@@ -1,7 +1,6 @@
 //Code from @Coralys Cortes
 
 import React, { Component } from 'react';
-// import "../Layouts/CitiesDropdown.css";
 import {InputLabel, MenuItem, Select} from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 

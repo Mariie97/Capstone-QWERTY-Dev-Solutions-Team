@@ -21,22 +21,23 @@
 
 /* first 5 boxes of label input better known as the center body of the layout */
 
-.big-flexbox-for-2-flexbox-containers{
+.big-flexbox-for-2-flexbox-containers-job-creation{
 	display: flex;
 
 	/* testing purposes */
 
 	/* background-color: red; */
-	width: 85%;
+	width: 70%;
 	margin-left: 150px;
 	flex-direction: row;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
-.big-flexbox-for-2-flexbox-containers .selected {
-	position: relative;
-	right: 350px;
-	top: px;
+.big-flexbox-for-3-flexbox-containers-job-creation{
+	/* position: relative;
+	right: 350px; */
+
 	display: flex;
 	flex-direction: column;
 	line-height: 2.5;
@@ -199,3 +200,32 @@
 .MuiList-root{
 	background-color: #FFEBCC;
 }
+
+/* price, category and available days */
+
+
+.big-flexbox-for-3-lower-flexbox-containers-job-creation{
+	display: flex;
+
+	/* testing purposes */
+
+	/* background-color: red; */
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
+.price-miniflex-job-creation{
+	display: flex;
+	flex-direction: column;
+	line-height: 2.5;
+}
+
+.chip-flex-job-creation {
+    color: #2F2D4A;
+    display: flex;
+	flex-direction: row;
+    list-style-type: none;
+}
+
