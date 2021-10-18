@@ -424,7 +424,7 @@ class ProfilePage extends Component {
 
     validateCity() {
         const { change_city, change_zipcode, change_street, cityError } = this.state;
-        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.city==null) {
+        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.city===null) {
             this.setState({cityError: 'Select a city'});
             return false
 
