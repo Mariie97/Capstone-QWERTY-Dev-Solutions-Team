@@ -111,6 +111,7 @@
 	flex-direction: row;
 	justify-content: space-between; 
 	gap: 30%;
+	line-height: 2.5;
 }
 
 .input-3-job-creation{
@@ -118,7 +119,6 @@
 	width: 100%;
 	padding: 12px 20px;
 	padding-bottom: 6px;
-	margin: 8px 0;
 	box-sizing: border-box;
 	border: 3px solid black;
 	outline: none;
@@ -136,6 +136,7 @@
 
 .input-3-job-creation:focus{
 		background-color: #FFEBCC;
+		margin: 0px;
 }
 
 /* Material ui override dropdown styling  */
@@ -214,12 +215,14 @@
 	flex-direction: row;
 	justify-content: space-evenly;
 	flex-wrap: wrap;
+	line-height: 2.5;
 }
 
 .price-miniflex-job-creation{
 	display: flex;
 	flex-direction: column;
 	line-height: 2.5;
+	margin-left: 50px;
 }
 
 .chip-flex-job-creation {
@@ -229,3 +232,35 @@
     list-style-type: none;
 }
 
+.MuiInputBase-input {
+	background-color: white;
+	font-family: "Jost";
+	font-size: 15px;
+
+}
+
+
+.MuiInputBase-root {
+    background-color: white;
+    border-top: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+}
+
+.MuiFormLabel-root{
+line-height: 0px;
+}
+.job-creation-dropdown{
+	margin-top: 0px;
+}
+
+.MuiInputBase-root:focus-within {
+	background-color: #FFEBCC;
+}
+.MuiFormControl-root:focus{
+	background-color: #FFEBCC;
+}
+.MuiInputBase-input:focus{
+	background-color: #FFEBCC;
+}

@@ -9,7 +9,7 @@ const ListItem = styled('li')(({ theme }) => ({
   }));
 
 
-export class AvailableDaysChips_JobCreation extends Component {
+class AvailableDaysChips_JobCreation extends Component {
     constructor(props){
         super(props);
 
@@ -28,10 +28,11 @@ export class AvailableDaysChips_JobCreation extends Component {
     }
 
         handleAvailableDaysDelete(chipToDelete) {
+                console.log(chipToDelete)
                 const test = this.state.chipData.filter((chip) => chip.key !== chipToDelete.key)
                 console.log(test)
                 this.setState({
-                    chipdata:  test     
+                    chipdata:  test
                 }, () => {
                     console.log(this.state.chipData, 'chip data');}
                 );   
@@ -47,7 +48,7 @@ export class AvailableDaysChips_JobCreation extends Component {
                         <Chip
                         style = {chipStyleJobCreation}
                         label={data.label}
-                        onDelete={ ()=> this.handleAvailableDaysDelete(data)}
+                        onDelete={() => this.handleAvailableDaysDelete(data)}
                         />
                     </ListItem>
                     );
