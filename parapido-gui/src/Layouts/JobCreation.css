@@ -173,12 +173,13 @@
 }
 
 /* arrow icon in Material ui dropdown */
+
 .MuiSelect-icon{
 	color: darkblue;
 	
 }
 
-/*what changes when you select something */
+/* what changes when you select something */
 
 .MuiSelect-select{
 	background-color:white ;
@@ -204,7 +205,6 @@
 }
 
 /* price, category and available days */
-
 
 .big-flexbox-for-3-lower-flexbox-containers-job-creation{
 	display: flex;
@@ -243,7 +243,6 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-
 }
 
 .MuiInputBase-root {
@@ -252,8 +251,9 @@
 }
 
 .MuiFormLabel-root{
-line-height: 0px;
+	line-height: 0px;
 }
+
 .job-creation-dropdown{
 	margin-top: 0px;
 }
@@ -275,3 +275,34 @@ line-height: 0px;
 	color:black;
 	margin-left: 3px;
 }
+
+/* job creation button */
+
+.button-job-creation{
+	width: 40%;
+    margin-top: 28px;
+    padding-bottom: 15px;
+    background-color: #91EB8F;
+    border: 2px solid #91EB8F;
+    border-radius: 10px;
+}
+
+.button-job-creation:hover{
+    cursor: pointer;
+    border: 2px solid black;  
+	
+}
+
+.text-button-job-creation{
+	position: relative;
+	top: 5px;
+	font-family: "Helvetica";
+	font-size: 15px;
+	color: black;
+	letter-spacing: 12px
+}
+
+.text-button-job-creation:hover{
+	color:floralwhite;
+}
+

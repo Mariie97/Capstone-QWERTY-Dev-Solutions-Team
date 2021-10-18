@@ -4,6 +4,7 @@ import MunicipalitiesDropdown from "./CitiesDropdown_JobCreation.js"
 import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js"
 import AvailableDays from './AvailableDaysChips_JobCreation';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield"
+import CreateIcon from '@material-ui/icons/Create';
 
 export class JobCreation extends Component {
 
@@ -15,8 +16,8 @@ export class JobCreation extends Component {
     render() {
         return (
         <React.Fragment>
+
             <h1 className="job-creation-page-header"> Job Creation </h1>
-                
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                     <div className="left-body-container-1-job-creation">
                         <label className="label-job-creation"> *Title: </label>
@@ -52,7 +53,7 @@ export class JobCreation extends Component {
                             placeholder= "Price"
 			                // onChange={(event, value)=> setValue(value)}
                     />
-                    </div>
+                </div>
 
                 <div> 
                     <label className="label-job-creation"> *Categories: </label>
@@ -63,12 +64,29 @@ export class JobCreation extends Component {
                     <label className="label-job-creation"> *Available days: </label>
                     <AvailableDays />
                 </div>
-
             </div>
+
+            <div style={{textAlign:"center"}}>
+                <button className="button-job-creation">
+                    <div className="text-button-job-creation">
+                    CREATE 
+                    <CreateIcon style={editpencil}/>
+                    </div>   
+                </button>
+            </div>
+
         </React.Fragment>
         )
     }
 }
 
+// small icons and elements css
+
+const editpencil = {
+	paddingRight: 10,
+	height: 20,
+    position: "relative",
+    top: "3px"
+}
 
 export default JobCreation

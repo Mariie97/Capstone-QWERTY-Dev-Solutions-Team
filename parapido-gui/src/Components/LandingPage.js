@@ -65,6 +65,7 @@ class LandingPage extends Component {
 }
 
 // small icons and elements css
+
 const mail = {
 	color: "#ffebcc",
 	paddingRight: 10,
