@@ -31,18 +31,21 @@ class AvailableDaysChips_JobCreation extends Component {
                 console.log(chipToDelete)
                 const test = this.state.chipData.filter((chip) => chip.key !== chipToDelete.key)
                 console.log(test)
+                
                 this.setState({
-                    chipdata:  test
+                    chipData:  test
                 }, () => {
                     console.log(this.state.chipData, 'chip data');}
                 );   
+
+                
+
         };
 
     render() {
         return (
                 <div className="chip-flex-job-creation">
                 {this.state.chipData.map((data) => {
-
                     return (
                     <ListItem key={data.key}>
                         <Chip

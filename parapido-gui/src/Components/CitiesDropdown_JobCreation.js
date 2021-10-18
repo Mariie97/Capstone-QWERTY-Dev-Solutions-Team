@@ -1,30 +1,32 @@
 //Code from @Coralys Cortes
 
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import {InputLabel, MenuItem, Select} from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 
 
+
 class CitiesDropdown extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         city: '1'
-    //     };
+    constructor(props) {
+        super(props);
 
-    //     this.handleOnchangeCity = this.handleOnchangeCity.bind(this);
-    // }
+        this.state = {
+            city: this.props.initial_value!==''? this.props.initial_value : undefined
+        };
 
-    // handleOnchangeCity(event) {
-    //     this.setState({
-    //         city: event.target.value.toString()
-    //     });
-    //     this.props.onChange();
-    // }
+        this.handleOnchangeCity = this.handleOnchangeCity.bind(this);
+    }
+
+    handleOnchangeCity(event) {
+        this.setState({
+            city: event.target.value.toString()
+        });
+    }
 
     render() {
-        // const { city } = this.state;
+
+        const { city } = this.state;
 
         return (
             <StyledEngineProvider injectFirst>
@@ -33,8 +35,8 @@ class CitiesDropdown extends Component {
                 <Select
                     // labelId="cities-dropdown-label"
                     // id={"cities-dropdown"}
-                    // value={city}
-                    // onChange={this.handleOnchangeCity}
+                    value={city}
+                    onChange={this.handleOnchangeCity}
                     className="job-creation-dropdown"
                 >
                     <MenuItem value={1}>Adjuntas</MenuItem>
