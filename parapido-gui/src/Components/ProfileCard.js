@@ -40,7 +40,7 @@ class ProfileCard extends Component {
                                 <StarIcon style = {star}/>
                                 {rating_value===null ?
                                     ' No rating yet ':
-                                    'Rating:' + { rating_value} + 'of 5'
+                                    `Rating: ${rating_value} of 5`
                                 }
 
                                 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
