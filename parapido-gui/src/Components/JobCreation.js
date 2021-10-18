@@ -26,7 +26,7 @@ export class JobCreation extends Component {
                     </div>
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <label className="label-job-creation"> *Street: </label>
-                        <input className="input-1-job-creation" style={{ width:"138.6%", marginTop: "4.8px"}} type="text" id="street" name="street" placeholder="Street"></input>
+                        <input className="input-1-job-creation" style={{ width:"138.6%"}} type="text" id="street" name="street" placeholder="Street"></input>
                         <div className="mini-flex-box-job-creation">
                             <div>
                             <label className="label-job-creation"> *City: </label>
@@ -42,7 +42,7 @@ export class JobCreation extends Component {
 
             <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                 <div className="price-miniflex-job-creation">
-                    <label className="label-job-creation"> *Price: </label>
+                    <label className="label-job-creation" style={{paddingTop: 2}}> *Price: </label>
                     <CurrencyTextField
                         	//label="Amount"
                             currencySymbol="$"

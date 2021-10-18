@@ -112,6 +112,7 @@
 	justify-content: space-between; 
 	gap: 30%;
 	line-height: 2.5;
+	margin-top: 6px
 }
 
 .input-3-job-creation{
@@ -222,7 +223,10 @@
 	display: flex;
 	flex-direction: column;
 	line-height: 2.5;
-	margin-left: 50px;
+	margin-left: 25px;
+	/* margin-top: 5px; */
+	width: 9%
+
 }
 
 .chip-flex-job-creation {
@@ -236,16 +240,15 @@
 	background-color: white;
 	font-family: "Jost";
 	font-size: 15px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 
 }
 
-
 .MuiInputBase-root {
     background-color: white;
-    border-top: 3px solid black;
-    border-left: 3px solid black;
-    border-bottom: 3px solid black;
-    border-right: 3px solid black;
+	border: 3px solid black;
 }
 
 .MuiFormLabel-root{
@@ -258,9 +261,17 @@ line-height: 0px;
 .MuiInputBase-root:focus-within {
 	background-color: #FFEBCC;
 }
-.MuiFormControl-root:focus{
-	background-color: #FFEBCC;
-}
+
 .MuiInputBase-input:focus{
 	background-color: #FFEBCC;
+}
+
+.MuiInputBase-input.CurrencyTextField-textField-3{
+	height: 30px;
+	text-align: left;
+}
+
+.MuiTypography-root.MuiTypography-colorTextSecondary{
+	color:black;
+	margin-left: 3px;
 }
