@@ -247,7 +247,7 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item4">
                                             <Input
-                                                label="Street"
+                                                label="Street*"
                                                 value={change_street}
                                                 id="change-street-address"
                                                 onChange={(event) => {
@@ -274,7 +274,7 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item6">
                                             <Input
-                                                label="Zipcode"
+                                                label="Zipcode*"
                                                 value={change_zipcode}
                                                 id="change-zipcode-address"
                                                 onChange={(event) => {
@@ -294,14 +294,13 @@ class ProfilePage extends Component {
                                                 id="profile-pic"
                                                 type="file"
                                                 name="file"
-                                                accept="image/*"
+                                                accept="image/*"                                  
                                                 onChange={(event) => {
                                                     this.setState({
                                                         change_image: event.target.files[0]
                                                     });}
                                                 }
                                             />
-
                                         </div>
                                     </div>
                                     <button className="button-profile-page save-change-button" onClick={this.saveChanges} > Save changes </button>

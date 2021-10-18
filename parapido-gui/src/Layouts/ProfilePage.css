@@ -26,6 +26,7 @@
 	/* background-color: red; */
 
 	white-space: nowrap;
+	color: red
 }
 
 /* card */
@@ -145,7 +146,7 @@
 	grid-template-columns: 30% 30% 30%;
 	grid-template-rows: 40% 40% 40%;
 	display: grid;
-	grid-gap: 10px 120px;
+	grid-gap: 5px 120px;
 	/*background-color: black;*/
 }
 .grid-edit-info-item1 {
@@ -190,6 +191,8 @@
 h2.edit-subheaders {
 	color: white;
 	margin-bottom: 25px;
+	font-family: "Cormorant Garamond";
+	font-size: 20px
 }
 
 .save-change-button {
@@ -198,6 +201,11 @@ h2.edit-subheaders {
 
 #profile-pic-label {
 	color: white;
+	font-family: "Cormorant Garamond";
+	font-weight: 400;
+	font-size: 18px;
+	font-style: italic;
+	margin-right: 20px;
 }
 
 .loading-icon {
