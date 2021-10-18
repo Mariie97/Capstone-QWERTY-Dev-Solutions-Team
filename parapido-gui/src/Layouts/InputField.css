@@ -2,15 +2,18 @@
     margin-bottom: 35px;
 }
 
-.MuiInputLabel-root.Mui-focused {
-    color: green !important;
+.MuiFormLabel-filled {
+    color: black !important;
 }
 
-.MuiOutlinedInput-notchedOutline {
-    border-color: white !important;
+.MuiFilledInput-root .MuiFilledInput-input {
+    background-color: white;
+    color: black;
+    font-size: 20px;
 }
 
-.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border-color: green !important;
+.MuiFilledInput-root.MuiFilledInput-multiline,
+.MuiFilledInput-root.MuiFilledInput-multiline.Mui-focused {
+    background-color: white;
 }
 

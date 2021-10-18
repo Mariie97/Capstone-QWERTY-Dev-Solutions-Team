@@ -121,6 +121,8 @@ class ProfilePage extends Component {
         console.log(street,' ', zipcode);
         return (
             <React.Fragment>
+                {!is_auth && <Redirect to='/' />}
+
                 {!pageLoaded ?
                     <div className='loading-icon'>
                         <Box sx={{display: 'flex'}}>
@@ -128,7 +130,6 @@ class ProfilePage extends Component {
                         </Box>
                     </div>:
                     <div>
-                        {!is_auth && <Redirect to='/' />}
                         <div className="button-profile-page-flex-container">
                             {showButtons &&
                             <div className='button-container'>
