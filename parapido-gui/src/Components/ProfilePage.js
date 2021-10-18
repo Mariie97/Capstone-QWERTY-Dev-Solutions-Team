@@ -22,7 +22,7 @@ class ProfilePage extends Component {
                 email : '',
                 about : '',
                 type  :'',
-                image : ' ',
+                image : '',
                 jobs_cancelled : '',
                 street: '',
                 city: '',
@@ -43,6 +43,7 @@ class ProfilePage extends Component {
             lastNameError: undefined,
             streetError: undefined,
             zipcodeError: undefined,
+            cityError: undefined,
         }
 
         this.toggleEdit = this.toggleEdit.bind(this);
@@ -51,8 +52,10 @@ class ProfilePage extends Component {
         this.validateLastName = this.validateLastName.bind(this);
         this.validateStreet = this.validateStreet.bind(this);
         this.validateZipcode = this.validateZipcode.bind(this);
+        this.validateCity = this.validateCity.bind(this);
 
         this.saveChanges = this.saveChanges.bind(this);
+        this.onClickDelete = this.onClickDelete.bind(this);
     }
 
     componentDidMount(){
@@ -109,12 +112,13 @@ class ProfilePage extends Component {
             lastNameError,
             streetError,
             zipcodeError,
+            cityError,
             is_auth,
             pageLoaded} = this.state;
 
         const {user_id} = this.props;
         const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
-
+        console.log(street,' ', zipcode);
         return (
             <React.Fragment>
                 {!pageLoaded ?
@@ -165,7 +169,7 @@ class ProfilePage extends Component {
                                         <li>
                                             <ul className="body-flex-profile-page">
                                                 <li className="child2-body-flex-profile-page"> Address:</li>
-                                                {zipcode!==null &&
+                                                {street!==null &&
                                                 <li className="break-text-profile-page"
                                                     style={{paddingTop: 2}}> {street} {cities[city - 1]} PR, {zipcode}
                                                 </li>
@@ -262,6 +266,9 @@ class ProfilePage extends Component {
                                                 initial_value={city}
                                                 ref={change_city}
                                             />
+                                            {cityError!==undefined &&
+                                            <p className='citi-field-error'>{cityError}</p>
+                                            }
 
                                         </div>
                                         <div className="grid-edit-info-item6">
@@ -307,7 +314,18 @@ class ProfilePage extends Component {
     }
 
     onClickDelete(){
-        //    TODO: Call api to delete user: this.props.user_id
+        fetch('/delete_user/' + this.props.user_id, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
+        }).then(response =>{
+            if (response.status!==200){
+                alert(`Can't delete user at this moment`)
+            }
+            //    TODO: Redirect to admin users list
+        })
     }
 
     toggleEdit() {
@@ -317,11 +335,11 @@ class ProfilePage extends Component {
             this.setState(prevState => {
                 return {
                     ...prevState,
-                    change_about: prevState.user.about,
+                    change_about: prevState.user.about!==null ? prevState.user.about: '',
                     change_first_name: prevState.user.first_name,
                     change_last_name: prevState.user.last_name,
-                    change_zipcode: prevState.user.zipcode,
-                    change_street: prevState.user.street,
+                    change_zipcode: prevState.user.zipcode!==null ? prevState.user.zipcode : '',
+                    change_street: prevState.user.street !== null ? prevState.user.street : '',
                     edit: !prevState.edit
                 };
             });
@@ -330,7 +348,12 @@ class ProfilePage extends Component {
             this.setState(prevState => {
                 return {
                     ...prevState,
-                    edit: !prevState.edit
+                    edit: !prevState.edit,
+                    firstNameError: undefined,
+                    lastNameError: undefined,
+                    streetError: undefined,
+                    zipcodeError: undefined,
+                    cityError: undefined,
                 };
             });
         }
@@ -398,12 +421,24 @@ class ProfilePage extends Component {
         return true;
     }
 
+    validateCity() {
+        const { change_city, change_zipcode, change_street, cityError } = this.state;
+        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.city==null) {
+            this.setState({cityError: 'Select a city'});
+            return false
+
+        }
+        this.setState({cityError: undefined});
+        return true;
+    }
+
     saveChanges() {
         const val1= this.validateLastName();
         const val2= this.validateFirstName();
         const val3= this.validateStreet();
         const val4= this.validateZipcode();
-        if (!val1 || !val2 || !val3 || !val4) {
+        const val5= this.validateCity();
+        if (!val1 || !val2 || !val3 || !val4 || !val5) {
             return false;
         }
 
@@ -414,7 +449,6 @@ class ProfilePage extends Component {
 
         const data = new FormData();
 
-        // data.append("user_id", '270');
         data.append("first_name", this.state.change_first_name);
         data.append("last_name", this.state.change_last_name);
         data.append("image", this.state.change_image);
@@ -425,10 +459,14 @@ class ProfilePage extends Component {
 
         fetch('/edit_user/' + this.props.user_id, {
             method: 'PUT',
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
             body: data,
         }).then(response => {
             if (response.status!==200) {
-                alert("Error");
+                alert("Sorry we can not edit your information at this moment. Try again later");
             }
             else {
                 window.location.reload();
