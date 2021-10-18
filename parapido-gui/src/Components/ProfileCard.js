@@ -36,7 +36,14 @@ class ProfileCard extends Component {
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                            <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                            <li>
+                                <StarIcon style = {star}/>
+                                {rating_value===null ?
+                                    ' No rating yet ':
+                                    'Rating:' + { rating_value} + 'of 5'
+                                }
+
+                                <ThumbsUpDownIcon style = {thumbsupdown}/></li>
                         </ul>
                         <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
                     </div>
