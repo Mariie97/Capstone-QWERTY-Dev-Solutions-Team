@@ -93,3 +93,17 @@ export const cities = [
     "Yabucoa",
     "Yauco",
 ];
+
+export const jobStatus = {
+    posted: 1,
+    in_process: 2,
+    completed: 3,
+    cancelled: 4,
+    deleted: 5,
+};
+
+export const accountType = {
+    student: 1,
+    client: 2,
+    superuser: 3,
+};

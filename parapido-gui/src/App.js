@@ -5,6 +5,7 @@ import LandingPage from "./Components/LandingPage"
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
+import JobDetailsPage from "./Components/JobDetailsPage";
 
 
 class App extends React.Component {
@@ -42,15 +43,28 @@ class App extends React.Component {
                                 </React.Fragment>
                             )}
                         />
-                    <Route
-                    exact
-                    path='/signup'
-                    render={() => (
-                    <React.Fragment>
-                    <h1>Register Account</h1>
-                    </React.Fragment>
-                )}
-                    />
+                        <Route
+                            exact
+                            path='/signup'
+                            render={() => (
+                                <React.Fragment>
+                                    <h1>Register Account</h1>
+                                </React.Fragment>
+                            )}
+                        />
+                        <Route
+                            exact
+                            path='/job/:job_id'
+                            render={(props) => (
+                                <React.Fragment>
+                                    <NavBar cookies={this.props.cookies} />
+                                    <JobDetailsPage
+                                        cookies={this.props.cookies}
+                                        job_id={props.match.params.job_id}
+                                    />
+                                </React.Fragment>
+                            )}
+                        />
                     </Switch>
                 </div>
             </BrowserRouter>
