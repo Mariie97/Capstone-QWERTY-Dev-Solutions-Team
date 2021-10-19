@@ -28,14 +28,16 @@ class AvailableDaysChips_JobCreation extends Component {
     }
 
         handleAvailableDaysDelete(chipToDelete) {
-                console.log(chipToDelete)
-                const test = this.state.chipData.filter((chip) => chip.key !== chipToDelete.key)
-                console.log(test)
+              
+                const chipList = this.state.chipData
+                // console.log(chipToDelete)
+
+                const removed_chip = chipList.filter((chip) => chip.key !== chipToDelete.key)
+                // console.log(test)
                 
                 this.setState({
-                    chipData:  test
-                }, () => {
-                    console.log(this.state.chipData, 'chip data');}
+                    chipData:  removed_chip
+                }
                 );   
 
                 

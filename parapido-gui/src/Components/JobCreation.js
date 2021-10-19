@@ -25,6 +25,7 @@ export class JobCreation extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleCreateClick = this.handleCreateClick.bind(this);
     }
 
     componentDidMount() {
@@ -37,11 +38,67 @@ export class JobCreation extends Component {
         const {name, value} = event.target;
         this.setState({[name]:value});
         console.log(this.state);
-
     }
 
+
+    handleCreateClick(){
+        
+        const { title, street, description, zipcode, price, change_city,
+        change_category, availableDays_chips } = this.state
+
+        const city = change_city?.current.state.city
+        const category = change_category?.current.state.category
+        const chips = availableDays_chips?.current.state.chipData
+
+        const sunday    = chips.some(sun => sun.key === 0);
+        const monday    = chips.some(sun => sun.key === 1);
+        const tuesday   = chips.some(sun => sun.key === 2);
+        const wednesday = chips.some(sun => sun.key === 3);
+        const thursday  = chips.some(sun => sun.key === 4);
+        const friday    = chips.some(sun => sun.key === 5);
+        const saturday  = chips.some(sun => sun.key === 6);  
+        
+        console.log(sunday === true ? "hi" : "fuk")
+
+        fetch('/create_job',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+
+                user_id:  localStorage.getItem('user_id'),
+                title: title,
+                street: street,
+                description: description,
+                zipcode: zipcode,
+                price: price,
+                city: city,
+                category: category,  
+                d: sunday === true ? 1 : 0, 
+                l: monday === true ? 1 : 0, 
+                m: tuesday === true ? 1 : 0, 
+                w: wednesday === true ? 1 : 0, 
+                j: thursday === true ? 1 : 0, 
+                v: friday === true ? 1 : 0, 
+                s: saturday === true ? 1 : 0
+                
+                })
+                
+            }).then(response => {
+                if(response.status === 200) {
+                    console.log("successful")
+                    }
+                else{
+                   console.log("can't create job!!!!")
+                }
+            }
+        )
+    }
+
+
+
+
     render() {
-        const { change_city, change_category } = this.state
+        const { change_city, change_category, availableDays_chips } = this.state
         
         return (
         <React.Fragment>
@@ -63,8 +120,8 @@ export class JobCreation extends Component {
                             <div>
                             <label className="label-job-creation"> *City: </label>
                             <CitiesDropdown 
-                            initial_value={''}
-                            ref={change_city}
+                                initial_value={''}
+                                ref={change_city}
                             />
                             </div>
                             <div>
@@ -87,7 +144,6 @@ export class JobCreation extends Component {
                             placeholder= "Price"
                             name = "price"
                             onChange = {this.handleChange}
-			                // onChange={(event, value)=> setValue(value)}
                     />
                 </div>
 
@@ -101,12 +157,12 @@ export class JobCreation extends Component {
 
                 <div> 
                     <label className="label-job-creation"> *Available days: </label>
-                    <AvailableDays />
+                    <AvailableDays ref={availableDays_chips} />
                 </div>
             </div>
 
             <div style={{textAlign:"center"}}>
-                <button className="button-job-creation">
+                <button className="button-job-creation" onClick={this.handleCreateClick}>
                     <div className="text-button-job-creation">
                     CREATE 
                     <CreateIcon style={editpencil}/>

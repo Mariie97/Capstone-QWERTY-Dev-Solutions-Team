@@ -4,7 +4,25 @@ import {InputLabel, MenuItem, Select} from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 
 class CategoriesDropdown_JobCreation extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            category: this.props.initial_value !== ''? this.props.initial_value : undefined
+        };
+
+        this.handleOnChangeCategory = this.handleOnChangeCategory.bind(this);
+    }
+
+    handleOnChangeCategory(event) {
+        this.setState({
+            category: event.target.value.toString()
+        });
+    }
     render() {
+
+        const { category } = this.state;
         return (
             <div>
                  <StyledEngineProvider injectFirst>
@@ -13,8 +31,8 @@ class CategoriesDropdown_JobCreation extends Component {
                 <Select
                     // labelId="cities-dropdown-label"
                     // id={"cities-dropdown"}
-                    // value={city}
-                    // onChange={this.handleOnchangeCity}
+                    value={category}
+                    onChange={this.handleOnChangeCategory}
                     className="job-creation-dropdown">
 
                     <MenuItem value={1}>Animals</MenuItem>

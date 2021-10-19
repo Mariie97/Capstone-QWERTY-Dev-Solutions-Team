@@ -12,31 +12,37 @@ class CitiesDropdown extends Component {
         super(props);
 
         this.state = {
-            city: this.props.initial_value!==''? this.props.initial_value : undefined
+            city: this.props.initial_value !== ''? this.props.initial_value : undefined
         };
 
-        this.handleOnchangeCity = this.handleOnchangeCity.bind(this);
+        this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
+
     }
 
-    handleOnchangeCity(event) {
+    handleOnChangeCity(event) {
         this.setState({
             city: event.target.value.toString()
-        });
+        },()=>{ console.log(this.state.city)}
+
+        )
+            
     }
+
+
 
     render() {
 
         const { city } = this.state;
+        // console.log("IM HERE")
+        // console.log(city);
 
         return (
             <StyledEngineProvider injectFirst>
-            <div >
+            <div>
                 <InputLabel></InputLabel>
                 <Select
-                    // labelId="cities-dropdown-label"
-                    // id={"cities-dropdown"}
                     value={city}
-                    onChange={this.handleOnchangeCity}
+                    onChange={this.handleOnChangeCity}
                     className="job-creation-dropdown"
                 >
                     <MenuItem value={1}>Adjuntas</MenuItem>
