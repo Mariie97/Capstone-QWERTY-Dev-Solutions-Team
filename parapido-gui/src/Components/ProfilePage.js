@@ -190,9 +190,9 @@ class ProfilePage extends Component {
                                             <h2 className="edit-subheaders">Personal information</h2>
                                         </div>
                                         <div className="grid-edit-info-item1">
+                                            <label className="label-about-profile-page"> About*: </label>
                                             <Input
                                                 required
-                                                label="First Name"
                                                 value={change_first_name}
                                                 id="change-first-name"
                                                 onChange={(event) => {
@@ -208,9 +208,9 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item2">
+                                            <label className="label-about-profile-page"> Last Name*: </label>
                                             <Input
                                                 required
-                                                label="Last Name"
                                                 value={change_last_name}
                                                 id="change-last-name"
                                                 onChange={(event) => {
@@ -226,9 +226,9 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
+                                            <label className="label-about-profile-page"> About*: </label>
                                             <Input
                                                 id="change-about"
-                                                label="About"
                                                 multiline={true}
                                                 rows={6}
                                                 value={change_about}
@@ -246,8 +246,8 @@ class ProfilePage extends Component {
                                             <h2 className="edit-subheaders"> Address</h2>
                                         </div>
                                         <div className="grid-edit-info-item4">
+                                            <label className="label-about-profile-page"> Street*: </label>
                                             <Input
-                                                label="Street*"
                                                 value={change_street}
                                                 id="change-street-address"
                                                 onChange={(event) => {
@@ -273,8 +273,8 @@ class ProfilePage extends Component {
 
                                         </div>
                                         <div className="grid-edit-info-item6">
+                                            <label className="label-about-profile-page"> Zipcode*: </label>
                                             <Input
-                                                label="Zipcode*"
                                                 value={change_zipcode}
                                                 id="change-zipcode-address"
                                                 onChange={(event) => {

@@ -21,3 +21,15 @@
     background-color: white;
 }
 
+.MuiInputBase-root.MuiFilledInput-root.MuiFilledInput-underline.MuiInputBase-formControl.MuiInputBase-multiline.MuiFilledInput-multiline{
+    padding: 0px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline{
+    padding-right: 8px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline:focus{
+    background-color: #FFEBCC;
+}
+
