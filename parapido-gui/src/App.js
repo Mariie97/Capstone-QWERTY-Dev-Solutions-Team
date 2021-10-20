@@ -12,19 +12,6 @@ class App extends React.Component {
         super(props);
     }
 
-    state = {
-        fields: {}
-    };
-
-    onChange = (updatedValue) =>{
-
-        this.setState({fields:{
-                ...this.state.fields,
-                ...updatedValue
-            }})
-
-    };
-
     render() {
         const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
@@ -61,11 +48,7 @@ class App extends React.Component {
                             path='/security-questions'
                             render={() => (
                                 <div>
-                                    <SecurityQuestionsPage onChange={fields => this.onChange(fields)}/>
-                                    <p>
-                                        {JSON.stringify(this.state.fields, null, 2)}
-                                    </p>
-
+                                    <SecurityQuestionsPage/>
                                 </div>
 
 

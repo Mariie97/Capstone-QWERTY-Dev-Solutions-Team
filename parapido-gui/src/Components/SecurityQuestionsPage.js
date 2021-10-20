@@ -3,6 +3,136 @@ import { Alert, Backdrop, Button, Modal, Stack } from "@material-ui/core";
 import {TextField} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 
+const titleStyle = {
+    position: "absolute",
+    width: "800px",
+    height: "120px",
+    left: "550px",
+    top: "124px",
+
+    fontFamily: "Future BdCn BT",
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: "80px",
+    lineHeight: "120px",
+
+
+    color: "#FFFFFF",
+
+    opacity: "0.62",
+};
+
+const emailStyle = {
+    position: "absolute",
+    width: "636px",
+    left: "643px",
+    top: "469px",
+    //backgroundColor: "#FFFFFF",
+
+    background: "#FFFFFF",
+};
+
+const answerOneStyle = {
+    position: "absolute",
+    width: "636px",
+    left: "643px",
+    top: "607px",
+
+    background: "#FFFFFF",
+};
+
+const answerTwoStyle = {
+    position: "absolute",
+    width: "636px",
+    left: "643px",
+    top: "744px",
+
+    background: "#FFFFFF",
+};
+
+const createButtonStyle = {
+    position: "absolute",
+    width: "190px",
+    height: "80px",
+    left: "860px",
+    top: "900px",
+    color: "#2F2D4A",
+    border: "2px solid",
+    background: "#FFEBCC",
+};
+
+const securityQuestionTextStyle = {
+    position: "absolute",
+    left: "643px",
+    top: "327px",
+    width: "500px",
+
+    fontFamily: "Grand",
+    fontStyle: "normal",
+    fontWeight: "normal",
+    fontSize: "30px",
+    lineHeight: "27px",
+
+    color: "#FFFFFF",
+};
+
+const outerGridStyle= {
+    top: "-80px",
+    position: "absolute"
+
+}
+
+const backdropStyle = {
+    left: "700px",
+    top: "200px",
+    width: "500px",
+    height: "600px",
+    position: "absolute",
+    backgroundColor: "#2F2D4A",
+
+}
+
+const confirmPasswordStyle = {
+    position: "absolute",
+    width: "400px",
+    top: "300px",
+    left: "50px",
+    //backgroundColor: "#FFFFFF",
+
+    background: "#FFFFFF",
+};
+
+const passwordStyle = {
+    position: "absolute",
+    width: "400px",
+    top: "200px",
+    left: "50px",
+    //backgroundColor: "#FFFFFF",
+
+    background: "#FFFFFF",
+};
+
+const changePasswordStyle = {
+    position: "absolute",
+    width: "190px",
+    height: "80px",
+    top: "400px",
+    left: "150px",
+
+    //background: "#FFFFFF",
+};
+
+const errorStyle = {
+    position: "absolute",
+    width: "429px",
+    height: "52px",
+    left: "730px",
+    top: "600px",
+    zIndex: -1,
+
+    //background: "#FFFFFF",
+};
+
 class SecurityQuestionsPage extends Component {
 
     constructor(props){
@@ -247,137 +377,6 @@ class SecurityQuestionsPage extends Component {
             changeSuccess,
             fetchError,
         } = this.state;
-
-
-        const titleStyle = {
-            position: "absolute",
-            width: "800px",
-            height: "120px",
-            left: "550px",
-            top: "124px",
-
-            fontFamily: "Future BdCn BT",
-            fontStyle: "normal",
-            fontWeight: "bold",
-            fontSize: "80px",
-            lineHeight: "120px",
-
-
-            color: "#FFFFFF",
-
-            opacity: "0.62",
-        };
-
-        const emailStyle = {
-            position: "absolute",
-            width: "636px",
-            left: "643px",
-            top: "469px",
-            //backgroundColor: "#FFFFFF",
-
-            background: "#FFFFFF",
-        };
-
-        const answerOneStyle = {
-            position: "absolute",
-            width: "636px",
-            left: "643px",
-            top: "607px",
-
-            background: "#FFFFFF",
-        };
-
-        const answerTwoStyle = {
-            position: "absolute",
-            width: "636px",
-            left: "643px",
-            top: "744px",
-
-            background: "#FFFFFF",
-        };
-
-        const createButtonStyle = {
-            position: "absolute",
-            width: "190px",
-            height: "80px",
-            left: "860px",
-            top: "900px",
-            color: "#2F2D4A",
-            border: "2px solid",
-            background: "#FFEBCC",
-        };
-
-        const securityQuestionTextStyle = {
-            position: "absolute",
-            left: "643px",
-            top: "327px",
-            width: "500px",
-
-            fontFamily: "Grand",
-            fontStyle: "normal",
-            fontWeight: "normal",
-            fontSize: "30px",
-            lineHeight: "27px",
-
-            color: "#FFFFFF",
-        };
-
-        const outerGridStyle= {
-            top: "-80px",
-            position: "absolute"
-
-        }
-
-        const backdropStyle = {
-            left: "700px",
-            top: "200px",
-            width: "500px",
-            height: "600px",
-            position: "absolute",
-            backgroundColor: "#2F2D4A",
-
-        }
-
-        const confirmPasswordStyle = {
-            position: "absolute",
-            width: "400px",
-            top: "300px",
-            left: "50px",
-            //backgroundColor: "#FFFFFF",
-
-            background: "#FFFFFF",
-        };
-
-        const passwordStyle = {
-            position: "absolute",
-            width: "400px",
-            top: "200px",
-            left: "50px",
-            //backgroundColor: "#FFFFFF",
-
-            background: "#FFFFFF",
-        };
-
-        const changePasswordStyle = {
-            position: "absolute",
-            width: "190px",
-            height: "80px",
-            top: "400px",
-            left: "150px",
-
-            //background: "#FFFFFF",
-        };
-
-        const errorStyle = {
-            position: "absolute",
-            width: "429px",
-            height: "52px",
-            left: "730px",
-            top: "600px",
-            zIndex: -1,
-
-            //background: "#FFFFFF",
-        };
 
         if(this.state.emailIsValid){
 
