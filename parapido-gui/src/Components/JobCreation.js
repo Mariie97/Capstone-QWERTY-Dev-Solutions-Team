@@ -32,19 +32,26 @@ export class JobCreation extends Component {
 
         };
 
+        //event methods - before render method
+
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind(this);
+
+        //validation methods - end of render method
+
+        this.validateTitle = this.validateTitle.bind(this);
     }
 
     componentDidMount() {
+
 		// webpage background color
+
 		document.body.style.backgroundColor = "#2F2D4A";
 	}
 
     handleChange(event){
+
         // const price_regex = new RegExp("^[0-9][0-9][0-9].[0-9][0-9]$");
-
-
 
         const {name, value} = event.target;
         if(name === "title" && value.length <= 500){ 
@@ -66,6 +73,10 @@ export class JobCreation extends Component {
         
         const { title, street, description, zipcode, price, change_city,
         change_category, availableDays_chips } = this.state
+
+        
+
+
         console.log(price, "price")
 
         const city = change_city?.current.state.city
@@ -122,6 +133,7 @@ export class JobCreation extends Component {
 
     render() {
         const { change_city, change_category, availableDays_chips } = this.state
+        console.log(this.state.titleError)
         
         return (
         <React.Fragment>
@@ -129,7 +141,15 @@ export class JobCreation extends Component {
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                     <div className="left-body-container-1-job-creation">
                         <label className="label-job-creation"> Title* </label>
-                        <input className="input-1-job-creation" type="text" id="title" name="title" placeholder="Title" onChange={this.handleChange}></input>
+                        <input className="input-1-job-creation" type="text" id="title" name="title" placeholder="Title" 
+                        onChange={this.handleChange} onBlur={this.validateTitle} ></input>
+                        {this.state.titleError !== undefined &&
+                            <div>
+                            {this.state.titleError} 
+                            </div>
+                        }
+                        
+
                         <label className="label-job-creation"> Description* </label>
                         <textarea className="input-2-job-creation" type="text" id="description" name="description" placeholder="Description" 
                         onChange={this.handleChange}></textarea>
@@ -167,7 +187,6 @@ export class JobCreation extends Component {
                             placeholder= "0.00"
                             name = "price"
                             onChange = {this.handleChange}
-                        
                     />
                 </div>
 
@@ -195,6 +214,26 @@ export class JobCreation extends Component {
             </div>
         </React.Fragment>
         )
+    }
+
+    // validation methods 
+
+    validateTitle(){
+        if (this.state.title.length === 0) {
+            this.setState({
+                titleError: "This field is required"
+                
+            })
+            document.querySelector('.input-1-job-creation').style.cssText = 'background-color: red; ';
+            return false;
+        }
+
+        document.querySelector('.input-1-job-creation').style.cssText = 'background-color: grey;';
+
+        this.setState({
+            titleError: undefined
+        })
+        return true;
     }
 }
 

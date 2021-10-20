@@ -136,7 +136,10 @@
 }
 
 .input-3-job-creation:focus{
+		/* background-color: black;
+		border: 3px solid grey; */
 		background-color: #FFEBCC;
+		/* color:white; */
 		margin: 0px;
 }
 
