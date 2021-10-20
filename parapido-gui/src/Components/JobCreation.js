@@ -23,7 +23,7 @@ export class JobCreation extends Component {
             change_category: createRef(),
             availableDays_chips: createRef(),
             titleError: undefined,
-            // streetError: undefined,
+            streetError: undefined,
             // descriptionError: undefined,
             // zipcodeError: undefined,
             // priceError: undefined,
@@ -41,6 +41,7 @@ export class JobCreation extends Component {
         //validation methods - end of render method
 
         this.validateTitle = this.validateTitle.bind(this);
+        this.validateStreet = this.validateStreet.bind(this);
     }
 
     componentDidMount() {
@@ -157,8 +158,13 @@ export class JobCreation extends Component {
                     </div>
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <label className="label-job-creation"> Street* </label>
-                        <input className="input-1-job-creation" style={{ width:"138.6%"}} type="text" id="street" name="street" placeholder="Street"
-                        onChange={this.handleChange}></input>
+                        <input className="input-1-copy-job-creation" style={{ width:"138.6%"}} type="text" id="street" name="street" placeholder="Street"
+                        onChange={this.handleChange} onBlur={this.validateStreet}></input>
+                        {this.state.streetError !== undefined &&
+                            <div className="required-field-job-creation">
+                            <ReportProblemIcon style={report} /> {this.state.streetError} 
+                            </div>
+                        }
 
                         <div className="mini-flex-box-job-creation">
                             <div>
@@ -236,7 +242,27 @@ export class JobCreation extends Component {
         })
         return true;
     }
+
+    validateStreet(){
+        if (this.state.street.length === 0) {
+            this.setState({
+                streetError: "This field is required" 
+            })
+            document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 2px solid #cc3300; position: relative; bottom: 1px';
+            return false;
+        }
+        
+        document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 3x solid black;';
+        
+        this.setState({
+            streetError: undefined
+        })
+        return true;
+    }
+
 }
+
+    
 
 // small icons and elements css
 
@@ -253,7 +279,6 @@ const report = {
     position: "relative",
     top: "4px"
 }
-
 
 export default JobCreation
 

@@ -83,6 +83,23 @@
 		background-color: #FFEBCC;
 }
 
+.input-1-copy-job-creation{
+	font-family: "Jost";
+	width: 140%;
+	padding: 12px 20px;
+	padding-bottom: 6px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	display: inline;
+}
+
+.input-1-copy-job-creation:focus{
+	background-color: #FFEBCC;
+}
+
 /* description textarea */
 
 .input-2-job-creation{
