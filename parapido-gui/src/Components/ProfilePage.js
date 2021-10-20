@@ -71,7 +71,7 @@ class ProfilePage extends Component {
 
         return (
             <React.Fragment>
-                {!is_auth && <Redirect to='/' />}
+                {/* {!is_auth && <Redirect to='/' />} */}
                 <div className="button-profile-page-flex-container">
                     <Link to={"/jobdashboard"} className="button-profile-page" style={{margin: 20}}> My Jobs </Link>
                     <Link to={"/editprofile"} className="button-profile-page" style={{marginRight: 70}}> Edit Profile </Link>
