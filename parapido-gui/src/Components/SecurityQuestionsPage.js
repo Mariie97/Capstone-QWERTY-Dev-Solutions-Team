@@ -17,7 +17,7 @@ const titleStyle = {
     lineHeight: "120px",
 
 
-    color: "#FFFFFF",
+    //color: "#FFFFFF",
 
     opacity: "0.62",
 };
