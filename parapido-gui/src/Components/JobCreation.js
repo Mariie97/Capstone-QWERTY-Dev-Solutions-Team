@@ -24,8 +24,8 @@ export class JobCreation extends Component {
             availableDays_chips: createRef(),
             titleError: undefined,
             streetError: undefined,
-            // descriptionError: undefined,
-            // zipcodeError: undefined,
+            descriptionError: undefined,
+            zipcodeError: undefined,
             // priceError: undefined,
             // change_cityError: undefined,
             // change_categoryError: undefined,
@@ -42,6 +42,8 @@ export class JobCreation extends Component {
 
         this.validateTitle = this.validateTitle.bind(this);
         this.validateStreet = this.validateStreet.bind(this);
+        this.validateDescription = this.validateDescription.bind(this);
+        this.validateZipcode = this.validateZipcode.bind(this);
     }
 
     componentDidMount() {
@@ -55,12 +57,13 @@ export class JobCreation extends Component {
 
         // const price_regex = new RegExp("^[0-9][0-9][0-9].[0-9][0-9]$");
 
+
         const {name, value} = event.target;
         if(name === "title" && value.length <= 500){ 
             this.setState({[name]:value});}
         else if(name === "street" && value.length <=30 ){this.setState({[name]:value});}
         else if(name === "description" && value.length <= 500){this.setState({[name]:value});}
-        else if(name === "zipcode" && value.length <= 5 && !isNaN(value)){this.setState({[name]:value});}
+        else if(name === "zipcode"){this.setState({[name]:value});}
         // else if(name ==="price" && price_regex.test(value)=== false){ 
         else if(name === "price"){
             const format_price = value.replaceAll(',','')
@@ -72,12 +75,15 @@ export class JobCreation extends Component {
 
 
     handleCreateClick(){
+
+        this.validateTitle();
+        this.validateStreet();
+        this.validateDescription();
+        this.validateZipcode();
         
+        console.log(this.state.zipcode.length)
         const { title, street, description, zipcode, price, change_city,
         change_category, availableDays_chips } = this.state
-
-        
-
 
         console.log(price, "price")
 
@@ -154,7 +160,13 @@ export class JobCreation extends Component {
 
                         <label className="label-job-creation"> Description* </label>
                         <textarea className="input-2-job-creation" type="text" id="description" name="description" placeholder="Description" 
-                        onChange={this.handleChange}></textarea>
+                        onChange={this.handleChange} onBlur={this.validateDescription}></textarea>
+                         {this.state.descriptionError !== undefined &&
+                            <div className="required-field-job-creation">
+                            <ReportProblemIcon style={report} /> {this.state.descriptionError} 
+                            </div>
+                        }
+
                     </div>
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <label className="label-job-creation"> Street* </label>
@@ -177,7 +189,12 @@ export class JobCreation extends Component {
                             <div>
                                 <label className="label-job-creation"> Zipcode* </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"
-                                onChange={this.handleChange}></input>
+                                 onChange={this.handleChange} onBlur={this.validateZipcode}></input>
+                                 {this.state.zipcodeError !== undefined &&
+                                    <div className="required-field-2-job-creation">
+                                    <ReportProblemIcon style={report} /> {this.state.zipcodeError} 
+                                    </div>
+                                 }
                             </div>
                         </div>
                     </div>   
@@ -260,7 +277,53 @@ export class JobCreation extends Component {
         return true;
     }
 
+    validateDescription(){
+        if (this.state.description.length === 0) {
+            this.setState({
+                
+                descriptionError: "This field is required" 
+            })
+            document.querySelector('.input-2-job-creation').style.cssText = 'border: 2px solid #cc3300;';
+            return false;
+        }
+        
+        document.querySelector('.input-2-job-creation').style.cssText = 'border: 3x solid black;';
+        
+        this.setState({
+            descriptionError: undefined
+        })
+        return true;
+    }
+
+    validateZipcode(){
+        if (this.state.zipcode.length === 0) {
+            this.setState({
+                
+                zipcodeError: "This field is required" 
+            })
+            document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
+            return false;
+        }
+        else if (!isNaN(this.state.zipcode) === false || (this.state.zipcode.length < 5) || this.state.zipcode.length >= 6){
+            this.setState({ 
+                zipcodeError: "wrong format" 
+            })
+
+            document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
+
+            return false;
+        }
+        
+        document.querySelector('.input-3-job-creation').style.cssText = 'border: 3x solid black;';
+        
+        this.setState({
+            zipcodeError: undefined
+        })
+        return true;
+    }
 }
+
+
 
     
 

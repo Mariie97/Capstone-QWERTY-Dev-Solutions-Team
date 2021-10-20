@@ -129,7 +129,8 @@
 	justify-content: space-between; 
 	gap: 30%;
 	line-height: 2.5;
-	margin-top: 6px
+	margin-top: 6px;
+	width:120%
 }
 
 .input-3-job-creation{
@@ -146,10 +147,11 @@
 	width: 80%;
 	text-align: center;
 	display: block;
-	width: 80%;
+	width: 70%;
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis
+	text-overflow: ellipsis;
+	margin-bottom: 8px;
 }
 
 .input-3-job-creation:focus{
@@ -333,4 +335,14 @@
 	color: #cc3300;
 	position: relative;
 	bottom: 8px;
+	left: -3px;
+}
+
+.required-field-2-job-creation {
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	bottom: 8px;
+	left: -3px;
+	margin-top: 8px;
 }
