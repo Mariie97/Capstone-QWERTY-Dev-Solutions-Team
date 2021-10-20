@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Redirect} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import verifyUserAuth, {accountType, cities, jobStatus} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import "../Layouts/ProfilePage.css";
@@ -188,11 +188,13 @@ class JobDetailsPage extends Component {
                         <div className = "parent-flex-container-profile-page">
                             <div className="child1-flex-container-profile-page">
                                 <ProfileCard
+                                    user_id={job.owner_id}
                                     first_name={job.owner_name}
                                     last_name={job.owner_last}
                                     rating_value={undefined}
                                     jobs_cancelled={undefined}
                                     type={undefined}
+                                    image={job.owner_image}
                                 />
                             </div>
                             <div className = "child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
@@ -227,6 +229,16 @@ class JobDetailsPage extends Component {
                                             {job.categories}
                                         </p>
                                     </ul>
+                                    { job.student_id!==null &&
+                                    <ul className="body-flex-profile-page">
+                                            <li className= "child1-body-flex-profile-page">Assigned to:</li>
+
+                                            <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
+                                                {`${job.student_name} ${job.student_last}`}
+                                            </Link>
+                                    </ul>
+                                    }
+
                                 </ul>
                             </div>
                         </div>
