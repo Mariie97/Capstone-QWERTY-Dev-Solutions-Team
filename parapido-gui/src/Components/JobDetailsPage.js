@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
-import verifyUserAuth, {accountType, cities, jobStatus} from "../Utilities";
+import verifyUserAuth, {accountType, cities, current_user, getJobStatus, jobStatus} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import "../Layouts/ProfilePage.css";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -44,6 +44,7 @@ class JobDetailsPage extends Component {
 
         this.onClickRequest = this.onClickRequest.bind(this);
         this.changeJobStatus = this.changeJobStatus.bind(this);
+        this.onClickCancelRequest = this.onClickCancelRequest.bind(this);
     }
 
     componentDidMount() {
@@ -113,7 +114,29 @@ class JobDetailsPage extends Component {
                 alert('Could not add request at this moment, please try again later');
             }
         })
+    }
 
+    onClickCancelRequest() {
+        const { job_id } = this.props;
+        fetch('/cancel_request', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
+            body: JSON.stringify({
+                job_id: job_id,
+                student_id: current_user.id,
+            })
+        }).then(response => {
+            if (response.status === 200) {
+                //    TODO: Redirect to request listing page
+                alert("Successful")
+            }
+            else {
+                alert('Could not add request at this moment, please try again later');
+            }
+        })
     }
 
     changeJobStatus() {
@@ -131,7 +154,10 @@ class JobDetailsPage extends Component {
 
         fetch(`/job_status/${job_id}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
             body: JSON.stringify({
                 status: new_status
             })
@@ -148,18 +174,23 @@ class JobDetailsPage extends Component {
 
 
     render() {
+        //TODO: This must be able to show all job without considering the status?
         const {is_auth, job, pageLoaded } = this.state;
-        const already_requested = job.users_requested.filter(user_id => user_id===this.current_user.id);
-        const showRequestButton = this.current_user.type===accountType.student && (
-            already_requested.length===0 &&
-            job.status===jobStatus.posted
-        );
-        const showCancelButton = (this.current_user.id===job.owner_id && (
+
+        const showCancelRequestButton =
+            job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
+            job.status===jobStatus.posted;
+
+        const showRequestButton = current_user.type===accountType.student &&
+            job.users_requested.filter(request  => request[0]===current_user.id).length===0 &&
+            job.status===jobStatus.posted;
+
+        const showCancelButton = (current_user.id===job.owner_id && (
             job.status===jobStatus.posted || job.status===jobStatus.in_process)) || (
             this.current_user.id===job.student_id && job.status===jobStatus.in_process
         );
 
-        const showDeleteButton = this.current_user.type===accountType.superuser;
+        const showDeleteButton = current_user.type===accountType.superuser && job.status!==jobStatus.deleted;
 
         return (
             <div className="Dashboard">
@@ -185,6 +216,11 @@ class JobDetailsPage extends Component {
                             {showDeleteButton &&
                             <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
                                 Delete Job
+                            </button>
+                            }
+                            {showCancelRequestButton &&
+                            <button onClick={this.onClickCancelRequest} className="button-profile-page" style={{margin: 20}}>
+                                Cancel Request
                             </button>
                             }
                         </div>
@@ -231,6 +267,12 @@ class JobDetailsPage extends Component {
                                         <li className= "child1-body-flex-profile-page">Category:</li>
                                         <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}}>
                                             {job.categories}
+                                        </p>
+                                    </ul>
+                                    <ul className="body-flex-profile-page">
+                                        <li className= "child1-body-flex-profile-page">Status:</li>
+                                        <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}}>
+                                            {getJobStatus[job.status-1]}
                                         </p>
                                     </ul>
                                     { job.student_id!==null &&
