@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+.input-field-container {
+    margin-bottom: 35px;
+}
+
+.MuiFormLabel-filled {
+    color: black !important;
+}
+
+.MuiFilledInput-root .MuiFilledInput-input {
+    background-color: white;
+    color: black;
+    font-size: 15px;
+    font-family: Jost;
+}
+
+.MuiFilledInput-root.MuiFilledInput-multiline,
+.MuiFilledInput-root.MuiFilledInput-multiline.Mui-focused {
+    background-color: white;
+}
+
+.MuiInputBase-root.MuiFilledInput-root.MuiFilledInput-underline.MuiInputBase-formControl.MuiInputBase-multiline.MuiFilledInput-multiline{
+    padding: 0px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline{
+    padding-right: 8px;
+}
+
+.MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline:focus{
+    background-color: #FFEBCC;
+}
+

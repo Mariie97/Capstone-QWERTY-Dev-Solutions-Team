@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+#cities-dropdown-label {
+    font-family: "Cormorant Garamond";
+	font-style: italic; 
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
+	letter-spacing: 1px;
+	line-height: 1.5;
+}
+
+#cities-dropdown {
+    color: black;
+    background-color: white;
+    width: 29vh;
+    font-family: "Jost";
+  
+}
+
+.MuiInputBase-root{
+    border: 3px solid black;
+    font-family: "Jost";
+    font-size: 15px;
+}
+
