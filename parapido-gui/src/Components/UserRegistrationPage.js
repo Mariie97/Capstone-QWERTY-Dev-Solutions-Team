@@ -200,6 +200,13 @@ const questionErrorStyle = {
 };
 
 
+    Grid, InputLabel, OutlinedInput,
+    Radio,
+    RadioGroup
+} from "@material-ui/core";
+import {TextField} from "@material-ui/core";
+
+import SecurityQuestion from "./SecurityQuestion";
 
 
 class UserRegistrationPage extends Component {

@@ -16,7 +16,7 @@ class App extends React.Component {
         const is_auth = localStorage.getItem('is_auth') === 'true';
         return (
             <BrowserRouter>
-                <div className="App">
+                <div>
                     <Switch>
                         <Route
                             exact
