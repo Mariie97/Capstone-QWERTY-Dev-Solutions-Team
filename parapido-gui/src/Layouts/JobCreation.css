@@ -309,3 +309,11 @@
 	color:floralwhite;
 }
 
+/* field is required - live alerts */
+
+.required-field-job-creation{
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	bottom: 8px;
+}

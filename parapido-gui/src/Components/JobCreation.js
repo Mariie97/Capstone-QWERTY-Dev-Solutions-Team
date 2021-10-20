@@ -5,6 +5,7 @@ import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js"
 import AvailableDays from './AvailableDaysChips_JobCreation';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield"
 import CreateIcon from '@material-ui/icons/Create';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 export class JobCreation extends Component {
     
@@ -144,8 +145,8 @@ export class JobCreation extends Component {
                         <input className="input-1-job-creation" type="text" id="title" name="title" placeholder="Title" 
                         onChange={this.handleChange} onBlur={this.validateTitle} ></input>
                         {this.state.titleError !== undefined &&
-                            <div>
-                            {this.state.titleError} 
+                            <div className="required-field-job-creation">
+                            <ReportProblemIcon style={report} /> {this.state.titleError} 
                             </div>
                         }
                         
@@ -224,12 +225,12 @@ export class JobCreation extends Component {
                 titleError: "This field is required"
                 
             })
-            document.querySelector('.input-1-job-creation').style.cssText = 'background-color: red; ';
+            document.querySelector('.input-1-job-creation').style.cssText = 'border: 2px solid #cc3300; ';
             return false;
         }
-
-        document.querySelector('.input-1-job-creation').style.cssText = 'background-color: grey;';
-
+        
+        document.querySelector('.input-1-job-creation').style.cssText = 'border: 3x solid black;';
+        
         this.setState({
             titleError: undefined
         })
@@ -244,6 +245,20 @@ const editpencil = {
 	height: 20,
     position: "relative",
     top: "3px"
+    
 }
 
+const report = {
+    color: "red",
+    position: "relative",
+    top: "4px"
+}
+
+
 export default JobCreation
+
+
+
+     
+
+
