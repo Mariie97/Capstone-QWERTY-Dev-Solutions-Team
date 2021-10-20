@@ -219,7 +219,7 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
-                                            <label className="label-about-profile-page"> About* </label>
+                                            <label className="label-about-profile-page"> About </label>
                                             <Input
                                                 id="change-about"
                                                 multiline={true}
