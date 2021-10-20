@@ -32,9 +32,6 @@ class SecurityQuestionsPage extends Component {
 
     componentDidMount() {
         document.body.style.backgroundColor = "#2F2D4A"
-        /*
-                document.body.style.backgroundColor = "#FFFFFF"
-        */
     }
 
     change = e =>{
@@ -138,30 +135,17 @@ class SecurityQuestionsPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        //this.props.onSubmit(this.state)
 
         const err = this.validate()
 
 
         if(!err) {
             //clear
-            //this.state.questionOneRef.clear;
-            //this.state.questionTwoRef.clear;
+
             this.setState({open: true})
             this.setState({correctAnswers: true})
 
-            /*
-                        this.setState({
-                            email: '',
-                            emailError: '',
-                            questionOne: '',
-                            questionTwo: '',
-                            answerOne: '',
-                            answerOneError: '',
-                            answerTwo: '',
-                            answerTwoError: '',
-                            emailIsValid: false,
-                        })*/
+
             this.props.onChange({
                 email: undefined,
                 questionOne: undefined,
@@ -190,9 +174,6 @@ class SecurityQuestionsPage extends Component {
 
                     //Success get data
                     response.json().then(data => {
-
-/*                        console.log(data["answer_1"])
-                        console.log(data["answer_2"])*/
 
                         this.setState({questionOne: data["question_1"]})
                         this.setState({questionTwo: data["question_2"]})
@@ -321,8 +302,9 @@ class SecurityQuestionsPage extends Component {
             height: "80px",
             left: "860px",
             top: "900px",
-
-            //background: "#FFFFFF",
+            color: "#2F2D4A",
+            border: "2px solid",
+            background: "#FFEBCC",
         };
 
         const securityQuestionTextStyle = {
