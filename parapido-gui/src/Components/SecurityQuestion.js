@@ -36,10 +36,12 @@ class SecurityQuestion extends Component {
         const { question } = this.state;
         const { num, style_q} = this.props;
         const dropDownStyle = {
-            background:"#FFFFFF"
+            background:"#FFFFFF",
+            height: "52px",
+            top: "11px"
         }
         const textStyle = {
-            color:"#FFFFFF"
+            color:"#FFFFFF",
         }
         return (
 

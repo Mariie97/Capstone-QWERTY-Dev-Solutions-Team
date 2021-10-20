@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {
-    Alert,
     Button,
     FormControl,
     FormControlLabel,
     FormHelperText,
     FormLabel,
     Radio,
-    RadioGroup, Stack,
+    RadioGroup,
     TextField
 } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 
 import SecurityQuestion from "./SecurityQuestion";
 import {Redirect} from "react-router-dom";
@@ -198,16 +198,6 @@ const questionErrorStyle = {
 
     //background: "#FFFFFF",
 };
-
-
-    Grid, InputLabel, OutlinedInput,
-    Radio,
-    RadioGroup
-} from "@material-ui/core";
-import {TextField} from "@material-ui/core";
-
-import SecurityQuestion from "./SecurityQuestion";
-
 
 class UserRegistrationPage extends Component {
 
@@ -403,26 +393,25 @@ class UserRegistrationPage extends Component {
             <div>
 
                 {questionError &&
-                <Stack sx={{ width: '50%' }} spacing={2}>
+
                     <Alert variant="filled" severity="error" style={questionErrorStyle}>
                         Please select different security questions!
                     </Alert>
-                </Stack>
+
                 }
 
                 {isFetchError &&
 
-                <Stack sx={{width: '100%'}} spacing={2}>
+
                     <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
-                </Stack>
+
 
                 }
 
                 {registerSuccess &&
 
-                <Stack sx={{width: '100%'}} spacing={2}>
                     <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
-                </Stack>
+
 
                 }
 
