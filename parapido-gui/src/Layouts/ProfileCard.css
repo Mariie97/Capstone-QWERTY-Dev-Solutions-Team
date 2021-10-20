@@ -35,7 +35,6 @@
 	flex-direction: column;
 	text-align: center;
 	place-items: center;
-	border: 3px solid #036800;
 	border-radius: 20px;
 	white-space: nowrap;
 	overflow: hidden;

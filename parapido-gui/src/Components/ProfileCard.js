@@ -19,6 +19,7 @@ class ProfileCard extends Component {
 
     render() {
         const { first_name, last_name, rating_value, jobs_cancelled, type} = this.props.user
+        const profile_pic = image!==null ? image : defaultPicture;
 
         return (
             <React.Fragment>
@@ -34,15 +35,19 @@ class ProfileCard extends Component {
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
-                            <img className = "profile-card-image" style={image_resize} src= {defaultPicture} alt="profile" />
+                            <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                            { rating_value!==undefined &&
+                                { rating_value!==undefined &&
                                 <li>
-                                    <StarIcon style = {star}/>
-                                    Rating: { rating_value} of 5
-                                    <ThumbsUpDownIcon style = {thumbsupdown}/>
+                                      <StarIcon style = {star}/>
+                                {rating_value===null ?
+                                    ' No rating yet ':
+                                    `Rating: ${rating_value} of 5`
+                                }
+
+                                <ThumbsUpDownIcon style = {thumbsupdown}/>
                                 </li>
                             }
                         </ul>
