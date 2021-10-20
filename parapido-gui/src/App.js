@@ -25,11 +25,14 @@ class App extends React.Component {
                         />
                         <Route
                             exact
-                            path='/profile'
-                            render={() => (
+                            path='/profile/:user_id'
+                            render={(props) => (
                                 <React.Fragment>
-                                    <NavBar cookies= {this.props.cookies} />
-                                    <ProfilePage cookies= {this.props.cookies} />
+                                    <NavBar cookies={this.props.cookies} />
+                                    <ProfilePage
+                                        cookies={this.props.cookies}
+                                        user_id={props.match.params.user_id}
+                                    />
                                 </React.Fragment>
                             )}
                         />
