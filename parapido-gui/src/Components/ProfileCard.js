@@ -12,7 +12,7 @@ import {Link} from "react-router-dom";
 
 class ProfileCard extends Component {
 
-    acc_type ={
+    acc_type = {
         1: "STUDENT",
         2: "CLIENT",
         3: "ADMIN"
@@ -42,7 +42,6 @@ class ProfileCard extends Component {
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                            { rating_value!==undefined &&
                             <li>
                                 <StarIcon style = {star}/>
                                 {rating_value===null ?
@@ -51,14 +50,11 @@ class ProfileCard extends Component {
                                 }
                                 <ThumbsUpDownIcon style = {thumbsupdown}/>
                             </li>
-                            }
                         </ul>
-                        { jobs_cancelled!==undefined &&
                         <p className="footer-line-profile-card">
                             <DeleteTwoTone style={trashcan} />
                             Jobs Cancelled: {jobs_cancelled}
                         </p>
-                        }
                     </div>
                 </div>
             </React.Fragment>

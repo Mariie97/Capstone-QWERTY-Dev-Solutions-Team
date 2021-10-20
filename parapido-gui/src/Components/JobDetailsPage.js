@@ -32,10 +32,12 @@ class JobDetailsPage extends Component {
                 owner_name: '',
                 owner_last: '',
                 owner_image: '',
+                owner_cancellations: '',
                 student_name: '',
                 student_last: '',
                 days: [],
                 users_requested: [],
+                owner_rating: '',
             },
             pageLoaded: false,
         };
@@ -78,6 +80,8 @@ class JobDetailsPage extends Component {
                             student_last: data.student_last,
                             days: data.days,
                             users_requested: data.users_requested,
+                            owner_rating: data.owner_rating,
+                            owner_cancellations: data.owner_cancellations,
                         },
                         pageLoaded: true,
                     });
@@ -191,8 +195,8 @@ class JobDetailsPage extends Component {
                                     user_id={job.owner_id}
                                     first_name={job.owner_name}
                                     last_name={job.owner_last}
-                                    rating_value={undefined}
-                                    jobs_cancelled={undefined}
+                                    rating_value={job.owner_rating}
+                                    jobs_cancelled={job.owner_cancellations}
                                     type={undefined}
                                     image={job.owner_image}
                                 />
@@ -231,14 +235,12 @@ class JobDetailsPage extends Component {
                                     </ul>
                                     { job.student_id!==null &&
                                     <ul className="body-flex-profile-page">
-                                            <li className= "child1-body-flex-profile-page">Assigned to:</li>
-
-                                            <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
-                                                {`${job.student_name} ${job.student_last}`}
-                                            </Link>
+                                        <li className= "child1-body-flex-profile-page">Assigned to:</li>
+                                        <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
+                                            {`${job.student_name} ${job.student_last}`}
+                                        </Link>
                                     </ul>
                                     }
-
                                 </ul>
                             </div>
                         </div>

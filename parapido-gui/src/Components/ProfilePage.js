@@ -114,7 +114,9 @@ class ProfilePage extends Component {
             zipcodeError,
             cityError,
             is_auth,
-            pageLoaded} = this.state;
+            pageLoaded,
+            user,
+        } = this.state;
 
         const {user_id} = this.props;
         const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
@@ -149,7 +151,16 @@ class ProfilePage extends Component {
                         </div>
                         <h1 className="profile-page-header">{first_name} {last_name} </h1>
                         <div className = "parent-flex-container-profile-page">
-                            <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
+                            <div className="child1-flex-container-profile-page">
+                                <ProfileCard
+                                    user_id={user_id}
+                                    first_name={user.first_name}
+                                    last_name={user.last_name}
+                                    rating_value={user.rating_value}
+                                    jobs_cancelled={user.jobs_cancelled}
+                                    type={user.type}
+                                    image={user.image}                                />
+                            </div>
                             {!edit ?
                                 <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
                                     <ul className="bullet-removal-profile-page">
@@ -287,7 +298,7 @@ class ProfilePage extends Component {
                                                 id="profile-pic"
                                                 type="file"
                                                 name="file"
-                                                accept="image/*"                                  
+                                                accept="image/*"
                                                 onChange={(event) => {
                                                     this.setState({
                                                         change_image: event.target.files[0]
