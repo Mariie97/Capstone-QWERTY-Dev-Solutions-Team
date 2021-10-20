@@ -76,10 +76,15 @@ export class JobCreation extends Component {
 
     handleCreateClick(){
 
-        this.validateTitle();
-        this.validateStreet();
-        this.validateDescription();
-        this.validateZipcode();
+        const validate1 = this.validateTitle();
+        const validate2 = this.validateStreet();
+        const validate3 = this.validateDescription();
+        const validate4 = this.validateZipcode();
+
+        if(!validate1 || !validate2 || !validate3 || !validate4){
+            return false;
+        }
+
         
         console.log(this.state.zipcode.length)
         const { title, street, description, zipcode, price, change_city,
@@ -306,7 +311,7 @@ export class JobCreation extends Component {
         }
         else if (!isNaN(this.state.zipcode) === false || (this.state.zipcode.length < 5) || this.state.zipcode.length >= 6){
             this.setState({ 
-                zipcodeError: "wrong format" 
+                zipcodeError: "zipcode format: #####" 
             })
 
             document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
