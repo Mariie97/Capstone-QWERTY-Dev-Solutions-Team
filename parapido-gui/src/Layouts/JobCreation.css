@@ -62,6 +62,7 @@
     font-size: 16px;
     color: white;
 	letter-spacing: 1px;
+	
 }
 
 /* title input */
@@ -164,17 +165,6 @@
 
 /* Material ui override dropdown styling  */
 
-.job-creation-dropdown{
-	width: 100%;
-	background-color: #FFEBCC;
-	box-sizing: border-box;
-	border: 3px solid black;
-	outline: none;
-	font-family: "Jost";
-	font-size: 16px;
-	margin-top: 9px;
-}
-
 .MuiSelect-root{
 	padding-bottom: 0px;
 	padding-right: 0px;
@@ -245,9 +235,9 @@
 	display: flex;
 	flex-direction: column;
 	line-height: 2.5;
-	margin-left: 25px;
+	margin-left: 50px;
 	/* margin-top: 5px; */
-	width: 9%
+	/* width: 9% */
 
 }
 
@@ -269,15 +259,16 @@
 
 .MuiInputBase-root {
     background-color: white;
-	border: 3px solid black;
+	/* border: 3px solid black; */
+
 }
 
 .MuiFormLabel-root{
 	line-height: 0px;
 }
 
-.job-creation-dropdown{
-	margin-top: 0px;
+.MuiFormControl-root{
+	width: 65%;
 }
 
 .MuiInputBase-root:focus-within {
@@ -346,3 +337,4 @@
 	left: -3px;
 	margin-top: 8px;
 }
+

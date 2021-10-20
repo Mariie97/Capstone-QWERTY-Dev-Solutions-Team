@@ -18,7 +18,7 @@ export class JobCreation extends Component {
             street: '',
             description: '',
             zipcode: '',
-            price: '0.00',
+            price: '',
             change_city: createRef(),
             change_category: createRef(),
             availableDays_chips: createRef(),
@@ -26,7 +26,7 @@ export class JobCreation extends Component {
             streetError: undefined,
             descriptionError: undefined,
             zipcodeError: undefined,
-            // priceError: undefined,
+            priceError: undefined,
             // change_cityError: undefined,
             // change_categoryError: undefined,
             // availableDays_chipsError:undefined
@@ -44,6 +44,7 @@ export class JobCreation extends Component {
         this.validateStreet = this.validateStreet.bind(this);
         this.validateDescription = this.validateDescription.bind(this);
         this.validateZipcode = this.validateZipcode.bind(this);
+        this.validatePrice = this.validatePrice.bind(this);
     }
 
     componentDidMount() {
@@ -207,7 +208,7 @@ export class JobCreation extends Component {
 
             <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                 <div className="price-miniflex-job-creation">
-                    <label className="label-job-creation" style={{paddingTop: 2}}> Price* </label>
+                    <label className="label-job-creation" style={{paddingTop: 2, marginTop: "6px", marginBottom: "0px"}}> Price* </label>
                     <CurrencyTextField
                             currencySymbol="$"
                             outputFormat="string"
@@ -216,7 +217,15 @@ export class JobCreation extends Component {
                             placeholder= "0.00"
                             name = "price"
                             onChange = {this.handleChange}
+                            onBlur  = {this.validatePrice}
                     />
+                     {this.state.priceError !== undefined &&
+                          
+                            <div className="required-field-2-job-creation">
+                            <ReportProblemIcon style={report} /> {this.state.priceError} 
+                            </div>
+                    
+                     }
                 </div>
 
                 <div> 
@@ -323,6 +332,22 @@ export class JobCreation extends Component {
         
         this.setState({
             zipcodeError: undefined
+        })
+        return true;
+    }
+
+    validatePrice(){
+        if (this.state.price === '') {
+            this.setState({
+                priceError: "This field is required" 
+    
+            })
+            // document.querySelector('.MuiInputBase-root').style.cssText = 'border: 3px solid red';
+            return false;
+        }
+        
+        this.setState({
+            priceError: undefined
         })
         return true;
     }
