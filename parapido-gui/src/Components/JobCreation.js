@@ -17,10 +17,18 @@ export class JobCreation extends Component {
             street: '',
             description: '',
             zipcode: '',
-            price: '',
+            price: '0.00',
             change_city: createRef(),
             change_category: createRef(),
-            availableDays_chips: createRef()
+            availableDays_chips: createRef(),
+            titleError: undefined,
+            // streetError: undefined,
+            // descriptionError: undefined,
+            // zipcodeError: undefined,
+            // priceError: undefined,
+            // change_cityError: undefined,
+            // change_categoryError: undefined,
+            // availableDays_chipsError:undefined
 
         };
 
@@ -34,35 +42,50 @@ export class JobCreation extends Component {
 	}
 
     handleChange(event){
+        // const price_regex = new RegExp("^[0-9][0-9][0-9].[0-9][0-9]$");
+
+
 
         const {name, value} = event.target;
-        this.setState({[name]:value});
-        console.log(this.state);
+        if(name === "title" && value.length <= 500){ 
+            this.setState({[name]:value});}
+        else if(name === "street" && value.length <=30 ){this.setState({[name]:value});}
+        else if(name === "description" && value.length <= 500){this.setState({[name]:value});}
+        else if(name === "zipcode" && value.length <= 5 && !isNaN(value)){this.setState({[name]:value});}
+        // else if(name ==="price" && price_regex.test(value)=== false){ 
+        else if(name === "price"){
+            const format_price = value.replaceAll(',','')
+            this.setState({[name]:format_price});}    
     }
+
+  
+
 
 
     handleCreateClick(){
         
         const { title, street, description, zipcode, price, change_city,
         change_category, availableDays_chips } = this.state
+        console.log(price, "price")
 
         const city = change_city?.current.state.city
         const category = change_category?.current.state.category
         const chips = availableDays_chips?.current.state.chipData
 
         const sunday    = chips.some(sun => sun.key === 0);
-        const monday    = chips.some(sun => sun.key === 1);
-        const tuesday   = chips.some(sun => sun.key === 2);
-        const wednesday = chips.some(sun => sun.key === 3);
-        const thursday  = chips.some(sun => sun.key === 4);
-        const friday    = chips.some(sun => sun.key === 5);
-        const saturday  = chips.some(sun => sun.key === 6);  
+        const monday    = chips.some(mon => mon.key === 1);
+        const tuesday   = chips.some(tue => tue.key === 2);
+        const wednesday = chips.some(wed => wed.key === 3);
+        const thursday  = chips.some(thu => thu.key === 4);
+        const friday    = chips.some(fri => fri.key === 5);
+        const saturday  = chips.some(sat => sat.key === 6);  
         
-        console.log(sunday === true ? "hi" : "fuk")
-
         fetch('/create_job',{
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            credentials: 'same-origin',
+            headers: {'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
             body: JSON.stringify({
 
                 user_id:  localStorage.getItem('user_id'),
@@ -72,7 +95,7 @@ export class JobCreation extends Component {
                 zipcode: zipcode,
                 price: price,
                 city: city,
-                category: category,  
+                categories: category,  
                 d: sunday === true ? 1 : 0, 
                 l: monday === true ? 1 : 0, 
                 m: tuesday === true ? 1 : 0, 
@@ -80,12 +103,12 @@ export class JobCreation extends Component {
                 j: thursday === true ? 1 : 0, 
                 v: friday === true ? 1 : 0, 
                 s: saturday === true ? 1 : 0
-                
                 })
                 
             }).then(response => {
-                if(response.status === 200) {
+                if(response.status === 201) {
                     console.log("successful")
+                    
                     }
                 else{
                    console.log("can't create job!!!!")
@@ -105,27 +128,27 @@ export class JobCreation extends Component {
             <h1 className="job-creation-page-header"> Job Creation </h1>
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                     <div className="left-body-container-1-job-creation">
-                        <label className="label-job-creation"> *Title: </label>
+                        <label className="label-job-creation"> Title* </label>
                         <input className="input-1-job-creation" type="text" id="title" name="title" placeholder="Title" onChange={this.handleChange}></input>
-                        <label className="label-job-creation"> *Description: </label>
+                        <label className="label-job-creation"> Description* </label>
                         <textarea className="input-2-job-creation" type="text" id="description" name="description" placeholder="Description" 
                         onChange={this.handleChange}></textarea>
                     </div>
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
-                        <label className="label-job-creation"> *Street: </label>
+                        <label className="label-job-creation"> Street* </label>
                         <input className="input-1-job-creation" style={{ width:"138.6%"}} type="text" id="street" name="street" placeholder="Street"
                         onChange={this.handleChange}></input>
 
                         <div className="mini-flex-box-job-creation">
                             <div>
-                            <label className="label-job-creation"> *City: </label>
+                            <label className="label-job-creation"> City* </label>
                             <CitiesDropdown 
                                 initial_value={''}
                                 ref={change_city}
                             />
                             </div>
                             <div>
-                                <label className="label-job-creation"> *Zipcode: </label>
+                                <label className="label-job-creation"> Zipcode* </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"
                                 onChange={this.handleChange}></input>
                             </div>
@@ -135,20 +158,21 @@ export class JobCreation extends Component {
 
             <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                 <div className="price-miniflex-job-creation">
-                    <label className="label-job-creation" style={{paddingTop: 2}}> *Price: </label>
+                    <label className="label-job-creation" style={{paddingTop: 2}}> Price* </label>
                     <CurrencyTextField
                             currencySymbol="$"
                             outputFormat="string"
                             decimalCharacter="."
                             digitGroupSeparator=","
-                            placeholder= "Price"
+                            placeholder= "0.00"
                             name = "price"
                             onChange = {this.handleChange}
+                        
                     />
                 </div>
 
                 <div> 
-                    <label className="label-job-creation"> *Categories: </label>
+                    <label className="label-job-creation"> Categories* </label>
                     <CategoriesDropdown 
                     initial_value={''}
                     ref={change_category}
@@ -156,7 +180,7 @@ export class JobCreation extends Component {
                 </div>
 
                 <div> 
-                    <label className="label-job-creation"> *Available days: </label>
+                    <label className="label-job-creation"> Available days* </label>
                     <AvailableDays ref={availableDays_chips} />
                 </div>
             </div>
