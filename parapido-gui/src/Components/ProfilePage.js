@@ -155,16 +155,9 @@ class ProfilePage extends Component {
                                     <ul className="bullet-removal-profile-page">
                                         <li>
                                             <ul className="body-flex-profile-page">
-                                                <li className="child-body-flex-profile-page">Name:</li>
-                                                <li className="break-text-profile-page"
-                                                    style={{paddingTop: 1, paddingLeft: 14}}> {first_name} {last_name} </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul className="body-flex-profile-page">
                                                 <li className="child1-body-flex-profile-page"> Email:</li>
                                                 <li className="break-text-profile-page"
-                                                    style={{paddingTop: 1, paddingLeft: 19}}> {email} </li>
+                                                    style={{paddingTop: 19, paddingLeft: 18}}> {email} </li>
                                             </ul>
                                         </li>
                                         <li>
@@ -172,7 +165,7 @@ class ProfilePage extends Component {
                                                 <li className="child2-body-flex-profile-page"> Address:</li>
                                                 {street!==null &&
                                                 <li className="break-text-profile-page"
-                                                    style={{paddingTop: 2}}> {street} {cities[city - 1]} PR, {zipcode}
+                                                    style={{paddingLeft: 3, paddingTop: 21}}> {street} {cities[city - 1]} PR, {zipcode}
                                                 </li>
                                                 }
                                             </ul>
@@ -180,7 +173,7 @@ class ProfilePage extends Component {
                                         <ul className="body-flex-profile-page">
                                             <li className="child1-body-flex-profile-page">About:</li>
                                             <p className="break-text-profile-page"
-                                               style={{paddingLeft: 17, paddingTop: 2.5}}> {about} </p>
+                                               style={{paddingLeft: 14, paddingTop: 19.5}}> {about} </p>
                                         </ul>
                                     </ul>
                                 </div>:
