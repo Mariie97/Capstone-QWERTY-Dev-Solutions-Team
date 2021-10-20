@@ -183,7 +183,7 @@ class ProfilePage extends Component {
                                             <h2 className="edit-subheaders">Personal information</h2>
                                         </div>
                                         <div className="grid-edit-info-item1">
-                                            <label className="label-about-profile-page"> About*: </label>
+                                            <label className="label-about-profile-page"> First Name* </label>
                                             <Input
                                                 required
                                                 value={change_first_name}
@@ -201,7 +201,7 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item2">
-                                            <label className="label-about-profile-page"> Last Name*: </label>
+                                            <label className="label-about-profile-page"> Last Name* </label>
                                             <Input
                                                 required
                                                 value={change_last_name}
@@ -219,7 +219,7 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
-                                            <label className="label-about-profile-page"> About*: </label>
+                                            <label className="label-about-profile-page"> About* </label>
                                             <Input
                                                 id="change-about"
                                                 multiline={true}
@@ -239,7 +239,7 @@ class ProfilePage extends Component {
                                             <h2 className="edit-subheaders"> Address</h2>
                                         </div>
                                         <div className="grid-edit-info-item4">
-                                            <label className="label-about-profile-page"> Street*: </label>
+                                            <label className="label-about-profile-page"> Street </label>
                                             <Input
                                                 value={change_street}
                                                 id="change-street-address"
@@ -266,7 +266,7 @@ class ProfilePage extends Component {
 
                                         </div>
                                         <div className="grid-edit-info-item6">
-                                            <label className="label-about-profile-page"> Zipcode*: </label>
+                                            <label className="label-about-profile-page"> Zipcode </label>
                                             <Input
                                                 value={change_zipcode}
                                                 id="change-zipcode-address"
