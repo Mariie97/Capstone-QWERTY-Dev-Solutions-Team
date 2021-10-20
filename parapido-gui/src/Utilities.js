@@ -119,5 +119,5 @@ export const getJobStatus = [
 export const accountType = {
     student: 1,
     client: 2,
-    superuser: 3,
+    admin: 3,
 };

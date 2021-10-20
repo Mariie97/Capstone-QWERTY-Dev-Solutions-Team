@@ -7,10 +7,6 @@ import {Box, CircularProgress} from "@material-ui/core";
 
 
 class JobDetailsPage extends Component {
-    current_user = {
-        id: parseInt(localStorage.getItem('user_id')),
-        type: parseInt(localStorage.getItem('type'))
-    };
 
     constructor(props) {
         super(props);
@@ -104,7 +100,7 @@ class JobDetailsPage extends Component {
             },
             body: JSON.stringify({
                 job_id: job_id,
-                student_id: this.current_user.id,
+                student_id: current_user.id,
             })
         }).then(response => {
             if (response.status === 200) {
@@ -144,10 +140,10 @@ class JobDetailsPage extends Component {
         const { job } = this .state;
         let new_status;
 
-        if (this.current_user.type===accountType.superuser)
+        if (current_user.type===accountType.admin)
             new_status = jobStatus.deleted;
         else
-        if (this.current_user.id===job.owner_id)
+        if (current_user.id===job.owner_id)
             new_status = jobStatus.cancelled;
         else
             new_status = jobStatus.posted;
@@ -187,10 +183,10 @@ class JobDetailsPage extends Component {
 
         const showCancelButton = (current_user.id===job.owner_id && (
             job.status===jobStatus.posted || job.status===jobStatus.in_process)) || (
-            this.current_user.id===job.student_id && job.status===jobStatus.in_process
+            current_user.id===job.student_id && job.status===jobStatus.in_process
         );
 
-        const showDeleteButton = current_user.type===accountType.superuser && job.status!==jobStatus.deleted;
+        const showDeleteButton = current_user.type===accountType.admin && job.status!==jobStatus.deleted;
 
         return (
             <div className="Dashboard">

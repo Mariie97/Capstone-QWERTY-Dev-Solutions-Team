@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react'
 import "../Layouts/ProfilePage.css"
 import {Link, Redirect} from 'react-router-dom';
-import verifyUserAuth, {cities} from "../Utilities";
+import verifyUserAuth, {accountType, cities, current_user} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -9,10 +9,6 @@ import ProfileCard from './ProfileCard';
 
 
 class ProfilePage extends Component {
-    current_user = {
-        id: localStorage.getItem('user_id'),
-        type: localStorage.getItem('type'),
-    };
 
     constructor(props){
         super(props);
@@ -119,8 +115,8 @@ class ProfilePage extends Component {
         } = this.state;
 
         const {user_id} = this.props;
-        const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
-        console.log(street,' ', zipcode);
+        const showButtons = parseInt(user_id) === current_user.id || current_user.type===accountType.admin;
+
         return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' />}
@@ -135,13 +131,17 @@ class ProfilePage extends Component {
                         <div className="button-profile-page-flex-container">
                             {showButtons &&
                             <div className='button-container'>
-                                <Link to={"/jobdashboard"} >
-                                    <button className="button-profile-page" onClick={this.toggleEdit} >My Jobs</button>
-                                </Link>
+                                {user.type !== accountType.admin &&
+                                    <Link to={"/jobdashboard"}>
+                                        <button className="button-profile-page" onClick={this.toggleEdit}>
+                                            {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
+                                        </button>
+                                    </Link>
+                                }
                                 <button className="button-profile-page" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
-                                {this.current_user.type === '3' &&
+                                {current_user.type === accountType.admin &&
                                 <button className="button-profile-page button-delete" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
