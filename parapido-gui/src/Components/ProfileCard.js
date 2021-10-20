@@ -18,16 +18,19 @@ class ProfileCard extends Component {
     }
 
     render() {
-        const {first_name,last_name,rating_value,jobs_cancelled,type} = this.props.user
+        const { first_name, last_name, rating_value, jobs_cancelled, type} = this.props.user
 
         return (
             <React.Fragment>
+                {type!==undefined &&
                 <div className= "top-profile-card-lettering">
                     {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
                         :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
                             :<img src= {_admin} alt="admin" style={admin}/>}
                     {this.acc_type[type]}
                 </div>
+                }
+
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
@@ -35,9 +38,20 @@ class ProfileCard extends Component {
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
-                            <li> <StarIcon style = {star}/> Rating: { rating_value} of 5 <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                            { rating_value!==undefined &&
+                                <li>
+                                    <StarIcon style = {star}/>
+                                    Rating: { rating_value} of 5
+                                    <ThumbsUpDownIcon style = {thumbsupdown}/>
+                                </li>
+                            }
                         </ul>
-                        <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
+                        { jobs_cancelled!==undefined &&
+                            <p className="footer-line-profile-card">
+                                <DeleteTwoTone style={trashcan} />
+                                Jobs Cancelled: {jobs_cancelled}
+                            </p>
+                        }
                     </div>
                 </div>
             </React.Fragment>

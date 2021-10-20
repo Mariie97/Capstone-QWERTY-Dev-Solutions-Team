@@ -103,11 +103,10 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                alert("Successful");
+                //    TODO: Redirect to request listing page
             }
             else {
-                alert("Error");
-                console.log(response);
+                alert('Could not add request at this moment, please try again later');
             }
         })
 
@@ -134,10 +133,11 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                //    TODO: Redirect to request listing page
+                //    TODO: Redirect to jobs, maybe???
+                alert('Success');
             }
             else {
-                alert('Could not add request at this moment, please try again later');
+                alert('The server could not handle your request at this moment, please try again later.');
             }
         })
     }
