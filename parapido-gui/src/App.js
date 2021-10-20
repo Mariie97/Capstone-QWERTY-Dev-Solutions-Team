@@ -1,8 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import {withCookies} from "react-cookie";
-import LoginPage from "./Components/LoginPage";
-import DashboardPage from "./Components/DashboardPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import LandingPage from "./Components/LandingPage"
 import ProfilePage from "./Components/ProfilePage";
