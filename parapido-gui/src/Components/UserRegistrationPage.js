@@ -287,7 +287,6 @@ class UserRegistrationPage extends Component {
         if(!val1 || !val2 || !val3 || !val4 || !val5 || !val6 || !val7 || !val8 || !val9)
             return;
 
-
         this.validateFetch()
     };
 
@@ -429,26 +428,15 @@ class UserRegistrationPage extends Component {
 
         return (
             <div>
-
                 {isFetchError &&
-
-
-                <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
-
-
+                    <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
                 }
 
                 {registerSuccess &&
-
-                <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
-
-
+                    <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
                 }
-
                 {registerSuccess && setTimeout(function() {}, 3000)}
-
                 {registerSuccess && <Redirect to='/'/>}
-
                 <form>
                     <div style={outerGridStyle}>
                         <h1 style={titleStyle}>
@@ -480,7 +468,6 @@ class UserRegistrationPage extends Component {
                             style={lastNameStyle}
                             onBlur={this.validateLastName}
                         />
-
                         <TextField
                             required
                             error = {this.state.emailError!==undefined}
@@ -494,7 +481,6 @@ class UserRegistrationPage extends Component {
                             style={emailStyle}
                             onBlur={this.validateEmail}
                         />
-
                         <TextField
                             required
                             error = {this.state.passwordError!==undefined}
@@ -508,7 +494,6 @@ class UserRegistrationPage extends Component {
                             style={passwordStyle}
                             onBlur={this.validatePassword}
                         />
-
                         <TextField
                             required
                             error = {this.state.confirmPasswordError!==undefined}
@@ -522,8 +507,6 @@ class UserRegistrationPage extends Component {
                             style={confirmPasswordStyle}
                             onBlur={this.validatePasswordConfirm}
                         />
-
-
                         <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
                         <div className='security-questions-container' >
                             <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
@@ -593,7 +576,6 @@ class UserRegistrationPage extends Component {
                     </div>
                 </form>
             </div>
-
         );
     };
 }
