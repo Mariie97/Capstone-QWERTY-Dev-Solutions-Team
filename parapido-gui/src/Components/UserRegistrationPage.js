@@ -216,7 +216,7 @@ class UserRegistrationPage extends Component {
             answerOneError: undefined,
             answerTwo: '',
             answerTwoError: undefined,
-            accountType: '',
+            accountType: '1',
             accountTypeError: '',
             registerSuccess: false,
             questionError: undefined,
@@ -231,6 +231,8 @@ class UserRegistrationPage extends Component {
         this.validateAnswerTwo = this.validateAnswerTwo.bind(this)
         this.validateAccountType = this.validateAccountType.bind(this)
         this.validateQuestions = this.validateQuestions.bind(this)
+
+        this.onSubmit = this.onSubmit.bind(this)
 
     }
 
@@ -253,8 +255,8 @@ class UserRegistrationPage extends Component {
                 last_name: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
-                q_type1: this.state.questionOneRef.current.state.question,
-                q_type2: this.state.questionTwoRef.current.state.question,
+                q_type1: this.state.questionOneRef?.current.state.question,
+                q_type2: this.state.questionTwoRef?.current.state.question,
                 ans1: this.state.answerOne,
                 ans2: this.state.answerTwo,
                 type: this.state.accountType,
@@ -272,8 +274,7 @@ class UserRegistrationPage extends Component {
 
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
+    onSubmit() {
 
         const val1= this.validateFirstName();
         const val2= this.validateLastName();
@@ -394,7 +395,7 @@ class UserRegistrationPage extends Component {
             accountType: typeSelected,
             emailError: undefined
         });
-        return false;
+        return true;
     }
 
     validateQuestions() {
@@ -411,6 +412,7 @@ class UserRegistrationPage extends Component {
 
 
     render() {
+        //TODO: Needs CSS improvement
         const {
             firstName,
             lastName,
@@ -429,14 +431,16 @@ class UserRegistrationPage extends Component {
         return (
             <div>
                 {isFetchError &&
-                    <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
+                <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
                 }
 
+
                 {registerSuccess &&
+                <div>
                     <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
+                    <Redirect to='/' />
+                </div>
                 }
-                {registerSuccess && setTimeout(function() {}, 3000)}
-                {registerSuccess && <Redirect to='/'/>}
                 <form>
                     <div style={outerGridStyle}>
                         <h1 style={titleStyle}>
@@ -560,7 +564,12 @@ class UserRegistrationPage extends Component {
                             />
                         </div>
 
-                        <FormControl component="fieldset" style={accountTypeStyle} error={this.state.accountTypeError} helperText={this.state.accountTypeError}>
+                        <FormControl
+                            component="fieldset"
+                            style={accountTypeStyle}
+                            error={this.state.accountTypeError}
+                            helperText={this.state.accountTypeError}
+                        >
                             <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
                             <RadioGroup row
                                         aria-label="Account Type"
