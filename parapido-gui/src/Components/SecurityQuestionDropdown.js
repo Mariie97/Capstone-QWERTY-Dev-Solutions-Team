@@ -13,7 +13,7 @@ const textStyle = {
 }
 
 
-class SecurityQuestion extends Component {
+class SecurityQuestionDropdown extends Component {
 
     constructor(props){
         super(props);
@@ -64,4 +64,4 @@ class SecurityQuestion extends Component {
     }
 }
 
-export default SecurityQuestion;
+export default SecurityQuestionDropdown;

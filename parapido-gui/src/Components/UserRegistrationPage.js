@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 
-import SecurityQuestion from "./SecurityQuestion";
+import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
 import {Redirect} from "react-router-dom";
 
 const titleStyle = {
@@ -532,7 +532,7 @@ class UserRegistrationPage extends Component {
                             }
 
 
-                            <SecurityQuestion
+                            <SecurityQuestionDropdown
                                 question={1}
                                 num={1}
                                 style_q={questionOneStyle}
@@ -553,7 +553,7 @@ class UserRegistrationPage extends Component {
                                 style={answerOneStyle}
                                 onBlur={this.validateAnswerOne}
                             />
-                            <SecurityQuestion
+                            <SecurityQuestionDropdown
                                 question={2}
                                 num={2}
                                 style_q={questionTwoStyle}
