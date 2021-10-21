@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react';
+import {Redirect} from "react-router-dom";
 import "../Layouts/JobCreation.css";
 import CitiesDropdown from "./CitiesDropdown_JobCreation.js"
 import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js"
@@ -27,8 +28,7 @@ export class JobCreation extends Component {
             descriptionError: undefined,
             zipcodeError: undefined,
             priceError: undefined,
-            // availableDays_chipsError:undefined
-
+            creationSuccessful: false
         };
 
         //event methods - before render method
@@ -141,10 +141,13 @@ export class JobCreation extends Component {
             }).then(response => {
                 if(response.status === 201) {
                     console.log("successful")
+                    this.setState({
+                       creationSuccessful: true
+                    })
                     
                     }
                 else{
-                   console.log("can't create job!!!!")
+                   alert("can't create job")
                 }
             }
         )
@@ -158,6 +161,8 @@ export class JobCreation extends Component {
         
         return (
         <React.Fragment>
+            {this.state.creationSuccessful && <Redirect to="/jobdashboard" />}
+
             <h1 className="job-creation-page-header"> Job Creation </h1>
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                     <div className="left-body-container-1-job-creation">

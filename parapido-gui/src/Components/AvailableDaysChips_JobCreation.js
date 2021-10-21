@@ -22,7 +22,7 @@ class AvailableDaysChips_JobCreation extends Component {
             { key: 5, label: 'Friday'},
             { key: 6, label: 'Saturday'}
         ],
-        chipError: undefined,
+     
      
     }
 
@@ -30,14 +30,12 @@ class AvailableDaysChips_JobCreation extends Component {
 
         this.handleAvailableDaysDelete = this.handleAvailableDaysDelete.bind(this);
 
-        // validation methods - end of render method
-
-        this.validateChips = this.validateChips.bind(this);
+       
     }
 
     handleAvailableDaysDelete(chipToDelete) {
         
-        this.validateChips();
+      
         const chipList = this.state.chipData
       
         const removed_chip = chipList.filter((chip) => chip.key !== chipToDelete.key)
@@ -46,21 +44,19 @@ class AvailableDaysChips_JobCreation extends Component {
             chipData:  removed_chip,     
         }
         );   
-
-        console.log(this.state.chipData)
     };
 
+
     render() {
-
-console.log(this.state.chipError)
-
         return (
-                
                 <React.Fragment>
-                {this.state.chipData.length === 0 && <AvailableDaysChips_JobCreation />}
-
-                <div className="chip-flex-job-creation"
-                >
+                {this.state.chipData.length === 0 && 
+                <div>
+                    <AvailableDaysChips_JobCreation />
+                </div>
+                }
+                
+                <div className="chip-flex-job-creation">
                 {this.state.chipData.map((data) => {
                     return (
                     <ListItem key={data.key}
@@ -73,23 +69,9 @@ console.log(this.state.chipError)
                     </ListItem>
                     );
                 })}
-            </div>
+               </div>
             </React.Fragment>
         )
-    }
-
-    validateChips(){
-        if (this.state.chipData.length === 1) {
-            this.setState({
-                chipError: "This field is required",
-            })
-            return false;
-        }
-        
-        this.setState({
-            chipError: undefined
-        })
-        return true;
     }
 
 }
