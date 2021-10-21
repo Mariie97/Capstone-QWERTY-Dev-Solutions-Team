@@ -43,7 +43,6 @@ class CategoriesDropdown_JobCreation extends Component {
                     onChange={this.handleOnChangeCategory}
                     className="job-creation-dropdown"
                     onBlur={this.validateCategory}
-                    error={this.state.categoryError !== undefined}
                     >
                   
 
@@ -58,6 +57,10 @@ class CategoriesDropdown_JobCreation extends Component {
                 </Select>
                 {this.state.categoryError !== undefined &&
                     <div className="required-field-2-job-creation">
+                        <hr className="category-error-job-creation"></hr>
+                        <hr className="category-1-error-job-creation"></hr>
+                        <hr className="city-error-2-job-creation"></hr>
+                        <hr className="category-3-error-job-creation"></hr> 
                         <ReportProblemIcon style={report} /> {this.state.categoryError} 
                     </div>
                 }
@@ -74,10 +77,10 @@ class CategoriesDropdown_JobCreation extends Component {
                 categoryError: "This field is required" 
     
             })
-            // document.querySelector('.MuiInputBase-root').style.cssText = 'border: 3px solid red';
+            document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px;';
             return false;
         }
-        
+       
         this.setState({
             categoryError: undefined
         })

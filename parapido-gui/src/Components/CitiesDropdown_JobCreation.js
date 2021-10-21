@@ -50,7 +50,6 @@ class CitiesDropdown extends Component {
                     onChange={this.handleOnChangeCity}
                     className="job-creation-dropdown"
                     onBlur={this.validateCity}
-                    error={this.state.cityError !== undefined}
                 >
                     <MenuItem value={1}>Adjuntas</MenuItem>
                     <MenuItem value={2}>Aguada</MenuItem>
@@ -133,6 +132,10 @@ class CitiesDropdown extends Component {
                 </Select>
                  {this.state.cityError !== undefined &&
                             <div className="required-field-2-job-creation">
+                             <hr className="city-error-job-creation"></hr>
+                             <hr className="city-error-1-job-creation"></hr>
+                             <hr className="city-error-2-job-creation"></hr>
+                             <hr className="city-error-3-job-creation"></hr> 
                              <ReportProblemIcon style={report} /> {this.state.cityError} 
                             </div>
                             }

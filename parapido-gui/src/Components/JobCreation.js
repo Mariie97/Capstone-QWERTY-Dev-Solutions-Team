@@ -230,13 +230,16 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
-                            error = {this.state.priceError !== undefined}
-                           
                     />
                      {this.state.priceError !== undefined &&
                           
                             <div className="required-field-2-job-creation">
+                            <hr className="price-error-job-creation"></hr>
+                            <hr className="price-error-1-job-creation"></hr>
+                            <hr className="price-error-2-job-creation"></hr>
+                            <hr className="price-error-3-job-creation"></hr> 
                             <ReportProblemIcon style={report} /> {this.state.priceError} 
+                          
                             </div>
                     
                      }
@@ -351,24 +354,33 @@ export class JobCreation extends Component {
     }
 
     validatePrice(){
+        
         if (this.state.price === '') {
             this.setState({
                 priceError: "This field is required" 
     
             })
-            // document.querySelector('.MuiInputBase-root').style.cssText = 'border: 3px solid red';
+            if(this.state.change_category?.current.state.categoryError !== undefined){
+                document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px';
+            }
+            else{
+                document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 56px;';
+            }
+            
             return false;
         }
-        
+        if(this.state.change_category?.current.state.categoryError === undefined && this.state.price !== ''){
+            document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 50px;';
+        }
+        else{
+        document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px;';
+        }
         this.setState({
             priceError: undefined
         })
         return true;
     }
 }
-
-
-    
 
 // small icons and elements css
 
