@@ -3,7 +3,7 @@
 import React, { Component} from 'react';
 import {InputLabel, MenuItem, Select} from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
-
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 
 class CitiesDropdown extends Component {
@@ -12,10 +12,12 @@ class CitiesDropdown extends Component {
         super(props);
 
         this.state = {
-            city: this.props.initial_value !== ''? this.props.initial_value : undefined
+            city: this.props.initial_value !== ''? this.props.initial_value : undefined,
+            cityError: undefined
         };
 
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
+        this.validateCity = this.validateCity.bind(this);
 
     }
 
@@ -33,8 +35,6 @@ class CitiesDropdown extends Component {
     render() {
 
         const { city } = this.state;
-        // console.log("IM HERE")
-        // console.log(city);
 
         return (
             <StyledEngineProvider injectFirst>
@@ -44,6 +44,8 @@ class CitiesDropdown extends Component {
                     value={city}
                     onChange={this.handleOnChangeCity}
                     className="job-creation-dropdown"
+                    onBlur={this.validateCity}
+                    error={this.state.cityError !== undefined}
                 >
                     <MenuItem value={1}>Adjuntas</MenuItem>
                     <MenuItem value={2}>Aguada</MenuItem>
@@ -124,10 +126,41 @@ class CitiesDropdown extends Component {
                     <MenuItem value={77}>Yabucoa</MenuItem>
                     <MenuItem value={78}>Yauco</MenuItem>
                 </Select>
-            </div>
+                 {this.state.cityError !== undefined &&
+                            <div className="required-field-2-job-creation">
+                             <ReportProblemIcon style={report} /> {this.state.cityError} 
+                            </div>
+                            }
+            </div>           
             </StyledEngineProvider>
         )
     }
+
+    validateCity(){
+        console.log(this.state.city)
+        if (this.state.city === undefined) {
+            this.setState({
+                cityError: "This field is required" 
+    
+            })
+            // document.querySelector('.MuiInputBase-root').style.cssText = 'border: 3px solid red';
+            return false;
+        }
+        
+        this.setState({
+            cityError: undefined
+        })
+        return true;
+    }
+    
+}
+
+//small icons & elements css 
+
+const report = {
+    color: "red",
+    position: "relative",
+    top: "4px"
 }
 
 export default CitiesDropdown;

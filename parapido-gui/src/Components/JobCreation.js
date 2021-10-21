@@ -45,6 +45,8 @@ export class JobCreation extends Component {
         this.validateDescription = this.validateDescription.bind(this);
         this.validateZipcode = this.validateZipcode.bind(this);
         this.validatePrice = this.validatePrice.bind(this);
+
+        // this.validateCity = this.validateCity.bind(this);
     }
 
     componentDidMount() {
@@ -52,6 +54,7 @@ export class JobCreation extends Component {
 		// webpage background color
 
 		document.body.style.backgroundColor = "#2F2D4A";
+
 	}
 
     handleChange(event){
@@ -81,8 +84,10 @@ export class JobCreation extends Component {
         const validate2 = this.validateStreet();
         const validate3 = this.validateDescription();
         const validate4 = this.validateZipcode();
+        const validate5 = this.validatePrice();
+        const validate6 = this.state.change_city.current?.validateCity();
 
-        if(!validate1 || !validate2 || !validate3 || !validate4){
+        if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6){
             return false;
         }
 
@@ -147,7 +152,6 @@ export class JobCreation extends Component {
 
     render() {
         const { change_city, change_category, availableDays_chips } = this.state
-        console.log(this.state.titleError)
         
         return (
         <React.Fragment>
@@ -185,14 +189,14 @@ export class JobCreation extends Component {
                         }
 
                         <div className="mini-flex-box-job-creation">
-                            <div>
+                            <div style={{width:"100%"}}>
                             <label className="label-job-creation"> City* </label>
                             <CitiesDropdown 
                                 initial_value={''}
                                 ref={change_city}
                             />
                             </div>
-                            <div>
+                            <div style={{width: "100%"}}>
                                 <label className="label-job-creation"> Zipcode* </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"
                                  onChange={this.handleChange} onBlur={this.validateZipcode}></input>
@@ -352,7 +356,6 @@ export class JobCreation extends Component {
         return true;
     }
 }
-
 
 
     

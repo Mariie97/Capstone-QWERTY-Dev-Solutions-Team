@@ -9,11 +9,13 @@ class CitiesDropdown extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            city: this.props.initial_value!==''? this.props.initial_value : undefined
+            city: this.props.initial_value!==''? this.props.initial_value : undefined,
+            
         };
 
         this.handleOnchangeCity = this.handleOnchangeCity.bind(this);
         this.changeCity = this.changeCity.bind(this);
+      
     }
 
     render() {
