@@ -26,11 +26,7 @@ const titleStyle = {
     fontWeight: "bold",
     fontSize: "100px",
     lineHeight: "120px",
-
-
     color: "#FFFFFF",
-
-    opacity: "0.62",
 };
 
 const firstNameStyle = {
@@ -191,12 +187,10 @@ const errorStyle = {
 };
 
 const questionErrorStyle = {
-    position: "absolute",
-    width: "300px",
-    left: "1400px",
-    top: "335px",
-
-    //background: "#FFFFFF",
+    marginTop: '36vh',
+    marginLeft: '60vw',
+    fontSize: '13px',
+    color: '#f44336'
 };
 
 class UserRegistrationPage extends Component {
@@ -205,28 +199,38 @@ class UserRegistrationPage extends Component {
         super(props);
         this.state={
             firstName: '',
-            firstNameError: '',
+            firstNameError: undefined,
             lastName: '',
-            lastNameError: '',
+            lastNameError: undefined,
             email: '',
-            emailError: '',
+            emailError: undefined,
             password: '',
-            passwordError: '',
+            passwordError: undefined,
             confirmPassword: '',
-            confirmPasswordError: '',
+            confirmPasswordError: undefined,
             isFetchError: false,
             fetchError: '',
             questionOneRef: React.createRef(),
             questionTwoRef: React.createRef(),
             answerOne: '',
-            answerOneError: '',
+            answerOneError: undefined,
             answerTwo: '',
-            answerTwoError: '',
+            answerTwoError: undefined,
             accountType: '',
             accountTypeError: '',
             registerSuccess: false,
-            questionError: false,
+            questionError: undefined,
         };
+
+        this.validateFirstName = this.validateFirstName.bind(this)
+        this.validateLastName = this.validateLastName.bind(this)
+        this.validateEmail = this.validateEmail.bind(this)
+        this.validatePassword = this.validatePassword.bind(this)
+        this.validatePasswordConfirm = this.validatePasswordConfirm.bind(this)
+        this.validateAnswerOne = this.validateAnswerOne.bind(this)
+        this.validateAnswerTwo = this.validateAnswerTwo.bind(this)
+        this.validateAccountType = this.validateAccountType.bind(this)
+        this.validateQuestions = this.validateQuestions.bind(this)
 
     }
 
@@ -235,7 +239,6 @@ class UserRegistrationPage extends Component {
     }
 
     change = e =>{
-        this.props.onChange({[e.target.name]: e.target.value});
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -269,110 +272,146 @@ class UserRegistrationPage extends Component {
 
     }
 
-    validate = () => {
-        let isError = false;
+    onSubmit = (e) => {
+        e.preventDefault();
 
-        const errors = {
-            firstNameError: '',
-            lastNameError: '',
-            emailError: '',
-            passwordError: '',
-            confirmPasswordError: '',
-            answerOneError: '',
-            answerTwoError: '',
-            accountTypeError: '',
-            questionError: false,
-        };
+        const val1= this.validateFirstName();
+        const val2= this.validateLastName();
+        const val3= this.validateEmail();
+        const val4= this.validatePassword();
+        const val5= this.validatePasswordConfirm();
+        const val6= this.validateAnswerOne();
+        const val7= this.validateAnswerTwo();
+        const val8= this.validateAccountType();
+        const val9= this.validateQuestions();
+        if(!val1 || !val2 || !val3 || !val4 || !val5 || !val6 || !val7 || !val8 || !val9)
+            return;
 
-        if(this.state.firstName == ""){
-            isError = true;
-            errors.firstNameError = "Field is required";
+
+        this.validateFetch()
+    };
+
+    validateFirstName(event){
+        if (this.state.firstName.length===0) {
+            this.setState({firstNameError: "This field is required"});
+            return false;
+        }
+        this.setState({firstNameError: undefined });
+        return true;
+    }
+
+    validateLastName(event){
+        if (this.state.lastName.length===0) {
+            this.setState({ lastNameError: "This field is required" });
+            return false;
+        }
+        this.setState({lastNameError: undefined});
+        return true;
+    }
+
+    validateEmail(event){
+        const { email } = this.state;
+
+        if (email.length===0) {
+            this.setState({emailError: 'This field is required' });
+            return false;
         }
 
-        if(this.state.lastName == ""){
-            isError = true;
-            errors.lastNameError = "Field is required";
+        const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+        if (!pattern.test(this.state.email)) {
+            this.setState({emailError: "The email provided is not valid"});
+            return false;
         }
 
-        if(this.state.password == ""){
-            isError = true;
-            errors.passwordError = "Please enter your password";
+        this.setState({emailError: undefined});
+        return true;
+
+    }
+
+    validatePassword(event) {
+        const { password } = this.state;
+        if (password.length===0) {
+            this.setState({passwordError: 'This field is required'});
+            return false;
         }
 
-        if(this.state.password == ""){
-            isError = true;
-            errors.confirmPasswordError = "Please confirm your password";
+        if (password.length < 6) {
+            this.setState({passwordError: 'At least 6 characters are required'});
+            return false;
         }
 
-        if (typeof this.state.email !== "undefined") {
-            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(this.state.email)) {
-                isError = true;
-                errors.emailError = "Please enter valid email address.";
-            }
+        this.setState({passwordError: undefined});
+        return true;
+    }
 
+    validatePasswordConfirm(event) {
+        const { confirmPassword, password } = this.state;
+        if (confirmPassword.length===0) {
+            this.setState({confirmPasswordError: 'This field is required'});
+            return false;
         }
 
-        if (typeof this.state.password !== "undefined" && typeof this.state.confirmPassword !== "undefined") {
-            if (this.state.password != this.state.confirmPassword) {
-                isError = true;
-                errors.passwordError = "Passwords don't match.";
-                errors.confirmPasswordError = "Passwords don't match.";
-            }
+        if (password!==confirmPassword) {
+            this.setState({confirmPasswordError: 'Passwords does not match'});
+            return false;
         }
 
-        if(this.state.answerOne == ""){
-            isError = true;
-            errors.answerOneError = "Please submit a response";
+        this.setState({confirmPasswordError: undefined});
+        return true;
+    }
+
+    validateAnswerOne(event) {
+        if (this.state.answerOne.length===0) {
+            this.setState({ answerOneError: "This field is required" });
+            return false;
         }
+        this.setState({answerOneError: undefined});
+        return true;
+    }
 
-        if(this.state.answerTwo == ""){
-            isError = true;
-            errors.answerTwoError = "Please submit a response";
+    validateAnswerTwo(event) {
+        if (this.state.answerTwo.length===0) {
+            this.setState({ answerTwoError: "This field is required" });
+            return false;
         }
+        this.setState({answerTwoError: undefined});
+        return true;
+    }
 
-        if(this.state.accountType == ""){
-            isError = true;
-            errors.accountTypeError = "Please select an account type";
-        }
+    validateAccountType(event) {
+        const { email, accountType } = this.state;
+        const typeSelected = event!==undefined ? event.target.value : accountType;
+        const uprPattern = /^.+@upr\.edu$/;
 
-        if(this.state.accountType=="1" ) {
-            if (typeof this.state.email !== "undefined") {
-                const pattern = new RegExp('^.+@upr\.edu$');
-                if (!pattern.test(this.state.email)) {
-                    isError = true;
-                    errors.emailError = "A upr email is needed to register as student";
-                }
-
-            }
-        }
-
-        if(this.state.questionOneRef.current.state.question === this.state.questionTwoRef.current.state.question){
-            isError = true;
-            errors.questionError = true;
+        if (typeSelected==='1' && !uprPattern.test(email)) {
+            this.setState({
+                accountType: typeSelected,
+                emailError: 'A upr email is needed to register as student'
+            });
+            return false;
         }
 
         this.setState({
-            ...this.state,
-            ...errors
-        })
+            accountType: typeSelected,
+            emailError: undefined
+        });
+        return false;
+    }
 
+    validateQuestions() {
+        const { questionOneRef, questionTwoRef } = this.state;
 
-        return isError
+        if (questionOneRef?.current.state.question === questionTwoRef?.current.state.question) {
+            this.setState({questionError: 'Please select different questions'})
+            return false;
 
-    };
-
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        const err = this.validate()
-
-        if(!err){
-            this.validateFetch()
         }
-    };
+        this.setState({questionError: undefined})
+        return true
+    }
 
-    render(){
+
+    render() {
         const {
             firstName,
             lastName,
@@ -388,29 +427,20 @@ class UserRegistrationPage extends Component {
             questionError,
         } = this.state;
 
-
         return (
             <div>
-
-                {questionError &&
-
-                    <Alert variant="filled" severity="error" style={questionErrorStyle}>
-                        Please select different security questions!
-                    </Alert>
-
-                }
 
                 {isFetchError &&
 
 
-                    <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
+                <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
 
 
                 }
 
                 {registerSuccess &&
 
-                    <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
+                <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
 
 
                 }
@@ -421,151 +451,145 @@ class UserRegistrationPage extends Component {
 
                 <form>
                     <div style={outerGridStyle}>
-
-
                         <h1 style={titleStyle}>
                             Create Account
                         </h1>
-
-
-
                         <TextField
                             required
-                            error = {this.state.firstNameError}
+                            error = {this.state.firstNameError!==undefined}
                             variant="filled"
                             label="First Name"
                             type="text"
                             name="firstName"
-                            defaultValue="First Name"
                             value = {firstName}
-                            onChange={e => this.change(e)}
+                            onChange={this.change}
                             helperText={this.state.firstNameError}
                             style={firstNameStyle}
+                            onBlur={this.validateFirstName}
                         />
-
-
-
-
                         <TextField
                             required
-                            error = {this.state.lastNameError}
+                            error = {this.state.lastNameError!==undefined}
                             variant="filled"
                             label="Last Name"
                             type="text"
                             name="lastName"
-                            defaultValue=""
                             value = {lastName}
-                            onChange={e => this.change(e)}
+                            onChange={this.change}
                             helperText={this.state.lastNameError}
                             style={lastNameStyle}
+                            onBlur={this.validateLastName}
                         />
-
 
                         <TextField
                             required
-                            error = {this.state.emailError}
+                            error = {this.state.emailError!==undefined}
                             variant="filled"
                             label="Email"
                             type="text"
                             name="email"
-                            defaultValue=""
                             value = {email}
-                            onChange={e => this.change(e)}
+                            onChange={this.change}
                             helperText={this.state.emailError}
                             style={emailStyle}
+                            onBlur={this.validateEmail}
                         />
 
                         <TextField
                             required
-                            error = {this.state.passwordError}
+                            error = {this.state.passwordError!==undefined}
                             variant="filled"
                             label="Password"
                             type="password"
                             name="password"
                             value = {password}
-                            onChange={e => this.change(e)}
+                            onChange={this.change}
                             helperText={this.state.passwordError}
                             style={passwordStyle}
+                            onBlur={this.validatePassword}
                         />
-
 
                         <TextField
                             required
-                            error = {this.state.confirmPasswordError}
+                            error = {this.state.confirmPasswordError!==undefined}
                             variant="filled"
                             label="Confirm Password"
                             type="password"
                             name="confirmPassword"
                             value = {confirmPassword}
-                            onChange={e => this.change(e)}
+                            onChange={this.change}
                             helperText={this.state.confirmPasswordError}
                             style={confirmPasswordStyle}
+                            onBlur={this.validatePasswordConfirm}
                         />
 
 
-                        <Button variant="contained" style={createButtonStyle} onClick={e => this.onSubmit(e)}>Create</Button>
+                        <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
+                        <div className='security-questions-container' >
+                            <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
+                            {questionError!==undefined &&
+                            <p style={questionErrorStyle}>{questionError}</p>
+                            }
 
 
+                            <SecurityQuestion
+                                question={1}
+                                num={1}
+                                style_q={questionOneStyle}
+                                ref={questionOneRef}
+                                onClick={this.validateQuestions}
+                            />
+                            <TextField
+                                required
+                                error = {this.state.answerOneError!==undefined}
+                                variant="filled"
+                                label="Answer 1"
+                                helperText={this.state.answerOneError}
+                                type="text"
+                                name="answerOne"
+                                placeholder="Answer"
+                                value = {answerOne}
+                                onChange={this.change}
+                                style={answerOneStyle}
+                                onBlur={this.validateAnswerOne}
+                            />
+                            <SecurityQuestion
+                                question={2}
+                                num={2}
+                                style_q={questionTwoStyle}
+                                ref={questionTwoRef}
+                                onClick={this.validateQuestions}
+                            />
 
-                        <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
-
-                        <TextField
-                            required
-                            error = {this.state.answerOneError}
-                            variant="filled"
-                            label="Answer 1"
-                            helperText={this.state.answerOneError}
-                            type="text"
-                            name="answerOne"
-                            placeholder="Answer"
-                            value = {answerOne}
-                            onChange={e => this.change(e)}
-                            style={answerOneStyle}
-                        />
-
-                        <TextField
-                            required
-                            error = {this.state.answerTwoError}
-                            variant="filled"
-                            label="Answer 2"
-                            helperText={this.state.answerTwoError}
-                            type="text"
-                            name="answerTwo"
-                            placeholder="Answer"
-                            value = {answerTwo}
-                            onChange={e => this.change(e)}
-                            style={answerTwoStyle}
-                        />
-
-
-                        <SecurityQuestion
-                            num={2}
-                            style_q={questionTwoStyle}
-                            ref={questionTwoRef}
-                        />
-                        <SecurityQuestion
-                            num={1}
-                            style_q={questionOneStyle}
-                            ref={questionOneRef}
-                        />
-
+                            <TextField
+                                required
+                                error = {this.state.answerTwoError!==undefined}
+                                variant="filled"
+                                label="Answer 2"
+                                helperText={this.state.answerTwoError}
+                                type="text"
+                                name="answerTwo"
+                                placeholder="Answer"
+                                value = {answerTwo}
+                                onChange={this.change}
+                                style={answerTwoStyle}
+                                onBlur={this.validateAnswerTwo}
+                            />
+                        </div>
 
                         <FormControl component="fieldset" style={accountTypeStyle} error={this.state.accountTypeError} helperText={this.state.accountTypeError}>
                             <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
                             <RadioGroup row
                                         aria-label="Account Type"
                                         name="accountType"
-                                        onChange={e => this.change(e)}
+                                        onChange={this.validateAccountType}
                                         value={this.state.accountType}
-
                             >
                                 <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
                                 <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
                             </RadioGroup>
                             <FormHelperText>{this.state.accountTypeError}</FormHelperText>
                         </FormControl>
-
-
                     </div>
                 </form>
             </div>
