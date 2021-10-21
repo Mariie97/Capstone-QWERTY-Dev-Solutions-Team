@@ -6,6 +6,7 @@ import AvailableDays from './AvailableDaysChips_JobCreation';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield"
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import { OutlinedInput } from '@material-ui/core';
 
 export class JobCreation extends Component {
     
@@ -27,8 +28,6 @@ export class JobCreation extends Component {
             descriptionError: undefined,
             zipcodeError: undefined,
             priceError: undefined,
-            // change_cityError: undefined,
-            // change_categoryError: undefined,
             // availableDays_chipsError:undefined
 
         };
@@ -46,7 +45,7 @@ export class JobCreation extends Component {
         this.validateZipcode = this.validateZipcode.bind(this);
         this.validatePrice = this.validatePrice.bind(this);
 
-        // this.validateCity = this.validateCity.bind(this);
+    
     }
 
     componentDidMount() {
@@ -86,8 +85,9 @@ export class JobCreation extends Component {
         const validate4 = this.validateZipcode();
         const validate5 = this.validatePrice();
         const validate6 = this.state.change_city.current?.validateCity();
+        const validate7 = this.state.change_category.current?.validateCategory();
 
-        if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6){
+        if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
 
@@ -212,7 +212,7 @@ export class JobCreation extends Component {
 
             <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                 <div className="price-miniflex-job-creation">
-                    <label className="label-job-creation" style={{paddingTop: 2, marginTop: "6px", marginBottom: "0px"}}> Price* </label>
+                    <label className="label-job-creation" style={{paddingTop: 3.9}}> Price* </label>
                     <CurrencyTextField
                             currencySymbol="$"
                             outputFormat="string"
@@ -222,6 +222,8 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
+                            error = {this.state.priceError !== undefined}
+                           
                     />
                      {this.state.priceError !== undefined &&
                           

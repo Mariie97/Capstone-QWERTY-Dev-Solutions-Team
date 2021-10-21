@@ -16,7 +16,12 @@ class CitiesDropdown extends Component {
             cityError: undefined
         };
 
+        //event methods - before render method
+
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
+
+        // validation methods - end of render method
+
         this.validateCity = this.validateCity.bind(this);
 
     }
