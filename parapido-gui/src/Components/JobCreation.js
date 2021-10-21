@@ -6,7 +6,6 @@ import AvailableDays from './AvailableDaysChips_JobCreation';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield"
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import { OutlinedInput } from '@material-ui/core';
 
 export class JobCreation extends Component {
     
@@ -87,6 +86,8 @@ export class JobCreation extends Component {
         const validate6 = this.state.change_city.current?.validateCity();
         const validate7 = this.state.change_category.current?.validateCategory();
 
+        console.log(this.state.availableDays_chips?.current.state.chipData.length, "Category")
+
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
@@ -96,12 +97,14 @@ export class JobCreation extends Component {
         const { title, street, description, zipcode, price, change_city,
         change_category, availableDays_chips } = this.state
 
-        console.log(price, "price")
+       
 
         const city = change_city?.current.state.city
         const category = change_category?.current.state.category
         const chips = availableDays_chips?.current.state.chipData
 
+        
+        
         const sunday    = chips.some(sun => sun.key === 0);
         const monday    = chips.some(mon => mon.key === 1);
         const tuesday   = chips.some(tue => tue.key === 2);

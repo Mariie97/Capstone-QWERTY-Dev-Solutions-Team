@@ -31,6 +31,8 @@ class CategoriesDropdown_JobCreation extends Component {
     render() {
 
         const { category } = this.state;
+
+     
         return (
             <div>
                  <StyledEngineProvider injectFirst>
