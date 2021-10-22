@@ -5,6 +5,7 @@ import LandingPage from "./Components/LandingPage"
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
+import JobListingPage from "./Components/JobListingPage";
 
 
 class App extends React.Component {
@@ -54,6 +55,18 @@ class App extends React.Component {
                     </React.Fragment>
                 )}
                     />
+
+                        <Route
+                            exact
+                            path='/listings'
+                            render={() => (
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobListingPage cookies= {this.props.cookies}/>
+                                </React.Fragment>
+                            )}
+                        />
+
                     </Switch>
                 </div>
             </BrowserRouter>

@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+#listing-title {
+    position: absolute;
+    left: 30px;
+    color: aliceblue;
+    width: 900px;
+    height: 60px;
+    padding: 17px;
+}
+
+#listing-price {
+    position: absolute;
+    left: 250px;
+    color: aliceblue;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding: 17px;
+
+}
+
+#listing-date {
+    position: absolute;
+    left: 650px;
+    color: aliceblue;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    padding: 17px;
+}
+
+#list-style {
+    position: absolute;
+    top: 200px;
+    left: 55px;
+}
+
+#list-bullet-style {
+    list-style-type: none;
+}
+
+.job-listing-page-header {
+	font-weight: bold;
+	font-size: 60px;
+	text-align: left;
+	color: black;
+	border-bottom: 2px solid black;
+	width: 700px;
+    padding-bottom: 20px;
+    margin: 65px;
+    top: -10px;
+}
+
+#go-back-button {
+    position: absolute;
+    width: 200px;
+    height: 90px;
+    left: 1382px;
+    top: 115px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    background-color: #FFEBCC;
+    border: 2px black;
+}
+
+#delete-button {
+    position: absolute;
+    left: 900px;
+    color: white;
+    background-color: #ac1212;
+    padding: 17px;
+    width: 20px;
+}
+
+#checkbox-style {
+    position: absolute;
+    padding: 7px;
+    left: 800px;
+}
