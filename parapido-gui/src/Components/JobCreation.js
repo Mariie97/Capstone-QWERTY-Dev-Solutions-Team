@@ -1,12 +1,13 @@
 import React, { Component, createRef } from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobCreation.css";
-import CitiesDropdown from "./CitiesDropdown_JobCreation.js"
-import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js"
+import CitiesDropdown from "./CitiesDropdown_JobCreation.js";
+import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js";
 import AvailableDays from './AvailableDaysChips_JobCreation';
-import CurrencyTextField from "@unicef/material-ui-currency-textfield"
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import Alert from '@material-ui/lab/Alert';
 
 export class JobCreation extends Component {
     
@@ -28,7 +29,8 @@ export class JobCreation extends Component {
             descriptionError: undefined,
             zipcodeError: undefined,
             priceError: undefined,
-            creationSuccessful: false
+            creationSuccessful: false,
+            serverProcessedRequest: true
         };
 
         //event methods - before render method
@@ -147,6 +149,9 @@ export class JobCreation extends Component {
                     
                     }
                 else{
+                    this.setState({
+                        serverProcessedRequest: false
+                     })
                    alert("can't create job")
                 }
             }
@@ -157,11 +162,14 @@ export class JobCreation extends Component {
 
 
     render() {
-        const { change_city, change_category, availableDays_chips } = this.state
+        const { change_city, change_category, availableDays_chips, serverProcessedRequest } = this.state
         
         return (
         <React.Fragment>
             {this.state.creationSuccessful && <Redirect to="/jobdashboard" />}
+            {!serverProcessedRequest && <Alert variant="outlined" severity="error">
+                                    Sorry your request can't be processed right now 😔 please try again later!!!.
+                                    </Alert>}
 
             <h1 className="job-creation-page-header"> Job Creation </h1>
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
@@ -389,7 +397,6 @@ const editpencil = {
 	height: 20,
     position: "relative",
     top: "3px"
-    
 }
 
 const report = {
