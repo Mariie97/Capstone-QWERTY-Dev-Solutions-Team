@@ -137,7 +137,7 @@ class JobDetailsPage extends Component {
 
     changeJobStatus() {
         const { job_id } = this.props;
-        const { job } = this .state;
+        const { job } = this.state;
         let new_status;
 
         if (current_user.type===accountType.admin)
@@ -172,6 +172,8 @@ class JobDetailsPage extends Component {
     render() {
         //TODO: This must be able to show all job without considering the status?
         const {is_auth, job, pageLoaded } = this.state;
+        const { job_id } = this.props;
+
 
         const showCancelRequestButton =
             job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
@@ -188,6 +190,9 @@ class JobDetailsPage extends Component {
 
         const showDeleteButton = current_user.type===accountType.admin && job.status!==jobStatus.deleted;
 
+        const showContractButton = (job.status === jobStatus.in_process || job.status === jobStatus.completed) &&
+            (current_user.id===job.owner_id || current_user.id===job.student_id)
+
         return (
             <div className="Dashboard">
                 {!is_auth && <Redirect to='/' />}
@@ -200,24 +205,31 @@ class JobDetailsPage extends Component {
                     <div>
                         <div className="button-profile-page-flex-container">
                             {showRequestButton &&
-                            <button onClick={this.onClickRequest} className="button-profile-page" style={{margin: 20}}>
-                                Request Job
-                            </button>
+                                <button onClick={this.onClickRequest} className="button-profile-page" style={{margin: 20}}>
+                                    Request Job
+                                </button>
                             }
                             {showCancelButton &&
-                            <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
-                                Cancel Job
-                            </button>
+                                <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
+                                    Cancel Job
+                                </button>
                             }
                             {showDeleteButton &&
-                            <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
-                                Delete Job
-                            </button>
+                                <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
+                                    Delete Job
+                                </button>
                             }
                             {showCancelRequestButton &&
-                            <button onClick={this.onClickCancelRequest} className="button-profile-page" style={{margin: 20}}>
-                                Cancel Request
-                            </button>
+                                <button onClick={this.onClickCancelRequest} className="button-profile-page" style={{margin: 20}}>
+                                    Cancel Request
+                                </button>
+                            }
+                            {showContractButton &&
+                                <a
+                                    href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    className="button-profile-page" style={{margin: 20}}>
+                                    View Contract
+                                </a>
                             }
                         </div>
                         <h1 className="profile-page-header">{job.title}</h1>
