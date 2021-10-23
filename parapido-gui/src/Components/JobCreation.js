@@ -9,13 +9,13 @@ import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
 
+
 export class JobCreation extends Component {
     
     constructor(props){
         super(props);
 
         this.state = {
-
             title : '',
             street: '',
             description: '',
@@ -46,7 +46,6 @@ export class JobCreation extends Component {
         this.validateZipcode = this.validateZipcode.bind(this);
         this.validatePrice = this.validatePrice.bind(this);
 
-    
     }
 
     componentDidMount() {
@@ -58,9 +57,7 @@ export class JobCreation extends Component {
 	}
 
     handleChange(event){
-
         // const price_regex = new RegExp("^[0-9][0-9][0-9].[0-9][0-9]$");
-
 
         const {name, value} = event.target;
         if(name === "title" && value.length <= 500){ 
@@ -74,12 +71,7 @@ export class JobCreation extends Component {
             this.setState({[name]:format_price});}    
     }
 
-  
-
-
-
     handleCreateClick(){
-
         const validate1 = this.validateTitle();
         const validate2 = this.validateStreet();
         const validate3 = this.validateDescription();
@@ -88,25 +80,16 @@ export class JobCreation extends Component {
         const validate6 = this.state.change_city.current?.validateCity();
         const validate7 = this.state.change_category.current?.validateCategory();
 
-        console.log(this.state.availableDays_chips?.current.state.chipData.length, "Category")
-
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
 
-        
-        console.log(this.state.zipcode.length)
         const { title, street, description, zipcode, price, change_city,
         change_category, availableDays_chips } = this.state
-
-       
-
         const city = change_city?.current.state.city
         const category = change_category?.current.state.category
         const chips = availableDays_chips?.current.state.chipData
 
-        
-        
         const sunday    = chips.some(sun => sun.key === 0);
         const monday    = chips.some(mon => mon.key === 1);
         const tuesday   = chips.some(tue => tue.key === 2);
@@ -122,7 +105,6 @@ export class JobCreation extends Component {
             'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
             },
             body: JSON.stringify({
-
                 user_id:  localStorage.getItem('user_id'),
                 title: title,
                 street: street,
@@ -138,8 +120,7 @@ export class JobCreation extends Component {
                 j: thursday === true ? 1 : 0, 
                 v: friday === true ? 1 : 0, 
                 s: saturday === true ? 1 : 0
-                })
-                
+                })       
             }).then(response => {
                 if(response.status === 201) {
                     console.log("successful")
@@ -157,49 +138,49 @@ export class JobCreation extends Component {
         )
     }
 
-
-
-
     render() {
-        const { change_city, change_category, availableDays_chips, serverProcessedRequest } = this.state
-        
+        const { change_city, change_category, availableDays_chips, serverProcessedRequest, creationSuccessful } = this.state
+
+        // ERROR variables
+
+        const {titleError, descriptionError, streetError, zipcodeError, priceError} = this.state
+
         return (
         <React.Fragment>
-            {this.state.creationSuccessful && <Redirect to="/jobdashboard" />}
+            {creationSuccessful && <Redirect to="/jobdashboard" />}
             {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                                     Sorry can't create job right now 😔 please try again later!!!.
-                                    </Alert>}
-
+                                        </Alert>}
             <h1 className="job-creation-page-header"> Job Creation </h1>
+
                 <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                     <div className="left-body-container-1-job-creation">
                         <label className="label-job-creation"> Title* </label>
                         <input className="input-1-job-creation" type="text" id="title" name="title" placeholder="Title" 
                         onChange={this.handleChange} onBlur={this.validateTitle} ></input>
-                        {this.state.titleError !== undefined &&
+                        {titleError !== undefined &&
                             <div className="required-field-job-creation">
-                            <ReportProblemIcon style={report} /> {this.state.titleError} 
+                            <ReportProblemIcon style={report} />{titleError} 
                             </div>
                         }
                         
-
                         <label className="label-job-creation"> Description* </label>
                         <textarea className="input-2-job-creation" type="text" id="description" name="description" placeholder="Description" 
                         onChange={this.handleChange} onBlur={this.validateDescription}></textarea>
-                         {this.state.descriptionError !== undefined &&
+                         {descriptionError !== undefined &&
                             <div className="required-field-job-creation">
-                            <ReportProblemIcon style={report} /> {this.state.descriptionError} 
+                            <ReportProblemIcon style={report} /> {descriptionError} 
                             </div>
                         }
-
                     </div>
+
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <label className="label-job-creation"> Street* </label>
                         <input className="input-1-copy-job-creation" style={{ width:"138.6%"}} type="text" id="street" name="street" placeholder="Street"
                         onChange={this.handleChange} onBlur={this.validateStreet}></input>
-                        {this.state.streetError !== undefined &&
+                        {streetError !== undefined &&
                             <div className="required-field-job-creation">
-                            <ReportProblemIcon style={report} /> {this.state.streetError} 
+                            <ReportProblemIcon style={report} /> {streetError} 
                             </div>
                         }
 
@@ -211,13 +192,14 @@ export class JobCreation extends Component {
                                 ref={change_city}
                             />
                             </div>
+
                             <div style={{width: "108%"}}>
                                 <label className="label-job-creation"> Zipcode* </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"
                                  onChange={this.handleChange} onBlur={this.validateZipcode}></input>
-                                 {this.state.zipcodeError !== undefined &&
+                                 {zipcodeError !== undefined &&
                                     <div className="required-field-2-job-creation">
-                                    <ReportProblemIcon style={report} /> {this.state.zipcodeError} 
+                                    <ReportProblemIcon style={report} /> {zipcodeError} 
                                     </div>
                                  }
                             </div>
@@ -238,18 +220,15 @@ export class JobCreation extends Component {
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
                     />
-                     {this.state.priceError !== undefined &&
-                          
+                    {priceError !== undefined &&
                             <div className="required-field-2-job-creation">
                             <hr className="price-error-job-creation"></hr>
                             <hr className="price-error-1-job-creation"></hr>
                             <hr className="price-error-2-job-creation"></hr>
                             <hr className="price-error-3-job-creation"></hr> 
-                            <ReportProblemIcon style={report} /> {this.state.priceError} 
-                          
-                            </div>
-                    
-                     }
+                            <ReportProblemIcon style={report} /> {priceError}             
+                            </div>        
+                    }
                 </div>
 
                 <div> 
@@ -261,11 +240,8 @@ export class JobCreation extends Component {
                 </div>
 
                 <div> 
-                    <label className="label-job-creation"> Available days* <p className="job-creation-available-days-disclaimer">(Please make sure that at least one day is available for job completion)</p></label>
-                    <AvailableDays ref={availableDays_chips} />
-
-                
-
+                    <label className="label-job-creation" > Available days* <p className="job-creation-available-days-disclaimer">(Please make sure that at least one day is available for job completion)</p></label>
+                    <AvailableDays ref={availableDays_chips}/>
                 </div>
             </div>
 
@@ -286,16 +262,16 @@ export class JobCreation extends Component {
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({
-                titleError: "This field is required"
-                
+
+                titleError: "This field is required"  
             })
             document.querySelector('.input-1-job-creation').style.cssText = 'border: 2px solid #cc3300; ';
             return false;
         }
         
         document.querySelector('.input-1-job-creation').style.cssText = 'border: 3x solid black;';
-        
         this.setState({
+
             titleError: undefined
         })
         return true;
@@ -304,6 +280,7 @@ export class JobCreation extends Component {
     validateStreet(){
         if (this.state.street.length === 0) {
             this.setState({
+
                 streetError: "This field is required" 
             })
             document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 2px solid #cc3300; position: relative; bottom: 1px';
@@ -311,8 +288,8 @@ export class JobCreation extends Component {
         }
         
         document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 3x solid black;';
-        
         this.setState({
+
             streetError: undefined
         })
         return true;
@@ -329,8 +306,8 @@ export class JobCreation extends Component {
         }
         
         document.querySelector('.input-2-job-creation').style.cssText = 'border: 3x solid black;';
-        
         this.setState({
+
             descriptionError: undefined
         })
         return true;
@@ -347,28 +324,27 @@ export class JobCreation extends Component {
         }
         else if (!isNaN(this.state.zipcode) === false || (this.state.zipcode.length < 5) || this.state.zipcode.length >= 6){
             this.setState({ 
+
                 zipcodeError: "zipcode format: #####" 
             })
 
             document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
-
             return false;
         }
         
         document.querySelector('.input-3-job-creation').style.cssText = 'border: 3x solid black;';
-        
         this.setState({
+
             zipcodeError: undefined
         })
         return true;
     }
 
     validatePrice(){
-        
         if (this.state.price === '') {
             this.setState({
+
                 priceError: "This field is required" 
-    
             })
             if(this.state.change_category?.current.state.categoryError !== undefined){
                 document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px';
@@ -386,12 +362,14 @@ export class JobCreation extends Component {
         document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px;';
         }
         this.setState({
+
             priceError: undefined
         })
         return true;
     }
-}
 
+}
+      
 // small icons and elements css
 
 const editpencil = {

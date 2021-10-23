@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import "../Layouts/JobCreation.css"
+import React, { Component } from 'react';
+import "../Layouts/JobCreation.css";
 import { styled } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
 
@@ -9,7 +9,7 @@ const ListItem = styled('li')(({ theme }) => ({
   }));
 
 
-class AvailableDaysChips_JobCreation extends Component {
+class availableDaysChipsJobCreation extends Component {
     constructor(props){
         super(props);
 
@@ -22,20 +22,14 @@ class AvailableDaysChips_JobCreation extends Component {
             { key: 5, label: 'Friday'},
             { key: 6, label: 'Saturday'}
         ],
-     
-     
     }
 
-        // event methods - before render method
+        // event method - before render method
 
         this.handleAvailableDaysDelete = this.handleAvailableDaysDelete.bind(this);
-
-       
     }
 
     handleAvailableDaysDelete(chipToDelete) {
-        
-      
         const chipList = this.state.chipData
       
         const removed_chip = chipList.filter((chip) => chip.key !== chipToDelete.key)
@@ -46,35 +40,35 @@ class AvailableDaysChips_JobCreation extends Component {
         );   
     };
 
-
     render() {
         return (
-                <React.Fragment>
+            <React.Fragment>
                 {this.state.chipData.length === 0 && 
-                <div>
-                    <AvailableDaysChips_JobCreation />
-                </div>
+                    <div>
+                        <availableDaysChipsJobCreation />
+   _
+                 </div>
                 }
                 
                 <div className="chip-flex-job-creation">
-                {this.state.chipData.map((data) => {
-                    return (
-                    <ListItem key={data.key}
-                    >
-                        <Chip
-                        style = {chipStyleJobCreation}
-                        label={data.label}
-                        onDelete={() => this.handleAvailableDaysDelete(data)}
-                        />
-                    </ListItem>
-                    );
-                })}
+                    {this.state.chipData.map((data) => {
+                        return (
+                        <ListItem key={data.key}>
+                            <Chip
+                            style = {chipStyleJobCreation}
+                            label={data.label}
+                            onDelete={() => this.handleAvailableDaysDelete(data)}
+                            />
+                        </ListItem>
+                        );
+                    })}
                </div>
             </React.Fragment>
         )
     }
-
 }
+
+// each chip style
 
 const chipStyleJobCreation = {
     backgroundColor : "#FFEBCC",
@@ -82,4 +76,4 @@ const chipStyleJobCreation = {
     fontSize : 15, 
 }
 
-export default AvailableDaysChips_JobCreation;
+export default availableDaysChipsJobCreation;

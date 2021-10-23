@@ -4,6 +4,7 @@ import {InputLabel, MenuItem, Select} from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
+
 class CategoriesDropdown_JobCreation extends Component {
 
     constructor(props) {
@@ -14,11 +15,11 @@ class CategoriesDropdown_JobCreation extends Component {
             categoryError: undefined
         };
 
-        //event methods - before render method
+        // event method - before render method
 
         this.handleOnChangeCategory = this.handleOnChangeCategory.bind(this);
         
-        // validation methods - end of render method
+        // validation method - end of render method
 
         this.validateCategory = this.validateCategory.bind(this);
     }
@@ -26,62 +27,60 @@ class CategoriesDropdown_JobCreation extends Component {
     handleOnChangeCategory(event) {
         this.setState({
             category: event.target.value.toString()
+
         });
     }
+
     render() {
+        const { category, categoryError } = this.state;
 
-        const { category } = this.state;
-
-     
         return (
-            <div>
-                 <StyledEngineProvider injectFirst>
-            <div >
-                <InputLabel></InputLabel>
-                <Select
-                    value={category}
-                    onChange={this.handleOnChangeCategory}
-                    className="job-creation-dropdown"
-                    onBlur={this.validateCategory}
-                    >
-                  
+            <StyledEngineProvider injectFirst>
+                <div>
+                    <InputLabel></InputLabel>
+                    <Select
+                        value={category}
+                        onChange={this.handleOnChangeCategory}
+                        className="job-creation-dropdown"
+                        onBlur={this.validateCategory}
+                        >
+                    
 
-                    <MenuItem value={1}>Animals</MenuItem>
-                    <MenuItem value={2}>Auto</MenuItem>
-                    <MenuItem value={3}>Education</MenuItem>
-                    <MenuItem value={4}>Events</MenuItem>
-                    <MenuItem value={5}>Home</MenuItem>
-                    <MenuItem value={6}>Self-Care</MenuItem>
-                    <MenuItem value={7}>Shop</MenuItem>
-                    <MenuItem value={8}>Other</MenuItem>                   
-                </Select>
-                {this.state.categoryError !== undefined &&
-                    <div className="required-field-2-job-creation">
-                        <hr className="category-error-job-creation"></hr>
-                        <hr className="category-1-error-job-creation"></hr>
-                        <hr className="city-error-2-job-creation"></hr>
-                        <hr className="category-3-error-job-creation"></hr> 
-                        <ReportProblemIcon style={report} /> {this.state.categoryError} 
-                    </div>
-                }
-            </div>
-            </StyledEngineProvider>
-            </div>
+                        <MenuItem value={1}>Animals</MenuItem>
+                        <MenuItem value={2}>Auto</MenuItem>
+                        <MenuItem value={3}>Education</MenuItem>
+                        <MenuItem value={4}>Events</MenuItem>
+                        <MenuItem value={5}>Home</MenuItem>
+                        <MenuItem value={6}>Self-Care</MenuItem>
+                        <MenuItem value={7}>Shop</MenuItem>
+                        <MenuItem value={8}>Other</MenuItem>                   
+                    </Select>
+                    {this.state.categoryError !== undefined &&
+                        <div className="required-field-2-job-creation">
+                            <hr className="category-error-job-creation"></hr>
+                            <hr className="category-1-error-job-creation"></hr>
+                            <hr className="city-error-2-job-creation"></hr>
+                            <hr className="category-3-error-job-creation"></hr> 
+                            <ReportProblemIcon style={report}/> {categoryError} 
+                        </div>
+                    }
+                </div>
+            </StyledEngineProvider>  
         )
     }
 
-    validateCategory(){
-        
+    validateCategory(){   
         if (this.state.category === undefined) {
             this.setState({
+
                 categoryError: "This field is required" 
-    
             })
             document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px;';
             return false;
         }
        
         this.setState({
+
             categoryError: undefined
         })
         return true;
