@@ -56,18 +56,18 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                            exact
-                            path='/job/:job_id'
-                            render={(props) => (
-                                <React.Fragment>
-                                    <NavBar cookies={this.props.cookies} />
-                                    <JobDetailsPage
-                                        cookies={this.props.cookies}
-                                        job_id={props.match.params.job_id}
-                                    />
-                                </React.Fragment>
-                            )}
-                        />
+                        exact
+                        path='/job/:job_id'
+                        render={(props) => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <JobDetailsPage
+                                    cookies={this.props.cookies}
+                                    job_id={props.match.params.job_id}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
                 </Switch>
             </BrowserRouter>
         );
