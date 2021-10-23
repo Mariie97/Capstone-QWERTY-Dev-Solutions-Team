@@ -9,7 +9,7 @@ const ListItem = styled('li')(({ theme }) => ({
   }));
 
 
-class availableDaysChipsJobCreation extends Component {
+class AvailableDaysChips extends Component {
     constructor(props){
         super(props);
 
@@ -45,7 +45,7 @@ class availableDaysChipsJobCreation extends Component {
             <React.Fragment>
                 {this.state.chipData.length === 0 && 
                     <div>
-                        <availableDaysChipsJobCreation />
+                        <AvailableDaysChips />
    _
                  </div>
                 }
@@ -76,4 +76,4 @@ const chipStyleJobCreation = {
     fontSize : 15, 
 }
 
-export default availableDaysChipsJobCreation;
+export default AvailableDaysChips;

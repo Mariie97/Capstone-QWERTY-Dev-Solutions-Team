@@ -5,7 +5,7 @@ import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 
-class CategoriesDropdown_JobCreation extends Component {
+class CategoriesDropdown extends Component {
 
     constructor(props) {
         super(props);
@@ -95,4 +95,4 @@ const report = {
     top: "4px"
 }
 
-export default CategoriesDropdown_JobCreation;
+export default CategoriesDropdown;
