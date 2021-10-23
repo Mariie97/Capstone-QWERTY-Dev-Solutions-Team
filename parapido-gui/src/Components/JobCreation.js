@@ -152,7 +152,6 @@ export class JobCreation extends Component {
                     this.setState({
                         serverProcessedRequest: false
                      })
-                   alert("can't create job")
                 }
             }
         )
@@ -167,8 +166,8 @@ export class JobCreation extends Component {
         return (
         <React.Fragment>
             {this.state.creationSuccessful && <Redirect to="/jobdashboard" />}
-            {!serverProcessedRequest && <Alert variant="outlined" severity="error">
-                                    Sorry your request can't be processed right now 😔 please try again later!!!.
+            {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
+                                    Sorry can't create job right now 😔 please try again later!!!.
                                     </Alert>}
 
             <h1 className="job-creation-page-header"> Job Creation </h1>
@@ -212,7 +211,7 @@ export class JobCreation extends Component {
                                 ref={change_city}
                             />
                             </div>
-                            <div style={{width: "100%"}}>
+                            <div style={{width: "108%"}}>
                                 <label className="label-job-creation"> Zipcode* </label>
                                 <input className="input-3-job-creation" type="text" id="zipcode" name="zipcode" placeholder="Zipcode"
                                  onChange={this.handleChange} onBlur={this.validateZipcode}></input>
@@ -262,8 +261,11 @@ export class JobCreation extends Component {
                 </div>
 
                 <div> 
-                    <label className="label-job-creation"> Available days* </label>
+                    <label className="label-job-creation"> Available days* <p className="job-creation-available-days-disclaimer">(Please make sure that at least one day is available for job completion)</p></label>
                     <AvailableDays ref={availableDays_chips} />
+
+                
+
                 </div>
             </div>
 

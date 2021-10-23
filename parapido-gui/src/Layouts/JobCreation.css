@@ -319,7 +319,7 @@
 	color:floralwhite;
 }
 
-/* field is required - live alerts */
+/* field is required - live alerts and errors */
 
 .required-field-job-creation{
 	font-family: "Times New Roman";
@@ -386,7 +386,7 @@
 	border: 1.4px solid red;
 	position: relative;
 	bottom: 48px;
-	width: 69.5%;
+	width: 72%;
 	left: 4px;
 	top: -46px;
 }
@@ -446,11 +446,25 @@
 }
 
 .category-3-error-job-creation{
-background-color: red;
-border: 0.1px solid red;
-position: absolute;
-bottom: 174px;
-width: 127.8px;
-left: 4px;
-top: -2.1px;
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 127.8px;
+	left: 4px;
+	top: -2.1px;
+}
+
+.job-creation-available-days-disclaimer{
+	font-size: 13px;
+	font-style: normal;
+	color: lightpink;
+	line-height: 0px;
+	margin-bottom: 6px;
+}
+
+.server-error-job-creation{
+	position: absolute;
+	width: 97.9%;
+	bottom: 640.4px;
 }
