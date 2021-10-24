@@ -5,6 +5,8 @@ import "../Layouts/CitiesDropdown.css"
 
 class CitiesDropdown extends Component {
 
+     
+
     constructor(props) {
         super(props);
 
@@ -27,6 +29,17 @@ class CitiesDropdown extends Component {
                     labelId="cities-dropdown-label"
                     id={"cities-dropdown"}
                     value={city}
+                    inputProps={{
+                        underline: {
+                            "&&&:before": {
+                                borderBottom: "none"
+                            },
+                            "&&:after": {
+                                borderBottom: "none"
+                            }
+                        }
+                    }}
+                    disableUnderline
                     onChange={this.handleOnchangeCity}
                 >
                     <MenuItem value={1}>Adjuntas</MenuItem>
@@ -107,6 +120,7 @@ class CitiesDropdown extends Component {
                     <MenuItem value={76}>Villalba</MenuItem>
                     <MenuItem value={77}>Yabucoa</MenuItem>
                     <MenuItem value={78}>Yauco</MenuItem>
+                    
                 </Select>
             </div>
         )

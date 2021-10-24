@@ -201,6 +201,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateFirstName}
                                                 error={firstNameError!==undefined}
                                                 helperText={firstNameError}
+                                                InputProps={{ disableUnderline: true }}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item2">
@@ -219,6 +220,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateLastName}
                                                 error={lastNameError!==undefined}
                                                 helperText={lastNameError}
+                                                InputProps={{ disableUnderline: true }}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
@@ -230,6 +232,7 @@ class ProfilePage extends Component {
                                                     rows = {6}
                                                     maxRows={6}
                                                     value={change_about}
+                                                    className="change-about-style-profile-page"
                                                     onChange={(event) => {
                                                         if (event.target.value.length <= 250 ) {
                                                             this.setState({
@@ -259,6 +262,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateStreet}
                                                 error={streetError!==undefined}
                                                 helperText={streetError}
+                                                InputProps={{ disableUnderline: true }}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item5">
@@ -287,6 +291,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateZipcode}
                                                 error={zipcodeError!==undefined}
                                                 helperText={zipcodeError}
+                                                InputProps={{ disableUnderline: true }}
                                             />
                                             <div id="profile-pic-label">Profile picture </div>
                                                 <div style={{marginBottom: "22px", color:"white", fontSize: "12px"}}> 

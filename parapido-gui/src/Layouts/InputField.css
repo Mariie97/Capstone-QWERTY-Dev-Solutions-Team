@@ -9,6 +9,7 @@
     color: black !important;
 }
 
+
 .MuiFilledInput-root .MuiFilledInput-input {
     background-color: white;
     color: black;
@@ -18,6 +19,11 @@
     padding-left:3px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+
+.MuiFilledInput-root .MuiFilledInput-input:focus{
+    outline:none !important;
 }
 
 .MuiFilledInput-root.MuiFilledInput-multiline,

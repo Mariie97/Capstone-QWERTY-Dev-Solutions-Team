@@ -261,3 +261,19 @@ h2.edit-subheaders {
 	margin-left: -1.8px;
 
 }
+
+.change-about-style-profile-page{
+	font-family: "Times New Roman";
+	font-size: 18px;
+	width:63.4%;
+	border: 3px solid black;
+	padding-left: 3px;
+	padding-right: 0px;
+	resize: none
+}
+
+.change-about-style-profile-page:focus{
+	background-color: #ffebcc;
+	border: 3px solid black;
+	outline: none;
+}
