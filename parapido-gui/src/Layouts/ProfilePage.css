@@ -213,7 +213,7 @@ h2.edit-subheaders {
 	font-weight: 400;
 	font-size: 18px;
 	font-style: italic;
-	margin-right: 20px;
+	line-height: 2;
 }
 
 .loading-icon {
@@ -245,5 +245,19 @@ h2.edit-subheaders {
     font-size: 16px;
     color: white;
 	letter-spacing: 1px;
-	line-height: 1.5;
+	line-height: 2;
+}
+
+.custom-file-upload-profile-page {
+	margin-top: 35px;
+	padding: 10px;
+	background-color: #FFEBCC;
+	border: 2px solid black;
+	border-radius: 10px;
+	font-family: jost;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-left: -1.8px;
+
 }

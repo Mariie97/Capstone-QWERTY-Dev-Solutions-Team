@@ -108,6 +108,7 @@ class ProfilePage extends Component {
             change_city,
             change_zipcode,
             change_street,
+            change_image,
             firstNameError,
             lastNameError,
             streetError,
@@ -115,6 +116,8 @@ class ProfilePage extends Component {
             cityError,
             is_auth,
             pageLoaded} = this.state;
+            
+            console.log(change_image)
 
         const {user_id} = this.props;
         const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
@@ -223,6 +226,7 @@ class ProfilePage extends Component {
                                             <Input
                                                 id="change-about"
                                                 multiline={true}
+                                                    
                                                 rows={6}
                                                 value={change_about}
                                                 onChange={(event) => {
@@ -282,18 +286,26 @@ class ProfilePage extends Component {
                                                 error={zipcodeError!==undefined}
                                                 helperText={zipcodeError}
                                             />
-                                            <label id="profile-pic-label">Profile picture</label>
-                                            <input
-                                                id="profile-pic"
-                                                type="file"
-                                                name="file"
-                                                accept="image/*"                                  
-                                                onChange={(event) => {
-                                                    this.setState({
-                                                        change_image: event.target.files[0]
-                                                    });}
-                                                }
-                                            />
+                                            <div id="profile-pic-label">Profile picture </div>
+                                                <div style={{marginBottom: "22px", color:"white", fontSize: "12px"}}> 
+                                                    {change_image.name === undefined ? <div> No file Selected </div> :
+                                                    <div> {change_image.name} </div>}
+                                                </div>
+                                            <div>
+                                            <label for="profile-pic" class="custom-file-upload-profile-page"> Upload profile picture</label>
+                                            </div>
+                                                <input
+                                                    id="profile-pic"
+                                                    type="file"
+                                                    name="file"
+                                                    accept="image/*"   
+                                                    style={{display:"none"}}                               
+                                                    onChange={(event) => {
+                                                        this.setState({
+                                                            change_image: event.target.files[0]
+                                                        });}
+                                                    }
+                                                />
                                         </div>
                                     </div>
                                     <button className="button-profile-page save-change-button" onClick={this.saveChanges} > Save changes </button>

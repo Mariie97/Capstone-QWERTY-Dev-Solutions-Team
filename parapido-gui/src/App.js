@@ -6,7 +6,7 @@ import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 import JobCreation from "./Components/JobCreation";
-import UserRegistrationPage from "./Components/UserRegistrationPage";
+
 
 
 class App extends React.Component {
