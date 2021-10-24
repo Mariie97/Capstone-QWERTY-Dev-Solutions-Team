@@ -6,7 +6,7 @@ import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
-
+import TextareaAutosize from '@material-ui/core/TextareaAutosize'
 
 class ProfilePage extends Component {
     current_user = {
@@ -223,21 +223,23 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item3">
                                             <label className="label-about-profile-page"> About </label>
-                                            <Input
-                                                id="change-about"
-                                                multiline={true}
-                                                    
-                                                rows={6}
-                                                value={change_about}
-                                                onChange={(event) => {
-                                                    if (event.target.value.length <= 250 ) {
-                                                        this.setState({
-                                                            change_about: event.target.value
-                                                        });
-                                                    }
-                                                }}
+                                            <div>
+                                                <TextareaAutosize
+                                                    id="change-about"
+                                                    multiline={true}
+                                                    rows = {6}
+                                                    maxRows={6}
+                                                    value={change_about}
+                                                    onChange={(event) => {
+                                                        if (event.target.value.length <= 250 ) {
+                                                            this.setState({
+                                                                change_about: event.target.value
+                                                            });
+                                                        }
+                                                    }}
 
-                                            />
+                                                />
+                                            </div>
                                         </div>
                                         <div className="grid-edit-info-item8">
                                             <h2 className="edit-subheaders"> Address</h2>
