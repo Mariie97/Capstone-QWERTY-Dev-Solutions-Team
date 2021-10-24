@@ -50,6 +50,7 @@ class App extends React.Component {
                         path='/signup'
                         render={() => (
                             <React.Fragment>
+                                <NavBar cookies= {this.props.cookies} />
                                 <UserRegistrationPage/>
                             </React.Fragment>
                         )}

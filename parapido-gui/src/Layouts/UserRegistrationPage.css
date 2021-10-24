@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+
+
+.title-style {
+    position: absolute;
+    width: 850px;
+    height: 120px;
+    left: 162px;
+    top: 120px;
+    border-bottom: 2px solid white;
+    font-family: Jost, serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 80px;
+    line-height: 120px;
+    color: #FFFFFF;
+    padding-bottom: 20px;
+}
+
+.firstNameStyle {
+    position: absolute;
+    width: 234px;
+    height: 52px;
+    left: 166px;
+    top: 310px;
+    background: #FFFFFF;
+    color: red;
+}
+
+.lastNameStyle {
+    position: absolute;
+    width: 234px;
+    height: 52px;
+    left: 500px;
+    top: 310px;
+    background: #FFFFFF;
+}
+
+.securityQuestionTextStyle {
+    position: absolute;
+    left: 1047px;
+    top: 304px;
+    width: 500px;
+    font-family: Jost, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 27px;
+    color: #FFFFFF;
+}

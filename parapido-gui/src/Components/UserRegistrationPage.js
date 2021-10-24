@@ -9,46 +9,13 @@ import {
     RadioGroup,
     TextField
 } from "@material-ui/core";
+
 import Alert from '@material-ui/lab/Alert';
 
 import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
 import {Redirect} from "react-router-dom";
+import "../Layouts/UserRegistrationPage.css"
 
-const titleStyle = {
-    position: "absolute",
-    width: "1847px",
-    height: "120px",
-    left: "162px",
-    top: "100px",
-
-    fontFamily: "Future BdCn BT",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "100px",
-    lineHeight: "120px",
-    color: "#FFFFFF",
-};
-
-const firstNameStyle = {
-    position: "absolute",
-    width: "234px",
-    height: "52px",
-    left: "166px",
-    top: "340px",
-
-    background: "#FFFFFF",
-    color: "red",
-};
-
-const lastNameStyle = {
-    position: "absolute",
-    width: "234px",
-    height: "52px",
-    left: "485px",
-    top: "340px",
-
-    background: "#FFFFFF",
-};
 
 const emailStyle = {
     position: "absolute",
@@ -56,8 +23,6 @@ const emailStyle = {
     height: "52px",
     left: "162px",
     top: "437px",
-    //backgroundColor: "#FFFFFF",
-
     background: "#FFFFFF",
 };
 
@@ -67,7 +32,6 @@ const passwordStyle = {
     height: "52px",
     left: "162px",
     top: "579px",
-
     background: "#FFFFFF",
 };
 
@@ -77,7 +41,6 @@ const confirmPasswordStyle = {
     height: "52px",
     left: "162px",
     top: "735px",
-
     background: "#FFFFFF",
 };
 
@@ -87,7 +50,6 @@ const answerOneStyle = {
     height: "52px",
     left: "1047px",
     top: "501px",
-
     background: "#FFFFFF",
 };
 
@@ -97,7 +59,6 @@ const answerTwoStyle = {
     height: "52px",
     left: "1047px",
     top: "718px",
-
     background: "#FFFFFF",
 };
 
@@ -107,8 +68,6 @@ const questionOneStyle = {
     height: "52px",
     left: "1047px",
     top: "388px",
-
-    //background: "#FFFFFF",
 };
 
 const questionTwoStyle = {
@@ -117,7 +76,6 @@ const questionTwoStyle = {
     height: "52px",
     left: "1047px",
     top: "609px",
-
     color: "#FFFFFF",
 };
 
@@ -126,14 +84,6 @@ const accountTypeStyle = {
     left: "162px",
     top: "850px",
     width: "500px",
-
-    /*            fontFamily: "Grand",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "24px",
-                lineHeight: "27px",*/
-
-
     color: "#FFFFFF",
 };
 
@@ -143,29 +93,19 @@ const createButtonStyle = {
     height: "80px",
     left: "1493px",
     top: "864px",
-
-    //background: "#FFFFFF",
-};
-
-const securityQuestionTextStyle = {
-    position: "absolute",
-    left: "1047px",
-    top: "304px",
-    width: "500px",
-
-    /*            fontFamily: "Grand",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "24px",
-                lineHeight: "27px",*/
-
-    color: "#FFFFFF",
+    borderColor: "black",
+    borderRadius: "20px",
+    borderWidth: "2px",
+    background: "#FFEBCC",
+    fontFamily: "Grand",
+    fontStyle: "normal",
+    fontWeight: "bold",
+    fontSize: "24px",
 };
 
 const outerGridStyle= {
-    top: "-80px",
+    top: "-70px",
     position: "absolute"
-
 }
 
 const formLabelStyle= {
@@ -182,14 +122,12 @@ const errorStyle = {
     height: "52px",
     left: "600px",
     top: "800px",
-
-    //background: "#FFFFFF",
 };
 
 const questionErrorStyle = {
-    marginTop: '36vh',
-    marginLeft: '60vw',
-    fontSize: '13px',
+    marginTop: '32vh',
+    marginLeft: '71vw',
+    fontSize: '20px',
     color: '#f44336'
 };
 
@@ -443,9 +381,10 @@ class UserRegistrationPage extends Component {
                 }
                 <form>
                     <div style={outerGridStyle}>
-                        <h1 style={titleStyle}>
+                        <div className={"title-style"}>
                             Create Account
-                        </h1>
+                        </div>
+
                         <TextField
                             required
                             error = {this.state.firstNameError!==undefined}
@@ -456,7 +395,7 @@ class UserRegistrationPage extends Component {
                             value = {firstName}
                             onChange={this.change}
                             helperText={this.state.firstNameError}
-                            style={firstNameStyle}
+                            className={"firstNameStyle"}
                             onBlur={this.validateFirstName}
                         />
                         <TextField
@@ -469,7 +408,7 @@ class UserRegistrationPage extends Component {
                             value = {lastName}
                             onChange={this.change}
                             helperText={this.state.lastNameError}
-                            style={lastNameStyle}
+                            className={"lastNameStyle"}
                             onBlur={this.validateLastName}
                         />
                         <TextField
@@ -513,7 +452,7 @@ class UserRegistrationPage extends Component {
                         />
                         <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
                         <div className='security-questions-container' >
-                            <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
+                            <div className={"securityQuestionTextStyle"}>Security Questions:</div>
                             {questionError!==undefined &&
                             <p style={questionErrorStyle}>{questionError}</p>
                             }
