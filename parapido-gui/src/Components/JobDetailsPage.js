@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import '../Layouts/JobDetails.css'
 import {Link, Redirect} from "react-router-dom";
 import verifyUserAuth, {accountType, cities, current_user, getJobStatus, jobStatus} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import "../Layouts/ProfilePage.css";
-import {Box, CircularProgress} from "@material-ui/core";
+import {Box, CircularProgress, Chip} from "@material-ui/core";
 
 
 class JobDetailsPage extends Component {
@@ -139,7 +140,8 @@ class JobDetailsPage extends Component {
         const { job_id } = this.props;
         const { job } = this.state;
         let new_status;
-
+        
+        
         if (current_user.type===accountType.admin)
             new_status = jobStatus.deleted;
         else
@@ -174,6 +176,7 @@ class JobDetailsPage extends Component {
         const {is_auth, job, pageLoaded } = this.state;
         const { job_id } = this.props;
 
+        console.log(getJobStatus[job.status-1])
 
         const showCancelRequestButton =
             job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
@@ -205,36 +208,36 @@ class JobDetailsPage extends Component {
                     <div>
                         <div className="button-profile-page-flex-container">
                             {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="button-profile-page" style={{margin: 20}}>
+                                <button onClick={this.onClickRequest} className="button-job-details" style={positionButton}>
                                     Request Job
                                 </button>
                             }
                             {showCancelButton &&
-                                <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
+                                <button onClick={this.changeJobStatus} className="button-job-details" style={positionButton1}>
                                     Cancel Job
                                 </button>
                             }
                             {showDeleteButton &&
-                                <button onClick={this.changeJobStatus} className="button-profile-page" style={{margin: 20}}>
+                                <button onClick={this.changeJobStatus} className="button-job-details" style={positionButton1}>
                                     Delete Job
                                 </button>
                             }
                             {showCancelRequestButton &&
-                                <button onClick={this.onClickCancelRequest} className="button-profile-page" style={{margin: 20}}>
+                                <button onClick={this.onClickCancelRequest} className="button-job-details" style={positionButton2}>
                                     Cancel Request
                                 </button>
                             }
                             {showContractButton &&
                                 <a
                                     href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
-                                    className="button-profile-page" style={{margin: 20}}>
+                                    className="button-job-details" style={positionButton3}>
                                     View Contract
                                 </a>
                             }
                         </div>
                         <h1 className="profile-page-header">{job.title}</h1>
                         <div className = "parent-flex-container-profile-page">
-                            <div className="child1-flex-container-profile-page">
+                            <div className="child1-flex-container-profile-page" style={{marginTop: "90px"}}>
                                 <ProfileCard
                                     user_id={job.owner_id}
                                     first_name={job.owner_name}
@@ -250,7 +253,7 @@ class JobDetailsPage extends Component {
                                     <li>
                                         <ul className="body-flex-profile-page">
                                             <li className= "child-body-flex-profile-page">Description: </li>
-                                            <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 14}}>
+                                            <li className="break-text-profile-page" style={{paddingTop: "18.2px", paddingLeft: 14}}>
                                                 {job.description}
                                             </li>
                                         </ul>
@@ -258,7 +261,7 @@ class JobDetailsPage extends Component {
                                     <li>
                                         <ul className="body-flex-profile-page">
                                             <li  className= "child1-body-flex-profile-page"> Price: </li>
-                                            <li className="break-text-profile-page" style={{paddingTop: 1, paddingLeft: 19}}>
+                                            <li className="break-text-profile-page" style={{paddingTop: "18.2px",paddingLeft: "102px"}}>
                                                 {job.price}
                                             </li>
                                         </ul>
@@ -266,7 +269,7 @@ class JobDetailsPage extends Component {
                                     <li>
                                         <ul className="body-flex-profile-page">
                                             <li className= "child2-body-flex-profile-page" > Location: </li>
-                                            <li className="break-text-profile-page" style={{paddingTop: 2}}>
+                                            <li className="break-text-profile-page" style={{paddingTop: "18.2px", paddingLeft: "72px"}}>
                                                 {job.street} {cities[job.city]} PR, {job.zipcode}
                                             </li>
                                         </ul>
@@ -274,13 +277,17 @@ class JobDetailsPage extends Component {
                                     <ul className="body-flex-profile-page">
                                         <li className= "child1-body-flex-profile-page">Category:</li>
                                         <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}}>
-                                            {job.categories}
+                                            <Chip label={job.categories} style = {chipStyleJobDetails}/>
                                         </p>
                                     </ul>
                                     <ul className="body-flex-profile-page">
                                         <li className= "child1-body-flex-profile-page">Status:</li>
-                                        <p className="break-text-profile-page" style={{paddingLeft: 17 , paddingTop: 2.5}}>
-                                            {getJobStatus[job.status-1]}
+                                        <p className="break-text-profile-page" style={{paddingTop: "18.2px"}}>
+                                            {getJobStatus[job.status-1] === "Cancelled" && <div style={{paddingLeft: "84px"}}> {getJobStatus[job.status-1]} </div>}
+                                            {getJobStatus[job.status-1] === "Deleted" && <div style={{paddingLeft: "89px"}}> {getJobStatus[job.status-1]} </div>}
+                                            {getJobStatus[job.status-1] === "Completed" && <div style={{paddingLeft: "90px"}}> {getJobStatus[job.status-1]} </div>}
+                                            {getJobStatus[job.status-1] === "Posted" && <div style={{paddingLeft: "94px"}}> {getJobStatus[job.status-1]} </div>}
+                                            {getJobStatus[job.status-1] === "In process" && <div style={{paddingLeft: "96px"}}> {getJobStatus[job.status-1]} </div>}
                                         </p>
                                     </ul>
                                     { job.student_id!==null &&
@@ -300,5 +307,47 @@ class JobDetailsPage extends Component {
         )
     }
 }
+
+
+const chipStyleJobDetails = {
+    backgroundColor : "#FFEBCC",
+    fontFamily : "Jost",
+    fontSize : "21px", 
+    fontWeight: "400",
+    marginTop : "22px",
+    marginLeft : "33px",
+    marginRight : "0px",
+    paddingRight : "10px",
+    paddingLeft : "10px",
+    border: "2px solid black",
+}
+
+const positionButton1 = {
+    position: "relative",
+    right: "660px",
+    top: "122px", 
+}
+
+const positionButton2 = {
+    position: "relative",
+    right: "642px",
+    top: "122px", 
+}
+
+const positionButton = {
+    position: "relative",
+    right: "656px",
+    top: "122px",
+}
+
+const positionButton3 = {
+        position: "relative",
+        top: "122px",
+        right: "656px",
+        paddingTop: "6px",
+        paddingBottom: "6px",
+    
+}
+
 
 export default JobDetailsPage;
