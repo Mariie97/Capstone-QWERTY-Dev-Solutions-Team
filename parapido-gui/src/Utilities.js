@@ -121,3 +121,12 @@ export const accountType = {
     client: 2,
     admin: 3,
 };
+
+export const weekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+]
