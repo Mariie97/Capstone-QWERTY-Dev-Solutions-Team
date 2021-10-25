@@ -7,6 +7,7 @@ import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import continueArrow from '../Static/Images/continueArrow.png'
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -29,9 +30,9 @@ class LoginModal extends Component {
             login_success: false,
             login_failed: false,
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
+        
     }
 
     handleOnClick() {
@@ -78,9 +79,12 @@ class LoginModal extends Component {
                             style={{textAlign:"center"}}
                         >
                             <Box sx={style}>
-                                {login_failed &&  <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                
+                                {login_failed && 
+                                    <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
                                     Yikes!!! 😬 Incorrect email or Password.
-                                </Alert>}
+                                    </Alert>}
+                                
 
                                 <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                                 <div className="first-point-login-modal"> Hey! Good to see you again!</div>
