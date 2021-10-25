@@ -219,6 +219,7 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
+                            InputProps={{ disableUnderline: true }}
                     />
                     {priceError !== undefined &&
                             <div className="required-field-2-job-creation">

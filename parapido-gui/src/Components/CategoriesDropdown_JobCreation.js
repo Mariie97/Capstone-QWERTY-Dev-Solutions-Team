@@ -43,6 +43,17 @@ class CategoriesDropdown extends Component {
                         onChange={this.handleOnChangeCategory}
                         className="job-creation-dropdown"
                         onBlur={this.validateCategory}
+                        inputProps={{
+                            underline: {
+                                "&&&:before": {
+                                    borderBottom: "none"
+                                },
+                                "&&:after": {
+                                    borderBottom: "none"
+                                }
+                            }
+                        }}
+                        disableUnderline
                         >
                     
 

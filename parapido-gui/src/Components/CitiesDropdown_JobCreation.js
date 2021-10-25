@@ -45,6 +45,17 @@ class CitiesDropdown extends Component {
                         onChange={this.handleOnChangeCity}
                         className="job-creation-dropdown"
                         onBlur={this.validateCity}
+                        inputProps={{
+                            underline: {
+                                "&&&:before": {
+                                    borderBottom: "none"
+                                },
+                                "&&:after": {
+                                    borderBottom: "none"
+                                }
+                            }
+                        }}
+                        disableUnderline
                     >
                         <MenuItem value={1}>Adjuntas</MenuItem>
                         <MenuItem value={2}>Aguada</MenuItem>
