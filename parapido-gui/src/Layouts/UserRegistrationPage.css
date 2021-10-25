@@ -10,10 +10,10 @@
     left: 162px;
     top: 120px;
     border-bottom: 2px solid white;
-    font-family: Jost, serif;
+    font-family: "Jost";
     font-style: normal;
     font-weight: bold;
-    font-size: 80px;
+    font-size: 60px;
     line-height: 120px;
     color: #FFFFFF;
     padding-bottom: 20px;
@@ -33,7 +33,7 @@
     position: absolute;
     width: 234px;
     height: 52px;
-    left: 500px;
+    left: 250px;
     top: 310px;
     background: #FFFFFF;
 }
@@ -43,10 +43,10 @@
     left: 1047px;
     top: 304px;
     width: 500px;
-    font-family: Jost, serif;
+    font-family: Jost;
     font-style: normal;
     font-weight: normal;
-    font-size: 32px;
+    font-size: 30px;
     line-height: 27px;
     color: #FFFFFF;
 }

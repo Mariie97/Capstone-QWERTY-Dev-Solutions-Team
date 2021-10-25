@@ -125,8 +125,8 @@ const errorStyle = {
 };
 
 const questionErrorStyle = {
-    marginTop: '32vh',
-    marginLeft: '71vw',
+    marginTop: '26vh',
+    marginLeft: '70vw',
     fontSize: '20px',
     color: '#f44336'
 };
