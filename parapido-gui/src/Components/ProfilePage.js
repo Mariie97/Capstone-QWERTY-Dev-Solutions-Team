@@ -331,9 +331,16 @@ class ProfilePage extends Component {
                                                 InputProps={{ disableUnderline: true }}
                                             />
                                             {zipcodeError !== undefined &&
-                                            <div className="required-field-job-creation">
-                                            <ReportProblemIcon style={report} />{zipcodeError} 
-                                            </div>
+                                                <div className="required-field-job-creation">
+                                                    {firstNameError !== undefined ?  lastNameError !== undefined ?<hr className="zipcode-last-name-error-move"></hr>: 
+                                                    <hr className="zipcode-error-move"></hr>: <hr className="zipcode-error"></hr>}
+                                                    <hr className="zipcode-error-1"></hr>
+                                                    {firstNameError !== undefined ?  <hr className="zipcode-error-2"></hr>: lastNameError !== undefined ? <hr className="zipcode-last-name-error-2-move"></hr> :
+                                                    <hr className="zipcode-error-2-move"></hr>}
+                                                    {firstNameError !== undefined ?  lastNameError !== undefined ? <hr className="zipcode-last-name-error-3-move"></hr> :
+                                                    <hr className="zipcode-error-3-move"></hr>:<hr className="zipcode-error-3"></hr>}
+                                                    <ReportProblemIcon style={report} />{zipcodeError} 
+                                                </div>
                                              }
                                             <div id="profile-pic-label">Profile picture </div>
                                                 <div style={{marginBottom: "22px", color:"white", fontSize: "12px"}}> 

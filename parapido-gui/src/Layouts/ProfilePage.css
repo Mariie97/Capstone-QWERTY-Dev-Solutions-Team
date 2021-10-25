@@ -554,4 +554,105 @@ h2.edit-subheaders {
 	top: -15.1px;
 }
 
+.zipcode-error{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -57px;
+}
+
+.zipcode-error-move{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -57.8px;
+}
+
+
+.zipcode-last-name-error-move{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -56.8px;
+}
+
+.zipcode-error-1{
+	border: 0;
+	margin: 0;
+	border-left: 2.4px solid red;
+	height: 43.5px;
+	position: absolute;
+	left: 3px;
+	top: -57px;
+}
+
+.zipcode-error-2{
+	border: 0;
+	margin: 0;
+	border: 2.2px solid red;
+	height: 40px;
+	position: absolute;
+	left: 177px;
+	top: -57px;
+}
+
+.zipcode-error-2-move{
+	border:0px;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 44px;
+	position: absolute;
+	left: 179.8px;
+	top: -57px;
+}
+
+.zipcode-last-name-error-2-move{
+	margin: 0;
+	border: 1.6px solid red;
+	height: 40px;
+	position: absolute;
+	left: 177.8px;
+	top: -57px;
+}
+
+
+.zipcode-error-3{
+	background-color: red;
+	border: 1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 175.2px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.zipcode-error-3-move{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 174.8px;
+	left: 4px;
+	top: -14.1px;
+}
+
+.zipcode-last-name-error-3-move{
+background-color: red;
+border: 1px solid red;
+position: absolute;
+bottom: 174px;
+width: 175.2px;
+left: 4px;
+top: -15.1px;
+}
+
 
