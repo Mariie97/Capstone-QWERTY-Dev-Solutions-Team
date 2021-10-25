@@ -8,6 +8,7 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
+import verifyUserAuth from "../Utilities";
 
 
 export class JobCreation extends Component {
@@ -30,7 +31,8 @@ export class JobCreation extends Component {
             zipcodeError: undefined,
             priceError: undefined,
             creationSuccessful: false,
-            serverProcessedRequest: true
+            serverProcessedRequest: true,
+            is_auth: true
         };
 
         // event methods - before render method
@@ -53,6 +55,9 @@ export class JobCreation extends Component {
 		// webpage background color
 
 		document.body.style.backgroundColor = "#2F2D4A";
+        this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
 
 	}
 
@@ -139,7 +144,7 @@ export class JobCreation extends Component {
     }
 
     render() {
-        const { change_city, change_category, availableDays_chips, serverProcessedRequest, creationSuccessful } = this.state
+        const { change_city, change_category, availableDays_chips, serverProcessedRequest, creationSuccessful, is_auth } = this.state
 
         // ERROR variables
 
@@ -147,6 +152,7 @@ export class JobCreation extends Component {
 
         return (
         <React.Fragment>
+            {!is_auth && <Redirect to='/' />}
             {creationSuccessful && <Redirect to="/jobdashboard" />}
             {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                                     Sorry can't create job right now 😔 please try again later!!!.
