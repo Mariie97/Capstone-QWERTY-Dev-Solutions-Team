@@ -67,7 +67,7 @@
 	box-sizing: border-box;
 	text-decoration: none;
 	font-family: "Jost";
-	font-weight: bold;
+	font-weight: 400;
 	color: black;
 	background-color: #ffebcc;
 	text-align: center;
@@ -257,7 +257,7 @@ h2.edit-subheaders {
 	border-radius: 10px;
 	font-family: jost;
 	font-size: 14px;
-	font-weight: bold;
+	font-weight: 400;
 	cursor: pointer;
 	margin-left: -1.8px;
 
