@@ -21,11 +21,6 @@
     padding-bottom: 10px;
 }
 
-
-.MuiFilledInput-root .MuiFilledInput-input:focus{
-    outline:none !important;
-}
-
 .MuiFilledInput-root.MuiFilledInput-multiline,
 .MuiFilledInput-root.MuiFilledInput-multiline.Mui-focused {
     background-color: white;
@@ -42,3 +37,5 @@
 .MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline:focus{
     background-color: #FFEBCC;
 }
+
+

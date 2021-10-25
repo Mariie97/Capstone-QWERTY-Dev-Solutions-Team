@@ -1,12 +1,13 @@
-import React, {Component, createRef} from 'react'
-import "../Layouts/ProfilePage.css"
+import React, {Component, createRef} from 'react';
+import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
 import verifyUserAuth, {cities} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize'
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 class ProfilePage extends Component {
     current_user = {
@@ -199,10 +200,14 @@ class ProfilePage extends Component {
                                                     }
                                                 }}
                                                 onBlur={this.validateFirstName}
-                                                error={firstNameError!==undefined}
-                                                helperText={firstNameError}
                                                 InputProps={{ disableUnderline: true }}
                                             />
+                                            {firstNameError !== undefined &&
+                                            <div className="required-field-job-creation">
+                                            <ReportProblemIcon style={report} />{firstNameError} 
+                                            </div>
+                                             }
+
                                         </div>
                                         <div className="grid-edit-info-item2">
                                             <label className="label-about-profile-page"> Last Name* </label>
@@ -218,10 +223,13 @@ class ProfilePage extends Component {
                                                     }
                                                 }}
                                                 onBlur={this.validateLastName}
-                                                error={lastNameError!==undefined}
-                                                helperText={lastNameError}
                                                 InputProps={{ disableUnderline: true }}
                                             />
+                                             {lastNameError !== undefined &&
+                                            <div className="required-field-job-creation">
+                                            <ReportProblemIcon style={report} />{lastNameError} 
+                                            </div>
+                                             }
                                         </div>
                                         <div className="grid-edit-info-item3">
                                             <label className="label-about-profile-page"> About </label>
@@ -260,10 +268,13 @@ class ProfilePage extends Component {
                                                     }}
                                                 }
                                                 onBlur={this.validateStreet}
-                                                error={streetError!==undefined}
-                                                helperText={streetError}
                                                 InputProps={{ disableUnderline: true }}
                                             />
+                                            {streetError !== undefined &&
+                                            <div className="required-field-job-creation">
+                                            <ReportProblemIcon style={report} />{streetError} 
+                                            </div>
+                                             }
                                         </div>
                                         <div className="grid-edit-info-item5">
                                             <CitiesDropdown
@@ -289,10 +300,13 @@ class ProfilePage extends Component {
                                                     }
                                                 }}
                                                 onBlur={this.validateZipcode}
-                                                error={zipcodeError!==undefined}
-                                                helperText={zipcodeError}
                                                 InputProps={{ disableUnderline: true }}
                                             />
+                                            {zipcodeError !== undefined &&
+                                            <div className="required-field-job-creation">
+                                            <ReportProblemIcon style={report} />{zipcodeError} 
+                                            </div>
+                                             }
                                             <div id="profile-pic-label">Profile picture </div>
                                                 <div style={{marginBottom: "22px", color:"white", fontSize: "12px"}}> 
                                                     {change_image.name === undefined ? <div> No file Selected </div> :
@@ -485,7 +499,14 @@ class ProfilePage extends Component {
             }
         });
     }
+}
 
+// small icons and elements css
+
+const report = {
+    color: "red",
+    position: "relative",
+    top: "4px"
 }
 export default ProfilePage;
 

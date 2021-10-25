@@ -74,6 +74,7 @@
 	position: relative;
 	border-radius: 2%;
 	margin-right: 25px;
+	cursor: pointer;
 }
 
 .button-profile-page:hover {
@@ -262,6 +263,14 @@ h2.edit-subheaders {
 
 }
 
+.custom-file-upload-profile-page:hover {
+	border-color: white;
+}
+
+.custom-file-upload-profile-page:active {
+	background-color: #2e856e;
+}
+
 .change-about-style-profile-page{
 	font-family: "Times New Roman";
 	font-size: 18px;
@@ -277,3 +286,4 @@ h2.edit-subheaders {
 	border: 3px solid black;
 	outline: none;
 }
+

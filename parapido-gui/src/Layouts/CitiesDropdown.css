@@ -18,6 +18,8 @@
     font-family: "Times New Roman";
     width: 151px;
     font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .MuiInputBase-root{
@@ -26,6 +28,26 @@
     font-size: 15px;
 
 }
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
+}
+
+.MuiMenuItem-root{
+    background-color: white;
+}
+
+
+
 
 
 
