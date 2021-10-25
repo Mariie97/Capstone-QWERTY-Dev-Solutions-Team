@@ -395,6 +395,7 @@ class ProfilePage extends Component {
         this.setState({
             firstNameError: undefined
         })
+
         return true;
     }
 
@@ -407,7 +408,7 @@ class ProfilePage extends Component {
         }
         this.setState({
             lastNameError: undefined
-        })
+        }) 
         return true;
     }
 

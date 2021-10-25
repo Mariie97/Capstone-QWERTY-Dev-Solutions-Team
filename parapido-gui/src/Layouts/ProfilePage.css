@@ -277,7 +277,7 @@ h2.edit-subheaders {
 	width:63.4%;
 	border: 3px solid black;
 	padding-left: 3px;
-	padding-right: 0px;
+	padding-right: 3px;
 	resize: none
 }
 
@@ -286,4 +286,5 @@ h2.edit-subheaders {
 	border: 3px solid black;
 	outline: none;
 }
+
 
