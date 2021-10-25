@@ -5,7 +5,8 @@ import Alert from '@material-ui/lab/Alert';
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import continueArrow from '../Static/Images/continueArrow.png'
+import continueArrow from '../Static/Images/continueArrow.png';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 
 const style = {
@@ -29,10 +30,19 @@ class LoginModal extends Component {
             password: '',
             login_success: false,
             login_failed: false,
+            emailError: undefined,
+            passwordError: undefined
         };
+
+        // event methods - before render method
+
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
         
+        // validation methods - end of render method
+
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
     }
 
     handleOnClick() {
@@ -69,6 +79,10 @@ class LoginModal extends Component {
         const {isOpen, toggle} = this.props;
         const { login_success, login_failed } = this.state;
 
+        // ERROR variables
+
+        const { emailError, passwordError } = this.state;
+
         return (
             <StyledEngineProvider injectFirst>
                 {login_success ? <Redirect to='/jobdashboard'/> :
@@ -82,7 +96,7 @@ class LoginModal extends Component {
                                 
                                 {login_failed && 
                                     <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
-                                    Yikes!!! 😬 Incorrect email or Password.
+                                    Yikes!!! 😬 Incorrect Email or Password.
                                     </Alert>}
                                 
 
@@ -94,12 +108,26 @@ class LoginModal extends Component {
                                 </div>
                                 <div className="body-container-login-modal">
                                     <label className="third-point-login-modal"> Enter E-mail: </label>
-                                    {login_failed ? <input className="input-login-modal-error" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange}></input>:
-                                        <input className="input-login-modal" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange}></input>
+                                    {login_failed ? <input className="input-login-modal-error" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange} onBlur={this.validateEmail}></input>:
+                                        <input className="input-login-modal" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange} onBlur={this.validateEmail}></input>
                                     }
+
+                                    {emailError !== undefined &&
+                                        <div className="required-field-login-modal">
+                                            <ReportProblemIcon style={report} /> {emailError} 
+                                        </div>
+                                    }
+
                                     <label className="third-point-login-modal"> Enter Password: </label>
-                                    {login_failed ? <input className="input-login-modal-error" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange}></input>:
-                                        <input className="input-login-modal" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange}></input>}
+                                    {login_failed ? <input className="input-login-modal-error" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange} onBlur={this.validatePassword}></input>:
+                                        <input className="input-login-modal1" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange} onBlur={this.validatePassword}></input>}
+                                    
+                                    {passwordError !== undefined &&
+                                        <div className="required-field-login-modal">
+                                            <ReportProblemIcon style={report} /> {passwordError} 
+                                        </div>
+                                    }
+
                                     <button onClick={this.handleOnClick} className="login-modal-continue-button">
                                         <div className="text-button-login-modal">
                                             CONTINUE
@@ -119,10 +147,51 @@ class LoginModal extends Component {
             </StyledEngineProvider>
         );
     }
+
+    validateEmail(){
+        const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+
+        if (this.state.email.length===0) {
+            this.setState({
+                emailError: "This field is required"
+            })
+
+            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
+            return false;
+        }
+        else if (!pattern.test(this.state.email)) {
+            this.setState({ 
+                emailError: "Invalid email format: @..."
+        });
+            return false;
+        }
+        this.setState({
+            emailError: undefined
+        })
+        document.querySelector('.input-login-modal').style.cssText = 'border: 3px solid #2F2D4A;';
+        return true;
+
+    }
+
+    validatePassword(){
+        if (this.state.password.length===0) {
+            this.setState({
+                passwordError: "This field is required"
+            })
+
+            document.querySelector('.input-login-modal1').style.cssText = 'border: 2px solid #cc3300;';
+            return false;
+        }
+        this.setState({
+            passwordError: undefined
+        })
+        document.querySelector('.input-login-modal1').style.cssText = 'border: 3px solid #2F2D4A;';
+        return true;
+    }
 }
 
-
 // small icons and elements css
+
 const login_logostyle = {
     width: 80,
     height: 80,
@@ -135,5 +204,12 @@ const continue_arrow_image_resize = {
     bottom: 25,
     left: 300,
 };
+
+const report = {
+    color: "red",
+    position: "relative",
+    top: "4px"
+}
+
 
 export default LoginModal;

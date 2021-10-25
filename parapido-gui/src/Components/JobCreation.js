@@ -33,12 +33,12 @@ export class JobCreation extends Component {
             serverProcessedRequest: true
         };
 
-        //event methods - before render method
+        // event methods - before render method
 
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind(this);
 
-        //validation methods - end of render method
+        // validation methods - end of render method
 
         this.validateTitle = this.validateTitle.bind(this);
         this.validateStreet = this.validateStreet.bind(this);
