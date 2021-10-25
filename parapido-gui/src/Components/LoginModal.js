@@ -163,6 +163,7 @@ class LoginModal extends Component {
             this.setState({ 
                 emailError: "Invalid email format: @..."
         });
+            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
         this.setState({
