@@ -1,137 +1,11 @@
 import React, {Component} from 'react';
-import { Alert, Backdrop, Button, Modal, Stack } from "@material-ui/core";
+import {Backdrop, Modal} from "@material-ui/core";
 import {TextField} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
-
-const titleStyle = {
-    position: "absolute",
-    width: "800px",
-    height: "120px",
-    left: "550px",
-    top: "124px",
-
-    fontFamily: "Future BdCn BT",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "80px",
-    lineHeight: "120px",
-
-
-    //color: "#FFFFFF",
-
-    opacity: "0.62",
-};
-
-const emailStyle = {
-    position: "absolute",
-    width: "636px",
-    left: "643px",
-    top: "469px",
-    //backgroundColor: "#FFFFFF",
-
-    background: "#FFFFFF",
-};
-
-const answerOneStyle = {
-    position: "absolute",
-    width: "636px",
-    left: "643px",
-    top: "607px",
-
-    background: "#FFFFFF",
-};
-
-const answerTwoStyle = {
-    position: "absolute",
-    width: "636px",
-    left: "643px",
-    top: "744px",
-
-    background: "#FFFFFF",
-};
-
-const createButtonStyle = {
-    position: "absolute",
-    width: "190px",
-    height: "80px",
-    left: "860px",
-    top: "900px",
-    color: "#2F2D4A",
-    border: "2px solid",
-    background: "#FFEBCC",
-};
-
-const securityQuestionTextStyle = {
-    position: "absolute",
-    left: "643px",
-    top: "327px",
-    width: "500px",
-
-    fontFamily: "Grand",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: "30px",
-    lineHeight: "27px",
-
-    color: "#FFFFFF",
-};
-
-const outerGridStyle= {
-    top: "-80px",
-    position: "absolute"
-
-}
-
-const backdropStyle = {
-    left: "700px",
-    top: "200px",
-    width: "500px",
-    height: "600px",
-    position: "absolute",
-    backgroundColor: "#2F2D4A",
-
-}
-
-const confirmPasswordStyle = {
-    position: "absolute",
-    width: "400px",
-    top: "300px",
-    left: "50px",
-    //backgroundColor: "#FFFFFF",
-
-    background: "#FFFFFF",
-};
-
-const passwordStyle = {
-    position: "absolute",
-    width: "400px",
-    top: "200px",
-    left: "50px",
-    //backgroundColor: "#FFFFFF",
-
-    background: "#FFFFFF",
-};
-
-const changePasswordStyle = {
-    position: "absolute",
-    width: "190px",
-    height: "80px",
-    top: "400px",
-    left: "150px",
-
-    //background: "#FFFFFF",
-};
-
-const errorStyle = {
-    position: "absolute",
-    width: "429px",
-    height: "52px",
-    left: "730px",
-    top: "600px",
-    zIndex: -1,
-
-    //background: "#FFFFFF",
-};
+import {Alert} from "@material-ui/lab";
+import Stack from '@mui/material/Stack';
+import "../Layouts/SecurityQuestionsPage.css"
+import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 
 class SecurityQuestionsPage extends Component {
 
@@ -165,40 +39,56 @@ class SecurityQuestionsPage extends Component {
     }
 
     change = e =>{
-        this.props.onChange({[e.target.name]: e.target.value});
         this.setState({
             [e.target.name]: e.target.value
         })
     };
 
 
-    validate = () => {
+    validateAnswerOne = () => {
         let isError = false;
 
         const errors = {
             emailError: '',
             answerOneError: '',
-            answerTwoError: '',
         };
 
-        if(this.state.answerOne == ""){
+        if(this.state.answerOne === ""){
             isError = true;
             errors.answerOneError = "Please submit a response";
         }
 
-        if(this.state.answerOne != this.state.questionOneAnswer){
+        if(this.state.answerOne !== this.state.questionOneAnswer){
             isError = true;
-            errors.answerOneError = "Answers do not match";
+            errors.answerOneError = "Incorrect answer. Please try again.";
         }
 
-        if(this.state.answerTwo == ""){
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+
+
+        return isError
+
+    };
+
+    validateAnswerTwo = () => {
+        let isError = false;
+
+        const errors = {
+            emailError: '',
+            answerTwoError: '',
+        };
+
+        if(this.state.answerTwo === ""){
             isError = true;
             errors.answerTwoError = "Please submit a response";
         }
 
-        if(this.state.answerTwo != this.state.questionTwoAnswer){
+        if(this.state.answerTwo !== this.state.questionTwoAnswer){
             isError = true;
-            errors.answerTwoError = "Answers do not match";
+            errors.answerTwoError = "Incorrect answer. Please try again.";
         }
 
         this.setState({
@@ -243,7 +133,7 @@ class SecurityQuestionsPage extends Component {
             confirmPasswordError: '',
         };
 
-        if (this.state.password !== this.state.confirmPassword) {
+        if (this.state.password !== this.state.confirmPassword && this.state.confirmPassword !== "") {
             isError = true;
             errors.passwordError = "Passwords do not match!"
             errors.confirmPasswordError = "Passwords do not match!"
@@ -266,7 +156,7 @@ class SecurityQuestionsPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        const err = this.validate()
+        const err = this.validateAnswerOne() || this.validateAnswerTwo()
 
 
         if(!err) {
@@ -274,16 +164,6 @@ class SecurityQuestionsPage extends Component {
 
             this.setState({open: true})
             this.setState({correctAnswers: true})
-
-
-            this.props.onChange({
-                email: undefined,
-                questionOne: undefined,
-                questionTwo: undefined,
-                answerOne: undefined,
-                answerTwo: undefined,
-                emailIsValid: undefined,
-            })
         }
     };
 
@@ -378,7 +258,7 @@ class SecurityQuestionsPage extends Component {
             fetchError,
         } = this.state;
 
-        if(this.state.emailIsValid){
+        if( this.state.emailIsValid ){
 
             renderQuestionOne = <TextField
                 required
@@ -391,7 +271,8 @@ class SecurityQuestionsPage extends Component {
                 name="answerOne"
                 placeholder="Answer"
                 onChange={e => this.change(e)}
-                style={answerOneStyle}
+                onBlur={this.validateAnswerOne}
+                className={"answerOneStyle"}
             />;
 
             renderQuestionTwo = <TextField
@@ -405,57 +286,66 @@ class SecurityQuestionsPage extends Component {
                 name="answerTwo"
                 placeholder="Answer"
                 onChange={e => this.change(e)}
-                style={answerTwoStyle}
+                onBlur={this.validateAnswerTwo}
+                className={"answerTwoStyle"}
             />;
 
         }
 
         if(!this.state.emailIsValid){
-            button = <Button variant="contained" style={createButtonStyle} onClick={e => this.onSubmitEmail(e)}>Verify Email</Button>
+            button = <button variant="contained" className={"createButtonStyle"} onClick={e => this.onSubmitEmail(e)}>Verify Email</button>
         }
-        else  button = <Button variant="contained" style={createButtonStyle} onClick={e => this.onSubmit(e)}>Submit</Button>
+        else  button = <button variant="contained" className={"createButtonStyle"} onClick={e => this.onSubmit(e)}>Submit</button>
 
         const body = (
             <div >
+                <img src={loginModalLogo} className={"modalLogoStyle"}/>
+
+
                 <form>
                     <TextField
                         required
                         error = {this.state.passwordError}
-                        variant="filled"
+                        variant="outlined"
                         label="Password"
                         type="password"
                         name="password"
                         defaultValue=""
                         value = {password}
                         onChange={e => this.change(e)}
+                        onBlur={this.validatePassword}
                         helperText={this.state.passwordError}
-                        style={passwordStyle}
+                        className={"passwordStyle"}
                     />
 
                     <TextField
                         required
                         error = {this.state.confirmPasswordError}
-                        variant="filled"
+                        variant="outlined"
                         label="Confirm Password"
                         type="password"
                         name="confirmPassword"
-                        defaultValue=""
+                        defaultValue=""S
                         value = {confirmPassword}
                         onChange={e => this.change(e)}
+                        onBlur={this.validatePassword}
                         helperText={this.state.confirmPasswordError}
-                        style={confirmPasswordStyle}
+                        className={"confirmPasswordStyle"}
                     />
 
 
                     {changeSuccess &&
 
                     <Stack sx={{width: '100%'}} spacing={2}>
-                        <Alert severity="success" style={errorStyle}>This is a success alert — check it out!</Alert>
+                        <Alert severity="success" className={"errorStyle"}>This is a success alert — check it out!</Alert>
                     </Stack>
 
                     }
-                    <Button variant="contained" style={changePasswordStyle} onClick={e => this.onSubmitPassword(e)}>Change Password</Button>
+                    <button variant="contained" className={"changePasswordStyle"} onClick={e => this.onSubmitPassword(e)}>Change Password</button>
+
                 </form>
+
+
             </div>
         );
 
@@ -464,26 +354,28 @@ class SecurityQuestionsPage extends Component {
         return (
             <div>
 
-                {fetchError &&
 
-                <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error" style={errorStyle}>DB Error Try Again</Alert>
-                </Stack>
+                {
+                    fetchError &&
+
+                    <Stack sx={{width: '100%'}} spacing={2}>
+                        <Alert severity="error" className={"errorStyle"}>DB Error Try Again</Alert>
+                    </Stack>
 
                 }
+
+
 
 
                 {changeSuccess && <Redirect to='/'/>}
 
 
                 <form>
-                    <div style={outerGridStyle}>
+                    <div className={"outerGridStyle"}>
 
-
-                        <h1 style={titleStyle}>
+                        <div className={"titleStyle"}>
                             Account Recovery
-                        </h1>
-
+                        </div>
 
 
                         <TextField
@@ -497,8 +389,9 @@ class SecurityQuestionsPage extends Component {
                             defaultValue=""
                             value = {email}
                             onChange={e => this.change(e)}
+                            onBlur={this.validateEmail}
                             helperText={this.state.emailError}
-                            style={emailStyle}
+                            className={"emailStyle"}
                         />
 
                         {renderQuestionOne}
@@ -509,7 +402,7 @@ class SecurityQuestionsPage extends Component {
 
 
 
-                        <h3 style={securityQuestionTextStyle}>Security Questions:</h3>
+                        <div className={"securityQuestionTextStyle"}>Security Questions:</div>
 
                         <div>
 
@@ -521,6 +414,7 @@ class SecurityQuestionsPage extends Component {
                                 //style={modalStyle}
                             >
                                 <Backdrop open={open} style={backdropStyle}>
+                                    <div className={"modalTextStyle"}> Enter your new password: </div>
                                     {body}
                                 </Backdrop>
 
@@ -534,6 +428,18 @@ class SecurityQuestionsPage extends Component {
 
         );
     };
+}
+
+const backdropStyle = {
+    left: "700px",
+    top: "200px",
+    width: "500px",
+    height: "600px",
+    position: "absolute",
+    //backgroundColor: "#2F2D4A",
+    backgroundColor: "#FFFFFF",
+    border: '3px solid black',
+
 }
 
 

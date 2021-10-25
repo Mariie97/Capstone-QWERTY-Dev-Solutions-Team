@@ -55,6 +55,7 @@ class App extends React.Component {
                             path='/security-questions'
                             render={() => (
                                 <div>
+                                    <NavBar cookies= {this.props.cookies} />
                                     <SecurityQuestionsPage/>
                                 </div>
 
@@ -63,15 +64,15 @@ class App extends React.Component {
                         />
 
 
-                    <Route
-                    exact
-                    path='/signup'
-                    render={() => (
-                    <React.Fragment>
-                    <h1>Register Account</h1>
-                    </React.Fragment>
-                )}
-                    />
+                        <Route
+                            exact
+                            path='/signup'
+                            render={() => (
+                                <React.Fragment>
+                                    <h1>Register Account</h1>
+                                </React.Fragment>
+                            )}
+                        />
 
                     </Switch>
                 </div>
