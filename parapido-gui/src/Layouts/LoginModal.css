@@ -108,6 +108,10 @@
     border: 2px solid black;  
 }
 
+.login-modal-continue-button:active {
+	background-color: #2e856e;
+}
+
 .text-button-login-modal{
     float: left;
     position: relative;

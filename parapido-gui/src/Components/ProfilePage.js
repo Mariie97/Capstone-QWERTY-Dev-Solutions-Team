@@ -204,7 +204,13 @@ class ProfilePage extends Component {
                                             />
                                             {firstNameError !== undefined &&
                                             <div className="required-field-job-creation">
-                                            <ReportProblemIcon style={report} />{firstNameError} 
+                                                <hr className="first-name-error"></hr>
+                                                <hr className="first-name-error-1"></hr>
+                                                {(lastNameError === undefined && zipcodeError === undefined) ?  <hr className="first-name-error-2"></hr>:
+                                                <hr className="first-name-error-2-move"></hr>}
+                                                {(lastNameError === undefined && zipcodeError === undefined) ?  <hr className="first-name-error-3"></hr>:
+                                                <hr className="first-name-error-3-move"></hr>}
+                                                <ReportProblemIcon style={report} />{firstNameError} 
                                             </div>
                                              }
 
@@ -225,11 +231,27 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateLastName}
                                                 InputProps={{ disableUnderline: true }}
                                             />
-                                             {lastNameError !== undefined &&
-                                            <div className="required-field-job-creation">
-                                            <ReportProblemIcon style={report} />{lastNameError} 
-                                            </div>
-                                             }
+                                            {lastNameError !== undefined &&
+                                                <div className="required-field-job-creation">
+                                                     {(firstNameError === undefined && zipcodeError === undefined) ? (streetError !== undefined) ? <hr className="last-name-street-error-move"></hr> :
+                                                     <hr className="last-name-error"></hr> 
+                                                     : (firstNameError === undefined && zipcodeError !== undefined) ? 
+                                                     <hr className="last-name-zipcode-error-move"></hr> :
+                                                     <hr className="last-name-error-move"></hr>}
+                                                     {(firstNameError === undefined && zipcodeError === undefined) ?  (streetError !== undefined) ? <hr className="last-name-street-error-1-move"></hr> :
+                                                     <hr className="last-name-error-1"></hr>:
+                                                     <hr className="last-name-error-1-move"></hr>}
+                                                     {(firstNameError === undefined && zipcodeError === undefined) ? (streetError !== undefined) ? <hr className="last-name-street-error-2-move"></hr> :
+                                                     <hr className="last-name-error-2"></hr>:
+                                                     <hr className="last-name-error-2-move"></hr>}
+                                                     {(firstNameError === undefined && zipcodeError === undefined) ?  (streetError !== undefined) ? <hr className="last-name-street-error-3-move"></hr> : 
+                                                     <hr className="last-name-error-3"></hr>:
+                                                     (firstNameError === undefined && zipcodeError !== undefined) ? 
+                                                     <hr className="last-name-zipcode-error-3-move"></hr> :
+                                                     <hr className="last-name-error-3-move"></hr>}   
+                                                     <ReportProblemIcon style={report} />{lastNameError} 
+                                                </div>
+                                            }
                                         </div>
                                         <div className="grid-edit-info-item3">
                                             <label className="label-about-profile-page"> About </label>
@@ -271,9 +293,15 @@ class ProfilePage extends Component {
                                                 InputProps={{ disableUnderline: true }}
                                             />
                                             {streetError !== undefined &&
-                                            <div className="required-field-job-creation">
-                                            <ReportProblemIcon style={report} />{streetError} 
-                                            </div>
+                                                <div className="required-field-job-creation">
+                                                    <hr className="street-error"></hr>
+                                                    <hr className="street-error-1"></hr>
+                                                    {lastNameError === undefined && zipcodeError === undefined ?  <hr className="street-error-2"></hr>:
+                                                    <hr className="street-error-2-move"></hr>}
+                                                    {lastNameError === undefined && zipcodeError === undefined ?  <hr className="street-error-3"></hr>:
+                                                    <hr className="street-error-3-move"></hr>}
+                                                    <ReportProblemIcon style={report} />{streetError} 
+                                                </div>
                                              }
                                         </div>
                                         <div className="grid-edit-info-item5">
@@ -389,7 +417,7 @@ class ProfilePage extends Component {
         if (this.state.change_first_name.length===0) {
             this.setState({
                 firstNameError: "This field is required"
-            })
+            })            
             return false;
         }
         this.setState({

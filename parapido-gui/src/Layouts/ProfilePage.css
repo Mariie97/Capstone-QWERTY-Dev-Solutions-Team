@@ -287,4 +287,271 @@ h2.edit-subheaders {
 	outline: none;
 }
 
+/* field is required - live alerts and errors */
+
+.first-name-error{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -57px;
+}
+
+
+.first-name-error-1{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 44px;
+	position: absolute;
+	left: 3px;
+	top: -57px;
+}
+
+.first-name-error-2{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 180.6px;
+	top: -57px;
+}
+
+.first-name-error-2-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 177.6px;
+	top: -57px;
+}
+
+
+.first-name-error-3{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 176.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.first-name-error-3-move{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 174.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.street-error{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -57px;
+}
+
+
+.street-error-1{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 44px;
+	position: absolute;
+	left: 3px;
+	top: -57px;
+}
+
+.street-error-2{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 179.6px;
+	top: -57px;
+}
+
+.street-error-2-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 178.5px;
+	top: -57px;
+}
+
+
+.street-error-3{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 176.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.street-error-3-move{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 174.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.last-name-error{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64%;
+	left: 4px;
+	top: -57px;
+}
+
+.last-name-error-move{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64.4%;
+	left: 3px;
+	top: -57.8px;
+}
+
+.last-name-zipcode-error-move{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64.4%;
+	left: 3px;
+	top: -57px;
+}
+
+.last-name-street-error-move{
+	color: red;
+	border: 1.55px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 63.8%;
+	left: 4px;
+	top: -57.8px;
+}
+
+.last-name-error-1{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 44px;
+	position: absolute;
+	left: 3px;
+	top: -57px;
+}
+
+.last-name-error-1-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.4px solid red;
+	height: 44px;
+	position: absolute;
+	left: 3px;
+	top: -57px;
+}
+
+.last-name-street-error-1-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.4px solid red;
+	height: 44px;
+	position: absolute;
+	left: 3px;
+	top: -57.5px;
+}
+
+.last-name-error-2{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 180.6px;
+	top: -57px;
+}
+
+.last-name-error-2-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 177.6px;
+	top: -57px;
+}
+
+.last-name-street-error-2-move{
+	border: 0;
+	margin: 0;
+	border-left: 2.5px solid red;
+	height: 43px;
+	position: absolute;
+	left: 177.6px; 
+	top: -57px;
+}
+
+
+.last-name-error-3{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 176.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
+.last-name-error-3-move{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 174.8px;
+	left: 4px;
+	top: -14.1px;
+}
+
+.last-name-zipcode-error-3-move{
+	color: red;
+	border: 1.5px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 64.4%;
+	left: 3px;
+	top: -16px;
+}
+
+.last-name-street-error-3-move{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 174.8px;
+	left: 4px;
+	top: -15.1px;
+}
+
 
