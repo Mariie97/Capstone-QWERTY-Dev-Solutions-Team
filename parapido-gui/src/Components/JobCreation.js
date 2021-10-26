@@ -1,8 +1,8 @@
 import React, { Component, createRef } from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobCreation.css";
-import CitiesDropdown from "./CitiesDropdown_JobCreation.js";
-import CategoriesDropdown from "./CategoriesDropdown_JobCreation.js";
+import CitiesDropdown from "./CitiesDropdown_.js";
+import CategoriesDropdown from "./CategoriesDropdown.js";
 import AvailableDays from './AvailableDaysChips_JobCreation';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
