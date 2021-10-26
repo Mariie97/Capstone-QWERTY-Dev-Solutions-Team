@@ -6,6 +6,7 @@ import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 import UserRegistrationPage from "./Components/UserRegistrationPage";
+import ChatPage from "./Components/ChatPage";
 
 
 class App extends React.Component {
@@ -50,7 +51,21 @@ class App extends React.Component {
                         path='/signup'
                         render={() => (
                             <React.Fragment>
-                                <UserRegistrationPage/>
+                                <UserRegistrationPage />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/chat'
+                        render={(props) => (
+                            <React.Fragment>
+                                <NavBar cookies= {this.props.cookies} />
+                                <ChatPage
+                                    cookies= {this.props.cookies}
+                                    queryParams={props.location.search}
+                                />
+
                             </React.Fragment>
                         )}
                     />
