@@ -2,7 +2,7 @@ import {Component} from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import verifyUserAuth from "../Utilities";
-
+import CategoriesDropdown from './CategoriesDropdown_';
 
 class JobDashboardPage extends Component {
 
@@ -30,13 +30,16 @@ class JobDashboardPage extends Component {
                 <h1 className="job-dashboard-page-header">Job Dashboard</h1>
                 <div className="first-flex-container-job-dashboard-page">
                     <div>
-                        Category
+                        <label className="label-job-dashboard"> Categories </label>
+                        <CategoriesDropdown initial_value= ''/>
                     </div>
+
                     <div>
-                        Price
+                        <label className="label-job-dashboard"> Price </label>
                     </div>
+                    
                     <div>
-                        City
+                        <label className="label-job-dashboard"> City</label>
                     </div>
                     <button> Press to FILTER </button>
                 </div>

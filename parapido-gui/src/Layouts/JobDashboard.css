@@ -17,6 +17,18 @@
 	margin-bottom: 80px;
 }
 
+/* all labels have the same style */
+
+.label-job-dashboard{
+font-family: "Cormorant Garamond";
+  font-style: italic; 
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 2.5;
+}
+
 /* dropdowns and filters*/
 
 .first-flex-container-job-dashboard-page{
@@ -24,4 +36,63 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-wrap: wrap;
+}
+
+/* Material ui override dropdown styling  */
+
+.MuiInputBase-root {
+    background-color: white;
+	font-size: 17px;
+}
+
+.MuiMenuItem-root{
+	font-family: "Jost";
+}
+
+.MuiSelect-root{
+	display: inline;
+	padding-bottom: 0px;
+	padding-right: 0px;
+	width: 190px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	height: 42px;
+}
+
+.MuiInputBase-input{
+	animation-name: none;
+	animation-duration: 0ms;
+
+}
+
+/* arrow icon in Material ui dropdown */
+
+.MuiSelect-icon{
+	color: darkblue;
+}
+
+/* what changes when you select something */
+
+.MuiSelect-select{
+	background-color:white ;
+	display: grid;
+	align-content: center;
+	text-align: center;
+	
+}
+
+/* inside Material ui dropdown */
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
 }
