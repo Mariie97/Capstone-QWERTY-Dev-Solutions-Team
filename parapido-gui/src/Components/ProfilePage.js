@@ -8,6 +8,8 @@ import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import SaveIcon from '@material-ui/icons/Save';
+import UploadIcon from '@material-ui/icons/Update'
 
 class ProfilePage extends Component {
     current_user = {
@@ -348,7 +350,7 @@ class ProfilePage extends Component {
                                                     <div> {change_image.name} </div>}
                                                 </div>
                                             <div>
-                                            <label for="profile-pic" class="custom-file-upload-profile-page"> Upload profile picture</label>
+                                            <label for="profile-pic" class="custom-file-upload-profile-page"><UploadIcon style={upload}/> Upload profile picture</label>
                                             </div>
                                                 <input
                                                     id="profile-pic"
@@ -364,7 +366,8 @@ class ProfilePage extends Component {
                                                 />
                                         </div>
                                     </div>
-                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} > Save changes </button>
+                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} > 
+                                    <SaveIcon style={save}/> Save changes </button>
                                 </div>
                             }
                         </div>
@@ -544,5 +547,16 @@ const report = {
     position: "relative",
     top: "4px"
 }
+
+const save = {
+    position: "relative",
+    top: "5px"
+}
+
+const upload = {
+    position: "relative",
+    top: "7px"
+}
+
 export default ProfilePage;
 
