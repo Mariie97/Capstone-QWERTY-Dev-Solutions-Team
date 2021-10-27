@@ -90,9 +90,7 @@ class ChatApp extends Component {
             messages: data,
             refreshComplete: true,
           });
-          console.log('about to set receiver');
           this.receiver_id = data[0].sender_id===current_user.id ? data[0].receiver_id : data[0].sender_id;
-          console.log(this.receiver_id);
         })
       }
     })

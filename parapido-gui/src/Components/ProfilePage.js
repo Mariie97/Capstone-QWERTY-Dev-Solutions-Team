@@ -151,7 +151,7 @@ class ProfilePage extends Component {
                         <div className = "parent-flex-container-profile-page">
                             <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
                             {!edit ?
-                                <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
+                                <div className="child2-flex-container-profile-page">
                                     <ul className="bullet-removal-profile-page">
                                         <li>
                                             <ul className="body-flex-profile-page">

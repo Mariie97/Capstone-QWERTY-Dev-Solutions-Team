@@ -25,7 +25,7 @@
 	/* testing purposes */
 	/* background-color: red; */
 
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 }
 
 /* card */
@@ -45,6 +45,7 @@
 
 .child2-flex-container-profile-page {
 	margin-top: 90px;
+	margin-left: 0;
 	font-family: "Cormorant Garamond";
 	font-size: 30px;
 	font-weight: 200;
@@ -52,6 +53,7 @@
 	line-height: 80px;
 	position: relative;
 	bottom: 18px;
+	max-width: 50%;
 }
 
 /* buttons */
