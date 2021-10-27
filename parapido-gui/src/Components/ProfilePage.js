@@ -9,7 +9,8 @@ import ProfileCard from './ProfileCard';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import SaveIcon from '@material-ui/icons/Save';
-import UploadIcon from '@material-ui/icons/Update'
+// import UploadIcon from '@material-ui/icons/Update';
+import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
     current_user = {
@@ -350,7 +351,8 @@ class ProfilePage extends Component {
                                                     <div> {change_image.name} </div>}
                                                 </div>
                                             <div>
-                                            <label for="profile-pic" class="custom-file-upload-profile-page"><UploadIcon style={upload}/> Upload profile picture</label>
+                                            <label for="profile-pic" class="custom-file-upload-profile-page">
+                                                <UploadIcon style={upload}/> Upload profile picture</label>
                                             </div>
                                                 <input
                                                     id="profile-pic"
