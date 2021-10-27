@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {InputLabel, MenuItem, Select} from "@material-ui/core";
-import "../Layouts/CitiesDropdown.css"
-
-
+import "../Layouts/CitiesDropdown.css";
 
 class CitiesDropdown extends Component {
 

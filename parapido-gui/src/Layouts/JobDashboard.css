@@ -96,3 +96,34 @@ font-family: "Cormorant Garamond";
 .MuiList-root{
 	background-color: #FFEBCC;
 }
+
+/* button */ 
+
+.filter-button-job-dashboard{
+	width: 15%;
+    margin-top: 35px;
+    padding-bottom: 20px;
+	border: 2px solid #FFEBCC;  
+    background-color: #FFEBCC;
+    border-radius: 10px;
+	text-align: center;
+}
+
+.filter-button-job-dashboard:hover{
+    cursor: pointer;
+    border: 3px solid black;  
+}
+
+.filter-button-job-dashboard:active{
+    background-color: #2e856e;
+}
+
+.text-button-job-dashboard{
+    position: relative;
+    top: 7px;
+    left: 4px;
+    font-family: "Sans Serif";
+    font-weight: bold;
+    font-size:20px;
+    color: #2F2D4A;
+}
