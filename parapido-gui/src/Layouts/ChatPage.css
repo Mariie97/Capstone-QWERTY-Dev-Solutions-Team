@@ -15,7 +15,8 @@ body {
   max-width: 1000px;
   border-radius: 10px;
   background-color: #FFFFFF;
-  box-shadow: 3px 0 15px rgb(157, 150, 150);  overflow: hidden;
+  box-shadow: 1px 1px 15px rgb(157, 150, 150);
+  overflow: hidden;
   height: calc(100vh - 120px);
   max-height: 72vh;
 }
@@ -164,7 +165,7 @@ body {
   display: inline-block;
   border-radius: 50px;
   background-color: #6cca51;
-  border: 1px solid #28531b;
+  border: 1px solid #6cca51;
   color: #fff;
   cursor: pointer;
   transition: all 0.2s linear;
