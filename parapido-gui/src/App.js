@@ -5,7 +5,9 @@ import LandingPage from "./Components/LandingPage"
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
+import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
+import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
 
 
@@ -52,6 +54,7 @@ class App extends React.Component {
                         render={() => (
                             <React.Fragment>
                                 <UserRegistrationPage />
+                                <UserRegistrationPage />
                             </React.Fragment>
                         )}
                     />
@@ -69,6 +72,29 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+                    <Route
+                        exact
+                        path='/job/:job_id'
+                        render={(props) => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <JobDetailsPage
+                                    cookies={this.props.cookies}
+                                    job_id={props.match.params.job_id}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                            exact
+                            path='/jobcreation'
+                            render={() => (
+                                <React.Fragment>
+                                    <NavBar cookies={this.props.cookies} />
+                                    <JobCreation cookies={this.props.cookies} />
+                               </React.Fragment>
+                            )}
+                        />
                 </Switch>
             </BrowserRouter>
         );

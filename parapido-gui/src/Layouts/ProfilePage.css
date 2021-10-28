@@ -69,13 +69,14 @@
 	box-sizing: border-box;
 	text-decoration: none;
 	font-family: "Jost";
-	font-weight: bold;
+	font-weight: 400;
 	color: black;
 	background-color: #ffebcc;
 	text-align: center;
 	position: relative;
 	border-radius: 2%;
 	margin-right: 25px;
+	cursor: pointer;
 }
 
 .button-profile-page:hover {
@@ -148,10 +149,9 @@
 
 .edit-info-grid-container {
 	grid-template-columns: 30% 30% 30%;
-	grid-template-rows: 40% 40% 40%;
+	grid-template-rows: 20px 40% 40% auto;
 	display: grid;
 	grid-gap: 5px 120px;
-	/*background-color: black;*/
 	position: relative;
 	top: 35px;
 }
@@ -205,8 +205,9 @@ h2.edit-subheaders {
 
 .save-change-button {
 	float: right;
-	bottom: 65px;
-	left: 40px;
+	top: 22px;
+	/*bottom: 65px;*/
+	/*left: 40px;*/
 }
 
 #profile-pic-label {
@@ -215,7 +216,7 @@ h2.edit-subheaders {
 	font-weight: 400;
 	font-size: 18px;
 	font-style: italic;
-	margin-right: 20px;
+	line-height: 2;
 }
 
 .loading-icon {
@@ -242,10 +243,64 @@ h2.edit-subheaders {
 
 .label-about-profile-page{
 	font-family: "Cormorant Garamond";
-	font-style: italic; 
-    font-weight: 400;
-    font-size: 16px;
-    color: white;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 16px;
+	color: white;
 	letter-spacing: 1px;
-	line-height: 1.5;
+	line-height: 2;
+}
+
+.custom-file-upload-profile-page {
+	padding: 10px;
+	background-color: #FFEBCC;
+	border: 2px solid black;
+	border-radius: 10px;
+	font-family: jost;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	margin-left: -1.8px;
+
+}
+
+.custom-file-upload-profile-page:hover {
+	border-color: white;
+}
+
+.custom-file-upload-profile-page:active {
+	background-color: #2e856e;
+}
+
+.change-about-style-profile-page{
+	font-family: "Times New Roman";
+	font-size: 18px;
+	width: 100%;
+	border: 3px solid black;
+	padding-left: 3px;
+	padding-right: 3px;
+	resize: none
+}
+
+.change-about-style-profile-page:focus{
+	background-color: #ffebcc;
+	border: 3px solid black;
+	outline: none;
+}
+
+.upload-profile-pic-container {
+	display: flex;
+	flex-flow: row-reverse wrap;
+	justify-content: flex-end;
+	margin-top: 40px;
+	align-items: center;
+}
+
+.upload-file-text {
+	margin-left: 10px;
+	color: white;
+	font-size: 12px;
+}
+.error{
+	border-color: red;
 }
