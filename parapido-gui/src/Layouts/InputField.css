@@ -62,7 +62,7 @@
     left: -3px;
 }
 
-.custome-input-label {
+.custom-input-label {
     font-family: "Cormorant Garamond";
     font-style: italic;
     font-weight: 400;
@@ -70,6 +70,21 @@
     color: white;
     letter-spacing: 1px;
     line-height: 2;
+}
+.custom-input-multiline{
+	font-family: "Times New Roman";
+	font-size: 18px;
+	width: 100%;
+	border: 3px solid black;
+	padding-left: 3px;
+	padding-right: 3px;
+	resize: none
+}
+
+.custom-input-multiline:focus{
+	background-color: #ffebcc;
+	border: 3px solid black;
+	outline: none;
 }
 
 

@@ -133,16 +133,16 @@ class ProfilePage extends Component {
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
                                 <Link to={"/jobdashboard"}>
-                                    <button className="custome-buttons" onClick={this.toggleEdit}>
+                                    <button className="custom-buttons" onClick={this.toggleEdit}>
                                         {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>
                                 </Link>
                                 }
-                                <button className="custome-buttons" onClick={this.toggleEdit} >
+                                <button className="custom-buttons" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
                                 {current_user.type === accountType.admin &&
-                                <button className="custome-buttons delete-button" onClick={this.onClickDelete}>
+                                <button className="custom-buttons delete-button" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
                                 }
@@ -223,24 +223,21 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
-                                            <label className="label-about-profile-page">About </label>
-                                            <div>
-                                                <TextareaAutosize
-                                                    id="change-about"
-                                                    multiline={true}
-                                                    rows = {6}
-                                                    maxRows={6}
-                                                    value={change_about}
-                                                    className="change-about-style-profile-page"
-                                                    onChange={(event) => {
-                                                        if (event.target.value.length <= 250 ) {
-                                                            this.setState({
-                                                                change_about: event.target.value
-                                                            });
-                                                        }
-                                                    }}
-                                                />
-                                            </div>
+                                            <Input
+                                                id="change-about"
+                                                labelText='About'
+                                                multiline
+                                                rows='6'
+                                                value={change_about}
+                                                className="change-about-style-profile-page"
+                                                onChange={(event) => {
+                                                    if (event.target.value.length <= 250 ) {
+                                                        this.setState({
+                                                            change_about: event.target.value
+                                                        });
+                                                    }
+                                                }}
+                                            />
                                         </div>
                                         <div className="grid-edit-info-item8">
                                             <h2 className="edit-subheaders">Address</h2>
@@ -311,7 +308,7 @@ class ProfilePage extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} >
+                                    <button className="custom-buttons save-change-button" onClick={this.saveChanges} >
                                         Save changes
                                     </button>
                                 </div>

@@ -156,7 +156,7 @@ class ChatApp extends Component {
           <div className='header-flex-container'>
             <div className="button-flex-container">
               <Link to={`/job/${this.queryParams?.get('job_id')}`}
-                    className='custome-buttons'
+                    className='custom-buttons'
                     id="view-job-button">
                 View Job
               </Link>

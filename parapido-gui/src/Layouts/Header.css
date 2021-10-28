@@ -26,7 +26,7 @@
     margin-right: 5%;
 
 }
-.custome-buttons {
+.custom-buttons {
     border: 1px solid black;
     text-decoration: none;
     font-family: "Jost";
@@ -41,15 +41,15 @@
     border-radius: 8px;
     padding: 5px;
 }
-.custome-buttons.delete-button {
+.custom-buttons.delete-button {
     background-color: #ac1212;
 }
 
-.custome-buttons:hover {
+.custom-buttons:hover {
     border-color: white;
     cursor: pointer;
 }
 
-.custome-buttons:active {
+.custom-buttons:active {
     background-color: #2e856e;
 }

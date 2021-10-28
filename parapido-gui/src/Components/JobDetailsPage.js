@@ -220,35 +220,35 @@ class JobDetailsPage extends Component {
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="custome-buttons">
+                                <button onClick={this.onClickRequest} className="custom-buttons">
                                     Request Job
                                 </button>
                                 }
                                 {showCancelButton &&
-                                <button onClick={this.changeJobStatus} className="custome-buttons">
+                                <button onClick={this.changeJobStatus} className="custom-buttons">
                                     Cancel Job
                                 </button>
                                 }
                                 {showCancelRequestButton &&
-                                <button onClick={this.onClickCancelRequest} className="custome-buttons">
+                                <button onClick={this.onClickCancelRequest} className="custom-buttons">
                                     Cancel Request
                                 </button>
                                 }
                                 {showContractButton &&
                                 <a
                                     href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
-                                    className="custome-buttons">
+                                    className="custom-buttons">
                                     View Contract
                                 </a>
                                 }
                                 {showChatButton &&
                                 <Link
                                     to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}`}
-                                    className="custome-buttons"
+                                    className="custom-buttons"
                                 >Chat</Link>
                                 }
                                 {showDeleteButton &&
-                                <button onClick={this.changeJobStatus} className="custome-buttons delete-button">
+                                <button onClick={this.changeJobStatus} className="custom-buttons delete-button">
                                     Delete Job
                                 </button>
                                 }

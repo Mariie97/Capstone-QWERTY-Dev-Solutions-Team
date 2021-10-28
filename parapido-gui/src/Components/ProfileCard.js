@@ -45,10 +45,10 @@ class ProfileCard extends Component {
                             <li>
                                 {type!==undefined &&
                                 <div className= "top-profile-card-lettering">
-                                    {13 === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
-                                        :2 === accountType.client ? <img src= {_employer} alt="client" style={client}/>
+                                    {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
+                                        : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
                                             :<img src= {_admin} alt="admin" style={admin}/>}
-                                    {this.acc_type[2]}
+                                    {this.acc_type[type]}
                                 </div>
                                 }
                             </li>
