@@ -8,20 +8,47 @@
     font-size: 16px;
     color: white;
 	letter-spacing: 1px;
-	line-height: 1.5;
+	line-height: 2;
 }
+  
 
 #cities-dropdown {
     color: black;
     background-color: white;
-    width: 29vh;
-    font-family: "Jost";
-  
+    font-family: "Times New Roman";
+    width: 151px;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .MuiInputBase-root{
     border: 3px solid black;
     font-family: "Jost";
     font-size: 15px;
+    border-radius: 0px;
+
 }
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
+}
+
+.MuiMenuItem-root{
+    background-color: white;
+}
+
+
+
+
+
 
