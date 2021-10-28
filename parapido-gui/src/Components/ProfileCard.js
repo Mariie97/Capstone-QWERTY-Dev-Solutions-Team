@@ -37,26 +37,24 @@ class ProfileCard extends Component {
                             <li>
                                 <StarIcon style = {star}/>
                                 {rating_value===null ?
-                                    ' No rating yet ':
+                                    'No rating yet ':
                                     `Rating: ${rating_value} of 5`
                                 }
                                 <ThumbsUpDownIcon style = {thumbsupdown}/>
                             </li>
-                            <li>
-                                {type!==undefined &&
-                                <div className= "top-profile-card-lettering">
-                                    {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
-                                        : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
-                                            :<img src= {_admin} alt="admin" style={admin}/>}
-                                    {this.acc_type[type]}
-                                </div>
-                                }
-                            </li>
+                            {type!==undefined &&
+                            <div className= "top-profile-card-lettering">
+                                {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
+                                    : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
+                                        :<img src= {_admin} alt="admin" style={admin}/>}
+                                <p>{this.acc_type[type]}</p>
+                            </div>
+                            }
                         </ul>
-                        <p className="footer-line-profile-card">
+                        <div className="footer-line-profile-card">
                             <DeleteTwoTone style={trashcan} />
                             Jobs Cancelled: {jobs_cancelled}
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -95,9 +95,9 @@ export const cities = [
 ];
 
 export const current_user = {
-        id: parseInt(localStorage.getItem('user_id')),
-        type: parseInt(localStorage.getItem('type'))
-    };
+    id: parseInt(localStorage.getItem('user_id')),
+    type: parseInt(localStorage.getItem('type'))
+};
 
 export const jobStatus = {
     posted: 1,
@@ -129,6 +129,17 @@ export const weekDays = [
     'Thursday',
     'Friday',
     'Saturday'
+];
+
+export const categories = [
+    'Animals',
+    'Auto',
+    'Education',
+    'Events',
+    'Home',
+    'Self-Care',
+    'Shop',
+    'Other'
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;

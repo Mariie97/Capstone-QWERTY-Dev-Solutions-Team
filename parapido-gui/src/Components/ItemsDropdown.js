@@ -4,7 +4,7 @@ import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
 
-class CitiesDropdown extends Component {
+class ItemsDropdown extends Component {
 
     constructor(props) {
         super(props);
@@ -20,6 +20,8 @@ class CitiesDropdown extends Component {
         // validation method - end of render method
         this.validateItem = this.validateItem.bind(this);
         this.validate = this.validate.bind(this);
+
+        this.getAllItems = this.getAllItems.bind(this);
 
     }
 
@@ -38,7 +40,7 @@ class CitiesDropdown extends Component {
             this.validateItem();
     }
 
-    allCities() {
+    getAllItems() {
         const { itemsList } = this.props;
         return itemsList.map((item, index) =>
             <MenuItem value={index+1}>{item}</MenuItem>
@@ -49,10 +51,13 @@ class CitiesDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
+        const { label, required } = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
+                  <label className="label-job-creation"> {label}{required && '*'} </label>
+                    <br/>
                     <Select
                         value={item}
                         onChange={this.handleOnChangeCity}
@@ -70,7 +75,7 @@ class CitiesDropdown extends Component {
                         }}
                         disableUnderline
                     >
-                        {this.allCities()}
+                        {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
                     <div className="required-field-2-job-creation">
@@ -105,4 +110,4 @@ const report = {
     top: "4px"
 }
 
-export default CitiesDropdown;
+export default ItemsDropdown;

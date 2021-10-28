@@ -3,7 +3,7 @@ import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
 import verifyUserAuth, {accountType, cities, current_user, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
-import CitiesDropdown from "./CitiesDropdown";
+import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
 import UploadIcon from '@material-ui/icons/CloudUpload'
@@ -260,7 +260,7 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item5">
                                             <label className="label-job-creation">City</label>
-                                            <CitiesDropdown
+                                            <ItemsDropdown
                                                 initial_value={city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
