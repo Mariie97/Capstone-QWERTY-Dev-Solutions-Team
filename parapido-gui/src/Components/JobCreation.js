@@ -7,7 +7,7 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
-import verifyUserAuth, {categories, cities} from "../Utilities";
+import verifyUserAuth, {categories, cities, zipcodeFormatPR} from "../Utilities";
 
 
 export class JobCreation extends Component {
@@ -217,14 +217,14 @@ export class JobCreation extends Component {
                         }
 
                         <div className="mini-flex-box-job-creation">
-                                <ItemsDropdown
-                                    initial_value={''}
-                                    ref={change_city}
-                                    validate={true}
-                                    itemsList={cities}
-                                    label='City'
-                                    required
-                                />
+                            <ItemsDropdown
+                                initial_value={''}
+                                ref={change_city}
+                                validate={true}
+                                itemsList={cities}
+                                label='City'
+                                required
+                            />
 
                             <div style={{width: "108%"}}>
                                 <label className="label-job-creation"> Zipcode* </label>
@@ -272,14 +272,14 @@ export class JobCreation extends Component {
                         </div>
                         }
                     </div>
-                        <ItemsDropdown
-                            required
-                            label='Category'
-                            initial_value={''}
-                            ref={change_category}
-                            validate={true}
-                            itemsList={categories}
-                        />
+                    <ItemsDropdown
+                        required
+                        label='Category'
+                        initial_value={''}
+                        ref={change_category}
+                        validate={true}
+                        itemsList={categories}
+                    />
                     <div>
                         <label className="label-job-creation" >
                             Available days*
@@ -352,8 +352,9 @@ export class JobCreation extends Component {
             return false;
         }
 
-        if (!(this.state.zipcode[2] === '6'|| this.state.zipcode[2] === '7' || this.state.zipcode[2] ==='9')) {
-            this.setState({zipcodeError: 'The zip code provide do not belong to Puerto Rico'});
+        if (!zipcodeFormatPR.test(this.state.zipcode)) {
+            this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
+
             return false;
         }
 
