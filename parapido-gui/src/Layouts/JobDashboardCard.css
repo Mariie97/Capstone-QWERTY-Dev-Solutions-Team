@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Tangerine&family=Old+Standard+TT:ital@1&display=swap');
+
+.card-body-wrapper{
+    margin: 2rem;
+    font-family: 'Tangerine';
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+
+.card-wrapper{
+    display: grid;
+    background-color: burlywood;
+    grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
+    gap: 2rem;
+    justify-content: center;
+
+}

@@ -6,7 +6,7 @@ import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 import UserRegistrationPage from "./Components/UserRegistrationPage";
-
+import Card from './Components/JobDashboardCard'
 
 class App extends React.Component {
     render() {
@@ -19,6 +19,15 @@ class App extends React.Component {
                         render={() => (
                             <React.Fragment>
                                 <LandingPage cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/test'
+                        render={() => (
+                            <React.Fragment>
+                               <Card />
                             </React.Fragment>
                         )}
                     />
