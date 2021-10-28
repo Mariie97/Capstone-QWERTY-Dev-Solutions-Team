@@ -7,7 +7,7 @@ import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
     current_user = {
@@ -285,19 +285,13 @@ class ProfilePage extends Component {
                                             />
                                             <div className='upload-profile-pic-container'>
                                                 <div className='upload-file-text'>
-                                                    {change_image.name === undefined ? <div> No file Selected </div> :
-                                                        <div> {change_image.name} </div>}
+                                                    {change_image.name === undefined ? 'No file selected'  :
+                                                        change_image.name
+                                                    }
                                                 </div>
-                                            <div>
-                                            <label for="profile-pic" class="custom-file-upload-profile-page">
-                                                <UploadIcon style={upload}/> Upload profile picture</label>
-                                            </div>
-                                                {/*<div>*/}
-                                                {/*    <label htmlFor="profile-pic"*/}
-                                                {/*           className="custom-file-upload-profile-page">*/}
-                                                {/*        Upload picture*/}
-                                                {/*    </label>*/}
-                                                {/*</div>*/}
+                                                <label for="profile-pic" className="custom-file-upload-profile-page">
+                                                    <UploadIcon style={upload}/> Upload picture
+                                                </label>
                                                 <input
                                                     id="profile-pic"
                                                     type="file"
@@ -314,12 +308,8 @@ class ProfilePage extends Component {
                                         </div>
                                     </div>
                                     <button className="button-profile-page save-change-button" onClick={this.saveChanges} >
-                                    <SaveIcon style={save}/> Save changes </button>
-                                    {/*<button*/}
-                                    {/*    className="button-profile-page save-change-button"*/}
-                                    {/*    onClick={this.saveChanges}>*/}
-                                    {/*    Save changes*/}
-                                    {/*</button>*/}
+                                        Save changes
+                                    </button>
                                 </div>
                             }
                         </div>
@@ -506,18 +496,6 @@ class ProfilePage extends Component {
 }
 
 // small icons and elements css
-
-const report = {
-    color: "red",
-    position: "relative",
-    top: "4px"
-}
-
-const save = {
-    position: "relative",
-    top: "5px"
-}
-
 const upload = {
     position: "relative",
     top: "7px"

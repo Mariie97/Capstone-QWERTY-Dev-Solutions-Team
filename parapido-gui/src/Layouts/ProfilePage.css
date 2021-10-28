@@ -250,7 +250,6 @@ h2.edit-subheaders {
 }
 
 .custom-file-upload-profile-page {
-	margin-top: 35px;
 	padding: 10px;
 	background-color: #FFEBCC;
 	border: 2px solid black;
@@ -289,9 +288,10 @@ h2.edit-subheaders {
 
 .upload-profile-pic-container {
 	display: flex;
-	flex-flow: row-reverse;
+	flex-flow: row-reverse wrap;
 	justify-content: flex-end;
 	margin-top: 40px;
+	align-items: center;
 }
 
 .upload-file-text {
