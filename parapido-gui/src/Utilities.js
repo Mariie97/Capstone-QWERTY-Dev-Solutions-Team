@@ -93,3 +93,40 @@ export const cities = [
     'Yabucoa',
     'Yauco',
 ];
+
+export const current_user = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
+
+export const jobStatus = {
+    posted: 1,
+    in_process: 2,
+    completed: 3,
+    cancelled: 4,
+    deleted: 5,
+};
+
+export const getJobStatus = [
+    'Posted',
+    'In process',
+    'Completed',
+    'Cancelled',
+    'Deleted',
+]
+
+
+export const accountType = {
+    student: 1,
+    client: 2,
+    admin: 3,
+};
+
+export const weekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+]

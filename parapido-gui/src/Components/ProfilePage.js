@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
-import verifyUserAuth, {cities} from "../Utilities";
+import verifyUserAuth, {accountType, cities, current_user} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -10,10 +10,6 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
-    current_user = {
-        id: localStorage.getItem('user_id'),
-        type: localStorage.getItem('type'),
-    };
 
     constructor(props){
         super(props);
@@ -114,10 +110,12 @@ class ProfilePage extends Component {
             streetError,
             zipcodeError,
             is_auth,
-            pageLoaded} = this.state;
+            pageLoaded,
+            user,
+        } = this.state;
 
         const {user_id} = this.props;
-        const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
+        const showButtons = parseInt(user_id) === current_user.id || current_user.type===accountType.admin;
 
         return (
             <React.Fragment>
@@ -133,13 +131,17 @@ class ProfilePage extends Component {
                         <div className="button-profile-page-flex-container">
                             {showButtons &&
                             <div className='button-container'>
-                                <Link to={"/jobdashboard"} >
-                                    <button className="button-profile-page" onClick={this.toggleEdit} >My Jobs</button>
-                                </Link>
+                                {user.type !== accountType.admin &&
+                                    <Link to={"/jobdashboard"}>
+                                        <button className="button-profile-page" onClick={this.toggleEdit}>
+                                            {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
+                                        </button>
+                                    </Link>
+                                }
                                 <button className="button-profile-page" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
-                                {this.current_user.type === '3' &&
+                                {current_user.type === accountType.admin &&
                                 <button className="button-profile-page button-delete" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
@@ -149,7 +151,16 @@ class ProfilePage extends Component {
                         </div>
                         <h1 className="profile-page-header">{first_name} {last_name} </h1>
                         <div className = "parent-flex-container-profile-page">
-                            <div className="child1-flex-container-profile-page"><ProfileCard user={this.state.user} /></div>
+                            <div className="child1-flex-container-profile-page">
+                                <ProfileCard
+                                    user_id={user_id}
+                                    first_name={user.first_name}
+                                    last_name={user.last_name}
+                                    rating_value={user.rating_value}
+                                    jobs_cancelled={user.jobs_cancelled}
+                                    type={user.type}
+                                    image={user.image}                                />
+                            </div>
                             {!edit ?
                                 <div className="child2-flex-container-profile-page" style={{width: 800, marginLeft: 114}}>
                                     <ul className="bullet-removal-profile-page">

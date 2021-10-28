@@ -7,32 +7,38 @@ import _admin from '../Static/Images/admin.png';
 import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import StarIcon from '@material-ui/icons/Star';
+import {Link} from "react-router-dom";
 
 
 class ProfileCard extends Component {
 
-    acc_type ={
+    acc_type = {
         1: "STUDENT",
         2: "CLIENT",
         3: "ADMIN"
     }
 
     render() {
-        const {first_name,last_name,rating_value,jobs_cancelled,type, image} = this.props.user
+        const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
         const profile_pic = image!==null ? image : defaultPicture;
 
         return (
             <React.Fragment>
+                {type!==undefined &&
                 <div className= "top-profile-card-lettering">
                     {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
                         :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
                             :<img src= {_admin} alt="admin" style={admin}/>}
                     {this.acc_type[type]}
                 </div>
+                }
+
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
-                            <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
+                            <Link to={`/profile/${user_id}`}>
+                                <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
+                            </Link>
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
@@ -42,10 +48,13 @@ class ProfileCard extends Component {
                                     ' No rating yet ':
                                     `Rating: ${rating_value} of 5`
                                 }
-
-                                <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                                <ThumbsUpDownIcon style = {thumbsupdown}/>
+                            </li>
                         </ul>
-                        <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
+                        <p className="footer-line-profile-card">
+                            <DeleteTwoTone style={trashcan} />
+                            Jobs Cancelled: {jobs_cancelled}
+                        </p>
                     </div>
                 </div>
             </React.Fragment>
