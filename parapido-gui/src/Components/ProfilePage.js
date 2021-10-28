@@ -128,30 +128,30 @@ class ProfilePage extends Component {
                         </Box>
                     </div>:
                     <div>
-                        <div className="button-profile-page-flex-container">
+                        <div className='header-flex-container'>
                             {showButtons &&
-                            <div className='button-container'>
+                            <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
-                                    <Link to={"/jobdashboard"}>
-                                        <button className="button-profile-page" onClick={this.toggleEdit}>
-                                            {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
-                                        </button>
-                                    </Link>
+                                <Link to={"/jobdashboard"}>
+                                    <button className="custome-buttons" onClick={this.toggleEdit}>
+                                        {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
+                                    </button>
+                                </Link>
                                 }
-                                <button className="button-profile-page" onClick={this.toggleEdit} >
+                                <button className="custome-buttons" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
                                 {current_user.type === accountType.admin &&
-                                <button className="button-profile-page button-delete" onClick={this.onClickDelete}>
+                                <button className="custome-buttons delete-button" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
                                 }
                             </div>
                             }
+                            <h1 className="page-title-header">{first_name} {last_name}</h1>
                         </div>
-                        <h1 className="profile-page-header">{first_name} {last_name} </h1>
-                        <div className = "parent-flex-container-profile-page">
-                            <div className="child1-flex-container-profile-page">
+                        <div className = "parent-table-body-container">
+                            <div className="child1-flex-body-container">
                                 <ProfileCard
                                     user_id={user_id}
                                     first_name={user.first_name}
@@ -162,39 +162,31 @@ class ProfilePage extends Component {
                                     image={user.image}                                />
                             </div>
                             {!edit ?
-                                <div className="child2-flex-container-profile-page">
-                                    <ul className="bullet-removal-profile-page">
-                                        <li>
-                                            <ul className="body-flex-profile-page">
-                                                <li className="child1-body-flex-profile-page"> Email:</li>
-                                                <li className="break-text-profile-page"
-                                                    style={{paddingTop: 19, paddingLeft: 18}}> {email} </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <ul className="body-flex-profile-page">
-                                                <li className="child2-body-flex-profile-page"> Address:</li>
-                                                {street!==null &&
-                                                <li className="break-text-profile-page"
-                                                    style={{paddingLeft: 3, paddingTop: 21}}> {street} {cities[city - 1]} PR, {zipcode}
-                                                </li>
-                                                }
-                                            </ul>
-                                        </li>
-                                        <ul className="body-flex-profile-page">
-                                            <li className="child1-body-flex-profile-page">About:</li>
-                                            <p className="break-text-profile-page"
-                                               style={{paddingLeft: 14, paddingTop: 19.5}}> {about} </p>
-                                        </ul>
-                                    </ul>
-                                </div>:
+                                <table className='table-body-content'>
+                                    <tr className='row-table-body'>
+                                        <th className='column-table-body col1'>Email:</th>
+                                        <th className='column-table-body col2'>{email} </th>
+                                    </tr>
+                                    <tr className='row-table-body'>
+                                        <th className='column-table-body col1'>Address:</th>
+                                        <th className='column-table-body col2'>
+                                            {street !== null &&
+                                                `${street} ${cities[city - 1]} PR, ${zipcode}`
+                                            }
+                                        </th>
+                                    </tr>
+                                    <tr className='row-table-body'>
+                                        <th className='column-table-body col1'>About:</th>
+                                        <th className='column-table-body col2'>{about}</th>
+                                    </tr>
+                                </table>
+                                :
                                 <div className = "child2-grid-container">
                                     <div className="edit-info-grid-container">
                                         <div className="grid-edit-info-item7">
                                             <h2 className="edit-subheaders">Personal information</h2>
                                         </div>
                                         <div className="grid-edit-info-item1">
-                                            <label className="label-about-profile-page"> First Name* </label>
                                             <Input
                                                 required
                                                 value={change_first_name}
@@ -209,10 +201,10 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateFirstName}
                                                 error={firstNameError!==undefined}
                                                 errorMsg={firstNameError}
+                                                labelText='First Name'
                                             />
                                         </div>
                                         <div className="grid-edit-info-item2">
-                                            <label className="label-about-profile-page"> Last Name* </label>
                                             <Input
                                                 required
                                                 value={change_last_name}
@@ -227,10 +219,11 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateLastName}
                                                 error={lastNameError!==undefined}
                                                 errorMsg={lastNameError}
+                                                labelText='Last Name'
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
-                                            <label className="label-about-profile-page"> About </label>
+                                            <label className="label-about-profile-page">About </label>
                                             <div>
                                                 <TextareaAutosize
                                                     id="change-about"
@@ -250,10 +243,9 @@ class ProfilePage extends Component {
                                             </div>
                                         </div>
                                         <div className="grid-edit-info-item8">
-                                            <h2 className="edit-subheaders"> Address</h2>
+                                            <h2 className="edit-subheaders">Address</h2>
                                         </div>
                                         <div className="grid-edit-info-item4">
-                                            <label className="label-about-profile-page"> Street </label>
                                             <Input
                                                 value={change_street}
                                                 className="change-street-address"
@@ -267,6 +259,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateStreet}
                                                 error={streetError!==undefined}
                                                 errorMsg={streetError}
+                                                labelText='Street'
                                             />
                                         </div>
                                         <div className="grid-edit-info-item5">
@@ -278,7 +271,6 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item6">
-                                            <label className="label-about-profile-page"> Zipcode </label>
                                             <Input
                                                 value={change_zipcode}
                                                 className="change-zipcode-address"
@@ -293,6 +285,7 @@ class ProfilePage extends Component {
                                                 onBlur={this.validateZipcode}
                                                 error={zipcodeError!==undefined}
                                                 errorMsg={zipcodeError}
+                                                labelText='Zipcode'
                                             />
                                             <div className='upload-profile-pic-container'>
                                                 <div className='upload-file-text'>

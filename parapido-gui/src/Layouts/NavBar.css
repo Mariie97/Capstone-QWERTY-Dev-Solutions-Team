@@ -28,7 +28,7 @@
 	font-weight: 500;
 	font-size: 18px;
 	gap: 15px;
-	margin-bottom: 40px; /* moves the elements below the nav bar */
+	margin-bottom: 25px; /* moves the elements below the nav bar */
 }
 
 /* child element - This controls the smaller box 

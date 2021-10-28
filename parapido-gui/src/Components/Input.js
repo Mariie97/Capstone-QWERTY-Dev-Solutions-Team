@@ -7,9 +7,11 @@ import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 class Input extends Component {
 
     render() {
-        const { errorMsg } = this.props;
+        const { errorMsg, labelText, required} = this.props;
         return (
             <div className='input-field-container'>
+                <label className="custome-input-label"> {labelText}{required && '*'}</label>
+                <br />
                 <TextField
                     variant={'filled'}
                     InputProps={{disableUnderline: true}}

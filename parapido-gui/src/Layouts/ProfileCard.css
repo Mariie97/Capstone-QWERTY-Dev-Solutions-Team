@@ -95,24 +95,24 @@
 
 .top-profile-card-lettering {
 	font-family: "Cormorant Garamond";
-	font-style: "Italic";
 	font-weight: bold;
 	color: white;
-	font-size: 40px;
+	font-size: 25px;
 
 	/* small container for lettering to be centered all the time no matter change*/
 	box-sizing: border-box;
 	border-radius: 20px;
-	width: 300px;
-
-	display: grid;
+	width: 50px;
 	place-items: center;
 	margin-left: 50px;
-
 	display: flex;
 	flex-direction: row;
 	align-content: space-around;
 	gap: 10px;
 	justify-content: center;
-	margin-bottom: 20px;
+	height: 50px;
+	margin-top: 25px;
+}
+.profile-card-container {
+	margin-right: 25px;
 }

@@ -1,147 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
-/* title and line  */
-
-.profile-page-header {
-	font-family: "Jost";
-	font-weight: bold;
-	letter-spacing: 1px;
-	font-size: 60px;
-	text-align: center;
-	color: white;
-	border-bottom: 1px solid white;
-	width: 700px;
-	margin: 0 auto;
-	padding-bottom: 20px;
-	margin-bottom: 20px;
-}
-
-/* parent - flex between profile - body text - buttons */
-
-.parent-flex-container-profile-page {
-	display: flex;
-
-	/* testing purposes */
-	/* background-color: red; */
-
-	flex-wrap: nowrap;
-}
-
-/* card */
-
-.child1-flex-container-profile-page {
-	margin-right: 60px;
-	margin-left: 83px;
-}
-
-/* remove bullets */
-
-.bullet-removal-profile-page {
-	list-style: none;
-}
-
-/* body text */
-
-.child2-flex-container-profile-page {
-	margin-top: 90px;
-	margin-left: 0;
-	font-family: "Cormorant Garamond";
-	font-size: 30px;
-	font-weight: 200;
-	color: white;
-	line-height: 80px;
-	position: relative;
-	bottom: 18px;
-	max-width: 50%;
-}
-
-/* buttons */
-
-.button-profile-page {
-	display: inline-block;
-	padding-right: 40px;
-	padding-left: 40px;
-	padding-top: 4px;
-	padding-bottom: 4px;
-	margin: 0.1em;
-	border: 0.2em solid black;
-	box-sizing: border-box;
-	text-decoration: none;
-	font-family: "Jost";
-	font-weight: 400;
-	color: black;
-	background-color: #ffebcc;
-	text-align: center;
-	position: relative;
-	border-radius: 2%;
-	margin-right: 25px;
-	cursor: pointer;
-}
-
-.button-profile-page:hover {
-	border-color: white;
-}
-
-.button-profile-page:active {
-	background-color: #2e856e;
-}
-
-.button-profile-page-flex-container {
-	margin-top: 0px;
-	float: right;
-}
-
-/* flex within the body text for bold and spacing */
-
-.body-flex-profile-page {
-	list-style: none;
-	display: flex;
-
-	/* text-align: justify; */
-	/* testing purposes */
-	/* background-color: thistle; */
-}
-
-.child-body-flex-profile-page {
-	font-family: "Times New Roman";
-	font-weight: bold;
-	margin-right: 50px;
-}
-
-.child1-body-flex-profile-page {
-	font-family: "Times New Roman";
-	font-weight: bold;
-	margin-right: 43px;
-}
-
-.child2-body-flex-profile-page {
-	font-family: "Times New Roman";
-	font-weight: bold;
-	margin-right: 29px;
-}
-
-.break-text-profile-page {
-	width: 80%;
-	padding-top: 10px;
-
-	/* testing */
-	/* border-style: solid;
-	border-color: white; */
-
-	border-width: 1px;
-	padding-left: 5px;
-	padding-bottom: 10px;
-	text-align: justify;
-	word-break: break-word;
-	hyphens: auto;
-	-moz-hyphens: auto;
-	-ms-hyphens: auto;
-	-webkit-hyphens: auto;
-	line-height: 1.4;
-	letter-spacing: 1px;
-}
-
 
 .child2-grid-container {
 	width: 60%;
@@ -206,17 +65,6 @@ h2.edit-subheaders {
 .save-change-button {
 	float: right;
 	top: 22px;
-	/*bottom: 65px;*/
-	/*left: 40px;*/
-}
-
-#profile-pic-label {
-	color: white;
-	font-family: "Cormorant Garamond";
-	font-weight: 400;
-	font-size: 18px;
-	font-style: italic;
-	line-height: 2;
 }
 
 .loading-icon {
@@ -224,21 +72,6 @@ h2.edit-subheaders {
 	display: flex;
 	align-items: center;
 	height: 100vh;
-}
-
-.button-delete {
-	background-color: #ac1212;
-}
-
-.citi-field-error {
-	color: #f44336;
-	margin-right: 14px;
-	margin-left: 14px;
-	margin-top: 3px;
-	font-size: 0.75rem;
-	font-weight: 400;
-	line-height: 1.66;
-	letter-spacing: 0.03333em;
 }
 
 .label-about-profile-page{

@@ -154,12 +154,14 @@ class ChatApp extends Component {
     return (
         <div className='parent-container'>
           <div className='header-flex-container'>
-            <Link to={`/job/${this.queryParams?.get('job_id')}`}
-                  className='header-button button'
-                  id="view-job-button">View Job
-            </Link>
-            <h1 className="page-header">Chat: {this.queryParams?.get('title')} </h1>
-
+            <div className="button-flex-container">
+              <Link to={`/job/${this.queryParams?.get('job_id')}`}
+                    className='custome-buttons'
+                    id="view-job-button">
+                View Job
+              </Link>
+            </div>
+            <h1 className="page-title-header">Chat: {this.queryParams?.get('title')} </h1>
           </div>
           <div className='chat-flex-container'>
             <div className="chat-window">

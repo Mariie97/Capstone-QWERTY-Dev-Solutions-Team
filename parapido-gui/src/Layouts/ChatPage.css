@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
-
+@import "Header.css";
 
 * {
   box-sizing: border-box;
@@ -11,7 +10,7 @@ body {
 
 .chat-window {
   padding: 20px 20px 10px 20px;
-  width: calc(100% - 20px);
+  width: calc(100vw - 500px);
   max-width: 1000px;
   border-radius: 10px;
   background-color: #FFFFFF;
@@ -27,7 +26,7 @@ body {
   padding: 20px 10px 0 10px;
   margin: 0;
   height: calc(100vh - 250px);
-  max-height: 58.3vh;
+  max-height: 58vh;
   overflow: scroll;
 }
 
@@ -193,54 +192,10 @@ body {
   color: black;
 }
 
-.page-header {
-  font-family: Jost, serif;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-size: 32px;
-  text-align: left;
-  color: white;
-  border-bottom: 1px solid white;
-  max-width: 50%;
-  padding-bottom: 20px;
-  margin: 0 auto 20px;
-  align-items: flex-end;
-}
-
-.header-flex-container {
-  display: flex;
-  flex-flow: row-reverse wrap;
-}
-
-.header-button {
-  padding: 13px;
-  background-color: #ffeacb;
-  border-radius: 20px;
-  width: 130px;
-  height: 50px;
-  text-align: center;
-  font-family: Jost, serif;
-  font-weight: bold;
-  font-size: 14px;
-  color: black;
-}
-
-
-#view-job-button {
-  position: absolute;
-  text-decoration: none;
-  margin-right: 30px;
-  justify-items: center;
-}
-
 #refresh-button {
   margin-right: 30px;
 }
 
-#view-job-button:hover{
-  cursor: pointer;
-  border: 0.2em solid white;
-}
 
 .chat-flex-container {
   display: flex;
