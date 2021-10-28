@@ -11,6 +11,7 @@ class JobDashboardCard extends Component {
                             
                             <h2 className="card-title">Lavar Platos
                                 <div className= "circle-square"></div>
+                                <div className= "circle-square2"></div>
                             </h2>
                     
                             <h2 className="card-clientName"> FeFa Vargas Villarini</h2>

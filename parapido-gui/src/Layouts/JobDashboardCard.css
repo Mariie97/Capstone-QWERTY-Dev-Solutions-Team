@@ -25,6 +25,7 @@
     justify-content: space-between;
     cursor: pointer;
     transition: transform 200ms ease-in;
+    border: 2px solid red;
 
 }
 
@@ -34,21 +35,34 @@
     width: 100%;
     object-fit: cover;
     color: white;
+    border-top-right-radius: 69px;
+    padding-left: 3px;
 }
 
 .circle-square{
     width: 100px;
     height: 100px;
     background: lightgoldenrodyellow;
-    border-radius: 0% 50% 50% 0%;
+    border-radius: 50% 50% 50% 50%;
     position: relative;
-    top: 5.1px;
-    left: -42px;
+    top: 6.1px;
+    left: -55px;
+}
+
+.circle-square2{
+    width: 100px;
+    height: 100px;
+    background: lightgoldenrodyellow;
+    border-radius: 50%;
+    position: relative;
+    top: -177.9px;
+    left: 186px;
 }
 
 .card-wrapper-1 .card-clientName{
     padding: 10px;
     text-align: center;
+    object-fit: cover;
 }
 
 .card-wrapper-1 .card-location{
