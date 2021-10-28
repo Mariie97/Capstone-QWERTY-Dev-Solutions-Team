@@ -2,24 +2,34 @@ import React, {Component} from 'react'
 import "../Layouts/InputField.css"
 import TextField from "@material-ui/core/TextField";
 import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 
 class Input extends Component {
 
     render() {
-        const { errorMsg } = this.props;
+        const { errorMsg, labelText, required, multiline} = this.props;
         return (
             <div className='input-field-container'>
-                <TextField
-                    variant={'filled'}
-                    InputProps={{disableUnderline: true}}
-                    {...this.props}
-                />
+                <label className="custom-input-label"> {labelText}{required && '*'}</label>
+                <br />
+                {multiline ?
+                    <TextareaAutosize
+                        className='custom-input-multiline'
+                        {...this.props}
+                    />
+                    :
+                    <TextField
+                        variant={'filled'}
+                        InputProps={{disableUnderline: true}}
+                        {...this.props}
+                    />
+                }
                 {errorMsg!==undefined &&
-                    <div className="required-field-error-msg">
-                        <ReportProblemIcon style={report}/>
-                        {errorMsg}
-                    </div>
+                <div className="required-field-error-msg">
+                    <ReportProblemIcon style={report}/>
+                    {errorMsg}
+                </div>
                 }
             </div>
         )

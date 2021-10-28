@@ -1,0 +1,37 @@
+
+.parent-table-body-container {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 6%;
+    margin-top: 2%;
+}
+
+.table-body-content{
+    margin-top: 15px;
+    max-width: 68%;
+}
+
+.row-table-body, .column-table-body{
+    vertical-align: top;
+    text-align: left;
+    color: white;
+    font-size: 22px;
+    padding: 10px;
+    font-weight: 400;;
+    font-family: "Cormorant Garamond";
+}
+
+.column-table-body.col1{
+    max-width: 19%;
+}
+
+.column-table-body.col2{
+    max-width: 81%
+}
+
+.loading-icon {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}

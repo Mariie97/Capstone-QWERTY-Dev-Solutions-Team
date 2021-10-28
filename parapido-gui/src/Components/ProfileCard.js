@@ -8,6 +8,7 @@ import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import StarIcon from '@material-ui/icons/Star';
 import {Link} from "react-router-dom";
+import {accountType} from "../Utilities";
 
 
 class ProfileCard extends Component {
@@ -23,16 +24,7 @@ class ProfileCard extends Component {
         const profile_pic = image!==null ? image : defaultPicture;
 
         return (
-            <React.Fragment>
-                {type!==undefined &&
-                <div className= "top-profile-card-lettering">
-                    {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
-                        :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
-                            :<img src= {_admin} alt="admin" style={admin}/>}
-                    {this.acc_type[type]}
-                </div>
-                }
-
+            <div className='profile-card-container'>
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
@@ -45,19 +37,27 @@ class ProfileCard extends Component {
                             <li>
                                 <StarIcon style = {star}/>
                                 {rating_value===null ?
-                                    ' No rating yet ':
+                                    'No rating yet ':
                                     `Rating: ${rating_value} of 5`
                                 }
                                 <ThumbsUpDownIcon style = {thumbsupdown}/>
                             </li>
+                            {type!==undefined &&
+                            <div className= "top-profile-card-lettering">
+                                {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
+                                    : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
+                                        :<img src= {_admin} alt="admin" style={admin}/>}
+                                <p>{this.acc_type[type]}</p>
+                            </div>
+                            }
                         </ul>
-                        <p className="footer-line-profile-card">
+                        <div className="footer-line-profile-card">
                             <DeleteTwoTone style={trashcan} />
                             Jobs Cancelled: {jobs_cancelled}
-                        </p>
+                        </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }
@@ -90,20 +90,20 @@ const image_resize = {
     width: 180,
 };
 
-const schoolbag = {
-    height: 70,
-    width: 60,
+const student = {
+    height: 50,
+    width: 50,
 };
 
-const employer = {
-    height: 70,
-    width: 70,
+const client = {
+    height:  50,
+    width: 50,
     backgroundColor: "white"
 };
 
 const admin = {
-    height: 70,
-    width: 70,
+    height: 50,
+    width: 50,
 };
 
 export default ProfileCard;

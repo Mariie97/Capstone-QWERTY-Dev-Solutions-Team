@@ -218,45 +218,45 @@ class JobDetailsPage extends Component {
                     </div> :
                     <div>
                         <div className='header-flex-container'>
-                            <div className="button-job-detail-flex-container">
+                            <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="button-job-details">
+                                <button onClick={this.onClickRequest} className="custom-buttons">
                                     Request Job
                                 </button>
                                 }
                                 {showCancelButton &&
-                                <button onClick={this.changeJobStatus} className="button-job-details">
+                                <button onClick={this.changeJobStatus} className="custom-buttons">
                                     Cancel Job
                                 </button>
                                 }
                                 {showCancelRequestButton &&
-                                <button onClick={this.onClickCancelRequest} className="button-job-details">
+                                <button onClick={this.onClickCancelRequest} className="custom-buttons">
                                     Cancel Request
                                 </button>
                                 }
                                 {showContractButton &&
                                 <a
                                     href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
-                                    className="button-job-details">
+                                    className="custom-buttons">
                                     View Contract
                                 </a>
                                 }
                                 {showChatButton &&
                                 <Link
                                     to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}`}
-                                    className="button-job-details"
+                                    className="custom-buttons"
                                 >Chat</Link>
                                 }
                                 {showDeleteButton &&
-                                <button onClick={this.changeJobStatus} className="button-job-details delete-button">
+                                <button onClick={this.changeJobStatus} className="custom-buttons delete-button">
                                     Delete Job
                                 </button>
                                 }
                             </div>
-                            <h1 className="job-detail-page-header">{job.title}</h1>
+                            <h1 className="page-title-header">{job.title}</h1>
                         </div>
-                        <div className = "parent-flex-container-job-detail">
-                            <div className="child1-flex-container-job-detail">
+                        <div className = "parent-table-body-container">
+                            <div className="child1-flex-body-container">
                                 <ProfileCard
                                     user_id={job.owner_id}
                                     first_name={job.owner_name}
@@ -267,37 +267,37 @@ class JobDetailsPage extends Component {
                                     image={job.owner_image}
                                 />
                             </div>
-                            <table className='table-content-job-detail'>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Description:</th>
-                                    <th className='column-table-job-detail col2'>{job.description} </th>
+                            <table className='table-body-content'>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Description:</th>
+                                    <th className='column-table-body col2'>{job.description} </th>
                                 </tr>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Price:</th>
-                                    <th className='column-table-job-detail col2'>{job.price}</th>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Price:</th>
+                                    <th className='column-table-body col2'>{job.price}</th>
                                 </tr>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Location:</th>
-                                    <th className='column-table-job-detail col2'>{job.street} {cities[job.city-1]} PR, {job.zipcode}</th>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Location:</th>
+                                    <th className='column-table-body col2'>{job.street} {cities[job.city-1]} PR, {job.zipcode}</th>
                                 </tr>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Category:</th>
-                                    <th className='column-table-job-detail col2'>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Category:</th>
+                                    <th className='column-table-body col2'>
                                         <Chip label={job.categories} style = {chipStyleJobDetails}/>
                                     </th>
                                 </tr>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Available Days:</th>
-                                    <th className='column-table-job-detail col2'>{this.getJobDays()}</th>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Available Days:</th>
+                                    <th className='column-table-body col2'>{this.getJobDays()}</th>
                                 </tr>
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Status:</th>
-                                    <th className='column-table-job-detail col2'>{getJobStatus[job.status-1]}</th>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Status:</th>
+                                    <th className='column-table-body col2'>{getJobStatus[job.status-1]}</th>
                                 </tr>
                                 { job.student_id!==null &&
-                                <tr className='row-table-job-detail'>
-                                    <th className='column-table-job-detail col1'>Assigned to:</th>
-                                    <th className='column-table-job-detail col2'>
+                                <tr className='row-table-body'>
+                                    <th className='column-table-body col1'>Assigned to:</th>
+                                    <th className='column-table-body col2'>
                                         <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
