@@ -34,8 +34,7 @@
 .MuiInputBase-input.MuiFilledInput-input.MuiInputBase-inputMultiline.MuiFilledInput-inputMultiline:focus{
     background-color: #FFEBCC;
 }
-
-.MuiInputBase-root.MuiFilledInput-root.MuiFilledInput-underline.Mui-error.MuiInputBase-formControl{
+.MuiInputBase-root.MuiFilledInput-root.Mui-error.MuiInputBase-formControl {
     border: 2px solid red;
 }
 
@@ -53,6 +52,14 @@
 
 .MuiFormHelperText-root.MuiFormHelperText-contained.Mui-error {
     width: 250%;
+}
+
+.required-field-error-msg{
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	margin-top: 10px;
+	left: -3px;
 }
 
 

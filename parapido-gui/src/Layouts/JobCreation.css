@@ -4,7 +4,7 @@
 /* title and line */
 
 .job-creation-page-header{
-    font-family: "Jost";
+	font-family: "Jost";
 	font-weight: bold;
 	letter-spacing: 1px;
 	font-size: 60px;
@@ -36,18 +36,18 @@
 /* title and description */
 .left-body-container-1-job-creation{
 	display: flex;
-    flex-direction: column;
-    line-height: 2.5;
-    text-align: left;
+	flex-direction: column;
+	line-height: 2.5;
+	text-align: left;
 }
 
 /* all labels have the same style */
 .label-job-creation{
-  	font-family: "Cormorant Garamond";
-	font-style: italic; 
-    font-weight: 400;
-    font-size: 16px;
-    color: white;
+	font-family: "Cormorant Garamond";
+	font-style: italic;
+	font-weight: 400;
+	font-size: 16px;
+	color: white;
 	letter-spacing: 1px;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .input-1-job-creation:focus{
-		background-color: #FFEBCC;
+	background-color: #FFEBCC;
 }
 
 .input-1-copy-job-creation{
@@ -96,19 +96,19 @@
 	border: 3px solid black;
 	outline: none;
 	font-size: 16px;
-	display: inline;	
+	display: inline;
 	resize:none;
 }
 
 .input-2-job-creation:focus{
-		background-color: #FFEBCC;
+	background-color: #FFEBCC;
 }
 
 /* municipality and zipcode */
 .mini-flex-box-job-creation{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between; 
+	justify-content: space-between;
 	gap: 30%;
 	line-height: 2.5;
 	margin-top: 6px;
@@ -133,8 +133,8 @@
 }
 
 .input-3-job-creation:focus{
-		background-color: #FFEBCC;
-		margin: 0px;
+	background-color: #FFEBCC;
+	margin: 0px;
 }
 
 /* Material ui override dropdown styling  */
@@ -200,10 +200,10 @@
 }
 
 .chip-flex-job-creation {
-    color: #2F2D4A;
-    display: flex;
+	color: #2F2D4A;
+	display: flex;
 	flex-direction: row;
-    list-style-type: none;
+	list-style-type: none;
 }
 
 .MuiInputBase-input {
@@ -216,7 +216,8 @@
 }
 
 .MuiInputBase-root {
-    background-color: white;
+	background-color: white;
+	border: 2px solid black;
 }
 
 .MuiFormLabel-root{
@@ -248,17 +249,17 @@
 /* job creation button */
 .button-job-creation{
 	width: 40%;
-    margin-top: 28px;
-    padding-bottom: 15px;
-    background-color: #91EB8F;
-    border: 2px solid #91EB8F;
-    border-radius: 10px;
+	margin-top: 28px;
+	padding-bottom: 15px;
+	background-color: #91EB8F;
+	border: 2px solid #91EB8F;
+	border-radius: 10px;
 }
 
 .button-job-creation:hover{
-    cursor: pointer;
-    border: 2px solid black;  
-	
+	cursor: pointer;
+	border: 2px solid black;
+
 }
 
 .text-button-job-creation{
@@ -421,4 +422,12 @@
 	position: absolute;
 	width: 97.9%;
 	bottom: 640.4px;
+}
+
+.job-creation-dropdown {
+	min-width: 50%;
+}
+
+.error {
+	border-color: red;
 }

@@ -147,7 +147,7 @@
 
 .edit-info-grid-container {
 	grid-template-columns: 30% 30% 30%;
-	grid-template-rows: 20px 100px 100px auto;
+	grid-template-rows: 20px 40% 40% auto;
 	display: grid;
 	grid-gap: 5px 120px;
 	position: relative;
@@ -298,4 +298,7 @@ h2.edit-subheaders {
 	margin-left: 10px;
 	color: white;
 	font-size: 12px;
+}
+.error{
+	border-color: red;
 }

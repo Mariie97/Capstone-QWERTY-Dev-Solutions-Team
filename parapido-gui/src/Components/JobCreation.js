@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobCreation.css";
-import CitiesDropdown from "./CitiesDropdown_.js";
+import CitiesDropdown from "./CitiesDropdown.js";
 import CategoriesDropdown from "./CategoriesDropdown.js";
 import AvailableDays from './AvailableDaysChips';
 import CurrencyTextField from "@unicef/material-ui-currency-textfield";
@@ -223,6 +223,7 @@ export class JobCreation extends Component {
                                 <CitiesDropdown
                                     initial_value={''}
                                     ref={change_city}
+                                    validate={true}
                                 />
                             </div>
 
@@ -349,6 +350,11 @@ export class JobCreation extends Component {
             this.setState({zipcodeError: "zipcode format: #####" })
 
             document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
+            return false;
+        }
+
+        if (!(this.state.zipcode[2] === '6'|| this.state.zipcode[2] === '7' || this.state.zipcode[2] ==='9')) {
+            this.setState({zipcodeError: 'The zip code provide do not belong to Puerto Rico'});
             return false;
         }
 
