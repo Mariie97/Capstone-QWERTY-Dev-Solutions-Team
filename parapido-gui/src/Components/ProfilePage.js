@@ -9,7 +9,6 @@ import ProfileCard from './ProfileCard';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import SaveIcon from '@material-ui/icons/Save';
-// import UploadIcon from '@material-ui/icons/Update';
 import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
