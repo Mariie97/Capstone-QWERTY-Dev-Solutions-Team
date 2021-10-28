@@ -129,4 +129,6 @@ export const weekDays = [
     'Thursday',
     'Friday',
     'Saturday'
-]
+];
+
+export const zipcodeFormatPR = /^00[679]\d{2}$/;

@@ -1,12 +1,11 @@
 import React, {Component, createRef} from 'react';
 import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
-import verifyUserAuth, {accountType, cities, current_user} from "../Utilities";
+import verifyUserAuth, {accountType, cities, current_user, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
@@ -265,6 +264,7 @@ class ProfilePage extends Component {
                                                 initial_value={city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
+                                                itemsList={cities}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item6">
@@ -338,7 +338,7 @@ class ProfilePage extends Component {
     toggleEdit() {
         const {edit, change_city, user} = this.state;
         if(!edit) {
-            change_city.current?.changeCity(user.city.toString());
+            change_city.current?.setState({item: user.city.toString()});
             this.setState(prevState => {
                 return {
                     ...prevState,
@@ -397,7 +397,7 @@ class ProfilePage extends Component {
         const { change_street, change_zipcode, zipcodeError} = this.state;
         if (change_street.length===0 && change_zipcode.length>0) {
             this.setState({
-                streetError: "This field has to be completed"
+                streetError: 'This field is required'
             })
             return false;
         }
@@ -416,18 +416,20 @@ class ProfilePage extends Component {
     validateZipcode(event){
         const { change_street, change_zipcode, streetError} = this.state;
 
+        console.log(change_zipcode);
         if (change_zipcode.length===0 && change_street.length>0) {
-            this.setState({zipcodeError: "This field has to be completed"})
+            this.setState({zipcodeError: 'This field is required'})
             return false;
         }
-
-        if (change_zipcode!=='' && change_zipcode.length<5) {
-            this.setState({zipcodeError: "Zipcode format #####"});
-            return false;
-        }
-        if (!(change_zipcode[2] === '6'|| change_zipcode[2] === '7' || change_zipcode[2] ==='9')) {
-            this.setState({zipcodeError: 'The zip code provide do not belong to Puerto Rico'});
-            return false;
+        if (change_zipcode!=='') {
+            if (change_zipcode.length < 5) {
+                this.setState({zipcodeError: "Zipcode format #####"});
+                return false;
+            }
+            if (!zipcodeFormatPR.test(change_zipcode)) {
+                this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
+                return false;
+            }
         }
 
         if (change_zipcode==='' && streetError!==undefined) {
@@ -444,12 +446,12 @@ class ProfilePage extends Component {
 
     validateCity() {
         const { change_city, change_zipcode, change_street } = this.state;
-        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.city===null) {
-            change_city?.current.setState({cityError: 'This field is required'});
+        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.item===null) {
+            change_city?.current.setState({itemError: 'This field is required'});
             return false;
 
         }
-        change_city?.current.setState({cityError: undefined});
+        change_city?.current.setState({itemError: undefined});
         return true;
     }
 
@@ -465,7 +467,7 @@ class ProfilePage extends Component {
 
         let city = '';
         if(this.state.change_zipcode!=='' || this.state.change_street!=='') {
-            city = this.state.change_city?.current.state.city;
+            city = this.state.change_city?.current.state.item;
         }
 
         const data = new FormData();

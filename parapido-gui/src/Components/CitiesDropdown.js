@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { MenuItem, Select } from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import {cities} from "../Utilities";
 
 
 class CitiesDropdown extends Component {
@@ -11,23 +10,22 @@ class CitiesDropdown extends Component {
         super(props);
 
         this.state = {
-            city: this.props.initial_value !== ''? this.props.initial_value : undefined,
-            cityError: undefined,
-            externalError: undefined,
+            item: this.props.initial_value !== ''? this.props.initial_value : undefined,
+            itemError: undefined,
         };
 
         //event method - before render method
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
 
         // validation method - end of render method
-        this.validateCity = this.validateCity.bind(this);
+        this.validateItem = this.validateItem.bind(this);
         this.validate = this.validate.bind(this);
 
     }
 
     handleOnChangeCity(event) {
         this.setState({
-            city: event.target.value.toString()
+            item: event.target.value.toString()
         }, this.validate);
     }
 
@@ -37,27 +35,28 @@ class CitiesDropdown extends Component {
             validationFunc();
         else
         if (validate)
-            this.validateCity();
+            this.validateItem();
     }
 
     allCities() {
-        return cities.map((city, index) =>
-            <MenuItem value={index+1}>{city}</MenuItem>
+        const { itemsList } = this.props;
+        return itemsList.map((item, index) =>
+            <MenuItem value={index+1}>{item}</MenuItem>
         )
     }
 
 
 
     render() {
-        const { city, cityError } = this.state;
+        const { item, itemError } = this.state;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
                     <Select
-                        value={city}
+                        value={item}
                         onChange={this.handleOnChangeCity}
-                        className={cityError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
+                        className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
                         onClose={this.validate}
                         inputProps={{
                             underline: {
@@ -73,10 +72,10 @@ class CitiesDropdown extends Component {
                     >
                         {this.allCities()}
                     </Select>
-                    {cityError !== undefined &&
+                    {itemError !== undefined &&
                     <div className="required-field-2-job-creation">
                         <ReportProblemIcon style={report} />
-                        {cityError}
+                        {itemError}
                     </div>
                     }
                 </div>
@@ -84,16 +83,16 @@ class CitiesDropdown extends Component {
         )
     }
 
-    validateCity(){
-        if (this.state.city === undefined) {
+    validateItem(){
+        if (this.state.item === undefined) {
             this.setState({
-                cityError: "This field is required"
+                itemError: "This field is required"
             })
             return false;
         }
 
         this.setState({
-            cityError: undefined
+            itemError: undefined
         })
         return true;
     }
