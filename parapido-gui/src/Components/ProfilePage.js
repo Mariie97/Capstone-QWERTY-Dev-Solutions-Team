@@ -1,12 +1,13 @@
-import React, {Component, createRef} from 'react'
-import "../Layouts/ProfilePage.css"
+import React, {Component, createRef} from 'react';
+import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
 import verifyUserAuth, {cities} from "../Utilities";
 import Input from "./Input";
 import CitiesDropdown from "./CitiesDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ProfileCard from './ProfileCard';
-
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
     current_user = {
@@ -43,7 +44,6 @@ class ProfilePage extends Component {
             lastNameError: undefined,
             streetError: undefined,
             zipcodeError: undefined,
-            cityError: undefined,
         }
 
         this.toggleEdit = this.toggleEdit.bind(this);
@@ -91,7 +91,7 @@ class ProfilePage extends Component {
                         });
                     }
                 ).catch((e) => {
-                    console.log(e);
+                    console.log("Network error: " + e);
                     throw(e);
                 });
             }
@@ -108,17 +108,17 @@ class ProfilePage extends Component {
             change_city,
             change_zipcode,
             change_street,
+            change_image,
             firstNameError,
             lastNameError,
             streetError,
             zipcodeError,
-            cityError,
             is_auth,
             pageLoaded} = this.state;
 
         const {user_id} = this.props;
         const showButtons = user_id === this.current_user.id|| this.current_user.type==='3';
-        console.log(street,' ', zipcode);
+
         return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' />}
@@ -187,7 +187,7 @@ class ProfilePage extends Component {
                                             <Input
                                                 required
                                                 value={change_first_name}
-                                                id="change-first-name"
+                                                className="change-name"
                                                 onChange={(event) => {
                                                     if (event.target.value.length <= 15 ) {
                                                         this.setState({
@@ -197,7 +197,7 @@ class ProfilePage extends Component {
                                                 }}
                                                 onBlur={this.validateFirstName}
                                                 error={firstNameError!==undefined}
-                                                helperText={firstNameError}
+                                                errorMsg={firstNameError}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item2">
@@ -205,7 +205,7 @@ class ProfilePage extends Component {
                                             <Input
                                                 required
                                                 value={change_last_name}
-                                                id="change-last-name"
+                                                className="change-name"
                                                 onChange={(event) => {
                                                     if (event.target.value.length <= 15 ) {
                                                         this.setState({
@@ -215,25 +215,28 @@ class ProfilePage extends Component {
                                                 }}
                                                 onBlur={this.validateLastName}
                                                 error={lastNameError!==undefined}
-                                                helperText={lastNameError}
+                                                errorMsg={lastNameError}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item3">
                                             <label className="label-about-profile-page"> About </label>
-                                            <Input
-                                                id="change-about"
-                                                multiline={true}
-                                                rows={6}
-                                                value={change_about}
-                                                onChange={(event) => {
-                                                    if (event.target.value.length <= 250 ) {
-                                                        this.setState({
-                                                            change_about: event.target.value
-                                                        });
-                                                    }
-                                                }}
-
-                                            />
+                                            <div>
+                                                <TextareaAutosize
+                                                    id="change-about"
+                                                    multiline={true}
+                                                    rows = {6}
+                                                    maxRows={6}
+                                                    value={change_about}
+                                                    className="change-about-style-profile-page"
+                                                    onChange={(event) => {
+                                                        if (event.target.value.length <= 250 ) {
+                                                            this.setState({
+                                                                change_about: event.target.value
+                                                            });
+                                                        }
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
                                         <div className="grid-edit-info-item8">
                                             <h2 className="edit-subheaders"> Address</h2>
@@ -242,7 +245,7 @@ class ProfilePage extends Component {
                                             <label className="label-about-profile-page"> Street </label>
                                             <Input
                                                 value={change_street}
-                                                id="change-street-address"
+                                                className="change-street-address"
                                                 onChange={(event) => {
                                                     if (event.target.value.length <= 30 ) {
                                                         this.setState({
@@ -252,24 +255,22 @@ class ProfilePage extends Component {
                                                 }
                                                 onBlur={this.validateStreet}
                                                 error={streetError!==undefined}
-                                                helperText={streetError}
+                                                errorMsg={streetError}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item5">
+                                            <label className="label-job-creation">City</label>
                                             <CitiesDropdown
                                                 initial_value={city}
                                                 ref={change_city}
+                                                validationFunc={this.validateCity}
                                             />
-                                            {cityError!==undefined &&
-                                            <p className='citi-field-error'>{cityError}</p>
-                                            }
-
                                         </div>
                                         <div className="grid-edit-info-item6">
                                             <label className="label-about-profile-page"> Zipcode </label>
                                             <Input
                                                 value={change_zipcode}
-                                                id="change-zipcode-address"
+                                                className="change-zipcode-address"
                                                 onChange={(event) => {
                                                     const value = event.target.value;
                                                     if (value.length <= 5  && !isNaN(value)) {
@@ -280,23 +281,35 @@ class ProfilePage extends Component {
                                                 }}
                                                 onBlur={this.validateZipcode}
                                                 error={zipcodeError!==undefined}
-                                                helperText={zipcodeError}
+                                                errorMsg={zipcodeError}
                                             />
-                                            <label id="profile-pic-label">Profile picture</label>
-                                            <input
-                                                id="profile-pic"
-                                                type="file"
-                                                name="file"
-                                                accept="image/*"                                  
-                                                onChange={(event) => {
-                                                    this.setState({
-                                                        change_image: event.target.files[0]
-                                                    });}
-                                                }
-                                            />
+                                            <div className='upload-profile-pic-container'>
+                                                <div className='upload-file-text'>
+                                                    {change_image.name === undefined ? 'No file selected'  :
+                                                        change_image.name
+                                                    }
+                                                </div>
+                                                <label for="profile-pic" className="custom-file-upload-profile-page">
+                                                    <UploadIcon style={upload}/> Upload picture
+                                                </label>
+                                                <input
+                                                    id="profile-pic"
+                                                    type="file"
+                                                    name="file"
+                                                    accept="image/*"
+                                                    style={{display:"none"}}
+                                                    onChange={(event) => {
+                                                        this.setState({
+                                                            change_image: event.target.files[0]
+                                                        });}
+                                                    }
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} > Save changes </button>
+                                    <button className="button-profile-page save-change-button" onClick={this.saveChanges} >
+                                        Save changes
+                                    </button>
                                 </div>
                             }
                         </div>
@@ -362,6 +375,7 @@ class ProfilePage extends Component {
         this.setState({
             firstNameError: undefined
         })
+
         return true;
     }
 
@@ -379,49 +393,62 @@ class ProfilePage extends Component {
     }
 
     validateStreet(event){
-        const { change_street, change_zipcode} = this.state;
+        const { change_street, change_zipcode, zipcodeError} = this.state;
         if (change_street.length===0 && change_zipcode.length>0) {
             this.setState({
                 streetError: "This field has to be completed"
             })
             return false;
         }
-        this.setState({
-            streetError: undefined
-        })
+        if (change_street==='' && zipcodeError!==undefined) {
+            this.setState({
+                zipcodeError: undefined,
+                streetError: undefined,
+            });
+        }
+        else
+            this.setState({ streetError: undefined});
+
         return true;
     }
 
     validateZipcode(event){
-        const { change_street, change_zipcode} = this.state;
+        const { change_street, change_zipcode, streetError} = this.state;
 
         if (change_zipcode.length===0 && change_street.length>0) {
-            this.setState({
-                zipcodeError: "This field has to be completed"
-            })
+            this.setState({zipcodeError: "This field has to be completed"})
             return false;
         }
 
         if (change_zipcode!=='' && change_zipcode.length<5) {
-            this.setState({
-                zipcodeError: "Zipcode format #####"
-            });
+            this.setState({zipcodeError: "Zipcode format #####"});
             return false;
         }
-        this.setState({
-            zipcodeError: undefined,
-        })
+        if (!(change_zipcode[2] === '6'|| change_zipcode[2] === '7' || change_zipcode[2] ==='9')) {
+            this.setState({zipcodeError: 'The zip code provide do not belong to Puerto Rico'});
+            return false;
+        }
+
+        if (change_zipcode==='' && streetError!==undefined) {
+            this.setState({
+                zipcodeError: undefined,
+                streetError: undefined,
+            });
+        }
+        else
+            this.setState({zipcodeError: undefined });
+
         return true;
     }
 
     validateCity() {
-        const { change_city, change_zipcode, change_street, cityError } = this.state;
+        const { change_city, change_zipcode, change_street } = this.state;
         if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.city===null) {
-            this.setState({cityError: 'Select a city'});
-            return false
+            change_city?.current.setState({cityError: 'This field is required'});
+            return false;
 
         }
-        this.setState({cityError: undefined});
+        change_city?.current.setState({cityError: undefined});
         return true;
     }
 
@@ -466,7 +493,13 @@ class ProfilePage extends Component {
             }
         });
     }
-
 }
+
+// small icons and elements css
+const upload = {
+    position: "relative",
+    top: "7px"
+}
+
 export default ProfilePage;
 

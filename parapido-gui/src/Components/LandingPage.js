@@ -49,7 +49,8 @@ class LandingPage extends Component {
 						</li>
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>
+							{this.state.showLogin && 
+							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>}
 						</li>
 					</ul>
 				</div>
@@ -65,6 +66,7 @@ class LandingPage extends Component {
 }
 
 // small icons and elements css
+
 const mail = {
 	color: "#ffebcc",
 	paddingRight: 10,

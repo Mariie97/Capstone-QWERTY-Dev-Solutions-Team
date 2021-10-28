@@ -6,6 +6,7 @@ import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
 import UserRegistrationPage from "./Components/UserRegistrationPage";
+import JobCreation from "./Components/JobCreation";
 
 
 class App extends React.Component {
@@ -50,10 +51,20 @@ class App extends React.Component {
                         path='/signup'
                         render={() => (
                             <React.Fragment>
-                                <UserRegistrationPage/>
+                                <UserRegistrationPage />
                             </React.Fragment>
                         )}
                     />
+                    <Route
+                            exact
+                            path='/jobcreation'
+                            render={() => (
+                                <React.Fragment>
+                                    <NavBar cookies={this.props.cookies} />
+                                    <JobCreation cookies={this.props.cookies} />
+                               </React.Fragment>
+                            )}
+                        />
                 </Switch>
             </BrowserRouter>
         );
