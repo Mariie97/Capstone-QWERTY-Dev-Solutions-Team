@@ -35,12 +35,10 @@ class LoginModal extends Component {
         };
 
         // event methods - before render method
-
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
-        
-        // validation methods - end of render method
 
+        // validation methods - end of render method
         this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
     }
@@ -93,13 +91,11 @@ class LoginModal extends Component {
                             style={{textAlign:"center"}}
                         >
                             <Box sx={style}>
-                                
-                                {login_failed && 
-                                    <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                {login_failed &&
+                                <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
                                     Yikes!!! 😬 Incorrect Email or Password.
-                                    </Alert>}
-                                
-
+                                </Alert>
+                                }
                                 <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                                 <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                                 <div className="second-point-login-modal">
@@ -108,24 +104,56 @@ class LoginModal extends Component {
                                 </div>
                                 <div className="body-container-login-modal">
                                     <label className="third-point-login-modal"> Enter E-mail: </label>
-                                    {login_failed ? <input className="input-login-modal-error" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange} onBlur={this.validateEmail}></input>:
-                                        <input className="input-login-modal" type="text" id="email" name="email" placeholder="Email" onChange={this.handleChange} onBlur={this.validateEmail}></input>
+                                    {login_failed ?
+                                        <input
+                                            className="input-login-modal-error"
+                                            type="text"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validateEmail}
+                                        />:
+                                        <input
+                                            className="input-login-modal"
+                                            type="text"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validateEmail}
+                                        />
                                     }
-
                                     {emailError !== undefined &&
-                                        <div className="required-field-login-modal">
-                                            <ReportProblemIcon style={report} /> {emailError} 
-                                        </div>
+                                    <div className="required-field-login-modal">
+                                        <ReportProblemIcon style={report} /> {emailError}
+                                    </div>
                                     }
-
                                     <label className="third-point-login-modal"> Enter Password: </label>
-                                    {login_failed ? <input className="input-login-modal-error" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange} onBlur={this.validatePassword}></input>:
-                                        <input className="input-login-modal1" type="password" id="password" name="password" placeholder="Password" onChange={this.handleChange} onBlur={this.validatePassword}></input>}
-                                    
+                                    {login_failed ?
+                                        <input
+                                            className="input-login-modal-error"
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validatePassword}
+                                        />:
+                                        <input
+                                            className="input-login-modal1"
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validatePassword}
+                                        />}
+
                                     {passwordError !== undefined &&
-                                        <div className="required-field-login-modal">
-                                            <ReportProblemIcon style={report} /> {passwordError} 
-                                        </div>
+                                    <div className="required-field-login-modal">
+                                        <ReportProblemIcon style={report} /> {passwordError}
+                                    </div>
                                     }
 
                                     <button onClick={this.handleOnClick} className="login-modal-continue-button">
@@ -135,7 +163,7 @@ class LoginModal extends Component {
                                         <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
                                     </button>
                                 </div>
-                                <hr className="line-login-modal"></hr>
+                                <hr className="line-login-modal" />
                                 <ul className="footer-flex-login-modal">
                                     <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
                                     <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
@@ -160,9 +188,9 @@ class LoginModal extends Component {
             return false;
         }
         else if (!pattern.test(this.state.email)) {
-            this.setState({ 
+            this.setState({
                 emailError: "Invalid email format: @..."
-        });
+            });
             document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
