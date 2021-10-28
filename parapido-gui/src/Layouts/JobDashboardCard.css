@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Tangerine&family=Old+Standard+TT:ital@1&display=swap');
 
 .card-body-wrapper{
-    margin: 2rem;
+    margin: 11px;
     font-family: 'Tangerine';
     font-size: 20px;
     line-height: 1.5;
@@ -10,9 +10,55 @@
 
 .card-wrapper{
     display: grid;
-    background-color: burlywood;
+    /* background-color: burlywood; */
     grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
     gap: 2rem;
-    justify-content: center;
 
+}
+
+.card-wrapper-1{
+    overflow: hidden;
+    box-shadow: 0 4px 20px lightgray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+
+}
+
+.card-wrapper-1 .card-title{
+    background-color: black;
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    color: white;
+}
+
+.circle-square{
+    width: 100px;
+    height: 100px;
+    background: lightgoldenrodyellow;
+    border-radius: 0% 50% 50% 0%;
+    position: relative;
+    top: 5.1px;
+    left: -42px;
+}
+
+.card-wrapper-1 .card-clientName{
+    padding: 10px;
+    text-align: center;
+}
+
+.card-wrapper-1 .card-location{
+    padding:10px;
+}
+
+.card-wrapper-1 .card-price{
+    padding: 10px;
+}
+
+.card-wrapper-1:hover{
+    transform:scale(1.02);
 }

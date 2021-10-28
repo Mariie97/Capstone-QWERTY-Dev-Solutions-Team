@@ -8,12 +8,16 @@ class JobDashboardCard extends Component {
                 <div className="card-wrapper">
                     <div className="card-wrapper-1">
                         <div className="card-body">
-                            <h2 className="card-title">Lavar Platos</h2>
-                            <h2 className="card-clientName"> Fefa Vargas Villarini </h2>
+                            
+                            <h2 className="card-title">Lavar Platos
+                                <div className= "circle-square"></div>
+                            </h2>
+                    
+                            <h2 className="card-clientName"> FeFa Vargas Villarini</h2>
                             <p className="card-location">
                             Calle Caoba 00718
                             </p>
-                            <div> $1000 </div>
+                            <div className="card-price"> $1000 </div>
                         </div>
                     </div>
                 </div>
