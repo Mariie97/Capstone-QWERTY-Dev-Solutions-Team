@@ -12,7 +12,7 @@
     display: grid;
     /* background-color: burlywood; */
     grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
-    gap: 2rem;
+    gap: 4rem;
 
 }
 
@@ -26,6 +26,7 @@
     cursor: pointer;
     transition: transform 200ms ease-in;
     border: 2px solid red;
+    background-color: white
 
 }
 
