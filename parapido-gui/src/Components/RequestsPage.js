@@ -14,11 +14,13 @@ class RequestsPage extends Component {
         super(props);
 
         this.state = {
-            requestsList: []
+            requestsList: [],
+            studentSelected: undefined,
         };
 
         this.getJobRequests = this.getJobRequests.bind(this);
         this.renderCards = this.renderCards.bind(this);
+        this.onClickAccept = this.onClickAccept.bind(this);
     }
 
     componentDidMount() {
@@ -27,13 +29,39 @@ class RequestsPage extends Component {
 
     getJobRequests(){
         fetch('/job_requests/13',{
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                },
             }
         ).then(response => {
             if(response.status === 200) {
                 response.json().then(data => {
                     this.setState({requestsList: data});
                 })
+            }
+        })
+    }
+
+    onClickAccept(student_id) {
+        fetch('/assign_job',{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                },
+                body: JSON.stringify({
+                    job_id: 13,
+                    student_id: student_id
+                })
+            }
+        ).then(response => {
+            if(response.status === 200) {
+                //TODO: Redirect to job in progress page
+                alert('success');
+            }
+            else{
+                alert('Failed' + response.status);
             }
         })
     }
@@ -58,13 +86,14 @@ class RequestsPage extends Component {
                     </CardContent>
                 </Link>
                 <CardActions>
-                    <Button size="small">Accept</Button>
+                    <Button size="small" onClick={() => this.onClickAccept(request.user_id) }>Accept</Button>
                 </CardActions>
             </Card>
         ) )
     }
 
     render() {
+        //TODO: Show message when there are no request; fetch to accept a request
         return (
             <div>
                 <div className='header-flex-container'>

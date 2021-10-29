@@ -82,7 +82,10 @@ class ChatApp extends Component {
 
   getChatMessages() {
     fetch(`/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${current_user.id}`, {
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+      }
     }).then(response => {
       if (response.status === 200) {
         response.json().then(data => {

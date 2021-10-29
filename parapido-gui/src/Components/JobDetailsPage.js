@@ -53,7 +53,10 @@ class JobDetailsPage extends Component {
 
         const { job_id } =  this.props;
         fetch(`/job_details/${job_id}`, {
-            method:'GET'
+            method:'GET',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
         }).then(response => {
             if (response.status===200) {
                 response.json().then(data =>{
