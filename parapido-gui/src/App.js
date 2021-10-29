@@ -9,6 +9,7 @@ import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
+import RequestsPage from "./Components/RequestsPage";
 
 
 class App extends React.Component {
@@ -86,15 +87,25 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                            exact
-                            path='/jobcreation'
-                            render={() => (
-                                <React.Fragment>
-                                    <NavBar cookies={this.props.cookies} />
-                                    <JobCreation cookies={this.props.cookies} />
-                               </React.Fragment>
-                            )}
-                        />
+                        exact
+                        path='/jobcreation'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <JobCreation cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/job_requests'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <RequestsPage cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
                 </Switch>
             </BrowserRouter>
         );
