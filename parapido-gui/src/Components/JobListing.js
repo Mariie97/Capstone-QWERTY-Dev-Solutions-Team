@@ -1,7 +1,9 @@
 import React from 'react'
 import {Box, Button, Checkbox, IconButton, withStyles} from "@material-ui/core";
 import "../Layouts/JobListing.css"
-import {green} from "@material-ui/core/colors";
+import {blue, green, pink, red} from "@material-ui/core/colors";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const boxSX = {
     width: 1000,
@@ -21,6 +23,7 @@ const categoryBoxSX = {
     left: 450,
     width: 100,
     height: 9,
+    verticalAlign: 'middle',
     color: '#2F2D4A',
     align: 'center',
     textAlign: 'center',
@@ -43,6 +46,21 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
+    const findCategory = (category) => {
+
+        switch(category){
+            case 1: return 'Animals'
+            case 2: return 'Auto'
+            case 3: return 'Education'
+            case 4: return 'Events'
+            case 5: return 'Home'
+            case 6: return 'Other'
+            case 7: return 'Self-care'
+            case 8: return 'Shop'
+        }
+
+    }
+
 const listing = (props) => {
 
     return(
@@ -59,25 +77,43 @@ const listing = (props) => {
                 <span id={"listing-title"}> {props.title} </span>
                 <span id={"listing-price"}> {props.price} </span>
                 <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
-                <span id={"listing-date"}> {props.date} </span>
+                <span id={"listing-date"}> {props.date_posted} </span>
+                <span id={"checkbox-style"}>
 
-                <span
+                    <IconButton>
+                        <ThumbUpIcon
+                            sx={{ color: blue[100],
+                                fontSize: 25,
+                            }}
+
+                        />
+                    </IconButton>
+
+                </span>
+
+{/*                <span
                 id={"checkbox-style"}
                 >
 
                    <GreenCheckbox
                    />
 
-               </span>
+               </span>*/}
 
-                <Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>
+                {/*<Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>*/}
 
 
-                {/*                <span id={"delete-button"}>
+                <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
-                        <DeleteIcon onClick={props.deleteListing}/>
+                        <DeleteIcon
+                            onClick={props.deleteListing}
+                            sx={{ color: red[900],
+                                fontSize: 25,
+                            }}
+
+                        />
                     </IconButton>
-                </span>*/}
+                </span>
 
             </Box>
         </li>

@@ -62,7 +62,7 @@ class App extends React.Component {
                             render={() => (
                                 <React.Fragment>
                                     <NavBar cookies= {this.props.cookies} />
-                                    <JobListingPage cookies= {this.props.cookies}/>
+                                    <JobListingPage cookies = {this.props.cookies}/>
                                 </React.Fragment>
                             )}
                         />
