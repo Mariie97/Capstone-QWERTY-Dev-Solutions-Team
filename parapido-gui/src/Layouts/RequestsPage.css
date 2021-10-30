@@ -14,7 +14,7 @@
 
 .student-request-cards:hover {
     cursor: pointer;
-	border: 1px solid black;
+    border: 1px solid black;
     box-shadow: 2px 1px 15px rgb(157, 150, 150);
 }
 
@@ -29,4 +29,9 @@
     justify-content: center;
     padding-bottom: 12px;
     padding-top: 12px;
+}
+
+.request-page-subheader {
+    font-family: "Jost";
+    color: white;
 }

@@ -39,7 +39,7 @@ class MessagesContainer extends Component{
           <Link to={`profile/${message.sender_id}`}>
             <Avatar
                 className='avatar'
-                alt="Remy Sharp"
+                alt={`${message.sender_name} ${message.sender_last}`}
                 src={message.sender_image}
             />
           </Link>

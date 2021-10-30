@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
+import {Box, CircularProgress} from "@material-ui/core";
 
 class RequestsPage extends Component {
 
@@ -15,7 +16,7 @@ class RequestsPage extends Component {
 
         this.state = {
             requestsList: [],
-            studentSelected: undefined,
+            requestLoaded: false
         };
 
         this.getJobRequests = this.getJobRequests.bind(this);
@@ -37,7 +38,10 @@ class RequestsPage extends Component {
         ).then(response => {
             if(response.status === 200) {
                 response.json().then(data => {
-                    this.setState({requestsList: data});
+                    this.setState({
+                        requestsList: data,
+                        requestLoaded: true
+                    });
                 })
             }
         })
@@ -74,13 +78,13 @@ class RequestsPage extends Component {
                     <div className='request-image-container'>
                         <Avatar
                             className='avatar'
-                            alt="Remy Sharp"
+                            alt={`${request.first_name} ${request.last_name}`}
                             src={request.image}
                             sx={{width: 200, height: 200}}
                         />
                     </div>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h5" component="div" color='#1976d2'>
                             {`${request.first_name} ${request.last_name}`}
                         </Typography>
                     </CardContent>
@@ -94,16 +98,25 @@ class RequestsPage extends Component {
 
     render() {
         //TODO: Show message when there are no request; fetch to accept a request
+        const { requestsList, requestLoaded } = this.state;
         return (
             <div>
                 <div className='header-flex-container'>
                     <h1 className="page-title-header">Student's Requests</h1>
                 </div>
-                <div className='student-requests-flex-container'>
-                    {this.renderCards()}
-                </div>
+                {!requestLoaded ?
+                    <div className='loading-icon'>
+                        <Box sx={{display: 'flex'}}>
+                            <CircularProgress />
+                        </Box>
+                    </div>:
+                    <div className='student-requests-flex-container'>
+                        {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :
+                            this.renderCards()
+                        }
+                    </div>
+                }
             </div>
-
         );
     }
 }
