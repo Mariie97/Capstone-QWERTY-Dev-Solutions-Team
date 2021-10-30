@@ -7,7 +7,7 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
-import verifyUserAuth, {categories, cities, zipcodeFormatPR} from "../Utilities";
+import {categories, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 
 
 export class JobCreation extends Component {

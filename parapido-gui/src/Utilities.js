@@ -1,4 +1,4 @@
-export default function verifyUserAuth(token) {
+export function verifyUserAuth(token) {
     if(token===undefined)
         return false;
 
@@ -13,6 +13,20 @@ export default function verifyUserAuth(token) {
     })
 }
 
+export function setJobStatus(token, job_id, status) {
+    return fetch(`/job_status/${job_id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        },
+        body: JSON.stringify({
+            status: status
+        })
+    }).then(response => {
+        return response.status === 200;
+    })
+}
 export const cities = [
     'Adjuntas',
     'Aguada',
