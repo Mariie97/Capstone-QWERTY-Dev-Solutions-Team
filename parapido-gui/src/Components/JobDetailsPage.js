@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 import '../Layouts/JobDetails.css'
 import {Link, Redirect} from "react-router-dom";
-import verifyUserAuth, {accountType, cities, current_user, getJobStatus, jobStatus, weekDays} from "../Utilities";
+import {
+    accountType,
+    cities,
+    current_user,
+    getJobStatus,
+    jobStatus,
+    setJobStatus, verifyUserAuth,
+    weekDays
+} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
 
@@ -36,10 +44,10 @@ class JobDetailsPage extends Component {
                 owner_rating: '',
             },
             pageLoaded: false,
+            redirect: undefined,
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
-        this.changeJobStatus = this.changeJobStatus.bind(this);
         this.onClickCancelRequest = this.onClickCancelRequest.bind(this);
         this.getJobDays = this.getJobDays.bind(this);
     }
@@ -127,7 +135,7 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                //    TODO: Redirect to request listing page
+                //    TODO: Redirect to student request listing page
                 alert("Successful")
             }
             else {
@@ -136,41 +144,6 @@ class JobDetailsPage extends Component {
         })
     }
 
-    changeJobStatus() {
-        const { job_id } = this.props;
-        const { job } = this.state;
-        let new_status;
-
-
-        if (current_user.type===accountType.admin)
-            new_status = jobStatus.deleted;
-        else
-        if (current_user.id===job.owner_id)
-            new_status = jobStatus.cancelled;
-        else
-            new_status = jobStatus.posted;
-
-        fetch(`/job_status/${job_id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: JSON.stringify({
-                status: new_status
-            })
-        }).then(response => {
-            if (response.status === 200) {
-                //    TODO: Redirect to jobs, maybe???
-                alert('Success');
-            }
-            else {
-                alert('The server could not handle your request at this moment, please try again later.');
-            }
-        })
-    }
-
-
     getJobDays() {
         const {days} = this.state.job;
         return days.map(day =>
@@ -178,13 +151,11 @@ class JobDetailsPage extends Component {
         )
     }
 
-
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded } = this.state;
+        const {is_auth, job, pageLoaded, redirect } = this.state;
         const { job_id } = this.props;
-
-        console.log(getJobStatus[job.status-1])
+        const token = this.props.cookies.get('csrf_access_token');
 
         const showCancelRequestButton =
             job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
@@ -217,6 +188,7 @@ class JobDetailsPage extends Component {
                         </Box>
                     </div> :
                     <div>
+                        {redirect !== undefined && <Redirect to={redirect} />}
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
@@ -225,7 +197,17 @@ class JobDetailsPage extends Component {
                                 </button>
                                 }
                                 {showCancelButton &&
-                                <button onClick={this.changeJobStatus} className="custom-buttons">
+                                <button
+                                    onClick={() => {
+                                        const status = current_user.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
+                                        const success = setJobStatus(token, job_id, status);
+                                        if(success) {
+                                            //TODO: Redirect: student_request or job_posted depending on user account
+                                            this.setState({redirect: '/jobdashboard'});
+                                        }
+                                    }}
+                                    className="custom-buttons"
+                                >
                                     Cancel Job
                                 </button>
                                 }
@@ -248,7 +230,16 @@ class JobDetailsPage extends Component {
                                 >Chat</Link>
                                 }
                                 {showDeleteButton &&
-                                <button onClick={this.changeJobStatus} className="custom-buttons delete-button">
+                                <button
+                                    onClick={() => {
+                                        const success = setJobStatus(token, job_id, jobStatus.deleted);
+                                        if(success) {
+                                            //TODO: Redirect to user admin list page
+                                            this.setState({redirect: '/jobdashboard'});
+                                        }
+                                    }}
+                                    className="custom-buttons delete-button"
+                                >
                                     Delete Job
                                 </button>
                                 }

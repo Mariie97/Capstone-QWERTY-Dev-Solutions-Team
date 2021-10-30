@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
-import verifyUserAuth, {accountType, cities, current_user, zipcodeFormatPR} from "../Utilities";
+import {accountType, cities, current_user, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
-import verifyUserAuth from "../Utilities";
+import {verifyUserAuth} from "../Utilities";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
