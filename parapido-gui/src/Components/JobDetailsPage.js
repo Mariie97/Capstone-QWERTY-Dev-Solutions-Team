@@ -302,7 +302,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <th className='column-table-body col1'>Assigned to:</th>
                                     <th className='column-table-body col2'>
-                                        <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
+                                        <Link to={`/profile/${job.student_id}`} id='job-student-assigned-name'>
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
                                     </th>
