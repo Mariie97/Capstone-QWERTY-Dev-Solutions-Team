@@ -250,7 +250,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showJobRequestsButton &&
                                 <Link
-                                    to='/job_requests'
+                                    to={`/job_requests?job_id=${job_id}`}
                                     className="custom-buttons"
                                 >
                                     View Requests

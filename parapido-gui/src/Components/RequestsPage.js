@@ -8,8 +8,10 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {Box, CircularProgress} from "@material-ui/core";
+import {getQueryParams} from "../Utilities";
 
 class RequestsPage extends Component {
+    queryParams = undefined;
 
     constructor(props) {
         super(props);
@@ -25,11 +27,12 @@ class RequestsPage extends Component {
     }
 
     componentDidMount() {
+        this.queryParams = getQueryParams(this.props.queryParams)
         this.getJobRequests();
     }
 
     getJobRequests(){
-        fetch('/job_requests/13',{
+        fetch(`/job_requests/${this.queryParams.get('job_id')}?state=1`,{
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -40,10 +43,10 @@ class RequestsPage extends Component {
                 response.json().then(data => {
                     this.setState({
                         requestsList: data,
-                        requestLoaded: true
                     });
                 })
             }
+            this.setState({requestLoaded: true});
         })
     }
 
@@ -55,7 +58,7 @@ class RequestsPage extends Component {
                     'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
                 },
                 body: JSON.stringify({
-                    job_id: 13,
+                    job_id: this.queryParams.get('job_id'),
                     student_id: student_id
                 })
             }

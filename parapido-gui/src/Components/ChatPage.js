@@ -2,7 +2,7 @@ import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
 import Avatar from '@mui/material/Avatar';
-import {current_user} from "../Utilities";
+import {current_user, getQueryParams} from "../Utilities";
 import {Link} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
@@ -101,7 +101,7 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
-    this.queryParams = this.getQueryParams();
+    this.queryParams = getQueryParams(this.props.queryParams);
     this.getChatMessages();
   }
 
@@ -146,10 +146,6 @@ class ChatApp extends Component {
       enter_pressed = true;
     }
     this.addMessageBox(enter_pressed);
-  }
-
-  getQueryParams() {
-    return new URLSearchParams(this.props.queryParams);
   }
 
   render() {

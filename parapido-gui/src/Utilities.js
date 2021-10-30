@@ -121,6 +121,10 @@ export const jobStatus = {
     deleted: 5,
 };
 
+export function getQueryParams(query) {
+    return new URLSearchParams(query);
+  }
+
 export const getJobStatus = [
     'Posted',
     'In process',
