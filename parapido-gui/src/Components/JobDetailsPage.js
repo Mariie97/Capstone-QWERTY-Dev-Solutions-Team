@@ -181,6 +181,8 @@ class JobDetailsPage extends Component {
         const showChatButton = (job.status === jobStatus.in_process && (
             current_user.id === job.owner_id || current_user.id === job.student_id));
 
+        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === current_user.id;
+
         return (
             <div className="Dashboard">
                 {!is_auth && <Redirect to='/' />}
@@ -245,6 +247,14 @@ class JobDetailsPage extends Component {
                                 >
                                     Delete Job
                                 </button>
+                                }
+                                {showJobRequestsButton &&
+                                <Link
+                                    to='/job_requests'
+                                    className="custom-buttons"
+                                >
+                                    View Requests
+                                </Link>
                                 }
                             </div>
                             <h1 className="page-title-header">{job.title}</h1>
@@ -315,6 +325,7 @@ const chipStyleJobDetails = {
     fontWeight: "400",
     padding: '5px',
     border: "1px solid black",
+    marginRight: '5px',
 }
 
 export default JobDetailsPage;
