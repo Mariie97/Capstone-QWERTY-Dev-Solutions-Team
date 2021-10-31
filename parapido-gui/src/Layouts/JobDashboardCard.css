@@ -15,6 +15,7 @@
     gap: 4rem;
     width: 100%;
     justify-content: center;
+    padding-top: 34px;
 
 }
 
@@ -58,7 +59,7 @@
     border-radius: 50%;
     position: relative;
     top: -177.9px;
-    left: 186px;
+    left: 165px;
 }
 
 .card-wrapper-1 .card-clientName{
