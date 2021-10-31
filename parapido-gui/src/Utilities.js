@@ -157,3 +157,9 @@ export const categories = [
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;
+
+export const mapAccount = {
+    1: "Student",
+    2: "Client",
+    3: "Admin"
+};

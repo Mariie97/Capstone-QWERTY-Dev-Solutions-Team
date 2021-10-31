@@ -1,0 +1,118 @@
+@import "Header.css";
+
+.administration-body-container {
+    display: flex;
+    flex-flow: row nowrap;
+    width:100vw;
+    height: calc(100vh - 200px);
+    align-items: flex-start;
+    margin-left: 6%;
+    margin-top: 2%;
+
+}
+.list-categories-container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.list-categories-text{
+    font-family: Jost;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.administration-table-container{
+    background-color: white;
+    margin-left: 3%;
+    width: 65%;
+    min-width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    padding: 0 20px;
+    overflow: auto;
+}
+
+.admin-table-content{
+    width: 100%;
+    table-layout: fixed;
+    height: 100%;
+    overflow: scroll;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.admin-col-table{
+    color: black;
+    width: 34%;
+    height: 50px;
+    padding: 10px;
+    border-bottom: 1px solid #dbd6d685;
+}
+
+.admin-row-table{
+    height: 10%;
+    width: 100%;
+    padding: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.admin-row-table:hover {
+    border: 2px solid black;
+    background: #e3e2e2;
+}
+
+#header-row-table {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: white;
+    text-align: left;
+    padding-top: 10px;
+}
+
+
+.header-col-table{
+    padding-top: 20px;
+}
+
+.admin-table-row-link:hover {
+    color: #2F2D4A;
+    cursor: pointer;
+}
+
+.admin-col1{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.admin-col2{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+.admin-col3{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.administration-filter-container {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid white;
+    margin-left: 3%;
+    height: auto;
+    width: 15%;
+    border-radius: 10px;
+    padding: 10px 5px 10px 5px;
+    align-self: center;
+    align-items: center;
+}
+
+.admin-filter-button {
+    margin: 8px 0;
+}

@@ -10,7 +10,7 @@ class ItemsDropdown extends Component {
         super(props);
 
         this.state = {
-            item: this.props.initial_value !== ''? this.props.initial_value : undefined,
+            item: this.props.initial_value !== undefined ? this.props.initial_value : '',
             itemError: undefined,
         };
 
@@ -22,6 +22,7 @@ class ItemsDropdown extends Component {
         this.validate = this.validate.bind(this);
 
         this.getAllItems = this.getAllItems.bind(this);
+        this.reset = this.reset.bind(this);
 
     }
 
@@ -100,6 +101,11 @@ class ItemsDropdown extends Component {
             itemError: undefined
         })
         return true;
+    }
+
+    reset() {
+        const { initial_value } = this.props;
+        this.setState({item: initial_value !== undefined? this.props.initial_value : ''})
     }
 }
 
