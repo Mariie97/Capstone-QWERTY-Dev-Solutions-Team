@@ -33,10 +33,11 @@
 .card-wrapper-1 .card-title{
     background-color: black;
     height: 150px;
-    width: 100%;
+    /* width: 100%; */
     color: white;
     border-top-right-radius: 69px;
     padding-left: 3px;
+    border-bottom: 2px solid red;
 }
 
 .circle-square{
@@ -62,15 +63,25 @@
 .card-wrapper-1 .card-clientName{
     padding: 10px;
     text-align: center;
-    object-fit: cover;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
 }
 
 .card-wrapper-1 .card-location{
     padding:10px;
+    padding-left: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
 }
 
 .card-wrapper-1 .card-price{
     padding: 10px;
+    padding-left: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
 }
 
 .card-wrapper-1:hover{
@@ -78,7 +89,7 @@
 }
 
 .breakTitleJobDashboard{
-    inline-size: 150px;
+    inline-size: 175px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
