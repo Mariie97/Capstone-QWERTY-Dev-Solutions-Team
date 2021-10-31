@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
+import "../Layouts/JobDashboardCard.css";
 import {verifyUserAuth} from "../Utilities";
 import CategoriesDropdown from './CategoriesDropdown_';
 import PricesDropdown from './PricesDropdown';
@@ -89,7 +90,7 @@ class JobDashboardPage extends Component {
                     </button>
                 </div>
 
-            <div>
+            <div className="card-wrapper">
                 {cardArray}
             </div>
             </div>

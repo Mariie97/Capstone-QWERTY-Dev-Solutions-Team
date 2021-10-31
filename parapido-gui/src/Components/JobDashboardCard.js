@@ -12,12 +12,11 @@ class JobDashboardCard extends Component {
         const {job_id, title} =  this.props
         return (
             <div className="card-body-wrapper">
-                <div className="card-wrapper">
                     <Link to={"/job/"+job_id}  className="none-display-for-link"> 
                         <div className="card-wrapper-1">
                             <div className="card-body">
                                 <h2 className="card-title">
-                                    <div className="breakTitleJobDashboard"> {title} </div>
+                                    <div className="break-title-job-dashboard"> {title} </div>
                                     <div className= "circle-square"></div>
                                     <div className= "circle-square2"></div>
                                 </h2>
@@ -28,25 +27,7 @@ class JobDashboardCard extends Component {
                                 <div className="card-price"> $1000 </div>
                             </div>
                         </div>
-                    </Link>
-
-                    <div className="card-wrapper-1">
-                        <div className="card-body">
-                            
-                            <h2 className="card-title"> 
-                                <div className="breakTitleJobDashboard"> Recoger la sala </div>
-                                <div className= "circle-square"></div>
-                                <div className= "circle-square2"></div>
-                            </h2>
-                    
-                            <h2 className="card-clientName"> Pepe cojones </h2>
-                            <p className="card-location">
-                            Calle Caoba 00718
-                            </p>
-                            <div className="card-price"> $1000000 </div>
-                        </div>
-                    </div>
-                </div>                  
+                    </Link>                          
             </div>
          
         )
