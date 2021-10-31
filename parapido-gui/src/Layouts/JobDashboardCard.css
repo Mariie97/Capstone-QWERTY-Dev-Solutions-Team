@@ -95,3 +95,8 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.none-display-for-link{
+        text-decoration: none;
+        color: black;
+}
