@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
-import verifyUserAuth from "../Utilities";
+import {verifyUserAuth} from "../Utilities";
 import CategoriesDropdown from './CategoriesDropdown_';
 import PricesDropdown from './PricesDropdown';
 import CitiesDropdown from './CitiesDropdown_1';

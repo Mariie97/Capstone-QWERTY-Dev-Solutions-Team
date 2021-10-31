@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
-import Avatar from '@mui/material/Avatar';
+import Avatar from '@material-ui/core/Avatar';
 import {current_user} from "../Utilities";
 import {Link} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';

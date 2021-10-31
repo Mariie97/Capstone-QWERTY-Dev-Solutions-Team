@@ -266,6 +266,7 @@ export class JobCreation extends Component {
                         <div className="required-field-2-job-creation">
                             <hr className="price-error-job-creation" />
                             <hr className="price-error-1-job-creation" />
+                            <hr className="price-error-2-job-creation" />
                             <hr className="price-error-3-job-creation" />
                             <ReportProblemIcon style={report} />
                             {priceError}
