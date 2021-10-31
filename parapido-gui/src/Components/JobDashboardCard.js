@@ -12,12 +12,11 @@ class JobDashboardCard extends Component {
                 <div className="card-wrapper">
                     <div className="card-wrapper-1">
                         <div className="card-body">
-                            
-                            <h2 className="card-title">Lavar Platos
+                            <h2 className="card-title">
+                                <div className="breakTitleJobDashboard"> Recoger la sala </div>
                                 <div className= "circle-square"></div>
                                 <div className= "circle-square2"></div>
                             </h2>
-                    
                             <h2 className="card-clientName"> FeFa Vargas Villarini</h2>
                             <p className="card-location">
                             Calle Caoba 00718
@@ -29,7 +28,8 @@ class JobDashboardCard extends Component {
                     <div className="card-wrapper-1">
                         <div className="card-body">
                             
-                            <h2 className="card-title"> Recoger la sala
+                            <h2 className="card-title"> 
+                                <div className="breakTitleJobDashboard"> Recoger la sala </div>
                                 <div className= "circle-square"></div>
                                 <div className= "circle-square2"></div>
                             </h2>

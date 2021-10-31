@@ -34,7 +34,6 @@
     background-color: black;
     height: 150px;
     width: 100%;
-    object-fit: cover;
     color: white;
     border-top-right-radius: 69px;
     padding-left: 3px;
@@ -76,4 +75,11 @@
 
 .card-wrapper-1:hover{
     transform:scale(1.02);
+}
+
+.breakTitleJobDashboard{
+    inline-size: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
