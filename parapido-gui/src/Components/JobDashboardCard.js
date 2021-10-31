@@ -11,7 +11,7 @@ class JobDashboardCard extends Component {
         return (
             <div className="card-body-wrapper">
                 <div className="card-wrapper">
-                    <Link to={"/"}  className="none-display-for-link"> 
+                    <Link to={"/job/"}  className="none-display-for-link"> 
                         <div className="card-wrapper-1">
                             <div className="card-body">
                                 <h2 className="card-title">

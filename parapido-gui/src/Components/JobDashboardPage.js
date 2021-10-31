@@ -6,12 +6,14 @@ import CategoriesDropdown from './CategoriesDropdown_';
 import PricesDropdown from './PricesDropdown';
 import CitiesDropdown from './CitiesDropdown_1';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import JobDashboardCard from './JobDashboardCard';
 
 class JobDashboardPage extends Component {
 
     constructor(props) {
         super(props);
         this.state={
+            jobs: [],
             is_auth: true
         };
 
@@ -33,19 +35,26 @@ class JobDashboardPage extends Component {
           method: 'GET'
         }).then(response => {
           if (response.status === 200) {
-            response.json().then(data => {
-              console.log(data)         
+            response.json().then(data => { 
+              this.setState(
+                  {jobs : data})      
             })
           }
           else{
-              console.log("Error")
+              console.log("Error request couldn't get processed")
           }
         })
     
       }
 
     render() {
-        const {is_auth} = this.state;
+        const {is_auth, jobs} = this.state;
+        console.log(this.state.jobs)
+        const cardArray = jobs.map( 
+            job => <JobDashboardCard />
+        )
+
+
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
@@ -72,6 +81,10 @@ class JobDashboardPage extends Component {
                         </div>
                     </button>
                 </div>
+
+            <div>
+                {cardArray}
+            </div>
             </div>
         )
     }
