@@ -35,8 +35,7 @@
 .admin-table-content{
     width: 100%;
     table-layout: fixed;
-    height: 100%;
-    overflow: scroll;
+    height: auto;
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -47,6 +46,7 @@
     height: 50px;
     padding: 10px;
     border-bottom: 1px solid #dbd6d685;
+    word-wrap: break-word;
 }
 
 .admin-row-table{
