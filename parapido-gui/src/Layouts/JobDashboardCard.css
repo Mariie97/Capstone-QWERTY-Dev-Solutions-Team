@@ -10,15 +10,17 @@
 
 .card-wrapper{
     display: grid;
-    /* background-color: burlywood; */
+    background-color: burlywood;
     grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
     gap: 4rem;
+    width: 100%;
+    justify-content: center;
 
 }
 
 .card-wrapper-1{
     overflow: hidden;
-    box-shadow: 0 4px 20px lightgray;
+    box-shadow:  0 2px 10px #f00;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -33,7 +35,6 @@
 .card-wrapper-1 .card-title{
     background-color: black;
     height: 150px;
-    /* width: 100%; */
     color: white;
     border-top-right-radius: 69px;
     padding-left: 3px;
