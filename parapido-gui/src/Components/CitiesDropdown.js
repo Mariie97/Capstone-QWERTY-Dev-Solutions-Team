@@ -19,7 +19,7 @@ class CitiesDropdown extends Component {
 
         return (
             <div>
-                <InputLabel id={"cities-dropdown-label"} >City</InputLabel>
+                <InputLabel id={"cities-dropdown-label"}>City</InputLabel>
                 <Select
                     labelId="cities-dropdown-label"
                     id={"cities-dropdown"}

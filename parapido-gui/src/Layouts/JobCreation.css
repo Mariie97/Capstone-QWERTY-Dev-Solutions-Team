@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+/* title and line */
+
+.job-creation-page-header{
+	font-family: "Jost";
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 60px;
+	text-align: left;
+	color: white;
+	border-bottom: 1px solid white;
+	width: 700px;
+	padding-bottom: 20px;
+	margin: 0 auto 20px 150px;
+}
+
+/* first 5 boxes of label input better known as the center body of the layout */
+.big-flexbox-for-2-flexbox-containers-job-creation{
+	display: flex;
+	width: 70%;
+	margin-left: 150px;
+	flex-direction: row;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.big-flexbox-for-3-flexbox-containers-job-creation{
+	display: flex;
+	flex-direction: column;
+	line-height: 2.5;
+	text-align: left;
+}
+
+/* title and description */
+.left-body-container-1-job-creation{
+	display: flex;
+	flex-direction: column;
+	line-height: 2.5;
+	text-align: left;
+}
+
+/* all labels have the same style */
+.label-job-creation{
+	font-family: "Cormorant Garamond";
+	font-style: italic;
+	font-weight: 400;
+	font-size: 16px;
+	color: white;
+	letter-spacing: 1px;
+}
+
+/* title input */
+
+.input-1-job-creation{
+	font-family: "Jost";
+	width: 200%;
+	padding: 12px 20px 6px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	display: inline;
+}
+
+.input-1-job-creation:focus{
+	background-color: #FFEBCC;
+}
+
+.input-1-copy-job-creation{
+	font-family: "Jost";
+	width: 140%;
+	padding: 12px 20px 6px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	display: inline;
+}
+
+.input-1-copy-job-creation:focus{
+	background-color: #FFEBCC;
+}
+
+/* description textarea */
+.input-2-job-creation{
+	font-family: "Jost";
+	width: 200%;
+	word-wrap: break-word;
+	padding: 12px 20px 100px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	display: inline;
+	resize:none;
+}
+
+.input-2-job-creation:focus{
+	background-color: #FFEBCC;
+}
+
+/* municipality and zipcode */
+.mini-flex-box-job-creation{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 30%;
+	line-height: 2.5;
+	margin-top: 6px;
+	width:130%
+}
+
+.input-3-job-creation{
+	font-family: "Jost";
+	padding: 12px 20px 6px;
+	box-sizing: border-box;
+	border: 3px solid black;
+	outline: none;
+	font-size: 16px;
+	flex-direction: column;
+	display: block;
+	width: 70%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-bottom: 8px;
+}
+
+.input-3-job-creation:focus{
+	background-color: #FFEBCC;
+	margin: 0px;
+}
+
+/* Material ui override dropdown styling  */
+.MuiSelect-root{
+	padding-bottom: 0px;
+	padding-right: 0px;
+	width: 102px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	height: 42px;
+}
+
+.MuiInputBase-input{
+	animation-name: none;
+	animation-duration: 0ms;
+
+}
+
+/* arrow icon in Material ui dropdown */
+.MuiSelect-icon{
+	color: darkblue;
+}
+
+/* what changes when you select something */
+.MuiSelect-select{
+	background-color:white ;
+	display: grid;
+	align-content: center;
+	text-align: center;
+}
+
+/* inside Material ui dropdown */
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
+}
+
+/* price, category and available days */
+.big-flexbox-for-3-lower-flexbox-containers-job-creation{
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-evenly;
+	flex-wrap: wrap;
+	line-height: 2.5;
+}
+
+.price-miniflex-job-creation{
+	display: flex;
+	flex-direction: column;
+	line-height: 2.5;
+	margin-left: 50px;
+}
+
+.chip-flex-job-creation {
+	color: #2F2D4A;
+	display: flex;
+	flex-direction: row;
+	list-style-type: none;
+}
+
+.MuiInputBase-input {
+	background-color: white;
+	font-family: "Jost";
+	font-size: 15px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.MuiInputBase-root {
+	background-color: white;
+	border: 2px solid black;
+}
+
+.MuiFormLabel-root{
+	line-height: 0px;
+}
+
+.MuiFormControl-root{
+	width: 65%;
+}
+
+.MuiInputBase-root:focus-within {
+	background-color: #FFEBCC;
+}
+
+.MuiInputBase-input:focus{
+	background-color: #FFEBCC;
+}
+
+.MuiInputBase-input.CurrencyTextField-textField-3{
+	height: 30px;
+	text-align: left;
+}
+
+.MuiTypography-root.MuiTypography-colorTextSecondary{
+	color:black;
+	margin-left: 3px;
+}
+
+/* job creation button */
+.button-job-creation{
+	width: 40%;
+	margin-top: 28px;
+	padding-bottom: 15px;
+	background-color: #91EB8F;
+	border: 2px solid #91EB8F;
+	border-radius: 10px;
+}
+
+.button-job-creation:hover{
+	cursor: pointer;
+	border: 2px solid black;
+
+}
+
+.text-button-job-creation{
+	position: relative;
+	top: 5px;
+	font-family: "Helvetica";
+	font-size: 15px;
+	color: black;
+	letter-spacing: 12px
+}
+
+.text-button-job-creation:hover{
+	color:floralwhite;
+}
+
+/* field is required - live alerts and errors */
+.required-field-job-creation{
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	bottom: 8px;
+	left: -3px;
+}
+
+.required-field-2-job-creation {
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	bottom: 8px;
+	left: -3px;
+	margin-top: 8px;
+}
+
+.price-error-job-creation{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 63%;
+	left: 4px;
+	top: -47px;
+}
+
+
+.price-error-1-job-creation{
+	border: 0;
+	margin: 0;
+	border-left: 2.3px solid red;
+	height: 45px;
+	position: absolute;
+	bottom: 46px;
+	left: 4px;
+	top: -46px;
+}
+
+.price-error-2-job-creation{
+	border: 0;
+	margin: 0;
+	border-left: 2.3px solid red;
+	height: 45px;
+	position: absolute;
+	bottom: 46px;
+	left: 137.6px;
+	top: -47px;
+}
+
+.price-error-3-job-creation{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 133.8px;
+	left: 4px;
+	top: -3.1px;
+}
+
+.city-error-job-creation{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 72%;
+	left: 4px;
+	top: -46px;
+}
+
+
+.city-error-1-job-creation{
+	border: 0;
+	margin: 0;
+	border-left: 2.3px solid red;
+	height: 45px;
+	position: absolute;
+	bottom: 46px;
+	left: 4px;
+	top: -46px;
+}
+
+.city-error-2-job-creation{
+	border: 0;
+	margin: 0;
+	border-left: 2.3px solid red;
+	height: 45px;
+	position: absolute;
+	bottom: 46px;
+	left: 131.5px;
+	top: -46px;
+}
+
+.city-error-3-job-creation{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 127px;
+	left: 4px;
+	top: -2.1px;
+}
+
+.category-error-job-creation{
+	color: red;
+	border: 1.4px solid red;
+	position: relative;
+	bottom: 48px;
+	width: 78.5%;
+	left: 4px;
+	top: -46px;
+}
+
+.category-1-error-job-creation{
+	border: 0;
+	margin: 0;
+	border-left: 2.3px solid red;
+	height: 45px;
+	position: absolute;
+	bottom: 46px;
+	left: 3.6px;
+	top: -46px;
+}
+
+.category-3-error-job-creation{
+	background-color: red;
+	border: 0.1px solid red;
+	position: absolute;
+	bottom: 174px;
+	width: 127.8px;
+	left: 4px;
+	top: -2.1px;
+}
+
+.job-creation-available-days-disclaimer{
+	font-size: 13px;
+	font-style: normal;
+	color: lightpink;
+	line-height: 0px;
+	margin-bottom: 6px;
+}
+
+.server-error-job-creation{
+	position: absolute;
+	width: 97.9%;
+	bottom: 640.4px;
+}
+
+.job-creation-dropdown {
+	min-width: 50%;
+}
+
+.error {
+	border-color: red;
+}
