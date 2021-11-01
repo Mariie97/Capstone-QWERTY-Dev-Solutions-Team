@@ -21,14 +21,14 @@
 
 .card-wrapper-1{
     overflow: hidden;
-    box-shadow:  0 2px 10px #f00;
+    box-shadow:  0 2px 10px green;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
     transition: transform 200ms ease-in;
-    border: 2px solid red;
+    border: 2px solid green;
     background-color: white
 
 }
@@ -39,7 +39,7 @@
     color: white;
     border-top-right-radius: 69px;
     padding-left: 3px;
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid green;
 }
 
 .circle-square{

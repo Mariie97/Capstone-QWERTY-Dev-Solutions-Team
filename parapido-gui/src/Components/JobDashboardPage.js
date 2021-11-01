@@ -1,14 +1,16 @@
-import {Component} from 'react';
+import {Component, createRef} from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
 import {verifyUserAuth} from "../Utilities";
+import ItemsDropdown from "./ItemsDropdown.js";
 import CategoriesDropdown from './CategoriesDropdown_';
 import PricesDropdown from './PricesDropdown';
 import CitiesDropdown from './CitiesDropdown_1';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
 import {Box, CircularProgress} from "@material-ui/core";
+import {cities, categories, prices} from "../Utilities";
 
 class JobDashboardPage extends Component {
 
@@ -16,6 +18,9 @@ class JobDashboardPage extends Component {
         super(props);
         this.state={
             jobs: [],
+            change_category: createRef(),
+            change_city: createRef(),
+            change_price: createRef(),
             is_auth: true,
             pageLoaded: false,
         };
@@ -55,16 +60,18 @@ class JobDashboardPage extends Component {
       }
 
     render() {
-        const {is_auth, jobs, pageLoaded} = this.state;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded } = this.state;
+
         console.log(this.state.jobs)
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
             job_id = {job.job_id}
-            date_posted = {job.date_posted}
             title = {job.title} 
             city = {job.city}
             price = {job.price}
             category = {job.categories}
+            owner_first  = {job.owner_first}
+            owner_last = {job.owner_last}
             />
         )
 
@@ -81,21 +88,34 @@ class JobDashboardPage extends Component {
                     <div>
                     <h1 className="job-dashboard-page-header">Job Dashboard</h1>
                     <div className="first-flex-container-job-dashboard-page">
-                        <div>
-                            <label className="label-job-dashboard"> Categories </label>
-                            <CategoriesDropdown initial_value= ''/>
+                        <div className = "label-job-dashboard">
+                            <ItemsDropdown
+                                 initial_value={''}
+                                 ref={change_category}
+                                 itemsList={categories}
+                                 label='Categories'
+                            />
                         </div>
 
-                        <div>
-                            <label className="label-job-dashboard"> Price </label>
-                            <PricesDropdown initial_value= ''/>
+                        <div className = "label-job-dashboard">
+                            <ItemsDropdown
+                                 initial_value={''}
+                                 ref={change_price}
+                                 itemsList={prices}
+                                 label='Prices'
+                            />
+                        </div>
 
+                        <div className = "label-job-dashboard">
+                            <ItemsDropdown
+                                 initial_value={''}
+                                 ref={change_city}
+                                 itemsList={cities}
+                                 label='Cities'
+                            />
                         </div>
-                        
-                        <div>
-                            <label className="label-job-dashboard"> City</label>
-                            <CitiesDropdown initial_value= ''/>
-                        </div>
+
+                     
                         <button className="filter-button-job-dashboard"> 
                             <div className="text-button-job-dashboard">
                             <FilterListIcon style={filter}/>Press to FILTER!

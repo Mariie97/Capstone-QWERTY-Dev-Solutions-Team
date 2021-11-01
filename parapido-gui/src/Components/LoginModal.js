@@ -231,7 +231,6 @@ const continue_arrow_image_resize = {
     width: 100,
     position: "fixed",
     bottom: 25,
-    left: 300,
 };
 
 const report = {

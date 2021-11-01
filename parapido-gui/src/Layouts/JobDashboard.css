@@ -107,6 +107,8 @@ font-family: "Cormorant Garamond";
     background-color: #FFEBCC;
     border-radius: 10px;
 	text-align: center;
+	position: relative;
+	bottom: 6px;
 }
 
 .filter-button-job-dashboard:hover{

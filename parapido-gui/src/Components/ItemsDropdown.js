@@ -63,6 +63,9 @@ class ItemsDropdown extends Component {
                         onChange={this.handleOnChangeCity}
                         className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
                         onClose={this.validate}
+                        MenuProps={{
+                            disableScrollLock: true,
+                        }}
                         inputProps={{
                             underline: {
                                 "&&&:before": {

@@ -156,4 +156,12 @@ export const categories = [
     'Other'
 ];
 
+export const prices = [
+    'Less than $20.00',
+    '$20.00 to $40.00',
+    '$50.00 to $60.00',
+    '$70.00 to $100.00',
+    'More than $100.00'            
+];
+
 export const zipcodeFormatPR = /^00[679]\d{2}$/;
