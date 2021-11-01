@@ -1,22 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
-.titleStyle  {
-    position: absolute;
-    width: 800px;
-    height: 100px;
-    left: 550px;
-    top: 124px;
-    font-family: Jost;
-    text-align: center;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 60px;
-    line-height: 120px;
-    color: #FFFFFF;
-    border-bottom: 2px solid white;
-    padding-bottom: 10px;
-}
 
 .emailStyle {
     position: absolute;
@@ -77,17 +61,15 @@
 }
 
 .modalTextStyle {
-    position: absolute;
-    left: 60px;
-    top: 130px;
-    width: 500px;
+    text-align: center;
     font-family: Jost;
     font-style: normal;
     font-weight: bold;
     font-size: 32px;
     line-height: 27px;
     color: black;
-    text-align: left;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 
 .confirmPasswordStyle {
@@ -95,7 +77,6 @@
     width: 400px;
     top: 25px;
     left: 50px;
-
     background: #FFFFFF;
 }
 
@@ -122,18 +103,12 @@
 }
 
 .modalLogoStyle {
-    position: absolute;
-    left: 200px;
-    top: 20px;
+    position: relative;
+    transform: translate(-50px);
+    left: 50%;
+    top: 5px;
     width: 100px;
-    height: 80px;
-    font-family: Jost;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 27px;
-    color: black;
-    text-align: left;
+    height: 100px;
 }
 
 .errorStyle {
@@ -146,18 +121,35 @@
     text-align: center;
 }
 
-/*
-Alternate styling:
 
-.errorStyle {
-    position: absolute;
-    width: 400px;
-    height: 52px;
-    left: 750px;
-    top: 300px;
-    z-index: -1;
-    text-align: center;
+.security-body-flex-container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: calc(100vw - 5%);
 }
 
-*/
+.security-page-subheader {
+    color: white;
+    margin-bottom: 15px;
+}
+.security-page-input{
+    width: 100%;
+}
+
+.security-page-button{
+    margin-top: 25px;
+}
+#security-submit-button{
+    left: 25%;
+}
+.security-questions-input {
+    margin-left: 2%;
+}
+#security-change-pswd-button{
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%;
+    margin: 10% 0;
+}
 

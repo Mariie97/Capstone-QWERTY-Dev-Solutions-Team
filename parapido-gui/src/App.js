@@ -50,14 +50,14 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                            exact
-                            path='/security-questions'
-                            render={() => (
+                        exact
+                        path='/security-questions'
+                        render={() => (
                             <React.Fragment>
-                                    <NavBar cookies= {this.props.cookies} />
-                                    <SecurityQuestionsPage />
-                            <React.Fragment>
-                            )}
+                                <NavBar cookies={this.props.cookies} />
+                                <SecurityQuestionsPage />
+                            </React.Fragment>
+                        )}
                     />
                     <Route
                         exact
@@ -96,15 +96,15 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                            exact
-                            path='/jobcreation'
-                            render={() => (
-                                <React.Fragment>
-                                    <NavBar cookies={this.props.cookies} />
-                                    <JobCreation cookies={this.props.cookies} />
-                               </React.Fragment>
-                            )}
-                        />
+                        exact
+                        path='/jobcreation'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <JobCreation cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
                 </Switch>
             </BrowserRouter>
         );

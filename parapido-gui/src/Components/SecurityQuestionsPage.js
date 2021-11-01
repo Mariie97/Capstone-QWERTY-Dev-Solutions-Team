@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {Backdrop, Modal} from "@material-ui/core";
-import {TextField} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
 import {Alert} from "@material-ui/lab";
 import Stack from '@mui/material/Stack';
 import "../Layouts/SecurityQuestionsPage.css"
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
+import Input from "./Input";
+import {securityQuestions} from "../Utilities";
 
 class SecurityQuestionsPage extends Component {
 
@@ -13,19 +14,19 @@ class SecurityQuestionsPage extends Component {
         super(props);
         this.state={
             email: '',
-            emailError: '',
+            emailError: undefined,
             questionOne: '',
             questionTwo: '',
             answerOne: '',
-            answerOneError: '',
+            answerOneError: undefined,
             answerTwo: '',
-            answerTwoError: '',
+            answerTwoError: undefined,
             emailIsValid: false,
             open: false,
             password: '',
-            passwordError: '',
+            passwordError: undefined,
             confirmPassword: '',
-            confirmPasswordError: '',
+            confirmPasswordError: undefined,
             correctAnswers: false,
             changeSuccess: false,
             fetchError: false,
@@ -46,105 +47,62 @@ class SecurityQuestionsPage extends Component {
 
 
     validateAnswerOne = () => {
-        let isError = false;
-
-        const errors = {
-            emailError: '',
-            answerOneError: '',
-        };
-
         if(this.state.answerOne === ""){
-            isError = true;
-            errors.answerOneError = "Please submit a response";
+            this.setState({answerOneError:"Please submit a response" });
+            return true;
         }
 
         if(this.state.answerOne !== this.state.questionOneAnswer){
-            isError = true;
-            errors.answerOneError = "Incorrect answer. Please try again.";
+            this.setState({answerOneError:"Incorrect answer" });
+            return true;
         }
 
-        this.setState({
-            ...this.state,
-            ...errors
-        })
-
-
-        return isError
-
+        this.setState({answerOneError: undefined});
+        return false
     };
 
     validateAnswerTwo = () => {
-        let isError = false;
-
-        const errors = {
-            emailError: '',
-            answerTwoError: '',
-        };
-
         if(this.state.answerTwo === ""){
-            isError = true;
-            errors.answerTwoError = "Please submit a response";
+            this.setState({answerTwoError:"Please submit a response" });
+            return true;
         }
 
         if(this.state.answerTwo !== this.state.questionTwoAnswer){
-            isError = true;
-            errors.answerTwoError = "Incorrect answer. Please try again.";
+            this.setState({answerTwoError:"Incorrect answer" });
+            return true;
         }
 
-        this.setState({
-            ...this.state,
-            ...errors
-        })
-
-
-        return isError
-
+        this.setState({answerTwoError: undefined});
+        return false
     };
 
     validateEmail = () => {
-        let isError = false;
-
-        const errors = {
-            emailError: '',
-        };
-
-        if (typeof this.state.email !== "undefined") {
+        if (this.state.email !== undefined) {
             const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
             if (!pattern.test(this.state.email)) {
-                isError = true;
-                errors.emailError = "Please enter valid email address.";
+                this.setState({ emailError: "Please enter valid email address."})
+                return true;
             }
-
         }
 
-        this.setState({
-            ...this.state,
-            ...errors
-        })
-
-        return isError
+        this.setState({ emailError: undefined})
+        return false;
     }
 
     validatePassword = () => {
-        let isError = false;
-
-        const errors = {
-            passwordError: '',
-            confirmPasswordError: '',
-        };
-
         if (this.state.password !== this.state.confirmPassword && this.state.confirmPassword !== "") {
-            isError = true;
-            errors.passwordError = "Passwords do not match!"
-            errors.confirmPasswordError = "Passwords do not match!"
+            this.setState({
+                passwordError: "Passwords do not match",
+                confirmPasswordError: "Passwords do not match",
+            });
+            return true;
         }
 
         this.setState({
-            ...this.state,
-            ...errors
+            passwordError: undefined,
+            confirmPasswordError: undefined,
         })
-
-        return isError
+        return false;
     }
 
     handleClose = () => {
@@ -155,66 +113,51 @@ class SecurityQuestionsPage extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
         const err = this.validateAnswerOne() || this.validateAnswerTwo()
-
-
         if(!err) {
             //clear
-
-            this.setState({open: true})
-            this.setState({correctAnswers: true})
+            this.setState({
+                open: true,
+                correctAnswers: true
+            })
         }
     };
 
     onSubmitEmail = (e) => {
         //Make sure the email is valid and exists. Also fetch the questions and answers]
-
-        e.preventDefault();//this.props.onSubmit(this.state)
+        e.preventDefault();
         const err = this.validateEmail()
-
         if (!err) {
             console.log(this.state.email)
 
             fetch('/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
                 console.log(response.status)
                 if(response.status === 200) {
-                    this.setState({emailIsValid: true})
-                    this.setState({fetchError: false})
-
                     //Success get data
                     response.json().then(data => {
-
-                        this.setState({questionOne: data["question_1"]})
-                        this.setState({questionTwo: data["question_2"]})
-                        this.setState({questionOneAnswer: data["answer_1"]})
-                        this.setState({questionTwoAnswer: data["answer_2"]})
+                        this.setState({
+                            emailIsValid: true,
+                            fetchError: false,
+                            questionOne: data["question_1"],
+                            questionTwo: data["question_2"],
+                            questionOneAnswer: data["answer_1"],
+                            questionTwoAnswer: data["answer_2"]
+                        })
                     })
                 }
                 else{
                     this.setState({fetchError: true})
                 }
-
             })
         }
-
-
     };
-
-    chooseQuestion = (e) => {
-
-        if(e == 1) return "In what city were you born?"
-        if(e == 2) return "What high school did you attend?"
-        if(e == 3) return "What was your favorite food as a child?"
-    }
 
     onSubmitPassword = (e) => {
         //Here we make sure the email is valid and exists. Also fetch the questions and answers
-        e.preventDefault();//this.props.onSubmit(this.state)
+        e.preventDefault();
         const err = this.validatePassword()
 
         if (!err) {
-            //redirect
             fetch('/change_password',{
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -224,31 +167,19 @@ class SecurityQuestionsPage extends Component {
                 })
             }).then(response => {
                 if(response.status === 200) {
-
-                    this.setState({changeSuccess: true})
-
+                    //TODO: Redirect to Landing Page
+                    this.setState({changeSuccess: true});
                 }
                 else {
                     //fetch error
+                    //TODO: Change message to the correct text according to response's status code
                     this.setState({passwordError: "DB Error Try Again"})
                 }
             })
-
-
-
         }
-
-
-
     };
 
-
     render(){
-
-        let renderQuestionOne;
-        let renderQuestionTwo;
-        let button;
-
         const {
             email,
             open,
@@ -258,188 +189,142 @@ class SecurityQuestionsPage extends Component {
             fetchError,
         } = this.state;
 
-        if( this.state.emailIsValid ){
-
-            renderQuestionOne = <TextField
-                required
-                disabled = {this.state.correctAnswers}
-                error = {this.state.answerOneError}
-                variant="filled"
-                label={this.chooseQuestion(this.state.questionOne)}
-                helperText={this.state.answerOneError}
-                type="text"
-                name="answerOne"
-                placeholder="Answer"
-                onChange={e => this.change(e)}
-                onBlur={this.validateAnswerOne}
-                className={"answerOneStyle"}
-            />;
-
-            renderQuestionTwo = <TextField
-                required
-                disabled = {this.state.correctAnswers}
-                error = {this.state.answerTwoError}
-                variant="filled"
-                label={this.chooseQuestion(this.state.questionTwo)}
-                helperText={this.state.answerTwoError}
-                type="text"
-                name="answerTwo"
-                placeholder="Answer"
-                onChange={e => this.change(e)}
-                onBlur={this.validateAnswerTwo}
-                className={"answerTwoStyle"}
-            />;
-
-        }
-
-        if(!this.state.emailIsValid){
-            button = <button variant="contained" className={"createButtonStyle"} onClick={e => this.onSubmitEmail(e)}>Verify Email</button>
-        }
-        else  button = <button variant="contained" className={"createButtonStyle"} onClick={e => this.onSubmit(e)}>Submit</button>
-
-        const body = (
-            <div >
-                <img src={loginModalLogo} className={"modalLogoStyle"}/>
-
-
-                <form>
-                    <TextField
-                        required
-                        error = {this.state.passwordError}
-                        variant="outlined"
-                        label="Password"
-                        type="password"
-                        name="password"
-                        defaultValue=""
-                        value = {password}
-                        onChange={e => this.change(e)}
-                        onBlur={this.validatePassword}
-                        helperText={this.state.passwordError}
-                        className={"passwordStyle"}
-                    />
-
-                    <TextField
-                        required
-                        error = {this.state.confirmPasswordError}
-                        variant="outlined"
-                        label="Confirm Password"
-                        type="password"
-                        name="confirmPassword"
-                        defaultValue=""S
-                        value = {confirmPassword}
-                        onChange={e => this.change(e)}
-                        onBlur={this.validatePassword}
-                        helperText={this.state.confirmPasswordError}
-                        className={"confirmPasswordStyle"}
-                    />
-
-
-                    {changeSuccess &&
-
-                    <Stack sx={{width: '100%'}} spacing={2}>
-                        <Alert severity="success" className={"errorStyle"}>This is a success alert — check it out!</Alert>
-                    </Stack>
-
-                    }
-                    <button variant="contained" className={"changePasswordStyle"} onClick={e => this.onSubmitPassword(e)}>Change Password</button>
-
-                </form>
-
-
-            </div>
-        );
-
-
 
         return (
             <div>
-
-
-                {
-                    fetchError &&
-
-                    <Stack sx={{width: '100%'}} spacing={2}>
-                        <Alert severity="error" className={"errorStyle"}>DB Error Try Again</Alert>
-                    </Stack>
-
+                {fetchError &&
+                <Stack sx={{width: '100%'}} spacing={2}>
+                    <Alert severity="error" className={"errorStyle"}>An error has occurred,.Please try again later!</Alert>
+                </Stack>
                 }
 
-
-
-
                 {changeSuccess && <Redirect to='/'/>}
+                <div className='header-flex-container'>
+                    <h1 className="page-title-header">Account Recovery</h1>
+                </div>
+                <div className='security-body-flex-container'>
+                    <h2 className='security-page-subheader'>Security Questions:</h2>
+                    <Input
+                        required
+                        disabled = {this.state.emailIsValid}
+                        error = {this.state.emailError!==undefined}
+                        labelText="Email"
+                        name="email"
+                        value = {email}
+                        onChange={e => this.change(e)}
+                        onBlur={this.validateEmail}
+                        errorMsg={this.state.emailError}
+                        className='security-page-input'
+                    />
 
-
-                <form>
-                    <div className={"outerGridStyle"}>
-
-                        <div className={"titleStyle"}>
-                            Account Recovery
+                    {!this.state.emailIsValid ?
+                        <button
+                            className='custom-buttons security-page-button'
+                            onClick={e => this.onSubmitEmail(e)}>Verify Email
+                        </button> :
+                        <div className='security-questions-input'>
+                            <Input
+                                required
+                                disabled = {this.state.correctAnswers}
+                                error = {this.state.answerOneError!==undefined}
+                                labelText={securityQuestions[this.state.questionOne-1]}
+                                errorMsg={this.state.answerOneError}
+                                type="text"
+                                name="answerOne"
+                                placeholder="Answer"
+                                onChange={e => this.change(e)}
+                                onBlur={this.validateAnswerOne}
+                                className='security-page-input'
+                            />
+                            <Input
+                                required
+                                disabled = {this.state.correctAnswers}
+                                error = {this.state.answerTwoError!==undefined}
+                                labelText={securityQuestions[this.state.questionTwo-1]}
+                                errorMsg={this.state.answerTwoError}
+                                type="text"
+                                name="answerTwo"
+                                placeholder="Answer"
+                                onChange={e => this.change(e)}
+                                onBlur={this.validateAnswerTwo}
+                                className='security-page-input'
+                            />
+                            <button
+                                className='custom-buttons security-page-button'
+                                id='security-submit-button'
+                                onClick={e => this.onSubmit(e)}>Submit
+                            </button>
                         </div>
+                    }
+                </div>
+                <div>
+                    <Modal
+                        open={open}
+                        onClose={this.handleClose}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                        <Backdrop open={open} style={backdropStyle}>
+                            <div className='security-modal-container'>
+                                <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
+                                <h2 className='modalTextStyle'> Enter your new password: </h2>
+                                <Input
+                                    required
+                                    blackLabel
+                                    error={this.state.passwordError!==undefined}
+                                    labelText="Password"
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={e => this.change(e)}
+                                    onBlur={this.validatePassword}
+                                    errorMsg={this.state.passwordError}
+                                    className='security-page-input black-label-input'
+                                />
+                                <Input
+                                    required
+                                    blackLabel
+                                    error={this.state.confirmPasswordError!==undefined}
+                                    labelText="Confirm Password"
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={confirmPassword}
+                                    onChange={e => this.change(e)}
+                                    onBlur={this.validatePassword}
+                                    errorMsg={this.state.confirmPasswordError}
+                                    className='security-page-input'
+                                />
 
-
-                        <TextField
-                            required
-                            disabled = {this.state.emailIsValid}
-                            error = {this.state.emailError}
-                            variant="filled"
-                            label="Email"
-                            type="text"
-                            name="email"
-                            defaultValue=""
-                            value = {email}
-                            onChange={e => this.change(e)}
-                            onBlur={this.validateEmail}
-                            helperText={this.state.emailError}
-                            className={"emailStyle"}
-                        />
-
-                        {renderQuestionOne}
-                        {renderQuestionTwo}
-
-
-                        {button}
-
-
-
-                        <div className={"securityQuestionTextStyle"}>Security Questions:</div>
-
-                        <div>
-
-                            <Modal
-                                open={open}
-                                onClose={this.handleClose}
-                                aria-labelledby="simple-modal-title"
-                                aria-describedby="simple-modal-description"
-                                //style={modalStyle}
-                            >
-                                <Backdrop open={open} style={backdropStyle}>
-                                    <div className={"modalTextStyle"}> Enter your new password: </div>
-                                    {body}
-                                </Backdrop>
-
-                            </Modal>
-                        </div>
-
-
-                    </div>
-                </form>
+                                {changeSuccess &&
+                                <Stack sx={{width: '100%'}} spacing={2}>
+                                    <Alert severity="success" className={"errorStyle"}>This is a success alert — check it out!</Alert>
+                                </Stack>
+                                }
+                                <button
+                                    className='custom-buttons security-page-button'
+                                    id='security-change-pswd-button'
+                                    onClick={e => this.onSubmitPassword(e)}>Change Password
+                                </button>
+                            </div>
+                        </Backdrop>
+                    </Modal>
+                </div>
             </div>
-
         );
     };
 }
 
 const backdropStyle = {
-    left: "700px",
-    top: "200px",
-    width: "500px",
-    height: "600px",
+    left: "50%",
+    top: "50%",
+    transform: 'translate(-50%, -50%)',
+    width: "33vw",
+    height: "80vh",
     position: "absolute",
-    //backgroundColor: "#2F2D4A",
+    display: "flex",
+    flexFlow: "column",
+    padding: '20px',
     backgroundColor: "#FFFFFF",
-    border: '3px solid black',
-
 }
 
 
