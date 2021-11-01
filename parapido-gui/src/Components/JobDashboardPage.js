@@ -57,25 +57,30 @@ class JobDashboardPage extends Component {
       }
 
     clickFilter() {
-        let category = ''
+        let category = this.state.change_category?.current.state.item;
+        console.log(category, "cat")
         let selectedCity = 0;
-        let cities = ''
-        
+        let cities = '';
+        let filterResult = '?'
+        console.log(filterResult.length)
 
         if(category !== undefined){
-            category = `?category=${this.state.change_category?.current.state.item}`;
-            
+            category = `category=${category}`;
+            filterResult += category
         }
         if(cities !== undefined){
             selectedCity = +this.state.change_city?.current.state.item - 1;
-            console.log(selectedCity)
-            cities = `?city=${selectedCity}`;
-        
-        
-     
+            if(filterResult.length === 1){
+                cities = `city=${selectedCity}`;  
+                filterResult += cities
+            }
+            else{
+                cities = `&city=${selectedCity}`; 
+                filterResult += cities;
+            }
         }
 
-        fetch(`jobs_list/1`+cities, {
+        fetch(`jobs_list/1`+filterResult, {
             method: 'GET'
           }).then(response => {
             if (response.status === 200) {
