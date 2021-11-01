@@ -35,3 +35,7 @@
     font-family: "Jost";
     color: white;
 }
+
+.request-card-actions-container {
+    border-bottom: 1px solid #dbd6d685;
+}

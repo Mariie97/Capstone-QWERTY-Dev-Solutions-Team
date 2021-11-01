@@ -92,7 +92,7 @@ class RequestsPage extends Component {
                         </Typography>
                     </CardContent>
                 </Link>
-                <CardActions>
+                <CardActions className='request-card-actions-container'>
                     <Button size="small" onClick={() => this.onClickAccept(request.user_id) }>Accept</Button>
                 </CardActions>
             </Card>
