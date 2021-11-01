@@ -8,6 +8,7 @@ import PricesDropdown from './PricesDropdown';
 import CitiesDropdown from './CitiesDropdown_1';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
+import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
 

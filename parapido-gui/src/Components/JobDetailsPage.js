@@ -304,7 +304,6 @@ class JobDetailsPage extends Component {
     }
 }
 
-
 const chipStyleJobDetails = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
