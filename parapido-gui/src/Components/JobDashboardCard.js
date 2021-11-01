@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../Layouts/JobDashboardCard.css';
 import {Link} from "react-router-dom";
-import {Chip} from "@material-ui/core";
+import {cities, categories} from "../Utilities";
 
 class JobDashboardCard extends Component {
     componentDidMount(){
@@ -25,11 +25,11 @@ class JobDashboardCard extends Component {
                                 </h2>
                                 <h2 className="card-clientName"> FeFa Vargas Villarini</h2>
                                 <p className="card-location">
-                                Calle {city} 00718
+                                {cities[city]} calle 00718
                                 </p>
                                 <div className="card-price"> {price} </div>
                                 <div> 
-                                    <div style={{marginLeft:6}}> {category} </div>
+                                    <div style={{marginLeft:6, fontWeight: "bold", color: "green"}}> {categories[category]} </div>
                                     <div style= {{float: "right", paddingRight: "10px", fontFamily:"Times New Roman",
                                      fontSize: 10, fontWeight: "400"
                                     }}> {date_posted} </div>

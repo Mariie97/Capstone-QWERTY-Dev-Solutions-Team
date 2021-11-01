@@ -16,7 +16,8 @@ class JobDashboardPage extends Component {
         super(props);
         this.state={
             jobs: [],
-            is_auth: true
+            is_auth: true,
+            pageLoaded: false,
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -39,8 +40,12 @@ class JobDashboardPage extends Component {
           if (response.status === 200) {
             response.json().then(data => { 
               this.setState(
-                  {jobs : data})      
+                  {jobs : data,
+                  pageLoaded : true
+                  }
+                  )      
             })
+           
           }
           else{
               console.log("Error request couldn't get processed")
@@ -50,7 +55,7 @@ class JobDashboardPage extends Component {
       }
 
     render() {
-        const {is_auth, jobs} = this.state;
+        const {is_auth, jobs, pageLoaded} = this.state;
         console.log(this.state.jobs)
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
@@ -67,34 +72,43 @@ class JobDashboardPage extends Component {
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
-                <h1 className="job-dashboard-page-header">Job Dashboard</h1>
-                <div className="first-flex-container-job-dashboard-page">
+                {!pageLoaded ?
+                    <div className='loading-icon'>
+                        <Box sx={{display: 'flex'}}>
+                            <CircularProgress/>
+                        </Box>
+                    </div> :
                     <div>
-                        <label className="label-job-dashboard"> Categories </label>
-                        <CategoriesDropdown initial_value= ''/>
-                    </div>
-
-                    <div>
-                        <label className="label-job-dashboard"> Price </label>
-                        <PricesDropdown initial_value= ''/>
-
-                    </div>
-                    
-                    <div>
-                        <label className="label-job-dashboard"> City</label>
-                        <CitiesDropdown initial_value= ''/>
-                    </div>
-                    <button className="filter-button-job-dashboard"> 
-                        <div className="text-button-job-dashboard">
-                        <FilterListIcon style={filter}/>Press to FILTER!
+                    <h1 className="job-dashboard-page-header">Job Dashboard</h1>
+                    <div className="first-flex-container-job-dashboard-page">
+                        <div>
+                            <label className="label-job-dashboard"> Categories </label>
+                            <CategoriesDropdown initial_value= ''/>
                         </div>
-                    </button>
-                </div>
 
-            <div className="card-wrapper">
-                {cardArray}
+                        <div>
+                            <label className="label-job-dashboard"> Price </label>
+                            <PricesDropdown initial_value= ''/>
+
+                        </div>
+                        
+                        <div>
+                            <label className="label-job-dashboard"> City</label>
+                            <CitiesDropdown initial_value= ''/>
+                        </div>
+                        <button className="filter-button-job-dashboard"> 
+                            <div className="text-button-job-dashboard">
+                            <FilterListIcon style={filter}/>Press to FILTER!
+                            </div>
+                        </button>
+                    </div>
+
+                <div className="card-wrapper">
+                    {cardArray}
+                </div>
+                </div>}
             </div>
-            </div>
+
         )
     }
 }

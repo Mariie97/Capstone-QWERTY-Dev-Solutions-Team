@@ -111,7 +111,7 @@ font-family: "Cormorant Garamond";
 
 .filter-button-job-dashboard:hover{
     cursor: pointer;
-    border: 3px solid black;  
+    border: 3px solid white;  
 }
 
 .filter-button-job-dashboard:active{

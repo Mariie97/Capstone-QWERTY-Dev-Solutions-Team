@@ -71,17 +71,23 @@
 }
 
 .card-wrapper-1 .card-location{
-    padding-left: 2px;
+    padding-left: 6px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    font-weight: 300;
+    font-family: 'Times New Roman';
+    font-size: 12px;
 }
 
 .card-wrapper-1 .card-price{
-    padding-left: 2px;
+    padding-left: 6px;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
+    font-weight: 300;
+    font-family: 'Times New Roman';
+    font-size: 12px;
 }
 
 .card-wrapper-1:hover{
