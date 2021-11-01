@@ -9,6 +9,7 @@ import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
+import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
 
 
@@ -51,6 +52,16 @@ class App extends React.Component {
                     />
                     <Route
                         exact
+                        path='/security-questions'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <SecurityQuestionsPage />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
                         path='/signup'
                         render={() => (
                             <React.Fragment>
@@ -69,7 +80,6 @@ class App extends React.Component {
                                     cookies= {this.props.cookies}
                                     queryParams={props.location.search}
                                 />
-
                             </React.Fragment>
                         )}
                     />
