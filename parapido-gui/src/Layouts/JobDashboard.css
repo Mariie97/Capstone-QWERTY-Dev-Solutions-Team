@@ -39,65 +39,6 @@ font-family: "Cormorant Garamond";
 	margin-bottom: auto;
 }
 
-/* Material ui override dropdown styling  */
-
-.MuiInputBase-root {
-    background-color: white;
-	font-size: 17px;
-}
-
-.MuiMenuItem-root{
-	font-family: "Jost";
-}
-
-.MuiSelect-root{
-	display: inline;
-	padding-bottom: 0px;
-	padding-right: 0px;
-	width: 190px;
-	padding-top: 0px;
-	margin-bottom: 0px;
-	margin-right: 0px;
-	height: 42px;
-}
-
-.MuiInputBase-input{
-	animation-name: none;
-	animation-duration: 0ms;
-
-}
-
-/* arrow icon in Material ui dropdown */
-
-.MuiSelect-icon{
-	color: darkblue;
-}
-
-/* what changes when you select something */
-
-.MuiSelect-select{
-	background-color:white ;
-	display: grid;
-	align-content: center;
-	text-align: center;
-	
-}
-
-/* inside Material ui dropdown */
-
-.MuiListItem-button{
-	background-color: white;
-}
-
-.MuiList-padding{
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-
-.MuiList-root{
-	background-color: #FFEBCC;
-}
-
 /* button */ 
 
 .filter-button-job-dashboard{

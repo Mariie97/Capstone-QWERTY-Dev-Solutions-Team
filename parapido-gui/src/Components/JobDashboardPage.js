@@ -23,6 +23,7 @@ class JobDashboardPage extends Component {
         };
 
         this.getJobs = this.getJobs.bind(this);
+        this.clickFilter = this.clickFilter.bind(this);
     }
 
     componentDidMount() {
@@ -53,12 +54,38 @@ class JobDashboardPage extends Component {
               console.log("Error request couldn't get processed")
           }
         })
-    
       }
+
+    clickFilter() {
+        let category = ''
+
+        if(category !== undefined){
+            category = `?category=${this.state.change_category?.current.state.item}`;
+        }
+
+        fetch(`jobs_list/1`+category, {
+            method: 'GET'
+          }).then(response => {
+            if (response.status === 200) {
+              response.json().then(data => { 
+                this.setState(
+                    {jobs : data,
+                    pageLoaded : true
+                    }
+                    ) 
+              }) 
+            }
+            else{
+                this.getJobs();
+                console.log("Error request couldn't get processed")
+            }
+          })
+
+    }
 
     render() {
         const { jobs, change_category, change_city, change_price, is_auth, pageLoaded } = this.state;
-
+        
         console.log(this.state.jobs)
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
@@ -113,9 +140,9 @@ class JobDashboardPage extends Component {
                         </div>
 
                      
-                        <button className="filter-button-job-dashboard"> 
+                        <button className="filter-button-job-dashboard" onClick={this.clickFilter}> 
                             <div className="text-button-job-dashboard">
-                            <FilterListIcon style={filter}/>Filter
+                            <FilterListIcon/>Filter
                             </div>
                         </button>
                     </div>
@@ -131,11 +158,5 @@ class JobDashboardPage extends Component {
 }
 
 // small icons and elements css
-
-const filter = {
-    position: "relative",
-    top: "5.5px",
-    left: "-13px"
-}
 
 export default JobDashboardPage;

@@ -151,9 +151,9 @@ export const categories = [
     'Education',
     'Events',
     'Home',
-    'Self-Care',
-    'Shop',
-    'Other'
+    'Other',
+    'Self-care',
+    'Shop'
 ];
 
 export const prices = [

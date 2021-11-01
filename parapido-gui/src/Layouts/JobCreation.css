@@ -172,6 +172,7 @@
 	display: grid;
 	align-content: center;
 	text-align: center;
+	
 }
 
 /* inside Material ui dropdown */
@@ -310,7 +311,7 @@
 	border: 1.4px solid red;
 	position: relative;
 	bottom: 48px;
-	width: 63%;
+	width: 43%;
 	left: 4px;
 	top: -47px;
 }
@@ -440,6 +441,9 @@
 	min-width: 50%;
 }
 
+
+
 .error {
 	border-color: red;
 }
+

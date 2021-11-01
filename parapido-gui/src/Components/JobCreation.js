@@ -10,6 +10,7 @@ import Alert from '@material-ui/lab/Alert';
 import {categories, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 
 
+
 export class JobCreation extends Component {
 
     constructor(props){
@@ -260,7 +261,7 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
-                            InputProps={{ disableUnderline: true }}
+                            InputProps={{ disableUnderline: true }}              
                         />
                         {priceError !== undefined &&
                         <div className="required-field-2-job-creation">

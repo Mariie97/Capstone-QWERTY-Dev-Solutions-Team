@@ -51,7 +51,7 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required } = this.props;
+        const { label, required} = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
