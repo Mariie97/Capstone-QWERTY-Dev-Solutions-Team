@@ -5,10 +5,10 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {Box, CircularProgress} from "@material-ui/core";
-import {getQueryParams} from "../Utilities";
+import {getQueryParams, verifyUserAuth} from "../Utilities";
 
 class RequestsPage extends Component {
     queryParams = undefined;
@@ -17,6 +17,7 @@ class RequestsPage extends Component {
         super(props);
 
         this.state = {
+            is_auth: true,
             requestsList: [],
             requestLoaded: false
         };
@@ -27,7 +28,11 @@ class RequestsPage extends Component {
     }
 
     componentDidMount() {
-        this.queryParams = getQueryParams(this.props.queryParams)
+        this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
+
+        this.queryParams = getQueryParams(this.props.queryParams);
         this.getJobRequests();
     }
 
@@ -101,9 +106,11 @@ class RequestsPage extends Component {
 
     render() {
         //TODO: Show message when there are no request; fetch to accept a request
-        const { requestsList, requestLoaded } = this.state;
+        const { is_auth, requestsList, requestLoaded } = this.state;
         return (
             <div>
+                {!is_auth && <Redirect to='/' />}
+
                 <div className='header-flex-container'>
                     <h1 className="page-title-header">Student's Requests</h1>
                 </div>
