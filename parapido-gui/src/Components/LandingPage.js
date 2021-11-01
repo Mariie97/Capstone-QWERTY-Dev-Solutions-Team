@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
-import verifyUserAuth from "../Utilities";
+import {verifyUserAuth} from "../Utilities";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
@@ -49,7 +49,8 @@ class LandingPage extends Component {
 						</li>
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>
+							{this.state.showLogin && 
+							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>}
 						</li>
 					</ul>
 				</div>
@@ -65,6 +66,7 @@ class LandingPage extends Component {
 }
 
 // small icons and elements css
+
 const mail = {
 	color: "#ffebcc",
 	paddingRight: 10,

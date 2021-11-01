@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
-/* invisible parent box on the back */
 
+/* invisible parent box on the back */
 .body-profile-card {
 	box-sizing: border-box;
 	border-radius: 20px;
@@ -10,24 +10,15 @@
 	height: 400px;
 	display: grid;
 	place-items: center;
-
-	/* testing */
-	/* background-color: black; */
-
 	letter-spacing: 1px;
 	line-height: 1.5;
 	margin-left: 50px;
 }
 
 /* square holding text and image inside */
-
 .profile-card {
-
-	/* testing */
-	/* box-shadow: 0px 0px 20px white; */
-
 	width: 95%;
-	height: 95%;
+	height: auto;
 	color: white;
 	background-color: black;
 	font-family: "Jost";
@@ -35,7 +26,6 @@
 	flex-direction: column;
 	text-align: center;
 	place-items: center;
-	border: 3px solid #036800;
 	border-radius: 20px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -48,10 +38,7 @@
 	display: flex;
 	flex-direction: column;
 	list-style: none;
-	margin: 0;
-	margin-top: 120px;
-	margin-bottom: 65px;
-	padding: 0px;
+	margin: 120px 0 65px;
 	line-height: 2;
 }
 
@@ -81,12 +68,9 @@
 	border-top: 2px solid #036800;
 
 	/* moves the box inside the box in the footer */
-
-	padding-bottom: 0px;
-	padding-top: 4px;
+	padding: 5px;
 
 	/* makes text not overflow from the card and gives 3 dots */
-
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis
@@ -96,24 +80,24 @@
 
 .top-profile-card-lettering {
 	font-family: "Cormorant Garamond";
-	font-style: "Italic";
 	font-weight: bold;
 	color: white;
-	font-size: 40px;
-
-	/* small container for lettering to be centered all the time no matter change*/
+	font-size: 25px;
+	display: flex;
+	flex-flow: row;
 	box-sizing: border-box;
 	border-radius: 20px;
-	width: 300px;
-
-	display: grid;
+	width: 50px;
 	place-items: center;
-	margin-left: 50px;
-
-	display: flex;
-	flex-direction: row;
 	align-content: space-around;
+	grid-gap: 10px;
 	gap: 10px;
 	justify-content: center;
-	margin-bottom: 20px;
+	padding-top: 25px;
+	height: 10px;
+	margin-top: 10%;
+	margin-left: 35%;
+}
+.profile-card-container {
+	margin-right: 25px;
 }
