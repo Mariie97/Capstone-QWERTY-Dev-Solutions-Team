@@ -44,7 +44,7 @@ class ItemsDropdown extends Component {
     getAllItems() {
         const { itemsList } = this.props;
         return itemsList.map((item, index) =>
-            <MenuItem value={index+1}>{item}</MenuItem>
+            <MenuItem key={`${item}-${index}`} value={index+1}>{item}</MenuItem>
         )
     }
 
@@ -90,7 +90,7 @@ class ItemsDropdown extends Component {
     }
 
     validateItem(){
-        if (this.state.item === undefined) {
+        if (this.state.item === '') {
             this.setState({
                 itemError: "This field is required"
             })

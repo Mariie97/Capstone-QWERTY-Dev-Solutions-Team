@@ -10,15 +10,33 @@
     margin-top: 2%;
 
 }
+
 .list-categories-container {
     display: flex;
     flex-flow: column nowrap;
+    width: 7%;
+}
+
+.admin-entities-container{
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    height: 12vh;
+}
+
+.admin-entities-header, .list-categories-text  {
+    font-family: Jost;
+    margin-bottom: 5px;
+    color: white;
 }
 
 .list-categories-text{
-    font-family: Jost;
-    color: white;
-    margin-bottom: 5px;
+    cursor: pointer;
+    color: black;
+}
+
+.list-categories-text:hover{
+    border-bottom: 1px solid #dbd6d685;
 }
 
 .administration-table-container{
@@ -42,7 +60,6 @@
 
 .admin-col-table{
     color: black;
-    width: 34%;
     height: 50px;
     padding: 10px;
     border-bottom: 1px solid #dbd6d685;
@@ -115,4 +132,8 @@
 
 .admin-filter-button {
     margin: 8px 0;
+}
+
+.admin-number-col{
+    width: 55px;
 }
