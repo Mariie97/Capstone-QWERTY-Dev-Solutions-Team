@@ -2,8 +2,8 @@ import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
 import Avatar from '@mui/material/Avatar';
-import {current_user, getQueryParams} from "../Utilities";
-import {Link} from "react-router-dom";
+import {current_user, getQueryParams, verifyUserAuth} from "../Utilities";
+import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 
@@ -68,10 +68,12 @@ class ChatApp extends Component {
 
   constructor(props){
     super(props);
+
     this.state = {
-      'messages': [],
-      'current_message': '',
-      'refreshComplete': true,
+      is_auth: true,
+      messages: [],
+      current_message: '',
+      refreshComplete: true,
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -101,6 +103,9 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
+    this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
     this.queryParams = getQueryParams(this.props.queryParams);
     this.getChatMessages();
   }
@@ -149,9 +154,10 @@ class ChatApp extends Component {
   }
 
   render() {
-    const {messages, current_message, refreshComplete} = this.state;
+    const { is_auth, messages, current_message, refreshComplete } = this.state;
     return (
         <div className='parent-container'>
+          {!is_auth && <Redirect to='/' />}
           <div className='header-flex-container'>
             <div className="button-flex-container">
               <Link to={`/job/${this.queryParams?.get('job_id')}`}
