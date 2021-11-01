@@ -7,48 +7,57 @@ import _admin from '../Static/Images/admin.png';
 import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import StarIcon from '@material-ui/icons/Star';
+import {Link} from "react-router-dom";
+import {accountType} from "../Utilities";
 
 
 class ProfileCard extends Component {
 
-    acc_type ={
+    acc_type = {
         1: "STUDENT",
         2: "CLIENT",
         3: "ADMIN"
     }
 
     render() {
-        const {first_name,last_name,rating_value,jobs_cancelled,type, image} = this.props.user
+        const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
         const profile_pic = image!==null ? image : defaultPicture;
 
         return (
-            <React.Fragment>
-                <div className= "top-profile-card-lettering">
-                    {type === 1 ? <img src= {school_bag} alt="school bag" style={schoolbag}/>
-                        :type === 2 ? <img src= {_employer} alt="employer" style={employer}/>
-                            :<img src= {_admin} alt="admin" style={admin}/>}
-                    {this.acc_type[type]}
-                </div>
+            <div className='profile-card-container'>
                 <div className="body-profile-card">
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
-                            <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
+                            <Link to={`/profile/${user_id}`}>
+                                <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
+                            </Link>
                         </div>
                         <ul className = "header-list-profile-card">
                             <li style= {{fontWeight : "bold"}}> {first_name} {last_name} </li>
                             <li>
                                 <StarIcon style = {star}/>
                                 {rating_value===null ?
-                                    ' No rating yet ':
+                                    'No rating yet ':
                                     `Rating: ${rating_value} of 5`
                                 }
-
-                                <ThumbsUpDownIcon style = {thumbsupdown}/></li>
+                                <ThumbsUpDownIcon style = {thumbsupdown}/>
+                            </li>
+                            {type!==undefined &&
+                            <div className= "top-profile-card-lettering">
+                                {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
+                                    : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
+                                        :<img src= {_admin} alt="admin" style={admin}/>}
+                                <p>{this.acc_type[type]}</p>
+                            </div>
+                            }
                         </ul>
-                        <p className="footer-line-profile-card"> <DeleteTwoTone style={trashcan} /> Jobs Cancelled: {jobs_cancelled} </p>
+                        <div className="footer-line-profile-card">
+                            <DeleteTwoTone style={trashcan} />
+                            Jobs Cancelled: {jobs_cancelled}
+                        </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </div>
         )
     }
 }
@@ -81,20 +90,20 @@ const image_resize = {
     width: 180,
 };
 
-const schoolbag = {
-    height: 70,
-    width: 60,
+const student = {
+    height: 50,
+    width: 50,
 };
 
-const employer = {
-    height: 70,
-    width: 70,
+const client = {
+    height:  50,
+    width: 50,
     backgroundColor: "white"
 };
 
 const admin = {
-    height: 70,
-    width: 70,
+    height: 50,
+    width: 50,
 };
 
 export default ProfileCard;
