@@ -16,6 +16,7 @@ export function verifyUserAuth(token) {
 export function setJobStatus(token, job_id, status) {
     return fetch(`/job_status/${job_id}`, {
         method: 'PUT',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': token

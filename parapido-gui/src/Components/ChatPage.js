@@ -112,6 +112,7 @@ class ChatApp extends Component {
     if( current_message && enter){
       fetch("/add_message", {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')

@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {categories, getJobStatus, mapAccount} from "../Utilities";
-import {Link} from "react-router-dom";
+import {categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
+import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 
@@ -22,18 +22,20 @@ class AdministrationPage extends Component {
             jobStatusRef: createRef(),
             jobCategoryRef: createRef(),
             currentEntity: this.entity.users,
+            is_auth: true,
         };
 
         this.renderUsers = this.renderUsers.bind(this);
         this.renderJobs = this.renderJobs.bind(this);
         this.getAllUsers = this.getAllUsers.bind(this);
         this.getAllJobs = this.getAllJobs.bind(this);
+        this.clearFilters = this.clearFilters.bind(this);
     }
 
     getAllUsers() {
         const { deletedRef, typeRef } = this.state;
-        let filters = '';
 
+        let filters = '';
         if (typeRef.current?.state.item !== undefined && typeRef.current?.state.item !== '') {
             filters = `?account_type=${typeRef.current?.state.item}`;
         }
@@ -41,7 +43,13 @@ class AdministrationPage extends Component {
             filters = filters !== '' ? filters + `&deleted=true` : `?deleted=true}`
         }
 
-        fetch(`/users${filters}`).then(
+        fetch(`/users${filters}`, {
+            method: "GET",
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
+        }).then(
             response => {
                 if (response.status===200){
                     response.json().then(data => {
@@ -62,8 +70,21 @@ class AdministrationPage extends Component {
     }
 
     getAllJobs() {
-        //TODO: Add credentials
-        fetch('/jobs_list/1').then(response => {
+        const { jobStatusRef, jobCategoryRef } = this.state;
+        const jobStatus = jobStatusRef.current?.state.item !== undefined ? jobStatusRef.current?.state.item : 1;
+
+        let filters = '';
+        if (jobCategoryRef.current?.state.item !== undefined && jobCategoryRef.current?.state.item !== '') {
+            filters = `?category=${jobCategoryRef.current?.state.item}`;
+        }
+
+        fetch(`/jobs_list/${jobStatus + filters}`, {
+            method: "GET",
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
+        }).then(response => {
             if(response.status===200) {
                 response.json().then(data =>  {
                     this.setState({
@@ -72,10 +93,33 @@ class AdministrationPage extends Component {
                     });
                 })
             }
+            else {
+                if (response.status === 404) {
+                    this.setState({
+                        entities: [],
+                        entitiesLoaded: true,
+                    });
+                }
+                else {
+                    alert("Sorry an error has occurred. Try again later");
+                }
+            }
         })
     }
 
+    clearFilters() {
+        const { deletedRef, typeRef, jobStatusRef, jobCategoryRef} = this.state;
+        deletedRef.current?.reset();
+        typeRef.current?.reset();
+        jobStatusRef.current?.reset();
+        jobCategoryRef.current?.reset();
+    }
+
     componentDidMount() {
+        this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
+
         this.getAllUsers();
     }
 
@@ -98,7 +142,6 @@ class AdministrationPage extends Component {
     renderJobs() {
         const { entities } = this.state;
         return entities.map((entity, index )=> (
-
             <tr key={`job-${entity.job_id}`} className='admin-row-table'>
                 <td className='admin-col-table admin-number-col'>{index+1}</td>
                 <td className='admin-col-table'>
@@ -114,34 +157,41 @@ class AdministrationPage extends Component {
     }
 
     render() {
-        const { deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef} = this.state;
+        //TODO: Add 403 forbidden when user is not admin
+        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef} = this.state;
+
         return (
             <div>
-                <h1 className="page-title-header">Administration Site</h1>
+                {!is_auth && <Redirect to='/' />}
+                <h1 className="page-title-header">
+                    Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
+                </h1>
                 <div className = "administration-body-container">
                     <div className="list-categories-container">
                         <h2 className="admin-entities-header">Entities</h2>
                         <div className="admin-entities-container">
                             <ul
-                            className="list-categories-text"
-                            onClick={() => {
-                                this.setState({
-                                    currentEntity: this.entity.users,
-                                    entitiesLoaded: false,
-                                });
-                                this.getAllUsers();
-                            }}
-                        >Users</ul>
-                        <ul
-                            className="list-categories-text"
-                            onClick={() => {
-                                this.setState({
-                                    currentEntity: this.entity.jobs,
-                                    entitiesLoaded: false
-                                });
-                                this.getAllJobs();
-                            }}
-                        >Jobs</ul>
+                                className="list-categories-text"
+                                onClick={() => {
+                                    this.setState({
+                                        currentEntity: this.entity.users,
+                                        entitiesLoaded: false,
+                                    });
+                                    this.clearFilters();
+                                    this.getAllUsers();
+                                }}
+                            >Users</ul>
+                            <ul
+                                className="list-categories-text"
+                                onClick={() => {
+                                    this.setState({
+                                        currentEntity: this.entity.jobs,
+                                        entitiesLoaded: false
+                                    });
+                                    this.clearFilters();
+                                    this.getAllJobs();
+                                }}
+                            >Jobs</ul>
                         </div>
 
                     </div>
@@ -180,6 +230,7 @@ class AdministrationPage extends Component {
                         {currentEntity === this.entity.users ?
                             <div className='administration-filter-dropdowns'>
                                 <ItemsDropdown
+                                    id='admin-user-type-dropdown'
                                     label={'Account Type'}
                                     ref={typeRef}
                                     itemsList={Object.values(mapAccount)}
@@ -194,17 +245,17 @@ class AdministrationPage extends Component {
                             </div> :
                             <div className='administration-filter-dropdowns'>
                                 <ItemsDropdown
+                                    id='admin-job-categories-dropdown'
+                                    label='Category'
+                                    ref={jobCategoryRef}
+                                    itemsList={categories}
+                                />
+                                <ItemsDropdown
                                     id='admin-job-status-dropdown'
                                     label='Status'
                                     initial_value='1'
                                     ref={jobStatusRef}
                                     itemsList={getJobStatus}
-                                />
-                                <ItemsDropdown
-                                    id='admin-job-categories-dropdown'
-                                    label='Category'
-                                    ref={jobCategoryRef}
-                                    itemsList={categories}
                                 />
                             </div>
                         }
@@ -212,16 +263,15 @@ class AdministrationPage extends Component {
                             className='custom-buttons filter admin-filter-button'
                             onClick={() => {
                                 this.setState({entitiesLoaded: false});
-                                this.getAllUsers();
+                                if (currentEntity === this.entity.users)
+                                    this.getAllUsers();
+                                else
+                                    this.getAllJobs();
                             }}>Filter
                         </button>
                         <button
                             className='custom-buttons filter admin-filter-button'
-                            onClick={() => {
-                                if(currentEntity===this.entity.users) {
-
-                                }
-                            }}>Clear Filters
+                            onClick={this.clearFilters}>Clear Filters
                         </button>
                     </div>
                 </div>
