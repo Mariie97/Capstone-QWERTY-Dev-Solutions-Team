@@ -96,6 +96,10 @@ h2.edit-subheaders {
 	font-weight: 400;
 	cursor: pointer;
 	margin-left: -1.8px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	gap: 4px
 
 }
 

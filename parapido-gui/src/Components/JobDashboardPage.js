@@ -58,12 +58,24 @@ class JobDashboardPage extends Component {
 
     clickFilter() {
         let category = ''
+        let selectedCity = 0;
+        let cities = ''
+        
 
         if(category !== undefined){
             category = `?category=${this.state.change_category?.current.state.item}`;
+            
+        }
+        if(cities !== undefined){
+            selectedCity = +this.state.change_city?.current.state.item - 1;
+            console.log(selectedCity)
+            cities = `?city=${selectedCity}`;
+        
+        
+     
         }
 
-        fetch(`jobs_list/1`+category, {
+        fetch(`jobs_list/1`+cities, {
             method: 'GET'
           }).then(response => {
             if (response.status === 200) {
@@ -77,7 +89,6 @@ class JobDashboardPage extends Component {
             }
             else{
                 this.getJobs();
-                console.log("Error request couldn't get processed")
             }
           })
 

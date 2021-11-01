@@ -291,7 +291,7 @@ class ProfilePage extends Component {
                                                     }
                                                 </div>
                                                 <label for="profile-pic" className="custom-file-upload-profile-page">
-                                                    <UploadIcon style={upload}/> Upload picture
+                                                    <UploadIcon /> Upload picture
                                                 </label>
                                                 <input
                                                     id="profile-pic"
@@ -496,12 +496,6 @@ class ProfilePage extends Component {
             }
         });
     }
-}
-
-// small icons and elements css
-const upload = {
-    position: "relative",
-    top: "7px"
 }
 
 export default ProfilePage;
