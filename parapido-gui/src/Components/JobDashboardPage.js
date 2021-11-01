@@ -4,9 +4,6 @@ import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
 import {verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown.js";
-import CategoriesDropdown from './CategoriesDropdown_';
-import PricesDropdown from './PricesDropdown';
-import CitiesDropdown from './CitiesDropdown_1';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
 import {Box, CircularProgress} from "@material-ui/core";
