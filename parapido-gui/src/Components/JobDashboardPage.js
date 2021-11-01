@@ -115,7 +115,7 @@ class JobDashboardPage extends Component {
                      
                         <button className="filter-button-job-dashboard"> 
                             <div className="text-button-job-dashboard">
-                            <FilterListIcon style={filter}/>Press to FILTER!
+                            <FilterListIcon style={filter}/>Filter
                             </div>
                         </button>
                     </div>
