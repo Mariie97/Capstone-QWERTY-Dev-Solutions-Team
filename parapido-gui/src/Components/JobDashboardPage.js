@@ -57,19 +57,25 @@ class JobDashboardPage extends Component {
       }
 
     clickFilter() {
+        const {jobs} = this.state
+
         let category = this.state.change_category?.current.state.item;
         console.log(category, "cat")
         let selectedCity = 0;
-        let cities = '';
+        let cities = this.state.change_city?.current.state.item;
         let filterResult = '?'
         console.log(filterResult.length)
 
-        if(category !== undefined){
+        const search_category = jobs.find(job =>  
+            job.categories === categories[category] 
+        )
+
+        if(category !== undefined && search_category !== undefined){
             category = `category=${category}`;
             filterResult += category
         }
         if(cities !== undefined){
-            selectedCity = +this.state.change_city?.current.state.item - 1;
+            selectedCity = +cities - 1;
             if(filterResult.length === 1){
                 cities = `city=${selectedCity}`;  
                 filterResult += cities
