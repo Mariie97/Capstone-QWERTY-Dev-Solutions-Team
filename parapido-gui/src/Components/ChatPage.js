@@ -181,12 +181,11 @@ class ChatApp extends Component {
             </div>
             <div className='refresh-message-container'>
               {!refreshComplete ?
-                  <div className='refresh-msg-icon'>
+                  <div>
                     <CircularProgress style={{fill: 'white'}}/>
                   </div> :
                   <RefreshIcon
                       className='refresh-msg-icon'
-                      style={{fill: 'white', fontSize: '100px'}}
                       onClick={() => {
                         this.setState({refreshComplete: false});
                         this.getChatMessages();
