@@ -231,7 +231,8 @@ class AdministrationPage extends Component {
                                     />
                                 </div>
                             }
-                            <button
+                            <div className="admin-filter-button-container">
+                                <button
                                 className='custom-buttons filter admin-filter-button'
                                 onClick={() => {
                                     this.setState({entitiesLoaded: false});
@@ -245,6 +246,8 @@ class AdministrationPage extends Component {
                                 className='custom-buttons filter admin-filter-button'
                                 onClick={this.clearFilters}>Clear Filters
                             </button>
+                            </div>
+
                         </div>
 
                     </div>
