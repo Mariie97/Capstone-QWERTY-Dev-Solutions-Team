@@ -105,3 +105,8 @@
         text-decoration: none;
         color: black;
 }
+
+.tooltip{
+    font-family: 'Jost';
+    font-size: 5px;   
+}

@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import '../Layouts/JobDashboardCard.css';
 import {Link} from "react-router-dom";
 import {cities} from "../Utilities";
+import ReactTooltip from 'react-tooltip';
 
 class JobDashboardCard extends Component {
     componentDidMount(){
         document.body.style.backgroundColor = "#2F2D4A";
     }
-
+   
     render() {
-
         const {job_id, title, price, category, city, owner_first, owner_last, street, zipcode} =  this.props
         return (
             <div className="card-body-wrapper">
@@ -17,7 +17,10 @@ class JobDashboardCard extends Component {
                         <div className="card-wrapper-1">
                             <div className="card-body">
                                 <h2 className="card-title">
-                                    <div className="break-title-job-dashboard"> {title}                                        
+
+                                    <div data-tip={title} className="break-title-job-dashboard"> {title}</div>
+                                    <div className="tooltip">
+                                    <ReactTooltip place="top" type="dark" effect="solid"/>
                                     </div>
 
                                     <div className= "circle-square"></div>

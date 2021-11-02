@@ -3,7 +3,6 @@ import { MenuItem, Select } from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
-
 class ItemsDropdown extends Component {
 
     constructor(props) {
