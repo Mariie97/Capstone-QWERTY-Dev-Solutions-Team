@@ -20,6 +20,7 @@ class JobDashboardPage extends Component {
             change_price: createRef(),
             is_auth: true,
             pageLoaded: false,
+            filterLoaded: false
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -44,7 +45,8 @@ class JobDashboardPage extends Component {
             response.json().then(data => { 
               this.setState(
                   {jobs : data,
-                  pageLoaded : true
+                  pageLoaded : true,
+                  filterLoaded : true
                   }
                   )      
             })
@@ -57,13 +59,15 @@ class JobDashboardPage extends Component {
       }
 
     clickFilter() {
+        this.setState(
+            {filterLoaded: false}
+        )
 
         let category = this.state.change_category?.current.state.item;
-        let cities = this.state.change_city?.current.state.item;
+        let city = this.state.change_city?.current.state.item;
         let selectedCity = 0;
         let filterResult = '?';
-        
-        console.log(category)
+        let price = this.state.change_price?.current.state.item;
 
         if(category !== undefined && category !== '0'){
             console.log(category)
@@ -75,29 +79,70 @@ class JobDashboardPage extends Component {
             filterResult = '?';
         }       
 
-        if(cities !== undefined && cities !== '0'){
-            selectedCity = +cities - 1;
+        if(city !== undefined && city !== '0'){
+            selectedCity = +city - 1;
             if(filterResult.length === 1){
-                cities = `city=${selectedCity}`;  
-                filterResult += cities
+                city = `city=${selectedCity}`;  
+                filterResult += city
             }
             else{
-                cities = `&city=${selectedCity}`; 
-                filterResult += cities;
+                city = `&city=${selectedCity}`; 
+                filterResult += city;
+            }
+        }
+
+        if(price !== undefined && price !== '0'){
+            if(filterResult.length === 1){
+                if(price === '1'){
+                    price = `maxPrice=20`;  
+                }
+                else if(price === '2'){
+                    price = `minPrice=20&maxPrice=40`;  
+                }
+                else if(price === '3'){
+                    price = `minPrice=50&maxPrice=60`;  
+                }
+                else if(price === '4'){
+                    price = `minPrice=70&maxPrice=100`;  
+                }
+                else if(price === '5'){
+                    price = `minPrice=100`;  
+                }
+                
+                filterResult += price
+            }
+            else{
+                if(price === '1'){
+                    price = `&maxPrice=20`;  
+                }
+                else if(price === '2'){
+                    price = `&minPrice=20&maxPrice=40`;  
+                }
+                else if(price === '3'){
+                    price = `&minPrice=50&maxPrice=60`;  
+                }
+                else if(price === '4'){
+                    price = `&minPrice=70&maxPrice=100`;  
+                }
+                else if(price === '5'){
+                    price = `&minPrice=100`;  
+                }
+
+                filterResult += price
             }
         }
 
         fetch(`jobs_list/1`+filterResult, {
             method: 'GET'
           }).then(response => {
-            if(category=== '0' && cities === '0'){
+            if(category=== '0' && cities === '0' && price === '0'){
                 this.getJobs();
             }
             else if (response.status === 200) {
               response.json().then(data => { 
                 this.setState(
                     {jobs : data,
-                    pageLoaded : true
+                     filterLoaded : true
                     }
                     ) 
               }) 
@@ -105,17 +150,16 @@ class JobDashboardPage extends Component {
             else{
                 this.setState(
                     {jobs : [],
-                    pageLoaded : true
-                    }
+                     filterLoaded: true}
                 ) 
-                console.log("There are no jobs with this filter :)")
+                console.log("There are no jobs with for this filter.")
             }
           })
 
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded } = this.state;        
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;        
         console.log(this.state.jobs)
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
@@ -174,14 +218,19 @@ class JobDashboardPage extends Component {
                      
                         <button className="filter-button-job-dashboard" onClick={this.clickFilter}> 
                             <div className="text-button-job-dashboard">
-                            <FilterListIcon/>Filter
+                                <FilterListIcon/>Filter
                             </div>
                         </button>
                     </div>
-
+                    {!filterLoaded ?
+                    <div className='loading-icon1'>
+                        <Box sx={{display: 'flex'}}>
+                            <CircularProgress style={{alignItems:"center"}}/>
+                        </Box>
+                </div> :
                 <div className="card-wrapper">
                     {cardArray}
-                </div>
+                </div>}
                 </div>}
             </div>
 

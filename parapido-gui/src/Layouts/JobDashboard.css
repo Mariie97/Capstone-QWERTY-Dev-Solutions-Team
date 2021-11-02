@@ -75,3 +75,10 @@ font-family: "Cormorant Garamond";
 	gap: 10px;
 	align-items: center;
 }
+
+.loading-icon1 {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	height: 50vh;
+}
