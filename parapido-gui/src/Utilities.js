@@ -130,6 +130,12 @@ export const getJobStatus = [
     'Deleted',
 ]
 
+export const securityQuestions = [
+    "In what city were you born?",
+    "What high school did you attend?",
+    "What was your favorite food as a child?",
+]
+
 
 export const accountType = {
     student: 1,
