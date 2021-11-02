@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
+import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -34,51 +34,56 @@ class AdministrationPage extends Component {
 
     getAllUsers() {
         const { deletedRef, typeRef } = this.state;
+        let filters = {};
 
-        let filters = '';
         if (typeRef.current?.state.item !== undefined && typeRef.current?.state.item !== '') {
-            filters = `?account_type=${typeRef.current?.state.item}`;
+            filters.account_type = typeRef.current?.state.item;
         }
         if (deletedRef.current?.state.item === '2') {
-            filters = filters !== '' ? filters + `&deleted=true` : `?deleted=true}`
+            filters.deleted = 'true';
         }
 
-        fetch(`/users${filters}`, {
+        const url = buildURL('/users', filters);
+        fetch(url, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
                 'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
+        }).then(response => {
+            if(response.status===200) {
+                response.json().then(data =>  {
+                    this.setState({
+                        entities: data,
+                        entitiesLoaded: true,
+                    });
+                })
             }
-        }).then(
-            response => {
-                if (response.status===200){
-                    response.json().then(data => {
-                        this.setState({
-                            entities: data,
-                            entitiesLoaded: true,
-                        });
-                    })
-                }
-                else if(response.status === 404 ) {
+            else {
+                if (response.status === 404) {
                     this.setState({
                         entities: [],
                         entitiesLoaded: true,
                     });
                 }
+                else {
+                    alert("Sorry an error has occurred. Try again later");
+                }
             }
-        )
+        })
     }
 
     getAllJobs() {
         const { jobStatusRef, jobCategoryRef } = this.state;
         const jobStatus = jobStatusRef.current?.state.item !== undefined ? jobStatusRef.current?.state.item : 1;
 
-        let filters = '';
+        let filters = {};
         if (jobCategoryRef.current?.state.item !== undefined && jobCategoryRef.current?.state.item !== '') {
-            filters = `?category=${jobCategoryRef.current?.state.item}`;
+            filters.category = jobCategoryRef.current?.state.item;
         }
 
-        fetch(`/jobs_list/${jobStatus + filters}`, {
+        const url = buildURL(`/jobs_list/${jobStatus}`, filters);
+        fetch(url, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
