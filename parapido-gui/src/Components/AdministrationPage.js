@@ -198,12 +198,14 @@ class AdministrationPage extends Component {
                             {currentEntity === this.entity.users ?
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        blackLabel
                                         id='admin-user-type-dropdown'
                                         label={'Account Type'}
                                         ref={typeRef}
                                         itemsList={Object.values(mapAccount)}
                                     />
                                     <ItemsDropdown
+                                        blackLabel
                                         id='admin-user-deleted-dropdown'
                                         initial_value='1'
                                         label='Status'
@@ -213,12 +215,14 @@ class AdministrationPage extends Component {
                                 </div> :
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        blackLabel
                                         id='admin-job-categories-dropdown'
                                         label='Category'
                                         ref={jobCategoryRef}
                                         itemsList={categories}
                                     />
                                     <ItemsDropdown
+                                        blackLabel
                                         id='admin-job-status-dropdown'
                                         label='Status'
                                         initial_value='1'

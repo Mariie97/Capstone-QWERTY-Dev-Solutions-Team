@@ -17,13 +17,16 @@
     width: 15vw;
     background-color: white;
     border-radius: 10px;
-    padding: 15px;
+    padding: 0 15px;
     height: auto;
     max-height: 100%;
 }
 
 .admin-entities-container{
     padding: 0 14px 0 14px;
+}
+.admin-entities-header{
+    margin-top: 15px;
 }
 
 .admin-entities-header, .list-categories-text  {

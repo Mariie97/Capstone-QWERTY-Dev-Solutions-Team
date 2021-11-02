@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MenuItem, Select } from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import "../Layouts/ItemsDropdown.css";
 
 
 class ItemsDropdown extends Component {
@@ -52,12 +53,12 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required } = this.props;
+        const { label, required, blackLabel } = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                  <label className="label-job-creation"> {label}{required && '*'} </label>
+                  <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}
