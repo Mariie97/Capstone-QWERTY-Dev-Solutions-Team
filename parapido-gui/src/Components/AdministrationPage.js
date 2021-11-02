@@ -193,6 +193,55 @@ class AdministrationPage extends Component {
                                 }}
                             >Jobs</ul>
                         </div>
+                        <h2 className="admin-entities-header">Filters</h2>
+                        <div className='administration-filter-container'>
+                            {currentEntity === this.entity.users ?
+                                <div className='administration-filter-dropdowns'>
+                                    <ItemsDropdown
+                                        id='admin-user-type-dropdown'
+                                        label={'Account Type'}
+                                        ref={typeRef}
+                                        itemsList={Object.values(mapAccount)}
+                                    />
+                                    <ItemsDropdown
+                                        id='admin-user-deleted-dropdown'
+                                        initial_value='1'
+                                        label='Status'
+                                        ref={deletedRef}
+                                        itemsList={['Active', 'Deleted']}
+                                    />
+                                </div> :
+                                <div className='administration-filter-dropdowns'>
+                                    <ItemsDropdown
+                                        id='admin-job-categories-dropdown'
+                                        label='Category'
+                                        ref={jobCategoryRef}
+                                        itemsList={categories}
+                                    />
+                                    <ItemsDropdown
+                                        id='admin-job-status-dropdown'
+                                        label='Status'
+                                        initial_value='1'
+                                        ref={jobStatusRef}
+                                        itemsList={getJobStatus}
+                                    />
+                                </div>
+                            }
+                            <button
+                                className='custom-buttons filter admin-filter-button'
+                                onClick={() => {
+                                    this.setState({entitiesLoaded: false});
+                                    if (currentEntity === this.entity.users)
+                                        this.getAllUsers();
+                                    else
+                                        this.getAllJobs();
+                                }}>Filter
+                            </button>
+                            <button
+                                className='custom-buttons filter admin-filter-button'
+                                onClick={this.clearFilters}>Clear Filters
+                            </button>
+                        </div>
 
                     </div>
                     <div className="administration-table-container">
@@ -226,54 +275,7 @@ class AdministrationPage extends Component {
                             </table>
                         }
                     </div>
-                    <div className='administration-filter-container'>
-                        {currentEntity === this.entity.users ?
-                            <div className='administration-filter-dropdowns'>
-                                <ItemsDropdown
-                                    id='admin-user-type-dropdown'
-                                    label={'Account Type'}
-                                    ref={typeRef}
-                                    itemsList={Object.values(mapAccount)}
-                                />
-                                <ItemsDropdown
-                                    id='admin-user-deleted-dropdown'
-                                    initial_value='1'
-                                    label='Status'
-                                    ref={deletedRef}
-                                    itemsList={['Active', 'Deleted']}
-                                />
-                            </div> :
-                            <div className='administration-filter-dropdowns'>
-                                <ItemsDropdown
-                                    id='admin-job-categories-dropdown'
-                                    label='Category'
-                                    ref={jobCategoryRef}
-                                    itemsList={categories}
-                                />
-                                <ItemsDropdown
-                                    id='admin-job-status-dropdown'
-                                    label='Status'
-                                    initial_value='1'
-                                    ref={jobStatusRef}
-                                    itemsList={getJobStatus}
-                                />
-                            </div>
-                        }
-                        <button
-                            className='custom-buttons filter admin-filter-button'
-                            onClick={() => {
-                                this.setState({entitiesLoaded: false});
-                                if (currentEntity === this.entity.users)
-                                    this.getAllUsers();
-                                else
-                                    this.getAllJobs();
-                            }}>Filter
-                        </button>
-                        <button
-                            className='custom-buttons filter admin-filter-button'
-                            onClick={this.clearFilters}>Clear Filters
-                        </button>
-                    </div>
+
                 </div>
             </div>
         )

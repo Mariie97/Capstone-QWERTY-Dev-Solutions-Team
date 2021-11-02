@@ -14,29 +14,32 @@
 .list-categories-container {
     display: flex;
     flex-flow: column nowrap;
-    width: 7%;
+    width: 15vw;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    height: auto;
+    max-height: 100%;
 }
 
 .admin-entities-container{
-    background: white;
-    border-radius: 10px;
-    padding: 14px;
-    height: 12vh;
+    padding: 0 14px 0 14px;
 }
 
 .admin-entities-header, .list-categories-text  {
     font-family: Jost;
     margin-bottom: 5px;
-    color: white;
 }
 
 .list-categories-text{
     cursor: pointer;
     color: black;
+    height: 20px;
+    width: 40%;
 }
 
 .list-categories-text:hover{
-    border-bottom: 1px solid #dbd6d685;
+  border-bottom: 1px solid #386ef04f;
 }
 
 .administration-table-container{
@@ -97,35 +100,13 @@
     cursor: pointer;
 }
 
-.admin-col1{
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-}
-
-.admin-col2{
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-}
-.admin-col3{
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
 .administration-filter-container {
     display: flex;
     flex-flow: column nowrap;
-    border: 1px solid white;
-    margin-left: 3%;
     height: auto;
-    width: 15%;
+    width: auto;
     border-radius: 10px;
-    padding: 10px 5px 10px 5px;
+    padding: 0 5px 10px 5px;
     align-self: center;
     align-items: center;
 }
