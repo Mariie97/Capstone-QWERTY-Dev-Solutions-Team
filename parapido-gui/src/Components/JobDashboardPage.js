@@ -58,37 +58,24 @@ class JobDashboardPage extends Component {
 
     clickFilter() {
 
-        // const {jobs} = this.state
-
         let category = this.state.change_category?.current.state.item;
-        let selectedCity = 0;
         let cities = this.state.change_city?.current.state.item;
+        let selectedCity = 0;
         let filterResult = '?';
-        // console.log(filterResult.length)
-
-        // searching methods 
-    
-        // const search_category = jobs.find(job =>  
-        //     job.categories === categories[category] 
-        // )
-
-        // && search_category !== undefined
-
+        
         console.log(category)
 
         if(category !== undefined && category !== '0'){
-
             console.log(category)
             console.log(typeof(category))
-            console.log("hi22")
             category = `category=${category}`;
             filterResult += category
         }
         if(category === '0'){
-            console.log("hi")
             filterResult = '?';
         }       
-        if(cities !== undefined){
+
+        if(cities !== undefined && cities !== '0'){
             selectedCity = +cities - 1;
             if(filterResult.length === 1){
                 cities = `city=${selectedCity}`;  
@@ -103,7 +90,10 @@ class JobDashboardPage extends Component {
         fetch(`jobs_list/1`+filterResult, {
             method: 'GET'
           }).then(response => {
-            if (response.status === 200) {
+            if(category=== '0' && cities === '0'){
+                this.getJobs();
+            }
+            else if (response.status === 200) {
               response.json().then(data => { 
                 this.setState(
                     {jobs : data,
@@ -113,7 +103,12 @@ class JobDashboardPage extends Component {
               }) 
             }
             else{
-                this.getJobs();
+                this.setState(
+                    {jobs : [],
+                    pageLoaded : true
+                    }
+                ) 
+                console.log("There are no jobs with this filter :)")
             }
           })
 
