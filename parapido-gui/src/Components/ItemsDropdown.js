@@ -78,6 +78,7 @@ class ItemsDropdown extends Component {
                         }}
                         disableUnderline
                     >
+                        <MenuItem value={'0'}>Choose one... </MenuItem>
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&

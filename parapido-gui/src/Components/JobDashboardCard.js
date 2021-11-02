@@ -10,7 +10,7 @@ class JobDashboardCard extends Component {
 
     render() {
 
-        const {job_id, title, price, category, city, owner_first, owner_last} =  this.props
+        const {job_id, title, price, category, city, owner_first, owner_last, street, zipcode} =  this.props
         return (
             <div className="card-body-wrapper">
                     <Link to={"/job/"+job_id}  className="none-display-for-link"> 
@@ -25,7 +25,7 @@ class JobDashboardCard extends Component {
                                 </h2>
                                 <h2 className="card-clientName"> {owner_first} {owner_last}</h2>
                                 <p className="card-location">
-                                {cities[city]} calle 00718
+                                {cities[city]} {street} {zipcode}
                                 </p>
                                 <div className="card-price"> {price} </div>
                                

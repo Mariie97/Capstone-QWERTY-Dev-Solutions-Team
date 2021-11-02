@@ -57,23 +57,37 @@ class JobDashboardPage extends Component {
       }
 
     clickFilter() {
-        const {jobs} = this.state
+
+        // const {jobs} = this.state
 
         let category = this.state.change_category?.current.state.item;
-        console.log(category, "cat")
         let selectedCity = 0;
         let cities = this.state.change_city?.current.state.item;
-        let filterResult = '?'
-        console.log(filterResult.length)
+        let filterResult = '?';
+        // console.log(filterResult.length)
 
-        const search_category = jobs.find(job =>  
-            job.categories === categories[category] 
-        )
+        // searching methods 
+    
+        // const search_category = jobs.find(job =>  
+        //     job.categories === categories[category] 
+        // )
 
-        if(category !== undefined && search_category !== undefined){
+        // && search_category !== undefined
+
+        console.log(category)
+
+        if(category !== undefined && category !== '0'){
+
+            console.log(category)
+            console.log(typeof(category))
+            console.log("hi22")
             category = `category=${category}`;
             filterResult += category
         }
+        if(category === '0'){
+            console.log("hi")
+            filterResult = '?';
+        }       
         if(cities !== undefined){
             selectedCity = +cities - 1;
             if(filterResult.length === 1){
@@ -106,8 +120,7 @@ class JobDashboardPage extends Component {
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded } = this.state;
-        
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded } = this.state;        
         console.log(this.state.jobs)
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
@@ -118,6 +131,8 @@ class JobDashboardPage extends Component {
             category = {job.categories}
             owner_first  = {job.owner_first}
             owner_last = {job.owner_last}
+            street = {job.street}
+            zipcode = {job.zipcode}
             />
         )
 
@@ -178,7 +193,5 @@ class JobDashboardPage extends Component {
         )
     }
 }
-
-// small icons and elements css
 
 export default JobDashboardPage;
