@@ -7,7 +7,6 @@ import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import continueArrow from '../Static/Images/continueArrow.png';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import Input from "./Input";
 
 
 const style = {
@@ -103,35 +102,58 @@ class LoginModal extends Component {
                                     <div className="second-text-login-modal"> FUN.</div>
                                 </div>
                                 <div className="body-container-login-modal">
-                                    <Input
-                                        className="input-login-modal"
-                                        required
-                                        blackLabel
-                                        labelText='Enter E-mail'
-                                        emailError={emailError!==undefined}
-                                        errorMsg={emailError}
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateEmail}
-                                    />
-                                    <Input
-                                        required
-                                        blackLabel
-                                        className="input-login-modal"
-                                        labelText='Enter Password'
-                                        error={passwordError!==undefined}
-                                        errorMsg={passwordError}
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validatePassword}
-                                    />
+                                    <label className="third-point-login-modal"> Enter E-mail: </label>
+                                    {login_failed ?
+                                        <input
+                                            className="input-login-modal-error"
+                                            type="text"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validateEmail}
+                                        />:
+                                        <input
+                                            className="input-login-modal"
+                                            type="text"
+                                            id="email"
+                                            name="email"
+                                            placeholder="Email"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validateEmail}
+                                        />
+                                    }
+                                    {emailError !== undefined &&
+                                    <div className="required-field-login-modal">
+                                        <ReportProblemIcon style={report} /> {emailError}
+                                    </div>
+                                    }
+                                    <label className="third-point-login-modal"> Enter Password: </label>
+                                    {login_failed ?
+                                        <input
+                                            className="input-login-modal-error"
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validatePassword}
+                                        />:
+                                        <input
+                                            className="input-login-modal1"
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            onChange={this.handleChange}
+                                            onBlur={this.validatePassword}
+                                        />}
 
+                                    {passwordError !== undefined &&
+                                    <div className="required-field-login-modal">
+                                        <ReportProblemIcon style={report} /> {passwordError}
+                                    </div>
+                                    }
 
                                     <button onClick={this.handleOnClick} className="login-modal-continue-button">
                                         <div className="text-button-login-modal">
@@ -161,18 +183,22 @@ class LoginModal extends Component {
                 emailError: "This field is required"
             })
 
+            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
         else if (!pattern.test(this.state.email)) {
             this.setState({
                 emailError: "Invalid email format: @..."
             });
+            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
         this.setState({
             emailError: undefined
         })
+        document.querySelector('.input-login-modal').style.cssText = 'border: 3px solid #2F2D4A;';
         return true;
+
     }
 
     validatePassword(){
@@ -180,11 +206,14 @@ class LoginModal extends Component {
             this.setState({
                 passwordError: "This field is required"
             })
+
+            document.querySelector('.input-login-modal1').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
         this.setState({
             passwordError: undefined
         })
+        document.querySelector('.input-login-modal1').style.cssText = 'border: 3px solid #2F2D4A;';
         return true;
     }
 }
