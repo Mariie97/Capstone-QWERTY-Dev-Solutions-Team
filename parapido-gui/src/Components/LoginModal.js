@@ -74,7 +74,7 @@ class LoginModal extends Component {
     }
 
     render() {
-        const {isOpen, toggle} = this.props;
+        const {isOpen, toggle, adminLogin} = this.props;
         const { login_success, login_failed } = this.state;
 
         // ERROR variables
@@ -83,72 +83,76 @@ class LoginModal extends Component {
 
         return (
             <StyledEngineProvider injectFirst>
-                {login_success ? <Redirect to='/jobdashboard'/> :
-                    <div>
-                        <Modal
-                            open={true}
-                            onClose={toggle}
-                            style={{textAlign:"center"}}
-                        >
-                            <Box sx={style}>
-                                {login_failed &&
-                                <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
-                                    Yikes!!! 😬 Incorrect Email or Password.
-                                </Alert>
-                                }
-                                <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
-                                <div className="first-point-login-modal"> Hey! Good to see you again!</div>
-                                <div className="second-point-login-modal">
-                                    <div className="first-text-login-modal"> Log in to have</div>
-                                    <div className="second-text-login-modal"> FUN.</div>
-                                </div>
-                                <div className="body-container-login-modal">
-                                    <Input
-                                        className="input-login-modal"
-                                        required
-                                        blackLabel
-                                        labelText='Enter E-mail'
-                                        emailError={emailError!==undefined}
-                                        errorMsg={emailError}
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateEmail}
-                                    />
-                                    <Input
-                                        required
-                                        blackLabel
-                                        className="input-login-modal"
-                                        labelText='Enter Password'
-                                        error={passwordError!==undefined}
-                                        errorMsg={passwordError}
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validatePassword}
-                                    />
-
-
-                                    <button onClick={this.handleOnClick} className="login-modal-continue-button">
-                                        <div className="text-button-login-modal">
-                                            CONTINUE
-                                        </div>
-                                        <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
-                                    </button>
-                                </div>
-                                <hr className="line-login-modal" />
-                                <ul className="footer-flex-login-modal">
-                                    <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
-                                    <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
-                                </ul>
-                            </Box>
-                        </Modal>
-                    </div>
+                {login_success &&
+                adminLogin === undefined ?
+                    <Redirect to='/jobdashboard'/> :
+                    <Redirect to='/administration_login'/>
                 }
+
+                <div>
+                    <Modal
+                        open={isOpen}
+                        onClose={toggle}
+                        style={{textAlign:"center"}}
+                    >
+                        <Box sx={style}>
+                            {login_failed &&
+                            <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                Yikes!!! 😬 Incorrect Email or Password.
+                            </Alert>
+                            }
+                            <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                            <div className="first-point-login-modal"> Hey! Good to see you again!</div>
+                            <div className="second-point-login-modal">
+                                <div className="first-text-login-modal"> Log in to have</div>
+                                <div className="second-text-login-modal"> FUN.</div>
+                            </div>
+                            <div className="body-container-login-modal">
+                                <Input
+                                    className="input-login-modal"
+                                    required
+                                    blackLabel
+                                    labelText='Enter E-mail'
+                                    emailError={emailError!==undefined}
+                                    errorMsg={emailError}
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateEmail}
+                                />
+                                <Input
+                                    required
+                                    blackLabel
+                                    className="input-login-modal"
+                                    labelText='Enter Password'
+                                    error={passwordError!==undefined}
+                                    errorMsg={passwordError}
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validatePassword}
+                                />
+
+
+                                <button onClick={this.handleOnClick} className="login-modal-continue-button">
+                                    <div className="text-button-login-modal">
+                                        CONTINUE
+                                    </div>
+                                    <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                </button>
+                            </div>
+                            <hr className="line-login-modal" />
+                            <ul className="footer-flex-login-modal">
+                                <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
+                                <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
+                            </ul>
+                        </Box>
+                    </Modal>
+                </div>
             </StyledEngineProvider>
         );
     }

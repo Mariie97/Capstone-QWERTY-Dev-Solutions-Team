@@ -11,6 +11,7 @@ import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import AdministrationPage from "./Components/AdministrationPage";
+import LoginModal from "./Components/LoginModal";
 
 
 class App extends React.Component {
@@ -113,6 +114,19 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
                                 <AdministrationPage cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                     <Route
+                        exact
+                        path='/administration_login'
+                        render={() => (
+                            <React.Fragment>
+                                <LoginModal
+                                    isOpen={true}
+                                    toggle={() => {}}
+                                    adminLogin={true}
+                                />}
                             </React.Fragment>
                         )}
                     />
