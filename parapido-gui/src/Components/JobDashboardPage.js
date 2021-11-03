@@ -7,7 +7,7 @@ import ItemsDropdown from "./ItemsDropdown.js";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
 import {Box, CircularProgress} from "@material-ui/core";
-import {cities, categories, prices} from "../Utilities";
+import {cities, categories, prices, current_user, accountType} from "../Utilities";
 
 class JobDashboardPage extends Component {
 
@@ -161,6 +161,8 @@ class JobDashboardPage extends Component {
     render() {
         const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;        
         console.log(this.state.jobs)
+        console.log(current_user.type)
+        const showJobCreationButton = current_user.type === accountType.client;
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
             job_id = {job.job_id}
@@ -186,7 +188,12 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                    <h1 className="job-dashboard-page-header">Job Dashboard</h1>
+                    <h1 className="job-dashboard-page-header">Job Dashboard
+                        {showJobCreationButton &&
+                        <button>Create Job</button>
+                        }
+                    </h1>
+                  
                     <div className="first-flex-container-job-dashboard-page">
                         <div className = "label-job-dashboard">
                             <ItemsDropdown
