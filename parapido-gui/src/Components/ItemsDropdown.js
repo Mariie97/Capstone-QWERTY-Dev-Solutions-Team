@@ -92,7 +92,7 @@ class ItemsDropdown extends Component {
     }
 
     validateItem(){
-        if (this.state.item === undefined) {
+        if (this.state.item === undefined || this.state.item === '0') {
             this.setState({
                 itemError: "This field is required"
             })

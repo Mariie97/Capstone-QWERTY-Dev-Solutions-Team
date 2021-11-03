@@ -446,10 +446,10 @@ class ProfilePage extends Component {
 
     validateCity() {
         const { change_city, change_zipcode, change_street } = this.state;
-        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.item===null) {
+        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.item===null
+        || change_city?.current.state.item==='0') {
             change_city?.current.setState({itemError: 'This field is required'});
             return false;
-
         }
         change_city?.current.setState({itemError: undefined});
         return true;

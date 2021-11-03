@@ -20,13 +20,13 @@
 /* all labels have the same style */
 
 .label-job-dashboard{
-font-family: "Cormorant Garamond";
-  font-style: italic; 
-  font-weight: 400;
-  font-size: 16px;
-  color: white;
-  letter-spacing: 1px;
-  line-height: 2.5;
+	font-family: "Cormorant Garamond";
+	font-style: italic; 
+	font-weight: 400;
+	font-size: 16px;
+	color: white;
+	letter-spacing: 1px;
+	line-height: 2.5;
 }
 
 /* dropdowns and filters*/
@@ -75,6 +75,8 @@ font-family: "Cormorant Garamond";
 	gap: 10px;
 	align-items: center;
 }
+
+/* circular loading of cards after filter */
 
 .loading-icon1 {
 	justify-content: center;
