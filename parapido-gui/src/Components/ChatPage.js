@@ -2,8 +2,8 @@ import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
-import {current_user} from "../Utilities";
-import {Link} from "react-router-dom";
+import {current_user, getQueryParams, verifyUserAuth} from "../Utilities";
+import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 
@@ -39,7 +39,7 @@ class MessagesContainer extends Component{
           <Link to={`profile/${message.sender_id}`}>
             <Avatar
                 className='avatar'
-                alt="Remy Sharp"
+                alt={`${message.sender_name} ${message.sender_last}`}
                 src={message.sender_image}
             />
           </Link>
@@ -68,10 +68,12 @@ class ChatApp extends Component {
 
   constructor(props){
     super(props);
+
     this.state = {
-      'messages': [],
-      'current_message': '',
-      'refreshComplete': true,
+      is_auth: true,
+      messages: [],
+      current_message: '',
+      refreshComplete: true,
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -82,7 +84,10 @@ class ChatApp extends Component {
 
   getChatMessages() {
     fetch(`/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${current_user.id}`, {
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+      }
     }).then(response => {
       if (response.status === 200) {
         response.json().then(data => {
@@ -98,7 +103,10 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
-    this.queryParams = this.getQueryParams();
+    this.setState({
+            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+        });
+    this.queryParams = getQueryParams(this.props.queryParams);
     this.getChatMessages();
   }
 
@@ -145,14 +153,11 @@ class ChatApp extends Component {
     this.addMessageBox(enter_pressed);
   }
 
-  getQueryParams() {
-    return new URLSearchParams(this.props.queryParams);
-  }
-
   render() {
-    const {messages, current_message, refreshComplete} = this.state;
+    const { is_auth, messages, current_message, refreshComplete } = this.state;
     return (
         <div className='parent-container'>
+          {!is_auth && <Redirect to='/' />}
           <div className='header-flex-container'>
             <div className="button-flex-container">
               <Link to={`/job/${this.queryParams?.get('job_id')}`}

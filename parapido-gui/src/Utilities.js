@@ -121,12 +121,22 @@ export const jobStatus = {
     deleted: 5,
 };
 
+export function getQueryParams(query) {
+    return new URLSearchParams(query);
+  }
+
 export const getJobStatus = [
     'Posted',
     'In process',
     'Completed',
     'Cancelled',
     'Deleted',
+]
+
+export const securityQuestions = [
+    "In what city were you born?",
+    "What high school did you attend?",
+    "What was your favorite food as a child?",
 ]
 
 

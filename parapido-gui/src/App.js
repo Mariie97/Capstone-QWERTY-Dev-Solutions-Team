@@ -9,6 +9,8 @@ import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
+import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
+import RequestsPage from "./Components/RequestsPage";
 
 
 class App extends React.Component {
@@ -51,6 +53,16 @@ class App extends React.Component {
                     />
                     <Route
                         exact
+                        path='/security-questions'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <SecurityQuestionsPage />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
                         path='/signup'
                         render={() => (
                             <React.Fragment>
@@ -69,7 +81,6 @@ class App extends React.Component {
                                     cookies= {this.props.cookies}
                                     queryParams={props.location.search}
                                 />
-
                             </React.Fragment>
                         )}
                     />
@@ -87,15 +98,28 @@ class App extends React.Component {
                         )}
                     />
                     <Route
-                            exact
-                            path='/jobcreation'
-                            render={() => (
-                                <React.Fragment>
-                                    <NavBar cookies={this.props.cookies} />
-                                    <JobCreation cookies={this.props.cookies} />
-                               </React.Fragment>
-                            )}
-                        />
+                        exact
+                        path='/jobcreation'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <JobCreation cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/job_requests'
+                        render={(props) => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <RequestsPage
+                                    cookies={this.props.cookies}
+                                    queryParams={props.location.search}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
                 </Switch>
             </BrowserRouter>
         );

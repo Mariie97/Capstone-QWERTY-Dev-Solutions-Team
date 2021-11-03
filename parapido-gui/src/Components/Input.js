@@ -8,10 +8,10 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 class Input extends Component {
 
     render() {
-        const { errorMsg, labelText, required, multiline} = this.props;
+        const { errorMsg, labelText, required, multiline, blackLabel} = this.props;
         return (
             <div className='input-field-container'>
-                <label className="custom-input-label"> {labelText}{required && '*'}</label>
+                <label className={`custom-input-label ${blackLabel!==undefined && 'black-label-text'}`}> {labelText}{required && '*'}</label>
                 <br />
                 {multiline ?
                     <TextareaAutosize
