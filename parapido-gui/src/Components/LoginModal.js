@@ -95,7 +95,6 @@ class LoginModal extends Component {
     }
 
     render() {
-        //TODO: Change text according to current page
         const { isOpen, toggle, adminLogin } = this.props;
         const { login_success, login_failed, loginError, emailError, passwordError, redirectAdminLogin} = this.state;
 
@@ -123,7 +122,9 @@ class LoginModal extends Component {
                             <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                             <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                             <div className="second-point-login-modal">
-                                <div className="first-text-login-modal"> Log in to have</div>
+                                <div className="first-text-login-modal">
+                                    Log in to {adminLogin===undefined ? 'have' : 'administrate with' }
+                                </div>
                                 <div className="second-text-login-modal"> FUN.</div>
                             </div>
                             <div className="body-container-login-modal">
