@@ -48,7 +48,7 @@ class SecurityQuestionsPage extends Component {
 
     validateAnswerOne = () => {
         if(this.state.answerOne === ""){
-            this.setState({answerOneError:"Please submit a response" });
+            this.setState({answerOneError:"This field is required" });
             return true;
         }
 
@@ -63,7 +63,7 @@ class SecurityQuestionsPage extends Component {
 
     validateAnswerTwo = () => {
         if(this.state.answerTwo === ""){
-            this.setState({answerTwoError:"Please submit a response" });
+            this.setState({answerTwoError:"This field is required" });
             return true;
         }
 
@@ -202,8 +202,9 @@ class SecurityQuestionsPage extends Component {
                 <div className='header-flex-container'>
                     <h1 className="page-title-header">Account Recovery</h1>
                 </div>
+                <h2 className='security-page-subheader'>Security Questions:</h2>
+
                 <div className='security-body-flex-container'>
-                    <h2 className='security-page-subheader'>Security Questions:</h2>
                     <Input
                         required
                         disabled = {this.state.emailIsValid}

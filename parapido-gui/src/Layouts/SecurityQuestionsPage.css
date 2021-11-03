@@ -123,13 +123,12 @@
 
 
 .security-body-flex-container {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: center;
-    width: calc(100vw - 5%);
+    width: 40%;
+    margin: 0 auto;
 }
 
 .security-page-subheader {
+    text-align: center;
     color: white;
     margin-bottom: 15px;
 }
@@ -138,17 +137,15 @@
 }
 
 .security-page-button{
+    left: 50%;
+    transform: translate(-50%);
     margin-top: 25px;
 }
 #security-submit-button{
-    left: 25%;
+    margin: 25px 0;
 }
-.security-questions-input {
-    margin-left: 2%;
-}
+
 #security-change-pswd-button{
-    left: 50%;
-    transform: translate(-50%);
     width: 50%;
     margin: 10% 0;
 }

@@ -61,7 +61,10 @@ class JobDetailsPage extends Component {
 
         const { job_id } =  this.props;
         fetch(`/job_details/${job_id}`, {
-            method:'GET'
+            method:'GET',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
         }).then(response => {
             if (response.status===200) {
                 response.json().then(data =>{
@@ -180,6 +183,8 @@ class JobDetailsPage extends Component {
         const showChatButton = (job.status === jobStatus.in_process && (
             current_user.id === job.owner_id || current_user.id === job.student_id));
 
+        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === current_user.id;
+
         return (
             <div className="Dashboard">
                 {!is_auth && <Redirect to='/' />}
@@ -245,6 +250,14 @@ class JobDetailsPage extends Component {
                                     Delete Job
                                 </button>
                                 }
+                                {showJobRequestsButton &&
+                                <Link
+                                    to={`/job_requests?job_id=${job_id}`}
+                                    className="custom-buttons"
+                                >
+                                    View Requests
+                                </Link>
+                                }
                             </div>
                             <h1 className="page-title-header">{job.title}</h1>
                         </div>
@@ -291,7 +304,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <th className='column-table-body col1'>Assigned to:</th>
                                     <th className='column-table-body col2'>
-                                        <Link to={`/profile/${job.student_id}`} style={{color: '#FFFFFF'}}>
+                                        <Link to={`/profile/${job.student_id}`} id='job-student-assigned-name'>
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
                                     </th>
@@ -314,6 +327,7 @@ const chipStyleJobDetails = {
     fontWeight: "400",
     padding: '5px',
     border: "1px solid black",
+    marginRight: '5px',
 }
 
 export default JobDetailsPage;
