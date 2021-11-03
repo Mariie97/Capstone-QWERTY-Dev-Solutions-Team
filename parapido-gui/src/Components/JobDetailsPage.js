@@ -273,39 +273,39 @@ class JobDetailsPage extends Component {
                             </div>
                             <table className='table-body-content'>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Description:</th>
-                                    <th className='column-table-body col2'>{job.description} </th>
+                                    <td className='column-table-body col1'>Description:</td>
+                                    <td className='column-table-body col2'>{job.description} </td>
                                 </tr>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Price:</th>
-                                    <th className='column-table-body col2'>{job.price}</th>
+                                    <td className='column-table-body col1'>Price:</td>
+                                    <td className='column-table-body col2'>{job.price}</td>
                                 </tr>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Location:</th>
-                                    <th className='column-table-body col2'>{job.street} {cities[job.city-1]} PR, {job.zipcode}</th>
+                                    <td className='column-table-body col1'>Location:</td>
+                                    <td className='column-table-body col2'>{job.street} {cities[job.city-1]} PR, {job.zipcode}</td>
                                 </tr>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Category:</th>
-                                    <th className='column-table-body col2'>
+                                    <td className='column-table-body col1'>Category:</td>
+                                    <td className='column-table-body col2'>
                                         <Chip label={job.categories} style = {chipStyleJobDetails}/>
-                                    </th>
+                                    </td>
                                 </tr>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Available Days:</th>
-                                    <th className='column-table-body col2'>{this.getJobDays()}</th>
+                                    <td className='column-table-body col1'>Available Days:</td>
+                                    <td className='column-table-body col2'>{this.getJobDays()}</td>
                                 </tr>
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Status:</th>
-                                    <th className='column-table-body col2'>{getJobStatus[job.status-1]}</th>
+                                    <td className='column-table-body col1'>Status:</td>
+                                    <td className='column-table-body col2'>{getJobStatus[job.status-1]}</td>
                                 </tr>
                                 { job.student_id!==null &&
                                 <tr className='row-table-body'>
-                                    <th className='column-table-body col1'>Assigned to:</th>
-                                    <th className='column-table-body col2'>
+                                    <td className='column-table-body col1'>Assigned to:</td>
+                                    <td className='column-table-body col2'>
                                         <Link to={`/profile/${job.student_id}`} id='job-student-assigned-name'>
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
-                                    </th>
+                                    </td>
                                 </tr>
                                 }
                             </table>
