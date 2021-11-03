@@ -12,7 +12,7 @@ justify-content: flex-end;
     font-size: 25px;
     color: #D90027;
     margin-top: 2vh;
-    margin-bottom: 10vh
+    margin-bottom: 6vh
 }
 
 /* button */
@@ -23,7 +23,7 @@ justify-content: flex-end;
     background-color: #FFEBCC;
     border: 2px solid #FFEBCC;
     border-radius: 10px;
-    width: 100%;
+    width: 90%;
 }
 
 .agreement-modal-continue-button:hover{
@@ -40,7 +40,8 @@ justify-content: flex-end;
     font-style: italic;
     font-weight: 400;
     font-size: 20px;
-    width: 90%;
+    width: 55%;
+    margin-bottom: 2vh
 }
 
 .body-container-agreement-modal {
