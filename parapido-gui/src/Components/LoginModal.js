@@ -86,7 +86,7 @@ class LoginModal extends Component {
                 {login_success ? <Redirect to='/jobdashboard'/> :
                     <div>
                         <Modal
-                            open={true}
+                            open={isOpen}
                             onClose={toggle}
                             style={{textAlign:"center"}}
                         >
