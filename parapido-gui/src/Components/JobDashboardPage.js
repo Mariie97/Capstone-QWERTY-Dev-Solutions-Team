@@ -190,7 +190,11 @@ class JobDashboardPage extends Component {
                     <div>
                     <h1 className="job-dashboard-page-header">Job Dashboard
                         {showJobCreationButton &&
-                        <button>Create Job</button>
+                        <button style={{float: "right"}}  className="create-job-button-job-dashboard">
+                            <div className="text1-button-job-dashboard">
+                            Create Job
+                            </div>
+                        </button>
                         }
                     </h1>
                   

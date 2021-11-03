@@ -76,6 +76,39 @@
 	align-items: center;
 }
 
+.create-job-button-job-dashboard{
+	width: 15%;
+	border: 3px solid #FFEBCC;
+	background-color: #FFEBCC;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 10vh;
+	top: 14vh;
+}
+
+.create-job-button-job-dashboard:hover{
+    cursor: pointer;
+    border: 3px solid white;  
+}
+
+.create-job-button-job-dashboard:active{
+    background-color: #2e856e;
+}
+
+.text1-button-job-dashboard{
+    font-family: Jost;
+	font-weight: lighter;
+	font-size: 22px;
+	color: #2F2D4A;
+	display: flex;
+	grid-gap: 10px;
+	gap: 10px;
+	align-items: center;
+}
+
 /* circular loading of cards after filter */
 
 .loading-icon1 {
