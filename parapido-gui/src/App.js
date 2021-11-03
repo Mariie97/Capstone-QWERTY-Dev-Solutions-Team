@@ -10,6 +10,7 @@ import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
+import RequestsPage from "./Components/RequestsPage";
 
 
 class App extends React.Component {
@@ -102,6 +103,19 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
                                 <JobCreation cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/job_requests'
+                        render={(props) => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <RequestsPage
+                                    cookies={this.props.cookies}
+                                    queryParams={props.location.search}
+                                />
                             </React.Fragment>
                         )}
                     />
