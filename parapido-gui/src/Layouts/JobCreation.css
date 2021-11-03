@@ -246,10 +246,12 @@
 	background-color: #FFEBCC;
 }
 
-.MuiInputBase-input.CurrencyTextField-textField-3{
+
+.MuiInputBase-input.CurrencyTextField{
 	height: 30px;
 	text-align: left;
 }
+
 
 .MuiTypography-root.MuiTypography-colorTextSecondary{
 	color:black;

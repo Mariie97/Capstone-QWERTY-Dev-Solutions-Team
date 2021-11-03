@@ -62,7 +62,6 @@ export class JobCreation extends Component {
         else if(name === "street" && value.length <=30 ){this.setState({[name]:value});}
         else if(name === "description" && value.length <= 500){this.setState({[name]:value});}
         else if(name === "zipcode" && value.length <=5){this.setState({[name]:value});}
-
         else if(name === "price"){
             const format_price = value.replaceAll(',','')
             this.setState({[name]:format_price});}
@@ -74,15 +73,16 @@ export class JobCreation extends Component {
         const validate3 = this.validateDescription();
         const validate4 = this.validateZipcode();
         const validate5 = this.validatePrice();
-        const validate6 = this.state.change_city.current?.validate();
-        const validate7 = this.state.change_category.current?.validate();
-
+        const validate6 = this.state.change_city.current?.validateItem();
+        const validate7 = this.state.change_category.current?.validateItem();
+        
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
-
+       
         const { title, street, description, zipcode, price, change_city,
             change_category, availableDays_chips } = this.state
+           
         const city = change_city?.current.state.city
         const category = change_category?.current.state.category
         const chips = availableDays_chips?.current.state.chipData
@@ -94,7 +94,7 @@ export class JobCreation extends Component {
         const thursday  = chips.some(thu => thu.key === 4);
         const friday    = chips.some(fri => fri.key === 5);
         const saturday  = chips.some(sat => sat.key === 6);
-
+  
         fetch('/create_job',{
             method: 'POST',
             credentials: 'same-origin',
@@ -119,14 +119,14 @@ export class JobCreation extends Component {
                 s: saturday === true ? 1 : 0
             })
         }).then(response => {
-                if(response.status === 201) {
+                if(response.status === 201) {                  
                     console.log("successful")
                     this.setState({
                         creationSuccessful: true
                     })
-
                 }
                 else{
+                    console.log("failed to create job")
                     this.setState({
                         serverProcessedRequest: false
                     })
@@ -134,7 +134,6 @@ export class JobCreation extends Component {
             }
         )
     }
-
     render() {
         const { change_city,
             change_category,
@@ -261,14 +260,14 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
-                            InputProps={{ disableUnderline: true }}              
+                            InputProps={{ disableUnderline: true }}          
                         />
                         {priceError !== undefined &&
                         <div className="required-field-2-job-creation">
-                            <hr className="price-error-job-creation" />
+                            {/* <hr className="price-error-job-creation" />
                             <hr className="price-error-1-job-creation" />
                             <hr className="price-error-2-job-creation" />
-                            <hr className="price-error-3-job-creation" />
+                            <hr className="price-error-3-job-creation" /> */}
                             <ReportProblemIcon style={report} />
                             {priceError}
                         </div>

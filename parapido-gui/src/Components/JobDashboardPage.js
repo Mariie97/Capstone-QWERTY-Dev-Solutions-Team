@@ -1,5 +1,5 @@
 import {Component, createRef} from 'react';
-import {Redirect} from "react-router-dom";
+import {Redirect, Link} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
 import {verifyUserAuth} from "../Utilities";
@@ -37,6 +37,9 @@ class JobDashboardPage extends Component {
         this.getJobs();
     }
 
+    goToJobCreation(){
+
+    }
     getJobs() {
         fetch("jobs_list/1", {
           method: 'GET'
@@ -190,11 +193,13 @@ class JobDashboardPage extends Component {
                     <div>
                     <h1 className="job-dashboard-page-header">Job Dashboard
                         {showJobCreationButton &&
-                        <button style={{float: "right"}}  className="create-job-button-job-dashboard">
+                        <Link to="/jobcreation">
+                        <button className="create-job-button-job-dashboard">
                             <div className="text1-button-job-dashboard">
                             Create Job
                             </div>
                         </button>
+                        </Link>
                         }
                     </h1>
                   
