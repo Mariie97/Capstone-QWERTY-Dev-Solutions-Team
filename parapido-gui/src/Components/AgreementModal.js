@@ -17,6 +17,7 @@ const style = {
     border: '3px solid black',
     boxShadow: 24,
     p: 4,
+    padding: '9px'
 }
 
 class AgreementModal extends Component {
@@ -52,19 +53,18 @@ class AgreementModal extends Component {
                             style={{textAlign:"center"}}
                         >
                             <Box sx={style}>
-                                
-                                <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
-                                <div className="first-point-login-modal"> Hey! Good to see you again!</div>
-                                <div className="second-point-login-modal">
-                                    <div className="first-text-login-modal"> Log in to have</div>
-                                    <div className="second-text-login-modal"> FUN.</div>
+                                <div className="logo-flex-Agreement">
+                                    <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                                 </div>
-                                <div className="body-container-login-modal">
-                                    <button onClick={this.handleOnClick} className="login-modal-continue-button">
+                                <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>
+                              
+                                <div className="body-container-agreement-modal">
+                                    <p className="long-text-agreement-modal"> Check to state that you have read and agree with the job information </p>
+                                    <button onClick={this.handleOnClick} className="agreement-modal-continue-button">
                                         <div className="text-button-login-modal">
-                                            CONTINUE
+                                            Agree & Continue
                                         </div>
-                                        <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                        {/* <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" /> */}
                                     </button>
                                 </div>
                                 <hr className="line-login-modal" />
@@ -81,6 +81,7 @@ class AgreementModal extends Component {
 const login_logostyle = {
     width: 80,
     height: 80,
+    float: "right",
 };
 
 const continue_arrow_image_resize = {

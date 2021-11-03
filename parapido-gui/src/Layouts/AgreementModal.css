@@ -1,0 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+/* controlling the positioning of logo and the next starting div */
+
+.logo-flex-Agreement{
+width: 100%;
+display: flex;
+justify-content: flex-end;
+}
+
+.first-point-agreement-modal{
+    font-family: 'Times New Roman';
+    font-size: 25px;
+    color: #D90027;
+    margin-top: 2vh;
+    margin-bottom: 10vh
+}
+
+/* button */
+
+.agreement-modal-continue-button {
+    margin-top: 35px;
+    padding-bottom: 20px;
+    background-color: #FFEBCC;
+    border: 2px solid #FFEBCC;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.agreement-modal-continue-button:hover{
+    cursor: pointer;
+    border: 2px solid black;  
+}
+
+.agreement-modal-continue-button:active {
+	background-color: #2e856e;
+}
+
+.long-text-agreement-modal{
+    font-family: "Cormorant Garamond";
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    width: 90%;
+}
+
+.body-container-agreement-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
