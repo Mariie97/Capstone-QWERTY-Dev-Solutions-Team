@@ -11,6 +11,7 @@ import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
+import AgreementModal from './Components/AgreementModal';
 
 
 class App extends React.Component {
@@ -27,6 +28,17 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+                    
+                     <Route
+                        exact
+                        path='/test'
+                        render={() => (
+                            <React.Fragment>
+                              <AgreementModal />
+                            </React.Fragment>
+                        )}
+                    />
+
                     <Route
                         exact
                         path='/profile/:user_id'
