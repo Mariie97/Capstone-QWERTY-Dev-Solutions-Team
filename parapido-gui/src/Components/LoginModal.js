@@ -183,21 +183,25 @@ class LoginModal extends Component {
             this.setState({
                 emailError: "This field is required"
             })
-
+            if(document.querySelector('.input-login-modal') !== null){
             document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
+            }
             return false;
         }
         else if (!pattern.test(this.state.email)) {
             this.setState({
                 emailError: "Invalid email format: @..."
             });
-            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
+            if(document.querySelector('.input-login-modal1') !== null){
+            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';}
             return false;
         }
         this.setState({
             emailError: undefined
         })
+        if(document.querySelector('.input-login-modal')!== null){
         document.querySelector('.input-login-modal').style.cssText = 'border: 3px solid #2F2D4A;';
+        }
         return true;
 
     }
@@ -207,14 +211,17 @@ class LoginModal extends Component {
             this.setState({
                 passwordError: "This field is required"
             })
-
+            if(document.querySelector('.input-login-modal1') !== null){
             document.querySelector('.input-login-modal1').style.cssText = 'border: 2px solid #cc3300;';
+            }
             return false;
         }
         this.setState({
             passwordError: undefined
         })
+        if(document.querySelector('.input-login-modal1')){
         document.querySelector('.input-login-modal1').style.cssText = 'border: 3px solid #2F2D4A;';
+        }
         return true;
     }
 }
