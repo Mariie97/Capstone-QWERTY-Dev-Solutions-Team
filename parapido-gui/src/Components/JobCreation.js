@@ -73,8 +73,8 @@ export class JobCreation extends Component {
         const validate3 = this.validateDescription();
         const validate4 = this.validateZipcode();
         const validate5 = this.validatePrice();
-        const validate6 = this.state.change_city.current?.validateItem();
-        const validate7 = this.state.change_category.current?.validateItem();
+        const validate6 = this.state.change_city.current?.validate();
+        const validate7 = this.state.change_category.current?.validate();
         
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
