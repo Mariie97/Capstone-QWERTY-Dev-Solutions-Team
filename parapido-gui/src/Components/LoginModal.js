@@ -182,8 +182,9 @@ class LoginModal extends Component {
             this.setState({
                 emailError: "This field is required"
             })
-         
+            if(borderchanger!== null){
             borderchanger.style.cssText = 'border: 2px solid #cc3300;';
+            }
             
             return false;
         }
@@ -191,14 +192,15 @@ class LoginModal extends Component {
             this.setState({
                 emailError: "Invalid email format: @..."
             });
-          
+            if(borderchanger !== null){
             borderchanger.style.cssText = 'border: 2px solid #cc3300;';
+            }
             return false;
         }
         this.setState({
             emailError: undefined
         })
-      
+        
         borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
  
         return true;
@@ -212,6 +214,7 @@ class LoginModal extends Component {
                 passwordError: "This field is required"
             })
            
+           
             borderchanger.style.cssText = 'border: 2px solid #cc3300;';
      
             return false;
@@ -220,7 +223,9 @@ class LoginModal extends Component {
             passwordError: undefined
         })
        
+        if(borderchanger !== null){
         borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
+        }
         
         return true;
     }
