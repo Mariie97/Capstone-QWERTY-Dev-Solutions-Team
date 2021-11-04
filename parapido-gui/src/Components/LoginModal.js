@@ -54,7 +54,6 @@ class LoginModal extends Component {
             })
         }).then(response => {
                 if(response.status === 200) {
-                    localStorage.setItem('is_auth', 'true');
                     response.json().then(data => {
                         localStorage.setItem('user_id', data.user_id);
                         localStorage.setItem('type', data.type);
@@ -231,7 +230,6 @@ const continue_arrow_image_resize = {
     width: 100,
     position: "fixed",
     bottom: 25,
-    left: 300,
 };
 
 const report = {

@@ -216,8 +216,8 @@ class UserRegistrationPage extends Component {
             answerOneError: undefined,
             answerTwo: '',
             answerTwoError: undefined,
-            accountType: '1',
-            accountTypeError: '',
+            accountType: '',
+            accountTypeError: undefined,
             registerSuccess: false,
             questionError: undefined,
         };
@@ -243,7 +243,10 @@ class UserRegistrationPage extends Component {
     change = e =>{
         this.setState({
             [e.target.name]: e.target.value
-        })
+        }, () => {
+            if (e.target.name === 'accountType') {
+                this.validateAccountType();
+            }});
     };
 
     validateFetch = () => {
@@ -275,24 +278,25 @@ class UserRegistrationPage extends Component {
     }
 
     onSubmit() {
-
-        const val1= this.validateFirstName();
-        const val2= this.validateLastName();
-        const val3= this.validateEmail();
-        const val4= this.validatePassword();
-        const val5= this.validatePasswordConfirm();
-        const val6= this.validateAnswerOne();
-        const val7= this.validateAnswerTwo();
-        const val8= this.validateAccountType();
-        const val9= this.validateQuestions();
+        const val1 = this.validateFirstName();
+        const val2 = this.validateLastName();
+        const val3 = this.validateEmail();
+        const val4 = this.validatePassword();
+        const val5 = this.validatePasswordConfirm();
+        const val6 = this.validateAnswerOne();
+        const val7 = this.validateAnswerTwo();
+        const val8 = this.validateAccountType();
+        const val9 = this.validateQuestions();
         if(!val1 || !val2 || !val3 || !val4 || !val5 || !val6 || !val7 || !val8 || !val9)
             return;
 
         this.validateFetch()
     };
 
-    validateFirstName(event){
-        if (this.state.firstName.length===0) {
+    validateFirstName(){
+        const { firstName } = this.state;
+
+        if (firstName.length===0) {
             this.setState({firstNameError: "This field is required"});
             return false;
         }
@@ -300,8 +304,9 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validateLastName(event){
-        if (this.state.lastName.length===0) {
+    validateLastName(){
+        const { lastName } = this.state;
+        if (lastName.length===0) {
             this.setState({ lastNameError: "This field is required" });
             return false;
         }
@@ -309,17 +314,21 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validateEmail(event){
-        const { email } = this.state;
+    validateEmail(){
+        const { email, accountType } = this.state;
 
-        if (email.length===0) {
+        if (email.length=== '') {
             this.setState({emailError: 'This field is required' });
             return false;
         }
 
         const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-        if (!pattern.test(this.state.email)) {
+        if (!pattern.test(email)) {
             this.setState({emailError: "The email provided is not valid"});
+            return false;
+        }
+
+        if (accountType !== '' && !this.validateAccountType()) {
             return false;
         }
 
@@ -328,7 +337,7 @@ class UserRegistrationPage extends Component {
 
     }
 
-    validatePassword(event) {
+    validatePassword() {
         const { password } = this.state;
         if (password.length===0) {
             this.setState({passwordError: 'This field is required'});
@@ -344,7 +353,7 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validatePasswordConfirm(event) {
+    validatePasswordConfirm() {
         const { confirmPassword, password } = this.state;
         if (confirmPassword.length===0) {
             this.setState({confirmPasswordError: 'This field is required'});
@@ -360,8 +369,10 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validateAnswerOne(event) {
-        if (this.state.answerOne.length===0) {
+    validateAnswerOne() {
+        const { answerOne } = this.state;
+
+        if (answerOne.length===0) {
             this.setState({ answerOneError: "This field is required" });
             return false;
         }
@@ -369,8 +380,10 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validateAnswerTwo(event) {
-        if (this.state.answerTwo.length===0) {
+    validateAnswerTwo() {
+        const { answerTwo } = this.state;
+
+        if (answerTwo.length===0) {
             this.setState({ answerTwoError: "This field is required" });
             return false;
         }
@@ -378,23 +391,21 @@ class UserRegistrationPage extends Component {
         return true;
     }
 
-    validateAccountType(event) {
-        const { email, accountType } = this.state;
-        const typeSelected = event!==undefined ? event.target.value : accountType;
+    validateAccountType() {
+        const { email, accountType} = this.state;
         const uprPattern = /^.+@upr\.edu$/;
 
-        if (typeSelected==='1' && !uprPattern.test(email)) {
-            this.setState({
-                accountType: typeSelected,
-                emailError: 'A upr email is needed to register as student'
-            });
+        if (accountType==='') {
+            this.setState({accountTypeError: 'This field is required'});
             return false;
         }
 
-        this.setState({
-            accountType: typeSelected,
-            emailError: undefined
-        });
+        if (accountType === "1" && (email !== '' && !uprPattern.test(email))) {
+            this.setState({emailError: 'A upr email is needed to register as student'});
+            return false;
+        }
+
+        this.setState({accountTypeError: undefined});
         return true;
     }
 
@@ -567,14 +578,13 @@ class UserRegistrationPage extends Component {
                         <FormControl
                             component="fieldset"
                             style={accountTypeStyle}
-                            error={this.state.accountTypeError}
-                            helperText={this.state.accountTypeError}
+                            error={this.state.accountTypeError!==undefined}
                         >
                             <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
                             <RadioGroup row
                                         aria-label="Account Type"
                                         name="accountType"
-                                        onChange={this.validateAccountType}
+                                        onChange={this.change}
                                         value={this.state.accountType}
                             >
                                 <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />

@@ -4,6 +4,7 @@ import "../Layouts/NavBar.css";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
+import {current_user} from "../Utilities";
 
 class NavBar extends Component {
      current_user = {
@@ -61,26 +62,33 @@ class NavBar extends Component {
     }
 
     render() {
-        const { logout_success } = this.state;
-        const { menu_open } = this.state;
+        const { logout_success, menu_open } = this.state;
+        const isAuth  = this.props.cookies.get('csrf_access_token') !== undefined;
+
         return (
             <nav>
                 {logout_success && <Redirect to='/'/>}
                 <div className="nav">
-                    <img className="logostyle" src={logo} alt="Logo" />
-                    <ul className="nav-links">
-                        <li>
-                            <Link to="/jobdashboard">Job Dashboard</Link>
-                        </li>
-                        <li>
-                            <Link to={"/profile/" + this.current_user.id}>Profile</Link>
-                        </li>
-                        <li>
-                            <div>
-                                <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
-                            </div>
-                        </li>
-                    </ul>
+                    <Link to={'/jobdashboard'}>
+                        <img className="logostyle" src={logo} alt="Logo" />
+                    </Link>
+                    {isAuth &&
+                    <React.Fragment>
+                        <ul className="nav-links">
+                            <li>
+                                <Link to="/jobdashboard">Job Dashboard</Link>
+                            </li>
+                            <li>
+                                <Link to={"/profile/" + this.current_user.id}>Profile</Link>
+                            </li>
+                            <li>
+                                <div>
+                                    <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </React.Fragment>
+                    }
                     <div className="menu-open" onClick={this.navSlide}>
                         {menu_open ? <CancelIcon /> : <MenuOpenIcon/>}
                     </div>

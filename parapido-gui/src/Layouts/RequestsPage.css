@@ -1,0 +1,41 @@
+.student-requests-flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    flex-basis: 25em;
+    justify-content: left;
+    margin: 2% 10%;
+}
+
+.student-request-cards {
+    margin: 30px;
+    border-radius: 5px;
+    height: 355px;
+}
+
+.student-request-cards:hover {
+    cursor: pointer;
+    border: 1px solid black;
+    box-shadow: 2px 1px 15px rgb(157, 150, 150);
+}
+
+
+.student-request-card-content {
+    text-decoration: none;
+    text-align: center;
+}
+
+.request-image-container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 12px;
+    padding-top: 12px;
+}
+
+.request-page-subheader {
+    font-family: "Jost";
+    color: white;
+}
+
+.request-card-actions-container {
+    border-top: 1px solid #dbd6d685;
+}

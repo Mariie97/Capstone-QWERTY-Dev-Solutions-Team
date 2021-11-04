@@ -163,20 +163,20 @@ class ProfilePage extends Component {
                             {!edit ?
                                 <table className='table-body-content'>
                                     <tr className='row-table-body'>
-                                        <th className='column-table-body col1'>Email:</th>
-                                        <th className='column-table-body col2'>{email} </th>
+                                        <td className='column-table-body col1'>Email:</td>
+                                        <td className='column-table-body col2'>{email} </td>
                                     </tr>
                                     <tr className='row-table-body'>
-                                        <th className='column-table-body col1'>Address:</th>
-                                        <th className='column-table-body col2'>
+                                        <td className='column-table-body col1'>Address:</td>
+                                        <td className='column-table-body col2'>
                                             {street !== null &&
                                                 `${street} ${cities[city - 1]} PR, ${zipcode}`
                                             }
-                                        </th>
+                                        </td>
                                     </tr>
                                     <tr className='row-table-body'>
-                                        <th className='column-table-body col1'>About:</th>
-                                        <th className='column-table-body col2'>{about}</th>
+                                        <td className='column-table-body col1'>About:</td>
+                                        <td className='column-table-body col2'>{about}</td>
                                     </tr>
                                 </table>
                                 :
