@@ -7,6 +7,7 @@ import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 // import continueArrow from '../Static/Images/continueArrow.png';
 import virtualContract from '../Static/Images/Virtual_Contract.png';
+import {accountType, current_user} from "../Utilities";
 
 const style = {
     position: 'absolute',
@@ -28,7 +29,8 @@ class AgreementModal extends Component {
         super(props);
   
         this.state = {
-          open: false
+          open: false,
+          checked: false
         }
   
         this.toggleModal= this.toggleModal.bind(this);
@@ -44,15 +46,24 @@ class AgreementModal extends Component {
 
       isChecked(event){
         	console.log(event.target.checked)
+            this.setState({
+                checked: event.target.checked
+              })
       }
 
       handleOnClick(){
-          console.log("hi")
+          if(current_user.type === accountType.client){
+
+          }
+          else if(current_user.type === accountType.student){
+
+          }
       }
 
     render() {
-        const {open} = this.state;
+        const {open, checked} = this.state;
 
+        console.log(checked, "inside render")
 
         return (
             <StyledEngineProvider injectFirst>
@@ -76,7 +87,7 @@ class AgreementModal extends Component {
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
 
-                                    <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button">
+                                    <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
                                         <div className="text-button-login-modal">
                                             Agree & Continue
                                         </div>
