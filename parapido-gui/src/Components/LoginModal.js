@@ -200,9 +200,9 @@ class LoginModal extends Component {
         this.setState({
             emailError: undefined
         })
-        
+       
         borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
- 
+
         return true;
 
     }
@@ -214,18 +214,16 @@ class LoginModal extends Component {
                 passwordError: "This field is required"
             })
            
-           
-            borderchanger.style.cssText = 'border: 2px solid #cc3300;';
-     
+            if(borderchanger !== null){
+            borderchanger.style.cssText = 'border: 2px solid #cc3300;';}
+        
             return false;
         }
         this.setState({
             passwordError: undefined
         })
-       
-        if(borderchanger !== null){
         borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
-        }
+       
         
         return true;
     }
