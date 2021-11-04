@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
 import '../Layouts/JobDetails.css'
 import {Link, Redirect} from "react-router-dom";
-import {
-    accountType,
-    cities,
-    current_user,
-    getJobStatus,
-    jobStatus,
-    setJobStatus, verifyUserAuth,
-    weekDays
-} from "../Utilities";
+import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
 
 
 class JobDetailsPage extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props) {
         super(props);
@@ -112,7 +108,7 @@ class JobDetailsPage extends Component {
             },
             body: JSON.stringify({
                 job_id: job_id,
-                student_id: current_user.id,
+                student_id: this.currentUser.id,
             })
         }).then(response => {
             if (response.status === 200) {
@@ -134,7 +130,7 @@ class JobDetailsPage extends Component {
             },
             body: JSON.stringify({
                 job_id: job_id,
-                student_id: current_user.id,
+                student_id: this.currentUser.id,
             })
         }).then(response => {
             if (response.status === 200) {
@@ -161,27 +157,27 @@ class JobDetailsPage extends Component {
         const token = this.props.cookies.get('csrf_access_token');
 
         const showCancelRequestButton =
-            job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
+            job.users_requested.filter(request  => request[0]===this.currentUser.id && request[1]===1).length > 0 &&
             job.status===jobStatus.posted;
 
-        const showRequestButton = current_user.type===accountType.student &&
-            job.users_requested.filter(request  => request[0]===current_user.id).length===0 &&
+        const showRequestButton = this.currentUser.type===accountType.student &&
+            job.users_requested.filter(request  => request[0]===this.currentUser.id).length===0 &&
             job.status===jobStatus.posted;
 
-        const showCancelButton = (current_user.id===job.owner_id && (
+        const showCancelButton = (this.currentUser.id===job.owner_id && (
             job.status===jobStatus.posted || job.status===jobStatus.in_process)) || (
-            current_user.id===job.student_id && job.status===jobStatus.in_process
+            this.currentUser.id===job.student_id && job.status===jobStatus.in_process
         );
 
-        const showDeleteButton = current_user.type===accountType.admin && job.status!==jobStatus.deleted;
+        const showDeleteButton = this.currentUser.type===accountType.admin && job.status!==jobStatus.deleted;
 
         const showContractButton = (job.status === jobStatus.in_process || job.status === jobStatus.completed) &&
-            (current_user.id===job.owner_id || current_user.id===job.student_id)
+            (this.currentUser.id===job.owner_id || this.currentUser.id===job.student_id)
 
         const showChatButton = (job.status === jobStatus.in_process && (
-            current_user.id === job.owner_id || current_user.id === job.student_id));
+            this.currentUser.id === job.owner_id || this.currentUser.id === job.student_id));
 
-        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === current_user.id;
+        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === this.currentUser.id;
 
         return (
             <div className="Dashboard">
@@ -204,7 +200,7 @@ class JobDetailsPage extends Component {
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
-                                        const status = current_user.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
+                                        const status = this.currentUser.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
                                         const success = setJobStatus(token, job_id, status);
                                         if(success) {
                                             //TODO: Redirect: student_request or job_posted depending on user account

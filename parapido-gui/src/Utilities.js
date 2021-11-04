@@ -108,11 +108,6 @@ export const cities = [
     'Yauco',
 ];
 
-export const current_user = {
-    id: parseInt(localStorage.getItem('user_id')),
-    type: parseInt(localStorage.getItem('type'))
-};
-
 export const jobStatus = {
     posted: 1,
     in_process: 2,

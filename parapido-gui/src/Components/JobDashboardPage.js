@@ -1,15 +1,18 @@
 import {Component, createRef} from 'react';
-import {Redirect, Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
-import {verifyUserAuth} from "../Utilities";
+import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown.js";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
 import {Box, CircularProgress} from "@material-ui/core";
-import {cities, categories, prices, current_user, accountType} from "../Utilities";
 
 class JobDashboardPage extends Component {
+    currentUser = {
+    id: parseInt(localStorage.getItem('user_id')),
+    type: parseInt(localStorage.getItem('type'))
+};
 
     constructor(props) {
         super(props);
@@ -162,10 +165,8 @@ class JobDashboardPage extends Component {
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;        
-        console.log(this.state.jobs)
-        console.log(current_user.type)
-        const showJobCreationButton = current_user.type === accountType.client;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;
+        const showJobCreationButton = this.currentUser.type === accountType.client;
         const cardArray = jobs.map( 
             job => <JobDashboardCard 
             job_id = {job.job_id}

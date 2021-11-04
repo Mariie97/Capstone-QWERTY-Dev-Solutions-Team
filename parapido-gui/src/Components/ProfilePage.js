@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
-import {accountType, cities, current_user, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
+import {accountType, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -9,6 +9,10 @@ import ProfileCard from './ProfileCard';
 import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props){
         super(props);
@@ -114,7 +118,7 @@ class ProfilePage extends Component {
         } = this.state;
 
         const {user_id} = this.props;
-        const showButtons = parseInt(user_id) === current_user.id || current_user.type===accountType.admin;
+        const showButtons = parseInt(user_id) === this.currentUser.id || this.currentUser.type===accountType.admin;
 
         return (
             <React.Fragment>
@@ -133,14 +137,14 @@ class ProfilePage extends Component {
                                 {user.type !== accountType.admin &&
                                 <Link to={"/jobdashboard"}>
                                     <button className="custom-buttons" onClick={this.toggleEdit}>
-                                        {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
+                                        {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>
                                 </Link>
                                 }
                                 <button className="custom-buttons" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
-                                {current_user.type === accountType.admin &&
+                                {this.currentUser.type === accountType.admin &&
                                 <button className="custom-buttons delete-button" onClick={this.onClickDelete}>
                                     Delete
                                 </button>

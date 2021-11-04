@@ -4,12 +4,11 @@ import "../Layouts/NavBar.css";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {current_user} from "../Utilities";
 
 class NavBar extends Component {
-     current_user = {
-        id: localStorage.getItem('user_id'),
-        type: localStorage.getItem('type'),
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
     };
 
     constructor(props) {
@@ -79,7 +78,7 @@ class NavBar extends Component {
                                 <Link to="/jobdashboard">Job Dashboard</Link>
                             </li>
                             <li>
-                                <Link to={"/profile/" + this.current_user.id}>Profile</Link>
+                                <Link to={"/profile/" + this.currentUser.id}>Profile</Link>
                             </li>
                             <li>
                                 <div>
