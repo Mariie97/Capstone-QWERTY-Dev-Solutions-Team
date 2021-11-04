@@ -83,8 +83,8 @@ export class JobCreation extends Component {
         const { title, street, description, zipcode, price, change_city,
             change_category, availableDays_chips } = this.state
            
-        const city = change_city?.current.state.city
-        const category = change_category?.current.state.category
+        const city = change_city?.current.state.item
+        const category = change_category?.current.state.item
         const chips = availableDays_chips?.current.state.chipData
 
         const sunday    = chips.some(sun => sun.key === 0);
