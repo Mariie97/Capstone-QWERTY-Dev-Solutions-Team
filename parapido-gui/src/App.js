@@ -109,7 +109,7 @@ class App extends React.Component {
                     />
                     <Route
                         exact
-                        path='/administration_site'
+                        path='/admin/site'
                         render={() => (
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
@@ -119,7 +119,7 @@ class App extends React.Component {
                     />
                      <Route
                         exact
-                        path='/administration_login'
+                        path='/admin'
                         render={() => (
                             <React.Fragment>
                                 <LoginModal

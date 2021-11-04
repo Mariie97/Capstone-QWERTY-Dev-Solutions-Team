@@ -7,7 +7,6 @@ import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import continueArrow from '../Static/Images/continueArrow.png';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import {accountType} from "../Utilities";
 
 
 const style = {
@@ -46,47 +45,42 @@ class LoginModal extends Component {
         this.validatePassword = this.validatePassword.bind(this);
     }
 
-    handleOnClick() {
+
+    async handleOnClick() {
         const {email, password} = this.state;
         const { adminLogin } = this.props;
+        // const adminParam = adminLogin === undefined ? {} : {admin: 'true'};
+        // const url = buildURL('/login', adminParam)
 
-        fetch('/login',{
+        const adminParam = adminLogin === undefined ? '' : '?admin=true';
+        await fetch(`/login${adminParam}`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
+            // headers: {'Content-Type': 'text/plain'},
             body: JSON.stringify({
                 email: email,
                 password: password
             })
         }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-                        if ((adminLogin === undefined && data.type !== accountType.admin) ||
-                            (adminLogin!== undefined && data.type === accountType.admin)) {
-                            localStorage.setItem('user_id', data.user_id);
-                            localStorage.setItem('type', data.type);
-                            this.setState({
-                                login_success: true,
-                                login_failed: false
-                            });
-                        }
-                        else {
-                            //Todo Handle that the user is already login needs to do a logout or send to query param to auth a admin
-                            this.setState({
-                                loginError: adminLogin!==undefined ?
-                                    'This is not an admin account\n' : "Use administration login page: ",
-                                redirectAdminLogin: adminLogin===undefined,
-                            })
-                        }
-                    })}
-                else {
-                    if(response.status === 401) {
-                        this.setState({loginError: 'Yikes!!! 😬 Incorrect Email or Password.\n'})
+            if (response.status === 200) {
+                response.json().then(data => {
+                        localStorage.setItem('user_id', data.user_id);
+                        localStorage.setItem('type', data.type);
+                        this.setState({
+                            login_success: true,
+                            login_failed: false
+                        });
                     }
-                    else{
-                        this.setState({loginError: 'Can not login at this moment. Please try again later!\n'})}
-                }
-            }
-        )
+                )
+            } else {
+                this.setState({
+                    loginError: response.status === 401 ?
+                        'Yikes!!! 😬 Incorrect Email or Password.' :
+                        'Can not login at this moment. Please try again later!',
+                    login_success: false,
+                    login_failed: true
+                })
+            }})
     }
 
     handleChange(event){
@@ -97,105 +91,101 @@ class LoginModal extends Component {
     render() {
         const { isOpen, toggle, adminLogin } = this.props;
         const { login_success, login_failed, loginError, emailError, passwordError, redirectAdminLogin} = this.state;
-
-        let redirect = undefined;
-        if (login_success) {
-            if (adminLogin !== undefined) {redirect = '/administration_site';}
-            else {redirect = '/jobdashboard';}
-        }
+        const redirect = adminLogin === undefined ?  '/jobdashboard' : '/admin/site' ;
 
         return (
             <StyledEngineProvider injectFirst>
-                {redirect !== undefined && <Redirect to={redirect}/>}
-                <div>
-                    <Modal
-                        open={isOpen}
-                        onClose={toggle}
-                        style={{textAlign:"center"}}
-                    >
-                        <Box sx={style}>
-                            {loginError !==undefined &&
-                            <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
-                                {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
-                            </Alert>
+                {login_success && <Redirect to={redirect}/>}
+                <Modal
+                    open={isOpen}
+                    onClose={toggle}
+                    style={{textAlign:"center"}}
+                >
+                    <Box sx={style}>
+                        {loginError !==undefined &&
+                        <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                            {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
+                        </Alert>
+                        }
+                        <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                        <div className="first-point-login-modal"> Hey! Good to see you again!</div>
+                        <div className="second-point-login-modal">
+                            <div className="first-text-login-modal">
+                                Log in to {adminLogin===undefined ? 'have' : 'administrate with' }
+                            </div>
+                            <div className="second-text-login-modal"> FUN.</div>
+                        </div>
+                        <div className="body-container-login-modal">
+                            <label className="third-point-login-modal"> Enter E-mail: </label>
+                            {login_failed ?
+                                <input
+                                    className="input-login-modal-error"
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateEmail}
+                                />:
+                                <input
+                                    className="input-login-modal"
+                                    type="text"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateEmail}
+                                />
                             }
-                            <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
-                            <div className="first-point-login-modal"> Hey! Good to see you again!</div>
-                            <div className="second-point-login-modal">
-                                <div className="first-text-login-modal">
-                                    Log in to {adminLogin===undefined ? 'have' : 'administrate with' }
-                                </div>
-                                <div className="second-text-login-modal"> FUN.</div>
+                            {emailError !== undefined &&
+                            <div className="required-field-login-modal">
+                                <ReportProblemIcon style={report} /> {emailError}
                             </div>
-                            <div className="body-container-login-modal">
-                                <label className="third-point-login-modal"> Enter E-mail: </label>
-                                {login_failed ?
-                                    <input
-                                        className="input-login-modal-error"
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateEmail}
-                                    />:
-                                    <input
-                                        className="input-login-modal"
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateEmail}
-                                    />
-                                }
-                                {emailError !== undefined &&
-                                <div className="required-field-login-modal">
-                                    <ReportProblemIcon style={report} /> {emailError}
-                                </div>
-                                }
-                                <label className="third-point-login-modal"> Enter Password: </label>
-                                {login_failed ?
-                                    <input
-                                        className="input-login-modal-error"
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validatePassword}
-                                    />:
-                                    <input
-                                        className="input-login-modal1"
-                                        type="password"
-                                        id="password"
-                                        name="password"
-                                        placeholder="Password"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validatePassword}
-                                    />}
+                            }
+                            <label className="third-point-login-modal"> Enter Password: </label>
+                            {login_failed ?
+                                <input
+                                    className="input-login-modal-error"
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validatePassword}
+                                />:
+                                <input
+                                    className="input-login-modal1"
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validatePassword}
+                                />}
 
-                                {passwordError !== undefined &&
-                                <div className="required-field-login-modal">
-                                    <ReportProblemIcon style={report} /> {passwordError}
-                                </div>
-                                }
-
-                                <button onClick={this.handleOnClick} className="login-modal-continue-button">
-                                    <div className="text-button-login-modal">
-                                        CONTINUE
-                                    </div>
-                                    <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
-                                </button>
+                            {passwordError !== undefined &&
+                            <div className="required-field-login-modal">
+                                <ReportProblemIcon style={report} /> {passwordError}
                             </div>
-                            <hr className="line-login-modal" />
-                            <ul className="footer-flex-login-modal">
-                                <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
-                                <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
-                            </ul>
-                        </Box>
-                    </Modal>
-                </div>
+                            }
+
+                            <button onClick={this.handleOnClick} className="login-modal-continue-button">
+                                <div className="text-button-login-modal">
+                                    CONTINUE
+                                </div>
+                                <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                            </button>
+                        </div>
+                        <hr className="line-login-modal" />
+                        <ul className="footer-flex-login-modal">
+                            {adminLogin === undefined &&
+                            <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
+                            }
+
+                            <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
+                        </ul>
+                    </Box>
+                </Modal>
             </StyledEngineProvider>
         );
     }
