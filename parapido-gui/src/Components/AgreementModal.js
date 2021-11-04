@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import "../Layouts/AgreementModal.css"
 // import Alert from '@material-ui/lab/Alert';
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
@@ -30,7 +30,9 @@ class AgreementModal extends Component {
   
         this.state = {
           open: false,
-          checked: false
+          checked: false,
+          isclient: false,
+          isstudent: false,
         }
   
         this.toggleModal= this.toggleModal.bind(this);
@@ -53,15 +55,22 @@ class AgreementModal extends Component {
 
       handleOnClick(){
           if(current_user.type === accountType.client){
-
+            console.log("client");
+            this.setState({
+                isclient: true
+              })
+          
           }
           else if(current_user.type === accountType.student){
-
+                console.log("client");
+                this.setState({
+                isstudent: true
+                })    
           }
       }
 
     render() {
-        const {open, checked} = this.state;
+        const {open, checked, isclient, isstudent} = this.state;
 
         console.log(checked, "inside render")
 
@@ -86,7 +95,8 @@ class AgreementModal extends Component {
                                     <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
-
+                                    {isstudent && <Redirect to='/listings?status=1' />}
+                                    {isclient && <Redirect to='/listings?status=2' />}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
                                         <div className="text-button-login-modal">
                                             Agree & Continue
