@@ -49,3 +49,12 @@ justify-content: flex-end;
     flex-direction: column;
     align-items: center;
 }
+
+/* checkbox */
+
+#agree{
+    margin-right: 1vh;
+    height: 2vh;
+    width: 2vh;
+    cursor: pointer;
+}
