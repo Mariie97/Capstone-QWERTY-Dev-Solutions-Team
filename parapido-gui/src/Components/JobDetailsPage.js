@@ -102,6 +102,7 @@ class JobDetailsPage extends Component {
         const { job_id } = this.props;
         fetch('/request_job', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -124,6 +125,7 @@ class JobDetailsPage extends Component {
         const { job_id } = this.props;
         fetch('/cancel_request', {
             method: 'PUT',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')

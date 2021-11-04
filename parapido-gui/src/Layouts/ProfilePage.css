@@ -73,7 +73,7 @@ h2.edit-subheaders {
 	justify-content: center;
 	display: flex;
 	align-items: center;
-	height: 100vh;
+	height: 100%;
 }
 
 .label-about-profile-page{
