@@ -218,7 +218,6 @@ export class JobCreation extends Component {
 
                         <div className="mini-flex-box-job-creation">
                             <ItemsDropdown
-                                initial_value={''}
                                 ref={change_city}
                                 validate={true}
                                 itemsList={cities}
@@ -275,7 +274,6 @@ export class JobCreation extends Component {
                     <ItemsDropdown
                         required
                         label='Category'
-                        initial_value={''}
                         ref={change_category}
                         validate={true}
                         itemsList={categories}

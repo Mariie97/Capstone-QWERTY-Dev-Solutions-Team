@@ -13,9 +13,20 @@ export function verifyUserAuth(token) {
     })
 }
 
+export function buildURL(path, filters={}) {
+    let url = new URL(`${process.env.REACT_APP_API_URL}${path}`);
+
+    if (Object.keys(filters).length>0) {
+        url.search = new URLSearchParams(filters).toString();
+    }
+
+    return url.toString();
+}
+
 export function setJobStatus(token, job_id, status) {
     return fetch(`/job_status/${job_id}`, {
         method: 'PUT',
+        credentials: 'same-origin',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': token
@@ -167,3 +178,9 @@ export const categories = [
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;
+
+export const mapAccount = {
+    1: "Student",
+    2: "Client",
+    3: "Admin"
+};

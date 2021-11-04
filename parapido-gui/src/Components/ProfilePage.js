@@ -259,8 +259,8 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item5">
-                                            <label className="label-job-creation">City</label>
                                             <ItemsDropdown
+                                                label='City'
                                                 initial_value={city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
