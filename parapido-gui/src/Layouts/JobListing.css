@@ -12,11 +12,19 @@
     height: 60px;
 }
 
+.titleLink {
+  color: aliceblue;
+    text-underline: aliceblue;
+}
+.titleLink:hover {
+
+}
+
 #listing-price {
     position: absolute;
     left: 250px;
     color: aliceblue;
-    width: 130px;
+    width: 200px;
     text-align: center;
     padding: 17px;
     vertical-align: middle;
@@ -28,7 +36,7 @@
     position: absolute;
     left: 620px;
     color: aliceblue;
-    width: 150px;
+    width: 200px;
     text-align: center;
     padding: 17px;
     vertical-align: middle;
@@ -62,7 +70,7 @@
     width: 200px;
     height: 90px;
     left: 1382px;
-    top: 115px;
+    top: 300px;
     font-weight: bold;
     font-size: 18px;
     text-align: center;
@@ -87,9 +95,15 @@
     height: 60px;
 }
 
-.dropdown-style {
+.month-dropdown-style {
     position: absolute;
     left: 1382px;
+    top: 115px;
+}
+
+.year-dropdown-style {
+    position: absolute;
+    left: 1200px;
     top: 115px;
 }
 

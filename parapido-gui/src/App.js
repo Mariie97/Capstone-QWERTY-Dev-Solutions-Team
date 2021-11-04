@@ -62,14 +62,18 @@ class App extends React.Component {
                         <Route
                             exact
                             path='/listings'
-                            render={() => (
+                        render={(props) => (
                                 <React.Fragment>
                                     <NavBar cookies= {this.props.cookies} />
-                                    <JobListingPage cookies = {this.props.cookies}/>
+                                    <JobListingPage
+                                        cookies = {this.props.cookies}
+                                        queryParams={props.location.search}
+                                    />
                                 </React.Fragment>
                             )}
                         />
 
+                    <Route
                         exact
                         path='/signup'
                         render={() => (
@@ -79,6 +83,7 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+
                     <Route
                         exact
                         path='/chat'
