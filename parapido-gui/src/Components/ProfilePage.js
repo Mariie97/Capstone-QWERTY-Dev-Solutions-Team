@@ -90,7 +90,6 @@ class ProfilePage extends Component {
                         });
                     }
                 ).catch((e) => {
-                    console.log("Network error: " + e);
                     throw(e);
                 });
             }
@@ -420,7 +419,6 @@ class ProfilePage extends Component {
     validateZipcode(event){
         const { change_street, change_zipcode, streetError} = this.state;
 
-        console.log(change_zipcode);
         if (change_zipcode.length===0 && change_street.length>0) {
             this.setState({zipcodeError: 'This field is required'})
             return false;

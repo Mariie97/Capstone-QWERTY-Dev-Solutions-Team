@@ -120,13 +120,11 @@ export class JobCreation extends Component {
             })
         }).then(response => {
                 if(response.status === 201) {                  
-                    console.log("successful")
                     this.setState({
                         creationSuccessful: true
                     })
                 }
                 else{
-                    console.log("failed to create job")
                     this.setState({
                         serverProcessedRequest: false
                     })
