@@ -62,7 +62,7 @@ class AgreementModal extends Component {
           
           }
           else if(current_user.type === accountType.student){
-                console.log("client");
+                console.log("student");
                 this.setState({
                 isstudent: true
                 })    
@@ -92,7 +92,9 @@ class AgreementModal extends Component {
                               
                                 <div className="body-container-agreement-modal">
                                     <p className="long-text-agreement-modal"> 
+                                    <label class="checkbox">
                                     <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
+                                    </label>
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to='/listings?status=1' />}

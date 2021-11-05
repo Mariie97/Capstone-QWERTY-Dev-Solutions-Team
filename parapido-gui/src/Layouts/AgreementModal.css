@@ -54,7 +54,48 @@ justify-content: flex-end;
 
 #agree{
     margin-right: 1vh;
-    height: 2vh;
-    width: 2vh;
+    height: 2.5vh;
+    width: 2.5vh;
     cursor: pointer;
 }
+
+.checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.checkbox > input {
+    height: 25px;
+    width: 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 1px solid #34495E;
+    border-radius: 4px;
+    outline: none;
+    transition-duration: 0.3s;
+    background-color: #41B883;
+    cursor: pointer;
+  }
+
+.checkbox > input:checked {
+    border: 1px solid #34495E;
+    background-color: #41B883;
+}
+
+.checkbox > input:checked::before {
+    content: '\2713';
+    display: block;
+    color: white;
+    position: absolute;
+    left: 0.5vh;
+    
+}
+
+.checkbox > input:active {
+    border: 2px solid #34495E;
+}
+
