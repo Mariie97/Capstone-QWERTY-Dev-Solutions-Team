@@ -126,7 +126,7 @@ class App extends React.Component {
                                     isOpen={true}
                                     toggle={() => {}}
                                     adminLogin={true}
-                                />}
+                                />
                             </React.Fragment>
                         )}
                     />

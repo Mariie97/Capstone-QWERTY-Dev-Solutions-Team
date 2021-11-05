@@ -111,9 +111,9 @@ class LoginModal extends Component {
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                         <div className="second-point-login-modal">
                             <div className="first-text-login-modal">
-                                Log in to {adminLogin===undefined ? 'have' : 'administrate with' }
+                                Log in to {adminLogin===undefined ? 'have' : 'administrate' }
                             </div>
-                            <div className="second-text-login-modal"> FUN.</div>
+                            <div className="second-text-login-modal">  {adminLogin===undefined ? 'FUN.' : '' }</div>
                         </div>
                         <div className="body-container-login-modal">
                             <label className="third-point-login-modal"> Enter E-mail: </label>
@@ -245,7 +245,6 @@ const continue_arrow_image_resize = {
     width: 100,
     position: "fixed",
     bottom: 25,
-    left: 300,
 };
 
 const report = {
