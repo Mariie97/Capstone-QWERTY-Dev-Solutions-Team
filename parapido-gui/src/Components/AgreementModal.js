@@ -100,7 +100,7 @@ class AgreementModal extends Component {
                                     {isstudent && <Redirect to='/listings?status=1' />}
                                     {isclient && <Redirect to='/listings?status=2' />}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
-                                        <div className="text-button-login-modal">
+                                        <div className="text-button-agreement-modal">
                                             Agree & Continue
                                         </div>
                                         {/* <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" /> */}

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
 /* controlling the positioning of logo and the next starting div */
 
 .logo-flex-Agreement{
@@ -34,6 +35,28 @@ justify-content: flex-end;
 .agreement-modal-continue-button:active {
 	background-color: #2e856e;
 }
+
+.agreement-modal-continue-button:disabled{
+    background-color: #cccccc;
+    cursor:not-allowed;
+    border: 2px solid #666666;
+}
+
+.text-button-agreement-modal{
+    float: left;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    font-family: "Jost";
+    font-weight: bold;
+    font-size:12px;
+    color: #2F2D4A;
+}
+
+.agreement-modal-continue-button:disabled .text-button-agreement-modal{
+    color:#666666;
+}
+
 
 .long-text-agreement-modal{
     font-family: "Cormorant Garamond";
