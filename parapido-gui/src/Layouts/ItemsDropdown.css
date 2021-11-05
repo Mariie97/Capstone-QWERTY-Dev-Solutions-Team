@@ -57,6 +57,25 @@
 	line-height: 2;
 }
 
+.item-dropdown {
+	min-width: 150px;
+	min-height: 44px;
+}
+
+.MuiInputBase-root.MuiInput-root.item-dropdown.dropdown-error {
+    border-color: red;
+}
+
+.required-dropdown {
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	bottom: 8px;
+	left: -3px;
+	margin-top: 8px;
+	width: 150%;
+}
+
 .black-label-text{
 	color: black;
 }

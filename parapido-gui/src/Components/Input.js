@@ -15,7 +15,7 @@ class Input extends Component {
                 <br />
                 {multiline ?
                     <TextareaAutosize
-                        className='custom-input-multiline'
+                        className={errorMsg !== undefined ? 'custom-input-multiline input-error' : 'custom-input-multiline'}
                         {...this.props}
                     />
                     :

@@ -46,117 +46,78 @@
 /* all labels have the same style */
 
 .label-job-creation{
-	font-family: "Cormorant Garamond";
+	font-family: "Jost";
 	font-style: italic;
 	font-weight: 400;
-	font-size: 16px;
+	font-size: 18px;
 	color: white;
 	letter-spacing: 1px;
+	line-height: 2;
 }
 
 /* title input */
-
-.input-1-job-creation{
-	font-family: "Jost";
+.MuiFormControl-root.MuiTextField-root.input-title-job-creation {
 	width: 200%;
-	padding: 12px 20px 6px;
-	margin: 8px 0;
-	box-sizing: border-box;
-	border: 3px solid black;
-	outline: none;
-	font-size: 16px;
-	display: inline;
 }
 
-.input-1-job-creation:focus{
-	background-color: #FFEBCC;
-}
-
-.input-1-copy-job-creation{
-	font-family: "Jost";
+.MuiFormControl-root.MuiTextField-root.input-street-job-creation {
 	width: 140%;
-	padding: 12px 20px 6px;
-	margin: 8px 0;
-	box-sizing: border-box;
-	border: 3px solid black;
-	outline: none;
-	font-size: 16px;
-	display: inline;
-}
-
-.input-1-copy-job-creation:focus{
-	background-color: #FFEBCC;
 }
 
 /* description textarea */
-
-.input-2-job-creation{
+.input-description-job-creation{
 	font-family: "Jost";
 	width: 200%;
 	word-wrap: break-word;
-	padding: 12px 20px 100px;
-	margin: 8px 0;
+	padding: 12px;
 	box-sizing: border-box;
 	border: 3px solid black;
 	outline: none;
 	font-size: 16px;
-	display: inline;
 	resize:none;
 }
 
-.input-2-job-creation:focus{
+.input-description-job-creation:focus{
 	background-color: #FFEBCC;
 }
 
-/* municipality and zipcode */
+.input-error{
+	border-color: red;
+}
 
+.MuiFormControl-root.MuiTextField-root.input-error {
+    border: 2px solid red;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedStart {
+    border-color: white;
+}
+
+/* municipality and zipcode */
 .mini-flex-box-job-creation{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 30%;
 	line-height: 2.5;
-	margin-top: 6px;
 	width:130%
 }
 
-.input-3-job-creation{
-	font-family: "Jost";
-	padding: 12px 20px 6px;
-	box-sizing: border-box;
-	border: 3px solid black;
-	outline: none;
-	font-size: 16px;
-	flex-direction: column;
-	display: block;
-	width: 70%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	margin-bottom: 8px;
-}
-
-.input-3-job-creation:focus{
-	background-color: #FFEBCC;
-	margin: 0px;
-}
 
 /* Material ui override dropdown styling  */
-
 .MuiSelect-root{
-	padding-bottom: 0px;
-	padding-right: 0px;
+	padding-bottom: 0;
+	padding-right: 0;
 	width: 102px;
-	padding-top: 0px;
-	margin-bottom: 0px;
-	margin-right: 0px;
+	padding-top: 0;
+	margin-bottom: 0;
+	margin-right: 0;
 	height: 42px;
 }
 
 .MuiInputBase-input{
 	animation-name: none;
 	animation-duration: 0ms;
-
 }
 
 /* arrow icon in Material ui dropdown */
@@ -172,7 +133,7 @@
 	display: grid;
 	align-content: center;
 	text-align: center;
-	
+
 }
 
 /* inside Material ui dropdown */
@@ -286,16 +247,6 @@
 
 .text-button-job-creation:hover{
 	color:floralwhite;
-}
-
-/* field is required - live alerts and errors */
-
-.required-field-job-creation{
-	font-family: "Times New Roman";
-	color: #cc3300;
-	position: relative;
-	bottom: 8px;
-	left: -3px;
 }
 
 .required-field-2-job-creation {
@@ -437,15 +388,5 @@
 	position: absolute;
 	width: 97.9%;
 	bottom: 640.4px;
-}
-
-.job-creation-dropdown {
-	min-width: 50%;
-}
-
-
-
-.error {
-	border-color: red;
 }
 

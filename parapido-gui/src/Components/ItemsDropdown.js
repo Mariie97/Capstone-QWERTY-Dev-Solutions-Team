@@ -62,7 +62,7 @@ class ItemsDropdown extends Component {
                     <Select
                         value={item}
                         onChange={this.handleOnChangeCity}
-                        className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
+                        className={itemError===undefined ? "item-dropdown" : 'item-dropdown dropdown-error'}
                         onClose={this.validate}
                         MenuProps={{
                             disableScrollLock: true,
@@ -83,7 +83,7 @@ class ItemsDropdown extends Component {
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
-                    <div className="required-field-2-job-creation">
+                    <div className="required-dropdown">
                         <ReportProblemIcon style={report} />
                         {itemError}
                     </div>

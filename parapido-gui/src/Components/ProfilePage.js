@@ -161,7 +161,8 @@ class ProfilePage extends Component {
                                     rating_value={user.rating_value}
                                     jobs_cancelled={user.jobs_cancelled}
                                     type={user.type}
-                                    image={user.image}                                />
+                                    image={user.image}
+                                />
                             </div>
                             {!edit ?
                                 <table className='table-body-content'>
@@ -264,7 +265,7 @@ class ProfilePage extends Component {
                                         <div className="grid-edit-info-item5">
                                             <ItemsDropdown
                                                 label='City'
-                                                initial_value={city}
+                                                initial_value={city===null ? '' : city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
                                                 itemsList={cities}
