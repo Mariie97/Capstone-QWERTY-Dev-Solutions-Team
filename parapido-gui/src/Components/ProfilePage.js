@@ -369,7 +369,7 @@ class ProfilePage extends Component {
         }
     }
 
-    validateFirstName(event){
+    validateFirstName(){
         if (this.state.change_first_name.length===0) {
             this.setState({
                 firstNameError: "This field is required"
@@ -383,7 +383,7 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateLastName(event){
+    validateLastName(){
         if (this.state.change_last_name.length===0) {
             this.setState({
                 lastNameError: "This field is required"
@@ -396,8 +396,8 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateStreet(event){
-        const { change_street, change_zipcode, zipcodeError} = this.state;
+    validateStreet(){
+        const { change_city, change_street, change_zipcode, zipcodeError} = this.state;
         if (change_street.length===0 && change_zipcode.length>0) {
             this.setState({
                 streetError: 'This field is required'
@@ -405,6 +405,7 @@ class ProfilePage extends Component {
             return false;
         }
         if (change_street==='' && zipcodeError!==undefined) {
+            change_city.current.validate();
             this.setState({
                 zipcodeError: undefined,
                 streetError: undefined,
@@ -416,8 +417,8 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateZipcode(event){
-        const { change_street, change_zipcode, streetError} = this.state;
+    validateZipcode(){
+        const { change_city, change_street, change_zipcode, streetError} = this.state;
 
         if (change_zipcode.length===0 && change_street.length>0) {
             this.setState({zipcodeError: 'This field is required'})
@@ -435,6 +436,7 @@ class ProfilePage extends Component {
         }
 
         if (change_zipcode==='' && streetError!==undefined) {
+            change_city.current.validate();
             this.setState({
                 zipcodeError: undefined,
                 streetError: undefined,
@@ -448,7 +450,7 @@ class ProfilePage extends Component {
 
     validateCity() {
         const { change_city, change_zipcode, change_street } = this.state;
-        if ((change_zipcode.length > 0 || change_street.length > 0) && (change_city?.current.state.item===null
+        if ((change_zipcode.length > 0 || change_street.length > 0) && (change_city?.current.state.item===''
             || change_city?.current.state.item==='0')) {
             change_city?.current.setState({itemError: 'This field is required'});
             return false;
