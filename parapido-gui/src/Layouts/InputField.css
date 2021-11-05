@@ -3,6 +3,7 @@
 
 .input-field-container {
     margin-bottom: 8px;
+    line-height: 0;
 }
 
 .MuiFormLabel-filled {
@@ -63,7 +64,7 @@
 }
 
 .custom-input-label {
-    font-family: "Cormorant Garamond";
+    font-family: "Jost";
     font-style: italic;
     font-weight: 400;
     font-size: 18px;

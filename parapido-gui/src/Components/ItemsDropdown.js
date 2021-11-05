@@ -50,7 +50,6 @@ class ItemsDropdown extends Component {
     }
 
 
-
     render() {
         const { item, itemError } = this.state;
         const { label, required, blackLabel } = this.props;
