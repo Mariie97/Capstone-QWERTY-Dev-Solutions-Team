@@ -325,7 +325,7 @@ export class JobCreation extends Component {
         }
 
         if (!zipcodeFormatPR.test(this.state.zipcode)) {
-            this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
+            this.setState({zipcodeError: 'Zipcode not from PR'});
             return false;
         }
 

@@ -431,7 +431,7 @@ class ProfilePage extends Component {
                 return false;
             }
             if (!zipcodeFormatPR.test(change_zipcode)) {
-                this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
+                this.setState({zipcodeError: 'Zipcode not from PR'});
                 return false;
             }
         }
