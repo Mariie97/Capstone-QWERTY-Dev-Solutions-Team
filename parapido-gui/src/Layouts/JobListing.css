@@ -117,3 +117,15 @@
 	line-height: 1.66;
 	letter-spacing: 0.03333em;
 }
+
+.empty-list-error {
+	font-weight: bold;
+	font-size: 60px;
+	text-align: left;
+	color: red;
+	border-bottom: 2px solid red;
+	width: 700px;
+    padding-bottom: 20px;
+    margin: 65px;
+    top: 100px;
+}

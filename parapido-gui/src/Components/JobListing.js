@@ -56,31 +56,32 @@ const listing = (props) => {
 
 
 
-                <Box
-                    border = {2}
-                    borderColor = "black"
-                    sx = {boxSX}
-                    marginTop={5}
-                >
+            <Box
+                border = {2}
+                borderColor = "black"
+                sx = {boxSX}
+                marginTop={5}
+            >
 
-                     <span id={"listing-title"}> <Link to = {"/job/" + props.job_id} className = "titleLink" > {props.title} </Link> </span>
-                    <span id={"listing-price"}> {props.price} </span>
-                    <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
-                    <span id={"listing-date"}> {props.date_posted} </span>
-                    <span id={"checkbox-style"}>
+                <span id={"listing-title"}> <Link to = {"/job/" + props.job_id} className = "titleLink" > {props.title} </Link> </span>
+                <span id={"listing-price"}> {props.price} </span>
+                <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
+                <span id={"listing-date"}> {props.date_posted} </span>
+                { props.status === 2 &&
 
-                    <IconButton>
-                        <ThumbUpIcon
-                            sx={{ color: blue[100],
-                                fontSize: 25,
-                            }}
-                            onClick={props.onClickRate}
-                        />
-                    </IconButton>
+                <span id={"checkbox-style"}>
+                        <IconButton>
+                            <ThumbUpIcon
+                                sx={{ color: blue[100],
+                                    fontSize: 25,
+                                }}
+                                onClick={props.onClickRate}
+                            />
+                        </IconButton>
+                            </span>
+                }
 
-                </span>
-
-                    {/*                <span
+                {/*                <span
                 id={"checkbox-style"}
                 >
 
@@ -89,10 +90,11 @@ const listing = (props) => {
 
                </span>*/}
 
-                    {/*<Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>*/}
+                {/*<Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>*/}
 
 
-                    <span id={"delete-button"}>
+                { (props.status === 1 || props.status === 2) &&
+                <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
                         <DeleteIcon
                             onClick={props.deleteListing}
@@ -103,8 +105,9 @@ const listing = (props) => {
                         />
                     </IconButton>
                 </span>
+                }
 
-                </Box>
+            </Box>
 
         </li>
     )

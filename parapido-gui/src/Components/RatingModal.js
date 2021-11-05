@@ -15,6 +15,7 @@ class RatingModal extends Component {
 
         this.handleOnchangeRating = this.handleOnchangeRating.bind(this);
         this.changeRating = this.changeRating.bind(this);
+        this.handleRate = this.handleRate.bind(this, this.state.rating, this.props.job_id);
 
     }
 
@@ -57,7 +58,7 @@ class RatingModal extends Component {
                         <div className={"modalTextStyle"}>
                             Rate this Job:
                         </div>
-
+                        <button id={"rate-button"} onClick={this.handleRate}> Rate </button>
                         {body}
                     </Backdrop>
 
@@ -75,6 +76,28 @@ class RatingModal extends Component {
         this.setState({
             rating: value
         });
+    }
+
+    handleRate(value, job_id){
+
+        fetch('/api/rate_job/' + job_id,{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then(data => {
+
+                        console.log(data)
+
+
+                    }
+                )
+            }
+            else {
+                console.log("Error")
+            }
+        })
+
     }
 
 }

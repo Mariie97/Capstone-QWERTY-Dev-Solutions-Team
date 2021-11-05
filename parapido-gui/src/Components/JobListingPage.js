@@ -4,26 +4,28 @@ import {Box, Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {cities, verifyUserAuth, current_user, accountType, setJobStatus, jobStatus, getQuery} from "../Utilities";
+import {cities, verifyUserAuth, current_user, accountType, setJobStatus, jobStatus, getQueryParams} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 
 
 class JobListingPage extends Component {
 
+    status = undefined;
+
     constructor(props) {
         super(props);
         this.state = {
             listings:
-                            [
-                                {id:"algo1", title: 'Job Example One', price:'$5.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                                {id:"algo2", title: 'Job Example Two', price:'$50.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                                {id:"algo3", title: 'Job Example Three', price:'$500.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                                {id:"algo4", title: 'Job Example Four', price:'$5,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                                {id:"algo5", title: 'Job Example Five', price:'$50,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                                {id:"algo6", title: 'Job Example Six', price:'$500,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                            ],
-/*                [
-                ],*/
+                [
+                    {id:"algo1", title: 'Job Example One', price:'$5.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                    {id:"algo2", title: 'Job Example Two', price:'$50.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                    {id:"algo3", title: 'Job Example Three', price:'$500.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                    {id:"algo4", title: 'Job Example Four', price:'$5,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                    {id:"algo5", title: 'Job Example Five', price:'$50,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                    {id:"algo6", title: 'Job Example Six', price:'$500,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
+                ],
+            /*                [
+                            ],*/
 
 
             city: 1,
@@ -37,19 +39,23 @@ class JobListingPage extends Component {
             userAccountType: current_user.type,
             user_id: current_user.id,
             titleText: '',
+            currJob: '',
+            listIsEmpty: false,
         }
     }
 
     componentDidMount(){
 
-        /*?owner_id=' + this.state.user_id*/
-        document.body.style.backgroundColor = "white"
+        /*        this.status = getQueryParams(this.props.queryParams).get('status');*/
+        this.status = 1
+
+        document.body.style.backgroundColor = "white";
 
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        fetch('/jobs_list/1', {
+        fetch('/jobs_list/' + this.status /*+ "?owner_id=" + this.state.user_id*/, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -59,38 +65,43 @@ class JobListingPage extends Component {
             if(response.status === 200) {
                 response.json().then(data => {
 
+                        this.setState({listIsEmpty: false})
                         console.log(data)
-/*                        this.setState({ listings: data
-                        });*/
+                        /*                        this.setState({ listings: data
+                                                });*/
 
                     }
                 )
             }
-            /*            else {
-                            console.log("Error")
-                        }*/
+            else if(response.status === 404){
+                this.setState({listIsEmpty: true})
+            }
+            /*
+                                                else {
+                                                    console.log("Error")
+                                                }*/
         })
+
     }
 
     token = this.props.cookies.get('csrf_access_token');
 
     deleteListing = (index) => {
 
-                const listings = Object.assign([], this.state.listings);
-                listings.splice(index, 1);
-                this.setState({listings:listings});
+        const listings = Object.assign([], this.state.listings);
+        listings.splice(index, 1);
+        this.setState({listings:listings});
 
 
-/*
-setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
-*/
+        /*
+        setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
+        */
 
     }
 
-    onClickRate = () => {
-
+    onClickRate = (job_id) => {
+        this.state.currJob = job_id;
         this.setState({open:true});
-
     }
 
     handleClose = () => {
@@ -106,16 +117,6 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
         if(category === 6) return 'Other'
         if(category === 7) return 'Self-care'
         if(category === 8) return 'Shop'
-    }
-
-    changeTitle = () => {
-
-
-
-        if(this.state.userAccountType === 2 ) this.setState({titleText: "Client Title"})
-
-        if(this.state.accountType === 3 ) this.setState({titleText: "Admin Title"})
-
     }
 
     years = [
@@ -145,14 +146,16 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
     ];
 
     render(){
+
         return (
             <div>
 
                 <RatingModal
-                    initial_value={this.state.rating}
+                    initial_value={''}
                     ref={this.state.change_rating}
                     open = {this.state.open}
                     handleClose = {this.handleClose.bind(this)}
+                    job_id = {this.state.currJob}
                 />
 
                 <div className="year-dropdown-style">
@@ -187,12 +190,17 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
 
                 </div>
 
-                {this.state.userAccountType === 1 && <div className="job-listing-page-header"> Jobs Requested </div>}
-                {this.state.userAccountType === 2 && <div className="job-listing-page-header"> Jobs Posted </div>}
+
+                {this.state.userAccountType === 1 && this.status === 1 && <div className="job-listing-page-header"> Jobs Requested </div>}
+                {this.state.userAccountType === 2 && this.status === 1 && <div className="job-listing-page-header"> Jobs Posted </div>}
+                {this.status === 2 && <div className="job-listing-page-header"> Jobs In-Progress </div>}
+                {this.status === 3 && <div className="job-listing-page-header"> Jobs Completed </div>}
+                {this.state.listIsEmpty && <div className="empty-list-error"> No jobs here pal </div>}
 
 
                 <Button id={"go-back-button"} onClick={this.filterJobs}>Filter</Button>
 
+                {!this.state.listIsEmpty &&
                 <div id="list-style">
                     <ul id="list-bullet-style">
 
@@ -204,10 +212,10 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
 
                                     price = {listing.price} date_posted = {listing.date_posted}
                                     title = {listing.title} category = {this.findCategory(listing.categories)}
-                                    key = {listing.id}   job_id = {listing.job_id}
+                                    key = {listing.id}   job_id = {listing.job_id}   status = {this.status}
                                     deleteListing = {this.deleteListing.bind(this, currId)}
                                     //deleteListing = {this.deleteListing.bind(this, currId)}
-                                    onClickRate={this.onClickRate.bind(this)}
+                                    onClickRate={this.onClickRate.bind(this, currId)}
                                 >
 
                                 </JobListing>
@@ -218,6 +226,7 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
 
                     </ul>
                 </div>
+                }
 
             </div>
         );
@@ -228,13 +237,13 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
 
         let filters = '';
 
-/*        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
+        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
 
         if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
-            filters += "&month=" + monthRef.current.state.item*/
+            filters += "&month=" + monthRef.current.state.item
 
-        fetch('/jobs_list/1?owner_id=107&year=2021&month=10' /*+ this.state.user_id + filters*/  , {
+        fetch('/jobs_list/' + this.status + "?owner_id=" + this.state.user_id + filters, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -243,6 +252,7 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
             if(response.status === 200) {
                 response.json().then(data => {
 
+                        this.setState({listIsEmpty: false})
                         console.log(data)
 
                         /*                                                this.setState({ listings: data
@@ -251,9 +261,14 @@ setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
                     }
                 )
             }
-            /*            else {
-                            console.log("Error")
-                        }*/
+            else if(response.status === 404){
+                this.setState({listIsEmpty: true})
+                console.log(this.state.listIsEmpty)
+            }
+            /*
+                                                else {
+                                                    console.log("Error")
+                                                }*/
         })
     }
 

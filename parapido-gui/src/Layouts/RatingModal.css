@@ -36,3 +36,17 @@
     text-align: center;
     font-size: 15px;
 }
+
+#rate-button {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    top: 250px;
+    left: 200px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    background-color: #FFEBCC;
+    border: 2px black;
+}
