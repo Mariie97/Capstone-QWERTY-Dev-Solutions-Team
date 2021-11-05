@@ -184,7 +184,7 @@ class LoginModal extends Component {
         }
         else if (!pattern.test(this.state.email)) {
             this.setState({
-                emailError: "Invalid email format @..."
+                emailError: "Invalid email format: @..."
             });
             return false;
         }
