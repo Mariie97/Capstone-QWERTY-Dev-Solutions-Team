@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Redirect} from "react-router-dom";
 import "../Layouts/AgreementModal.css"
-// import Alert from '@material-ui/lab/Alert';
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-// import continueArrow from '../Static/Images/continueArrow.png';
+import continueArrow from '../Static/Images/continueArrow.png';
 import virtualContract from '../Static/Images/Virtual_Contract.png';
 import {accountType, current_user} from "../Utilities";
 
@@ -103,7 +102,7 @@ class AgreementModal extends Component {
                                         <div className="text-button-agreement-modal">
                                             Agree & Continue
                                         </div>
-                                        {/* <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" /> */}
+                                        <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
                                     </button>
                                 </div>
                                 <hr className="line-login-modal" />
@@ -123,12 +122,12 @@ const login_logostyle = {
     float: "right",
 };
 
-// const continue_arrow_image_resize = {
-//     height: 80,
-//     width: 100,
-//     position: "fixed",
-//     bottom: 25,
-// };
+const continue_arrow_image_resize = {
+    height: "80px",
+    width: "100px",
+    position: "fixed",
+    bottom: "-1.3vh",
+};
 
 const virtual_contract_image_resize = {
     height: 80,
