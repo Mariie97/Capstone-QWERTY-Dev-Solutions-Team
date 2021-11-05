@@ -177,43 +177,54 @@ class LoginModal extends Component {
 
     validateEmail(){
         const pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-
+        const borderchanger = document.querySelector('.input-login-modal');
         if (this.state.email.length===0) {
             this.setState({
                 emailError: "This field is required"
             })
-
-            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
+            if(borderchanger!== null){
+            borderchanger.style.cssText = 'border: 2px solid #cc3300;';
+            }
+            
             return false;
         }
         else if (!pattern.test(this.state.email)) {
             this.setState({
                 emailError: "Invalid email format: @..."
             });
-            document.querySelector('.input-login-modal').style.cssText = 'border: 2px solid #cc3300;';
+            if(borderchanger !== null){
+            borderchanger.style.cssText = 'border: 2px solid #cc3300;';
+            }
             return false;
         }
         this.setState({
             emailError: undefined
         })
-        document.querySelector('.input-login-modal').style.cssText = 'border: 3px solid #2F2D4A;';
+       
+        borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
+
         return true;
 
     }
 
     validatePassword(){
+        const borderchanger = document.querySelector('.input-login-modal1');
         if (this.state.password.length===0) {
             this.setState({
                 passwordError: "This field is required"
             })
-
-            document.querySelector('.input-login-modal1').style.cssText = 'border: 2px solid #cc3300;';
+           
+            if(borderchanger !== null){
+            borderchanger.style.cssText = 'border: 2px solid #cc3300;';}
+        
             return false;
         }
         this.setState({
             passwordError: undefined
         })
-        document.querySelector('.input-login-modal1').style.cssText = 'border: 3px solid #2F2D4A;';
+        borderchanger.style.cssText = 'border: 3px solid #2F2D4A;';
+       
+        
         return true;
     }
 }

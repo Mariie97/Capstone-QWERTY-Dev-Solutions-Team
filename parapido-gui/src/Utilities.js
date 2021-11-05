@@ -119,11 +119,6 @@ export const cities = [
     'Yauco',
 ];
 
-export const current_user = {
-    id: parseInt(localStorage.getItem('user_id')),
-    type: parseInt(localStorage.getItem('type'))
-};
-
 export const jobStatus = {
     posted: 1,
     in_process: 2,
@@ -172,9 +167,17 @@ export const categories = [
     'Education',
     'Events',
     'Home',
-    'Self-Care',
+    'Self-care',
     'Shop',
     'Other'
+];
+
+export const prices = [
+    'Less than $20.00',
+    '$20.00 to $40.00',
+    '$50.00 to $60.00',
+    '$70.00 to $100.00',
+    'More than $100.00'            
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;
