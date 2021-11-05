@@ -4,7 +4,7 @@ import "../Layouts/NavBar.css";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {current_user} from "../Utilities";
+
 
 class NavBar extends Component {
      current_user = {
