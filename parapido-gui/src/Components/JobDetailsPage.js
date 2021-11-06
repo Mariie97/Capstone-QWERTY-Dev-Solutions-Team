@@ -105,6 +105,7 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
+
         const {showAgreement} = this.state;
         this.setState({showAgreement: !showAgreement});
     }
@@ -149,7 +150,7 @@ class JobDetailsPage extends Component {
             job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
             job.status===jobStatus.posted;
 
-        const showRequestButton = current_user.type===accountType.client &&
+        const showRequestButton = current_user.type===accountType.student &&
             job.users_requested.filter(request  => request[0]===current_user.id).length===0 &&
             job.status===jobStatus.posted;
 
