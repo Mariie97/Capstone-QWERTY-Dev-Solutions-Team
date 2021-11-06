@@ -106,27 +106,29 @@ class JobDetailsPage extends Component {
 
     onClickRequest() {
         const { job_id } = this.props;
-        fetch('/request_job', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: JSON.stringify({
-                job_id: job_id,
-                student_id: current_user.id,
-            })
-        }).then(response => {
-            if (response.status === 200) {
-                //TODO: Redirect to request listing page
-            
-                this.setState({showAgreement: !this.state.showAgreement});
+        const {showAgreement} = this.state;
+        this.setState({showAgreement: !showAgreement});
 
-            }
-            else {
-                alert('Could not add request at this moment, please try again later');
-            }
-        })
+        // fetch('/request_job', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+        //     },
+        //     body: JSON.stringify({
+        //         job_id: job_id,
+        //         student_id: current_user.id,
+        //     })
+        // }).then(response => {
+        //     if (response.status === 200) {
+        //         //TODO: Redirect to request listing page         
+        //         this.setState({showAgreement: !showAgreement});
+
+        //     }
+        //     else {
+        //         this.setState({showAgreement: !showAgreement});
+        //     }
+        // })
     }
 
     onClickCancelRequest() {
@@ -169,7 +171,7 @@ class JobDetailsPage extends Component {
             job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
             job.status===jobStatus.posted;
 
-        const showRequestButton = current_user.type===accountType.student &&
+        const showRequestButton = current_user.type===accountType.client &&
             job.users_requested.filter(request  => request[0]===current_user.id).length===0 &&
             job.status===jobStatus.posted;
 
