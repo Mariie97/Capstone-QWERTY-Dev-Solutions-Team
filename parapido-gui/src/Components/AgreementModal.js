@@ -28,25 +28,18 @@ class AgreementModal extends Component {
         super(props);
   
         this.state = {
-          open: false,
           checked: false,
           isclient: false,
           isstudent: false,
         }
   
-        this.toggleModal= this.toggleModal.bind(this);
         this.handleOnClick= this.handleOnClick.bind(this);
         this.isChecked = this.isChecked.bind(this);
       }
   
-      toggleModal(){
-        this.setState({
-          open : !this.state.open
-        })
-      }
+ 
 
       isChecked(event){
-        	console.log(event.target.checked)
             this.setState({
                 checked: event.target.checked
               })
@@ -54,14 +47,12 @@ class AgreementModal extends Component {
 
       handleOnClick(){
           if(current_user.type === accountType.client){
-            console.log("client");
             this.setState({
                 isclient: true
               })
           
           }
           else if(current_user.type === accountType.student){
-                console.log("student");
                 this.setState({
                 isstudent: true
                 })    
@@ -69,7 +60,8 @@ class AgreementModal extends Component {
       }
 
     render() {
-        const {open, checked, isclient, isstudent} = this.state;
+        const {checked, isclient, isstudent} = this.state;
+        const {isOpen, toggle} = this.props;
 
         console.log(checked, "inside render")
 
@@ -77,10 +69,9 @@ class AgreementModal extends Component {
             <StyledEngineProvider injectFirst>
                 
                     <div>
-                        <div onClick={this.toggleModal}>Agreement Modal</div>
                         <Modal
-                            open={open}
-                            onClose={this.toggleModal}
+                            open={isOpen}
+                            onClose={toggle}
                             style={{textAlign:"center"}}
                         >
                             <Box sx={style}>

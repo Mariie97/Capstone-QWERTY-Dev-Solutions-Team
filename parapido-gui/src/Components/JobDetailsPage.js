@@ -12,6 +12,7 @@ import {
 } from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
+import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {
@@ -45,6 +46,7 @@ class JobDetailsPage extends Component {
             },
             pageLoaded: false,
             redirect: undefined,
+            showAgreement: false,
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
@@ -116,7 +118,10 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                //    TODO: Redirect to request listing page
+                //TODO: Redirect to request listing page
+            
+                this.setState({showAgreement: !this.state.showAgreement});
+
             }
             else {
                 alert('Could not add request at this moment, please try again later');
@@ -156,7 +161,7 @@ class JobDetailsPage extends Component {
 
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded, redirect } = this.state;
+        const {is_auth, job, pageLoaded, redirect, showAgreement } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
 
@@ -197,10 +202,15 @@ class JobDetailsPage extends Component {
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="custom-buttons">
-                                    Request Job
-                                </button>
+                                <React.Fragment>
+                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                        Request Job
+                                    </button>
+                                    {showAgreement && 
+                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest}/>}                 
+                                </React.Fragment>
                                 }
+                              
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
