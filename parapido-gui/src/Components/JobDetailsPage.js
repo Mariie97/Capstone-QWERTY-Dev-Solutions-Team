@@ -105,30 +105,8 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
-        const { job_id } = this.props;
         const {showAgreement} = this.state;
         this.setState({showAgreement: !showAgreement});
-
-        // fetch('/request_job', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-        //     },
-        //     body: JSON.stringify({
-        //         job_id: job_id,
-        //         student_id: current_user.id,
-        //     })
-        // }).then(response => {
-        //     if (response.status === 200) {
-        //         //TODO: Redirect to request listing page         
-        //         this.setState({showAgreement: !showAgreement});
-
-        //     }
-        //     else {
-        //         this.setState({showAgreement: !showAgreement});
-        //     }
-        // })
     }
 
     onClickCancelRequest() {
@@ -209,7 +187,7 @@ class JobDetailsPage extends Component {
                                         Request Job
                                     </button>
                                     {showAgreement && 
-                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest}/>}                 
+                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id}/>}                 
                                 </React.Fragment>
                                 }
                               

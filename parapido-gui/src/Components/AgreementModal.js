@@ -46,16 +46,36 @@ class AgreementModal extends Component {
       }
 
       handleOnClick(){
-          if(current_user.type === accountType.client){
+         const {job_id} = this.props;
+         console.log(typeof(job_id))
+          if(current_user.type === accountType.student){
             this.setState({
                 isclient: true
               })
           
           }
-          else if(current_user.type === accountType.student){
-                this.setState({
-                isstudent: true
-                })    
+          else if(current_user.type === accountType.client){           
+                fetch('/request_job', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        job_id: job_id,
+                        student_id: '7',
+                    })
+                }).then(response => {
+                    if (response.status === 200) {
+                        //TODO: Redirect to request listing page         
+                        this.setState({
+                            isstudent: true
+                            }) 
+                    }
+                    else {
+                       console.log("Error")
+                    }
+                })
+                 
           }
       }
 
