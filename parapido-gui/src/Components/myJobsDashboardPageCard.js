@@ -14,15 +14,14 @@ class myJobsDashboardPageCard extends Component {
                 <div className="myjobs-card"> 
                     <div className="myjobs-body-container">
                         <img  src= {jobsposted} style={posted} alt="jobsposted" />
-                        <div> Jobs Posted </div>
+                        <div className="bottom-card-styling-myjobs"> 
+                        <div className="bottom-square-myjobs">
+                                Posted Jobs
+                        </div>            
+                        </div>
                     </div>         
                 </div>         
-                <div className="myjobs-card"> 
-                    <div className="myjobs-body-container">
-                        <img  src= {jobsposted} style={posted} alt="jobsposted" />
-                        <div> Jobs In-Progress </div>
-                    </div>         
-                </div>         
+                        
             </div>
             </div>
         )
@@ -32,9 +31,8 @@ class myJobsDashboardPageCard extends Component {
 // small icons & elements css
 
 const posted = {
-    backgroundColor:"black", 
-    width: "10vh",
-    height: "10vh"
+    width: "15vh",
+    height: "15vh"
 };
 
 export default myJobsDashboardPageCard;
