@@ -9,14 +9,21 @@ class myJobsDashboardPageCard extends Component {
 	}
     render() {
         return (
+            <div className="myjobs-card-general-style">
             <div className="myjobs-card-container">
                 <div className="myjobs-card"> 
                     <div className="myjobs-body-container">
                         <img  src= {jobsposted} style={posted} alt="jobsposted" />
-                        <h1> Job Posted </h1>
-
-                    </div>
-                </div>              
+                        <div> Jobs Posted </div>
+                    </div>         
+                </div>         
+                <div className="myjobs-card"> 
+                    <div className="myjobs-body-container">
+                        <img  src= {jobsposted} style={posted} alt="jobsposted" />
+                        <div> Jobs In-Progress </div>
+                    </div>         
+                </div>         
+            </div>
             </div>
         )
     }
