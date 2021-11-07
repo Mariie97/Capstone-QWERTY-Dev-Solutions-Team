@@ -46,13 +46,30 @@ class AgreementModal extends Component {
       }
 
       handleOnClick(){
-         const {job_id} = this.props;
+         const {job_id, student_id} = this.props;
 
           if(current_user.type === accountType.client){
-            this.setState({
-                isclient: true
-              })
-          
+
+               fetch('/assign_job',{
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    job_id: job_id,
+                    student_id: student_id
+                })
+            }
+            ).then(response => {
+            if(response.status === 200) {
+                this.setState({
+                    isclient: true
+                  })        
+            }
+            else{
+                alert('Failed' + response.status);
+            }
+            })
           }
 
           else if(current_user.type === accountType.student){           
