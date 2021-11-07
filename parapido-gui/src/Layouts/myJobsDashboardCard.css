@@ -30,6 +30,7 @@
     background-color: #2F2D4A;
     border-bottom-left-radius: 3vh;
     
+    
 }
 
 .myjobs-card{
@@ -38,35 +39,50 @@
     overflow: hidden;
     box-shadow: 15px 15px 15px grey;
     border-radius: 2vh; 
+    transition: transition 1s ease-in;
 }
 
 .myjobs-body-container .bottom-card-styling-myjobs {
-        height: 12%;
-        width: 100%;
-        text-align: center;
-        color: white;
+    height: 12%;
+    width: 100%;
+    text-align: center;
+    color: white;
 }
   
 .myjobs-body-container .bottom-square-myjobs{
-        width: 30vh;
-        height: 10vh;
-        background-color: #91EB8F;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    width: 30vh;
+    height: 10vh;
+    background-color: #91EB8F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bottom-square-myjobs:hover{
-        background-color: darkgray;
-        color: black;
+    background-color: darkgray;
+    color: black;
 }
 
 .myjobs-body-container:hover {
-        background-color: black;
+    background-color: black;  
 }
 
 .myjobs-body-container:hover .bottom-square-myjobs {
     background-color: darkgray;
     color: black;
+}
+
+#grow {
+    width: 15vh;
+    height: 15vh;
+    transition: transform 300ms ease-in;
+}
+
+.myjobs-body-container:hover #grow{
+    transform: scale(1.2);
+}
+
+.myjobs-card:hover{
+    transform: scale(1.1);
 }
 
