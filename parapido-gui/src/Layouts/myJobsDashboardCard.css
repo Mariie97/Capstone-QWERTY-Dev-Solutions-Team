@@ -4,7 +4,8 @@
     font-family: 'Amatic SC';
     font-weight: bold;
     font-size: 40px;
-    line-height: 1.5;  
+    line-height: 1.5; 
+    cursor: pointer; 
 }
 
 .myjobs-card-container{
@@ -17,6 +18,7 @@
     padding-top: 34px;
     place-items: center;
     min-height: 100vh;
+
 }
 
 .myjobs-body-container{
@@ -27,7 +29,6 @@
     align-items: center;
     background-color: #2F2D4A;
     border-bottom-left-radius: 3vh;
-    border-bottom-right-radius: 3vh;
     
 }
 
@@ -36,13 +37,12 @@
     height: 35vh;
     overflow: hidden;
     box-shadow: 15px 15px 15px grey;
-    border-radius: 2vh;    
+    border-radius: 2vh; 
 }
 
 .myjobs-body-container .bottom-card-styling-myjobs {
         height: 12%;
         width: 100%;
-        background-color: #555;
         text-align: center;
         color: white;
 }
@@ -53,9 +53,20 @@
         background-color: #91EB8F;
         display: flex;
         justify-content: center;
-        border-bottom-left-radius: 2vh;
-        border-bottom-right-radius: 2vh;
         align-items: center;
 }
 
+.bottom-square-myjobs:hover{
+        background-color: darkgray;
+        color: black;
+}
+
+.myjobs-body-container:hover {
+        background-color: black;
+}
+
+.myjobs-body-container:hover .bottom-square-myjobs {
+    background-color: darkgray;
+    color: black;
+}
 
