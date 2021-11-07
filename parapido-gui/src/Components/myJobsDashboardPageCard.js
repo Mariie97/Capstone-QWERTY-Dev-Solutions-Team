@@ -13,7 +13,7 @@ class myJobsDashboardPageCard extends Component {
             <div className="myjobs-card-container">
                 <div className="myjobs-card"> 
                     <div className="myjobs-body-container">
-                        <img  id="grow" src= {jobsposted}  alt="jobsposted" />
+                        <img  id="grow-myjobs" src= {jobsposted}  alt="jobsposted" />
                         <div className="bottom-card-styling-myjobs"> 
                         <div className="bottom-square-myjobs">
                                 Posted Jobs
