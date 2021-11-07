@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { MenuItem, Select } from "@material-ui/core";
 import StyledEngineProvider from '@material-ui/styles/StylesProvider';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import "../Layouts/ItemsDropdown.css";
 
 
 class ItemsDropdown extends Component {
@@ -10,7 +11,7 @@ class ItemsDropdown extends Component {
         super(props);
 
         this.state = {
-            item: this.props.initial_value !== ''? this.props.initial_value : undefined,
+            item: this.props.initial_value !== undefined ? this.props.initial_value : '',
             itemError: undefined,
         };
 
@@ -22,6 +23,7 @@ class ItemsDropdown extends Component {
         this.validate = this.validate.bind(this);
 
         this.getAllItems = this.getAllItems.bind(this);
+        this.reset = this.reset.bind(this);
 
     }
 
@@ -34,16 +36,16 @@ class ItemsDropdown extends Component {
     validate() {
         const { validate, validationFunc } = this.props;
         if(validationFunc)
-            validationFunc();
-        else
+            return validationFunc();
+
         if (validate)
-            this.validateItem();
+            return this.validateItem();
     }
 
     getAllItems() {
         const { itemsList } = this.props;
         return itemsList.map((item, index) =>
-            <MenuItem value={index+1}>{item}</MenuItem>
+            <MenuItem key={`${item}-${index}`} value={index+1}>{item}</MenuItem>
         )
     }
 
@@ -51,18 +53,21 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required } = this.props;
+        const { label, required, blackLabel } = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                  <label className="label-job-creation"> {label}{required && '*'} </label>
+                  <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}
                         onChange={this.handleOnChangeCity}
                         className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
                         onClose={this.validate}
+                        MenuProps={{
+                            disableScrollLock: true,
+                        }}
                         inputProps={{
                             underline: {
                                 "&&&:before": {
@@ -75,6 +80,7 @@ class ItemsDropdown extends Component {
                         }}
                         disableUnderline
                     >
+                        <MenuItem value={'0'}>Choose one... </MenuItem>
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
@@ -89,7 +95,7 @@ class ItemsDropdown extends Component {
     }
 
     validateItem(){
-        if (this.state.item === undefined) {
+        if (this.state.item === '' || this.state.item === '0') {
             this.setState({
                 itemError: "This field is required"
             })
@@ -100,6 +106,11 @@ class ItemsDropdown extends Component {
             itemError: undefined
         })
         return true;
+    }
+
+    reset() {
+        const { initial_value } = this.props;
+        this.setState({item: initial_value !== undefined? this.props.initial_value : ''})
     }
 }
 

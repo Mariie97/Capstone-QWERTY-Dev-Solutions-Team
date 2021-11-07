@@ -8,16 +8,10 @@ import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
 import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import StarIcon from '@material-ui/icons/Star';
 import {Link} from "react-router-dom";
-import {accountType} from "../Utilities";
+import {accountType, mapAccount} from "../Utilities";
 
 
 class ProfileCard extends Component {
-
-    acc_type = {
-        1: "STUDENT",
-        2: "CLIENT",
-        3: "ADMIN"
-    }
 
     render() {
         const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
@@ -47,7 +41,7 @@ class ProfileCard extends Component {
                                 {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
                                     : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
                                         :<img src= {_admin} alt="admin" style={admin}/>}
-                                <p>{this.acc_type[type]}</p>
+                                <p>{mapAccount[type]}</p>
                             </div>
                             }
                         </ul>
