@@ -188,7 +188,7 @@ class JobDetailsPage extends Component {
                                         Request Job
                                     </button>
                                     {showAgreement && 
-                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id}/>}                 
+                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}                 
                                 </React.Fragment>
                                 }
                               

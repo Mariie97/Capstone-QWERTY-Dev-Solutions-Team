@@ -46,14 +46,14 @@ class AgreementModal extends Component {
       }
 
       handleOnClick(){
-         const {job_id, student_id} = this.props;
+          const {job_id, student_id, cookies} = this.props;
 
           if(current_user.type === accountType.client){
-
                fetch('/assign_job',{
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': cookies
                 },
                 body: JSON.stringify({
                     job_id: job_id,
@@ -77,6 +77,7 @@ class AgreementModal extends Component {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': cookies
                     },
                     body: JSON.stringify({
                         job_id: job_id,
