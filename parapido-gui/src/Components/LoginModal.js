@@ -100,7 +100,7 @@ class LoginModal extends Component {
                                 <div className="body-container-login-modal">
                                     <Input
                                         required
-                                        bluelabel
+                                        loginmodallabel
                                         labelText='Enter E-mail'
                                         className="input-login-modal"
                                         id="email"
@@ -113,7 +113,7 @@ class LoginModal extends Component {
                                     />
                                     <Input
                                         required
-                                        bluelabel
+                                        loginmodallabel
                                         labelText='Enter Password'
                                         className="input-login-modal"
                                         id="password"
