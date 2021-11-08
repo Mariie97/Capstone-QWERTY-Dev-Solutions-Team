@@ -110,6 +110,7 @@ class LoginModal extends Component {
                                         onBlur={this.validateEmail}
                                         error={emailError!==undefined}
                                         errorMsg={emailError}
+                                        style= {{border : emailError === undefined ? "1px solid black": "1px solid #cc3300"}}
                                     />
                                     <Input
                                         required
@@ -124,6 +125,7 @@ class LoginModal extends Component {
                                         onBlur={this.validatePassword}
                                         error={passwordError!==undefined}
                                         errorMsg={passwordError}
+                                        style= {{border : passwordError === undefined ? "1px solid black": "1px solid #cc3300"}}
                                     />
                                     <button onClick={this.handleOnClick} className="login-modal-continue-button">
                                         <div className="text-button-login-modal">
