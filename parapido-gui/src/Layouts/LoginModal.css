@@ -25,9 +25,11 @@
 /* fun. */
 .second-text-login-modal{
     margin-left: 4px;
-    color:red;
-    font-weight: bold;
-    font-size: 20px;
+    color: lightseagreen;
+    font-weight: 400;
+    font-size: 23px;
+    font-family: times new roman;
+    letter-spacing: 1px;
 }
 
 /* inputs and labels */
@@ -44,6 +46,7 @@
 
 .MuiFormControl-root.MuiTextField-root.input-login-modal {
     width: 95%;
+    
 }
 
 /* button */
@@ -71,7 +74,6 @@
     top: 10px;
     left: 10px;
     font-family: "Jost";
-    font-weight: bold;
     font-size:12px;
     color: #2F2D4A;
 }

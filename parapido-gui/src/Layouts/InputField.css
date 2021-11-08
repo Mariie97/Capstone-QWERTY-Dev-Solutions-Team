@@ -16,7 +16,8 @@
     color: black;
     font-size: 14px;
     font-family: "Jost";
-    padding: 10px 0px 10px 3px;
+    padding: 10px 3px 10px 3px;
+    border-radius: 0px;
 }
 
 .MuiFilledInput-root.MuiFilledInput-multiline,
@@ -37,6 +38,11 @@
 }
 .MuiInputBase-root.MuiFilledInput-root.Mui-error.MuiInputBase-formControl {
     border: 2px solid #cc3300;
+}
+
+.MuiInputBase-input:invalid {
+    box-shadow: none;
+    border-color: 2px solid #cc3300;
 }
 
 .MuiFormControl-root.MuiTextField-root.change-street-address {
@@ -93,9 +99,10 @@
 
 .login-modal-label-text{
     font-family: "Jost";
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 15px;
     color: #2F2D4A;
-    line-height: 3;
+    line-height: 4;
+    letter-spacing: 0px;
 }
 
