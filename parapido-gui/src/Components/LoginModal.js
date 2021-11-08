@@ -31,7 +31,7 @@ class LoginModal extends Component {
             login_success: false,
             login_failed: false,
             emailError: undefined,
-            passwordError: undefined
+            passwordError: undefined,
         };
 
         // event methods - before render method
