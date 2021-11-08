@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import MyJobsCard from './myJobsDashboardPageCard';
-import {accountType, current_user} from "../Utilities";
+import {accountType} from "../Utilities";
 
 class myJobsDashboardPage extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
     componentDidMount() {
 		// webpage background color
-		document.body.style.backgroundColor = "##FFFFFF";
+		document.body.style.backgroundColor = "#FFFFFF";
 	}
     render() {
 
-        const is_client = current_user.type === accountType.client
-        const is_student = current_user.type === accountType.student
+        const is_client = this.currentUser.type === accountType.client
+        const is_student = this.currentUser.type === accountType.student
       
         return (
             <div>
