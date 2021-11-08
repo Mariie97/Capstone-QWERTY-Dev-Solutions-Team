@@ -14,8 +14,8 @@
 .MuiFilledInput-root .MuiFilledInput-input {
     background-color: white;
     color: black;
-    font-size: 18px;
-    font-family: Times New Roman;
+    font-size: 14px;
+    font-family: "Jost";
     padding: 10px 0px 10px 3px;
 }
 
@@ -36,7 +36,7 @@
     background-color: #FFEBCC;
 }
 .MuiInputBase-root.MuiFilledInput-root.Mui-error.MuiInputBase-formControl {
-    border: 2px solid red;
+    border: 2px solid #cc3300;
 }
 
 .MuiFormControl-root.MuiTextField-root.change-street-address {
@@ -65,9 +65,8 @@
 
 .custom-input-label {
     font-family: "Jost";
-    font-style: italic;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
     color: white;
     letter-spacing: 1px;
     line-height: 2;
@@ -92,5 +91,8 @@
     color: black;
 }
 
-
+.blue-label-text{
+    color: #2F2D4A;
+    font-weight: bold;
+}
 

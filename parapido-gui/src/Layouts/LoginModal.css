@@ -38,6 +38,10 @@
     text-align: left;
 }
 
+.MuiFilledInput-root{
+    border-radius: 0px;
+}
+
 .MuiFormControl-root.MuiTextField-root.input-login-modal {
     width: 95%;
 }
