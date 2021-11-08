@@ -179,7 +179,6 @@ class ChatApp extends Component {
         access_allowed = true
       }
     }
-    console.log(access_allowed)
     return (
         <div className='parent-container'>
           {!is_auth && <Redirect to='/' />}
