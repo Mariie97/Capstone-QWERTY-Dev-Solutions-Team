@@ -2,7 +2,7 @@ import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
-import {getQueryParams, verifyUserAuth} from "../Utilities";
+import {getQueryParams, verifyUserAuth, accountType} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
@@ -16,9 +16,8 @@ class MessagesContainer extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      messagesRef: createRef()
+      messagesRef: createRef(),
     };
-
     this.addMessages = this.addMessages.bind(this);
   }
 
@@ -68,6 +67,8 @@ class MessagesContainer extends Component{
 
 class ChatApp extends Component {
   queryParams = undefined;
+  student_id = undefined;
+  owner_id = undefined;
   receiver_id = undefined;
   currentUser = {
     id: parseInt(localStorage.getItem('user_id')),
@@ -164,9 +165,25 @@ class ChatApp extends Component {
 
   render() {
     const { is_auth, messages, current_message, refreshComplete } = this.state;
+
+    const is_client = this.currentUser.type === accountType.client;
+    const is_student = this.currentUser.type === accountType.student;
+    let access_allowed = false;
+    if(is_student === true){
+      if(getQueryParams(this.props.queryParams)?.get('student_id')  === this.currentUser.id.toString()){
+        access_allowed = true
+      }
+    }
+    if(is_client === true){
+      if(getQueryParams(this.props.queryParams)?.get('owner_id') === this.currentUser.id.toString()){
+        access_allowed = true
+      }
+    }
+    console.log(access_allowed)
     return (
         <div className='parent-container'>
           {!is_auth && <Redirect to='/' />}
+          {!access_allowed && <Redirect to='/' /> }
           <div className='header-flex-container'>
             <div className="button-flex-container">
               <Link to={`/job/${this.queryParams?.get('job_id')}`}
