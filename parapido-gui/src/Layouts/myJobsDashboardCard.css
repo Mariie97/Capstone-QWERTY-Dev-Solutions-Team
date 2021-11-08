@@ -12,13 +12,12 @@
     /* background-color: chocolate; */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
-    gap: 3vh;
+    gap: 28vh;
     width: 99.9%;
     justify-content: center;
     padding-top: 34px;
     place-items: center;
-    min-height: 100vh;
-
+    min-height: 80vh;
 }
 
 .myjobs-body-container{

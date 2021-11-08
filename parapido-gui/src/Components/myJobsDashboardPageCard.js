@@ -8,22 +8,19 @@ class myJobsDashboardPageCard extends Component {
 		document.body.style.backgroundColor = "#FFFFFF";
 	}
     render() {
+        const {title} = this.props;
+
         return (
-            <div className="myjobs-card-general-style">
-            <div className="myjobs-card-container">
                 <div className="myjobs-card"> 
                     <div className="myjobs-body-container">
                         <img  id="grow-myjobs" src= {jobsposted}  alt="jobsposted" />
                         <div className="bottom-card-styling-myjobs"> 
                         <div className="bottom-square-myjobs">
-                                Posted Jobs
+                            {title}
                         </div>            
                         </div>
                     </div>         
-                </div>         
-                        
-            </div>
-            </div>
+                </div>                                         
         )
     }
 }
