@@ -165,7 +165,6 @@ class AdministrationPage extends Component {
     render() {
         //TODO: Add 403 forbidden when user is not admin
         const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin} = this.state;
-        console.log(is_admin)
         return (
             <div>
                 {(!is_auth || !is_admin) && <Redirect to='/' />}
