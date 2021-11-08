@@ -5,7 +5,7 @@ import {accountType, current_user} from "../Utilities";
 class myJobsDashboardPage extends Component {
     componentDidMount() {
 		// webpage background color
-		document.body.style.backgroundColor = "##FFFFFF";
+		document.body.style.backgroundColor = "#FFFFFF";
 	}
     render() {
 
