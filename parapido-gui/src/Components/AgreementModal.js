@@ -100,7 +100,6 @@ class AgreementModal extends Component {
         const {checked, isclient, isstudent} = this.state;
         const {isOpen, toggle} = this.props;
 
-        console.log(checked, "inside render")
 
         return (
             <StyledEngineProvider injectFirst>
