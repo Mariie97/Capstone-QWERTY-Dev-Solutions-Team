@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
+import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth , current_user, accountType} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -23,6 +23,7 @@ class AdministrationPage extends Component {
             jobCategoryRef: createRef(),
             currentEntity: this.entity.users,
             is_auth: true,
+            is_admin: current_user.type === accountType.admin
         };
 
         this.renderUsers = this.renderUsers.bind(this);
@@ -163,11 +164,11 @@ class AdministrationPage extends Component {
 
     render() {
         //TODO: Add 403 forbidden when user is not admin
-        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef} = this.state;
-
+        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin} = this.state;
+        console.log(is_admin)
         return (
             <div>
-                {!is_auth && <Redirect to='/' />}
+                {(!is_auth || !is_admin) && <Redirect to='/' />}
                 <h1 className="page-title-header">
                     Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
                 </h1>

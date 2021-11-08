@@ -33,7 +33,7 @@ export class JobCreation extends Component {
             creationSuccessful: false,
             serverProcessedRequest: true,
             is_auth: true,
-            isclient: current_user.type === accountType.client
+            is_client: current_user.type === accountType.client
         };
 
         // event methods - before render method
@@ -149,14 +149,13 @@ export class JobCreation extends Component {
             street,
             description,
             zipcode,
-            isclient
+            is_client
         } = this.state
 
         
         return (
             <React.Fragment>
-                {!is_auth && <Redirect to='/' /> }
-                {isclient && <Redirect to='/' /> }
+                {(!is_auth || !is_client)&& <Redirect to='/' /> }
                 {creationSuccessful && <Redirect to="/jobdashboard" />}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!.
