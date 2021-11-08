@@ -71,6 +71,8 @@
     color: black;
 }
 
+/* Posted/Requested jobs img animation */
+
 #grow-myjobs {
     width: 15vh;
     height: 15vh;
@@ -84,4 +86,32 @@
 .myjobs-card:hover{
     transform: scale(1.1);
 }
+
+/* In-progress jobs animation */
+
+#grow1-myjobs {
+    width: 15vh;
+    height: 15vh;
+    transition: transform 1s ease-in-out;
+}
+
+.myjobs-body-container:hover #grow1-myjobs{
+    transform: rotate(360deg);
+}
+
+/* Completed jobs animation */
+
+#grow2-myjobs {
+    width: 15vh;
+    height: 15vh;
+    transition: 300ms ease;
+}
+
+.myjobs-body-container:hover #grow2-myjobs{
+    -webkit-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg);
+    transform: rotateZ(10deg);
+    transition: 300ms ease;
+}
+
 

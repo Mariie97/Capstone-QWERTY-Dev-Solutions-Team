@@ -21,8 +21,8 @@ class myJobsDashboardPageCard extends Component {
                         <div className="myjobs-body-container">
                             {imgtype === "1" && <img  id="grow-myjobs" src= {jobsposted}  alt="postedjobs" />}
                             {imgtype === "2" && <img  id="grow-myjobs" src= {jobsrequested}  alt="requestedjobs" />}
-                            {imgtype === "3" && <img  id="grow-myjobs" src= {jobsinprogress}  alt="in-progressjobs" />}
-                            {imgtype === "4" && <img  id="grow-myjobs" src= {jobscompleted}  alt="completedjobs" />}
+                            {imgtype === "3" && <img  id="grow1-myjobs" src= {jobsinprogress}  alt="in-progressjobs" />}
+                            {imgtype === "4" && <img  id="grow2-myjobs" src= {jobscompleted}  alt="completedjobs" />}
                             <div className="bottom-card-styling-myjobs"> 
                                 <div className="bottom-square-myjobs">
                                     {title}
