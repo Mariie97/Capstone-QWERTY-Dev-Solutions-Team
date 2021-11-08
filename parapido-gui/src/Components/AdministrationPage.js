@@ -1,12 +1,17 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth , current_user, accountType} from "../Utilities";
+import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth , accountType} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 
 
 class AdministrationPage extends Component {
+
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
     entity = {
         users: 1,
         jobs: 2
@@ -23,7 +28,7 @@ class AdministrationPage extends Component {
             jobCategoryRef: createRef(),
             currentEntity: this.entity.users,
             is_auth: true,
-            is_admin: current_user.type === accountType.admin
+            is_admin: this.currentUser.type === accountType.admin
         };
 
         this.renderUsers = this.renderUsers.bind(this);
