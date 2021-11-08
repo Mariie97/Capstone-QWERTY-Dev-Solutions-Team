@@ -16,10 +16,10 @@ class myJobsDashboardPage extends Component {
             <div>
                 <div className="myjobs-card-general-style">
                     <div className="myjobs-card-container">
-                        {is_client &&  <MyJobsCard title="Posted Jobs" imgtype = "1" /> }
-                        {is_student && <MyJobsCard title="Requested Jobs" imgtype = "2"/> }
-                        <MyJobsCard title="In-progress Jobs" imgtype = "3"/>
-                        <MyJobsCard title="Completed Jobs" imgtype = "4"/>               
+                        {is_client &&  <MyJobsCard title="Posted Jobs" imgtype = "1" status="1"/> }
+                        {is_student && <MyJobsCard title="Requested Jobs" imgtype = "2" status="1"/> }
+                        <MyJobsCard title="In-progress Jobs" imgtype = "3" status="2"/>
+                        <MyJobsCard title="Completed Jobs" imgtype = "4" status="3"/>               
                     </div>
                 </div>
             </div>
