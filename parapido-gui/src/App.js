@@ -12,7 +12,7 @@ import ChatPage from "./Components/ChatPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
-
+import MyJobsPage from "./Components/myJobsDashboardPage"
 
 class App extends React.Component {
     render() {
@@ -58,6 +58,16 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
                                 <SecurityQuestionsPage />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='/myjobs'
+                        render={() => (
+                            <React.Fragment>
+                               <NavBar cookies={this.props.cookies} />
+                               <MyJobsPage />
                             </React.Fragment>
                         )}
                     />
