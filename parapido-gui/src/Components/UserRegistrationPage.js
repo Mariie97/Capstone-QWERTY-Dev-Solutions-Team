@@ -523,6 +523,7 @@ class UserRegistrationPage extends Component {
                             onBlur={this.validatePasswordConfirm}
                         />
                         <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
+
                         <div className='security-questions-container' >
                             <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
                             {questionError!==undefined &&

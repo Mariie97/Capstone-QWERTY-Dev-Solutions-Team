@@ -44,10 +44,11 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/jobdashboard'
-                        render={() => (
+                        render={(props) => (
                             <React.Fragment>
                                 <NavBar cookies= {this.props.cookies} />
-                                <JobDashboardPage cookies= {this.props.cookies}/>
+                                <JobDashboardPage {...props} cookies= {this.props.cookies}/>
+                                
                             </React.Fragment>
                         )}
                     />

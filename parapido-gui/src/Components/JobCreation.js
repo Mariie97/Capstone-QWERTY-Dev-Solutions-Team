@@ -153,7 +153,11 @@ export class JobCreation extends Component {
         return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' />}
-                {creationSuccessful && <Redirect to="/jobdashboard" />}
+                {creationSuccessful && <Redirect to={{
+            pathname: '/jobdashboard',
+            state: { creationSuccessful: "true" }
+            }}/>}
+                {/* {creationSuccessful && <Redirect to="/jobdashboard" />} */}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!.
                 </Alert>}

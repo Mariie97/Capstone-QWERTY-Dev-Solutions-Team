@@ -23,7 +23,8 @@ class JobDashboardPage extends Component {
             change_price: createRef(),
             is_auth: true,
             pageLoaded: false,
-            filterLoaded: false
+            filterLoaded: false,
+            jobcreationSuccesful: false
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -38,6 +39,12 @@ class JobDashboardPage extends Component {
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A";
         this.getJobs();
+
+        if(this.props.location.state !== undefined){
+            this.setState({
+                jobcreationSuccesful: this.props.location.state
+            });
+        }
     }
 
     getJobs() {
@@ -154,7 +161,8 @@ class JobDashboardPage extends Component {
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded, jobcreationSuccesful} = this.state;
+        console.log(jobcreationSuccesful)
         const showJobCreationButton = this.currentUser.type === accountType.client;
         const cardArray = jobs.map(
             job => <JobDashboardCard
@@ -181,6 +189,7 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
+                        {jobcreationSuccesful && <h1>Hi</h1>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
