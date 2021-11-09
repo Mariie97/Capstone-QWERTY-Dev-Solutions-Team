@@ -158,7 +158,7 @@ export class JobCreation extends Component {
             state: { creationSuccessful: "true" }
             }}/>}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
-                    Sorry can't create job right now 😔 please try again later!!!.
+                    Sorry can't create job right now 😔 please try again later!!!
                 </Alert>}
                 <h1 className="job-creation-page-header"> Job Creation </h1>
 

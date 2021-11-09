@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
 import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
+import Alert from '@material-ui/lab/Alert';
 import ItemsDropdown from "./ItemsDropdown.js";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
@@ -24,7 +25,7 @@ class JobDashboardPage extends Component {
             is_auth: true,
             pageLoaded: false,
             filterLoaded: false,
-            jobcreationSuccesful: false
+            jobcreationSuccesful: false,
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -49,8 +50,8 @@ class JobDashboardPage extends Component {
     }
 
     hideAlert() {
-     
-        setTimeout(() => {this.setState({jobcreationSuccesful: false})}, 1000);
+        setTimeout(() => {this.setState({
+            jobcreationSuccesful: false})}, 2000);
     }
 
     getJobs() {
@@ -168,7 +169,6 @@ class JobDashboardPage extends Component {
 
     render() {
         const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded, jobcreationSuccesful} = this.state;
-        console.log(jobcreationSuccesful)
         const showJobCreationButton = this.currentUser.type === accountType.client;
         const cardArray = jobs.map(
             job => <JobDashboardCard
@@ -195,7 +195,8 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {jobcreationSuccesful && <h1 onLoad={this.hideAlert()}>Hi</h1>}
+                        {(jobcreationSuccesful) && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
+                        The job was succesfully created!!! 👍🏼</Alert>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">

@@ -435,8 +435,13 @@
 
 .server-error-job-creation{
 	position: absolute;
-	width: 97.9%;
-	bottom: 640.4px;
+	width: 100%;
+	bottom: 89.2vh;
+	border-radius: 0vh;
+	height:4%;
+	display:flex;
+	justify-content:center;
+	align-items: center;
 }
 
 .job-creation-dropdown {
