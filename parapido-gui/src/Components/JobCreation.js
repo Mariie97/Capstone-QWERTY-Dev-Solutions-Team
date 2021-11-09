@@ -86,7 +86,7 @@ export class JobCreation extends Component {
         const city = change_city?.current.state.item
         const category = change_category?.current.state.item
         const chips = availableDays_chips?.current.state.chipData
-
+        console.log(chips)
         const sunday    = chips.some(sun => sun.key === 0);
         const monday    = chips.some(mon => mon.key === 1);
         const tuesday   = chips.some(tue => tue.key === 2);
@@ -110,13 +110,13 @@ export class JobCreation extends Component {
                 price: price,
                 city: city,
                 categories: category,
-                d: sunday === true ? 1 : 0,
-                l: monday === true ? 1 : 0,
-                m: tuesday === true ? 1 : 0,
-                w: wednesday === true ? 1 : 0,
-                j: thursday === true ? 1 : 0,
-                v: friday === true ? 1 : 0,
-                s: saturday === true ? 1 : 0
+                d: sunday === true ? "1" : "0",
+                l: monday === true ? "1" : "0",
+                m: tuesday === true ? "1" : "0",
+                w: wednesday === true ? "1" : "0",
+                j: thursday === true ? "1" : "0",
+                v: friday === true ? "1" : "0",
+                s: saturday === true ? "1" : "0",
             })
         }).then(response => {
                 if(response.status === 201) {                  
@@ -157,7 +157,6 @@ export class JobCreation extends Component {
             pathname: '/jobdashboard',
             state: { creationSuccessful: "true" }
             }}/>}
-                {/* {creationSuccessful && <Redirect to="/jobdashboard" />} */}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!.
                 </Alert>}

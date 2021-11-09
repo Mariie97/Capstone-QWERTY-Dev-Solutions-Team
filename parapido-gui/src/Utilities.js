@@ -156,6 +156,7 @@ export const weekDays = [
     'Sunday',
     'Monday',
     'Tuesday',
+    'wednesday',
     'Thursday',
     'Friday',
     'Saturday'
