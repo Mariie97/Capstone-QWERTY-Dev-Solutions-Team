@@ -29,6 +29,7 @@ class JobDashboardPage extends Component {
 
         this.getJobs = this.getJobs.bind(this);
         this.clickFilter = this.clickFilter.bind(this);
+        this.hideAlert = this.hideAlert.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +46,11 @@ class JobDashboardPage extends Component {
                 jobcreationSuccesful: this.props.location.state
             });
         }
+    }
+
+    hideAlert() {
+     
+        setTimeout(() => {this.setState({jobcreationSuccesful: false})}, 1000);
     }
 
     getJobs() {
@@ -189,7 +195,7 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {jobcreationSuccesful && <h1>Hi</h1>}
+                        {jobcreationSuccesful && <h1 onLoad={this.hideAlert()}>Hi</h1>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
