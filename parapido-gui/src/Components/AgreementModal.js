@@ -6,7 +6,7 @@ import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import continueArrow from '../Static/Images/continueArrow.png';
 import virtualContract from '../Static/Images/Virtual_Contract.png';
-import {accountType, current_user} from "../Utilities";
+import {accountType} from "../Utilities";
 
 const style = {
     position: 'absolute',
@@ -24,6 +24,11 @@ const style = {
 }
 
 class AgreementModal extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
+
     constructor(props){
         super(props);
   
@@ -47,8 +52,8 @@ class AgreementModal extends Component {
 
       handleOnClick(){
           const {job_id, student_id, cookies} = this.props;
-
-          if(current_user.type === accountType.client){
+         
+          if(this.currentUser.type === accountType.client){
                fetch('/assign_job',{
                 method: 'PUT',
                 headers: {
@@ -72,7 +77,7 @@ class AgreementModal extends Component {
             })
           }
 
-          else if(current_user.type === accountType.student){           
+          else if(this.currentUser.type === accountType.student){           
                 fetch('/request_job', {
                     method: 'POST',
                     headers: {
@@ -81,7 +86,7 @@ class AgreementModal extends Component {
                     },
                     body: JSON.stringify({
                         job_id: job_id,
-                        student_id: current_user.id,
+                        student_id: this.currentUser.id,
                     })
                 }).then(response => {
                     if (response.status === 200) {      

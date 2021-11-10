@@ -7,11 +7,15 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
-import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType, current_user} from "../Utilities";
+import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType} from "../Utilities";
 
 
 
 export class JobCreation extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props){
         super(props);
@@ -33,7 +37,7 @@ export class JobCreation extends Component {
             creationSuccessful: false,
             serverProcessedRequest: true,
             is_auth: true,
-            is_client: current_user.type === accountType.client
+            is_client: this.currentUser.type === accountType.client
         };
 
         // event methods - before render method
