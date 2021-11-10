@@ -3,14 +3,17 @@ import { Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {verifyUserAuth, current_user, getQueryParams} from "../Utilities";
+import {verifyUserAuth, getQueryParams} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 
 
 class JobListingPage extends Component {
 
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
     status = undefined;
-
     constructor(props) {
         super(props);
         this.state = {
@@ -31,8 +34,8 @@ class JobListingPage extends Component {
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
-            userAccountType: current_user.type,
-            user_id: current_user.id,
+            userAccountType: this.currentUser.type,
+            user_id: this.currentUser.id,
             titleText: '',
             currJob: '',
             listIsEmpty: false,
