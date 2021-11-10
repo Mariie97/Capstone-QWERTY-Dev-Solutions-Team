@@ -13,6 +13,8 @@ import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
+import LoginModal from "./Components/LoginModal";
+
 
 class App extends React.Component {
     render() {
@@ -132,11 +134,24 @@ class App extends React.Component {
                     />
                     <Route
                         exact
-                        path='/administration_site'
+                        path='/admin/site'
                         render={() => (
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
                                 <AdministrationPage cookies={this.props.cookies} />
+                            </React.Fragment>
+                        )}
+                    />
+                     <Route
+                        exact
+                        path='/admin'
+                        render={() => (
+                            <React.Fragment>
+                                <LoginModal
+                                    isOpen={true}
+                                    toggle={() => {}}
+                                    adminLogin={true}
+                                />
                             </React.Fragment>
                         )}
                     />
