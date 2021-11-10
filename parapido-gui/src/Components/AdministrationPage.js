@@ -210,6 +210,7 @@ class AdministrationPage extends Component {
                             {currentEntity === this.entity.users ?
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-user-type-dropdown'
                                         label={'Account Type'}
@@ -217,6 +218,7 @@ class AdministrationPage extends Component {
                                         itemsList={Object.values(mapAccount)}
                                     />
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-user-deleted-dropdown'
                                         initial_value='1'
@@ -227,6 +229,7 @@ class AdministrationPage extends Component {
                                 </div> :
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-job-categories-dropdown'
                                         label='Category'
@@ -234,6 +237,7 @@ class AdministrationPage extends Component {
                                         itemsList={categories}
                                     />
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-job-status-dropdown'
                                         label='Status'
