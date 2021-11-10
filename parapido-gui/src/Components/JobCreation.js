@@ -90,7 +90,6 @@ export class JobCreation extends Component {
         const city = change_city?.current.state.item
         const category = change_category?.current.state.item
         const chips = availableDays_chips?.current.state.chipData
-        console.log(chips)
         const sunday    = chips.some(sun => sun.key === 0);
         const monday    = chips.some(mon => mon.key === 1);
         const tuesday   = chips.some(tue => tue.key === 2);
@@ -158,7 +157,7 @@ export class JobCreation extends Component {
         
         return (
             <React.Fragment>
-                {!is_auth && <Redirect to='/' />}
+                {(!is_auth || !is_client)&& <Redirect to='/' />}
                 {creationSuccessful && <Redirect to={{
                     pathname: '/jobdashboard',
                     state: { creationSuccessful: "true" }
