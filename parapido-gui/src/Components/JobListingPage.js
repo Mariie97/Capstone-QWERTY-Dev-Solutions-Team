@@ -16,6 +16,8 @@ class JobListingPage extends Component {
 
     status = undefined;
 
+    idFilter = '';
+
     constructor(props) {
         super(props);
         this.state = {
@@ -36,12 +38,10 @@ class JobListingPage extends Component {
 
     componentDidMount(){
 
-        let idFilter = ''
-
         this.status = getQueryParams(this.props.queryParams).get('status');
 
-        if(this.status === '1' && this.state.userAccountType === 1) idFilter = "?student_id=" + this.state.user_id
-        else idFilter = "?owner_id=" + this.state.user_id
+        if(this.status === '1' && this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
+        else this.idFilter = "?owner_id=" + this.state.user_id
 
         document.body.style.backgroundColor = "white";
 
@@ -49,7 +49,7 @@ class JobListingPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        fetch('/jobs_list/' + this.status + idFilter, {
+        fetch('/jobs_list/' + this.status + this.idFilter, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -229,7 +229,6 @@ class JobListingPage extends Component {
         const {monthRef, yearRef} = this.state
 
         let filters = '';
-        let idFilter = ''
 
         if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
@@ -237,10 +236,8 @@ class JobListingPage extends Component {
         if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
             filters += "&month=" + monthRef.current.state.item
 
-        if(this.status === '1' && this.state.userAccountType === 1) idFilter = "?student_id=" + this.state.user_id
-        else idFilter = "?owner_id=" + this.state.user_id
 
-        fetch('/jobs_list/' + this.status + idFilter + filters, {
+        fetch('/jobs_list/' + this.status + this.idFilter + filters, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
