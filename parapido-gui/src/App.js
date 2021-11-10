@@ -9,6 +9,7 @@ import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
+import JobListingPage from "./Components/JobListingPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
@@ -55,6 +56,22 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+
+                        <Route
+                            exact
+                            path='/listings'
+                        render={(props) => (
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobListingPage
+                                        cookies = {this.props.cookies}
+                                        queryParams = {props.location.search}
+                                        status = {1}
+                                    />
+                                </React.Fragment>
+                            )}
+                        />
+
                     <Route
                         exact
                         path='/security-questions'
@@ -95,6 +112,7 @@ class App extends React.Component {
                                     cookies= {this.props.cookies}
                                     queryParams={props.location.search}
                                 />
+
                             </React.Fragment>
                         )}
                     />
