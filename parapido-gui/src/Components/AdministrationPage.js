@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {buildURL, categories, getJobStatus, mapAccount, verifyUserAuth , accountType} from "../Utilities";
+import {categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -41,6 +41,7 @@ class AdministrationPage extends Component {
     getAllUsers() {
         const { deletedRef, typeRef } = this.state;
         let filters = {};
+        let queryParams = '';
 
         if (typeRef.current?.state.item !== undefined && typeRef.current?.state.item !== '') {
             filters.account_type = typeRef.current?.state.item;
@@ -49,8 +50,11 @@ class AdministrationPage extends Component {
             filters.deleted = 'true';
         }
 
-        const url = buildURL('/users', filters);
-        fetch(url, {
+        if (Object.keys(filters).length>0) {
+            queryParams = `?${new URLSearchParams(filters)}`;
+        }
+
+        fetch(`/users/${queryParams}`, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
@@ -82,14 +86,17 @@ class AdministrationPage extends Component {
     getAllJobs() {
         const { jobStatusRef, jobCategoryRef } = this.state;
         const jobStatus = jobStatusRef.current?.state.item !== undefined ? jobStatusRef.current?.state.item : 1;
-
         let filters = {};
+        let queryParams = '';
+
         if (jobCategoryRef.current?.state.item !== undefined && jobCategoryRef.current?.state.item !== '') {
             filters.category = jobCategoryRef.current?.state.item;
         }
+        if (Object.keys(filters).length>0) {
+            queryParams = `?${new URLSearchParams(filters)}`;
+        }
 
-        const url = buildURL(`/jobs_list/${jobStatus}`, filters);
-        fetch(url, {
+        fetch(`/jobs_list/${jobStatus+queryParams}`, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
@@ -208,6 +215,7 @@ class AdministrationPage extends Component {
                             {currentEntity === this.entity.users ?
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-user-type-dropdown'
                                         label={'Account Type'}
@@ -215,6 +223,7 @@ class AdministrationPage extends Component {
                                         itemsList={Object.values(mapAccount)}
                                     />
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-user-deleted-dropdown'
                                         initial_value='1'
@@ -225,6 +234,7 @@ class AdministrationPage extends Component {
                                 </div> :
                                 <div className='administration-filter-dropdowns'>
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-job-categories-dropdown'
                                         label='Category'
@@ -232,6 +242,7 @@ class AdministrationPage extends Component {
                                         itemsList={categories}
                                     />
                                     <ItemsDropdown
+                                        removeDefault
                                         blackLabel
                                         id='admin-job-status-dropdown'
                                         label='Status'
@@ -243,19 +254,19 @@ class AdministrationPage extends Component {
                             }
                             <div className="admin-filter-button-container">
                                 <button
-                                className='custom-buttons filter admin-filter-button'
-                                onClick={() => {
-                                    this.setState({entitiesLoaded: false});
-                                    if (currentEntity === this.entity.users)
-                                        this.getAllUsers();
-                                    else
-                                        this.getAllJobs();
-                                }}>Filter
-                            </button>
-                            <button
-                                className='custom-buttons filter admin-filter-button'
-                                onClick={this.clearFilters}>Clear Filters
-                            </button>
+                                    className='custom-buttons filter admin-filter-button'
+                                    onClick={() => {
+                                        this.setState({entitiesLoaded: false});
+                                        if (currentEntity === this.entity.users)
+                                            this.getAllUsers();
+                                        else
+                                            this.getAllJobs();
+                                    }}>Filter
+                                </button>
+                                <button
+                                    className='custom-buttons filter admin-filter-button'
+                                    onClick={this.clearFilters}>Clear Filters
+                                </button>
                             </div>
 
                         </div>
