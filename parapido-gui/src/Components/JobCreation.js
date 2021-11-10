@@ -10,7 +10,6 @@ import Alert from '@material-ui/lab/Alert';
 import {categories, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 
 
-
 export class JobCreation extends Component {
 
     constructor(props){
@@ -75,14 +74,14 @@ export class JobCreation extends Component {
         const validate5 = this.validatePrice();
         const validate6 = this.state.change_city.current?.validate();
         const validate7 = this.state.change_category.current?.validate();
-        
+
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
-       
+
         const { title, street, description, zipcode, price, change_city,
             change_category, availableDays_chips } = this.state
-           
+
         const city = change_city?.current.state.item
         const category = change_category?.current.state.item
         const chips = availableDays_chips?.current.state.chipData
@@ -94,7 +93,7 @@ export class JobCreation extends Component {
         const thursday  = chips.some(thu => thu.key === 4);
         const friday    = chips.some(fri => fri.key === 5);
         const saturday  = chips.some(sat => sat.key === 6);
-  
+
         fetch('/create_job',{
             method: 'POST',
             credentials: 'same-origin',
@@ -119,7 +118,7 @@ export class JobCreation extends Component {
                 s: saturday === true ? "1" : "0",
             })
         }).then(response => {
-                if(response.status === 201) {                  
+                if(response.status === 201) {
                     this.setState({
                         creationSuccessful: true
                     })
@@ -154,9 +153,9 @@ export class JobCreation extends Component {
             <React.Fragment>
                 {!is_auth && <Redirect to='/' />}
                 {creationSuccessful && <Redirect to={{
-            pathname: '/jobdashboard',
-            state: { creationSuccessful: "true" }
-            }}/>}
+                    pathname: '/jobdashboard',
+                    state: { creationSuccessful: "true" }
+                }}/>}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!
                 </Alert>}
@@ -260,7 +259,7 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
-                            InputProps={{ disableUnderline: true }}          
+                            InputProps={{ disableUnderline: true }}
                         />
                         {priceError !== undefined &&
                         <div className="required-field-2-job-creation">

@@ -38,15 +38,18 @@ class JobDashboardPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
+        if(this.props.history.action === 'POP') {
+            this.setState({jobcreationSuccesful: false});
+        }
+        else {
+            if (this.props.location.state !== undefined){
+                this.setState({jobcreationSuccesful: this.props.location.state});
+            }
+        }
+
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A";
         this.getJobs();
-
-        if(this.props.location.state !== undefined){
-            this.setState({
-                jobcreationSuccesful: this.props.location.state
-            });
-        }
     }
 
     hideAlert() {
@@ -196,7 +199,7 @@ class JobDashboardPage extends Component {
                     </div> :
                     <div>
                         {(jobcreationSuccesful) && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
-                        The job was succesfully created!!! 👍🏼</Alert>}
+                            The job was succesfully created!!! 👍🏼</Alert>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
