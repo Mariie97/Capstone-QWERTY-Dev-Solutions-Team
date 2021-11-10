@@ -15,7 +15,6 @@
     width: 99.9%;
     justify-content: center;
     padding-top: 34px;
-
 }
 
 .card-wrapper-1{
@@ -101,8 +100,8 @@
 }
 
 .none-display-for-link{
-        text-decoration: none;
-        color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .tooltip{

@@ -4,6 +4,7 @@ import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
+import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {
@@ -41,6 +42,7 @@ class JobDetailsPage extends Component {
             },
             pageLoaded: false,
             redirect: undefined,
+            showAgreement: false,
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
@@ -99,26 +101,9 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
-        const { job_id } = this.props;
-        fetch('/request_job', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: JSON.stringify({
-                job_id: job_id,
-                student_id: this.currentUser.id,
-            })
-        }).then(response => {
-            if (response.status === 200) {
-                //    TODO: Redirect to request listing page
-            }
-            else {
-                alert('Could not add request at this moment, please try again later');
-            }
-        })
+
+        const {showAgreement} = this.state;
+        this.setState({showAgreement: !showAgreement});
     }
 
     onClickCancelRequest() {
@@ -155,7 +140,7 @@ class JobDetailsPage extends Component {
 
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded, redirect } = this.state;
+        const {is_auth, job, pageLoaded, redirect, showAgreement } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
 
@@ -196,10 +181,15 @@ class JobDetailsPage extends Component {
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="custom-buttons">
-                                    Request Job
-                                </button>
+                                <React.Fragment>
+                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                        Request Job
+                                    </button>
+                                    {showAgreement && 
+                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}                 
+                                </React.Fragment>
                                 }
+                              
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
@@ -229,7 +219,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}`}
+                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }

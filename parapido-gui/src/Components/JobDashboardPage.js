@@ -54,7 +54,7 @@ class JobDashboardPage extends Component {
 
     hideAlert() {
         setTimeout(() => {this.setState({
-            jobcreationSuccesful: false})}, 2000);
+            jobcreationSuccesful: false})}, 4000);
     }
 
     getJobs() {
@@ -199,7 +199,7 @@ class JobDashboardPage extends Component {
                     </div> :
                     <div>
                         {(jobcreationSuccesful) && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
-                            The job was succesfully created!!! 👍🏼</Alert>}
+                            The job was created succesfully!!! 👍🏼</Alert>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">

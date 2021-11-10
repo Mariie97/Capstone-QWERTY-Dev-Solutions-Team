@@ -4,6 +4,8 @@ import "../Layouts/NavBar.css";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import CancelIcon from '@material-ui/icons/Cancel';
+import {accountType} from "../Utilities";
+
 
 class NavBar extends Component {
     currentUser = {
@@ -80,6 +82,11 @@ class NavBar extends Component {
                             <li>
                                 <Link to={"/profile/" + this.currentUser.id}>Profile</Link>
                             </li>
+                            {this.currentUser.type === accountType.admin &&
+                            <li>
+                                <Link to={"/admin/site"}>Administration</Link>
+                            </li>
+                            }
                             <li>
                                 <div>
                                     <div onClick = {this.handleLogOut} id="logout"> Log Out </div>
