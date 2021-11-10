@@ -10,7 +10,6 @@ class RatingModal extends Component {
         super(props);
         this.state = {
             rating: this.props.initial_value!==''? this.props.initial_value : undefined,
-            open: this.props.open
         };
 
         this.handleOnchangeRating = this.handleOnchangeRating.bind(this);
@@ -20,7 +19,7 @@ class RatingModal extends Component {
     }
 
     render() {
-        const { rating, open } = this.state;
+        const {rating} = this.state;
 
         const body = (
             <div>

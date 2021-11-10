@@ -1,10 +1,9 @@
 import React, {Component, createRef} from 'react';
-import {Redirect} from "react-router-dom";
-import {Box, Button} from "@material-ui/core";
+import { Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {cities, verifyUserAuth, current_user, accountType, setJobStatus, jobStatus, getQueryParams} from "../Utilities";
+import {verifyUserAuth, current_user, getQueryParams} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 
 
@@ -24,10 +23,6 @@ class JobListingPage extends Component {
                     {id:"algo5", title: 'Job Example Five', price:'$50,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
                     {id:"algo6", title: 'Job Example Six', price:'$500,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
                 ],
-            /*                [
-                            ],*/
-
-
             city: 1,
             cityError: undefined,
             cityRef: createRef(),
@@ -46,8 +41,9 @@ class JobListingPage extends Component {
 
     componentDidMount(){
 
-        /*        this.status = getQueryParams(this.props.queryParams).get('status');*/
-        this.status = 1
+        this.status = getQueryParams(this.props.queryParams).get('status');
+        // console.log(this.status)
+        
 
         document.body.style.backgroundColor = "white";
 
@@ -100,8 +96,9 @@ class JobListingPage extends Component {
     }
 
     onClickRate = (job_id) => {
-        this.state.currJob = job_id;
-        this.setState({open:true});
+        this.setState({
+            currJob : job_id,
+            open:true});
     }
 
     handleClose = () => {
@@ -147,6 +144,7 @@ class JobListingPage extends Component {
 
     render(){
 
+
         return (
             <div>
 
@@ -191,10 +189,10 @@ class JobListingPage extends Component {
                 </div>
 
 
-                {this.state.userAccountType === 1 && this.status === 1 && <div className="job-listing-page-header"> Jobs Requested </div>}
-                {this.state.userAccountType === 2 && this.status === 1 && <div className="job-listing-page-header"> Jobs Posted </div>}
-                {this.status === 2 && <div className="job-listing-page-header"> Jobs In-Progress </div>}
-                {this.status === 3 && <div className="job-listing-page-header"> Jobs Completed </div>}
+                {this.state.userAccountType === 1 && this.status === "1" && <div className="job-listing-page-header"> Jobs Requested </div>}
+                {(this.state.userAccountType === 2 && this.status === "1") && <div className="job-listing-page-header"> Jobs Posted </div>}
+                {this.status === "2" && <div className="job-listing-page-header"> Jobs In-Progress </div>}
+                {this.status === "3" && <div className="job-listing-page-header"> Jobs Completed </div>}
                 {this.state.listIsEmpty && <div className="empty-list-error"> No jobs here pal </div>}
 
 
@@ -205,7 +203,7 @@ class JobListingPage extends Component {
                     <ul id="list-bullet-style">
 
                         {
-                            this.state.listings.map((listing, index)=>{
+                            this.state.listings.map((listing)=>{
                                 let currId = parseInt(listing.job_id)
 
                                 return <JobListing

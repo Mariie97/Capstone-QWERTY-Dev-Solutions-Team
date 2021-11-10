@@ -1,11 +1,11 @@
 import React from 'react'
-import {Box, Button, Checkbox, IconButton, withStyles} from "@material-ui/core";
+import {Box, IconButton} from "@material-ui/core";
 import "../Layouts/JobListing.css"
-import {blue, green, pink, red} from "@material-ui/core/colors";
+import {blue, red} from "@material-ui/core/colors";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import {Link} from "react-router-dom";
-import {jobStatus, setJobStatus} from "../Utilities";
+
 
 const boxSX = {
     width: 1000,
@@ -38,24 +38,11 @@ const categoryBoxSX = {
     marginTop: 7,
 }
 
-const GreenCheckbox = withStyles({
-    root: {
-        color: green[400],
-        '&$checked': {
-            color: green[600],
-        },
-    },
-    checked: {},
-})((props) => <Checkbox color="default" {...props} />);
-
 
 const listing = (props) => {
     return(
 
         <li list-style-type = "none">
-
-
-
             <Box
                 border = {2}
                 borderColor = "black"
@@ -67,7 +54,7 @@ const listing = (props) => {
                 <span id={"listing-price"}> {props.price} </span>
                 <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
                 <span id={"listing-date"}> {props.date_posted} </span>
-                { props.status === 2 &&
+                { props.status === "2" &&
 
                 <span id={"checkbox-style"}>
                         <IconButton>
@@ -81,19 +68,7 @@ const listing = (props) => {
                             </span>
                 }
 
-                {/*                <span
-                id={"checkbox-style"}
-                >
-
-                   <GreenCheckbox
-                   />
-
-               </span>*/}
-
-                {/*<Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>*/}
-
-
-                { (props.status === 1 || props.status === 2) &&
+                { (props.status === "1" || props.status === "2") &&
                 <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
                         <DeleteIcon
