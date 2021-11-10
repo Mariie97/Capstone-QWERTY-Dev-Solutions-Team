@@ -61,7 +61,6 @@ class App extends React.Component {
                                     <JobListingPage
                                         cookies = {this.props.cookies}
                                         queryParams = {props.location.search}
-                                        status = {1}
                                     />
                                 </React.Fragment>
                             )}

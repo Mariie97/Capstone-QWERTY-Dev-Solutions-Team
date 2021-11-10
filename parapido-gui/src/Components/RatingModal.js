@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Backdrop, FormControl, InputLabel, MenuItem, Modal, Select} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
+import {current_user} from "../Utilities";
 
 
 
@@ -82,6 +83,9 @@ class RatingModal extends Component {
 
         fetch('/api/rate_job/' + job_id,{
             method: 'POST',
+            body: JSON.stringify({
+                value: value
+            }),
             headers: {'Content-Type': 'application/json'},
         }).then(response => {
             if(response.status === 200) {
@@ -103,7 +107,8 @@ class RatingModal extends Component {
 }
 
 const backdropStyle = {
-    left: "700px",
+    display: "flex",
+    left: "40%",
     top: "200px",
     width: "500px",
     height: "300px",

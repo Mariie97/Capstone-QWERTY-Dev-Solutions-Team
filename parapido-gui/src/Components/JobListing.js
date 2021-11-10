@@ -8,7 +8,9 @@ import {Link} from "react-router-dom";
 import {jobStatus, setJobStatus} from "../Utilities";
 
 const boxSX = {
-    width: 1000,
+    display: 'flex',
+    flexWrap: 'wrap',
+    width: '80%',
     height: 60,
     backgroundColor: '#2F2D4A',
     borderRadius: 20,
@@ -22,8 +24,8 @@ const boxSX = {
 
 const categoryBoxSX = {
     position: 'absolute',
-    left: 450,
-    width: 100,
+    marginLeft: '25%',
+    width: '7%',
     height: 9,
     verticalAlign: 'middle',
     color: '#2F2D4A',
@@ -37,16 +39,6 @@ const categoryBoxSX = {
     padding: 17,
     marginTop: 7,
 }
-
-const GreenCheckbox = withStyles({
-    root: {
-        color: green[400],
-        '&$checked': {
-            color: green[600],
-        },
-    },
-    checked: {},
-})((props) => <Checkbox color="default" {...props} />);
 
 
 const listing = (props) => {
@@ -67,7 +59,8 @@ const listing = (props) => {
                 <span id={"listing-price"}> {props.price} </span>
                 <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
                 <span id={"listing-date"}> {props.date_posted} </span>
-                { props.status === 2 &&
+
+                { props.status === '2' &&
 
                 <span id={"checkbox-style"}>
                         <IconButton>
@@ -81,19 +74,8 @@ const listing = (props) => {
                             </span>
                 }
 
-                {/*                <span
-                id={"checkbox-style"}
-                >
 
-                   <GreenCheckbox
-                   />
-
-               </span>*/}
-
-                {/*<Button id={"delete-button"} onClick={props.deleteListing}>zafacon</Button>*/}
-
-
-                { (props.status === 1 || props.status === 2) &&
+                { (props.status === '1' || props.status === '2') &&
                 <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
                         <DeleteIcon

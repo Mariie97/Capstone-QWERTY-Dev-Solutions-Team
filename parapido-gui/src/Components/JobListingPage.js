@@ -1,11 +1,15 @@
 import React, {Component, createRef} from 'react';
 import {Redirect} from "react-router-dom";
-import {Box, Button} from "@material-ui/core";
+import {Box, Button, IconButton} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
 import {cities, verifyUserAuth, current_user, accountType, setJobStatus, jobStatus, getQueryParams} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
+import Completed from "../Static/Images/Completed.svg"
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import {blue} from "@material-ui/core/colors";
+import {FilterList} from "@mui/icons-material";
 
 
 class JobListingPage extends Component {
@@ -15,22 +19,8 @@ class JobListingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listings:
-                [
-                    {id:"algo1", title: 'Job Example One', price:'$5.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                    {id:"algo2", title: 'Job Example Two', price:'$50.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                    {id:"algo3", title: 'Job Example Three', price:'$500.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                    {id:"algo4", title: 'Job Example Four', price:'$5,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                    {id:"algo5", title: 'Job Example Five', price:'$50,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                    {id:"algo6", title: 'Job Example Six', price:'$500,000.45', category:"TRABAJO", date_posted: "mm/dd/yyyy"},
-                ],
-            /*                [
-                            ],*/
+            listings: [],
 
-
-            city: 1,
-            cityError: undefined,
-            cityRef: createRef(),
             rating: 1,
             change_rating: createRef(),
             open: false,
@@ -46,8 +36,12 @@ class JobListingPage extends Component {
 
     componentDidMount(){
 
-        /*        this.status = getQueryParams(this.props.queryParams).get('status');*/
-        this.status = 1
+        let idFilter = ''
+
+        this.status = getQueryParams(this.props.queryParams).get('status');
+
+        if(this.status === '1' && this.state.userAccountType === 1) idFilter = "?student_id=" + this.state.user_id
+        else idFilter = "?owner_id=" + this.state.user_id
 
         document.body.style.backgroundColor = "white";
 
@@ -55,7 +49,7 @@ class JobListingPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        fetch('/jobs_list/' + this.status /*+ "?owner_id=" + this.state.user_id*/, {
+        fetch('/jobs_list/' + this.status + idFilter, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -67,8 +61,8 @@ class JobListingPage extends Component {
 
                         this.setState({listIsEmpty: false})
                         console.log(data)
-                        /*                        this.setState({ listings: data
-                                                });*/
+                        this.setState({ listings: data
+                        });
 
                     }
                 )
@@ -76,26 +70,18 @@ class JobListingPage extends Component {
             else if(response.status === 404){
                 this.setState({listIsEmpty: true})
             }
-            /*
-                                                else {
-                                                    console.log("Error")
-                                                }*/
+            else {
+                console.log("Error")
+            }
         })
 
     }
 
     token = this.props.cookies.get('csrf_access_token');
 
-    deleteListing = (index) => {
+    deleteListing = (job_id) => {
 
-        const listings = Object.assign([], this.state.listings);
-        listings.splice(index, 1);
-        this.setState({listings:listings});
-
-
-        /*
         setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
-        */
 
     }
 
@@ -106,17 +92,6 @@ class JobListingPage extends Component {
 
     handleClose = () => {
         this.setState({open: false})
-    }
-
-    findCategory = (category) => {
-        if(category === 1) return "Animals"
-        if(category === 2) return 'Auto'
-        if(category === 3) return 'Education'
-        if(category === 4) return 'Events'
-        if(category === 5) return 'Home'
-        if(category === 6) return 'Other'
-        if(category === 7) return 'Self-care'
-        if(category === 8) return 'Shop'
     }
 
     years = [
@@ -158,77 +133,95 @@ class JobListingPage extends Component {
                     job_id = {this.state.currJob}
                 />
 
-                <div className="year-dropdown-style">
+                <div className={"outer-div"}>
 
-                    <ItemsDropdown
-                        initial_value={''}
-                        ref={this.state.yearRef}
-                        validate={true}
-                        itemsList={this.years}
-                        label='Year'
-                    />
+                    <div className={"list-flexbox"}>
 
-                    {this.state.cityError!==undefined &&
-                    <p className='citi-field-error'>{this.state.cityError}</p>
-                    }
-
-                </div>
-
-                <div className="month-dropdown-style">
-
-                    <ItemsDropdown
-                        initial_value={''}
-                        ref={this.state.monthRef}
-                        validate={true}
-                        itemsList={this.months}
-                        label='Month'
-                    />
-
-                    {this.state.cityError!==undefined &&
-                    <p className='citi-field-error'>{this.state.cityError}</p>
-                    }
-
-                </div>
+                        {this.state.userAccountType === 1 && this.status === '1' && <div className="job-listing-page-header"> Jobs Requested </div>}
+                        {this.state.userAccountType === 2 && this.status === '1' && <div className="job-listing-page-header"> Jobs Posted </div>}
+                        {this.status === '2' && <div className="job-listing-page-header"> Jobs In-Progress </div>}
+                        {this.status === '3' && <div className="job-listing-page-header"> Jobs Completed </div>}
+                        {this.state.listIsEmpty && <div className="empty-list-error"> ALERT PLACEHOLDER </div>}
 
 
-                {this.state.userAccountType === 1 && this.status === 1 && <div className="job-listing-page-header"> Jobs Requested </div>}
-                {this.state.userAccountType === 2 && this.status === 1 && <div className="job-listing-page-header"> Jobs Posted </div>}
-                {this.status === 2 && <div className="job-listing-page-header"> Jobs In-Progress </div>}
-                {this.status === 3 && <div className="job-listing-page-header"> Jobs Completed </div>}
-                {this.state.listIsEmpty && <div className="empty-list-error"> No jobs here pal </div>}
+                        {!this.state.listIsEmpty &&
+                        <ul id="list-bullet-style">
+
+                            {
+                                this.state.listings.map((listing, index) => {
+                                    let currId = parseInt(listing.job_id)
+
+                                    return <JobListing
+
+                                        price={listing.price} date_posted={listing.date_posted}
+                                        title={listing.title} category={listing.categories}
+                                        key={listing.id} job_id={listing.job_id} status={this.status}
+                                        deleteListing={this.deleteListing.bind(this, currId)}
+                                        onClickRate={this.onClickRate.bind(this, currId)}
+                                    >
+
+                                    </JobListing>
 
 
-                <Button id={"go-back-button"} onClick={this.filterJobs}>Filter</Button>
+                                })
+                            }
 
-                {!this.state.listIsEmpty &&
-                <div id="list-style">
-                    <ul id="list-bullet-style">
-
-                        {
-                            this.state.listings.map((listing, index)=>{
-                                let currId = parseInt(listing.job_id)
-
-                                return <JobListing
-
-                                    price = {listing.price} date_posted = {listing.date_posted}
-                                    title = {listing.title} category = {this.findCategory(listing.categories)}
-                                    key = {listing.id}   job_id = {listing.job_id}   status = {this.status}
-                                    deleteListing = {this.deleteListing.bind(this, currId)}
-                                    //deleteListing = {this.deleteListing.bind(this, currId)}
-                                    onClickRate={this.onClickRate.bind(this, currId)}
-                                >
-
-                                </JobListing>
-
-
-                            })
+                        </ul>
                         }
 
-                    </ul>
+                    </div>
+
+                    <div className={"right-flexbox"}>
+
+                        <div className={"filters-flexbox"}>
+
+                            <ItemsDropdown
+                                initial_value={''}
+                                ref={this.state.yearRef}
+                                validate={false}
+                                itemsList={this.years}
+                                label='Year'
+                            />
+
+
+
+                            <ItemsDropdown
+                                initial_value={''}
+                                ref={this.state.monthRef}
+                                validate={false}
+                                itemsList={this.months}
+                                label='Month'
+                            />
+
+                            <Button id={"go-back-button"} onClick={this.filterJobs}>
+
+                                <IconButton>
+                                    <FilterList
+                                        sx={{
+                                            fontSize: 25,
+                                        }}
+                                    />
+                                </IconButton>
+
+                            </Button>
+
+                        </div>
+
+                {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
+                {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
+                {this.status === '2' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
+                {this.status === '3' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
+
+                    </div>
+
                 </div>
-                }
+
+
+
+
 
             </div>
+
         );
     };
 
@@ -236,6 +229,7 @@ class JobListingPage extends Component {
         const {monthRef, yearRef} = this.state
 
         let filters = '';
+        let idFilter = ''
 
         if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
@@ -243,7 +237,10 @@ class JobListingPage extends Component {
         if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
             filters += "&month=" + monthRef.current.state.item
 
-        fetch('/jobs_list/' + this.status + "?owner_id=" + this.state.user_id + filters, {
+        if(this.status === '1' && this.state.userAccountType === 1) idFilter = "?student_id=" + this.state.user_id
+        else idFilter = "?owner_id=" + this.state.user_id
+
+        fetch('/jobs_list/' + this.status + idFilter + filters, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -255,8 +252,8 @@ class JobListingPage extends Component {
                         this.setState({listIsEmpty: false})
                         console.log(data)
 
-                        /*                                                this.setState({ listings: data
-                                                                        });*/
+                        this.setState({ listings: data
+                        });
 
                     }
                 )
@@ -265,10 +262,9 @@ class JobListingPage extends Component {
                 this.setState({listIsEmpty: true})
                 console.log(this.state.listIsEmpty)
             }
-            /*
-                                                else {
-                                                    console.log("Error")
-                                                }*/
+            else {
+                console.log("Error")
+            }
         })
     }
 
