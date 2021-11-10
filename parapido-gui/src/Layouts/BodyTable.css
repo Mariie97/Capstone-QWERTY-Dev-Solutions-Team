@@ -19,6 +19,7 @@
     padding: 10px;
     font-weight: 400;;
     font-family: "Cormorant Garamond";
+    word-wrap: break-word;
 }
 
 .column-table-body.col1{
@@ -26,7 +27,7 @@
 }
 
 .column-table-body.col2{
-    max-width: 81%
+    max-width: 40vw;
 }
 
 .loading-icon {

@@ -36,10 +36,10 @@ class ItemsDropdown extends Component {
     validate() {
         const { validate, validationFunc } = this.props;
         if(validationFunc)
-            validationFunc();
-        else
+            return validationFunc();
+
         if (validate)
-            this.validateItem();
+            return this.validateItem();
     }
 
     getAllItems() {
@@ -65,6 +65,9 @@ class ItemsDropdown extends Component {
                         onChange={this.handleOnChangeCity}
                         className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
                         onClose={this.validate}
+                        MenuProps={{
+                            disableScrollLock: true,
+                        }}
                         inputProps={{
                             underline: {
                                 "&&&:before": {
@@ -77,6 +80,7 @@ class ItemsDropdown extends Component {
                         }}
                         disableUnderline
                     >
+                        <MenuItem value={'0'}>Choose one... </MenuItem>
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
@@ -91,7 +95,7 @@ class ItemsDropdown extends Component {
     }
 
     validateItem(){
-        if (this.state.item === '') {
+        if (this.state.item === '' || this.state.item === '0') {
             this.setState({
                 itemError: "This field is required"
             })

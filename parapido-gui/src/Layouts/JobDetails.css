@@ -1,2 +1,11 @@
 @import "Header.css";
 @import "BodyTable.css";
+
+#job-student-assigned-name {
+    color: white;
+}
+
+#job-student-assigned-name:hover {
+    color: #ffebcc;
+    cursor: pointer;
+}

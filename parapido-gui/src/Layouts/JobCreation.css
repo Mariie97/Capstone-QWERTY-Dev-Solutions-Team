@@ -17,6 +17,7 @@
 }
 
 /* first 5 boxes of label input better known as the center body of the layout */
+
 .big-flexbox-for-2-flexbox-containers-job-creation{
 	display: flex;
 	width: 70%;
@@ -34,6 +35,7 @@
 }
 
 /* title and description */
+
 .left-body-container-1-job-creation{
 	display: flex;
 	flex-direction: column;
@@ -42,6 +44,7 @@
 }
 
 /* all labels have the same style */
+
 .label-job-creation{
 	font-family: "Cormorant Garamond";
 	font-style: italic;
@@ -86,6 +89,7 @@
 }
 
 /* description textarea */
+
 .input-2-job-creation{
 	font-family: "Jost";
 	width: 200%;
@@ -105,6 +109,7 @@
 }
 
 /* municipality and zipcode */
+
 .mini-flex-box-job-creation{
 	display: flex;
 	flex-direction: row;
@@ -137,6 +142,7 @@
 }
 
 /* Material ui override dropdown styling  */
+
 .MuiSelect-root{
 	padding-bottom: 0px;
 	padding-right: 0px;
@@ -154,16 +160,19 @@
 }
 
 /* arrow icon in Material ui dropdown */
+
 .MuiSelect-icon{
 	color: darkblue;
 }
 
 /* what changes when you select something */
+
 .MuiSelect-select{
 	background-color:white ;
 	display: grid;
 	align-content: center;
 	text-align: center;
+	
 }
 
 /* inside Material ui dropdown */
@@ -182,6 +191,7 @@
 }
 
 /* price, category and available days */
+
 .big-flexbox-for-3-lower-flexbox-containers-job-creation{
 	display: flex;
 	width: 100%;
@@ -212,6 +222,7 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-style: normal;
 }
 
 .MuiInputBase-root {
@@ -235,10 +246,12 @@
 	background-color: #FFEBCC;
 }
 
-.MuiInputBase-input.CurrencyTextField-textField-3{
+
+.MuiInputBase-input.CurrencyTextField{
 	height: 30px;
 	text-align: left;
 }
+
 
 .MuiTypography-root.MuiTypography-colorTextSecondary{
 	color:black;
@@ -246,6 +259,7 @@
 }
 
 /* job creation button */
+
 .button-job-creation{
 	width: 40%;
 	margin-top: 28px;
@@ -275,6 +289,7 @@
 }
 
 /* field is required - live alerts and errors */
+
 .required-field-job-creation{
 	font-family: "Times New Roman";
 	color: #cc3300;
@@ -290,6 +305,7 @@
 	bottom: 8px;
 	left: -3px;
 	margin-top: 8px;
+	width: 150%;
 }
 
 .price-error-job-creation{
@@ -297,7 +313,7 @@
 	border: 1.4px solid red;
 	position: relative;
 	bottom: 48px;
-	width: 63%;
+	width: 43%;
 	left: 4px;
 	top: -47px;
 }
@@ -427,6 +443,9 @@
 	min-width: 50%;
 }
 
+
+
 .error {
 	border-color: red;
 }
+

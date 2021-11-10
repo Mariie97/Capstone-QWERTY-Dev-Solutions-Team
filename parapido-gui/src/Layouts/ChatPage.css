@@ -210,12 +210,19 @@ body {
   margin-left: 50px;
 }
 
+
 input:focus {
   outline: none;
 }
 
+.refresh-msg-icon{
+  color:white;
+  scale: 4;
+}
+
 .refresh-msg-icon:hover {
   cursor: pointer;
+  fill:limegreen
 }
 
 
