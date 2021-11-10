@@ -7,15 +7,19 @@ import CurrencyTextField from "@unicef/material-ui-currency-textfield";
 import CreateIcon from '@material-ui/icons/Create';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
-import {categories, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
+import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType} from "../Utilities";
 
 
 
 export class JobCreation extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props){
         super(props);
-
+        
         this.state = {
             title : '',
             street: '',
@@ -32,7 +36,8 @@ export class JobCreation extends Component {
             priceError: undefined,
             creationSuccessful: false,
             serverProcessedRequest: true,
-            is_auth: true
+            is_auth: true,
+            is_client: this.currentUser.type === accountType.client
         };
 
         // event methods - before render method
@@ -148,11 +153,13 @@ export class JobCreation extends Component {
             street,
             description,
             zipcode,
+            is_client
         } = this.state
 
+        
         return (
             <React.Fragment>
-                {!is_auth && <Redirect to='/' />}
+                {(!is_auth || !is_client)&& <Redirect to='/' /> }
                 {creationSuccessful && <Redirect to="/jobdashboard" />}
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!.

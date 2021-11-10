@@ -30,6 +30,7 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+                    
                     <Route
                         exact
                         path='/profile/:user_id'
