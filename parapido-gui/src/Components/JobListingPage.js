@@ -38,7 +38,7 @@ class JobListingPage extends Component {
             user_id: this.currentUser.id,
             titleText: '',
             currJob: '',
-            listIsEmpty: false,
+            listIsEmpty: false
         }
     }
 
@@ -46,11 +46,7 @@ class JobListingPage extends Component {
 
         this.status = getQueryParams(this.props.queryParams).get('status');
         // console.log(this.status)
-       
-
-        // if (this.props.location.state !== undefined){
-        //     this.setState({jobcreationSuccesful: this.props.location.state});
-        // }
+        
         document.body.style.backgroundColor = "white";
 
         this.setState({
@@ -153,7 +149,7 @@ class JobListingPage extends Component {
 
         return (
             <div>
-
+                {this.state.requestSuccessful && <h1>HI</h1>}
                 <RatingModal
                     initial_value={''}
                     ref={this.state.change_rating}
@@ -161,9 +157,7 @@ class JobListingPage extends Component {
                     handleClose = {this.handleClose.bind(this)}
                     job_id = {this.state.currJob}
                 />
-
                 <div className="year-dropdown-style">
-
                     <ItemsDropdown
                         initial_value={''}
                         ref={this.state.yearRef}
@@ -171,7 +165,6 @@ class JobListingPage extends Component {
                         itemsList={this.years}
                         label='Year'
                     />
-
                     {this.state.cityError!==undefined &&
                     <p className='citi-field-error'>{this.state.cityError}</p>
                     }

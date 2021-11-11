@@ -3,7 +3,6 @@ import {Link, Redirect} from "react-router-dom";
 import "../Layouts/JobDashboard.css"
 import "../Layouts/JobDashboardCard.css";
 import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
-import Alert from '@material-ui/lab/Alert';
 import ItemsDropdown from "./ItemsDropdown.js";
 import FilterListIcon from '@material-ui/icons/FilterList';
 import JobDashboardCard from './JobDashboardCard';
@@ -25,12 +24,10 @@ class JobDashboardPage extends Component {
             is_auth: true,
             pageLoaded: false,
             filterLoaded: false,
-            jobcreationSuccesful: false,
         };
 
         this.getJobs = this.getJobs.bind(this);
         this.clickFilter = this.clickFilter.bind(this);
-        this.hideAlert = this.hideAlert.bind(this);
     }
 
     componentDidMount() {
@@ -38,23 +35,9 @@ class JobDashboardPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        if(this.props.history.action === 'POP') {
-            this.setState({jobcreationSuccesful: false});
-        }
-        else {
-            if (this.props.location.state !== undefined){
-                this.setState({jobcreationSuccesful: this.props.location.state});
-            }
-        }
-
         // webpage background color
         document.body.style.backgroundColor = "#2F2D4A";
         this.getJobs();
-    }
-
-    hideAlert() {
-        setTimeout(() => {this.setState({
-            jobcreationSuccesful: false})}, 4000);
     }
 
     getJobs() {
@@ -171,7 +154,7 @@ class JobDashboardPage extends Component {
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded, jobcreationSuccesful} = this.state;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded} = this.state;
         const showJobCreationButton = this.currentUser.type === accountType.client;
         const cardArray = jobs.map(
             job => <JobDashboardCard
@@ -187,7 +170,6 @@ class JobDashboardPage extends Component {
             />
         )
 
-
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
@@ -198,8 +180,6 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {(jobcreationSuccesful) && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
-                            The job was created succesfully!!! 👍🏼</Alert>}
                         <h1 className="job-dashboard-page-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">

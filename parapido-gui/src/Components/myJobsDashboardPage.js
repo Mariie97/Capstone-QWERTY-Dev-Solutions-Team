@@ -1,23 +1,73 @@
 import React, { Component } from 'react';
 import MyJobsCard from './myJobsDashboardPageCard';
 import {accountType} from "../Utilities";
+import Alert from '@material-ui/lab/Alert';
 
 class myJobsDashboardPage extends Component {
+    
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
     };
+
+    constructor(props) {
+        super(props);
+        this.state={
+            requestSuccessful: false,
+            creationSuccessful: false
+        };
+
+        this.hideAlert = this.hideAlert.bind(this);
+    }
+
     componentDidMount() {
 		// webpage background color
 		document.body.style.backgroundColor = "#FFFFFF";
+
+        if(this.props.history.action === 'POP') {
+            this.setState({requestSuccessful: false});
+        }
+        else {
+            if(this.props.location.state!== undefined){
+            if (this.props.location.state.requestSuccessful !== undefined){
+                this.setState({requestSuccessful: this.props.location.state.requestSuccessful});
+            }
+            else if(this.props.location.state.creationSuccessful !== undefined){
+                this.setState({creationSuccessful: this.props.location.state.creationSuccessful});
+            }
+        }
+        }
 	}
+
+    hideAlert() {
+
+        const {requestSuccessful, creationSuccessful} = this.state
+
+        if(requestSuccessful){
+            setTimeout(() => {this.setState({
+                requestSuccessful: false})}, 3000);
+        }
+
+        else if(creationSuccessful){
+            setTimeout(() => {this.setState({
+                creationSuccessful: false})}, 3000);
+            }
+        }
+    
+
     render() {
 
         const is_client = this.currentUser.type === accountType.client
         const is_student = this.currentUser.type === accountType.student
-      
+        const {requestSuccessful, creationSuccessful} = this.state
         return (
             <div>
+                {requestSuccessful && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
+                 The job has been requested succesfully!!! 👍🏼</Alert>}
+
+                {creationSuccessful && <Alert onLoad={this.hideAlert()} severity="success" className="server-error-job-creation">
+                The job has been created succesfully!!! 👍🏼</Alert>}
+
                 <div className="myjobs-card-general-style">
                     <div className="myjobs-card-container">
                         {is_client &&  <MyJobsCard title="Posted Jobs" imgtype = "1" status="1"/> }

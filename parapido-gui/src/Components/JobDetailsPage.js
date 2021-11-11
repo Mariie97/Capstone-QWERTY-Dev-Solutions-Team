@@ -101,7 +101,6 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
-
         const {showAgreement} = this.state;
         this.setState({showAgreement: !showAgreement});
     }

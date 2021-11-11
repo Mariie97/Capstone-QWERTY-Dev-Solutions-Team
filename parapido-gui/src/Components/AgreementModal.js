@@ -107,7 +107,6 @@ class AgreementModal extends Component {
         const {checked, isclient, isstudent, requestSuccessful} = this.state;
         const {isOpen, toggle} = this.props;
 
-
         return (
             <StyledEngineProvider injectFirst>
                 
@@ -129,10 +128,9 @@ class AgreementModal extends Component {
                                     </label>
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
-                                    {isstudent && <Redirect to='/listings?status=1'/>}
                                     {isstudent && <Redirect to={{
-                                        pathname: '//listings?status=1',
-                                        // state: { creationSuccessful: requestSuccessful }
+                                        pathname: '/myjobs',
+                                        state: { requestSuccessful: requestSuccessful }
                                     }}/>}
                                     {isclient && <Redirect to='/listings?status=2' />}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
