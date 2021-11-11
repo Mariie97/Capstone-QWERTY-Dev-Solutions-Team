@@ -36,7 +36,8 @@ class AgreementModal extends Component {
           checked: false,
           isclient: false,
           isstudent: false,
-          requestSuccessful: false
+          requestSuccessful: false,
+          studentIsChoosen: false,
         }
   
         this.handleOnClick= this.handleOnClick.bind(this);
@@ -69,7 +70,8 @@ class AgreementModal extends Component {
             ).then(response => {
             if(response.status === 200) {
                 this.setState({
-                    isclient: true
+                    isclient: true,
+                    studentIsChoosen:true, 
                   })        
             }
             else{
@@ -104,7 +106,7 @@ class AgreementModal extends Component {
       }
 
     render() {
-        const {checked, isclient, isstudent, requestSuccessful} = this.state;
+        const {checked, isclient, isstudent, requestSuccessful, studentIsChoosen} = this.state;
         const {isOpen, toggle} = this.props;
 
         return (
@@ -132,7 +134,10 @@ class AgreementModal extends Component {
                                         pathname: '/myjobs',
                                         state: { requestSuccessful: requestSuccessful }
                                     }}/>}
-                                    {isclient && <Redirect to='/listings?status=2' />}
+                                     {isclient && <Redirect to={{
+                                        pathname: '/myjobs',
+                                        state: { studentIsChoosen: studentIsChoosen}
+                                    }}/>}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
                                         <div className="text-button-agreement-modal">
                                             Agree & Continue
