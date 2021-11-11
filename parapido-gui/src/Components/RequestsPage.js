@@ -9,6 +9,7 @@ import {Link, Redirect} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {Box, CircularProgress} from "@material-ui/core";
 import {getQueryParams, verifyUserAuth} from "../Utilities";
+import AgreementModal from './AgreementModal.js'
 
 class RequestsPage extends Component {
     queryParams = undefined;
@@ -19,7 +20,8 @@ class RequestsPage extends Component {
         this.state = {
             is_auth: true,
             requestsList: [],
-            requestLoaded: false
+            requestLoaded: false,
+            showAgreement: false,
         };
 
         this.getJobRequests = this.getJobRequests.bind(this);
@@ -55,31 +57,14 @@ class RequestsPage extends Component {
         })
     }
 
-    onClickAccept(student_id) {
-        fetch('/assign_job',{
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                },
-                body: JSON.stringify({
-                    job_id: this.queryParams.get('job_id'),
-                    student_id: student_id
-                })
-            }
-        ).then(response => {
-            if(response.status === 200) {
-                //TODO: Redirect to job in progress page
-                alert('success');
-            }
-            else{
-                alert('Failed' + response.status);
-            }
-        })
+    onClickAccept() {
+        const {showAgreement} = this.state;
+        this.setState({showAgreement: !showAgreement});
     }
 
     renderCards() {
-        const { requestsList } = this.state;
+        const { requestsList, showAgreement } = this.state;
+        const token = this.props.cookies.get('csrf_access_token');
         return requestsList.map(request => (
             <Card sx={{width: 300}} className='student-request-cards'>
                 <Link to={`/profile/${request.user_id}`} className='student-request-card-content'>
@@ -98,7 +83,9 @@ class RequestsPage extends Component {
                     </CardContent>
                 </Link>
                 <CardActions className='request-card-actions-container'>
-                    <Button size="small" onClick={() => this.onClickAccept(request.user_id) }>Accept</Button>
+                    <Button size="small" onClick={this.onClickAccept}>Accept</Button>
+                    {showAgreement && <AgreementModal isOpen={showAgreement} toggle={this.onClickAccept} 
+                    job_id={this.queryParams.get('job_id')} student_id={request.user_id} cookies={token}/>}
                 </CardActions>
             </Card>
         ) )

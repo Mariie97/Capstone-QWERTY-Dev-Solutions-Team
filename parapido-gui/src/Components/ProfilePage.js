@@ -134,7 +134,7 @@ class ProfilePage extends Component {
                             {showButtons &&
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
-                                <Link to={"/jobdashboard"}>
+                                <Link to={"/myjobs"}>
                                     <button className="custom-buttons" onClick={this.toggleEdit}>
                                         {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>

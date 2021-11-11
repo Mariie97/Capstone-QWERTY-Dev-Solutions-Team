@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Tangerine&family=Old+Standard+TT:ital@1&display=swap');
+
+.myjobs-card-general-style{
+    font-family: 'Amatic SC';
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 1.5; 
+    cursor: pointer; 
+}
+
+.myjobs-card-container{
+    /* background-color: chocolate; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
+    gap: 28vh;
+    width: 99.9%;
+    justify-content: center;
+    padding-top: 34px;
+    place-items: center;
+    min-height: 80vh;
+}
+
+.myjobs-body-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #2F2D4A;
+    border-bottom-left-radius: 3vh;
+    
+    
+}
+
+.myjobs-card{
+    width: 30vh;
+    height: 35vh;
+    overflow: hidden;
+    box-shadow: 15px 15px 15px grey;
+    border-radius: 2vh; 
+    transition: transform 300ms ease-in;
+}
+
+.myjobs-body-container .bottom-card-styling-myjobs {
+    height: 12%;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+  
+.myjobs-body-container .bottom-square-myjobs{
+    width: 30vh;
+    height: 10vh;
+    background-color: #91EB8F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-square-myjobs:hover{
+    background-color: darkgray;
+    color: black;
+}
+
+.myjobs-body-container:hover {
+    background-color: black;  
+}
+
+.myjobs-body-container:hover .bottom-square-myjobs {
+    background-color: darkgray;
+    color: black;
+}
+
+/* Posted/Requested jobs img animation */
+
+#grow-myjobs {
+    width: 15vh;
+    height: 15vh;
+    transition: transform 300ms ease-in;
+}
+
+.myjobs-body-container:hover #grow-myjobs{
+    transform: scale(1.2);
+}
+
+.myjobs-card:hover{
+    transform: scale(1.1);
+}
+
+/* In-progress jobs animation */
+
+#grow1-myjobs {
+    width: 15vh;
+    height: 15vh;
+    transition: transform 1s ease-in-out;
+}
+
+.myjobs-body-container:hover #grow1-myjobs{
+    transform: rotate(360deg);
+}
+
+/* Completed jobs animation */
+
+#grow2-myjobs {
+    width: 15vh;
+    height: 15vh;
+    transition: 300ms ease;
+}
+
+.myjobs-body-container:hover #grow2-myjobs{
+    -webkit-transform: rotateZ(10deg);
+    -ms-transform: rotateZ(10deg);
+    transform: rotateZ(10deg);
+    transition: 300ms ease;
+}
+
+

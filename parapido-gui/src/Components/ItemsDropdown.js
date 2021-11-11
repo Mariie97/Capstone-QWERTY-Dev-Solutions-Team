@@ -52,12 +52,12 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required, blackLabel } = this.props;
+        const { label, required, blackLabel, removeDefault } = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                  <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
+                    <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}
@@ -79,7 +79,9 @@ class ItemsDropdown extends Component {
                         }}
                         disableUnderline
                     >
+                        {removeDefault === undefined &&
                         <MenuItem value={'0'}>Choose one... </MenuItem>
+                        }
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
