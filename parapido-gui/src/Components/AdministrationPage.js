@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/AdministrationPage.css'
-import {categories, getJobStatus, mapAccount, verifyUserAuth} from "../Utilities";
+import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";

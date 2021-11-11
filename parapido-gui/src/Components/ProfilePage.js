@@ -239,6 +239,7 @@ class ProfilePage extends Component {
                                                         });
                                                     }
                                                 }}
+                                                style={{border: "2px solid black"}}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item8">

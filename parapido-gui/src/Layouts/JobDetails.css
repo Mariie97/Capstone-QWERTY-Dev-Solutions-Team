@@ -9,3 +9,9 @@
     color: #ffebcc;
     cursor: pointer;
 }
+
+.MuiSelect-select.MuiSelect-select {
+    padding-right: 24px;
+    font-family: "Jost";
+    font-size: 15px;
+}
