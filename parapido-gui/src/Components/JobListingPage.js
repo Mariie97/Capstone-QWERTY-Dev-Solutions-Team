@@ -46,8 +46,11 @@ class JobListingPage extends Component {
 
         this.status = getQueryParams(this.props.queryParams).get('status');
         // console.log(this.status)
-        
+       
 
+        // if (this.props.location.state !== undefined){
+        //     this.setState({jobcreationSuccesful: this.props.location.state});
+        // }
         document.body.style.backgroundColor = "white";
 
         this.setState({

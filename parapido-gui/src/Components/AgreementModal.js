@@ -36,6 +36,7 @@ class AgreementModal extends Component {
           checked: false,
           isclient: false,
           isstudent: false,
+          requestSuccessful: false
         }
   
         this.handleOnClick= this.handleOnClick.bind(this);
@@ -91,7 +92,8 @@ class AgreementModal extends Component {
                 }).then(response => {
                     if (response.status === 200) {      
                         this.setState({
-                            isstudent: true
+                            isstudent: true,
+                            requestSuccessful: true
                             }) 
                     }
                     else {
@@ -102,7 +104,7 @@ class AgreementModal extends Component {
       }
 
     render() {
-        const {checked, isclient, isstudent} = this.state;
+        const {checked, isclient, isstudent, requestSuccessful} = this.state;
         const {isOpen, toggle} = this.props;
 
 
@@ -119,8 +121,7 @@ class AgreementModal extends Component {
                                 <div className="logo-flex-Agreement">
                                     <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                                 </div>
-                                <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>
-                              
+                                <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>      
                                 <div className="body-container-agreement-modal">
                                     <p className="long-text-agreement-modal"> 
                                     <label class="checkbox">
@@ -128,7 +129,11 @@ class AgreementModal extends Component {
                                     </label>
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
-                                    {isstudent && <Redirect to='/listings?status=1' />}
+                                    {isstudent && <Redirect to='/listings?status=1'/>}
+                                    {isstudent && <Redirect to={{
+                                        pathname: '//listings?status=1',
+                                        // state: { creationSuccessful: requestSuccessful }
+                                    }}/>}
                                     {isclient && <Redirect to='/listings?status=2' />}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
                                         <div className="text-button-agreement-modal">
