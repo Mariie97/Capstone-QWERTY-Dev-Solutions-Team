@@ -89,7 +89,7 @@ class LoginModal extends Component {
     }
 
     render() {
-        const { isOpen, toggle, adminLogin } = this.props;
+        const { isOpen, toggle, adminLogin} = this.props;
         const { login_success, login_failed, loginError, emailError, passwordError, redirectAdminLogin} = this.state;
         const redirect = adminLogin === undefined ?  '/jobdashboard' : '/admin/site' ;
 
@@ -163,7 +163,6 @@ class LoginModal extends Component {
                             {adminLogin === undefined &&
                             <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
                             }
-
                             <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
                         </ul>
                     </Box>

@@ -25,9 +25,9 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/'
-                        render={() => (
+                        render={(props) => (
                             <React.Fragment>
-                                <LandingPage cookies={this.props.cookies} />
+                                <LandingPage {...props} cookies={this.props.cookies} />
                             </React.Fragment>
                         )}
                     />

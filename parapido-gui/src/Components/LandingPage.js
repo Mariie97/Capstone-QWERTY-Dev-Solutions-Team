@@ -13,6 +13,7 @@ class LandingPage extends Component {
 		this.state = {
 			showLogin: false,
 			is_auth: false,
+			psswordChangedSuccesfully: false
 		};
 
 		this.showLoginModal = this.showLoginModal.bind(this);
@@ -23,6 +24,9 @@ class LandingPage extends Component {
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
 
+		if(this.props.location !== undefined)  this.setState(
+			{psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully,showLogin:true});
+		
 		// webpage background color
 		document.body.style.backgroundColor = "#2F2D4A";
 	}
@@ -32,8 +36,11 @@ class LandingPage extends Component {
 	}
 
 	render() {
+		const {psswordChangedSuccesfully} = this.state
+		console.log(psswordChangedSuccesfully)
 		return (
 			<div>
+				{psswordChangedSuccesfully &&	<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
 					<img className="logostyle" src={logo} alt="Logo" />

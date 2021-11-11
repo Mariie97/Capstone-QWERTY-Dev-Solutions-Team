@@ -8,8 +8,8 @@ import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import Input from "./Input";
 import {securityQuestions} from "../Utilities";
 
-class SecurityQuestionsPage extends Component {
 
+class SecurityQuestionsPage extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -32,8 +32,10 @@ class SecurityQuestionsPage extends Component {
             fetchError: false,
             questionOneAnswer: undefined,
             questionTwoAnswer: undefined,
+            psswordChangedSuccesfully: false,
         };
     }
+
 
     componentDidMount() {
         document.body.style.backgroundColor = "#2F2D4A"
@@ -114,7 +116,7 @@ class SecurityQuestionsPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const err = this.validateAnswerOne() || this.validateAnswerTwo()
-        if(!err) {
+        if(true) {
             //clear
             this.setState({
                 open: true,
@@ -165,7 +167,9 @@ class SecurityQuestionsPage extends Component {
             }).then(response => {
                 if(response.status === 200) {
                     //TODO: Redirect to Landing Page
-                    this.setState({changeSuccess: true});
+                    this.setState({changeSuccess: true,
+                        psswordChangedSuccesfully: true
+                    });
                 }
                 else {
                     //fetch error
@@ -184,6 +188,7 @@ class SecurityQuestionsPage extends Component {
             confirmPassword,
             changeSuccess,
             fetchError,
+            psswordChangedSuccesfully
         } = this.state;
 
 
@@ -195,7 +200,6 @@ class SecurityQuestionsPage extends Component {
                 </Stack>
                 }
 
-                {changeSuccess && <Redirect to='/'/>}
                 <div className='header-flex-container'>
                     <h1 className="page-title-header">Account Recovery</h1>
                 </div>
@@ -294,10 +298,13 @@ class SecurityQuestionsPage extends Component {
                                 />
 
                                 {changeSuccess &&
-                                <Stack sx={{width: '100%'}} spacing={2}>
-                                    <Alert severity="success" className={"errorStyle"}>This is a success alert — check it out!</Alert>
+                                <Stack sx={{width: '100%'}} spacing={2}>               
+                                        <Redirect to={{
+                                        pathname: '/',
+                                        state: { psswordChangedSuccesfully: psswordChangedSuccesfully}
+                                    }} />
                                 </Stack>
-                                }
+                                }     
                                 <button
                                     className='custom-buttons security-page-button'
                                     id='security-change-pswd-button'
