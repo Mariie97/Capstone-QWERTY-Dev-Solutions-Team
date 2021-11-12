@@ -156,10 +156,13 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/admin/site'
-                        render={() => (
+                        render={props => (
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
-                                <AdministrationPage cookies={this.props.cookies} />
+                                <AdministrationPage
+                                    cookies={this.props.cookies}
+                                    {...props}
+                               />
                             </React.Fragment>
                         )}
                     />

@@ -4,6 +4,7 @@ import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from 
 import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
 
 
 class AdministrationPage extends Component {
@@ -28,7 +29,11 @@ class AdministrationPage extends Component {
             jobCategoryRef: createRef(),
             currentEntity: this.entity.users,
             is_auth: true,
-            is_admin: this.currentUser.type === accountType.admin
+            is_admin: this.currentUser.type === accountType.admin,
+            alert: {
+                msg: undefined,
+                severity: undefined
+            }
         };
 
         this.renderUsers = this.renderUsers.bind(this);
@@ -36,6 +41,7 @@ class AdministrationPage extends Component {
         this.getAllUsers = this.getAllUsers.bind(this);
         this.getAllJobs = this.getAllJobs.bind(this);
         this.clearFilters = this.clearFilters.bind(this);
+        this.hideAlert = this.hideAlert.bind(this);
     }
 
     getAllUsers() {
@@ -139,6 +145,19 @@ class AdministrationPage extends Component {
         });
 
         this.getAllUsers();
+        if(this.props.history.action === 'POP') {
+            this.setState({
+                alert: {msg: undefined}
+            });
+        }
+        else {
+            this.setState({
+                alert: {
+                    msg: this.props.location.state?.alertMsg,
+                    severity: this.props.location.state?.alertSeverity
+                }
+            });
+        }
     }
 
     renderUsers() {
@@ -174,12 +193,24 @@ class AdministrationPage extends Component {
         ))
     }
 
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            alert: {msg: undefined}})}, 3000);
+    }
+
+
     render() {
         //TODO: Add 403 forbidden when user is not admin
-        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin} = this.state;
+        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin,
+            alert
+        } = this.state;
         return (
             <div>
                 {(!is_auth || !is_admin) && <Redirect to='/' />}
+                {alert.msg !== undefined &&
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                    {alert.msg}</Alert>
+                }
                 <h1 className="page-title-header">
                     Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
                 </h1>

@@ -6,6 +6,8 @@ import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import LoginModal from './LoginModal';
+
+
 class LandingPage extends Component {
 
 	constructor(props){

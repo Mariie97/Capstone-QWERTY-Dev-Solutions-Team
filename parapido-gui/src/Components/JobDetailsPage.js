@@ -43,6 +43,10 @@ class JobDetailsPage extends Component {
             pageLoaded: false,
             redirect: undefined,
             showAgreement: false,
+            alert: {
+                msg: undefined,
+                severity: 'success'
+            },
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
@@ -139,7 +143,7 @@ class JobDetailsPage extends Component {
 
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded, redirect, showAgreement } = this.state;
+        const {is_auth, job, pageLoaded, redirect, showAgreement, alert } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
 
@@ -176,7 +180,13 @@ class JobDetailsPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {redirect !== undefined && <Redirect to={redirect} />}
+                        {redirect !== undefined && <Redirect to={{
+                            pathname: redirect,
+                            state: {
+                                alertMsg: alert.msg,
+                                alertSeverity: alert.severity
+                            }
+                        }} />}
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
@@ -227,8 +237,21 @@ class JobDetailsPage extends Component {
                                     onClick={() => {
                                         const success = setJobStatus(token, job_id, jobStatus.deleted);
                                         if(success) {
-                                            //TODO: Redirect to user admin list page
-                                            this.setState({redirect: '/jobdashboard'});
+                                            this.setState({
+                                                redirect: '/admin/site',
+                                                alert: {
+                                                    msg: 'Job deleted successfully',
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            this.setState({
+                                                redirect: '/admin/site',
+                                                alert: {
+                                                    msg: 'Can not delete the job at this moment',
+                                                    severity: 'error'
+                                                }
+                                            });
                                         }
                                     }}
                                     className="custom-buttons delete-button"
