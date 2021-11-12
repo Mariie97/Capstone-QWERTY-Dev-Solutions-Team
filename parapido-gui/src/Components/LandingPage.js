@@ -18,7 +18,6 @@ class LandingPage extends Component {
 			psswordChangedSuccesfully: false,
 			alertMssg: undefined,
 			severity: undefined,
-			alertPasswordMssg: undefined,
 		};
 
 		this.showLoginModal = this.showLoginModal.bind(this);
@@ -34,15 +33,14 @@ class LandingPage extends Component {
         }
         else {
             if(this.props.location.state !== undefined){
-				if (this.props.location.state.psswordChangedSuccesfully !== undefined){
+				if (this.props.location.state.psswordChangedSuccesfully !== undefined){ 
 					this.setState({psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully, showLogin:true,
-						alertPasswordMssg:"Password was succesfully changed!!! 👍🏼",
 					});}
 				if(this.props.location.state.alertMssg !== undefined && this.props.location.state.severity !== undefined){
-					this.setState(
+					this.setState( 
 						this.setState({alertMssg: this.props.location.state.alertMssg,
 						severity: this.props.location.state.severity
-						})
+						})	
 						)
 				}
 			}
@@ -63,7 +61,7 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		const {psswordChangedSuccesfully, alertMssg, severity, alertPasswordMssg} = this.state
+		const {psswordChangedSuccesfully, alertMssg, severity} = this.state
 		return (
 			<div>
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
@@ -79,12 +77,12 @@ class LandingPage extends Component {
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
 							{this.state.showLogin && 
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} alertPasswordMssg={alertPasswordMssg} />}
+								<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>}
 						</li>
 					</ul>
 				</div>
 				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation1">
-                {alertMssg}</Alert>}
+                {alertMssg}</Alert>} 
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
 				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students

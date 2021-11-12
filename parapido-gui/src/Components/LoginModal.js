@@ -22,7 +22,6 @@ const style = {
 }
 
 class LoginModal extends Component {
-    
 
     constructor(props){
         super(props);
@@ -35,19 +34,16 @@ class LoginModal extends Component {
             passwordError: undefined,
             loginError: undefined,
             redirectAdminLogin: false,
-            alertPasswordMssg: this.props.alertPasswordMssg,
-
         };
+
         // event methods - before render method
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
-        this.hideAlert = this.hideAlert.bind(this);
 
         // validation methods - end of render method
         this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
     }
-
 
     async handleOnClick() {
         const {email, password} = this.state;
@@ -91,16 +87,10 @@ class LoginModal extends Component {
         this.setState({[name]:value});
     }
 
-    hideAlert() {
-		setTimeout(() => { this.setState({
-			alertPasswordMssg: undefined})}, 2000);
-      
-	}
-
     render() {
 
         const { isOpen, toggle, adminLogin} = this.props;
-        const { login_success, login_failed, loginError, emailError, passwordError, redirectAdminLogin, alertPasswordMssg} = this.state;
+        const { login_success, login_failed, loginError, emailError, passwordError, redirectAdminLogin} = this.state;
         const redirect = adminLogin === undefined ?  '/jobdashboard' : '/admin/site' ;
 
         return (
@@ -113,14 +103,9 @@ class LoginModal extends Component {
                 >
                     <Box sx={style}>
                         {loginError !==undefined &&
-                        <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
-                            {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
-                        </Alert>
-                        }
-                        {alertPasswordMssg !== undefined &&
-                        <div style={{marginBottom:"3vh"}}>
-                            <Alert severity="success" onLoad={this.hideAlert()}>{alertPasswordMssg}</Alert>
-                        </div>
+                            <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
+                            </Alert>
                         }
                         <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
