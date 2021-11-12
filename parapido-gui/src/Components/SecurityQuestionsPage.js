@@ -33,6 +33,7 @@ class SecurityQuestionsPage extends Component {
             questionOneAnswer: undefined,
             questionTwoAnswer: undefined,
             psswordChangedSuccesfully: false,
+            serverDown: false
         };
     }
 
@@ -166,7 +167,6 @@ class SecurityQuestionsPage extends Component {
                 })
             }).then(response => {
                 if(response.status === 200) {
-                    //TODO: Redirect to Landing Page
                     this.setState({changeSuccess: true,
                         psswordChangedSuccesfully: true
                     });
@@ -174,7 +174,10 @@ class SecurityQuestionsPage extends Component {
                 else {
                     //fetch error
                     //TODO: Change message to the correct text according to response's status code
-                    this.setState({passwordError: "DB Error Try Again"})
+                    console.log(response.status)
+                    if(response.status === 500){
+                        this.setState({serverDown: true})
+                    }
                 }
             })
         }
@@ -188,7 +191,8 @@ class SecurityQuestionsPage extends Component {
             confirmPassword,
             changeSuccess,
             fetchError,
-            psswordChangedSuccesfully
+            psswordChangedSuccesfully,
+            serverDown
         } = this.state;
 
 
@@ -196,7 +200,7 @@ class SecurityQuestionsPage extends Component {
             <div>
                 {fetchError &&
                 <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error" className={"errorStyle"}>An error has occurred,.Please try again later!</Alert>
+                    <Alert severity="error" className="server-error-job-creation">An error has occurred 😔, Please try again later! </Alert>
                 </Stack>
                 }
 
@@ -266,10 +270,13 @@ class SecurityQuestionsPage extends Component {
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                     >
-                        <Backdrop open={open} style={backdropStyle}>
-                            <div className='security-modal-container'>
-                                <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
-                                <h2 className='modalTextStyle'> Enter your new password: </h2>
+                           
+                        <Backdrop open={open} style={backdropStyle}>       
+                            <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
+                            <div className='security-modal-container'>     
+                                <h2 className='modalTextStyle'> 
+                                <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
+                                Enter your new password: </h2>
                                 <Input
                                     required
                                     blackLabel
@@ -296,7 +303,6 @@ class SecurityQuestionsPage extends Component {
                                     errorMsg={this.state.confirmPasswordError}
                                     className='security-page-input'
                                 />
-
                                 {changeSuccess &&
                                 <Stack sx={{width: '100%'}} spacing={2}>               
                                         <Redirect to={{

@@ -24,7 +24,7 @@ class LandingPage extends Component {
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
 
-		if(this.props.location !== undefined)  this.setState(
+		if(this.props.location.state !== undefined)  this.setState(
 			{psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully,showLogin:true});
 		
 		// webpage background color
