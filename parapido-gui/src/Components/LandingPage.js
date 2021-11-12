@@ -6,7 +6,7 @@ import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import LoginModal from './LoginModal';
-
+import Alert from '@material-ui/lab/Alert';
 
 class LandingPage extends Component {
 
@@ -15,26 +15,36 @@ class LandingPage extends Component {
 		this.state = {
 			showLogin: false,
 			is_auth: false,
-			psswordChangedSuccesfully: false
+			psswordChangedSuccesfully: false,
+			alertMssg: undefined,
+			severity: undefined,
+			alertPasswordMssg: undefined,
 		};
 
 		this.showLoginModal = this.showLoginModal.bind(this);
+		this.hideAlert = this.hideAlert.bind(this);
 	}
 
 	componentDidMount() {
 		this.setState({
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
-		
 		if(this.props.history.action === 'POP') {
             this.setState({psswordChangedSuccesfully: false, showLogin: false});
         }
         else {
             if(this.props.location.state !== undefined){
-
-            if (this.props.location.state.psswordChangedSuccesfully !== undefined) 
-				this.setState({psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully, showLogin:true});
-			
+				if (this.props.location.state.psswordChangedSuccesfully !== undefined){
+					this.setState({psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully, showLogin:true,
+						alertPasswordMssg:"Password was succesfully changed!!! 👍🏼",
+					});}
+				if(this.props.location.state.alertMssg !== undefined && this.props.location.state.severity !== undefined){
+					this.setState(
+						this.setState({alertMssg: this.props.location.state.alertMssg,
+						severity: this.props.location.state.severity
+						})
+						)
+				}
 			}
 		}
 		
@@ -46,12 +56,17 @@ class LandingPage extends Component {
 		this.setState({showLogin: !this.state.showLogin});
 	}
 
+	hideAlert() {
+		setTimeout(() => {this.setState({
+			alertMssg: undefined,
+			severity: undefined})}, 3000);
+	}
+
 	render() {
-		const {psswordChangedSuccesfully} = this.state
-		console.log(psswordChangedSuccesfully)
+		const {psswordChangedSuccesfully, alertMssg, severity, alertPasswordMssg} = this.state
 		return (
 			<div>
-				{psswordChangedSuccesfully &&	<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
+				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
 					<img className="logostyle" src={logo} alt="Logo" />
@@ -64,10 +79,12 @@ class LandingPage extends Component {
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
 							{this.state.showLogin && 
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
+							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} alertPasswordMssg={alertPasswordMssg} />}
 						</li>
 					</ul>
 				</div>
+				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation1">
+                {alertMssg}</Alert>}
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
 				<p className="first-paragraph-landing">Our team is committed in helping and providing flexible jobs to more than 10+ thousand low-income students

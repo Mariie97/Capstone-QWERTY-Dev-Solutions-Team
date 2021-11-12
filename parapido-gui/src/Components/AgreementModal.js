@@ -24,6 +24,7 @@ const style = {
 }
 
 class AgreementModal extends Component {
+    
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
@@ -36,16 +37,14 @@ class AgreementModal extends Component {
           checked: false,
           isclient: false,
           isstudent: false,
-          requestSuccessful: false,
           studentIsChoosen: false,
+          alertMssg: undefined,
+          severity: undefined
         }
-  
         this.handleOnClick= this.handleOnClick.bind(this);
         this.isChecked = this.isChecked.bind(this);
       }
   
- 
-
       isChecked(event){
             this.setState({
                 checked: event.target.checked
@@ -71,7 +70,8 @@ class AgreementModal extends Component {
             if(response.status === 200) {
                 this.setState({
                     isclient: true,
-                    studentIsChoosen:true, 
+                    alertMssg: "The job has been successfully added to the In-progress status!!! 👍🏼",
+                    severity: "info"
                   })        
             }
             else{
@@ -79,7 +79,6 @@ class AgreementModal extends Component {
             }
             })
           }
-
           else if(this.currentUser.type === accountType.student){           
                 fetch('/request_job', {
                     method: 'POST',
@@ -95,7 +94,8 @@ class AgreementModal extends Component {
                     if (response.status === 200) {      
                         this.setState({
                             isstudent: true,
-                            requestSuccessful: true
+                            alertMssg: "The job has been requested succesfully!!! 👍🏼",
+                            severity: "success"
                             }) 
                     }
                     else {
@@ -106,7 +106,7 @@ class AgreementModal extends Component {
       }
 
     render() {
-        const {checked, isclient, isstudent, requestSuccessful, studentIsChoosen} = this.state;
+        const {checked, isclient, isstudent, alertMssg, severity} = this.state;
         const {isOpen, toggle} = this.props;
 
         return (
@@ -132,11 +132,11 @@ class AgreementModal extends Component {
                                     <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to={{
                                         pathname: '/myjobs',
-                                        state: { requestSuccessful: requestSuccessful }
+                                        state: { alertMssg: alertMssg, severity: severity }
                                     }}/>}
                                      {isclient && <Redirect to={{
                                         pathname: '/myjobs',
-                                        state: { studentIsChoosen: studentIsChoosen}
+                                        state: { alertMssg: alertMssg, severity: severity}
                                     }}/>}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
                                         <div className="text-button-agreement-modal">
