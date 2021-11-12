@@ -190,13 +190,16 @@ class JobDetailsPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {redirect !== undefined && <Redirect to={{
+                        {redirect !== undefined &&
+                        <Redirect to={{
                             pathname: redirect,
                             state: {
-                                alertMsg: alert.msg,
-                                alertSeverity: alert.severity
+                                alertMssg: alert.msg,
+                                severity: alert.severity,
                             }
-                        }} />}
+                        }}
+                        />
+                        }
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
@@ -215,8 +218,23 @@ class JobDetailsPage extends Component {
                                         const status = this.currentUser.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
                                         const success = setJobStatus(token, job_id, status);
                                         if(success) {
-                                            //TODO: Redirect: student_request or job_posted depending on user account
-                                            this.setState({redirect: '/jobdashboard'});
+                                            this.setState({
+                                                redirect: '/myjobs',
+                                                alert: {
+                                                    msg: 'Job canceled successfully',
+                                                    severity: 'success'
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            this.setState({
+                                                redirect: '/myjobs',
+                                                alert: {
+                                                    msg: 'Can not cancel the job a this moment, please try again later.',
+                                                    severity: 'error'
+                                                }
+                                            });
+
                                         }
                                     }}
                                     className="custom-buttons"

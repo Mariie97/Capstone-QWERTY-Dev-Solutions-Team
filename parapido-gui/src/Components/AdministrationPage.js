@@ -153,8 +153,8 @@ class AdministrationPage extends Component {
         else {
             this.setState({
                 alert: {
-                    msg: this.props.location.state?.alertMsg,
-                    severity: this.props.location.state?.alertSeverity
+                    msg: this.props.location.state?.alertMssg,
+                    severity: this.props.location.state?.severity
                 }
             });
         }

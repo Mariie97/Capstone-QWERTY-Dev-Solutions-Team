@@ -132,8 +132,8 @@ class ProfilePage extends Component {
                 {redirect !== undefined && <Redirect to={{
                     pathname: redirect,
                     state: {
-                        alertMsg: alert.msg,
-                        alertSeverity: alert.severity
+                        alertMssg: alert.msg,
+                        severity: alert.severity
                     }
                 }} />
                 }
