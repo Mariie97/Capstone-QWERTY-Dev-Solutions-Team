@@ -16,6 +16,7 @@ class myJobsDashboardPage extends Component {
             requestSuccessful: false,
             creationSuccessful: false,
             studentIsChoosen: false,
+            alertMssg: ""
         };
 
         this.hideAlert = this.hideAlert.bind(this);
@@ -26,11 +27,11 @@ class myJobsDashboardPage extends Component {
 		document.body.style.backgroundColor = "#FFFFFF";
 
         if(this.props.history.action === 'POP') {
-            this.setState({requestSuccessful: false});
+            this.setState({requestSuccessful: false, creationSuccessful:false});
         }
         else {
             if(this.props.location.state !== undefined){
-            console.log(this.props.location.state.studentIsChoosen)
+
             if (this.props.location.state.requestSuccessful !== undefined){
                 this.setState({requestSuccessful: this.props.location.state.requestSuccessful});
             }

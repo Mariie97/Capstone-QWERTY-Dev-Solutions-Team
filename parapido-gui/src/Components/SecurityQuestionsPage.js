@@ -139,7 +139,12 @@ class SecurityQuestionsPage extends Component {
     }
 
     handleClose = () => {
-            this.setState({open: false})
+            this.setState({open: false,
+                passwordError: undefined,
+                confirmPasswordError: undefined,
+                password: '',
+                confirmPassword: ''
+            })
     };
 
 
@@ -336,6 +341,7 @@ class SecurityQuestionsPage extends Component {
                                     errorMsg={this.state.confirmPasswordError}
                                     className='security-page-input'
                                 />
+                                
                                 {changeSuccess &&
                                 <Stack sx={{width: '100%'}} spacing={2}>               
                                         <Redirect to={{

@@ -23,9 +23,18 @@ class LandingPage extends Component {
 		this.setState({
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
+		
+		if(this.props.history.action === 'POP') {
+            this.setState({psswordChangedSuccesfully: false, showLogin: false});
+        }
+        else {
+            if(this.props.location.state !== undefined){
 
-		if(this.props.location.state !== undefined)  this.setState(
-			{psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully,showLogin:true});
+            if (this.props.location.state.psswordChangedSuccesfully !== undefined) 
+				this.setState({psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully, showLogin:true});
+			
+			}
+		}
 		
 		// webpage background color
 		document.body.style.backgroundColor = "#2F2D4A";

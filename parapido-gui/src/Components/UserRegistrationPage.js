@@ -445,11 +445,13 @@ class UserRegistrationPage extends Component {
                 <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
                 }
 
-
                 {registerSuccess &&
                 <div>
-                    <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
-                    <Redirect to='/' />
+                   <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
+                   <Redirect to={{
+                                pathname: '/',
+                                state: { registerSuccess: registerSuccess }
+                                }}/>
                 </div>
                 }
                 <form>
