@@ -33,10 +33,11 @@ export class JobCreation extends Component {
             descriptionError: undefined,
             zipcodeError: undefined,
             priceError: undefined,
-            creationSuccessful: false,
             serverProcessedRequest: true,
             is_auth: true,
-            is_client: this.currentUser.type === accountType.client
+            is_client: this.currentUser.type === accountType.client,
+            alertMssg: undefined,
+            severity: undefined
         };
 
         // event methods - before render method
@@ -124,7 +125,8 @@ export class JobCreation extends Component {
         }).then(response => {
                 if(response.status === 201) {
                     this.setState({
-                        creationSuccessful: true
+                        alertMssg: "The job has been created succesfully!!! 👍🏼",
+                        severity: "success"
                     })
                 }
                 else{
@@ -140,7 +142,6 @@ export class JobCreation extends Component {
             change_category,
             availableDays_chips,
             serverProcessedRequest,
-            creationSuccessful,
             is_auth,
             titleError,
             descriptionError,
@@ -151,17 +152,20 @@ export class JobCreation extends Component {
             street,
             description,
             zipcode,
-            is_client
+            is_client,
+            alertMssg,
+            severity
         } = this.state
-
-        
+        	    
         return (
             <React.Fragment>
                 {(!is_auth || !is_client)&& <Redirect to='/' />}
-                {creationSuccessful && <Redirect to={{
+                { (alertMssg !== undefined && severity !== undefined) && <Redirect to={{
                     pathname: '/myjobs',
-                    state: { creationSuccessful: "true" }
+                    state: { alertMssg: alertMssg,
+                             severity: severity}
                 }}/>}
+                
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                     Sorry can't create job right now 😔 please try again later!!!
                 </Alert>}

@@ -444,6 +444,17 @@
 	align-items: center;
 }
 
+.server-error-job-creation1{
+	position: absolute;
+	width: 50%;
+	bottom: 77vh;
+	margin-left: 15vh;
+	height: 4%;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
 .job-creation-dropdown {
 	min-width: 50%;
 }
