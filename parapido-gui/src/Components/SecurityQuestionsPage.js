@@ -93,6 +93,19 @@ class SecurityQuestionsPage extends Component {
     }
 
     validatePassword = () => {
+
+        if(this.state.password === ""){
+            this.setState({
+                passwordError: "This Field is required",
+            });
+            return true;
+        }
+        if(this.state.confirmPassword === ""){
+            this.setState({
+                confirmPasswordError: "This Field is required",
+            });
+            return true;
+        }
         if (this.state.password !== this.state.confirmPassword && this.state.confirmPassword !== "") {
             this.setState({
                 passwordError: "Passwords do not match",
@@ -101,6 +114,7 @@ class SecurityQuestionsPage extends Component {
             return true;
         }
 
+      
         this.setState({
             passwordError: undefined,
             confirmPasswordError: undefined,
@@ -109,8 +123,6 @@ class SecurityQuestionsPage extends Component {
     }
 
     handleClose = () => {
-
-       
             this.setState({open: false})
     };
 
