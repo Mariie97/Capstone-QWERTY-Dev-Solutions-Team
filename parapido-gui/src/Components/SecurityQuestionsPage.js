@@ -109,7 +109,8 @@ class SecurityQuestionsPage extends Component {
     }
 
     handleClose = () => {
-        if(this.state.password === this.state.confirmPassword && this.state.password !== "" && this.state.confirmPassword !== "")
+
+       
             this.setState({open: false})
     };
 
@@ -117,7 +118,7 @@ class SecurityQuestionsPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         const err = this.validateAnswerOne() || this.validateAnswerTwo()
-        if(true) {
+        if(!err) {
             //clear
             this.setState({
                 open: true,
@@ -127,7 +128,7 @@ class SecurityQuestionsPage extends Component {
     };
 
     onSubmitEmail = (e) => {
-        //Make sure the email is valid and exists. Also fetch the questions and answers]
+        //Make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validateEmail()
         if (!err) {
@@ -146,7 +147,7 @@ class SecurityQuestionsPage extends Component {
                     })
                 }
                 else{
-                    this.setState({fetchError: true})
+                    if(response.status === 500) this.setState({fetchError: true})
                 }
             })
         }
