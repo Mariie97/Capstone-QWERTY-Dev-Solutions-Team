@@ -218,7 +218,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }

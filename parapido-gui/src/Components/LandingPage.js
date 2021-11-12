@@ -18,7 +18,6 @@ class LandingPage extends Component {
 			psswordChangedSuccesfully: false,
 			alertMssg: undefined,
 			severity: undefined,
-			alertPasswordMssg: undefined,
 		};
 
 		this.showLoginModal = this.showLoginModal.bind(this);
@@ -36,7 +35,6 @@ class LandingPage extends Component {
             if(this.props.location.state !== undefined){
 				if (this.props.location.state.psswordChangedSuccesfully !== undefined){ 
 					this.setState({psswordChangedSuccesfully: this.props.location.state.psswordChangedSuccesfully, showLogin:true,
-						alertPasswordMssg:"Password was succesfully changed!!! 👍🏼",	
 					});}
 				if(this.props.location.state.alertMssg !== undefined && this.props.location.state.severity !== undefined){
 					this.setState( 
@@ -63,7 +61,7 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		const {psswordChangedSuccesfully, alertMssg, severity, alertPasswordMssg} = this.state
+		const {psswordChangedSuccesfully, alertMssg, severity} = this.state
 		return (
 			<div>
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
@@ -79,7 +77,7 @@ class LandingPage extends Component {
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
 							{this.state.showLogin && 
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} alertPasswordMssg={alertPasswordMssg} />}
+								<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>}
 						</li>
 					</ul>
 				</div>
