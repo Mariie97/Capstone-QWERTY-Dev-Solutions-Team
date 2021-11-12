@@ -3,7 +3,7 @@ import {Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {current_user, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
+import {getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
@@ -27,8 +27,8 @@ class JobListingPage extends Component {
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
-            userAccountType: current_user.type,
-            user_id: current_user.id,
+            userAccountType: parseInt(localStorage.getItem('type')),
+            user_id: parseInt(localStorage.getItem('user_id')),
             titleText: '',
             currJob: '',
             userToRate: '',
