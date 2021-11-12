@@ -91,35 +91,51 @@ class SecurityQuestionsPage extends Component {
         this.setState({ emailError: undefined})
         return false;
     }
-
-    validatePassword = () => {
-
-        if(this.state.password === ""){
+    
+    validateFirstPassword = () => {
+        if(this.state.password.length === 0){
             this.setState({
                 passwordError: "This Field is required",
             });
             return true;
         }
-        if(this.state.confirmPassword === ""){
+        this.setState({
+            passwordError: undefined
+        })
+        return false;       
+    }
+    
+    validateConfirmPassword = () => {
+        if(this.state.confirmPassword.length === 0){
             this.setState({
                 confirmPasswordError: "This Field is required",
             });
             return true;
         }
-        if (this.state.password !== this.state.confirmPassword && this.state.confirmPassword !== "") {
+        this.validatePassword()
+        if(this.validatePassword() !== true){
+        this.setState({
+            confirmPasswordError: undefined
+        })
+        return false;
+    }
+    }
+
+
+
+    validatePassword = () => {
+        if (this.state.password !== this.state.confirmPassword) {
             this.setState({
                 passwordError: "Passwords do not match",
                 confirmPasswordError: "Passwords do not match",
             });
             return true;
         }
-
-      
         this.setState({
             passwordError: undefined,
-            confirmPasswordError: undefined,
+            confirmPasswordError: undefined
         })
-        return false;
+        return false;    
     }
 
     handleClose = () => {
@@ -169,8 +185,12 @@ class SecurityQuestionsPage extends Component {
         //Here we make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validatePassword()
-
-        if (!err) {
+        if(err) return false
+        const err1 = this.validateFirstPassword()
+        const err2 = this.validateConfirmPassword()
+        if(err1) return false
+        else if (err2) return false
+        if(!err){
             fetch('/change_password',{
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -299,7 +319,7 @@ class SecurityQuestionsPage extends Component {
                                     name="password"
                                     value={password}
                                     onChange={e => this.change(e)}
-                                    onBlur={this.validatePassword}
+                                    onBlur={this.validateFirstPassword}
                                     errorMsg={this.state.passwordError}
                                     className='security-page-input black-label-input'
                                 />
@@ -312,7 +332,7 @@ class SecurityQuestionsPage extends Component {
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     onChange={e => this.change(e)}
-                                    onBlur={this.validatePassword}
+                                    onBlur={this.validateConfirmPassword}
                                     errorMsg={this.state.confirmPasswordError}
                                     className='security-page-input'
                                 />
