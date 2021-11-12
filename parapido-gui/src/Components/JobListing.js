@@ -1,11 +1,10 @@
 import React from 'react'
-import {Box, Button, Checkbox, IconButton, withStyles} from "@material-ui/core";
+import {Box, IconButton} from "@material-ui/core";
 import "../Layouts/JobListing.css"
-import {blue, green, pink, red} from "@material-ui/core/colors";
+import {blue, red} from "@material-ui/core/colors";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import {Link} from "react-router-dom";
-import {jobStatus, setJobStatus} from "../Utilities";
 
 const boxSX = {
     display: 'flex',
@@ -23,10 +22,12 @@ const boxSX = {
 }
 
 const categoryBoxSX = {
+    display: 'flex',
+    flexWrap: 'wrap',
     position: 'absolute',
     marginLeft: '25%',
     width: '7%',
-    height: 9,
+    height: 8,
     verticalAlign: 'middle',
     color: '#2F2D4A',
     align: 'center',
@@ -37,7 +38,9 @@ const categoryBoxSX = {
     border: 2,
     borderColor: 'black',
     padding: 17,
-    marginTop: 7,
+    alignSelf: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
 }
 
 
@@ -47,22 +50,24 @@ const listing = (props) => {
         <li list-style-type = "none">
 
 
+            <Link to = {"/job/" + props.job_id} className = "titleLink" >
+                <Box
+                    border = {2}
+                    borderColor = "black"
+                    sx = {boxSX}
+                    marginTop={5}
+                >
 
-            <Box
-                border = {2}
-                borderColor = "black"
-                sx = {boxSX}
-                marginTop={5}
-            >
+                    <span id={"listing-title"}> {props.title} </span>
+                    <span id={"listing-price"}> {props.price} </span>
+                    <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
+                    <span id={"listing-date"}> {props.date_posted} </span>
 
-                <span id={"listing-title"}> <Link to = {"/job/" + props.job_id} className = "titleLink" > {props.title} </Link> </span>
-                <span id={"listing-price"}> {props.price} </span>
-                <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
-                <span id={"listing-date"}> {props.date_posted} </span>
+                </Box>
+            </Link>
+                                { props.status === '2' &&
 
-                { props.status === '2' &&
-
-                <span id={"checkbox-style"}>
+                    <span id={"checkbox-style"}>
                         <IconButton>
                             <ThumbUpIcon
                                 sx={{ color: blue[100],
@@ -72,11 +77,11 @@ const listing = (props) => {
                             />
                         </IconButton>
                             </span>
-                }
+                    }
 
 
-                { (props.status === '1' || props.status === '2') &&
-                <span id={"delete-button"}>
+                    { (props.status === '1' || props.status === '2') &&
+                    <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
                         <DeleteIcon
                             onClick={props.deleteListing}
@@ -87,10 +92,7 @@ const listing = (props) => {
                         />
                     </IconButton>
                 </span>
-                }
-
-            </Box>
-
+                    }
         </li>
     )
 }

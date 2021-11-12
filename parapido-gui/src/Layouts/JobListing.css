@@ -2,7 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
 #listing-title {
-
     width: 18%;
     position: absolute;
     margin-left: 0%;
@@ -11,6 +10,10 @@
     text-align: left;
     vertical-align: middle;
     height: 60px;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
+
 }
 
 .titleLink {
@@ -30,11 +33,12 @@
     padding: 17px;
     vertical-align: middle;
     height: 60px;
-
+    align-self: center;
+    align-content: center;
+    justify-content: center;
 }
 
 #listing-date {
-
     width: 12%;
     position: absolute;
     margin-left: 33%;
@@ -43,6 +47,9 @@
     padding: 17px;
     vertical-align: middle;
     height: 60px;
+    align-self: center;
+    align-content: center;
+    justify-content: center;
 }
 
 .list-style {
@@ -86,6 +93,7 @@
     padding: 2px;
     vertical-align: middle;
     height: 60px;
+    margin-top: -59px;
 }
 
 #checkbox-style {
@@ -95,6 +103,7 @@
     margin-left: 46%;
     vertical-align: middle;
     height: 60px;
+    margin-top: -59px;
 }
 
 .month-dropdown-style {
@@ -165,7 +174,6 @@
 #picture-style{
     width: 500px;
     height: 500px;
-    background-color: #2F2D4A;
     margin-left: 5%;
     margin-top: 100px;
 }

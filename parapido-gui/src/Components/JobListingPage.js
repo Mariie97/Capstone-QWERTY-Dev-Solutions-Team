@@ -1,15 +1,14 @@
 import React, {Component, createRef} from 'react';
-import {Redirect} from "react-router-dom";
-import {Box, Button, IconButton} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {cities, verifyUserAuth, current_user, accountType, setJobStatus, jobStatus, getQueryParams} from "../Utilities";
+import {current_user, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
-import Completed from "../Static/Images/Completed.svg"
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import {blue} from "@material-ui/core/colors";
-import {FilterList} from "@mui/icons-material";
+import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
+import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
+import JobPosted_listings from "../Static/Images/JobPosted_listings.svg"
+import JobRequested_listings from "../Static/Images/JobRequested_listings.svg"
 
 
 class JobListingPage extends Component {
@@ -32,6 +31,7 @@ class JobListingPage extends Component {
             user_id: current_user.id,
             titleText: '',
             currJob: '',
+            userToRate: '',
             listIsEmpty: false,
         }
     }
@@ -39,56 +39,42 @@ class JobListingPage extends Component {
     componentDidMount(){
 
         this.status = getQueryParams(this.props.queryParams).get('status');
-
-        if(this.status === '1' && this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
-        else this.idFilter = "?owner_id=" + this.state.user_id
-
         document.body.style.backgroundColor = "white";
-
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        fetch('/jobs_list/' + this.status + this.idFilter, {
-            method: 'GET',
-            credentials: 'same-origin',
-            headers: {'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            }
-        }).then(response => {
-            if(response.status === 200) {
-                response.json().then(data => {
-
-                        this.setState({listIsEmpty: false})
-                        console.log(data)
-                        this.setState({ listings: data
-                        });
-
-                    }
-                )
-            }
-            else if(response.status === 404){
-                this.setState({listIsEmpty: true})
-            }
-            else {
-                console.log("Error")
-            }
-        })
+        this.fetchList('');
 
     }
 
     token = this.props.cookies.get('csrf_access_token');
 
-    deleteListing = (job_id) => {
+    deleteListing = (listingIndex) => {
+// FilterJobs not working after fetch
 
-        setJobStatus(this.token, job_id, jobStatus.deleted).then(r => {})
+        if(this.state.userAccountType === 3)
+            setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.deleted).then(r => {})
+        else
+            setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.cancelled).then(r => {})
+
+
+        this.fetchList()
 
     }
 
-    onClickRate = (job_id) => {
-        this.state.currJob = job_id;
-        this.setState({open:true});
+    onClickRate = (listingIndex) => {
+        this.setState({
+            currJob: this.state.listings[listingIndex].job_id,
+            open:true
+        })
+
+        if(this.state.userAccountType === 1)
+            this.setState({userToRate: this.state.listings[listingIndex].owner_id});
+        else
+            this.setState({userToRate: this.state.listings[listingIndex].student_id});
     }
+
 
     handleClose = () => {
         this.setState({open: false})
@@ -126,11 +112,11 @@ class JobListingPage extends Component {
             <div>
 
                 <RatingModal
-                    initial_value={''}
-                    ref={this.state.change_rating}
                     open = {this.state.open}
                     handleClose = {this.handleClose.bind(this)}
                     job_id = {this.state.currJob}
+                    userToRate = {this.state.userToRate}
+                    fillterJobs = {this.fetchList.bind(this)}
                 />
 
                 <div className={"outer-div"}>
@@ -148,16 +134,20 @@ class JobListingPage extends Component {
                         <ul id="list-bullet-style">
 
                             {
+
                                 this.state.listings.map((listing, index) => {
-                                    let currId = parseInt(listing.job_id)
+                                    let listingIndex = index
+
+
 
                                     return <JobListing
 
                                         price={listing.price} date_posted={listing.date_posted}
                                         title={listing.title} category={listing.categories}
                                         key={listing.id} job_id={listing.job_id} status={this.status}
-                                        deleteListing={this.deleteListing.bind(this, currId)}
-                                        onClickRate={this.onClickRate.bind(this, currId)}
+
+                                        deleteListing={this.deleteListing.bind(this, listingIndex)}
+                                        onClickRate={this.onClickRate.bind(this, listingIndex)}
                                     >
 
                                     </JobListing>
@@ -176,6 +166,7 @@ class JobListingPage extends Component {
                         <div className={"filters-flexbox"}>
 
                             <ItemsDropdown
+                                blackLabel
                                 initial_value={''}
                                 ref={this.state.yearRef}
                                 validate={false}
@@ -186,6 +177,7 @@ class JobListingPage extends Component {
 
 
                             <ItemsDropdown
+                                blackLabel
                                 initial_value={''}
                                 ref={this.state.monthRef}
                                 validate={false}
@@ -193,42 +185,32 @@ class JobListingPage extends Component {
                                 label='Month'
                             />
 
-                            <Button id={"go-back-button"} onClick={this.filterJobs}>
-
-                                <IconButton>
-                                    <FilterList
-                                        sx={{
-                                            fontSize: 25,
-                                        }}
-                                    />
-                                </IconButton>
-
+                            <Button id={"go-back-button"} onClick={this.fetchList}>
+                                Filter
                             </Button>
 
                         </div>
 
-                {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
-                {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
-                {this.status === '2' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
-                {this.status === '3' && <img id={"picture-style"} src={Completed} alt="algo ahi" />}
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="algo ahi" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="algo ahi" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="algo ahi" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="algo ahi" />}
 
                     </div>
 
                 </div>
-
-
-
-
 
             </div>
 
         );
     };
 
-    filterJobs = () => {
+    fetchList = () => {
+        //Handle Filters
         const {monthRef, yearRef} = this.state
 
         let filters = '';
+
 
         if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
@@ -236,36 +218,76 @@ class JobListingPage extends Component {
         if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
             filters += "&month=" + monthRef.current.state.item
 
+        if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
+        else this.idFilter = "?owner_id=" + this.state.user_id
 
-        fetch('/jobs_list/' + this.status + this.idFilter + filters, {
-            method: 'GET',
-            credentials: 'same-origin',
-            headers: {'Content-Type': 'application/json',
-            }
-        }).then(response => {
-            if(response.status === 200) {
-                response.json().then(data => {
+        if(this.status === '1' && this.state.userAccountType === 1){
 
-                        this.setState({listIsEmpty: false})
-                        console.log(data)
+        //Fetch Requested Jobs
 
-                        this.setState({ listings: data
-                        });
+            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            //console.log(data)
 
-                    }
-                )
-            }
-            else if(response.status === 404){
-                this.setState({listIsEmpty: true})
-                console.log(this.state.listIsEmpty)
-            }
-            else {
-                console.log("Error")
-            }
-        })
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data
+                            })
+
+
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({listIsEmpty: true})
+                }
+                else {
+                    console.log("Error")
+                }
+            })
+        }
+        //Fetch In-Progress, Completed and Posted Jobs
+
+        else{
+
+            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            //console.log(data)
+
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data
+                            })
+
+
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({listIsEmpty: true})
+                }
+                else {
+                    console.log("Error")
+                }
+            })
+
+        }
+
     }
-
-
 }
 
 

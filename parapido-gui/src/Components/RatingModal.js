@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import {Backdrop, FormControl, InputLabel, MenuItem, Modal, Select} from "@material-ui/core";
+import React, {Component, createRef} from 'react'
+import {Backdrop, Modal} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
-import {current_user} from "../Utilities";
-
+import ItemsDropdown from "./ItemsDropdown";
+import Button from "@mui/material/Button";
 
 
 class RatingModal extends Component {
@@ -10,41 +10,23 @@ class RatingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rating: this.props.initial_value!==''? this.props.initial_value : undefined,
-            open: this.props.open
+            ratingRef: createRef(),
         };
 
-        this.handleOnchangeRating = this.handleOnchangeRating.bind(this);
         this.changeRating = this.changeRating.bind(this);
-        this.handleRate = this.handleRate.bind(this, this.state.rating, this.props.job_id);
+        this.handleRate = this.handleRate.bind(this);
 
     }
 
+    ratings = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+    ];
+
     render() {
-        const { rating, open } = this.state;
-
-        const body = (
-            <div>
-
-                <FormControl sx={{ m: 1, minWidth: 150, fontWeight: "bold", fontsize: 30 }}>
-                    <InputLabel>Rating</InputLabel>
-                    <Select
-                        id={"rating-dropdown"}
-                        value={rating}
-                        onChange={this.handleOnchangeRating}
-                        label="Rating"
-                    >
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-
-                    </Select>
-                </FormControl>
-
-            </div>
-        )
 
         return (
 
@@ -59,8 +41,19 @@ class RatingModal extends Component {
                         <div className={"modalTextStyle"}>
                             Rate this Job:
                         </div>
-                        <button id={"rate-button"} onClick={this.handleRate}> Rate </button>
-                        {body}
+
+                        <ItemsDropdown
+                            blackLabel
+                            initial_value={''}
+                            ref={this.state.ratingRef}
+                            validate={false}
+                            itemsList={this.ratings}
+                            label='Rating'
+                        />
+
+
+                        <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>
+
                     </Backdrop>
 
                 </Modal>
@@ -69,38 +62,40 @@ class RatingModal extends Component {
         )
     }
 
-    handleOnchangeRating(event) {
-        this.changeRating(event.target.value.toString());
-    }
-
     changeRating(value) {
         this.setState({
             rating: value
         });
     }
 
-    handleRate(value, job_id){
+    handleRate(){
 
-        fetch('/api/rate_job/' + job_id,{
-            method: 'POST',
-            body: JSON.stringify({
-                value: value
-            }),
-            headers: {'Content-Type': 'application/json'},
-        }).then(response => {
-            if(response.status === 200) {
-                response.json().then(data => {
+        if(this.state.ratingRef.current.state.item !== undefined)
+        {
 
-                        console.log(data)
+            fetch('/rate_job/' + this.props.job_id,{
+                method: 'POST',
+                body: JSON.stringify({
+                    value: this.state.ratingRef.current.state.item,
+                    user_id: this.props.userToRate
+                }),
+                headers: {'Content-Type': 'application/json'},
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+
+                            //console.log(data)
+                        this.props.filterJobs()
 
 
-                    }
-                )
-            }
-            else {
-                console.log("Error")
-            }
-        })
+                        }
+                    )
+                }
+                else {
+                    console.log("Error")
+                }
+            })
+        }
 
     }
 
