@@ -124,11 +124,21 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                //    TODO: Redirect to student request listing page
-                alert("Successful")
+                this.setState({
+                    redirect: '/myjobs',
+                    alert: {
+                        msg: 'Request canceled successfully',
+                    }
+                });
             }
             else {
-                alert('Could not add request at this moment, please try again later');
+                this.setState({
+                    redirect: '/myjobs',
+                    alert: {
+                        msg: 'Unable to cancel te request at this moment, try again later.',
+                        severity: 'error'
+                    }
+                });
             }
         })
     }
@@ -194,11 +204,11 @@ class JobDetailsPage extends Component {
                                     <button onClick={this.onClickRequest} className="custom-buttons">
                                         Request Job
                                     </button>
-                                    {showAgreement && 
-                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}                 
+                                    {showAgreement &&
+                                    <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}
                                 </React.Fragment>
                                 }
-                              
+
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
