@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Tangerine&family=Old+Standard+TT:ital@1&display=swap');
+
+.card-body-wrapper{
+    margin: 11px;
+    font-family: 'Tangerine';
+    font-size: 20px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+}
+
+.card-wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem,16rem));
+    gap: 4rem;
+    width: 99.9%;
+    justify-content: center;
+    padding-top: 34px;
+}
+
+.card-wrapper-1{
+    overflow: hidden;
+    box-shadow:  0 2px 10px green;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+    border: 2px solid green;
+    background-color: white
+
+}
+
+.card-wrapper-1 .card-title{
+    background-color: black;
+    height: 150px;
+    color: white;
+    border-top-right-radius: 69px;
+    padding-left: 3px;
+    border-bottom: 2px solid green;
+}
+
+.circle-square{
+    width: 100px;
+    height: 100px;
+    background: lightgoldenrodyellow;
+    border-radius: 50% 50% 50% 50%;
+    position: relative;
+    top: 6.1px;
+    left: -55px;
+}
+
+.circle-square2{
+    width: 100px;
+    height: 100px;
+    background: lightgoldenrodyellow;
+    border-radius: 50%;
+    position: relative;
+    top: -177.9px;
+    left: 165px;
+}
+
+.card-wrapper-1 .card-clientName{
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.card-wrapper-1 .card-location{
+    padding-left: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 300;
+    font-family: 'Times New Roman';
+    font-size: 12px;
+}
+
+.card-wrapper-1 .card-price{
+    padding-left: 6px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: 300;
+    font-family: 'Times New Roman';
+    font-size: 12px;
+}
+
+.card-wrapper-1:hover{
+    transform:scale(1.02);
+}
+
+.break-title-job-dashboard{
+    inline-size: 155px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.none-display-for-link{
+    text-decoration: none;
+    color: black;
+}
+
+.tooltip{
+    font-family: 'Jost';
+    font-size: 5px;   
+}

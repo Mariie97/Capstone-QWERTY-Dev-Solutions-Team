@@ -58,8 +58,8 @@
 h2.edit-subheaders {
 	color: white;
 	margin-bottom: 9px;
-	font-family: "Cormorant Garamond";
-	font-size: 22px;
+	font-family: "Jost";
+	font-size: 20px;
 	position: relative;
 	bottom: 12px;
 }
@@ -73,7 +73,7 @@ h2.edit-subheaders {
 	justify-content: center;
 	display: flex;
 	align-items: center;
-	height: 100vh;
+	height: 100%;
 }
 
 .label-about-profile-page{
@@ -96,6 +96,10 @@ h2.edit-subheaders {
 	font-weight: 400;
 	cursor: pointer;
 	margin-left: -1.8px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	gap: 4px
 
 }
 
@@ -106,12 +110,12 @@ h2.edit-subheaders {
 .custom-file-upload-profile-page:active {
 	background-color: #2e856e;
 }
-
+	
 .change-about-style-profile-page{
-	font-family: "Times New Roman";
-	font-size: 18px;
+	font-family: "Jost";
+	font-size: 15px;
 	width: 100%;
-	border: 3px solid black;
+	border: 2px solid black;
 	padding-left: 3px;
 	padding-right: 3px;
 	resize: none

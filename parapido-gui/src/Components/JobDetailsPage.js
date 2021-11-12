@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
 import '../Layouts/JobDetails.css'
 import {Link, Redirect} from "react-router-dom";
-import {
-    accountType,
-    cities,
-    current_user,
-    getJobStatus,
-    jobStatus,
-    setJobStatus, verifyUserAuth,
-    weekDays
-} from "../Utilities";
+import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
+import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props) {
         super(props);
@@ -29,7 +26,6 @@ class JobDetailsPage extends Component {
                 categories: '',
                 status: '',
                 date_posted: '',
-                pdf: '',
                 street: '',
                 city: '',
                 zipcode: '',
@@ -45,6 +41,7 @@ class JobDetailsPage extends Component {
             },
             pageLoaded: false,
             redirect: undefined,
+            showAgreement: false,
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
@@ -78,7 +75,6 @@ class JobDetailsPage extends Component {
                             categories: data.categories,
                             status: data.status,
                             date_posted: data.date_posted,
-                            pdf: data.pdf,
                             street: data.street,
                             city: data.city,
                             zipcode: data.zipcode,
@@ -103,38 +99,23 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
-        const { job_id } = this.props;
-        fetch('/request_job', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: JSON.stringify({
-                job_id: job_id,
-                student_id: current_user.id,
-            })
-        }).then(response => {
-            if (response.status === 200) {
-                //    TODO: Redirect to request listing page
-            }
-            else {
-                alert('Could not add request at this moment, please try again later');
-            }
-        })
+
+        const {showAgreement} = this.state;
+        this.setState({showAgreement: !showAgreement});
     }
 
     onClickCancelRequest() {
         const { job_id } = this.props;
         fetch('/cancel_request', {
             method: 'PUT',
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
             },
             body: JSON.stringify({
                 job_id: job_id,
-                student_id: current_user.id,
+                student_id: this.currentUser.id,
             })
         }).then(response => {
             if (response.status === 200) {
@@ -156,32 +137,32 @@ class JobDetailsPage extends Component {
 
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded, redirect } = this.state;
+        const {is_auth, job, pageLoaded, redirect, showAgreement } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
 
         const showCancelRequestButton =
-            job.users_requested.filter(request  => request[0]===current_user.id && request[1]===1).length > 0 &&
+            job.users_requested.filter(request  => request[0]===this.currentUser.id && request[1]===1).length > 0 &&
             job.status===jobStatus.posted;
 
-        const showRequestButton = current_user.type===accountType.student &&
-            job.users_requested.filter(request  => request[0]===current_user.id).length===0 &&
+        const showRequestButton = this.currentUser.type===accountType.student &&
+            job.users_requested.filter(request  => request[0]===this.currentUser.id).length===0 &&
             job.status===jobStatus.posted;
 
-        const showCancelButton = (current_user.id===job.owner_id && (
+        const showCancelButton = (this.currentUser.id===job.owner_id && (
             job.status===jobStatus.posted || job.status===jobStatus.in_process)) || (
-            current_user.id===job.student_id && job.status===jobStatus.in_process
+            this.currentUser.id===job.student_id && job.status===jobStatus.in_process
         );
 
-        const showDeleteButton = current_user.type===accountType.admin && job.status!==jobStatus.deleted;
+        const showDeleteButton = this.currentUser.type===accountType.admin && job.status!==jobStatus.deleted;
 
         const showContractButton = (job.status === jobStatus.in_process || job.status === jobStatus.completed) &&
-            (current_user.id===job.owner_id || current_user.id===job.student_id)
+            (this.currentUser.id===job.owner_id || this.currentUser.id===job.student_id)
 
         const showChatButton = (job.status === jobStatus.in_process && (
-            current_user.id === job.owner_id || current_user.id === job.student_id));
+            this.currentUser.id === job.owner_id || this.currentUser.id === job.student_id));
 
-        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === current_user.id;
+        const showJobRequestsButton = job.status === jobStatus.posted && job.owner_id === this.currentUser.id;
 
         return (
             <div className="Dashboard">
@@ -197,14 +178,19 @@ class JobDetailsPage extends Component {
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="custom-buttons">
-                                    Request Job
-                                </button>
+                                <React.Fragment>
+                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                        Request Job
+                                    </button>
+                                    {showAgreement && 
+                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}                 
+                                </React.Fragment>
                                 }
+                              
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
-                                        const status = current_user.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
+                                        const status = this.currentUser.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
                                         const success = setJobStatus(token, job_id, status);
                                         if(success) {
                                             //TODO: Redirect: student_request or job_posted depending on user account
@@ -230,7 +216,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}`}
+                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }
@@ -316,7 +302,6 @@ class JobDetailsPage extends Component {
         )
     }
 }
-
 
 const chipStyleJobDetails = {
     backgroundColor : "#FFEBCC",

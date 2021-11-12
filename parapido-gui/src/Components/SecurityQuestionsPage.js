@@ -128,10 +128,7 @@ class SecurityQuestionsPage extends Component {
         e.preventDefault();
         const err = this.validateEmail()
         if (!err) {
-            console.log(this.state.email)
-
             fetch('/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
-                console.log(response.status)
                 if(response.status === 200) {
                     //Success get data
                     response.json().then(data => {

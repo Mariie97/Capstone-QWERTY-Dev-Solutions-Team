@@ -1,20 +1,23 @@
 import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
-import Avatar from '@mui/material/Avatar';
-import {current_user, getQueryParams, verifyUserAuth} from "../Utilities";
+import Avatar from '@material-ui/core/Avatar';
+import {getQueryParams, verifyUserAuth, accountType} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 
 class MessagesContainer extends Component{
+  currentUser = {
+    id: parseInt(localStorage.getItem('user_id')),
+    type: parseInt(localStorage.getItem('type'))
+  };
 
   constructor(props) {
     super(props);
     this.state = {
-      messagesRef: createRef()
+      messagesRef: createRef(),
     };
-
     this.addMessages = this.addMessages.bind(this);
   }
 
@@ -34,8 +37,8 @@ class MessagesContainer extends Component{
 
   addMessages(){
     return this.props.messages.map((message) => (
-        <li className={`message ${message.sender_id===current_user.id? "right": "left"} appeared`}>
-          {message.sender_id!==current_user.id &&
+        <li className={`message ${message.sender_id===this.currentUser.id? "right": "left"} appeared`}>
+          {message.sender_id!==this.currentUser.id &&
           <Link to={`profile/${message.sender_id}`}>
             <Avatar
                 className='avatar'
@@ -64,7 +67,13 @@ class MessagesContainer extends Component{
 
 class ChatApp extends Component {
   queryParams = undefined;
+  student_id = undefined;
+  owner_id = undefined;
   receiver_id = undefined;
+  currentUser = {
+    id: parseInt(localStorage.getItem('user_id')),
+    type: parseInt(localStorage.getItem('type'))
+  };
 
   constructor(props){
     super(props);
@@ -83,7 +92,7 @@ class ChatApp extends Component {
   }
 
   getChatMessages() {
-    fetch(`/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${current_user.id}`, {
+    fetch(`/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${this.currentUser.id}`, {
       method: 'GET',
       headers: {
         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -95,7 +104,7 @@ class ChatApp extends Component {
             messages: data,
             refreshComplete: true,
           });
-          this.receiver_id = data[0].sender_id===current_user.id ? data[0].receiver_id : data[0].sender_id;
+          this.receiver_id = data[0].sender_id===this.currentUser.id ? data[0].receiver_id : data[0].sender_id;
         })
       }
     })
@@ -104,8 +113,8 @@ class ChatApp extends Component {
 
   componentDidMount() {
     this.setState({
-            is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
-        });
+      is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
+    });
     this.queryParams = getQueryParams(this.props.queryParams);
     this.getChatMessages();
   }
@@ -114,19 +123,20 @@ class ChatApp extends Component {
     const {messages, current_message} = this.state;
     const newMsg = {
       content: current_message,
-      sender_id: current_user.id,
+      sender_id: this.currentUser.id,
     };
 
     if( current_message && enter){
       fetch("/add_message", {
         method: 'POST',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
         },
         body: JSON.stringify({
           job_id: this.queryParams.get('job_id'),
-          sender_id: current_user.id,
+          sender_id: this.currentUser.id,
           receiver_id: this.receiver_id,
           content: current_message
         })
@@ -155,9 +165,24 @@ class ChatApp extends Component {
 
   render() {
     const { is_auth, messages, current_message, refreshComplete } = this.state;
+
+    const is_client = this.currentUser.type === accountType.client;
+    const is_student = this.currentUser.type === accountType.student;
+    let access_allowed = false;
+    if(is_student === true){
+      if(getQueryParams(this.props.queryParams)?.get('student_id')  === this.currentUser.id.toString()){
+        access_allowed = true
+      }
+    }
+    if(is_client === true){
+      if(getQueryParams(this.props.queryParams)?.get('owner_id') === this.currentUser.id.toString()){
+        access_allowed = true
+      }
+    }
     return (
         <div className='parent-container'>
           {!is_auth && <Redirect to='/' />}
+          {!access_allowed && <Redirect to='/' /> }
           <div className='header-flex-container'>
             <div className="button-flex-container">
               <Link to={`/job/${this.queryParams?.get('job_id')}`}
@@ -186,12 +211,11 @@ class ChatApp extends Component {
             </div>
             <div className='refresh-message-container'>
               {!refreshComplete ?
-                  <div className='refresh-msg-icon'>
+                  <div>
                     <CircularProgress style={{fill: 'white'}}/>
                   </div> :
                   <RefreshIcon
                       className='refresh-msg-icon'
-                      style={{fill: 'white', fontSize: '100px'}}
                       onClick={() => {
                         this.setState({refreshComplete: false});
                         this.getChatMessages();

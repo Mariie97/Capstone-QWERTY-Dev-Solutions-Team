@@ -1,7 +1,7 @@
 import React, {Component, createRef} from 'react';
 import "../Layouts/ProfilePage.css";
 import {Link, Redirect} from 'react-router-dom';
-import {accountType, cities, current_user, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
+import {accountType, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
@@ -9,6 +9,10 @@ import ProfileCard from './ProfileCard';
 import UploadIcon from '@material-ui/icons/CloudUpload'
 
 class ProfilePage extends Component {
+    currentUser = {
+        id: parseInt(localStorage.getItem('user_id')),
+        type: parseInt(localStorage.getItem('type'))
+    };
 
     constructor(props){
         super(props);
@@ -86,7 +90,6 @@ class ProfilePage extends Component {
                         });
                     }
                 ).catch((e) => {
-                    console.log("Network error: " + e);
                     throw(e);
                 });
             }
@@ -114,7 +117,7 @@ class ProfilePage extends Component {
         } = this.state;
 
         const {user_id} = this.props;
-        const showButtons = parseInt(user_id) === current_user.id || current_user.type===accountType.admin;
+        const showButtons = parseInt(user_id) === this.currentUser.id || this.currentUser.type===accountType.admin;
 
         return (
             <React.Fragment>
@@ -131,16 +134,16 @@ class ProfilePage extends Component {
                             {showButtons &&
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
-                                <Link to={"/jobdashboard"}>
+                                <Link to={"/myjobs"}>
                                     <button className="custom-buttons" onClick={this.toggleEdit}>
-                                        {current_user.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
+                                        {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>
                                 </Link>
                                 }
                                 <button className="custom-buttons" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
-                                {current_user.type === accountType.admin &&
+                                {this.currentUser.type === accountType.admin &&
                                 <button className="custom-buttons delete-button" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
@@ -236,6 +239,7 @@ class ProfilePage extends Component {
                                                         });
                                                     }
                                                 }}
+                                                style={{border: "2px solid black"}}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item8">
@@ -259,8 +263,8 @@ class ProfilePage extends Component {
                                             />
                                         </div>
                                         <div className="grid-edit-info-item5">
-                                            <label className="label-job-creation">City</label>
                                             <ItemsDropdown
+                                                label='City'
                                                 initial_value={city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
@@ -291,7 +295,7 @@ class ProfilePage extends Component {
                                                     }
                                                 </div>
                                                 <label for="profile-pic" className="custom-file-upload-profile-page">
-                                                    <UploadIcon style={upload}/> Upload picture
+                                                    <UploadIcon /> Upload picture
                                                 </label>
                                                 <input
                                                     id="profile-pic"
@@ -366,7 +370,7 @@ class ProfilePage extends Component {
         }
     }
 
-    validateFirstName(event){
+    validateFirstName(){
         if (this.state.change_first_name.length===0) {
             this.setState({
                 firstNameError: "This field is required"
@@ -380,7 +384,7 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateLastName(event){
+    validateLastName(){
         if (this.state.change_last_name.length===0) {
             this.setState({
                 lastNameError: "This field is required"
@@ -393,8 +397,8 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateStreet(event){
-        const { change_street, change_zipcode, zipcodeError} = this.state;
+    validateStreet(){
+        const { change_city, change_street, change_zipcode, zipcodeError} = this.state;
         if (change_street.length===0 && change_zipcode.length>0) {
             this.setState({
                 streetError: 'This field is required'
@@ -402,6 +406,7 @@ class ProfilePage extends Component {
             return false;
         }
         if (change_street==='' && zipcodeError!==undefined) {
+            change_city.current.validate();
             this.setState({
                 zipcodeError: undefined,
                 streetError: undefined,
@@ -413,10 +418,9 @@ class ProfilePage extends Component {
         return true;
     }
 
-    validateZipcode(event){
-        const { change_street, change_zipcode, streetError} = this.state;
+    validateZipcode(){
+        const { change_city, change_street, change_zipcode, streetError} = this.state;
 
-        console.log(change_zipcode);
         if (change_zipcode.length===0 && change_street.length>0) {
             this.setState({zipcodeError: 'This field is required'})
             return false;
@@ -433,6 +437,7 @@ class ProfilePage extends Component {
         }
 
         if (change_zipcode==='' && streetError!==undefined) {
+            change_city.current.validate();
             this.setState({
                 zipcodeError: undefined,
                 streetError: undefined,
@@ -446,10 +451,10 @@ class ProfilePage extends Component {
 
     validateCity() {
         const { change_city, change_zipcode, change_street } = this.state;
-        if ((change_zipcode.length>0 || change_street.length>0) && change_city?.current.state.item===null) {
+        if ((change_zipcode.length > 0 || change_street.length > 0) && (change_city?.current.state.item===''
+            || change_city?.current.state.item==='0')) {
             change_city?.current.setState({itemError: 'This field is required'});
             return false;
-
         }
         change_city?.current.setState({itemError: undefined});
         return true;
@@ -496,12 +501,6 @@ class ProfilePage extends Component {
             }
         });
     }
-}
-
-// small icons and elements css
-const upload = {
-    position: "relative",
-    top: "7px"
 }
 
 export default ProfilePage;

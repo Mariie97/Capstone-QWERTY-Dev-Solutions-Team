@@ -1,13 +1,11 @@
 import React, {Component} from "react";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import "../Layouts/LandingPage.css";
 import {verifyUserAuth} from "../Utilities";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from '@material-ui/icons/Mail';
 import LoginModal from './LoginModal';
-
-
 class LandingPage extends Component {
 
 	constructor(props){
@@ -34,10 +32,8 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		const {is_auth} = this.state;
 		return (
 			<div>
-				{is_auth && <Redirect to='/jobdashboard' />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
 					<img className="logostyle" src={logo} alt="Logo" />
@@ -50,7 +46,7 @@ class LandingPage extends Component {
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>
 							{this.state.showLogin && 
-							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal}/>}
+							<LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 						</li>
 					</ul>
 				</div>

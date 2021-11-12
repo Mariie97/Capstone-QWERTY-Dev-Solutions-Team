@@ -2,13 +2,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
 
 /* text */
-
 .first-point-login-modal{
     font-family: "Jost";
-    font-weight: bold;
     font-size: 30px;
+    color: #555;
+    letter-spacing: 1px;
 }
-
 
 .second-point-login-modal{
     display: flex;
@@ -25,23 +24,16 @@
 }
 
 /* fun. */
-
 .second-text-login-modal{
     margin-left: 4px;
-    color:red;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.third-point-login-modal{
-    font-family: "Jost";
-    font-weight: bold;
-    font-size: 15px;
-    color: #2F2D4A;
+    color: lightseagreen;
+    font-weight: 400;
+    font-size: 23px;
+    font-family: times new roman;
+    letter-spacing: 1px;
 }
 
 /* inputs and labels */
-
 .body-container-login-modal{
     display: flex;
     flex-direction: column;
@@ -49,50 +41,16 @@
     text-align: left;
 }
 
-.input-login-modal {
-    font-family: "Jost";
+.MuiFilledInput-root{
+    border-radius: 0px;
+}
+
+.MuiFormControl-root.MuiTextField-root.input-login-modal {
     width: 95%;
-    padding: 12px 20px;
-    padding-bottom: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 3px solid #2F2D4A;
-    outline: none;
-}
-
-.input-login-modal1 {
-    font-family: "Jost";
-    width: 95%;
-    padding: 12px 20px;
-    padding-bottom: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 3px solid #2F2D4A;
-    outline: none;
-}
-
-
-.input-login-modal-error {
-    font-family: "Jost";
-    width: 95%;
-    padding: 12px 20px;
-    padding-bottom: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid red;
-    outline: none; 
-}
-
-.input-login-modal:focus{
-    background-color: #FFEBCC;
-}
-
-.input-login-modal1:focus{
-    background-color: #FFEBCC;
+    
 }
 
 /* button */
-
 .login-modal-continue-button{
     width: 95%;
     margin-top: 35px;
@@ -101,7 +59,6 @@
     border: 2px solid #FFEBCC;
     border-radius: 10px;
 }
-
 
 .login-modal-continue-button:hover{
     cursor: pointer;
@@ -118,13 +75,11 @@
     top: 10px;
     left: 10px;
     font-family: "Jost";
-    font-weight: bold;
     font-size:12px;
     color: #2F2D4A;
 }
 
 /* footer */
-
 .footer-flex-login-modal{
     display: flex;
     flex-direction: row;
@@ -133,35 +88,28 @@
     width: 100%;
     position: relative;
     top: 25px;
-
-    /* testing pusposes */
-    /* border-top: 1px solid black; */
-
 }
 
 .line-login-modal{
     display: block;
     height: 1px;
-    border: 0;
-    border-top-color: currentcolor;
-    border-top-style: none;
-    border-top-width: 0px;
     border-top: 1px solid rgb(17, 13, 13);
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     margin: 1em 0;
     padding: 0;
     width: 100%;
     position: inherit;
-    right: 0px;
+    right: 0;
 }
 
 /* make hyperlinks stay blue */
-
 #visited-login-modal:visited {
     color: blue;
 }
 
 /* errors */
-
 .required-field-login-modal{
 	font-family: "Times New Roman";
 	color: #cc3300;
