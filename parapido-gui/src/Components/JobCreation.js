@@ -9,7 +9,6 @@ import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Alert from '@material-ui/lab/Alert';
 import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType} from "../Utilities";
 
-
 export class JobCreation extends Component {
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),

@@ -3,6 +3,7 @@
 
 .input-field-container {
     margin-bottom: 8px;
+    line-height: 0;
 }
 
 .MuiFormLabel-filled {
@@ -13,9 +14,10 @@
 .MuiFilledInput-root .MuiFilledInput-input {
     background-color: white;
     color: black;
-    font-size: 18px;
-    font-family: Times New Roman;
-    padding: 10px 0px 10px 3px;
+    font-size: 14px;
+    font-family: "Jost";
+    padding: 10px 3px 10px 3px;
+    border-radius: 0px;
 }
 
 .MuiFilledInput-root.MuiFilledInput-multiline,
@@ -35,7 +37,12 @@
     background-color: #FFEBCC;
 }
 .MuiInputBase-root.MuiFilledInput-root.Mui-error.MuiInputBase-formControl {
-    border: 2px solid red;
+    border: 2px solid #cc3300;
+}
+
+.MuiInputBase-input:invalid {
+    box-shadow: none;
+    border-color: 2px solid #cc3300;
 }
 
 .MuiFormControl-root.MuiTextField-root.change-street-address {
@@ -63,10 +70,9 @@
 }
 
 .custom-input-label {
-    font-family: "Cormorant Garamond";
-    font-style: italic;
+    font-family: "Jost";
     font-weight: 400;
-    font-size: 18px;
+    font-size: 15px;
     color: white;
     letter-spacing: 1px;
     line-height: 2;
@@ -91,5 +97,12 @@
     color: black;
 }
 
-
+.login-modal-label-text{
+    font-family: "Jost";
+    font-weight: 500;
+    font-size: 15px;
+    color: #2F2D4A;
+    line-height: 4;
+    letter-spacing: 0px;
+}
 
