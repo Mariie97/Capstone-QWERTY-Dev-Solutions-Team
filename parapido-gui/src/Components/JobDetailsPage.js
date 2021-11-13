@@ -128,6 +128,7 @@ class JobDetailsPage extends Component {
                     redirect: '/myjobs',
                     alert: {
                         msg: 'Request canceled successfully',
+                         severity: 'success'
                     }
                 });
             }
