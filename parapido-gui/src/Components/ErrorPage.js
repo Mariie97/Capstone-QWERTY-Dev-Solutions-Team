@@ -5,7 +5,7 @@ class ErrorPage extends Component {
     render() {
         return (
             <div>
-                
+                Hi
             </div>
         )
     }

@@ -14,6 +14,7 @@ import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
+import ErrorPage from './Components/ErrorPage';
 
 
 class App extends React.Component {
@@ -163,7 +164,7 @@ class App extends React.Component {
                         path='*'
                         render={() => (
                             <React.Fragment>
-                                <h1>HI</h1>
+                                <ErrorPage />
                             </React.Fragment>
                         )}
                     />
