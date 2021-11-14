@@ -17,6 +17,7 @@ import LoginModal from "./Components/LoginModal";
 
 
 class App extends React.Component {
+
     render() {
         return (
             <BrowserRouter>
@@ -30,6 +31,7 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+                
                     
                     <Route
                         exact
@@ -153,6 +155,15 @@ class App extends React.Component {
                                     toggle={() => {}}
                                     adminLogin={true}
                                 />
+                            </React.Fragment>
+                        )}
+                    />
+                     <Route
+                        exact
+                        path='*'
+                        render={() => (
+                            <React.Fragment>
+                                <h1>HI</h1>
                             </React.Fragment>
                         )}
                     />
