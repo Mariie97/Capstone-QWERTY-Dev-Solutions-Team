@@ -2,7 +2,7 @@ import React, {Component, createRef} from 'react';
 import '../Layouts/ChatPage.css';
 import {CircularProgress} from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
-import {getQueryParams, verifyUserAuth, accountType} from "../Utilities";
+import {getQueryParams, verifyUserAuth} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
 
@@ -67,8 +67,6 @@ class MessagesContainer extends Component{
 
 class ChatApp extends Component {
   queryParams = undefined;
-  student_id = undefined;
-  owner_id = undefined;
   receiver_id = undefined;
   currentUser = {
     id: parseInt(localStorage.getItem('user_id')),
@@ -77,7 +75,7 @@ class ChatApp extends Component {
 
   constructor(props){
     super(props);
-
+    this.queryParams = getQueryParams(props.queryParams);
     this.state = {
       is_auth: true,
       messages: [],
@@ -115,7 +113,6 @@ class ChatApp extends Component {
     this.setState({
       is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
     });
-    this.queryParams = getQueryParams(this.props.queryParams);
     this.getChatMessages();
   }
 
@@ -166,32 +163,22 @@ class ChatApp extends Component {
   render() {
     const { is_auth, messages, current_message, refreshComplete } = this.state;
 
-    const is_client = this.currentUser.type === accountType.client;
-    const is_student = this.currentUser.type === accountType.student;
-    let access_allowed = false;
-    if(is_student === true){
-      if(getQueryParams(this.props.queryParams)?.get('student_id')  === this.currentUser.id.toString()){
-        access_allowed = true
-      }
-    }
-    if(is_client === true){
-      if(getQueryParams(this.props.queryParams)?.get('owner_id') === this.currentUser.id.toString()){
-        access_allowed = true
-      }
-    }
+    const access_allowed = this.queryParams.get('student_id') === this.currentUser.id.toString() ||
+        this.queryParams.get('owner_id') === this.currentUser.id.toString();
+
     return (
         <div className='parent-container'>
           {!is_auth && <Redirect to='/' />}
           {!access_allowed && <Redirect to='/' /> }
           <div className='header-flex-container'>
             <div className="button-flex-container">
-              <Link to={`/job/${this.queryParams?.get('job_id')}`}
+              <Link to={`/job/${this.queryParams.get('job_id')}`}
                     className='custom-buttons'
                     id="view-job-button">
                 View Job
               </Link>
             </div>
-            <h1 className="page-title-header">Chat: {this.queryParams?.get('title')} </h1>
+            <h1 className="page-title-header">Chat: {this.queryParams.get('title')} </h1>
           </div>
           <div className='chat-flex-container'>
             <div className="chat-window">

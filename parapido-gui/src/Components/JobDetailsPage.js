@@ -182,11 +182,11 @@ class JobDetailsPage extends Component {
                                     <button onClick={this.onClickRequest} className="custom-buttons">
                                         Request Job
                                     </button>
-                                    {showAgreement && 
-                                        <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}                 
+                                    {showAgreement &&
+                                    <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}
                                 </React.Fragment>
                                 }
-                              
+
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
@@ -216,7 +216,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }
