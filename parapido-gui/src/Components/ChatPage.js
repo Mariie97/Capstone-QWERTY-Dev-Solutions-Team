@@ -108,27 +108,26 @@ class ChatApp extends Component {
           this.setState({
             messages: data,
             refreshComplete: true,
-            pageLoaded: true,
           });
         })
       }
+      this.setState({pageLoaded: true})
     })
   }
 
   async verifyUserAccess() {
-    let data = undefined;
     const response = await fetch(`/job_details/${this.queryParams.get('job_id')}`, {
       method:'GET',
       headers: {
         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
       }
     })
+    let data = undefined;
     if (response.status === 200) {
       data = await response.json();
       if (this.currentUser.id === data.owner_id || this.currentUser.id === data.student_id) {
         this.receiverId = this.currentUser.id === data.owner_id ? data.student_id : data.owner_id;
         this.job_title = data.title;
-        this.forceUpdate();
       }
       else {
         this.setState({allowAccess: false});
@@ -140,8 +139,7 @@ class ChatApp extends Component {
     this.setState({
       is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
     });
-    this.verifyUserAccess();
-    this.getChatMessages();
+    this.verifyUserAccess().then(this.getChatMessages);
   }
 
   addMessageBox(enter=true){
@@ -193,11 +191,11 @@ class ChatApp extends Component {
         <div className='parent-container'>
           {(!is_auth || !allowAccess) && <Redirect to='/' />}
           {!pageLoaded ?
-               <div className='loading-icon'>
-                        <Box sx={{display: 'flex'}}>
-                            <CircularProgress />
-                        </Box>
-                    </div>
+              <div className='loading-icon'>
+                <Box sx={{display: 'flex'}}>
+                  <CircularProgress />
+                </Box>
+              </div>
               :
               <React.Fragment>
                 <div className='header-flex-container'>
