@@ -130,8 +130,12 @@ class JobDetailsPage extends Component {
 
     getJobDays() {
         const {days} = this.state.job;
-        return days.map(day =>
-            <Chip label={weekDays[day - 1]} style = {chipStyleJobDetails}/>
+        return days.map((day, index) =>
+            <Chip
+                key={`day-${index}`}
+                label={weekDays[day - 1]}
+                style={chipStyleJobDetails}
+            />
         )
     }
 
