@@ -28,7 +28,7 @@ body {
   margin: 0;
   height: calc(100vh - 250px);
   max-height: 58vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .messages .message {
