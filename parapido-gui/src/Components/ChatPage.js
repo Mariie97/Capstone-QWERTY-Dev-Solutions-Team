@@ -80,6 +80,9 @@ class ChatApp extends Component {
   constructor(props){
     super(props);
     this.queryParams = getQueryParams(props.queryParams);
+    console.log(props.queryParams === "")
+    console.log(Object.keys(this.queryParams).length === 0)
+    console.log(this.queryParams.get('job_id'))
     this.state = {
       is_auth: true,
       messages: [],
@@ -87,6 +90,7 @@ class ChatApp extends Component {
       refreshComplete: true,
       allowAccess: true,
       pageLoaded: false,
+      pageNotFound: this.queryParams.get('job_id') == undefined
     };
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -185,11 +189,13 @@ class ChatApp extends Component {
   }
 
   render() {
-    const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded } = this.state;
-
+    const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
+    console.log(pageNotFound)
     return (
         <div className='parent-container'>
+          {pageNotFound && <h1>HI</h1>}
           {(!is_auth || !allowAccess) && <Redirect to='/' />}
+
           {!pageLoaded ?
               <div className='loading-icon'>
                 <Box sx={{display: 'flex'}}>
