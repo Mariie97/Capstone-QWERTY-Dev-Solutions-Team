@@ -9,7 +9,7 @@
 .body-container-error-page{
     display: flex;
     flex-direction: row;
-    gap: 6vh;
+    gap: 16vh;
 }
 
 .main-text-container-error-page{
