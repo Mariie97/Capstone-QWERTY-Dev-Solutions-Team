@@ -82,10 +82,13 @@ class NavBar extends Component {
                             <li>
                                 <Link to={"/profile/" + this.currentUser.id}>Profile</Link>
                             </li>
-                            {this.currentUser.type === accountType.admin &&
-                            <li>
-                                <Link to={"/admin/site"}>Administration</Link>
-                            </li>
+                            {this.currentUser.type === accountType.admin ?
+                                <li>
+                                    <Link to={"/admin/site"}>Administration</Link>
+                                </li>:
+                                <li>
+                                    <Link to={"/myjobs"}>My Jobs</Link>
+                                </li>
                             }
                             <li>
                                 <div>

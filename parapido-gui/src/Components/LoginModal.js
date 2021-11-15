@@ -45,7 +45,6 @@ class LoginModal extends Component {
         this.validatePassword = this.validatePassword.bind(this);
     }
 
-
     async handleOnClick() {
         const {email, password} = this.state;
         const { adminLogin } = this.props;
@@ -103,9 +102,9 @@ class LoginModal extends Component {
                 >
                     <Box sx={style}>
                         {loginError !==undefined &&
-                        <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
-                            {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
-                        </Alert>
+                            <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                                {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
+                            </Alert>
                         }
                         <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
@@ -157,7 +156,6 @@ class LoginModal extends Component {
                             {adminLogin === undefined &&
                             <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
                             }
-
                             <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
                         </ul>
                     </Box>
