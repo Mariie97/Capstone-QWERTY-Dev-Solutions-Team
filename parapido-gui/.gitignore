@@ -17,13 +17,9 @@
 /build
 
 ../.idea/
-<<<<<<< HEAD
-.vscode/
-=======
 ../.vscode/
 *.vscode
 *./vscode/
->>>>>>> origin
 
 # misc
 .DS_Store
