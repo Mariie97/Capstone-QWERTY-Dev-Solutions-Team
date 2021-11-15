@@ -5,6 +5,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {getQueryParams, verifyUserAuth} from "../Utilities";
 import {Link, Redirect} from "react-router-dom";
 import RefreshIcon from '@material-ui/icons/Refresh';
+import ErrorPage from './ErrorPage';
 
 
 class MessagesContainer extends Component{
@@ -80,9 +81,9 @@ class ChatApp extends Component {
   constructor(props){
     super(props);
     this.queryParams = getQueryParams(props.queryParams);
-    console.log(props.queryParams === "")
-    console.log(Object.keys(this.queryParams).length === 0)
-    console.log(this.queryParams.get('job_id'))
+    // console.log(props.queryParams === "")
+    // console.log(Object.keys(this.queryParams).length === 0)
+    // console.log(this.queryParams.get('job_id') === null)
     this.state = {
       is_auth: true,
       messages: [],
@@ -90,8 +91,8 @@ class ChatApp extends Component {
       refreshComplete: true,
       allowAccess: true,
       pageLoaded: false,
-      pageNotFound: this.queryParams.get('job_id') == undefined
-    };
+      pageNotFound: this.queryParams.get('job_id') === null
+    }
 
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -190,64 +191,65 @@ class ChatApp extends Component {
 
   render() {
     const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
-    console.log(pageNotFound)
     return (
-        <div className='parent-container'>
-          {pageNotFound && <h1>HI</h1>}
-          {(!is_auth || !allowAccess) && <Redirect to='/' />}
-
-          {!pageLoaded ?
-              <div className='loading-icon'>
-                <Box sx={{display: 'flex'}}>
-                  <CircularProgress />
-                </Box>
-              </div>
-              :
-              <React.Fragment>
-                <div className='header-flex-container'>
-                  <div className="button-flex-container">
-                    <Link to={`/job/${this.queryParams.get('job_id')}`}
-                          className='custom-buttons'
-                          id="view-job-button">
-                      View Job
-                    </Link>
+        <React.Fragment>
+          {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+            <div className='parent-container'>
+              {(!is_auth || !allowAccess) && <Redirect to='/' />}
+              {!pageLoaded ?
+                  <div className='loading-icon'>
+                    <Box sx={{display: 'flex'}}>
+                      <CircularProgress />
+                    </Box>
                   </div>
-                  <h1 className="page-title-header">Chat: {this.job_title} </h1>
-                </div>
-                <div className='chat-flex-container'>
-                  <div className="chat-window">
-                    <MessagesContainer messages={messages} />
-                    <div className="bottom_wrapper clearfix">
-                      <div className="message_input_wrapper">
-                        <input
-                            id="msg_input"
-                            className="message_input"
-                            placeholder="Type your messages here..."
-                            value={current_message}
-                            onChange={this.onChange}
-                            onKeyPress={this.handleKeyPress}/>
+                  :
+                  <React.Fragment>
+                    <div className='header-flex-container'>
+                      <div className="button-flex-container">
+                        <Link to={`/job/${this.queryParams.get('job_id')}`}
+                              className='custom-buttons'
+                              id="view-job-button">
+                          View Job
+                        </Link>
                       </div>
-                      <button className="send_message" onClick={this.addMessageBox}>Send</button>
+                      <h1 className="page-title-header">Chat: {this.job_title} </h1>
                     </div>
-                  </div>
-                  <div className='refresh-message-container'>
-                    {!refreshComplete ?
-                        <div>
-                          <CircularProgress style={{fill: 'white'}}/>
-                        </div> :
-                        <RefreshIcon
-                            className='refresh-msg-icon'
-                            onClick={() => {
-                              this.setState({refreshComplete: false});
-                              this.getChatMessages();
-                            }}
-                        />
-                    }
-                  </div>
-                </div>
-              </React.Fragment>
+                    <div className='chat-flex-container'>
+                      <div className="chat-window">
+                        <MessagesContainer messages={messages} />
+                        <div className="bottom_wrapper clearfix">
+                          <div className="message_input_wrapper">
+                            <input
+                                id="msg_input"
+                                className="message_input"
+                                placeholder="Type your messages here..."
+                                value={current_message}
+                                onChange={this.onChange}
+                                onKeyPress={this.handleKeyPress}/>
+                          </div>
+                          <button className="send_message" onClick={this.addMessageBox}>Send</button>
+                        </div>
+                      </div>
+                      <div className='refresh-message-container'>
+                        {!refreshComplete ?
+                            <div>
+                              <CircularProgress style={{fill: 'white'}}/>
+                            </div> :
+                            <RefreshIcon
+                                className='refresh-msg-icon'
+                                onClick={() => {
+                                  this.setState({refreshComplete: false});
+                                  this.getChatMessages();
+                                }}
+                            />
+                        }
+                      </div>
+                    </div>
+                  </React.Fragment>
+              }
+            </div>
           }
-        </div>
+        </React.Fragment>
     );
   }
 }
