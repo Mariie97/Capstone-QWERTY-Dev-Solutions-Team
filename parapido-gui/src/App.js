@@ -33,9 +33,7 @@ class App extends React.Component {
                                 <LandingPage cookies={this.props.cookies} />
                             </React.Fragment>
                         )}
-                    />
-                
-                    
+                    />             
                     <Route
                         exact
                         path='/profile/:user_id'
@@ -170,6 +168,7 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
+                    <ErrorPage errorNumber="404" errorType="Page Not Found"/>
                 </Switch>
             </BrowserRouter>
         );
