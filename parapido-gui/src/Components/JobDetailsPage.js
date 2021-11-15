@@ -144,9 +144,12 @@ class JobDetailsPage extends Component {
 
     getJobDays() {
         const {days} = this.state.job;
-        console.log(days)
-        return days.map(day =>
-            <Chip label={weekDays[day-1]} style = {chipStyleJobDetails}/>
+        return days.map((day, index) =>
+            <Chip
+                key={`day-${index}`}
+                label={weekDays[day - 1]}
+                style={chipStyleJobDetails}
+            />
         )
     }
 
@@ -207,7 +210,12 @@ class JobDetailsPage extends Component {
                                         Request Job
                                     </button>
                                     {showAgreement &&
-                                    <AgreementModal isOpen={showAgreement} toggle={this.onClickRequest} job_id={job_id} cookies={token}/>}
+                                    <AgreementModal
+                                        isOpen={showAgreement}
+                                        toggle={this.onClickRequest}
+                                        job_id={job_id}
+                                        cookies={token}/>
+                                    }
                                 </React.Fragment>
                                 }
 
@@ -255,7 +263,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}&student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    to={`/chat?job_id=${job_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }
