@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+.right-flexbox{
+	display: flex;
+	width: 35%;
+	flex-direction: column;
+	align-content: space-between;
+	flex-wrap: wrap;
+	margin-left: 5%;
+	/*
+    border: 2px red solid;
+	*/
+}
+
+.left-flexbox{
+	display: flex;
+	width: 40%;
+	margin-left: 10%;
+	flex-direction: column;
+	align-content: space-between;
+	flex-wrap: wrap;
+	/*
+    border: 2px red solid;
+	*/
+}
+
+.horizontal-flexbox1{
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	/*
+    border: 2px red solid;
+	*/
+	margin-bottom: 30px;
+	gap: 10px;
+}
+
+.horizontal-flexbox2{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+	/*
+    border: 2px red solid;
+	*/
+	gap: 100px;
+}
+
+.horizontal-flexbox3{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-top: 30px;
+	/*
+    border: 2px red solid;
+	*/
+	gap: 100px;
+}
+
+.horizontal-flexbox4{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	/*
+    border: 2px red solid;
+	*/
+	gap: 100px;
+}
+
+.horizontal-flexbox5{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-top: 50px;
+	/*
+    border: 2px red solid;
+	*/
+	gap: 100px;
+}
+
+.outer-flexbox{
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	/*
+    border: 2px red solid;
+	*/
+}
+
+.first-name-style{
+	width: 100%;
+}
+
+.last-name-style{
+	width: 100%;
+}
+
+.email-style{
+	width: 50%;
+}
+
+.password-style{
+	width: 50%;
+}
+
+.confirm-password-style{
+	width: 50%;
+}
+
+.answer-one-style{
+	width: 50%;
+}
+
+.answer-two-style{
+	width: 50%;
+}
+
+.page-header {
+	width: 50%;
+	font-weight: bold;
+	font-size: 60px;
+	text-align: left;
+	color: white;
+	border-bottom: 2px solid white;
+	padding-bottom: 20px;
+	margin: 65px;
+}
+
+create-button-style {
+    position: absolute;
+    width: 190px;
+    height: 80px;
+/*    left: 1493px;
+    top: 864px;*/
+
+}
