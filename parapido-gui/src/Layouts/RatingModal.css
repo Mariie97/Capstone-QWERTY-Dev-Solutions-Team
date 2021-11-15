@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+#rating-dropdown {
+    color: black;
+    background-color: white;
+    width: 15vh;
+    height: 2vh;
+    font-family: "Jost";
+    font-size: 25px;
+    text-align: center;
+    line-height: 25px;
+}
+
+.modalTextStyle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 500px;
+    font-family: Jost;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 27px;
+    color: black;
+}
+
+.modalTextBackgroundStyle {
+    position: absolute;
+    width: 500px;
+    line-height: 27px;
+    background-color: #91eb8f;
+}
+
+.menuItemStyle{
+    text-align: center;
+    font-size: 15px;
+}
+
+#rate-button {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    top: 250px;
+    left: 200px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: black;
+    background-color: #FFEBCC;
+    border: 2px black;
+}

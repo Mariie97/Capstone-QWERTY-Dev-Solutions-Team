@@ -20,7 +20,6 @@ const titleStyle = {
     height: "120px",
     left: "162px",
     top: "100px",
-
     fontFamily: "Future BdCn BT",
     fontStyle: "normal",
     fontWeight: "bold",
@@ -35,7 +34,6 @@ const firstNameStyle = {
     height: "52px",
     left: "166px",
     top: "340px",
-
     background: "#FFFFFF",
     color: "red",
 };
@@ -220,6 +218,8 @@ class UserRegistrationPage extends Component {
             accountTypeError: undefined,
             registerSuccess: false,
             questionError: undefined,
+            alertMssg: undefined,
+            severity: undefined
         };
 
         this.validateFirstName = this.validateFirstName.bind(this)
@@ -266,7 +266,8 @@ class UserRegistrationPage extends Component {
             })
         }).then(response => {
                 if(response.status === 201) {
-                    this.setState({registerSuccess: true})
+                    this.setState({
+                        alertMssg: "The account has been successfully created!!! 👍🏼", severity: "success"})
                 }
                 else{
                     //poner la alerta
@@ -434,9 +435,10 @@ class UserRegistrationPage extends Component {
             questionTwoRef,
             answerOne,
             answerTwo,
-            registerSuccess,
             isFetchError,
             questionError,
+            alertMssg,
+            severity
         } = this.state;
 
         return (
@@ -445,11 +447,13 @@ class UserRegistrationPage extends Component {
                 <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
                 }
 
-
-                {registerSuccess &&
+                { (alertMssg !== undefined && severity !== undefined) &&
                 <div>
-                    <Alert severity="success" style={errorStyle}>Your account was created successfully!</Alert>
-                    <Redirect to='/' />
+                   <Redirect to={{
+                                pathname: '/',
+                                state: { alertMssg: alertMssg,
+                                         severity: severity}
+                                }}/>
                 </div>
                 }
                 <form>
@@ -523,6 +527,7 @@ class UserRegistrationPage extends Component {
                             onBlur={this.validatePasswordConfirm}
                         />
                         <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
+
                         <div className='security-questions-container' >
                             <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
                             {questionError!==undefined &&

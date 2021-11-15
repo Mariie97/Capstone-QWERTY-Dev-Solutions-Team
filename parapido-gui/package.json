@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "react-tooltip": "^4.2.21"
+    "react-tooltip": "^4.2.21",
+    "@material-ui/styles": "^4.11.4"
   }
 }
