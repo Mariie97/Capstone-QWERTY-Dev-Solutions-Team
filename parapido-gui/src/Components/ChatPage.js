@@ -81,9 +81,6 @@ class ChatApp extends Component {
   constructor(props){
     super(props);
     this.queryParams = getQueryParams(props.queryParams);
-    // console.log(props.queryParams === "")
-    // console.log(Object.keys(this.queryParams).length === 0)
-    // console.log(this.queryParams.get('job_id') === null)
     this.state = {
       is_auth: true,
       messages: [],

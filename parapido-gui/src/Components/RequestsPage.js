@@ -1,5 +1,4 @@
 import '../Layouts/RequestsPage.css';
-import ErrorPage from './ErrorPage';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,7 +9,8 @@ import {Link, Redirect} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {Box, CircularProgress} from "@material-ui/core";
 import {getQueryParams, verifyUserAuth, accountType} from "../Utilities";
-import AgreementModal from './AgreementModal.js'
+import AgreementModal from './AgreementModal';
+import ErrorPage from './ErrorPage';
 
 class RequestsPage extends Component {
     queryParams = undefined;
@@ -18,15 +18,18 @@ class RequestsPage extends Component {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
     };
+    
     constructor(props) {
         super(props);
-
+        this.queryParams = getQueryParams(this.props.queryParams);
         this.state = {
             is_auth: true,
             is_student: this.currentUser.type === accountType.client,
             requestsList: [],
             requestLoaded: false,
             showAgreement: false,
+            pageNotFound: this.queryParams.get('job_id') === null
+
         };
 
         this.getJobRequests = this.getJobRequests.bind(this);
@@ -38,8 +41,6 @@ class RequestsPage extends Component {
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-
-        this.queryParams = getQueryParams(this.props.queryParams);
         this.getJobRequests();
     }
 
@@ -98,29 +99,33 @@ class RequestsPage extends Component {
 
     render() {
         //TODO: Show message when there are no request; fetch to accept a request
-        const { is_auth, requestsList, requestLoaded, is_student } = this.state;
+        const { is_auth, requestsList, requestLoaded, is_student, pageNotFound } = this.state;
         return (
-            <div>
-                {!is_auth && <Redirect to='/' />}
-                {!is_student ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
-                <React.Fragment>
-                    <div className='header-flex-container'>
-                        <h1 className="page-title-header">Student's Requests</h1>
-                    </div>
-                    {!requestLoaded ?
-                        <div className='loading-icon'>
-                            <Box sx={{display: 'flex'}}>
-                                <CircularProgress />
-                            </Box>
-                        </div>:
-                        <div className='student-requests-flex-container'>
-                            {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :
-                                this.renderCards()
+            <React.Fragment>
+                {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+                    <div>
+                        {!is_auth && <Redirect to='/' />}
+                        {!is_student ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+                        <React.Fragment>
+                            <div className='header-flex-container'>
+                                <h1 className="page-title-header">Student's Requests</h1>
+                            </div>
+                            {!requestLoaded ?
+                                <div className='loading-icon'>
+                                    <Box sx={{display: 'flex'}}>
+                                        <CircularProgress />
+                                    </Box>
+                                </div>:
+                                <div className='student-requests-flex-container'>
+                                    {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :
+                                        this.renderCards()
+                                    }
+                                </div>
                             }
-                        </div>
-                    }
-                </React.Fragment>}
-            </div>
+                        </React.Fragment>}
+                    </div>
+                }
+            </React.Fragment>
         );
     }
 }
