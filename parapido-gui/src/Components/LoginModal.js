@@ -45,7 +45,6 @@ class LoginModal extends Component {
         this.validatePassword = this.validatePassword.bind(this);
     }
 
-
     async handleOnClick() {
         const {email, password} = this.state;
         const { adminLogin } = this.props;
@@ -159,7 +158,6 @@ class LoginModal extends Component {
                             {adminLogin === undefined &&
                             <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
                             }
-
                             <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
                         </ul>
                     </Box>

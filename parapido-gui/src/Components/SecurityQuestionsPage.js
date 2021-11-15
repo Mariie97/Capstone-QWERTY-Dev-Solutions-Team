@@ -8,8 +8,8 @@ import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
 import Input from "./Input";
 import {securityQuestions} from "../Utilities";
 
-class SecurityQuestionsPage extends Component {
 
+class SecurityQuestionsPage extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -32,8 +32,11 @@ class SecurityQuestionsPage extends Component {
             fetchError: false,
             questionOneAnswer: undefined,
             questionTwoAnswer: undefined,
+            psswordChangedSuccesfully: false,
+            serverDown: false
         };
     }
+
 
     componentDidMount() {
         document.body.style.backgroundColor = "#2F2D4A"
@@ -88,26 +91,60 @@ class SecurityQuestionsPage extends Component {
         this.setState({ emailError: undefined})
         return false;
     }
+    
+    validateFirstPassword = () => {
+        if(this.state.password.length === 0){
+            this.setState({
+                passwordError: "This Field is required",
+            });
+            return true;
+        }
+        this.setState({
+            passwordError: undefined
+        })
+        return false;       
+    }
+    
+    validateConfirmPassword = () => {
+        if(this.state.confirmPassword.length === 0){
+            this.setState({
+                confirmPasswordError: "This Field is required",
+            });
+            return true;
+        }
+        this.validatePassword()
+        if(this.validatePassword() !== true){
+        this.setState({
+            confirmPasswordError: undefined
+        })
+        return false;
+    }
+    }
+
+
 
     validatePassword = () => {
-        if (this.state.password !== this.state.confirmPassword && this.state.confirmPassword !== "") {
+        if (this.state.password !== this.state.confirmPassword) {
             this.setState({
                 passwordError: "Passwords do not match",
                 confirmPasswordError: "Passwords do not match",
             });
             return true;
         }
-
         this.setState({
             passwordError: undefined,
-            confirmPasswordError: undefined,
+            confirmPasswordError: undefined
         })
-        return false;
+        return false;    
     }
 
     handleClose = () => {
-        if(this.state.password === this.state.confirmPassword && this.state.password !== "" && this.state.confirmPassword !== "")
-            this.setState({open: false})
+            this.setState({open: false,
+                passwordError: undefined,
+                confirmPasswordError: undefined,
+                password: '',
+                confirmPassword: ''
+            })
     };
 
 
@@ -124,7 +161,7 @@ class SecurityQuestionsPage extends Component {
     };
 
     onSubmitEmail = (e) => {
-        //Make sure the email is valid and exists. Also fetch the questions and answers]
+        //Make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validateEmail()
         if (!err) {
@@ -143,7 +180,7 @@ class SecurityQuestionsPage extends Component {
                     })
                 }
                 else{
-                    this.setState({fetchError: true})
+                    if(response.status === 500) this.setState({fetchError: true})
                 }
             })
         }
@@ -153,8 +190,12 @@ class SecurityQuestionsPage extends Component {
         //Here we make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validatePassword()
-
-        if (!err) {
+        if(err) return false
+        const err1 = this.validateFirstPassword()
+        const err2 = this.validateConfirmPassword()
+        if(err1) return false
+        else if (err2) return false
+        if(!err){
             fetch('/change_password',{
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -164,13 +205,17 @@ class SecurityQuestionsPage extends Component {
                 })
             }).then(response => {
                 if(response.status === 200) {
-                    //TODO: Redirect to Landing Page
-                    this.setState({changeSuccess: true});
+                    this.setState({changeSuccess: true,
+                        psswordChangedSuccesfully: true
+                    });
                 }
                 else {
                     //fetch error
                     //TODO: Change message to the correct text according to response's status code
-                    this.setState({passwordError: "DB Error Try Again"})
+                    console.log(response.status)
+                    if(response.status === 500){
+                        this.setState({serverDown: true})
+                    }
                 }
             })
         }
@@ -184,6 +229,8 @@ class SecurityQuestionsPage extends Component {
             confirmPassword,
             changeSuccess,
             fetchError,
+            psswordChangedSuccesfully,
+            serverDown
         } = this.state;
 
 
@@ -191,11 +238,10 @@ class SecurityQuestionsPage extends Component {
             <div>
                 {fetchError &&
                 <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error" className={"errorStyle"}>An error has occurred,.Please try again later!</Alert>
+                    <Alert severity="error" className="server-error-job-creation">An error has occurred 😔, Please try again later! </Alert>
                 </Stack>
                 }
 
-                {changeSuccess && <Redirect to='/'/>}
                 <div className='header-flex-container'>
                     <h1 className="page-title-header">Account Recovery</h1>
                 </div>
@@ -262,10 +308,13 @@ class SecurityQuestionsPage extends Component {
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                     >
-                        <Backdrop open={open} style={backdropStyle}>
-                            <div className='security-modal-container'>
-                                <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
-                                <h2 className='modalTextStyle'> Enter your new password: </h2>
+                           
+                        <Backdrop open={open} style={backdropStyle}>       
+                            <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
+                            <div className='security-modal-container'>     
+                                <h2 className='modalTextStyle'> 
+                                <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
+                                Enter your new password: </h2>
                                 <Input
                                     required
                                     blackLabel
@@ -275,7 +324,7 @@ class SecurityQuestionsPage extends Component {
                                     name="password"
                                     value={password}
                                     onChange={e => this.change(e)}
-                                    onBlur={this.validatePassword}
+                                    onBlur={this.validateFirstPassword}
                                     errorMsg={this.state.passwordError}
                                     className='security-page-input black-label-input'
                                 />
@@ -288,16 +337,19 @@ class SecurityQuestionsPage extends Component {
                                     name="confirmPassword"
                                     value={confirmPassword}
                                     onChange={e => this.change(e)}
-                                    onBlur={this.validatePassword}
+                                    onBlur={this.validateConfirmPassword}
                                     errorMsg={this.state.confirmPasswordError}
                                     className='security-page-input'
                                 />
-
+                                
                                 {changeSuccess &&
-                                <Stack sx={{width: '100%'}} spacing={2}>
-                                    <Alert severity="success" className={"errorStyle"}>This is a success alert — check it out!</Alert>
+                                <Stack sx={{width: '100%'}} spacing={2}>               
+                                        <Redirect to={{
+                                        pathname: '/',
+                                        state: { psswordChangedSuccesfully: psswordChangedSuccesfully}
+                                    }} />
                                 </Stack>
-                                }
+                                }     
                                 <button
                                     className='custom-buttons security-page-button'
                                     id='security-change-pswd-button'
