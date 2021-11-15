@@ -9,7 +9,7 @@
 .body-container-error-page{
     display: flex;
     flex-direction: row;
-    gap: 2vh;
+    gap: 6vh;
 }
 
 .main-text-container-error-page{
@@ -25,6 +25,14 @@
     font-family: Jost;
 }
 
+.error-response-error-page1{
+    font-family: Amatic SC;
+    font-size: 6vh;
+    display: flex;
+    flex-direction: column;
+    font-weight: lighter;
+}
+
 .footer-error-page{
     display: flex;
     flex-direction: row;
@@ -38,7 +46,7 @@
 }
 
 #parapido-email-error-page{
-    color: #ffebcc;
+    color: lightcoral;
 	text-decoration: underline;
 }
 
