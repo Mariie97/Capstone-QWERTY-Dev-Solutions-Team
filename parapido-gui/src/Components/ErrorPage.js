@@ -11,10 +11,10 @@ class ErrorPage extends Component {
 	}
 
     render() {
-        const {errorNumber, errorType} = this.props;
-
+        const {errorNumber, errorType, inside} = this.props;
+        document.body.style.backgroundColor = "#FFFFFF";
         return (
-            <div className="main-container-error-page">
+            <div className={inside ? "main-container-inside-error-page": "main-container-error-page"}>
                 <div className="body-container-error-page">
                     <img src= {errorpagecartoon}  alt="errorpagecartoon" style={{height:"90vh"}} />
                     <div className="main-text-container-error-page">

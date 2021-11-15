@@ -4,6 +4,18 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: white;
+}
+
+.main-container-inside-error-page{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+    background-color: white;
+    position: relative;
+    bottom: 25px;
 }
 
 .body-container-error-page{
