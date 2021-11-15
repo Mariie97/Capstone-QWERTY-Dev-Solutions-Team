@@ -1,9 +1,10 @@
 import React, {Component, createRef} from 'react';
+import {Link, Redirect} from "react-router-dom";
 import '../Layouts/AdministrationPage.css'
 import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
-import {Link, Redirect} from "react-router-dom";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
+import ErrorPage from './ErrorPage';
 
 
 class AdministrationPage extends Component {
@@ -175,136 +176,137 @@ class AdministrationPage extends Component {
     }
 
     render() {
-        //TODO: Add 403 forbidden when user is not admin
         const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin} = this.state;
         return (
             <div>
-                {(!is_auth || !is_admin) && <Redirect to='/' />}
-                <h1 className="page-title-header">
-                    Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
-                </h1>
-                <div className = "administration-body-container">
-                    <div className="list-categories-container">
-                        <h2 className="admin-entities-header">Entities</h2>
-                        <div className="admin-entities-container">
-                            <ul
-                                className="list-categories-text"
-                                onClick={() => {
-                                    this.setState({
-                                        currentEntity: this.entity.users,
-                                        entitiesLoaded: false,
-                                    });
-                                    this.clearFilters();
-                                    this.getAllUsers();
-                                }}
-                            >Users</ul>
-                            <ul
-                                className="list-categories-text"
-                                onClick={() => {
-                                    this.setState({
-                                        currentEntity: this.entity.jobs,
-                                        entitiesLoaded: false
-                                    });
-                                    this.clearFilters();
-                                    this.getAllJobs();
-                                }}
-                            >Jobs</ul>
-                        </div>
-                        <h2 className="admin-entities-header">Filters</h2>
-                        <div className='administration-filter-container'>
-                            {currentEntity === this.entity.users ?
-                                <div className='administration-filter-dropdowns'>
-                                    <ItemsDropdown
-                                        removeDefault
-                                        blackLabel
-                                        id='admin-user-type-dropdown'
-                                        label={'Account Type'}
-                                        ref={typeRef}
-                                        itemsList={Object.values(mapAccount)}
-                                    />
-                                    <ItemsDropdown
-                                        removeDefault
-                                        blackLabel
-                                        id='admin-user-deleted-dropdown'
-                                        initial_value='1'
-                                        label='Status'
-                                        ref={deletedRef}
-                                        itemsList={['Active', 'Deleted']}
-                                    />
-                                </div> :
-                                <div className='administration-filter-dropdowns'>
-                                    <ItemsDropdown
-                                        removeDefault
-                                        blackLabel
-                                        id='admin-job-categories-dropdown'
-                                        label='Category'
-                                        ref={jobCategoryRef}
-                                        itemsList={categories}
-                                    />
-                                    <ItemsDropdown
-                                        removeDefault
-                                        blackLabel
-                                        id='admin-job-status-dropdown'
-                                        label='Status'
-                                        initial_value='1'
-                                        ref={jobStatusRef}
-                                        itemsList={getJobStatus}
-                                    />
-                                </div>
-                            }
-                            <div className="admin-filter-button-container">
-                                <button
-                                    className='custom-buttons filter admin-filter-button'
+                {!is_auth && <Redirect to='/' />}
+                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidded/Access Not Allowed" inside/> :
+                <React.Fragment>
+                    <h1 className="page-title-header">
+                        Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
+                    </h1>
+                    <div className = "administration-body-container">
+                        <div className="list-categories-container">
+                            <h2 className="admin-entities-header">Entities</h2>
+                            <div className="admin-entities-container">
+                                <ul
+                                    className="list-categories-text"
                                     onClick={() => {
-                                        this.setState({entitiesLoaded: false});
-                                        if (currentEntity === this.entity.users)
-                                            this.getAllUsers();
-                                        else
-                                            this.getAllJobs();
-                                    }}>Filter
-                                </button>
-                                <button
-                                    className='custom-buttons filter admin-filter-button'
-                                    onClick={this.clearFilters}>Clear Filters
-                                </button>
+                                        this.setState({
+                                            currentEntity: this.entity.users,
+                                            entitiesLoaded: false,
+                                        });
+                                        this.clearFilters();
+                                        this.getAllUsers();
+                                    }}
+                                >Users</ul>
+                                <ul
+                                    className="list-categories-text"
+                                    onClick={() => {
+                                        this.setState({
+                                            currentEntity: this.entity.jobs,
+                                            entitiesLoaded: false
+                                        });
+                                        this.clearFilters();
+                                        this.getAllJobs();
+                                    }}
+                                >Jobs</ul>
+                            </div>
+                            <h2 className="admin-entities-header">Filters</h2>
+                            <div className='administration-filter-container'>
+                                {currentEntity === this.entity.users ?
+                                    <div className='administration-filter-dropdowns'>
+                                        <ItemsDropdown
+                                            removeDefault
+                                            blackLabel
+                                            id='admin-user-type-dropdown'
+                                            label={'Account Type'}
+                                            ref={typeRef}
+                                            itemsList={Object.values(mapAccount)}
+                                        />
+                                        <ItemsDropdown
+                                            removeDefault
+                                            blackLabel
+                                            id='admin-user-deleted-dropdown'
+                                            initial_value='1'
+                                            label='Status'
+                                            ref={deletedRef}
+                                            itemsList={['Active', 'Deleted']}
+                                        />
+                                    </div> :
+                                    <div className='administration-filter-dropdowns'>
+                                        <ItemsDropdown
+                                            removeDefault
+                                            blackLabel
+                                            id='admin-job-categories-dropdown'
+                                            label='Category'
+                                            ref={jobCategoryRef}
+                                            itemsList={categories}
+                                        />
+                                        <ItemsDropdown
+                                            removeDefault
+                                            blackLabel
+                                            id='admin-job-status-dropdown'
+                                            label='Status'
+                                            initial_value='1'
+                                            ref={jobStatusRef}
+                                            itemsList={getJobStatus}
+                                        />
+                                    </div>
+                                }
+                                <div className="admin-filter-button-container">
+                                    <button
+                                        className='custom-buttons filter admin-filter-button'
+                                        onClick={() => {
+                                            this.setState({entitiesLoaded: false});
+                                            if (currentEntity === this.entity.users)
+                                                this.getAllUsers();
+                                            else
+                                                this.getAllJobs();
+                                        }}>Filter
+                                    </button>
+                                    <button
+                                        className='custom-buttons filter admin-filter-button'
+                                        onClick={this.clearFilters}>Clear Filters
+                                    </button>
+                                </div>
+
                             </div>
 
                         </div>
-
+                        <div className="administration-table-container">
+                            {!entitiesLoaded ?
+                                <div className='loading-icon'>
+                                    <Box sx={{display: 'flex'}}>
+                                        <CircularProgress />
+                                    </Box>
+                                </div>:
+                                <table className='admin-table-content'>
+                                    <thead>
+                                    {currentEntity===this.entity.users ?
+                                        <tr className='admin-row-table' id="header-row-table">
+                                            <th className='admin-col-table header-col-table admin-number-col'/>
+                                            <th className='admin-col-table header-col-table'>Name</th>
+                                            <th className='admin-col-table header-col-table'>Email</th>
+                                            <th className='admin-col-table header-col-table'>Account Type</th>
+                                        </tr> :
+                                        <tr className='admin-row-table' id="header-row-table">
+                                            <th className='admin-col-table header-col-table admin-number-col'/>
+                                            <th className='admin-col-table header-col-table'>Title</th>
+                                            <th className='admin-col-table header-col-table'>Owner</th>
+                                            <th className='admin-col-table header-col-table'>Date Posted</th>
+                                            <th className='admin-col-table header-col-table'>Category</th>
+                                        </tr>
+                                    }
+                                    </thead>
+                                    <tbody>
+                                    {currentEntity === this.entity.users ? this.renderUsers() : this.renderJobs()}
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
                     </div>
-                    <div className="administration-table-container">
-                        {!entitiesLoaded ?
-                            <div className='loading-icon'>
-                                <Box sx={{display: 'flex'}}>
-                                    <CircularProgress />
-                                </Box>
-                            </div>:
-                            <table className='admin-table-content'>
-                                <thead>
-                                {currentEntity===this.entity.users ?
-                                    <tr className='admin-row-table' id="header-row-table">
-                                        <th className='admin-col-table header-col-table admin-number-col'/>
-                                        <th className='admin-col-table header-col-table'>Name</th>
-                                        <th className='admin-col-table header-col-table'>Email</th>
-                                        <th className='admin-col-table header-col-table'>Account Type</th>
-                                    </tr> :
-                                    <tr className='admin-row-table' id="header-row-table">
-                                        <th className='admin-col-table header-col-table admin-number-col'/>
-                                        <th className='admin-col-table header-col-table'>Title</th>
-                                        <th className='admin-col-table header-col-table'>Owner</th>
-                                        <th className='admin-col-table header-col-table'>Date Posted</th>
-                                        <th className='admin-col-table header-col-table'>Category</th>
-                                    </tr>
-                                }
-                                </thead>
-                                <tbody>
-                                {currentEntity === this.entity.users ? this.renderUsers() : this.renderJobs()}
-                                </tbody>
-                            </table>
-                        }
-                    </div>
-
-                </div>
+                </React.Fragment>}
             </div>
         )
     }

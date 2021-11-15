@@ -7,14 +7,13 @@ class myJobsDashboardPage extends Component {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
     };
-    componentDidMount() {
-		// webpage background color
-		document.body.style.backgroundColor = "#FFFFFF";
-	}
+
     render() {
 
         const is_client = this.currentUser.type === accountType.client
         const is_student = this.currentUser.type === accountType.student
+        // webpage background color
+		document.body.style.backgroundColor = "#FFFFFF";
       
         return (
             <div>
