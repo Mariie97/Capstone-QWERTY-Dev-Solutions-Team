@@ -11,17 +11,20 @@ class ErrorPage extends Component {
 	}
 
     render() {
+        const {errorNumber, errorType} = this.props;
+
         return (
             <div className="main-container-error-page">
                 <div className="body-container-error-page">
                     <img src= {errorpagecartoon}  alt="errorpagecartoon" style={{height:"90vh"}} />
                     <div className="main-text-container-error-page">
                             <div className="error-response-error-page"> 
-                                404 <img src= {error}  alt="error" />
+                                {errorNumber}
+                                <img src= {error}  alt="error" style={{marginLeft:"2vh"}}/>
                             </div>
                             <div className="error-response-error-page1">
-                                <div>Uh-OH!!! 📝</div>
-                                <div>Page Not Found</div>
+                                <div>Uh-OH!!!</div>
+                                <div>{errorType}</div>
                             </div>
                             <Link to="/">
                                     <button className="button-error-page">
@@ -47,7 +50,7 @@ class ErrorPage extends Component {
 
 const mail = {
 	color: "lightcoral",
-	height: 20
+	height: 20,
 }
 
 export default ErrorPage

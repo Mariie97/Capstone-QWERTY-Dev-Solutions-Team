@@ -166,7 +166,7 @@ class App extends React.Component {
                         path='*'
                         render={() => (
                             <React.Fragment>
-                                <ErrorPage />
+                                <ErrorPage errorNumber="404" errorType="Page Not Found"/>
                             </React.Fragment>
                         )}
                     />
