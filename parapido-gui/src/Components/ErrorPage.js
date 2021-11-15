@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import errorpagecartoon from "../Static/Images/Error_Page_Cartoon.jpg"
+import React, { Component } from 'react';
+import {Link} from "react-router-dom";
+import errorpagecartoon from "../Static/Images/Error_Page_Cartoon.jpg";
 import EmailIcon from '@material-ui/icons/Mail';
 
 class ErrorPage extends Component {
@@ -19,6 +20,13 @@ class ErrorPage extends Component {
                                 <div>Uh-OH!!! 📝</div>
                                 <div>Page Not Found</div>
                             </div>
+                            <Link to="/">
+                                    <button className="button-error-page">
+                                            <div className="text-button-error-page">
+                                                Home
+                                            </div>
+                                    </button>
+                            </Link>
                     </div>
                 </div>
                 <div className="footer-error-page">
