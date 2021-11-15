@@ -1,0 +1,47 @@
+.main-container-error-page{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.body-container-error-page{
+    display: flex;
+    flex-direction: row;
+    gap: 2vh;
+}
+
+.main-text-container-error-page{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    justify-content: center;
+}
+
+.error-response-error-page{
+    font-size: 20vh;
+    font-weight: bold;
+    font-family: Jost;
+}
+
+.footer-error-page{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 3vh;
+    left: 3vh;
+    font-family: Times New Roman;
+    font-size: 2vh;
+    font-weight: 400;
+}
+
+#parapido-email-error-page{
+    color: #ffebcc;
+	text-decoration: underline;
+}
+
+#parapido-email-error-page:hover {
+	color: black;
+}

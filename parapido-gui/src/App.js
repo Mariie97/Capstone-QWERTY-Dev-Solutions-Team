@@ -15,6 +15,8 @@ import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
 import ErrorPage from './Components/ErrorPage';
+import "./Layouts/ErrorPage.css";
+
 
 
 class App extends React.Component {
