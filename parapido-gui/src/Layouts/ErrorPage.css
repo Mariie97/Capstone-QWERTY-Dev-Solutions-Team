@@ -57,6 +57,18 @@
     font-weight: 400;
 }
 
+.footer-error-inside-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: Times New Roman;
+    font-size: 2vh;
+    font-weight: 400;
+    position: absolute;
+    bottom: -1vh;
+    left: 3vh;
+}
+
 #parapido-email-error-page{
     color: lightcoral;
 	text-decoration: underline;
