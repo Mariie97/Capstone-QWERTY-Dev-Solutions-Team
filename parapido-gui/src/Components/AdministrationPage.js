@@ -180,7 +180,7 @@ class AdministrationPage extends Component {
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
-                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidded/Access Not Allowed" inside/> :
+                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/> :
                 <React.Fragment>
                     <h1 className="page-title-header">
                         Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}

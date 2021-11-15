@@ -159,7 +159,7 @@ export class JobCreation extends Component {
         return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' /> }
-                {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidded/Access Not Allowed" inside/>:
+                {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
                 <React.Fragment>
                     {creationSuccessful && <Redirect to="/jobdashboard" />}
                     {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
