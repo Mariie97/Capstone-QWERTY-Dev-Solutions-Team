@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import "../Layouts/JobCreation.css";
-import { styled } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-
+import React, { Component } from "react";
+import { styled } from "@material-ui/core/styles";
+import Chip from "@material-ui/core/Chip";
 
 const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),

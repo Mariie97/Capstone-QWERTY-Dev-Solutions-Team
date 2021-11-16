@@ -1,14 +1,11 @@
-import React, {Component, createRef} from 'react';
-import '../Layouts/AdministrationPage.css'
-import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
+import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
+import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 
-
 class AdministrationPage extends Component {
-
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))

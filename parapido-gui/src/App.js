@@ -1,7 +1,7 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import React from "react";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {withCookies} from "react-cookie";
-import LandingPage from "./Components/LandingPage"
+import LandingPage from "./Components/LandingPage";
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
@@ -15,6 +15,10 @@ import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
+import "./Layouts/AdministrationPage.css";
+import "./Layouts/AgreementModal.css";
+import "./Layouts/JobCreation.css";
+
 
 
 class App extends React.Component {

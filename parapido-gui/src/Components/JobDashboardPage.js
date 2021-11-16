@@ -180,7 +180,7 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        <h1 className="job-dashboard-page-header">Job Dashboard
+                        <h1 className="page-title-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
                                 <button className="create-job-button-job-dashboard">

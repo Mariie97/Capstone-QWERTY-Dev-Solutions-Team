@@ -10,13 +10,15 @@
     font-family: "Jost";
     font-weight: bold;
     letter-spacing: 1px;
-    font-size: 35px;
+    font-size: 60px;
     text-align: center;
     color: white;
     border-bottom: 1px solid white;
-    width: 68vw;
-    padding-bottom: 5px;
-    margin: 0 auto 20px;
+    width: 700px;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .button-flex-container {
