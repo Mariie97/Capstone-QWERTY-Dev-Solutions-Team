@@ -23,7 +23,7 @@ class JobDashboardPage extends Component {
             change_price: createRef(),
             is_auth: true,
             pageLoaded: false,
-            filterLoaded: false
+            filterLoaded: false,
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -154,7 +154,7 @@ class JobDashboardPage extends Component {
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded } = this.state;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded} = this.state;
         const showJobCreationButton = this.currentUser.type === accountType.client;
         const cardArray = jobs.map(
             job => <JobDashboardCard
@@ -169,7 +169,6 @@ class JobDashboardPage extends Component {
                 zipcode = {job.zipcode}
             />
         )
-
 
         return (
             <div>

@@ -110,12 +110,12 @@ h2.edit-subheaders {
 .custom-file-upload-profile-page:active {
 	background-color: #2e856e;
 }
-
+	
 .change-about-style-profile-page{
-	font-family: "Times New Roman";
-	font-size: 18px;
+	font-family: "Jost";
+	font-size: 15px;
 	width: 100%;
-	border: 3px solid black;
+	border: 2px solid black;
 	padding-left: 3px;
 	padding-right: 3px;
 	resize: none

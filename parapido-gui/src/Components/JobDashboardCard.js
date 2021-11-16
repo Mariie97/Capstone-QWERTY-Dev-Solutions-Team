@@ -5,6 +5,7 @@ import {cities} from "../Utilities";
 import ReactTooltip from 'react-tooltip';
 
 class JobDashboardCard extends Component {
+    
     componentDidMount(){
         document.body.style.backgroundColor = "#2F2D4A";
     }

@@ -43,6 +43,11 @@ class ProfilePage extends Component {
             lastNameError: undefined,
             streetError: undefined,
             zipcodeError: undefined,
+            redirect: undefined,
+            alert: {
+                msg: undefined,
+                severity: 'success'
+            }
         }
 
         this.toggleEdit = this.toggleEdit.bind(this);
@@ -114,6 +119,8 @@ class ProfilePage extends Component {
             is_auth,
             pageLoaded,
             user,
+            redirect,
+            alert
         } = this.state;
 
         const {user_id} = this.props;
@@ -122,7 +129,14 @@ class ProfilePage extends Component {
         return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' />}
-
+                {redirect !== undefined && <Redirect to={{
+                    pathname: redirect,
+                    state: {
+                        alertMssg: alert.msg,
+                        severity: alert.severity
+                    }
+                }} />
+                }
                 {!pageLoaded ?
                     <div className='loading-icon'>
                         <Box sx={{display: 'flex'}}>
@@ -134,7 +148,7 @@ class ProfilePage extends Component {
                             {showButtons &&
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
-                                <Link to={"/jobdashboard"}>
+                                <Link to={"/myjobs"}>
                                     <button className="custom-buttons" onClick={this.toggleEdit}>
                                         {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>
@@ -174,7 +188,7 @@ class ProfilePage extends Component {
                                         <td className='column-table-body col1'>Address:</td>
                                         <td className='column-table-body col2'>
                                             {street !== null &&
-                                                `${street} ${cities[city - 1]} PR, ${zipcode}`
+                                            `${street} ${cities[city - 1]} PR, ${zipcode}`
                                             }
                                         </td>
                                     </tr>
@@ -240,6 +254,7 @@ class ProfilePage extends Component {
                                                         });
                                                     }
                                                 }}
+                                                style={{border: "2px solid black"}}
                                             />
                                         </div>
                                         <div className="grid-edit-info-item8">
@@ -333,9 +348,22 @@ class ProfilePage extends Component {
             }
         }).then(response =>{
             if (response.status!==200){
-                alert(`Can't delete user at this moment`)
+                this.setState({
+                    alert: {
+                        msg: "Can not delete user at this moment",
+                        severity: "error"
+                    },
+                    redirect: '/admin/site'
+                })
+
             }
-            //    TODO: Redirect to admin users list
+            else {
+                this.setState({
+                    alert: {
+                        msg: "User deleted successfully"},
+                    redirect: '/admin/site'
+                })
+            }
         })
     }
 

@@ -4,6 +4,7 @@ import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
+import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {
@@ -25,7 +26,6 @@ class JobDetailsPage extends Component {
                 categories: '',
                 status: '',
                 date_posted: '',
-                pdf: '',
                 street: '',
                 city: '',
                 zipcode: '',
@@ -41,6 +41,11 @@ class JobDetailsPage extends Component {
             },
             pageLoaded: false,
             redirect: undefined,
+            showAgreement: false,
+            alert: {
+                msg: undefined,
+                severity: 'success'
+            },
         };
 
         this.onClickRequest = this.onClickRequest.bind(this);
@@ -74,7 +79,6 @@ class JobDetailsPage extends Component {
                             categories: data.categories,
                             status: data.status,
                             date_posted: data.date_posted,
-                            pdf: data.pdf,
                             street: data.street,
                             city: data.city,
                             zipcode: data.zipcode,
@@ -99,26 +103,8 @@ class JobDetailsPage extends Component {
     }
 
     onClickRequest() {
-        const { job_id } = this.props;
-        fetch('/request_job', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: JSON.stringify({
-                job_id: job_id,
-                student_id: this.currentUser.id,
-            })
-        }).then(response => {
-            if (response.status === 200) {
-                //    TODO: Redirect to request listing page
-            }
-            else {
-                alert('Could not add request at this moment, please try again later');
-            }
-        })
+        const {showAgreement} = this.state;
+        this.setState({showAgreement: !showAgreement});
     }
 
     onClickCancelRequest() {
@@ -136,25 +122,40 @@ class JobDetailsPage extends Component {
             })
         }).then(response => {
             if (response.status === 200) {
-                //    TODO: Redirect to student request listing page
-                alert("Successful")
+                this.setState({
+                    redirect: '/myjobs',
+                    alert: {
+                        msg: 'Request canceled successfully',
+                         severity: 'success'
+                    }
+                });
             }
             else {
-                alert('Could not add request at this moment, please try again later');
+                this.setState({
+                    redirect: '/myjobs',
+                    alert: {
+                        msg: 'Unable to cancel te request at this moment, try again later.',
+                        severity: 'error'
+                    }
+                });
             }
         })
     }
 
     getJobDays() {
         const {days} = this.state.job;
-        return days.map(day =>
-            <Chip label={weekDays[day - 1]} style = {chipStyleJobDetails}/>
+        return days.map((day, index) =>
+            <Chip
+                key={`day-${index}`}
+                label={weekDays[day - 1]}
+                style={chipStyleJobDetails}
+            />
         )
     }
 
     render() {
         //TODO: This must be able to show all job without considering the status?
-        const {is_auth, job, pageLoaded, redirect } = this.state;
+        const {is_auth, job, pageLoaded, redirect, showAgreement, alert } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
 
@@ -191,22 +192,56 @@ class JobDetailsPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        {redirect !== undefined && <Redirect to={redirect} />}
+                        {redirect !== undefined &&
+                        <Redirect to={{
+                            pathname: redirect,
+                            state: {
+                                alertMssg: alert.msg,
+                                severity: alert.severity,
+                            }
+                        }}
+                        />
+                        }
                         <div className='header-flex-container'>
                             <div className="button-flex-container">
                                 {showRequestButton &&
-                                <button onClick={this.onClickRequest} className="custom-buttons">
-                                    Request Job
-                                </button>
+                                <React.Fragment>
+                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                        Request Job
+                                    </button>
+                                    {showAgreement &&
+                                    <AgreementModal
+                                        isOpen={showAgreement}
+                                        toggle={this.onClickRequest}
+                                        job_id={job_id}
+                                        cookies={token}/>
+                                    }
+                                </React.Fragment>
                                 }
+
                                 {showCancelButton &&
                                 <button
                                     onClick={() => {
                                         const status = this.currentUser.type === accountType.client ? jobStatus.cancelled : jobStatus.posted;
                                         const success = setJobStatus(token, job_id, status);
                                         if(success) {
-                                            //TODO: Redirect: student_request or job_posted depending on user account
-                                            this.setState({redirect: '/jobdashboard'});
+                                            this.setState({
+                                                redirect: '/myjobs',
+                                                alert: {
+                                                    msg: 'Job canceled successfully',
+                                                    severity: 'success'
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            this.setState({
+                                                redirect: '/myjobs',
+                                                alert: {
+                                                    msg: 'Can not cancel the job a this moment, please try again later.',
+                                                    severity: 'error'
+                                                }
+                                            });
+
                                         }
                                     }}
                                     className="custom-buttons"
@@ -228,7 +263,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showChatButton &&
                                 <Link
-                                    to={`/chat?job_id=${job_id}&title=${encodeURIComponent(job.title)}`}
+                                    to={`/chat?job_id=${job_id}`}
                                     className="custom-buttons"
                                 >Chat</Link>
                                 }
@@ -237,8 +272,21 @@ class JobDetailsPage extends Component {
                                     onClick={() => {
                                         const success = setJobStatus(token, job_id, jobStatus.deleted);
                                         if(success) {
-                                            //TODO: Redirect to user admin list page
-                                            this.setState({redirect: '/jobdashboard'});
+                                            this.setState({
+                                                redirect: '/admin/site',
+                                                alert: {
+                                                    msg: 'Job deleted successfully',
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            this.setState({
+                                                redirect: '/admin/site',
+                                                alert: {
+                                                    msg: 'Can not delete the job at this moment',
+                                                    severity: 'error'
+                                                }
+                                            });
                                         }
                                     }}
                                     className="custom-buttons delete-button"

@@ -15,7 +15,6 @@
     width: 99.9%;
     justify-content: center;
     padding-top: 34px;
-
 }
 
 .card-wrapper-1{
@@ -94,15 +93,15 @@
 }
 
 .break-title-job-dashboard{
-    inline-size: 175px;
+    inline-size: 155px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .none-display-for-link{
-        text-decoration: none;
-        color: black;
+    text-decoration: none;
+    color: black;
 }
 
 .tooltip{
