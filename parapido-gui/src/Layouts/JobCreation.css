@@ -25,18 +25,6 @@
 	text-align: left;
 }
 
-/* all labels have the same style */
-
-.label-job-creation{
-	font-family: "Jost";
-	font-style: italic;
-	font-weight: 400;
-	font-size: 18px;
-	color: white;
-	letter-spacing: 1px;
-	line-height: 2;
-}
-
 /* title input */
 .MuiFormControl-root.MuiTextField-root.input-title-job-creation {
 	width: 200%;
@@ -67,13 +55,22 @@
 	border-color: red;
 }
 
+.without-error{
+	border-color: black;
+}
+
 .MuiFormControl-root.MuiTextField-root.input-error {
     border: 2px solid red;
 }
 
-.MuiInputBase-root.MuiInput-root.MuiInputBase-formControl.MuiInput-formControl.MuiInputBase-adornedStart {
-    border-color: white;
+.MuiFormControl-root.MuiTextField-root.without-error{
+	border: 2px solid black;
 }
+
+.MuiInputBase-root.MuiInput-root.MuiInputBase-formControl.MuiInput-formControl{
+    border: transparent;
+}
+
 
 /* municipality and zipcode */
 .mini-flex-box-job-creation{
@@ -387,4 +384,8 @@
 	justify-content: center;
 	align-items: center
 }
+
+
+
+
 

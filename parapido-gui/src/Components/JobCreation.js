@@ -174,6 +174,7 @@ export class JobCreation extends Component {
                     <div className="left-body-container-1-job-creation">
                         <Input
                             required
+                            jobcreationlabel
                             labelText='Title'
                             className="input-title-job-creation"
                             id="title"
@@ -188,6 +189,7 @@ export class JobCreation extends Component {
                         <Input
                             required
                             multiline
+                            jobcreationlabel
                             rows={6}
                             labelText='Description'
                             className={descriptionError !== undefined ? 'input-description-job-creation input-error' : 'input-description-job-creation'}
@@ -205,6 +207,7 @@ export class JobCreation extends Component {
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <Input
                             required
+                            jobcreationlabel
                             labelText='Street'
                             className="input-street-job-creation"
                             id="street"
@@ -226,6 +229,7 @@ export class JobCreation extends Component {
                             />
                             <Input
                                 required
+                                jobcreationlabel
                                 labelText="Zipcode"
                                 className='input-zipcode-job-creation'
                                 type="text"
@@ -244,9 +248,9 @@ export class JobCreation extends Component {
 
                 <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                     <div className="price-miniflex-job-creation">
-                        <label className="label-job-creation" style={{paddingTop: 3.9}}> Price* </label>
+                        <label className="label-job-creation" style={labelstyle}> Price* </label>
                         <CurrencyTextField
-                            className={priceError !== undefined ? 'input-error' : 'input-price-job-description'}
+                            className={priceError !== undefined ? 'input-error' : "without-error"}
                             currencySymbol="$"
                             outputFormat="string"
                             decimalCharacter="."
@@ -272,7 +276,7 @@ export class JobCreation extends Component {
                         itemsList={categories}
                     />
                     <div>
-                        <label className="label-job-creation" >
+                        <label style={labelstyle} >
                             Available days*
                             <p className="job-creation-available-days-disclaimer">
                                 (Please make sure that at least one day is available for job completion)</p>
@@ -294,6 +298,7 @@ export class JobCreation extends Component {
     }
 
     // validation methods
+
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({titleError: "This field is required" })
@@ -366,6 +371,15 @@ const report = {
     color: "red",
     position: "relative",
     top: "4px"
+}
+
+const labelstyle = {
+    fontFamily: "Cormorant Garamond",
+	fontStyle: "italic",
+	fontWeight: "400",
+	fontSize: "15px",
+	color: "white",
+	letterSpacing: "1px"
 }
 
 export default JobCreation
