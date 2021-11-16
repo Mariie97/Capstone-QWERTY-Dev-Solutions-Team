@@ -1,10 +1,10 @@
-import React from 'react'
-import {Box, IconButton} from "@material-ui/core";
+import React from "react";
+import {Link} from "react-router-dom";
 import "../Layouts/JobListing.css"
 import {blue, red} from "@material-ui/core/colors";
-import DeleteIcon from '@mui/icons-material/Delete';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import {Link} from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import {Box, IconButton} from "@material-ui/core";
 
 
 const boxSX = {

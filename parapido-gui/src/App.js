@@ -1,6 +1,9 @@
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {withCookies} from "react-cookie";
+
+// Pages imports
+
 import LandingPage from "./Components/LandingPage";
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
@@ -15,11 +18,28 @@ import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
+
+
+// CSS imports
+
 import "./Layouts/AdministrationPage.css";
 import "./Layouts/AgreementModal.css";
 import "./Layouts/JobCreation.css";
-
-
+import "./Layouts/ChatPage.css";
+import "./Layouts/InputField.css";
+import "./Layouts/JobCreation.css";
+import "./Layouts/ItemsDropdown.css";
+import "./Layouts/JobDashboard.css";
+import "./Layouts/JobDashboardCard.css";
+import './Layouts/JobDetails.css';
+import "./Layouts/LandingPage.css";
+import "./Layouts/LoginModal.css";
+import "./Layouts/NavBar.css";
+import "./Layouts/myJobsDashboardCard.css";
+import "./Layouts/ProfileCard.css";
+import "./Layouts/ProfilePage.css";
+import "./Layouts/RequestsPage.css";
+import "./Layouts/SecurityQuestionsPage.css";
 
 class App extends React.Component {
     render() {

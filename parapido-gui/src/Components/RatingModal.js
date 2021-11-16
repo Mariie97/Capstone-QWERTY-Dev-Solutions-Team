@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import "../Layouts/RatingModal.css";
 import {Backdrop, FormControl, InputLabel, MenuItem, Modal, Select} from "@material-ui/core";
-import "../Layouts/RatingModal.css"
-
 
 
 class RatingModal extends Component {

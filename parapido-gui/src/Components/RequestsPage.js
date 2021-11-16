@@ -1,15 +1,14 @@
-import '../Layouts/RequestsPage.css';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
+import {getQueryParams, verifyUserAuth} from "../Utilities";
+import AgreementModal from "./AgreementModal"
 import Avatar from "@mui/material/Avatar";
 import {Box, CircularProgress} from "@material-ui/core";
-import {getQueryParams, verifyUserAuth} from "../Utilities";
-import AgreementModal from './AgreementModal.js'
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
 
 class RequestsPage extends Component {
     queryParams = undefined;

@@ -1,9 +1,7 @@
-import React, {Component} from 'react'
-import "../Layouts/InputField.css"
+import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-
 
 class Input extends Component {
 

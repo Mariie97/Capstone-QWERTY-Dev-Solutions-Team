@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
-import '../Layouts/JobDetails.css'
+import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
+import AgreementModal from "./AgreementModal";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
-import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {

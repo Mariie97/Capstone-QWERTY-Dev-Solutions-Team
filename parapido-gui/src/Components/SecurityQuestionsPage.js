@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
-import {Backdrop, Modal} from "@material-ui/core";
+import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-import {Alert} from "@material-ui/lab";
-import Stack from '@mui/material/Stack';
-import "../Layouts/SecurityQuestionsPage.css"
-import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import Input from "./Input";
 import {securityQuestions} from "../Utilities";
-
+import Input from "./Input";
+import {Backdrop, Modal} from "@material-ui/core";
+import {Alert} from "@material-ui/lab";
+import Stack from "@mui/material/Stack";
+import loginModalLogo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
 
 class SecurityQuestionsPage extends Component {
     constructor(props){

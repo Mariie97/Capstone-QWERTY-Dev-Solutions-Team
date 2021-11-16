@@ -1,17 +1,13 @@
-import React, {Component, createRef} from 'react';
+import React, {Component, createRef} from "react";
 import {Redirect} from "react-router-dom";
-import "../Layouts/JobCreation.css";
-import ItemsDropdown from "./ItemsDropdown.js";
-import AvailableDays from './AvailableDaysChips';
-import CurrencyTextField from "@unicef/material-ui-currency-textfield";
-import CreateIcon from '@material-ui/icons/Create';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import Alert from '@material-ui/lab/Alert';
 import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType} from "../Utilities";
 import Input from "./Input";
-
-
-
+import ItemsDropdown from "./ItemsDropdown";
+import AvailableDays from "./AvailableDaysChips";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
+import CreateIcon from "@material-ui/icons/Create";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import Alert from "@material-ui/lab/Alert";
 
 export class JobCreation extends Component {
     currentUser = {

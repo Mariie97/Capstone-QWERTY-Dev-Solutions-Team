@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
-import StyledEngineProvider from '@material-ui/styles/StylesProvider';
+import {accountType} from "../Utilities";
+import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import {Box, Modal} from "@material-ui/core";
 import loginModalLogo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
 import continueArrow from "../Static/Images/continueArrow.png";
 import virtualContract from "../Static/Images/Virtual_Contract.png";
-import {accountType} from "../Utilities";
 
 const style = {
     position: 'absolute',

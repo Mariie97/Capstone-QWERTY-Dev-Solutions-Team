@@ -6,7 +6,6 @@ const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),
 }));
 
-
 class AvailableDaysChips extends Component {
     constructor(props){
         super(props);

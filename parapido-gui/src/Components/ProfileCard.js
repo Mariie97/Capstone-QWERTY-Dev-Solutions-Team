@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
-import '../Layouts/ProfileCard.css';
-import defaultPicture from '../Static/Images/defaultprofilepicture.svg';
-import school_bag from '../Static/Images/school_bag_transparentbg.png';
-import _employer from '../Static/Images/employer.png';
-import _admin from '../Static/Images/admin.png';
-import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
-import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
-import StarIcon from '@material-ui/icons/Star';
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {accountType, mapAccount} from "../Utilities";
-
+import defaultPicture from "../Static/Images/defaultprofilepicture.svg";
+import school_bag from "../Static/Images/school_bag_transparentbg.png";
+import _employer from "../Static/Images/employer.png";
+import _admin from "../Static/Images/admin.png";
+import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
+import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
+import StarIcon from "@material-ui/icons/Star";
 
 class ProfileCard extends Component {
-
     render() {
         const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
         const profile_pic = image!==null ? image : defaultPicture;

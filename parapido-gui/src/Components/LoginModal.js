@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/LoginModal.css"
-import Alert from '@material-ui/lab/Alert';
-import StyledEngineProvider from '@material-ui/styles/StylesProvider';
-import {Box, Modal} from "@material-ui/core";
-import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import continueArrow from '../Static/Images/continueArrow.png';
 import Input from "./Input";
+import Alert from "@material-ui/lab/Alert";
+import StyledEngineProvider from "@material-ui/styles/StylesProvider";
+import {Box, Modal} from "@material-ui/core";
+import loginModalLogo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
+import continueArrow from "../Static/Images/continueArrow.png";
 
 
 const style = {

@@ -1,12 +1,11 @@
-import React, {Component, createRef} from 'react';
-import "../Layouts/ProfilePage.css";
-import {Link, Redirect} from 'react-router-dom';
+import React, {Component, createRef} from "react";
+import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
+import ProfileCard from "./ProfileCard";
 import {Box, CircularProgress} from "@material-ui/core";
-import ProfileCard from './ProfileCard';
-import UploadIcon from '@material-ui/icons/CloudUpload'
+import UploadIcon from "@material-ui/icons/CloudUpload";
 
 class ProfilePage extends Component {
     currentUser = {

@@ -1,11 +1,9 @@
-import React, {Component, createRef} from 'react';
-import '../Layouts/ChatPage.css';
-import {Box, CircularProgress} from "@material-ui/core";
-import Avatar from '@material-ui/core/Avatar';
-import {getQueryParams, verifyUserAuth} from "../Utilities";
+import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import RefreshIcon from '@material-ui/icons/Refresh';
-
+import {getQueryParams, verifyUserAuth} from "../Utilities";
+import {Box, CircularProgress} from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import RefreshIcon from "@material-ui/icons/Refresh";
 
 class MessagesContainer extends Component{
   currentUser = {

@@ -1,11 +1,10 @@
-import {Component, createRef} from 'react';
+import {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/JobDashboard.css"
-import "../Layouts/JobDashboardCard.css";
 import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown.js";
-import FilterListIcon from '@material-ui/icons/FilterList';
-import JobDashboardCard from './JobDashboardCard';
+import JobDashboardCard from "./JobDashboardCard";
+import FilterListIcon from "@material-ui/icons/FilterList";
+
 import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {

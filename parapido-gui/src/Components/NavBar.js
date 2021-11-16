@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/NavBar.css";
-import logo from "../Static/Images/Pa_RapidoLogo.png";
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import CancelIcon from '@material-ui/icons/Cancel';
 import {accountType} from "../Utilities";
-
+import logo from "../Static/Images/Pa_RapidoLogo.png";
+import MenuOpenIcon from "@material-ui/icons/MenuOpen";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 class NavBar extends Component {
     currentUser = {

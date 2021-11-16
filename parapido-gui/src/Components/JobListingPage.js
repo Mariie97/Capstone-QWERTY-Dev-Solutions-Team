@@ -1,9 +1,10 @@
-import React, {Component, createRef} from 'react';
+import React, {Component, createRef} from "react";
+import {verifyUserAuth, getQueryParams} from "../Utilities";
 import { Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {verifyUserAuth, getQueryParams} from "../Utilities";
+
 import ItemsDropdown from "./ItemsDropdown";
 
 

@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
-import "../Layouts/LandingPage.css";
 import {verifyUserAuth} from "../Utilities";
+import LoginModal from './LoginModal';
 import logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
-import EmailIcon from '@material-ui/icons/Mail';
-import LoginModal from './LoginModal';
-import Alert from '@material-ui/lab/Alert';
+import EmailIcon from "@material-ui/icons/Mail";
+import Alert from "@material-ui/lab/Alert";
 
 class LandingPage extends Component {
 
