@@ -78,12 +78,12 @@ class JobListingPage extends Component {
             let status;
             if(this.state.userAccountType === 3) {
                 deleteSuccess = setJobStatus(this.token, job_id, jobStatus.deleted);
-                status = 'Deleted';
+                status = 'deleted';
             }
             else {
                 const state = this.state.userAccountType === accountType.student ? jobStatus.posted : jobStatus.cancelled;
                 deleteSuccess = setJobStatus(this.token, job_id, state)
-                status = getJobStatus[state];
+                status = 'canceled';
             }
 
             if (deleteSuccess) {
