@@ -39,6 +39,7 @@ class JobListingPage extends Component {
         }
 
         this.hideAlert = this.hideAlert.bind(this);
+        this.fetchList = this.fetchList.bind(this);
     }
 
     componentDidMount(){
@@ -137,7 +138,7 @@ class JobListingPage extends Component {
                     handleClose = {this.handleClose.bind(this)}
                     job_id = {this.state.currJob}
                     userToRate = {this.state.userToRate}
-                    fillterJobs = {this.fetchList.bind(this)}
+                    filterJobs = {this.fetchList}
                     ratingRef = {this.state.ratingRef}
                     cookies = {this.props.cookies}
                 />
@@ -150,7 +151,7 @@ class JobListingPage extends Component {
                         {this.state.userAccountType === 2 && this.status === '1' && <div className="job-listing-page-header"> Jobs Posted </div>}
                         {this.status === '2' && <div className="job-listing-page-header"> Jobs In-Progress </div>}
                         {this.status === '3' && <div className="job-listing-page-header"> Jobs Completed </div>}
-                        {this.state.listIsEmpty && <div className="empty-list-error"> ALERT PLACEHOLDER </div>}
+                        {this.state.listIsEmpty && <h2 className="empty-list-msg"> No jobs available </h2>}
 
 
                         {!this.state.listIsEmpty &&
@@ -207,7 +208,7 @@ class JobListingPage extends Component {
         );
     };
 
-    fetchList = () => {
+    fetchList() {
         //Handle Filters
         const {monthRef, yearRef} = this.state
 

@@ -129,17 +129,9 @@
 	letter-spacing: 0.03333em;
 }
 
-.empty-list-error {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 50%;
+.empty-list-msg {
 	font-weight: bold;
-	font-size: 60px;
-	text-align: left;
-	color: red;
-	border-bottom: 2px solid red;
-    padding-bottom: 20px;
+	color: black;
     margin: 65px;
     top: 100px;
 }

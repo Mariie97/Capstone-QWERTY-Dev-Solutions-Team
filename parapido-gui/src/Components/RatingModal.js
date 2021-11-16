@@ -84,7 +84,7 @@ class RatingModal extends Component {
                 })
             }).then(response => {
                 if(response.status === 201) {
-                    this.props.filterJobs()
+                    this.props.filterJobs();
                 }
             })
         }
