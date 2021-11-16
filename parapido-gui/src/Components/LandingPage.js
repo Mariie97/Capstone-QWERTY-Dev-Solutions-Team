@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
 import {verifyUserAuth} from "../Utilities";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
