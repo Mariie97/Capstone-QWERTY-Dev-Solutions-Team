@@ -68,12 +68,8 @@ class RatingModal extends Component {
         });
     }
 
-    handleRate(){
-
-        if(this.state.ratingRef.current !== null) this.state.ratingRef.current.validate();
-
-        if(this.state.ratingRef.current.state.item !== undefined)
-        {
+    handleRate() {
+        if(this.state.ratingRef.current?.validate()) {
 
             fetch('/rate_job/' + this.props.job_id,{
                 method: 'POST',
@@ -87,18 +83,8 @@ class RatingModal extends Component {
                     user_id: this.props.userToRate
                 })
             }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-
-                            //console.log(data)
-                        this.props.filterJobs()
-
-
-                        }
-                    )
-                }
-                else {
-                    console.log("Error")
+                if(response.status === 201) {
+                    this.props.filterJobs()
                 }
             })
         }
@@ -116,7 +102,6 @@ const backdropStyle = {
     position: "absolute",
     backgroundColor: "#FFFFFF",
     border: '3px solid black',
-
 }
 
 

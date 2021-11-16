@@ -32,10 +32,11 @@ export class JobCreation extends Component {
             descriptionError: undefined,
             zipcodeError: undefined,
             priceError: undefined,
-            creationSuccessful: false,
             serverProcessedRequest: true,
             is_auth: true,
-            is_client: this.currentUser.type === accountType.client
+            is_client: this.currentUser.type === accountType.client,
+            alertMssg: undefined,
+            severity: undefined
         };
 
         // event methods - before render method
@@ -78,18 +79,17 @@ export class JobCreation extends Component {
         const validate5 = this.validatePrice();
         const validate6 = this.state.change_city.current?.validate();
         const validate7 = this.state.change_category.current?.validate();
-        
+
         if(!validate1 || !validate2 || !validate3 || !validate4 || !validate5 || !validate6 || !validate7){
             return false;
         }
-       
+
         const { title, street, description, zipcode, price, change_city,
             change_category, availableDays_chips } = this.state
-           
+
         const city = change_city?.current.state.item
         const category = change_category?.current.state.item
         const chips = availableDays_chips?.current.state.chipData
-
         const sunday    = chips.some(sun => sun.key === 0);
         const monday    = chips.some(mon => mon.key === 1);
         const tuesday   = chips.some(tue => tue.key === 2);
@@ -97,7 +97,7 @@ export class JobCreation extends Component {
         const thursday  = chips.some(thu => thu.key === 4);
         const friday    = chips.some(fri => fri.key === 5);
         const saturday  = chips.some(sat => sat.key === 6);
-  
+
         fetch('/create_job',{
             method: 'POST',
             credentials: 'same-origin',
@@ -113,18 +113,19 @@ export class JobCreation extends Component {
                 price: price,
                 city: city,
                 categories: category,
-                d: sunday === true ? 1 : 0,
-                l: monday === true ? 1 : 0,
-                m: tuesday === true ? 1 : 0,
-                w: wednesday === true ? 1 : 0,
-                j: thursday === true ? 1 : 0,
-                v: friday === true ? 1 : 0,
-                s: saturday === true ? 1 : 0
+                d: sunday === true ? "1" : "0",
+                l: monday === true ? "1" : "0",
+                m: tuesday === true ? "1" : "0",
+                w: wednesday === true ? "1" : "0",
+                j: thursday === true ? "1" : "0",
+                v: friday === true ? "1" : "0",
+                s: saturday === true ? "1" : "0",
             })
         }).then(response => {
-                if(response.status === 201) {                  
+                if(response.status === 201) {
                     this.setState({
-                        creationSuccessful: true
+                        alertMssg: "The job has been created succesfully!!! 👍🏼",
+                        severity: "success"
                     })
                 }
                 else{
@@ -140,7 +141,6 @@ export class JobCreation extends Component {
             change_category,
             availableDays_chips,
             serverProcessedRequest,
-            creationSuccessful,
             is_auth,
             titleError,
             descriptionError,
@@ -151,16 +151,22 @@ export class JobCreation extends Component {
             street,
             description,
             zipcode,
-            is_client
+            is_client,
+            alertMssg,
+            severity
         } = this.state
-
-        
+        	    
         return (
             <React.Fragment>
-                {(!is_auth || !is_client)&& <Redirect to='/' /> }
-                {creationSuccessful && <Redirect to="/jobdashboard" />}
+                {(!is_auth || !is_client)&& <Redirect to='/' />}
+                { (alertMssg !== undefined && severity !== undefined) && <Redirect to={{
+                    pathname: '/myjobs',
+                    state: { alertMssg: alertMssg,
+                             severity: severity}
+                }}/>}
+                
                 {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
-                    Sorry can't create job right now 😔 please try again later!!!.
+                    Sorry can't create job right now 😔 please try again later!!!
                 </Alert>}
                 <h1 className="job-creation-page-header"> Job Creation </h1>
 
@@ -262,7 +268,7 @@ export class JobCreation extends Component {
                             name = "price"
                             onChange = {this.handleChange}
                             onBlur  = {this.validatePrice}
-                            InputProps={{ disableUnderline: true }}          
+                            InputProps={{ disableUnderline: true }}
                         />
                         {priceError !== undefined &&
                         <div className="required-field-2-job-creation">

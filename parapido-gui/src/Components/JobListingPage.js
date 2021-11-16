@@ -220,7 +220,6 @@ class JobListingPage extends Component {
 
         let filters = '';
 
-
         if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
 
@@ -273,13 +272,10 @@ class JobListingPage extends Component {
             }).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {
-
                             this.setState({
                                 listIsEmpty: false,
                                 listings: data
                             })
-
-
                         }
                     )
                 }
