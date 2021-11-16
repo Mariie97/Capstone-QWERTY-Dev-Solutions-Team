@@ -3,15 +3,7 @@ import {Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {
-    accountType,
-    cancelJobRequest,
-    getJobStatus,
-    getQueryParams,
-    jobStatus,
-    setJobStatus,
-    verifyUserAuth
-} from "../Utilities";
+import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
