@@ -23,7 +23,7 @@ class JobListingPage extends Component {
             listings: [],
 
             rating: 1,
-            change_rating: createRef(),
+            ratingRef: createRef(),
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
@@ -33,6 +33,7 @@ class JobListingPage extends Component {
             currJob: '',
             userToRate: '',
             listIsEmpty: false,
+            deleteListing: true,
         }
     }
 
@@ -44,7 +45,7 @@ class JobListingPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        this.fetchList('');
+        this.fetchList();
 
     }
 
@@ -52,14 +53,19 @@ class JobListingPage extends Component {
 
     deleteListing = (listingIndex) => {
 // FilterJobs not working after fetch
+        let deleteSuccess
 
         if(this.state.userAccountType === 3)
-            setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.deleted).then(r => {})
+        {deleteSuccess = setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.deleted).then(r => {})}
         else
-            setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.cancelled).then(r => {})
+        {deleteSuccess = setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.cancelled).then(r => {})}
 
+        if(deleteSuccess){
+            const listings = Object.assign([], this.state.listings);
+            listings.splice(listingIndex, 1);
+            this.setState({listings:listings});
+        }
 
-        this.fetchList()
 
     }
 
@@ -73,6 +79,7 @@ class JobListingPage extends Component {
             this.setState({userToRate: this.state.listings[listingIndex].owner_id});
         else
             this.setState({userToRate: this.state.listings[listingIndex].student_id});
+
     }
 
 
@@ -117,6 +124,7 @@ class JobListingPage extends Component {
                     job_id = {this.state.currJob}
                     userToRate = {this.state.userToRate}
                     fillterJobs = {this.fetchList.bind(this)}
+                    ratingRef = {this.state.ratingRef}
                 />
 
                 <div className={"outer-div"}>
@@ -234,13 +242,11 @@ class JobListingPage extends Component {
             }).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {
-                            //console.log(data)
 
                             this.setState({
                                 listIsEmpty: false,
                                 listings: data
                             })
-
 
                         }
                     )
@@ -266,7 +272,6 @@ class JobListingPage extends Component {
             }).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {
-                            //console.log(data)
 
                             this.setState({
                                 listIsEmpty: false,
@@ -288,6 +293,7 @@ class JobListingPage extends Component {
         }
 
     }
+
 }
 
 

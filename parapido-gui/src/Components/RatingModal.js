@@ -10,7 +10,7 @@ class RatingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ratingRef: createRef(),
+            ratingRef: this.props.ratingRef,
         };
 
         this.changeRating = this.changeRating.bind(this);
@@ -46,7 +46,7 @@ class RatingModal extends Component {
                             blackLabel
                             initial_value={''}
                             ref={this.state.ratingRef}
-                            validate={false}
+                            validate={true}
                             itemsList={this.ratings}
                             label='Rating'
                         />
@@ -69,6 +69,8 @@ class RatingModal extends Component {
     }
 
     handleRate(){
+
+        if(this.state.ratingRef.current !== null) this.state.ratingRef.current.validate();
 
         if(this.state.ratingRef.current.state.item !== undefined)
         {
