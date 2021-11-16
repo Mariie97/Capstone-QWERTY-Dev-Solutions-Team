@@ -32,7 +32,7 @@ class ItemsDropdown extends Component {
     }
 
     validate() {
-        const { validate, validationFunc } = this.props;
+        const { validate, validationFunc} = this.props;
         if(validationFunc)
             return validationFunc();
 
@@ -50,12 +50,13 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required, blackLabel, removeDefault } = this.props;
+        const { label, required, blackLabel, removeDefault, jobcreationlabel} = this.props;
 
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                    <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
+                    <label className={ jobcreationlabel !== undefined ? 'job-creation-label-text' : `label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}
+                    `}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}

@@ -221,11 +221,12 @@ export class JobCreation extends Component {
                         />
                         <div className="mini-flex-box-job-creation">
                             <ItemsDropdown
+                                required
+                                jobcreationlabel
                                 ref={change_city}
                                 validate={true}
                                 itemsList={cities}
-                                label='City'
-                                required
+                                label='City'     
                             />
                             <Input
                                 required
@@ -268,13 +269,14 @@ export class JobCreation extends Component {
                         </div>
                         }
                     </div>
-                    <ItemsDropdown
-                        required
-                        label='Category'
-                        ref={change_category}
-                        validate={true}
-                        itemsList={categories}
-                    />
+                        <ItemsDropdown
+                            required
+                            jobcreationlabel
+                            label='Category'
+                            ref={change_category}
+                            validate={true}
+                            itemsList={categories}
+                        />
                     <div>
                         <label style={labelstyle} >
                             Available days*
@@ -379,7 +381,7 @@ const labelstyle = {
 	fontWeight: "400",
 	fontSize: "15px",
 	color: "white",
-	letterSpacing: "1px"
+	letterSpacing: "1px",
 }
 
 export default JobCreation

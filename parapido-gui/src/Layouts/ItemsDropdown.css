@@ -4,7 +4,6 @@
 	font-size: 15px;
 	color: white;
 	letter-spacing: 1px;
-	line-height: 2;
 }
 
 .item-dropdown {
@@ -13,17 +12,15 @@
 }
 
 .MuiInputBase-root.MuiInput-root.item-dropdown.dropdown-error {
-    border-color: red;
+    border-color: #cc3300;
 }
 
 .required-dropdown {
 	font-family: "Times New Roman";
 	color: #cc3300;
 	position: relative;
-	bottom: 8px;
 	left: -3px;
-	margin-top: 8px;
-	width: 150%;
+	width: 110%;
 }
 
 .black-label-text{
