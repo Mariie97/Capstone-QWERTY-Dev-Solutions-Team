@@ -77,11 +77,15 @@ class RatingModal extends Component {
 
             fetch('/rate_job/' + this.props.job_id,{
                 method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                },
                 body: JSON.stringify({
                     value: this.state.ratingRef.current.state.item,
                     user_id: this.props.userToRate
-                }),
-                headers: {'Content-Type': 'application/json'},
+                })
             }).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {

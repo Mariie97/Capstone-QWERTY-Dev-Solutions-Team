@@ -65,9 +65,9 @@ const listing = (props) => {
 
                 </Box>
             </Link>
-                                { props.status === '2' &&
+            { props.status === '2' &&
 
-                    <span id={"checkbox-style"}>
+            <span id={"checkbox-style"}>
                         <IconButton>
                             <ThumbUpIcon
                                 sx={{ color: blue[100],
@@ -77,11 +77,11 @@ const listing = (props) => {
                             />
                         </IconButton>
                             </span>
-                    }
+            }
 
 
-                    { (props.status === '1' || props.status === '2') &&
-                    <span id={"delete-button"}>
+            { (props.status === '1' || props.status === '2') &&
+            <span id={"delete-button"}>
                     <IconButton aria-label="delete" color="error">
                         <DeleteIcon
                             onClick={props.deleteListing}
@@ -92,7 +92,7 @@ const listing = (props) => {
                         />
                     </IconButton>
                 </span>
-                    }
+            }
         </li>
     )
 }

@@ -125,6 +125,7 @@ class JobListingPage extends Component {
                     userToRate = {this.state.userToRate}
                     fillterJobs = {this.fetchList.bind(this)}
                     ratingRef = {this.state.ratingRef}
+                    cookies = {this.props.cookies}
                 />
 
                 <div className={"outer-div"}>
@@ -231,7 +232,7 @@ class JobListingPage extends Component {
 
         if(this.status === '1' && this.state.userAccountType === 1){
 
-        //Fetch Requested Jobs
+            //Fetch Requested Jobs
 
             fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
                 method: 'GET',
