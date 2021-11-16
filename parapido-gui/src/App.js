@@ -67,7 +67,6 @@ class App extends React.Component {
                                         {...props}
                                         cookies = {this.props.cookies}
                                         queryParams = {props.location.search}
-                                        status = {1}
                                     />
                                 </React.Fragment>
                             )}
