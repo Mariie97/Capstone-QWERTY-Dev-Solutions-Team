@@ -89,7 +89,10 @@ class JobListingPage extends Component {
         if(deleteSuccess){
             const listings = Object.assign([], this.state.listings);
             listings.splice(listingIndex, 1);
-            this.setState({listings:listings});
+            this.setState({
+                listings:listings,
+                listIsEmpty: listings.length === 0
+            });
         }
     }
 
@@ -201,7 +204,6 @@ class JobListingPage extends Component {
                         <div className={"filters-flexbox"}>
                             <ItemsDropdown
                                 blackLabel
-                                initial_value={''}
                                 ref={this.state.yearRef}
                                 validate={false}
                                 itemsList={this.years}
@@ -209,7 +211,6 @@ class JobListingPage extends Component {
                             />
                             <ItemsDropdown
                                 blackLabel
-                                initial_value={''}
                                 ref={this.state.monthRef}
                                 validate={false}
                                 itemsList={this.months}
@@ -250,7 +251,6 @@ class JobListingPage extends Component {
         if(this.status === '1' && this.state.userAccountType === 1){
 
             //Fetch Requested Jobs
-
             fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
                 method: 'GET',
                 credentials: 'same-origin',
@@ -260,31 +260,26 @@ class JobListingPage extends Component {
             }).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {
-
                             this.setState({
                                 listIsEmpty: false,
                                 listings: data
                             })
-
                         }
                     )
                 }
                 else if(response.status === 404){
                     this.setState({listIsEmpty: true})
                 }
-                else {
-                    console.log("Error")
-                }
             })
         }
+
         //Fetch In-Progress, Completed and Posted Jobs
-
         else{
-
             fetch('/jobs_list/' + this.status + this.idFilter + filters, {
                 method: 'GET',
                 credentials: 'same-origin',
-                headers: {'Content-Type': 'application/json',
+                headers: {
+                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
                 }
             }).then(response => {
@@ -300,15 +295,9 @@ class JobListingPage extends Component {
                 else if(response.status === 404){
                     this.setState({listIsEmpty: true})
                 }
-                else {
-                    console.log("Error")
-                }
             })
-
         }
-
     }
-
 }
 
 
