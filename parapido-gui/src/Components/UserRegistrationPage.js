@@ -3,6 +3,7 @@ import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio,
 import "../Layouts/UserRegistrationPage.css";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
+import SecurityQuestions, {securityQuestions} from "../Utilities"
 
 const accountTypeStyle = {
     position: "absolute",
@@ -273,20 +274,15 @@ class UserRegistrationPage extends Component {
 
 
     render() {
-        //TODO: Needs CSS improvement
         const {
             firstName,
             lastName,
             email,
             password,
             confirmPassword,
-            questionOneRef,
-            questionTwoRef,
             answerOne,
             answerTwo,
-            registerSuccess,
-            isFetchError,
-            questionError,
+
         } = this.state;
 
         return (
@@ -428,11 +424,7 @@ class UserRegistrationPage extends Component {
                                 <ItemsDropdown
                                     initial_value={1}
                                     ref={this.state.questionOneRef}
-                                    itemsList={[
-                                        'In what city were you born?',
-                                        'What high school did you attend?',
-                                        'What was your favorite food as a child?',
-                                    ]}
+                                    itemsList={securityQuestions}
                                     validationFunc={this.validateQuestions}
                                     label='Question 1'
                                 />
@@ -462,11 +454,7 @@ class UserRegistrationPage extends Component {
                                 <ItemsDropdown
                                     initial_value={2}
                                     ref={this.state.questionTwoRef}
-                                    itemsList={[
-                                        'In what city were you born?',
-                                        'What high school did you attend?',
-                                        'What was your favorite food as a child?',
-                                    ]}
+                                    itemsList={securityQuestions}
                                     validationFunc={this.validateQuestions}
                                     label='Question 2'
                                 />
