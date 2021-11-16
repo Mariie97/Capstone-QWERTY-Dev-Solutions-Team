@@ -40,6 +40,7 @@ import "./Layouts/ProfileCard.css";
 import "./Layouts/ProfilePage.css";
 import "./Layouts/RequestsPage.css";
 import "./Layouts/SecurityQuestionsPage.css";
+import "./Layouts/Fonts and Color.css";
 
 class App extends React.Component {
     render() {
