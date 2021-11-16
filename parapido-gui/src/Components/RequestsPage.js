@@ -57,7 +57,6 @@ class RequestsPage extends Component {
                     this.setState({
                         requestsList: data.requests,
                         allowAccess: this.currentUser.id === data.owner_id
-
                     });
                 })
             }
@@ -100,7 +99,6 @@ class RequestsPage extends Component {
     }
 
     render() {
-        //TODO: Show message when there are no request; fetch to accept a request
         const { is_auth, requestsList, requestLoaded, is_student, pageNotFound, allowAccess} = this.state;
         
         return (
@@ -110,19 +108,21 @@ class RequestsPage extends Component {
                         {!is_auth && <Redirect to='/' />}
                         {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
                         <React.Fragment>
-                            <div className='header-flex-container'>
-                                <h1 className="page-title-header">Student's Requests</h1>
-                            </div>
                             {!requestLoaded ?
                                 <div className='loading-icon'>
                                     <Box sx={{display: 'flex'}}>
                                         <CircularProgress />
                                     </Box>
                                 </div>:
-                                <div className='student-requests-flex-container'>
-                                    {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :
-                                        this.renderCards()
-                                    }
+                                <div>
+                                    <div className='header-flex-container'>
+                                            <h1 className="page-title-header">Student's Requests</h1>
+                                    </div>     
+                                    <div className='student-requests-flex-container'>
+                                            {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :
+                                                this.renderCards()
+                                            }
+                                    </div>
                                 </div>
                             }
                         </React.Fragment>}
