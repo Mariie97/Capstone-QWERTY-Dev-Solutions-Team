@@ -222,7 +222,7 @@ export class JobCreation extends Component {
                         <div className="mini-flex-box-job-creation">
                             <ItemsDropdown
                                 required
-                                jobcreationlabel
+                                cormorantlabel
                                 ref={change_city}
                                 validate={true}
                                 itemsList={cities}
@@ -271,7 +271,7 @@ export class JobCreation extends Component {
                     </div>
                         <ItemsDropdown
                             required
-                            jobcreationlabel
+                            cormorantlabel
                             label='Category'
                             ref={change_category}
                             validate={true}

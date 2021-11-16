@@ -194,6 +194,7 @@ class JobDashboardPage extends Component {
                         <div className="first-flex-container-job-dashboard-page">
                             <div className = "label-job-dashboard">
                                 <ItemsDropdown
+                                    cormorantlabel
                                     ref={change_category}
                                     itemsList={categories}
                                     label='Categories'
@@ -202,6 +203,7 @@ class JobDashboardPage extends Component {
 
                             <div className = "label-job-dashboard">
                                 <ItemsDropdown
+                                    cormorantlabel
                                     ref={change_price}
                                     itemsList={prices}
                                     label='Prices'
@@ -210,6 +212,7 @@ class JobDashboardPage extends Component {
 
                             <div className = "label-job-dashboard">
                                 <ItemsDropdown
+                                    cormorantlabel
                                     ref={change_city}
                                     itemsList={cities}
                                     label='Cities'
