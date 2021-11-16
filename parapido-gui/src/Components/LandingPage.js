@@ -64,6 +64,7 @@ class LandingPage extends Component {
 		const {psswordChangedSuccesfully, alertMssg, severity} = this.state
 		return (
 			<div>
+				{is_auth && <Redirect to='/jobdashboard' />}
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
