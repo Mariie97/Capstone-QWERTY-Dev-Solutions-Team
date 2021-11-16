@@ -9,6 +9,7 @@ import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
 import JobPosted_listings from "../Static/Images/JobPosted_listings.svg"
 import JobRequested_listings from "../Static/Images/JobRequested_listings.svg"
+import Alert from "@material-ui/lab/Alert";
 
 
 class JobListingPage extends Component {
@@ -31,7 +32,13 @@ class JobListingPage extends Component {
             userToRate: '',
             listIsEmpty: false,
             deleteListing: true,
+            alert: {
+                msg: undefined,
+                severity: undefined
+            },
         }
+
+        this.hideAlert = this.hideAlert.bind(this);
     }
 
     componentDidMount(){
@@ -57,7 +64,8 @@ class JobListingPage extends Component {
                 deleteSuccess = setJobStatus(this.token, job_id, jobStatus.deleted)
             }
             else {
-                deleteSuccess = setJobStatus(this.token, job_id, jobStatus.cancelled)
+                const state = this.state.userAccountType === accountType.student ? jobStatus.posted : jobStatus.cancelled;
+                deleteSuccess = setJobStatus(this.token, job_id, state)
             }
         }
 
@@ -111,11 +119,19 @@ class JobListingPage extends Component {
         'Dic'
     ];
 
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            alert: {msg: undefined}})}, 3000);
+    }
+
     render(){
 
         return (
             <div>
-
+                {alert.msg !== undefined &&
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                    {alert.msg}</Alert>
+                }
                 <RatingModal
                     open = {this.state.open}
                     handleClose = {this.handleClose.bind(this)}
