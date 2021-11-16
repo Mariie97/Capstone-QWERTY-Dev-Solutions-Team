@@ -174,7 +174,7 @@ export class JobCreation extends Component {
                     <div className="left-body-container-1-job-creation">
                         <Input
                             required
-                            jobcreationlabel
+                            cormorantlabel
                             labelText='Title'
                             className="input-title-job-creation"
                             id="title"
@@ -189,7 +189,7 @@ export class JobCreation extends Component {
                         <Input
                             required
                             multiline
-                            jobcreationlabel
+                            cormorantlabel
                             rows={6}
                             labelText='Description'
                             className={descriptionError !== undefined ? 'input-description-job-creation input-error' : 'input-description-job-creation'}
@@ -207,7 +207,7 @@ export class JobCreation extends Component {
                     <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                         <Input
                             required
-                            jobcreationlabel
+                            cormorantlabel
                             labelText='Street'
                             className="input-street-job-creation"
                             id="street"
@@ -230,7 +230,7 @@ export class JobCreation extends Component {
                             />
                             <Input
                                 required
-                                jobcreationlabel
+                                cormorantlabel
                                 labelText="Zipcode"
                                 className='input-zipcode-job-creation'
                                 type="text"
