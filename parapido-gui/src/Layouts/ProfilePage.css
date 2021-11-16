@@ -131,10 +131,11 @@ h2.edit-subheaders {
 	justify-content: flex-end;
 	margin-top: 40px;
 	align-items: center;
+	gap: 0.5vh
 }
 
 .upload-file-text {
-	margin-left: 10px;
+	margin-bottom: 1vh;
 	color: white;
 	font-size: 12px;
 }
