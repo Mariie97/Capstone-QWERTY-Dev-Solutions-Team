@@ -3,7 +3,7 @@ import {Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
+import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
@@ -12,16 +12,13 @@ import JobRequested_listings from "../Static/Images/JobRequested_listings.svg"
 
 
 class JobListingPage extends Component {
-
     status = undefined;
-
     idFilter = '';
 
     constructor(props) {
         super(props);
         this.state = {
             listings: [],
-
             rating: 1,
             ratingRef: createRef(),
             open: false,
@@ -38,35 +35,37 @@ class JobListingPage extends Component {
     }
 
     componentDidMount(){
-
         this.status = getQueryParams(this.props.queryParams).get('status');
         document.body.style.backgroundColor = "white";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-
         this.fetchList();
-
     }
 
     token = this.props.cookies.get('csrf_access_token');
 
     deleteListing = (listingIndex) => {
-// FilterJobs not working after fetch
         let deleteSuccess
+        const job_id = this.state.listings[listingIndex].job_id;
 
-        if(this.state.userAccountType === 3)
-        {deleteSuccess = setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.deleted).then(r => {})}
-        else
-        {deleteSuccess = setJobStatus(this.token, this.state.listings[listingIndex].job_id, jobStatus.cancelled).then(r => {})}
+        if(this.state.userAccountType === accountType.student && parseInt(this.status) === jobStatus.posted) {
+            deleteSuccess = cancelJobRequest(this.token, job_id, this.state.user_id);
+        }
+        else{
+            if(this.state.userAccountType === 3) {
+                deleteSuccess = setJobStatus(this.token, job_id, jobStatus.deleted)
+            }
+            else {
+                deleteSuccess = setJobStatus(this.token, job_id, jobStatus.cancelled)
+            }
+        }
 
         if(deleteSuccess){
             const listings = Object.assign([], this.state.listings);
             listings.splice(listingIndex, 1);
             this.setState({listings:listings});
         }
-
-
     }
 
     onClickRate = (listingIndex) => {
@@ -81,7 +80,6 @@ class JobListingPage extends Component {
             this.setState({userToRate: this.state.listings[listingIndex].student_id});
 
     }
-
 
     handleClose = () => {
         this.setState({open: false})
@@ -146,34 +144,20 @@ class JobListingPage extends Component {
 
                                 this.state.listings.map((listing, index) => {
                                     let listingIndex = index
-
-
-
                                     return <JobListing
-
                                         price={listing.price} date_posted={listing.date_posted}
                                         title={listing.title} category={listing.categories}
                                         key={listing.id} job_id={listing.job_id} status={this.status}
-
                                         deleteListing={this.deleteListing.bind(this, listingIndex)}
                                         onClickRate={this.onClickRate.bind(this, listingIndex)}
-                                    >
-
-                                    </JobListing>
-
-
+                                    />
                                 })
                             }
-
                         </ul>
                         }
-
                     </div>
-
                     <div className={"right-flexbox"}>
-
                         <div className={"filters-flexbox"}>
-
                             <ItemsDropdown
                                 blackLabel
                                 initial_value={''}
@@ -182,9 +166,6 @@ class JobListingPage extends Component {
                                 itemsList={this.years}
                                 label='Year'
                             />
-
-
-
                             <ItemsDropdown
                                 blackLabel
                                 initial_value={''}
@@ -197,7 +178,6 @@ class JobListingPage extends Component {
                             <Button id={"go-back-button"} onClick={this.fetchList}>
                                 Filter
                             </Button>
-
                         </div>
 
                         {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="algo ahi" />}
@@ -206,11 +186,8 @@ class JobListingPage extends Component {
                         {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="algo ahi" />}
 
                     </div>
-
                 </div>
-
             </div>
-
         );
     };
 

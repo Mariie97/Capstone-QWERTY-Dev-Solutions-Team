@@ -1,4 +1,4 @@
-import React, {Component, createRef} from 'react'
+import React, {Component} from 'react'
 import {Backdrop, Modal} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
