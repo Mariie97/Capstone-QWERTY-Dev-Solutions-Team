@@ -15,6 +15,37 @@
     border-color: #cc3300;
 }
 
+/* arrow icon in Material ui dropdown */
+
+.MuiSelect-icon{
+	color: darkgreen;
+}
+
+/* what changes when you select something */
+
+.MuiSelect-select{
+	background-color:white ;
+	display: grid;
+	align-content: center;
+	text-align: center;
+} 
+
+/* inside Material ui dropdown */
+
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
+}
+
+
 .required-dropdown {
 	font-family: "Times New Roman";
 	color: #cc3300;

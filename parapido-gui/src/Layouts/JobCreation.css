@@ -26,6 +26,7 @@
 }
 
 /* title input */
+
 .MuiFormControl-root.MuiTextField-root.input-title-job-creation {
 	width: 200%;
 }
@@ -35,6 +36,7 @@
 }
 
 /* description textarea */
+
 .input-description-job-creation{
 	font-family: "Jost";
 	width: 200%;
@@ -43,13 +45,15 @@
 	box-sizing: border-box;
 	border: 2px solid black;
 	outline: none;
-	font-size: 16px;
+	font-size: 14px;
 	resize:none;
 }
 
 .input-description-job-creation:focus{
 	background-color: #FFEBCC;
 }
+
+/* managing error for price input */
 
 .input-error{
 	border-color: #cc3300;
@@ -69,64 +73,24 @@
 
 .MuiInputBase-root.MuiInput-root.MuiInputBase-formControl.MuiInput-formControl{
     border: transparent;
+	font-size: 14px;
+	font-family: Jost;
 }
 
+.MuiInputBase-input.MuiInput-input.CurrencyTextField-textField-1.CurrencyTextField-textField-3.MuiInputBase-inputAdornedStart{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
 
 /* city and zipcode */
+
 .mini-flex-box-job-creation{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 30%;
 	width: 135%;
-}
-
-
-/* Material ui override dropdown styling  */
-.MuiSelect-root{
-	padding-bottom: 0;
-	padding-right: 0;
-	width: 102px;
-	padding-top: 0;
-	margin-bottom: 0;
-	margin-right: 0;
-	height: 42px;
-}
-
-.MuiInputBase-input{
-	animation-name: none;
-	animation-duration: 0ms;
-}
-
-/* arrow icon in Material ui dropdown */
-
-.MuiSelect-icon{
-	color: darkblue;
-}
-
-/* what changes when you select something */
-
-.MuiSelect-select{
-	background-color:white ;
-	display: grid;
-	align-content: center;
-	text-align: center;
-
-}
-
-/* inside Material ui dropdown */
-
-.MuiListItem-button{
-	background-color: white;
-}
-
-.MuiList-padding{
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-
-.MuiList-root{
-	background-color: #FFEBCC;
 }
 
 /* price, category and available days */
@@ -154,7 +118,7 @@
 	list-style-type: none;
 }
 
-.MuiInputBase-input {
+/* .MuiInputBase-input {
 	background-color: white;
 	font-family: "Jost";
 	font-size: 15px;
@@ -162,16 +126,16 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-style: normal;
-}
-
+} */
+ 
 .MuiInputBase-root {
 	background-color: white;
 	border: 2px solid black;
-}
+} 
 
 .MuiFormLabel-root{
 	line-height: 0px;
-}
+} 
 
 .MuiFormControl-root{
 	width: 65%;
@@ -211,7 +175,6 @@
 .button-job-creation:hover{
 	cursor: pointer;
 	border: 2px solid black;
-
 }
 
 .text-button-job-creation{
@@ -236,7 +199,6 @@
 	margin-top: 8px;
 	width: 150%;
 }
-
 
 .job-creation-available-days-disclaimer{
 	font-size: 13px;

@@ -155,8 +155,7 @@ export class JobCreation extends Component {
             alertMssg,
             severity
         } = this.state
-        	    
-        return (
+        return (   
             <React.Fragment>
                 {(!is_auth || !is_client)&& <Redirect to='/' />}
                 { (alertMssg !== undefined && severity !== undefined) && <Redirect to={{
