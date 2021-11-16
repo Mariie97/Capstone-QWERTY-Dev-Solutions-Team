@@ -24,12 +24,12 @@ class RequestsPage extends Component {
         this.queryParams = getQueryParams(this.props.queryParams);
         this.state = {
             is_auth: true,
-            is_student: this.currentUser.type === accountType.client,
+            is_student: this.currentUser.type === accountType.student,
             requestsList: [],
             requestLoaded: false,
             showAgreement: false,
-            pageNotFound: this.queryParams.get('job_id') === null
-
+            pageNotFound: this.queryParams.get('job_id') === null,
+            allowAccess : true
         };
 
         this.getJobRequests = this.getJobRequests.bind(this);
@@ -55,7 +55,9 @@ class RequestsPage extends Component {
             if(response.status === 200) {
                 response.json().then(data => {
                     this.setState({
-                        requestsList: data,
+                        requestsList: data.requests,
+                        allowAccess: this.currentUser.id === data.owner_id
+
                     });
                 })
             }
@@ -69,7 +71,7 @@ class RequestsPage extends Component {
     }
 
     renderCards() {
-        const { requestsList, showAgreement } = this.state;
+        const { requestsList, showAgreement} = this.state;
         const token = this.props.cookies.get('csrf_access_token');
         return requestsList.map(request => (
             <Card sx={{width: 300}} className='student-request-cards'>
@@ -99,13 +101,14 @@ class RequestsPage extends Component {
 
     render() {
         //TODO: Show message when there are no request; fetch to accept a request
-        const { is_auth, requestsList, requestLoaded, is_student, pageNotFound } = this.state;
+        const { is_auth, requestsList, requestLoaded, is_student, pageNotFound, allowAccess} = this.state;
+        
         return (
             <React.Fragment>
                 {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
                     <div>
                         {!is_auth && <Redirect to='/' />}
-                        {!is_student ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+                        {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
                         <React.Fragment>
                             <div className='header-flex-container'>
                                 <h1 className="page-title-header">Student's Requests</h1>
