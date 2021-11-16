@@ -3,7 +3,15 @@ import {Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
+import {
+    accountType,
+    cancelJobRequest,
+    getJobStatus,
+    getQueryParams,
+    jobStatus,
+    setJobStatus,
+    verifyUserAuth
+} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
@@ -38,6 +46,7 @@ class JobListingPage extends Component {
             },
         }
 
+        this.setAlert = this.setAlert.bind(this);
         this.hideAlert = this.hideAlert.bind(this);
         this.fetchList = this.fetchList.bind(this);
     }
@@ -54,19 +63,34 @@ class JobListingPage extends Component {
     token = this.props.cookies.get('csrf_access_token');
 
     deleteListing = (listingIndex) => {
-        let deleteSuccess
+        let deleteSuccess;
         const job_id = this.state.listings[listingIndex].job_id;
 
         if(this.state.userAccountType === accountType.student && parseInt(this.status) === jobStatus.posted) {
             deleteSuccess = cancelJobRequest(this.token, job_id, this.state.user_id);
+            if (deleteSuccess) {
+                this.setAlert("Request canceled successfully");
+            } else {
+                this.setAlert("Can't cancel request at this moment, try again later!", "error");
+            }
         }
-        else{
+        else {
+            let status;
             if(this.state.userAccountType === 3) {
-                deleteSuccess = setJobStatus(this.token, job_id, jobStatus.deleted)
+                deleteSuccess = setJobStatus(this.token, job_id, jobStatus.deleted);
+                status = 'Deleted';
             }
             else {
                 const state = this.state.userAccountType === accountType.student ? jobStatus.posted : jobStatus.cancelled;
                 deleteSuccess = setJobStatus(this.token, job_id, state)
+                status = getJobStatus[state];
+            }
+
+            if (deleteSuccess) {
+                this.setAlert(`Job ${status} successfully`);
+            }
+            else {
+                this.setAlert(`Can't ${status} job at this moment, try again later!`, "error");
             }
         }
 
@@ -75,6 +99,13 @@ class JobListingPage extends Component {
             listings.splice(listingIndex, 1);
             this.setState({listings:listings});
         }
+    }
+
+    setAlert(msg, severity="success") {
+        this.setState({alert: {
+                msg: msg,
+                severity: severity
+            }});
     }
 
     onClickRate = (listingIndex) => {
@@ -126,7 +157,7 @@ class JobListingPage extends Component {
     }
 
     render(){
-
+        const { alert } = this.state;
         return (
             <div>
                 {alert.msg !== undefined &&
@@ -141,6 +172,7 @@ class JobListingPage extends Component {
                     filterJobs = {this.fetchList}
                     ratingRef = {this.state.ratingRef}
                     cookies = {this.props.cookies}
+                    setAlert={this.setAlert}
                 />
 
                 <div className={"outer-div"}>

@@ -68,9 +68,10 @@ class RatingModal extends Component {
         });
     }
 
-    handleRate() {
-        if(this.state.ratingRef.current?.validate()) {
+    handleRate(){
+        const { filterJobs, setAlert, handleClose } = this.props;
 
+        if(this.state.ratingRef.current?.validate()) {
             fetch('/rate_job/' + this.props.job_id,{
                 method: 'POST',
                 credentials: 'same-origin',
@@ -83,14 +84,17 @@ class RatingModal extends Component {
                     user_id: this.props.userToRate
                 })
             }).then(response => {
-                if(response.status === 201) {
-                    this.props.filterJobs();
+                if (response.status === 201) {
+                    filterJobs();
+                    setAlert('Rate completed successfully!!');
                 }
+                else {
+                    setAlert("Can't rate at this moment, please try again later", "error");
+                }
+                handleClose();
             })
         }
-
     }
-
 }
 
 const backdropStyle = {
