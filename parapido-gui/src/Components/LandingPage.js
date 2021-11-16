@@ -61,7 +61,7 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		const {psswordChangedSuccesfully, alertMssg, severity} = this.state
+		const {psswordChangedSuccesfully, alertMssg, severity, is_auth} = this.state
 		return (
 			<div>
 				{is_auth && <Redirect to='/jobdashboard' />}
