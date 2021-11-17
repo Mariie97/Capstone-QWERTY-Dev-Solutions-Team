@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import "../Layouts/LandingPage.css";
 import {verifyUserAuth} from "../Utilities";
 import logo from "../Static/Images/Pa_RapidoLogo.png";
@@ -61,9 +61,10 @@ class LandingPage extends Component {
 	}
 
 	render() {
-		const {psswordChangedSuccesfully, alertMssg, severity} = this.state
+		const {psswordChangedSuccesfully, alertMssg, severity, is_auth} = this.state
 		return (
 			<div>
+				{is_auth && <Redirect to='/jobdashboard' />}
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">

@@ -14,7 +14,6 @@ class myJobsDashboardPageCard extends Component {
 	}
     render() {
         const {title, imgtype, status} = this.props;
-
         return (
                 <div className="myjobs-card"> 
                     <Link to={"/listings?status="+status}  className="none-display-for-link">

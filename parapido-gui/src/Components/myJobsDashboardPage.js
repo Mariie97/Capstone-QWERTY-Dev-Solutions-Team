@@ -48,13 +48,15 @@ class myJobsDashboardPage extends Component {
 
         const is_client = this.currentUser.type === accountType.client
         const is_student = this.currentUser.type === accountType.student
+        // webpage background color
+		document.body.style.backgroundColor = "#FFFFFF"; 
         const {alertMssg, severity} = this.state
 
         return (
             <div>
                 {(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation">
-                    {alertMssg}</Alert>}
-
+                    {alertMssg}
+                </Alert>}
                 <div className="myjobs-card-general-style">
                     <div className="myjobs-card-container">
                         {is_client &&  <MyJobsCard title="Posted Jobs" imgtype = "1" status="1"/> }

@@ -75,9 +75,9 @@ class LoginModal extends Component {
                 this.setState({
                     loginError: response.status === 401 ?
                         'Yikes!!! 😬 Incorrect Email or Password.' :
-                        'Can not login at this moment. Please try again later!',
-                    login_success: false,
-                    login_failed: true
+                        <div>Sorry can not login right now 😔<br/>Please try again later!!!</div>,
+                        login_success: false,
+                        login_failed: true
                 })
             }})
     }
@@ -102,9 +102,11 @@ class LoginModal extends Component {
                 >
                     <Box sx={style}>
                         {loginError !==undefined &&
-                            <Alert style={{marginBottom: 40}} variant="outlined" severity="error">
+                        <div>
+                            <Alert style={{marginBottom: 40, display:"flex", justifyContent:"center"}} variant="outlined" severity="error">
                                 {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
                             </Alert>
+                        </div>
                         }
                         <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
