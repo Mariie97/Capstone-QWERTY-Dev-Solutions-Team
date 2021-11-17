@@ -50,18 +50,17 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required, blackLabel, removeDefault, cormorantlabel} = this.props;
-
+        const { label, required, blackLabel, removeDefault, cormorantlabel, lineheightstyle} = this.props;
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                    <label className={ cormorantlabel !== undefined ? 'cormorant-label-text' : `label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}
+                    <label  style={{lineHeight: lineheightstyle}} className={ cormorantlabel !== undefined ? 'cormorant-label-text' : `label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}
                     `}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}
                         onChange={this.handleOnChangeCity}
-                        className={itemError===undefined ? "item-dropdown" : 'item-dropdown dropdown-error'}
+                        className={itemError !== undefined ?  "item-dropdown dropdown-error" : "item-dropdown"}
                         onClose={this.validate}
                         MenuProps={{
                             disableScrollLock: true,

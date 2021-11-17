@@ -192,33 +192,29 @@ class JobDashboardPage extends Component {
                         </h1>
 
                         <div className="first-flex-container-job-dashboard-page">
-                            <div className = "label-job-dashboard">
                                 <ItemsDropdown
                                     cormorantlabel
+                                    lineheightstyle="2.5"
                                     ref={change_category}
                                     itemsList={categories}
                                     label='Categories'
                                 />
-                            </div>
-
-                            <div className = "label-job-dashboard">
+  
                                 <ItemsDropdown
                                     cormorantlabel
+                                    lineheightstyle="2.5"
                                     ref={change_price}
                                     itemsList={prices}
                                     label='Prices'
                                 />
-                            </div>
-
-                            <div className = "label-job-dashboard">
+                        
                                 <ItemsDropdown
                                     cormorantlabel
+                                    lineheightstyle="2.5"
                                     ref={change_city}
                                     itemsList={cities}
                                     label='Cities'
                                 />
-                            </div>
-
 
                             <button className="filter-button-job-dashboard" onClick={this.clickFilter}>
                                 <div className="text-button-job-dashboard">
