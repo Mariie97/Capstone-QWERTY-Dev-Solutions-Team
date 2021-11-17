@@ -31,7 +31,6 @@ import "./Layouts/JobCreation.css";
 import "./Layouts/ItemsDropdown.css";
 import "./Layouts/JobDashboard.css";
 import "./Layouts/JobDashboardCard.css";
-import './Layouts/JobDetails.css';
 import "./Layouts/LandingPage.css";
 import "./Layouts/LoginModal.css";
 import "./Layouts/NavBar.css";

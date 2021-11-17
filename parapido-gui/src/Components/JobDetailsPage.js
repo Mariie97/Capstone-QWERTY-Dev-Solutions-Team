@@ -347,7 +347,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <td className='column-table-body col1'>Assigned to:</td>
                                     <td className='column-table-body col2'>
-                                        <Link to={`/profile/${job.student_id}`} id='job-student-assigned-name'>
+                                        <Link to={`/profile/${job.student_id}`} id='small-urls' >
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
                                     </td>

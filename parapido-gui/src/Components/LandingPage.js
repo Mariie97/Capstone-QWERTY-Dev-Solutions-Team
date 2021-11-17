@@ -71,7 +71,7 @@ class LandingPage extends Component {
 						<li className="mini-flex-contactus">
 							<div style={contactuslink}>Contact Us</div>
 							<EmailIcon style={mail}/>
-							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="parapido-email"> parapidopr@gmail.com</a>
+							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="small-urls"> parapidopr@gmail.com</a>
 						</li>
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>

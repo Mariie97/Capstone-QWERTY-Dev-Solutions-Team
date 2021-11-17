@@ -5,3 +5,14 @@
 	padding: 0px;
 	box-sizing: border-box;
 }
+
+/*small urls style */
+
+#small-urls {
+	color: #ffebcc;
+	text-decoration: underline;
+}
+
+#small-urls:hover {
+	color: black;
+}

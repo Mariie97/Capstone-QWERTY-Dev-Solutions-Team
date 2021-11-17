@@ -48,7 +48,7 @@ class RequestsPage extends Component {
             if(response.status === 200) {
                 response.json().then(data => {
                     this.setState({
-                        requestsList: data,
+                        requestsList: data.requests,
                     });
                 })
             }

@@ -23,14 +23,6 @@
 	/* background-color: crimson; */
 }
 
-#parapido-email {
-	color: #ffebcc;
-	text-decoration: underline;
-}
-#parapido-email:hover {
-	color: black;
-}
-
 /* each item on the navbar except the logo*/
 
 .landing-nav-links {
