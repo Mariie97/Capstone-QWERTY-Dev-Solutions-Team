@@ -278,6 +278,7 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item5">
                                             <ItemsDropdown
+                                                lineheightstyle="2"
                                                 label='City'
                                                 initial_value={city===null ? '' : city}
                                                 ref={change_city}

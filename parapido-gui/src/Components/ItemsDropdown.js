@@ -54,7 +54,7 @@ class ItemsDropdown extends Component {
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                    <label  style={{lineHeight: lineheightstyle}} className={ cormorantlabel !== undefined ? 'cormorant-label-text' : `label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}
+                    <label  style={{lineHeight: lineheightstyle}} className={ cormorantlabel !== undefined ? 'cormorant-label-text' : `custom-input-label ${blackLabel !== undefined && 'black-label-text'}
                     `}> {label}{required && '*'} </label>
                     <br/>
                     <Select
