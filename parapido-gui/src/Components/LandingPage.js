@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {verifyUserAuth} from "../Utilities";
 import LoginModal from './LoginModal';
-import logo from "../Static/Images/Pa_RapidoLogo.png";
+import Logo from "../Static/Images/Pa_RapidoLogo.png";
 import studentLandingPage from "../Static/Images/Student_LandingPage.png";
 import EmailIcon from "@material-ui/icons/Mail";
 import Alert from "@material-ui/lab/Alert";
@@ -66,7 +66,7 @@ class LandingPage extends Component {
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
 				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
-					<img className="logostyle" src={logo} alt="Logo" />
+					<img className="logostyle" src={Logo} alt="Logo" />
 					<ul className="landing-nav-links">
 						<li className="mini-flex-contactus">
 							<div style={contactuslink}>Contact Us</div>

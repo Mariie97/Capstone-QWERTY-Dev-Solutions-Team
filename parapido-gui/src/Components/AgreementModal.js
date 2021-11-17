@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import {accountType} from "../Utilities";
 import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import {Box, Modal} from "@material-ui/core";
-import loginModalLogo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
+import Logo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
 import continueArrow from "../Static/Images/continueArrow.png";
 import virtualContract from "../Static/Images/Virtual_Contract.png";
 
@@ -118,7 +118,7 @@ class AgreementModal extends Component {
                         >
                             <Box sx={style}>
                                 <div className="logo-flex-Agreement">
-                                    <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                                    <img src={Logo} alt="login logo" style={login_logostyle}/>
                                 </div>
                                 <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>      
                                 <div className="body-container-agreement-modal">

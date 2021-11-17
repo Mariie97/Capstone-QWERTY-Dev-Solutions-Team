@@ -4,8 +4,8 @@ import Input from "./Input";
 import Alert from "@material-ui/lab/Alert";
 import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import {Box, Modal} from "@material-ui/core";
-import loginModalLogo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
 import continueArrow from "../Static/Images/continueArrow.png";
+import Logo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
 
 
 const style = {
@@ -105,7 +105,7 @@ class LoginModal extends Component {
                                 {loginError}{redirectAdminLogin && <Link to={'/administration_login'}>click here</Link>}
                             </Alert>
                         }
-                        <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                        <img src={Logo} alt="login logo" style={login_logostyle}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                         <div className="second-point-login-modal">
                             <div className="first-text-login-modal">

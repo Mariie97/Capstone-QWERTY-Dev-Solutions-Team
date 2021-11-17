@@ -104,12 +104,9 @@
 }
 
 .modalLogoStyle {
-    position: relative;
-    transform: translate(-50px);
-    left: 50%;
-    top: 5px;
     width: 100px;
     height: 100px;
+    margin-bottom: 5vh;
 }
 
 .errorStyle {
