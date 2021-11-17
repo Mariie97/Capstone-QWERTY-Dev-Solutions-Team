@@ -18,6 +18,9 @@ class JobListingPage extends Component {
 
     constructor(props) {
         super(props);
+        const queryParams = getQueryParams(this.props.queryParams);
+        this.status = queryParams.get('status');
+        const userType = parseInt(localStorage.getItem('type'));
         this.state = {
             listings: [],
             rating: 1,
@@ -25,8 +28,8 @@ class JobListingPage extends Component {
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
-            userAccountType: parseInt(localStorage.getItem('type')),
-            user_id: parseInt(localStorage.getItem('user_id')),
+            userAccountType: userType === accountType.admin ? parseInt(queryParams.get('account')) : userType,
+            user_id: props.user_id,
             titleText: '',
             currJob: '',
             userToRate: '',

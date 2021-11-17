@@ -51,6 +51,7 @@ class myJobsDashboardPage extends Component {
         const is_student = this.currentUser.type === accountType.student
         const is_admin = this.currentUser.type === accountType.admin;
         const {alertMssg, severity} = this.state
+        const { user_id } = this.props;
 
         return (
             <div>
@@ -69,6 +70,7 @@ class myJobsDashboardPage extends Component {
                                     imgtype="1"
                                     status={jobStatus.posted}
                                     account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                    user_id={user_id}
                                 />
                                 }
                                 {(is_student || (is_admin && this.queryParams.get('account')==accountType.student)) &&
@@ -77,6 +79,7 @@ class myJobsDashboardPage extends Component {
                                     imgtype="2"
                                     status={jobStatus.posted}
                                     account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                    user_id={user_id}
                                 />
                                 }
                                 <MyJobsCard
@@ -84,12 +87,14 @@ class myJobsDashboardPage extends Component {
                                     imgtype = "3"
                                     status={jobStatus.in_process}
                                     account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                    user_id={user_id}
                                 />
                                 <MyJobsCard
                                     title="Completed Jobs"
                                     imgtype="4"
                                     status={jobStatus.completed}
                                     account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                    user_id={user_id}
                                 />
                             </div>
                         </div>

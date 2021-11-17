@@ -9,7 +9,7 @@ import {getQueryParams} from "../Utilities";
 
 
 class myJobsDashboardPageCard extends Component {
-    queryParams = undefined
+    queryParams = ''
 
     constructor(props) {
         super(props);
@@ -26,10 +26,10 @@ class myJobsDashboardPageCard extends Component {
     }
 
     render() {
-        const {title, imgtype} = this.props;
+        const {title, imgtype, user_id} = this.props;
         return (
             <div className="myjobs-card">
-                <Link to={`/listings${this.queryParams}`}  className="none-display-for-link">
+                <Link to={`/listings/${user_id + this.queryParams}`}  className="none-display-for-link">
                     <div className="myjobs-body-container">
                         {imgtype === "1" && <img  id="grow-myjobs" src= {jobsposted}  alt="postedjobs" />}
                         {imgtype === "2" && <img  id="grow-myjobs" src= {jobsrequested}  alt="requestedjobs" />}
