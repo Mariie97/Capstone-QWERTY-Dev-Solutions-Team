@@ -134,7 +134,7 @@ class JobDetailsPage extends Component {
                 this.setState({
                     redirect: '/myjobs',
                     alert: {
-                        msg: 'Unable to cancel te request at this moment, try again later.',
+                        msg: 'Unable to cancel the request at this moment, try again later.',
                         severity: 'error'
                     }
                 });

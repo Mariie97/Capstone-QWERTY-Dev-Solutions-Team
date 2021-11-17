@@ -212,7 +212,6 @@ class SecurityQuestionsPage extends Component {
                 else {
                     //fetch error
                     //TODO: Change message to the correct text according to response's status code
-                    console.log(response.status)
                     if(response.status === 500){
                         this.setState({serverDown: true})
                     }

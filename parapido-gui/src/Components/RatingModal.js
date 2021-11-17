@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import {Backdrop, FormControl, InputLabel, MenuItem, Modal, Select} from "@material-ui/core";
+import React, {Component} from 'react'
+import {Backdrop, Modal} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
-
+import ItemsDropdown from "./ItemsDropdown";
+import Button from "@mui/material/Button";
 
 
 class RatingModal extends Component {
@@ -9,40 +10,23 @@ class RatingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rating: this.props.initial_value!==''? this.props.initial_value : undefined,
+            ratingRef: this.props.ratingRef,
         };
 
-        this.handleOnchangeRating = this.handleOnchangeRating.bind(this);
         this.changeRating = this.changeRating.bind(this);
-        this.handleRate = this.handleRate.bind(this, this.state.rating, this.props.job_id);
+        this.handleRate = this.handleRate.bind(this);
 
     }
 
+    ratings = [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+    ];
+
     render() {
-        const {rating} = this.state;
-
-        const body = (
-            <div>
-
-                <FormControl sx={{ m: 1, minWidth: 150, fontWeight: "bold", fontsize: 30 }}>
-                    <InputLabel>Rating</InputLabel>
-                    <Select
-                        id={"rating-dropdown"}
-                        value={rating}
-                        onChange={this.handleOnchangeRating}
-                        label="Rating"
-                    >
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-
-                    </Select>
-                </FormControl>
-
-            </div>
-        )
 
         return (
 
@@ -57,8 +41,19 @@ class RatingModal extends Component {
                         <div className={"modalTextStyle"}>
                             Rate this Job:
                         </div>
-                        <button id={"rate-button"} onClick={this.handleRate}> Rate </button>
-                        {body}
+
+                        <ItemsDropdown
+                            blackLabel
+                            initial_value={''}
+                            ref={this.state.ratingRef}
+                            validate={true}
+                            itemsList={this.ratings}
+                            label='Rating'
+                        />
+
+
+                        <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>
+
                     </Backdrop>
 
                 </Modal>
@@ -67,49 +62,50 @@ class RatingModal extends Component {
         )
     }
 
-    handleOnchangeRating(event) {
-        this.changeRating(event.target.value.toString());
-    }
-
     changeRating(value) {
         this.setState({
             rating: value
         });
     }
 
-    handleRate(value, job_id){
+    handleRate(){
+        const { filterJobs, setAlert, handleClose } = this.props;
 
-        fetch('/api/rate_job/' + job_id,{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-        }).then(response => {
-            if(response.status === 200) {
-                response.json().then(data => {
-
-                        console.log(data)
-
-
-                    }
-                )
-            }
-            else {
-                console.log("Error")
-            }
-        })
-
+        if(this.state.ratingRef.current?.validate()) {
+            fetch('/rate_job/' + this.props.job_id,{
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                },
+                body: JSON.stringify({
+                    value: this.state.ratingRef.current.state.item,
+                    user_id: this.props.userToRate
+                })
+            }).then(response => {
+                if (response.status === 201) {
+                    filterJobs();
+                    setAlert('Rate completed successfully!!');
+                }
+                else {
+                    setAlert("Can't rate at this moment, please try again later", "error");
+                }
+                handleClose();
+            })
+        }
     }
-
 }
 
 const backdropStyle = {
-    left: "700px",
+    display: "flex",
+    left: "40%",
     top: "200px",
     width: "500px",
     height: "300px",
     position: "absolute",
     backgroundColor: "#FFFFFF",
     border: '3px solid black',
-
 }
 
 

@@ -63,17 +63,16 @@ class App extends React.Component {
                         exact
                         path='/listings'
                         render={(props) => (
-                            <React.Fragment>
-                                <NavBar cookies= {this.props.cookies} />
-                                <JobListingPage
-                                    {...props}
-                                    cookies = {this.props.cookies}
-                                    queryParams = {props.location.search}
-                                    status = {1}
-                                />
-                            </React.Fragment>
-                        )}
-                    />
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobListingPage
+                                        {...props}
+                                        cookies = {this.props.cookies}
+                                        queryParams = {props.location.search}
+                                    />
+                                </React.Fragment>
+                            )}
+                        />
 
                     <Route
                         exact
