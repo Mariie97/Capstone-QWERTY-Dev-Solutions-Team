@@ -5,7 +5,7 @@ import Input from "./Input";
 import {Backdrop, Modal} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
 import Stack from "@mui/material/Stack";
-import Logo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
 class SecurityQuestionsPage extends Component {
     constructor(props){

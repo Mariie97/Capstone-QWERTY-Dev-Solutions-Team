@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {accountType} from "../Utilities";
-import Logo from "../Static/Images/Pa_RapidoLogo.png";
+import Logo from "../Static/Images/PaRapidoLogo.png";
 import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 import CancelIcon from "@material-ui/icons/Cancel";
 

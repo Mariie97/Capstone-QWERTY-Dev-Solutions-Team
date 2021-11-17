@@ -4,8 +4,8 @@ import Input from "./Input";
 import Alert from "@material-ui/lab/Alert";
 import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import {Box, Modal} from "@material-ui/core";
-import continueArrow from "../Static/Images/continueArrow.png";
-import Logo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
+import ContinueArrow from "../Static/Images/ContinueArrow.png";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
 
 const style = {
@@ -147,7 +147,7 @@ class LoginModal extends Component {
                                         <div className="text-button-login-modal">
                                             CONTINUE
                                         </div>
-                                     <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                     <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                         </div>
                         <hr className="line-login-modal" />

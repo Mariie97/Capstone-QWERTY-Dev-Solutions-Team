@@ -3,9 +3,9 @@ import {Redirect} from "react-router-dom";
 import {accountType} from "../Utilities";
 import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import {Box, Modal} from "@material-ui/core";
-import Logo from "../Static/Images/Pa_Rapido_logo_bgPalette.png";
-import continueArrow from "../Static/Images/continueArrow.png";
-import virtualContract from "../Static/Images/Virtual_Contract.png";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
+import ContinueArrow from "../Static/Images/ContinueArrow.png";
+import VirtualContract from "../Static/Images/VirtualContract.png";
 
 const style = {
     position: 'absolute',
@@ -127,7 +127,7 @@ class AgreementModal extends Component {
                                     <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
                                     </label>
                                     Check to state that you have read and agree with the job information </p>
-                                    <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
+                                    <img style={virtual_contract_image_resize} src={VirtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to={{
                                         pathname: '/myjobs',
                                         state: { alertMssg: alertMssg, severity: severity }
@@ -140,7 +140,7 @@ class AgreementModal extends Component {
                                         <div className="text-button-agreement-modal">
                                             Agree & Continue
                                         </div>
-                                        <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                        <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                                 </div>
                                 <hr className="line-login-modal" />
