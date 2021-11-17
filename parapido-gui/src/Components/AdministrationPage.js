@@ -163,7 +163,7 @@ class AdministrationPage extends Component {
             <tr key={`user-${user.user_id}`} className='admin-row-table'>
                 <td className='admin-col-table admin-number-col'>{index+1}</td>
                 <td className='admin-col-table'>
-                    <Link to={`/profile/${user.user_id}`} className='admin-table-row-link'>
+                    <Link to={`/profile/${user.user_id}`} id='small-urls' className='admin-table-row-link'>
                         {user.first_name} {user.last_name}
                     </Link>
                 </td>
@@ -208,7 +208,7 @@ class AdministrationPage extends Component {
                 <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
                     {alert.msg}</Alert>
                 }
-                <h1 className="page-title-header">
+                <h1 className="page-title-header" style={{width:"750px", paddingBottom: "0px", marginBottom:"0px"}}>
                     Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
                 </h1>
                 <div className = "administration-body-container">
