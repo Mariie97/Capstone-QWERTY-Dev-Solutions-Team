@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import {getQueryParams, verifyUserAuth} from "../Utilities";
 import AgreementModal from "./AgreementModal"
 import Avatar from "@mui/material/Avatar";
+import DefaultProfilePicture from "../Static/Images/DefaultProfilePicture.svg"
 import {Box, CircularProgress} from "@material-ui/core";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -63,6 +64,7 @@ class RequestsPage extends Component {
 
     renderCards() {
         const { requestsList, showAgreement } = this.state;
+        console.log(requestsList)
         const token = this.props.cookies.get('csrf_access_token');
         return requestsList.map(request => (
             <Card sx={{width: 300}} className='student-request-cards'>
@@ -71,7 +73,7 @@ class RequestsPage extends Component {
                         <Avatar
                             className='avatar'
                             alt={`${request.first_name} ${request.last_name}`}
-                            src={request.image}
+                            src={request.image === null ? DefaultProfilePicture: request.image}
                             sx={{width: 200, height: 200}}
                         />
                     </div>

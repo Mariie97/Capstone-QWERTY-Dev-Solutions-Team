@@ -8,14 +8,16 @@
 
 .student-request-cards {
     margin: 30px;
-    border-radius: 5px;
+    border-radius: 0px;
     height: 355px;
+    border:3px solid green;
+
 }
 
 .student-request-cards:hover {
     cursor: pointer;
-    border: 1px solid black;
-    box-shadow: 2px 1px 15px rgb(157, 150, 150);
+    border:3px solid green;
+    box-shadow: 2px 1px 15px green;
 }
 
 
@@ -37,5 +39,37 @@
 }
 
 .request-card-actions-container {
-    border-top: 1px solid #dbd6d685;
+    border-top: 1px solid green;
+}
+
+/* mui cards css */
+
+.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeSmall.MuiButton-textSizeSmall.MuiButtonBase-root.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+    color: green;
+    font-family: 'Times New Roman';
+    font-size: 15px;
+    font-style: normal;
+    letter-spacing: 1px;
+}
+
+.MuiCardContent-root.css-46bh2p-MuiCardContent-root{
+    padding: 8px;
+}
+
+.MuiTypography-root.MuiTypography-h5.MuiTypography-gutterBottom.css-1y15g74-MuiTypography-root{
+    margin: 0;
+    font-family: 'Times New Roman';
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.334;
+    letter-spacing: 0em;
+    margin-bottom: 0.35em;
+    color: green;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.student-request-cards.css-hkdbh3-MuiPaper-root-MuiCard-root{
+    width: 260px;
+    height: 332px;
+    border-radius: 0px;
+    border-color: lightgreen;
 }
