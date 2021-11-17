@@ -94,8 +94,7 @@ h2.edit-subheaders {
 	display: flex;
 	align-items: center;
 	align-content: center;
-	gap: 4px
-
+	gap: 4px;
 }
 
 .custom-file-upload-profile-page:hover {
@@ -113,7 +112,7 @@ h2.edit-subheaders {
 	border: 2px solid black;
 	padding-left: 3px;
 	padding-right: 3px;
-	resize: none
+	resize: none;
 }
 
 .change-about-style-profile-page:focus{
@@ -128,7 +127,7 @@ h2.edit-subheaders {
 	justify-content: flex-end;
 	margin-top: 40px;
 	align-items: center;
-	gap: 0.5vh
+	gap: 0.5vh;
 }
 
 .upload-file-text {

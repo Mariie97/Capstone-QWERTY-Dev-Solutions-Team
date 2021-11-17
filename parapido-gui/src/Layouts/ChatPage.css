@@ -42,7 +42,8 @@ body {
   background-color: #e1e1e1;
   margin-left: 20px;
   width: auto;
-  max-width: 60%;}
+  max-width: 60%;
+}
 
 .messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
   right: 100%;
@@ -169,7 +170,7 @@ body {
 }
 
 .bottom_wrapper .send_message:hover {
-    border-color:white;
+  border-color:white;
 }
 
 .bottom_wrapper .send_message .text {
@@ -217,7 +218,7 @@ input:focus {
 
 .refresh-msg-icon:hover {
   cursor: pointer;
-  fill:limegreen
+  fill:limegreen;
 }
 
 

@@ -25,6 +25,7 @@
     margin-right: 5%;
 
 }
+
 .custom-buttons {
     border: 1px solid black;
     text-decoration: none;
@@ -40,6 +41,7 @@
     border-radius: 8px;
     padding: 5px;
 }
+
 .custom-buttons.delete-button {
     background-color: #ac1212;
 }

@@ -80,7 +80,7 @@
 .MuiInputBase-input.MuiInput-input.CurrencyTextField-textField-1.CurrencyTextField-textField-3.MuiInputBase-inputAdornedStart{
 	white-space: nowrap;
 	overflow: hidden;
-	text-overflow: ellipsis
+	text-overflow: ellipsis;
 }
 
 /* city and zipcode */
@@ -117,16 +117,6 @@
 	flex-direction: row;
 	list-style-type: none;
 }
-
-/* .MuiInputBase-input {
-	background-color: white;
-	font-family: "Jost";
-	font-size: 15px;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	font-style: normal;
-} */
  
 .MuiInputBase-root {
 	background-color: white;
@@ -183,7 +173,7 @@
 	font-family: "Helvetica";
 	font-size: 15px;
 	color: black;
-	letter-spacing: 12px
+	letter-spacing: 12px;
 }
 
 .text-button-job-creation:hover{
@@ -227,7 +217,7 @@
 	height: 4%;
 	display: flex;
 	justify-content: center;
-	align-items: center
+	align-items: center;
 }
 
 
