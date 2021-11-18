@@ -135,18 +135,18 @@ class JobListingPage extends Component {
     ];
 
     months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
+        'January',
+        'February',
+        'March',
+        'April',
         'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dic'
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
     ];
 
     hideAlert() {
@@ -225,10 +225,10 @@ class JobListingPage extends Component {
                             </Button>
                         </div>
 
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="algo ahi" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="algo ahi" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="algo ahi" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="algo ahi" />}
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
 
                     </div>
                 </div>
