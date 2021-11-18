@@ -101,7 +101,7 @@ class JobDashboardPage extends Component {
                     price = `minPrice=70&maxPrice=100`;
                 }
                 else if(price === '5'){
-                    price = `minPrice=100`;
+                    price = `minPrice=101`;
                 }
 
                 filterResult += price
@@ -120,7 +120,7 @@ class JobDashboardPage extends Component {
                     price = `&minPrice=70&maxPrice=100`;
                 }
                 else if(price === '5'){
-                    price = `&minPrice=100`;
+                    price = `&minPrice=101`;
                 }
 
                 filterResult += price
