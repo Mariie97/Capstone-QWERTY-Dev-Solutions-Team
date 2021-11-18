@@ -306,12 +306,12 @@ class SecurityQuestionsPage extends Component {
                         aria-describedby="simple-modal-description"
                     >
                            
-                        <Backdrop open={open} style={backdropStyle}>  
-                            <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
+                        <Backdrop open={open} style={backdropStyle}>                            
                             <div>
-                                <h2 className='modalTextStyle'> 
+                            <h2 className='modalTextStyle'>    
+                            {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}                          
                                 Enter your new password: </h2>     
-                            </div>
+                            </div>                                	
                             <div>
                                 <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
                             </div>

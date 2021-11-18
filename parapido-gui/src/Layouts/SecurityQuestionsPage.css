@@ -57,7 +57,6 @@
 }
 
 .modalTextStyle {
-    position: relative;
     text-align: center;
     font-family: Jost;
     font-style: normal;
@@ -69,9 +68,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2vh;
     width: 100%;
-    left:0px;
+    height: 100%;
+    left: 0px;
+    grid-gap: 0vh;
+    position: relative;
 }
 
 .confirmPasswordStyle {
@@ -105,8 +106,6 @@
 
 .modalLogoStyle {
     width: 100px;
-    height: 100px;
-    margin-bottom: 5vh;
 }
 
 .errorStyle {
@@ -146,4 +145,10 @@
 #security-change-pswd-button{
     width: 50%;
     margin: 10% 0;
+}
+
+.MuiPaper-root.MuiAlert-root.MuiAlert-standardError.MuiPaper-elevation0{
+    position: relative;
+    top: -3vh;
+    text-align: center;
 }
