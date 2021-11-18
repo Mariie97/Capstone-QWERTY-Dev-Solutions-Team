@@ -103,10 +103,10 @@ class RequestsPage extends Component {
         
         return (
             <React.Fragment>
-                {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+                {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
                     <div>
                         {!is_auth && <Redirect to='/' />}
-                        {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+                        {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
                         <React.Fragment>
                             {!requestLoaded ?
                                 <div className='loading-icon'>

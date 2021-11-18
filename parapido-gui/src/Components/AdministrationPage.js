@@ -204,7 +204,7 @@ class AdministrationPage extends Component {
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
-                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/> :
+                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/> :
                 <React.Fragment>
                     {alert.msg !== undefined &&
                     <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">

@@ -188,10 +188,10 @@ class ChatApp extends Component {
     const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
     return (
         <React.Fragment>
-          {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+          {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
             <div className='parent-container'>
               {!is_auth && <Redirect to='/' />}
-              {!allowAccess ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+              {!allowAccess ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
               <React.Fragment>
                 {!pageLoaded ?
                     <div className='loading-icon'>
