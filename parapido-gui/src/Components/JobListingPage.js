@@ -61,7 +61,7 @@ class JobListingPage extends Component {
         if(this.state.userAccountType === accountType.student && parseInt(this.status) === jobStatus.posted) {
             deleteSuccess = cancelJobRequest(this.token, job_id, this.state.user_id);
             if (deleteSuccess) {
-                this.setAlert("Request canceled successfully");
+                this.setAlert("Request has been cancelled successfully!!! 👍🏼");
             } else {
                 this.setAlert("Can't cancel request at this moment, try again later!", "error");
             }

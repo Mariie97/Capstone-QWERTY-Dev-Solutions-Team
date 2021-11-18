@@ -124,7 +124,7 @@ class JobDetailsPage extends Component {
                 this.setState({
                     redirect: '/myjobs',
                     alert: {
-                        msg: 'Request canceled successfully',
+                        msg: 'Request has been cancelled successfully!!! 👍🏼',
                          severity: 'success'
                     }
                 });
