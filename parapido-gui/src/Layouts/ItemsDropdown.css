@@ -20,6 +20,8 @@
 	display: grid;
 	align-content: center;
 	text-align: center;
+	font-family: Jost;
+	font-size: 14px;
 } 
 
 /* inside Material ui dropdown */

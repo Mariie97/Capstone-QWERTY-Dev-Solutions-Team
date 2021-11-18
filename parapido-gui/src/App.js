@@ -18,6 +18,9 @@ import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
+import ErrorPage from './Components/ErrorPage';
+import "./Layouts/ErrorPage.css";
+
 
 
 // CSS imports
@@ -43,6 +46,7 @@ import "./Layouts/Fonts.css";
 import "./Layouts/ReusableCode.css";
 
 class App extends React.Component {
+
     render() {
         return (
             <BrowserRouter>
@@ -56,7 +60,6 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
-                    
                     <Route
                         exact
                         path='/profile/:user_id'
@@ -77,14 +80,13 @@ class App extends React.Component {
                             <React.Fragment>
                                 <NavBar cookies= {this.props.cookies} />
                                 <JobDashboardPage cookies= {this.props.cookies}/>
-                                
                             </React.Fragment>
                         )}
                     />
 
-                        <Route
-                            exact
-                            path='/listings'
+                    <Route
+                        exact
+                        path='/listings'
                         render={(props) => (
                                 <React.Fragment>
                                     <NavBar cookies= {this.props.cookies} />
@@ -92,7 +94,6 @@ class App extends React.Component {
                                         {...props}
                                         cookies = {this.props.cookies}
                                         queryParams = {props.location.search}
-                                        status = {1}
                                     />
                                 </React.Fragment>
                             )}
@@ -113,8 +114,8 @@ class App extends React.Component {
                         path='/myjobs'
                         render={(props) => (
                             <React.Fragment>
-                               <NavBar  cookies={this.props.cookies} />
-                               <MyJobsPage {...props} />
+                                <NavBar  cookies={this.props.cookies} />
+                                <MyJobsPage {...props} />
                             </React.Fragment>
                         )}
                     />
@@ -123,7 +124,7 @@ class App extends React.Component {
                         path='/signup'
                         render={() => (
                             <React.Fragment>
-                                <UserRegistrationPage />
+                                <NavBar cookies={this.props.cookies} />
                                 <UserRegistrationPage />
                             </React.Fragment>
                         )}
@@ -187,11 +188,11 @@ class App extends React.Component {
                                 <AdministrationPage
                                     cookies={this.props.cookies}
                                     {...props}
-                               />
+                                />
                             </React.Fragment>
                         )}
                     />
-                     <Route
+                    <Route
                         exact
                         path='/admin'
                         render={() => (
@@ -201,6 +202,16 @@ class App extends React.Component {
                                     toggle={() => {}}
                                     adminLogin={true}
                                 />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='*'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <ErrorPage errorNumber="404" errorType="Page Not Found"/>
                             </React.Fragment>
                         )}
                     />

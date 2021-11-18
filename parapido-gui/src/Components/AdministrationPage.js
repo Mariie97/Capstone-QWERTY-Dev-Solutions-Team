@@ -3,6 +3,7 @@ import {Link, Redirect} from "react-router-dom";
 import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
+import ErrorPage from './ErrorPage';
 import Alert from "@material-ui/lab/Alert";
 
 class AdministrationPage extends Component {
@@ -137,6 +138,8 @@ class AdministrationPage extends Component {
     }
 
     componentDidMount() {
+        document.body.style.backgroundColor = "#2F2D4A"
+
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
@@ -197,37 +200,26 @@ class AdministrationPage extends Component {
 
 
     render() {
-        //TODO: Add 403 forbidden when user is not admin
-        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin,
-            alert
-        } = this.state;
+        const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin, alert} = this.state;
         return (
             <div>
-                {(!is_auth || !is_admin) && <Redirect to='/' />}
-                {alert.msg !== undefined &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
-                    {alert.msg}</Alert>
-                }
-                <h1 className="page-title-header" style={{width:"750px", paddingBottom: "0px", marginBottom:"0px"}}>
-                    Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
-                </h1>
-                <div className = "administration-body-container">
-                    <div className="list-categories-container">
-                        <h2 className="admin-entities-header">Entities</h2>
-                        <div className="admin-entities-container">
-                            <ul
-                                className="list-categories-text"
-                                onClick={() => {
-                                    this.setState({
-                                        currentEntity: this.entity.users,
-                                        entitiesLoaded: false,
-                                    });
-                                    this.clearFilters();
-                                    this.getAllUsers();
-                                }}
-                            >Users</ul>
-                            <ul
-                                className="list-categories-text"
+                {!is_auth && <Redirect to='/' />}
+                {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/> :
+                <React.Fragment>
+                    {alert.msg !== undefined &&
+                    <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                        {alert.msg}
+                    </Alert>
+                    }
+                    <h1 className="page-title-header" style={{width:"750px", paddingBottom: "0px", marginBottom:"0px"}}>
+                        Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
+                    </h1>
+                    <div className = "administration-body-container">
+                        <div className="list-categories-container">
+                            <h2 className="admin-entities-header">Entities</h2>
+                            <div className="admin-entities-container">
+                                <ul
+                                    className="list-categories-text"
                                 onClick={() => {
                                     this.setState({
                                         currentEntity: this.entity.jobs,
@@ -283,56 +275,55 @@ class AdministrationPage extends Component {
                             <div className="admin-filter-button-container">
                                 <button
                                     className='custom-buttons filter admin-filter-button'
-                                    onClick={() => {
-                                        this.setState({entitiesLoaded: false});
-                                        if (currentEntity === this.entity.users)
-                                            this.getAllUsers();
-                                        else
-                                            this.getAllJobs();
-                                    }}>Filter
+
+                                        onClick={() => {
+                                            this.setState({entitiesLoaded: false});
+                                            if (currentEntity === this.entity.users)
+                                                this.getAllUsers();
+                                            else
+                                                this.getAllJobs();
+                                        }}>Filter
                                 </button>
                                 <button
                                     className='custom-buttons filter admin-filter-button'
                                     onClick={this.clearFilters}>Clear Filters
                                 </button>
                             </div>
-
                         </div>
-
                     </div>
-                    <div className="administration-table-container">
-                        {!entitiesLoaded ?
-                            <div className='loading-icon'>
-                                <Box sx={{display: 'flex'}}>
-                                    <CircularProgress />
-                                </Box>
-                            </div>:
-                            <table className='admin-table-content'>
-                                <thead>
-                                {currentEntity===this.entity.users ?
-                                    <tr className='admin-row-table' id="header-row-table">
-                                        <th className='admin-col-table header-col-table admin-number-col'/>
-                                        <th className='admin-col-table header-col-table'>Name</th>
-                                        <th className='admin-col-table header-col-table'>Email</th>
-                                        <th className='admin-col-table header-col-table'>Account Type</th>
-                                    </tr> :
-                                    <tr className='admin-row-table' id="header-row-table">
-                                        <th className='admin-col-table header-col-table admin-number-col'/>
-                                        <th className='admin-col-table header-col-table'>Title</th>
-                                        <th className='admin-col-table header-col-table'>Owner</th>
-                                        <th className='admin-col-table header-col-table'>Date Posted</th>
-                                        <th className='admin-col-table header-col-table'>Category</th>
-                                    </tr>
-                                }
-                                </thead>
-                                <tbody>
-                                {currentEntity === this.entity.users ? this.renderUsers() : this.renderJobs()}
-                                </tbody>
-                            </table>
-                        }
+                        <div className="administration-table-container">
+                            {!entitiesLoaded ?
+                                <div className='loading-icon'>
+                                    <Box sx={{display: 'flex'}}>
+                                        <CircularProgress />
+                                    </Box>
+                                </div>:
+                                <table className='admin-table-content'>
+                                    <thead>
+                                    {currentEntity===this.entity.users ?
+                                        <tr className='admin-row-table' id="header-row-table">
+                                            <th className='admin-col-table header-col-table admin-number-col'/>
+                                            <th className='admin-col-table header-col-table'>Name</th>
+                                            <th className='admin-col-table header-col-table'>Email</th>
+                                            <th className='admin-col-table header-col-table'>Account Type</th>
+                                        </tr> :
+                                        <tr className='admin-row-table' id="header-row-table">
+                                            <th className='admin-col-table header-col-table admin-number-col'/>
+                                            <th className='admin-col-table header-col-table'>Title</th>
+                                            <th className='admin-col-table header-col-table'>Owner</th>
+                                            <th className='admin-col-table header-col-table'>Date Posted</th>
+                                            <th className='admin-col-table header-col-table'>Category</th>
+                                        </tr>
+                                    }
+                                    </thead>
+                                    <tbody>
+                                    {currentEntity === this.entity.users ? this.renderUsers() : this.renderJobs()}
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
                     </div>
-
-                </div>
+                </React.Fragment>}
             </div>
         )
     }

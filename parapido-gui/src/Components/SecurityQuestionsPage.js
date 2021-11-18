@@ -210,7 +210,6 @@ class SecurityQuestionsPage extends Component {
                 else {
                     //fetch error
                     //TODO: Change message to the correct text according to response's status code
-                    console.log(response.status)
                     if(response.status === 500){
                         this.setState({serverDown: true})
                     }
@@ -307,12 +306,16 @@ class SecurityQuestionsPage extends Component {
                         aria-describedby="simple-modal-description"
                     >
                            
-                        <Backdrop open={open} style={backdropStyle}>       
-                            <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
-                            <div className='security-modal-container'>     
+                        <Backdrop open={open} style={backdropStyle}>  
+                            <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
+                            <div>
                                 <h2 className='modalTextStyle'> 
-                                <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
-                                Enter your new password: </h2>
+                                Enter your new password: </h2>     
+                            </div>
+                            <div>
+                                <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
+                            </div>
+                            <div className='security-modal-container'>     
                                 <Input
                                     required
                                     blackLabel

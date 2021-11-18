@@ -57,6 +57,7 @@
 }
 
 .modalTextStyle {
+    position: relative;
     text-align: center;
     font-family: Jost;
     font-style: normal;
@@ -146,4 +147,3 @@
     width: 50%;
     margin: 10% 0;
 }
-
