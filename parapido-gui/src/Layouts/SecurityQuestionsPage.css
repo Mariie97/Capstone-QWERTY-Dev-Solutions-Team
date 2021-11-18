@@ -71,7 +71,7 @@
     width: 100%;
     height: 100%;
     left: 0px;
-    grid-gap: 0vh;
+    grid-gap: 2vh;
     position: relative;
 }
 
@@ -147,8 +147,6 @@
     margin: 10% 0;
 }
 
-.MuiPaper-root.MuiAlert-root.MuiAlert-standardError.MuiPaper-elevation0{
-    position: relative;
-    top: -3vh;
-    text-align: center;
+.MuiFilledInput-root{
+    border-radius: 0vh;
 }
