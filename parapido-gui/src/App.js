@@ -9,14 +9,19 @@ import JobDetailsPage from "./Components/JobDetailsPage";
 import UserRegistrationPage from "./Components/UserRegistrationPage";
 import JobCreation from "./Components/JobCreation";
 import ChatPage from "./Components/ChatPage";
+import JobListingPage from "./Components/JobListingPage";
 import SecurityQuestionsPage from "./Components/SecurityQuestionsPage";
 import RequestsPage from "./Components/RequestsPage";
 import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
+import ErrorPage from './Components/ErrorPage';
+import "./Layouts/ErrorPage.css";
+
 
 
 class App extends React.Component {
+
     render() {
         return (
             <BrowserRouter>
@@ -24,13 +29,12 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/'
-                        render={() => (
+                        render={(props) => (
                             <React.Fragment>
-                                <LandingPage cookies={this.props.cookies} />
+                                <LandingPage {...props} cookies={this.props.cookies} />
                             </React.Fragment>
                         )}
                     />
-                    
                     <Route
                         exact
                         path='/profile/:user_id'
@@ -56,6 +60,21 @@ class App extends React.Component {
                     />
                     <Route
                         exact
+                        path='/listings'
+                        render={(props) => (
+                                <React.Fragment>
+                                    <NavBar cookies= {this.props.cookies} />
+                                    <JobListingPage
+                                        {...props}
+                                        cookies = {this.props.cookies}
+                                        queryParams = {props.location.search}
+                                    />
+                                </React.Fragment>
+                            )}
+                        />
+
+                    <Route
+                        exact
                         path='/security-questions'
                         render={() => (
                             <React.Fragment>
@@ -67,10 +86,10 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/myjobs'
-                        render={() => (
+                        render={(props) => (
                             <React.Fragment>
-                               <NavBar cookies={this.props.cookies} />
-                               <MyJobsPage />
+                                <NavBar  cookies={this.props.cookies} />
+                                <MyJobsPage {...props} />
                             </React.Fragment>
                         )}
                     />
@@ -79,7 +98,7 @@ class App extends React.Component {
                         path='/signup'
                         render={() => (
                             <React.Fragment>
-                                <NavBar cookies= {this.props.cookies} />
+                                <NavBar cookies={this.props.cookies} />
                                 <UserRegistrationPage />
                             </React.Fragment>
                         )}
@@ -136,14 +155,17 @@ class App extends React.Component {
                     <Route
                         exact
                         path='/admin/site'
-                        render={() => (
+                        render={props => (
                             <React.Fragment>
                                 <NavBar cookies={this.props.cookies} />
-                                <AdministrationPage cookies={this.props.cookies} />
+                                <AdministrationPage
+                                    cookies={this.props.cookies}
+                                    {...props}
+                                />
                             </React.Fragment>
                         )}
                     />
-                     <Route
+                    <Route
                         exact
                         path='/admin'
                         render={() => (
@@ -153,6 +175,16 @@ class App extends React.Component {
                                     toggle={() => {}}
                                     adminLogin={true}
                                 />
+                            </React.Fragment>
+                        )}
+                    />
+                    <Route
+                        exact
+                        path='*'
+                        render={() => (
+                            <React.Fragment>
+                                <NavBar cookies={this.props.cookies} />
+                                <ErrorPage errorNumber="404" errorType="Page Not Found"/>
                             </React.Fragment>
                         )}
                     />

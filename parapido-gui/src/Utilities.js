@@ -38,6 +38,24 @@ export function setJobStatus(token, job_id, status) {
         return response.status === 200;
     })
 }
+
+export function cancelJobRequest(token, job_id, student_id){
+    return fetch('/cancel_request', {
+        method: 'PUT',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        },
+        body: JSON.stringify({
+            job_id: job_id,
+            student_id: student_id,
+        })
+    }).then(response => {
+        return response.status === 200;
+    })
+}
+
 export const cities = [
     'Adjuntas',
     'Aguada',
@@ -129,7 +147,7 @@ export const jobStatus = {
 
 export function getQueryParams(query) {
     return new URLSearchParams(query);
-  }
+}
 
 export const getJobStatus = [
     'Posted',
@@ -178,7 +196,7 @@ export const prices = [
     '$20.00 to $40.00',
     '$50.00 to $60.00',
     '$70.00 to $100.00',
-    'More than $100.00'            
+    'More than $100.00'
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;

@@ -63,6 +63,8 @@ class UserRegistrationPage extends Component {
             accountTypeError: undefined,
             registerSuccess: false,
             questionError: undefined,
+            alertMssg: undefined,
+            severity: undefined
         };
 
         this.validateFirstName = this.validateFirstName.bind(this)
@@ -109,7 +111,8 @@ class UserRegistrationPage extends Component {
             })
         }).then(response => {
                 if(response.status === 201) {
-                    this.setState({registerSuccess: true})
+                    this.setState({
+                        alertMssg: "The account has been successfully created!!! 👍🏼", severity: "success"})
                 }
                 else{
                     //poner la alerta
@@ -283,6 +286,10 @@ class UserRegistrationPage extends Component {
             answerOne,
             answerTwo,
 
+            isFetchError,
+            questionError,
+            alertMssg,
+            severity
         } = this.state;
 
         return (

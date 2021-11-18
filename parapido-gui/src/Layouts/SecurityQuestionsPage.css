@@ -64,12 +64,17 @@
     text-align: center;
     font-family: Jost;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 300;
     font-size: 32px;
     line-height: 27px;
-    color: black;
+    color: #2F2D4A;
     margin-bottom: 30px;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    width: 100%;
+    left:0px;
 }
 
 .confirmPasswordStyle {
