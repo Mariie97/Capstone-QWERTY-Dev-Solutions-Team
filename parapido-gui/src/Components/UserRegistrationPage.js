@@ -126,7 +126,7 @@ class UserRegistrationPage extends Component {
                 this.setState({
                     isFetchError: true,
                     alert: {
-                        alertMssg: "The email already exist.",
+                        alertMssg: "Email address is already registered.",
                         severity: "error"
                     }
                 });
