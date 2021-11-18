@@ -3,7 +3,9 @@ import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio,
 import "../Layouts/UserRegistrationPage.css";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
-import SecurityQuestions, {securityQuestions} from "../Utilities"
+import {securityQuestions} from "../Utilities"
+import Alert from '@material-ui/lab/Alert';
+import {Redirect} from "react-router-dom";
 
 const accountTypeStyle = {
     position: "absolute",
@@ -63,8 +65,10 @@ class UserRegistrationPage extends Component {
             accountTypeError: undefined,
             registerSuccess: false,
             questionError: undefined,
-            alertMssg: undefined,
-            severity: undefined
+            alert: {
+                alertMssg: undefined,
+                severity: undefined
+            }
         };
 
         this.validateFirstName = this.validateFirstName.bind(this)
@@ -103,24 +107,40 @@ class UserRegistrationPage extends Component {
                 last_name: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
-                q_type1: this.state.questionOneRef?.current.state.question,
-                q_type2: this.state.questionTwoRef?.current.state.question,
+                q_type1: this.state.questionOneRef?.current.state.item,
+                q_type2: this.state.questionTwoRef?.current.state.item,
                 ans1: this.state.answerOne,
                 ans2: this.state.answerTwo,
                 type: this.state.accountType,
             })
         }).then(response => {
-                if(response.status === 201) {
-                    this.setState({
-                        alertMssg: "The account has been successfully created!!! 👍🏼", severity: "success"})
-                }
-                else{
-                    //poner la alerta
-                    this.setState({isFetchError: true})
-                }
+            if(response.status === 201) {
+                this.setState({
+                    registerSuccess: true,
+                    alert: {
+                        alertMssg: "The account has been successfully created!!! 👍🏼",
+                        severity: "success"}
+                })
             }
-        )
-
+            else if (response.status === 409) {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "The email already exist.",
+                        severity: "error"
+                    }
+                });
+            }
+            else {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "Sorry, we are unable to create your account at this moment. Please try again later!",
+                        severity: "error"
+                    }
+                });
+            }
+        })
     }
 
     onSubmit() {
@@ -275,6 +295,16 @@ class UserRegistrationPage extends Component {
         }
     }
 
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            isFetchError: false,
+            alert: {
+                alertMssg: undefined,
+                severity: undefined
+            }
+        })}, 3000);
+    }
+
 
     render() {
         const {
@@ -283,17 +313,34 @@ class UserRegistrationPage extends Component {
             email,
             password,
             confirmPassword,
+            questionOneRef,
+            questionTwoRef,
             answerOne,
             answerTwo,
-
             isFetchError,
-            questionError,
-            alertMssg,
-            severity
+            alert,
+            registerSuccess
         } = this.state;
 
         return (
             <div>
+                {isFetchError &&
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                    {alert.alertMssg}
+                </Alert>}
+
+
+                {registerSuccess &&
+                <div>
+                    <Redirect to={{
+                        pathname: '/',
+                        state: {
+                            alertMssg: 'alert.alertMssg',
+                            severity: 'success'
+                        }
+                    }}/>
+                </div>
+                }
                 <form>
 
 
@@ -430,7 +477,7 @@ class UserRegistrationPage extends Component {
 
                                 <ItemsDropdown
                                     initial_value={1}
-                                    ref={this.state.questionOneRef}
+                                    ref={questionOneRef}
                                     itemsList={securityQuestions}
                                     validationFunc={this.validateQuestions}
                                     label='Question 1'
@@ -460,7 +507,7 @@ class UserRegistrationPage extends Component {
 
                                 <ItemsDropdown
                                     initial_value={2}
-                                    ref={this.state.questionTwoRef}
+                                    ref={questionTwoRef}
                                     itemsList={securityQuestions}
                                     validationFunc={this.validateQuestions}
                                     label='Question 2'
@@ -488,7 +535,7 @@ class UserRegistrationPage extends Component {
                             </div>
 
                             <div className={"horizontal-flexbox5"}>
-                            <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
+                                <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
                             </div>
 
 

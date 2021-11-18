@@ -8,9 +8,6 @@
 	align-content: space-between;
 	flex-wrap: wrap;
 	margin-left: 5%;
-	/*
-    border: 2px red solid;
-	*/
 }
 
 .left-flexbox{
@@ -20,9 +17,6 @@
 	flex-direction: column;
 	align-content: space-between;
 	flex-wrap: wrap;
-	/*
-    border: 2px red solid;
-	*/
 }
 
 .horizontal-flexbox1{
@@ -31,11 +25,6 @@
 	flex-direction: row;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	/*
-    border: 2px red solid;
-	*/
-	margin-bottom: 30px;
-	gap: 10px;
 }
 
 .horizontal-flexbox2{
@@ -44,10 +33,6 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	margin-bottom: 30px;
-	/*
-    border: 2px red solid;
-	*/
 	gap: 100px;
 }
 
@@ -58,9 +43,6 @@
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-top: 30px;
-	/*
-    border: 2px red solid;
-	*/
 	gap: 100px;
 }
 
@@ -71,9 +53,6 @@
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-top: 10px;
-	/*
-    border: 2px red solid;
-	*/
 	gap: 100px;
 }
 
@@ -83,11 +62,6 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	margin-top: 50px;
-	/*
-    border: 2px red solid;
-	*/
-	gap: 100px;
 }
 
 .outer-flexbox{
@@ -95,9 +69,6 @@
 	width: 100%;
 	flex-direction: row;
 	flex-wrap: wrap;
-	/*
-    border: 2px red solid;
-	*/
 }
 
 .first-name-style{
@@ -129,21 +100,14 @@
 }
 
 .page-header {
-	width: 50%;
+	font-family: "Jost";
 	font-weight: bold;
+	letter-spacing: 1px;
 	font-size: 60px;
 	text-align: left;
 	color: white;
-	border-bottom: 2px solid white;
+	border-bottom: 1px solid white;
+	width: 700px;
 	padding-bottom: 20px;
-	margin: 65px;
-}
-
-create-button-style {
-    position: absolute;
-    width: 190px;
-    height: 80px;
-/*    left: 1493px;
-    top: 864px;*/
-
+	margin: 0 auto 20px 65px;
 }
