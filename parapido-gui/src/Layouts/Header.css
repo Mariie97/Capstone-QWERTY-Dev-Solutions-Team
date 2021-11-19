@@ -12,10 +12,8 @@
     color: white;
     border-bottom: 1px solid white;
     width: 700px;
-    margin: 0 auto;
-    margin-bottom: 0px;
-    padding-bottom: 20px;
-    margin-bottom: 40px;
+    margin: 0 auto 25px;
+    padding-bottom: 5px;
 }
 
 .button-flex-container {
@@ -23,7 +21,6 @@
     justify-content: flex-end;
     width: auto;
     margin-right: 5%;
-
 }
 
 .custom-buttons {
