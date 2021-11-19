@@ -11,10 +11,9 @@ class ErrorPage extends Component {
     }
 
     render() {
-        const {errorNumber, errorType, inside} = this.props;
-        document.body.style.backgroundColor = "#FFFFFF";
+        const {errorNumber, errorType} = this.props;
         return (
-            <div className={inside ? "main-container-inside-error-page": "main-container-error-page"}>
+            <div className={"main-container-error-page"}>
                 <div className="body-container-error-page">
                     <img src= {errorpagecartoon}  alt="errorpagecartoon" style={{height:"90vh"}} />
                     <div className="main-text-container-error-page">
@@ -35,7 +34,7 @@ class ErrorPage extends Component {
                         </Link>
                     </div>
                 </div>
-                <div className={inside ? "footer-error-inside-page" : "footer-error-page"}>
+                <div className={"footer-error-page"}>
                     <div> The support team can be contacted at:&nbsp; </div>
                     <EmailIcon style={mail}/>
                     <a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"

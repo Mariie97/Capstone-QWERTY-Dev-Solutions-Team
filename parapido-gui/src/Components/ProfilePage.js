@@ -1,12 +1,11 @@
-import React, {Component, createRef} from 'react';
-import "../Layouts/ProfilePage.css";
-import {Link, Redirect} from 'react-router-dom';
+import React, {Component, createRef} from "react";
+import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
+import ProfileCard from "./ProfileCard";
 import {Box, CircularProgress} from "@material-ui/core";
-import ProfileCard from './ProfileCard';
-import UploadIcon from '@material-ui/icons/CloudUpload'
+import UploadIcon from "@material-ui/icons/CloudUpload";
 
 class ProfilePage extends Component {
     currentUser = {
@@ -175,7 +174,8 @@ class ProfilePage extends Component {
                                     rating_value={user.rating_value}
                                     jobs_cancelled={user.jobs_cancelled}
                                     type={user.type}
-                                    image={user.image}                                />
+                                    image={user.image}
+                                />
                             </div>
                             {!edit ?
                                 <table className='table-body-content'>
@@ -278,8 +278,9 @@ class ProfilePage extends Component {
                                         </div>
                                         <div className="grid-edit-info-item5">
                                             <ItemsDropdown
+                                                lineheightstyle="2"
                                                 label='City'
-                                                initial_value={city}
+                                                initial_value={city===null ? '' : city}
                                                 ref={change_city}
                                                 validationFunc={this.validateCity}
                                                 itemsList={cities}
@@ -458,7 +459,7 @@ class ProfilePage extends Component {
                 return false;
             }
             if (!zipcodeFormatPR.test(change_zipcode)) {
-                this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
+                this.setState({zipcodeError: 'Zipcode not from PR'});
                 return false;
             }
         }

@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { MenuItem, Select } from "@material-ui/core";
-import StyledEngineProvider from '@material-ui/styles/StylesProvider';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import "../Layouts/ItemsDropdown.css";
-
+import StyledEngineProvider from "@material-ui/styles/StylesProvider";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 
 class ItemsDropdown extends Component {
 
@@ -52,17 +50,17 @@ class ItemsDropdown extends Component {
 
     render() {
         const { item, itemError } = this.state;
-        const { label, required, blackLabel, removeDefault } = this.props;
-
+        const { label, required, blackLabel, removeDefault, cormorantlabel, lineheightstyle} = this.props;
         return (
             <StyledEngineProvider injectFirst>
                 <div>
-                    <label className={`label-item-dropdown ${blackLabel !== undefined && 'black-label-text'}`}> {label}{required && '*'} </label>
+                    <label  style={{lineHeight: lineheightstyle}} className={ cormorantlabel !== undefined ? 'cormorant-label-text' : `custom-input-label ${blackLabel !== undefined && 'black-label-text'}
+                    `}> {label}{required && '*'} </label>
                     <br/>
                     <Select
                         value={item}
                         onChange={this.handleOnChangeCity}
-                        className={itemError===undefined ? "job-creation-dropdown" : 'job-creation-dropdown error'}
+                        className={itemError !== undefined ?  "item-dropdown dropdown-error" : "item-dropdown"}
                         onClose={this.validate}
                         MenuProps={{
                             disableScrollLock: true,
@@ -85,7 +83,7 @@ class ItemsDropdown extends Component {
                         {this.getAllItems()}
                     </Select>
                     {itemError !== undefined &&
-                    <div className="required-field-2-job-creation">
+                    <div className="required-dropdown">
                         <ReportProblemIcon style={report} />
                         {itemError}
                     </div>

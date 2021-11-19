@@ -1,6 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
-
 .input-field-container {
     margin-bottom: 8px;
     line-height: 0;
@@ -10,7 +7,6 @@
     color: black !important;
 }
 
-
 .MuiFilledInput-root .MuiFilledInput-input {
     background-color: white;
     color: black;
@@ -18,6 +14,9 @@
     font-family: "Jost";
     padding: 10px 3px 10px 3px;
     border-radius: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .MuiFilledInput-root.MuiFilledInput-multiline,
@@ -65,7 +64,6 @@
     font-family: "Times New Roman";
     color: #cc3300;
     position: relative;
-    margin-top: 10px;
     left: -3px;
 }
 
@@ -77,14 +75,14 @@
     letter-spacing: 1px;
     line-height: 2;
 }
+
 .custom-input-multiline{
 	font-family: "Times New Roman";
 	font-size: 18px;
 	width: 100%;
 	border: 3px solid black;
-	padding-left: 3px;
-	padding-right: 3px;
-	resize: none
+	padding: 5px;
+	resize: none;
 }
 
 .custom-input-multiline:focus{
@@ -92,6 +90,13 @@
 	border: 3px solid black;
 	outline: none;
 }
+
+
+.input-error{
+    border:2px solid #cc3300;
+}
+
+/* custom texts for inputs */
 
 .black-label-text{
     color: black;
@@ -104,5 +109,16 @@
     color: #2F2D4A;
     line-height: 4;
     letter-spacing: 0px;
+    white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+.cormorant-label-text{
+    font-family: "Cormorant Garamond";
+	font-style: italic;
+	font-weight: 400;
+	font-size: 15px;
+	color: white;
+	letter-spacing: 1px;
+}

@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
-
 /* controlling the positioning of logo and the next starting div */
 
 .logo-flex-Agreement{
@@ -13,7 +11,7 @@ justify-content: flex-end;
     font-size: 25px;
     color: #D90027;
     margin-top: 2vh;
-    margin-bottom: 6vh
+    margin-bottom: 6vh;
 }
 
 /* button */
@@ -110,16 +108,15 @@ justify-content: flex-end;
 
 .checkbox > input:checked::before {
     content: '\2713';
-    display: block;
     color: white;
-    position: absolute;
-    left: 0.5vh;
-    top:0.1vh;
-    bottom: 0.1vh;
-    
+    position: absolute; 
+    display: flex;
+    height: 2vh;
+    width: 2vh;
+    justify-content: center;
+    align-items: center; 
 }
 
 .checkbox > input:active {
     border: 2px solid #34495E;
 }
-

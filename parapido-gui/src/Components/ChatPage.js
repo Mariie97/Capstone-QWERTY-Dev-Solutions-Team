@@ -1,12 +1,10 @@
-import React, {Component, createRef} from 'react';
-import '../Layouts/ChatPage.css';
-import {Box, CircularProgress} from "@material-ui/core";
-import Avatar from '@material-ui/core/Avatar';
-import {getQueryParams, verifyUserAuth} from "../Utilities";
+import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import RefreshIcon from '@material-ui/icons/Refresh';
+import {getQueryParams, verifyUserAuth} from "../Utilities";
+import {Box, CircularProgress} from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+import RefreshIcon from "@material-ui/icons/Refresh";
 import ErrorPage from './ErrorPage';
-
 
 class MessagesContainer extends Component{
   currentUser = {
@@ -190,10 +188,10 @@ class ChatApp extends Component {
     const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
     return (
         <React.Fragment>
-          {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+          {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
             <div className='parent-container'>
               {!is_auth && <Redirect to='/' />}
-              {!allowAccess ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+              {!allowAccess ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
               <React.Fragment>
                 {!pageLoaded ?
                     <div className='loading-icon'>

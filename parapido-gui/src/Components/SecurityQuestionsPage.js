@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
-import {Backdrop, Modal} from "@material-ui/core";
+import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-import {Alert} from "@material-ui/lab";
-import Stack from '@mui/material/Stack';
-import "../Layouts/SecurityQuestionsPage.css"
-import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import Input from "./Input";
 import {securityQuestions} from "../Utilities";
-
+import Input from "./Input";
+import {Backdrop, Modal} from "@material-ui/core";
+import {Alert} from "@material-ui/lab";
+import Stack from "@mui/material/Stack";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
 class SecurityQuestionsPage extends Component {
     constructor(props){
@@ -308,12 +306,16 @@ class SecurityQuestionsPage extends Component {
                         aria-describedby="simple-modal-description"
                     >
                            
-                        <Backdrop open={open} style={backdropStyle}>       
-                            <img alt='PaRapido Logo' src={loginModalLogo} className={"modalLogoStyle"}/>
+                        <Backdrop open={open} style={backdropStyle}>                            
+                            <div>
+                            <h2 className='modalTextStyle'>    
+                            {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}                          
+                                Enter your new password: </h2>     
+                            </div>                                	
+                            <div>
+                                <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
+                            </div>
                             <div className='security-modal-container'>     
-                                <h2 className='modalTextStyle'> 
-                                <div> {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}</div>
-                                Enter your new password: </h2>
                                 <Input
                                     required
                                     blackLabel
@@ -367,14 +369,13 @@ const backdropStyle = {
     left: "50%",
     top: "50%",
     transform: 'translate(-50%, -50%)',
-    width: "33vw",
-    height: "80vh",
+    width: "26vw",
+    height: "75vh",
     position: "absolute",
     display: "flex",
     flexFlow: "column",
     padding: '20px',
     backgroundColor: "#FFFFFF",
 }
-
 
 export default SecurityQuestionsPage;

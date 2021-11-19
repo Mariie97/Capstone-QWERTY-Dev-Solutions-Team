@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {Redirect} from "react-router-dom";
-import "../Layouts/AgreementModal.css"
-import StyledEngineProvider from '@material-ui/styles/StylesProvider';
-import {Box, Modal} from "@material-ui/core";
-import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import continueArrow from '../Static/Images/continueArrow.png';
-import virtualContract from '../Static/Images/Virtual_Contract.png';
 import {accountType} from "../Utilities";
+import StyledEngineProvider from "@material-ui/styles/StylesProvider";
+import {Box, Modal} from "@material-ui/core";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
+import ContinueArrow from "../Static/Images/ContinueArrow.png";
+import VirtualContract from "../Static/Images/VirtualContract.png";
 
 const style = {
     position: 'absolute',
@@ -24,7 +23,6 @@ const style = {
 }
 
 class AgreementModal extends Component {
-    
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
@@ -120,7 +118,7 @@ class AgreementModal extends Component {
                         >
                             <Box sx={style}>
                                 <div className="logo-flex-Agreement">
-                                    <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                                    <img src={Logo} alt="login logo" style={login_logostyle}/>
                                 </div>
                                 <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>      
                                 <div className="body-container-agreement-modal">
@@ -129,7 +127,7 @@ class AgreementModal extends Component {
                                     <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
                                     </label>
                                     Check to state that you have read and agree with the job information </p>
-                                    <img style={virtual_contract_image_resize} src={virtualContract} alt="continue arrow" />
+                                    <img style={virtual_contract_image_resize} src={VirtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to={{
                                         pathname: '/myjobs',
                                         state: { alertMssg: alertMssg, severity: severity }
@@ -142,7 +140,7 @@ class AgreementModal extends Component {
                                         <div className="text-button-agreement-modal">
                                             Agree & Continue
                                         </div>
-                                        <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                        <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                                 </div>
                                 <hr className="line-login-modal" />

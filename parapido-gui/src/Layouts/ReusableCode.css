@@ -1,0 +1,21 @@
+@import "Header.css";
+@import "BodyTable.css";
+
+/* prevent web page issues */
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+/*small urls style */
+
+#small-urls {
+	color: #ffebcc;
+	text-decoration: underline;
+}
+
+#small-urls:hover {
+	color: black;
+}

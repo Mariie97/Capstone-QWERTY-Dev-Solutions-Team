@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
+import {Redirect} from "react-router-dom";
 import {
     Button,
     FormControl,
@@ -9,10 +10,8 @@ import {
     RadioGroup,
     TextField
 } from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
-
 import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
-import {Redirect} from "react-router-dom";
+import Alert from '@material-ui/lab/Alert';
 
 const titleStyle = {
     position: "absolute",

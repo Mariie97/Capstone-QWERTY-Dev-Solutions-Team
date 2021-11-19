@@ -4,7 +4,6 @@ import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
 import Button from "@mui/material/Button";
 
-
 class RatingModal extends Component {
 
     constructor(props) {

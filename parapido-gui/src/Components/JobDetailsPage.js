@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
-import '../Layouts/JobDetails.css'
+import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {accountType, cities, getJobStatus, jobStatus, setJobStatus, verifyUserAuth, weekDays} from "../Utilities";
 import ProfileCard from "./ProfileCard";
+import AgreementModal from "./AgreementModal";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
-import AgreementModal from './AgreementModal.js';
 
 
 class JobDetailsPage extends Component {
@@ -125,7 +124,7 @@ class JobDetailsPage extends Component {
                 this.setState({
                     redirect: '/myjobs',
                     alert: {
-                        msg: 'Request canceled successfully',
+                        msg: 'Request has been cancelled successfully!!! 👍🏼',
                          severity: 'success'
                     }
                 });
@@ -348,7 +347,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <td className='column-table-body col1'>Assigned to:</td>
                                     <td className='column-table-body col2'>
-                                        <Link to={`/profile/${job.student_id}`} id='job-student-assigned-name'>
+                                        <Link to={`/profile/${job.student_id}`} id='small-urls' >
                                             {`${job.student_name} ${job.student_last}`}
                                         </Link>
                                     </td>

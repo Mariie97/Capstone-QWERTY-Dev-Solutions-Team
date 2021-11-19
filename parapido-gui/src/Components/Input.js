@@ -1,23 +1,22 @@
-import React, {Component} from 'react'
-import "../Layouts/InputField.css"
+import React, {Component} from "react";
 import TextField from "@material-ui/core/TextField";
 import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
-
 class Input extends Component {
 
     render() {
-        const { errorMsg, labelText, required, multiline, blackLabel, loginmodallabel} = this.props;
+        const { errorMsg, labelText, required, multiline, blackLabel, loginmodallabel, cormorantlabel} = this.props;
         return (
             <div className='input-field-container'>
-                <label className={`custom-input-label ${blackLabel!==undefined && 'black-label-text'} ${loginmodallabel !==undefined && 'login-modal-label-text'}`}> 
+                <label className={`custom-input-label ${blackLabel!==undefined && 'black-label-text'} ${loginmodallabel !==undefined && 'login-modal-label-text'}
+                ${cormorantlabel !==undefined && 'cormorant-label-text'}`}> 
                 {labelText}{required && '*'}
                 </label>
                 <br />
                 {multiline ?
                     <TextareaAutosize
-                        className='custom-input-multiline'
+                        className={errorMsg !== undefined ? 'custom-input-multiline input-error' : 'custom-input-multiline'}
                         {...this.props}
                     />
                     :

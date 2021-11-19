@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/LoginModal.css"
-import Alert from '@material-ui/lab/Alert';
-import StyledEngineProvider from '@material-ui/styles/StylesProvider';
-import {Box, Modal} from "@material-ui/core";
-import loginModalLogo from '../Static/Images/Pa_Rapido_logo_bgPalette.png';
-import continueArrow from '../Static/Images/continueArrow.png';
 import Input from "./Input";
+import Alert from "@material-ui/lab/Alert";
+import StyledEngineProvider from "@material-ui/styles/StylesProvider";
+import {Box, Modal} from "@material-ui/core";
+import ContinueArrow from "../Static/Images/ContinueArrow.png";
+import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
 
 const style = {
@@ -108,7 +107,7 @@ class LoginModal extends Component {
                             </Alert>
                         </div>
                         }
-                        <img src={loginModalLogo} alt="login logo" style={login_logostyle}/>
+                        <img src={Logo} alt="login logo" style={login_logostyle}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                         <div className="second-point-login-modal">
                             <div className="first-text-login-modal">
@@ -150,7 +149,7 @@ class LoginModal extends Component {
                                         <div className="text-button-login-modal">
                                             CONTINUE
                                         </div>
-                                     <img style ={continue_arrow_image_resize} src={continueArrow} alt="continue arrow" />
+                                     <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                         </div>
                         <hr className="line-login-modal" />

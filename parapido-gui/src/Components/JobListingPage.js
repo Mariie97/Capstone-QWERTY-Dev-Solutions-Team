@@ -1,9 +1,9 @@
-import React, {Component, createRef} from 'react';
-import {Button} from "@material-ui/core";
+import React, {Component, createRef} from "react";
+import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
+import { Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import "../Layouts/JobListing.css";
-import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
 import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
@@ -61,7 +61,7 @@ class JobListingPage extends Component {
         if(this.state.userAccountType === accountType.student && parseInt(this.status) === jobStatus.posted) {
             deleteSuccess = cancelJobRequest(this.token, job_id, this.state.user_id);
             if (deleteSuccess) {
-                this.setAlert("Request canceled successfully");
+                this.setAlert("Request has been cancelled successfully!!! 👍🏼");
             } else {
                 this.setAlert("Can't cancel request at this moment, try again later!", "error");
             }

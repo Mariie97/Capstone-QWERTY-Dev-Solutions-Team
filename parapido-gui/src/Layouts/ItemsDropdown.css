@@ -1,67 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
-
-/*#cities-dropdown-label {*/
-/*    font-family: "Cormorant Garamond";*/
-/*	font-style: italic; */
-/*    font-weight: 400;*/
-/*    font-size: 16px;*/
-/*    color: white;*/
-/*	letter-spacing: 1px;*/
-/*	line-height: 2;*/
-/*}*/
-/*  */
-
-/*#cities-dropdown {*/
-/*    color: black;*/
-/*    background-color: white;*/
-/*    font-family: "Times New Roman";*/
-/*    width: 151px;*/
-/*    font-size: 18px;*/
-/*    padding-top: 10px;*/
-/*    padding-bottom: 10px;*/
-/*}*/
-
-/*.MuiInputBase-root{*/
-/*    border: 3px solid black;*/
-/*    font-family: "Jost";*/
-/*    font-size: 15px;*/
-/*    border-radius: 0px;*/
-
-/*}*/
-
-/*.MuiListItem-button{*/
-/*	background-color: white;*/
-/*}*/
-
-/*.MuiList-padding{*/
-/*	padding-top: 0px;*/
-/*	padding-bottom: 0px;*/
-/*}*/
-
-/*.MuiList-root{*/
-/*	background-color: #FFEBCC;*/
-/*}*/
-
-/*.MuiMenuItem-root{*/
-/*    background-color: white;*/
-/*}*/
-
-.label-item-dropdown{
-	font-family: "Jost";
-	font-weight: 400;
-	font-size: 15px;
-	color: white;
-	letter-spacing: 1px;
-	line-height: 2;
+.item-dropdown {
+	min-width: 150px;
+	min-height: 44px;
 }
 
-.black-label-text{
-	color: black;
+.MuiInputBase-root.MuiInput-root.item-dropdown.dropdown-error {
+    border-color: #cc3300;
 }
 
+/* arrow icon in Material ui dropdown */
 
+.MuiSelect-icon{
+	color: darkgreen;
+}
 
+/* what changes when you select something */
 
+.MuiSelect-select{
+	background-color:white ;
+	display: grid;
+	align-content: center;
+	text-align: center;
+	font-family: Jost;
+	font-size: 14px;
+} 
 
+/* inside Material ui dropdown */
 
+.MuiListItem-button{
+	background-color: white;
+}
+
+.MuiList-padding{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+.MuiList-root{
+	background-color: #FFEBCC;
+}
+
+.required-dropdown {
+	font-family: "Times New Roman";
+	color: #cc3300;
+	position: relative;
+	left: -3px;
+	width: 110%;
+}
