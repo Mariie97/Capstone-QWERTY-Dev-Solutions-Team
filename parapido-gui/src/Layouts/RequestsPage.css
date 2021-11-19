@@ -1,14 +1,13 @@
 .student-requests-flex-container {
     display: flex;
     flex-flow: row wrap;
-    flex-basis: 25em;
     justify-content: center;
-    margin: 2% 10%;
+    margin: 0 auto;
 }
 
 .student-request-cards {
     margin: 30px;
-    border-radius: 0px;
+    border-radius: 0;
     height: 355px;
     border:3px solid green;
 
@@ -42,7 +41,6 @@
 }
 
 /* mui cards css */
-
 .MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeSmall.MuiButton-textSizeSmall.MuiButtonBase-root.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
     color: green;
     font-family: 'Times New Roman';
@@ -59,16 +57,15 @@
     margin: 0;
     font-family: 'Times New Roman';
     font-weight: 400;
-    font-size: 15px;
+    font-size: 20px;
     line-height: 1.334;
-    letter-spacing: 0em;
-    margin-bottom: 0.35em;
+    letter-spacing: 0;
     color: green;
 }
 
 .MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiCard-root.student-request-cards.css-hkdbh3-MuiPaper-root-MuiCard-root{
     width: 260px;
     height: 332px;
-    border-radius: 0px;
+    border-radius: 0;
     border-color: lightgreen;
 }
