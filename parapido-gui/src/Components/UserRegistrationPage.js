@@ -1,18 +1,11 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-import {
-    Button,
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    FormLabel,
-    Radio,
-    RadioGroup,
-    TextField
-} from "@material-ui/core";
-import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
+import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup} from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
+import Input from "./Input";
 import "../Layouts/UserRegistrationPage.css";
+import {securityQuestions} from "../Utilities";
+import ItemsDropdown from "./ItemsDropdown";
 
 const accountTypeStyle = {
     position: "absolute",
@@ -89,7 +82,6 @@ class UserRegistrationPage extends Component {
         this.validateQuestions = this.validateQuestions.bind(this)
 
         this.onSubmit = this.onSubmit.bind(this)
-
     }
 
     componentDidMount() {
@@ -288,17 +280,15 @@ class UserRegistrationPage extends Component {
         const { questionOneRef, questionTwoRef } = this.state;
 
         if(questionOneRef.current !== null && questionTwoRef.current !== null){
-
             if (parseInt(questionOneRef?.current.state.item ) === parseInt(questionTwoRef?.current.state.item)) {
                 questionOneRef?.current.setState({itemError: 'Please select different questions'});
                 questionTwoRef?.current.setState({itemError: 'Please select different questions'});
                 return false;
-
             }
+
             questionOneRef?.current.setState({itemError: undefined});
             questionTwoRef?.current.setState({itemError: undefined});
             return true
-
         }
     }
 
@@ -335,8 +325,6 @@ class UserRegistrationPage extends Component {
                 <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
                     {alert.alertMssg}
                 </Alert>}
-
-
                 {registerSuccess &&
                 <div>
                     <Redirect to={{
@@ -349,18 +337,10 @@ class UserRegistrationPage extends Component {
                 </div>
                 }
                 <form>
-
-
                     <div className="page-header"> Create Account </div>
-
                     <div className={"outer-flexbox"}>
-
-
                         <div className={'right-flexbox'}>
-
                             <div className={'horizontal-flexbox1'}>
-
-
                                 <Input
                                     required
                                     error = {this.state.firstNameError!==undefined}
@@ -374,9 +354,6 @@ class UserRegistrationPage extends Component {
                                     className='first-name-style'
                                     onBlur={this.validateFirstName}
                                 />
-
-
-
                                 <Input
                                     required
                                     error = {this.state.lastNameError!==undefined}
@@ -390,10 +367,6 @@ class UserRegistrationPage extends Component {
                                     className='last-name-style'
                                     onBlur={this.validateLastName}
                                 />
-
-
-
-
                             </div>
                             <div className={'horizontal-flexbox2'}>
                                 <Input
@@ -409,10 +382,8 @@ class UserRegistrationPage extends Component {
                                     className={'email-style'}
                                     onBlur={this.validateEmail}
                                 />
-
                             </div>
                             <div className={'horizontal-flexbox2'}>
-
                                 <Input
                                     required
                                     error = {this.state.passwordError!==undefined}
@@ -426,11 +397,8 @@ class UserRegistrationPage extends Component {
                                     className={'password-style'}
                                     onBlur={this.validatePassword}
                                 />
-
                             </div>
-
                             <div className={'horizontal-flexbox2'}>
-
                                 <Input
                                     required
                                     error = {this.state.confirmPasswordError!==undefined}
@@ -444,11 +412,8 @@ class UserRegistrationPage extends Component {
                                     className={'confirm-password-style'}
                                     onBlur={this.validatePasswordConfirm}
                                 />
-
                             </div>
-
                             <div className={'horizontal-flexbox2'}>
-
                                 <FormControl
                                     component="fieldset"
                                     style={accountTypeStyle}
@@ -466,22 +431,13 @@ class UserRegistrationPage extends Component {
                                     </RadioGroup>
                                     <FormHelperText>{this.state.accountTypeError}</FormHelperText>
                                 </FormControl>
-
                             </div>
-
-
-
-
                         </div>
-
-
-
                         <div className={'left-flexbox'}>
-
-                            <div className={"horizontal-flexbox2"}> <h2 style={securityQuestionTextStyle}>Security Questions:</h2> </div>
-
+                            <div className={"horizontal-flexbox2"}>
+                                <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
+                            </div>
                             <div className={"horizontal-flexbox3"}>
-
                                 <ItemsDropdown
                                     initial_value={1}
                                     ref={questionOneRef}
@@ -489,11 +445,8 @@ class UserRegistrationPage extends Component {
                                     validationFunc={this.validateQuestions}
                                     label='Question 1'
                                 />
-
                             </div>
-
                             <div className={"horizontal-flexbox4"}>
-
                                 <Input
                                     required
                                     error = {this.state.answerOneError!==undefined}
@@ -507,11 +460,8 @@ class UserRegistrationPage extends Component {
                                     className={"answer-one-style"}
                                     onBlur={this.validateAnswerOne}
                                 />
-
                             </div>
-
                             <div className={"horizontal-flexbox3"}>
-
                                 <ItemsDropdown
                                     initial_value={2}
                                     ref={questionTwoRef}
@@ -519,11 +469,8 @@ class UserRegistrationPage extends Component {
                                     validationFunc={this.validateQuestions}
                                     label='Question 2'
                                 />
-
                             </div>
-
                             <div className={"horizontal-flexbox4"}>
-
                                 <Input
                                     required
                                     error = {this.state.answerTwoError!==undefined}
@@ -537,22 +484,14 @@ class UserRegistrationPage extends Component {
                                     className={"answer-two-style"}
                                     onBlur={this.validateAnswerTwo}
                                 />
-
-
                             </div>
-
                             <div className={"horizontal-flexbox5"}>
                                 <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
                             </div>
-
-
                         </div>
-
-
                     </div>
                 </form>
             </div>
-
         );
     };
 }
