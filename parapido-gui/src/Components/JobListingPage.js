@@ -3,14 +3,12 @@ import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, 
 import { Button} from "@material-ui/core";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
-import "../Layouts/JobListing.css";
 import ItemsDropdown from "./ItemsDropdown";
-import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
-import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
-import JobPosted_listings from "../Static/Images/JobPosted_listings.svg"
-import JobRequested_listings from "../Static/Images/JobRequested_listings.svg"
 import Alert from "@material-ui/lab/Alert";
-
+import JobCompleted_listings from "../Static/Images/JobCompletedBlue.svg"
+import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg"
+import JobPosted_listings from "../Static/Images/JobPostedBlue.svg"
+import JobRequested_listings from "../Static/Images/JobRequestedBlue.svg"
 
 class JobListingPage extends Component {
     status = undefined;

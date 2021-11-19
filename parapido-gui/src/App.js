@@ -45,6 +45,7 @@ import "./Layouts/SecurityQuestionsPage.css";
 import "./Layouts/Fonts.css";
 import "./Layouts/ReusableCode.css";
 import "./Layouts/UserRegistrationPage.css";
+import "./Layouts/JobListing.css";
 
 class App extends React.Component {
 
