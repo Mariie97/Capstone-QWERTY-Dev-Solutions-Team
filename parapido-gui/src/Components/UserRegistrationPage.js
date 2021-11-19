@@ -1,42 +1,10 @@
 import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup} from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
-import Input from "./Input";
-import "../Layouts/UserRegistrationPage.css";
 import {securityQuestions} from "../Utilities";
+import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
-
-const accountTypeStyle = {
-    position: "absolute",
-    marginTop: "10px",
-    color: "#FFFFFF",
-};
-
-const createButtonStyle = {
-    position: "absolute",
-    width: "160px",
-    height: "70px",
-    left: "67%",
-    fontWeight: "bold",
-    fontSize: "24px",
-    border: "2px solid black",
-    borderRadius: "15px",
-    background: "#FFEBCC",
-};
-
-const securityQuestionTextStyle = {
-    position: "absolute",
-    color: "#FFFFFF",
-};
-
-const formLabelStyle = {
-    color:"#FFFFFF"
-}
-
-const radioStyle = {
-    color:"#FFFFFF"
-}
+import {FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup} from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 
 class UserRegistrationPage extends Component {
 
@@ -157,6 +125,209 @@ class UserRegistrationPage extends Component {
             return;
 
         this.validateFetch()
+    };
+
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            isFetchError: false,
+            alert: {
+                alertMssg: undefined,
+                severity: undefined
+            }
+        })}, 3000);
+    }
+
+
+    render() {
+        const {
+            firstName,
+            lastName,
+            email,
+            password,
+            confirmPassword,
+            questionOneRef,
+            questionTwoRef,
+            answerOne,
+            answerTwo,
+            isFetchError,
+            alert,
+            registerSuccess
+        } = this.state;
+
+        return (
+            <div>
+                {isFetchError &&
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                    {alert.alertMssg}
+                </Alert>}
+                {registerSuccess &&
+                <div>
+                    <Redirect to={{
+                        pathname: '/',
+                        state: {
+                            alertMssg: 'alert.alertMssg',
+                            severity: 'success'
+                        }
+                    }}/>
+                </div>
+                }
+                <form>
+                    <div className="page-header"> Create Account </div>
+                    <div className={"outer-flexbox"}>
+                        <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
+                        <div className={'right-flexbox'}>
+                            <div className={'horizontal-flexbox1'}>
+                                <Input
+                                    required
+                                    error = {this.state.firstNameError!==undefined}
+                                    variant="filled"
+                                    labelText="First Name"
+                                    type="text"
+                                    name="firstName"
+                                    value = {firstName}
+                                    onChange={this.change}
+                                    errorMsg={this.state.firstNameError}
+                                    className='first-name-style'
+                                    onBlur={this.validateFirstName}
+                                />
+                                <Input
+                                    required
+                                    error = {this.state.lastNameError!==undefined}
+                                    variant="filled"
+                                    labelText="Last Name"
+                                    type="text"
+                                    name="lastName"
+                                    value = {lastName}
+                                    onChange={this.change}
+                                    errorMsg={this.state.lastNameError}
+                                    className='last-name-style'
+                                    onBlur={this.validateLastName}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.emailError!==undefined}
+                                    variant="filled"
+                                    labelText="Email"
+                                    type="text"
+                                    name="email"
+                                    value = {email}
+                                    onChange={this.change}
+                                    errorMsg={this.state.emailError}
+                                    className={'email-style'}
+                                    onBlur={this.validateEmail}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.passwordError!==undefined}
+                                    variant="filled"
+                                    labelText="Password"
+                                    type="password"
+                                    name="password"
+                                    value = {password}
+                                    onChange={this.change}
+                                    errorMsg={this.state.passwordError}
+                                    className={'password-style'}
+                                    onBlur={this.validatePassword}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.confirmPasswordError!==undefined}
+                                    variant="filled"
+                                    labelText="Confirm Password"
+                                    type="password"
+                                    name="confirmPassword"
+                                    value = {confirmPassword}
+                                    onChange={this.change}
+                                    errorMsg={this.state.confirmPasswordError}
+                                    className={'confirm-password-style'}
+                                    onBlur={this.validatePasswordConfirm}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <FormControl
+                                    component="fieldset"
+                                    style={accountTypeStyle}
+                                    error={this.state.accountTypeError!==undefined}
+                                >
+                                    <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
+                                    <RadioGroup row
+                                                aria-label="Account Type"
+                                                name="accountType"
+                                                onChange={this.change}
+                                                value={this.state.accountType}
+                                    >
+                                        <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
+                                        <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
+                                    </RadioGroup>
+                                    <FormHelperText>{this.state.accountTypeError}</FormHelperText>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className={'left-flexbox'}>
+                            <div className={"horizontal-flexbox2"}>                               
+                            </div>
+                            <div className={"horizontal-flexbox3"}>
+                                <ItemsDropdown
+                                    initial_value={1}
+                                    ref={questionOneRef}
+                                    itemsList={securityQuestions}
+                                    validationFunc={this.validateQuestions}
+                                    label='Question 1'
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox4"}>
+                                <Input
+                                    required
+                                    error = {this.state.answerOneError!==undefined}
+                                    variant="filled"
+                                    labelText="Answer 1"
+                                    errorMsg={this.state.answerOneError}
+                                    type="text"
+                                    name="answerOne"
+                                    value = {answerOne}
+                                    onChange={this.change}
+                                    className={"answer-one-style"}
+                                    onBlur={this.validateAnswerOne}
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox3"}>
+                                <ItemsDropdown
+                                    initial_value={2}
+                                    ref={questionTwoRef}
+                                    itemsList={securityQuestions}
+                                    validationFunc={this.validateQuestions}
+                                    label='Question 2'
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox4"}>
+                                <Input
+                                    required
+                                    error = {this.state.answerTwoError!==undefined}
+                                    variant="filled"
+                                    labelText="Answer 2"
+                                    errorMsg={this.state.answerTwoError}
+                                    type="text"
+                                    name="answerTwo"
+                                    value = {answerTwo}
+                                    onChange={this.change}
+                                    className={"answer-two-style"}
+                                    onBlur={this.validateAnswerTwo}
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox5"}>
+                                <button variant="contained" className="create-button-style" onClick={this.onSubmit}>Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        );
     };
 
     validateFirstName(){
@@ -291,210 +462,27 @@ class UserRegistrationPage extends Component {
             return true
         }
     }
-
-    hideAlert() {
-        setTimeout(() => {this.setState({
-            isFetchError: false,
-            alert: {
-                alertMssg: undefined,
-                severity: undefined
-            }
-        })}, 3000);
-    }
-
-
-    render() {
-        const {
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword,
-            questionOneRef,
-            questionTwoRef,
-            answerOne,
-            answerTwo,
-            isFetchError,
-            alert,
-            registerSuccess
-        } = this.state;
-
-        return (
-            <div>
-                {isFetchError &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
-                    {alert.alertMssg}
-                </Alert>}
-                {registerSuccess &&
-                <div>
-                    <Redirect to={{
-                        pathname: '/',
-                        state: {
-                            alertMssg: 'alert.alertMssg',
-                            severity: 'success'
-                        }
-                    }}/>
-                </div>
-                }
-                <form>
-                    <div className="page-header"> Create Account </div>
-                    <div className={"outer-flexbox"}>
-                        <div className={'right-flexbox'}>
-                            <div className={'horizontal-flexbox1'}>
-                                <Input
-                                    required
-                                    error = {this.state.firstNameError!==undefined}
-                                    variant="filled"
-                                    labelText="First Name"
-                                    type="text"
-                                    name="firstName"
-                                    value = {firstName}
-                                    onChange={this.change}
-                                    errorMsg={this.state.firstNameError}
-                                    className='first-name-style'
-                                    onBlur={this.validateFirstName}
-                                />
-                                <Input
-                                    required
-                                    error = {this.state.lastNameError!==undefined}
-                                    variant="filled"
-                                    labelText="Last Name"
-                                    type="text"
-                                    name="lastName"
-                                    value = {lastName}
-                                    onChange={this.change}
-                                    errorMsg={this.state.lastNameError}
-                                    className='last-name-style'
-                                    onBlur={this.validateLastName}
-                                />
-                            </div>
-                            <div className={'horizontal-flexbox2'}>
-                                <Input
-                                    required
-                                    error = {this.state.emailError!==undefined}
-                                    variant="filled"
-                                    labelText="Email"
-                                    type="text"
-                                    name="email"
-                                    value = {email}
-                                    onChange={this.change}
-                                    errorMsg={this.state.emailError}
-                                    className={'email-style'}
-                                    onBlur={this.validateEmail}
-                                />
-                            </div>
-                            <div className={'horizontal-flexbox2'}>
-                                <Input
-                                    required
-                                    error = {this.state.passwordError!==undefined}
-                                    variant="filled"
-                                    labelText="Password"
-                                    type="password"
-                                    name="password"
-                                    value = {password}
-                                    onChange={this.change}
-                                    errorMsg={this.state.passwordError}
-                                    className={'password-style'}
-                                    onBlur={this.validatePassword}
-                                />
-                            </div>
-                            <div className={'horizontal-flexbox2'}>
-                                <Input
-                                    required
-                                    error = {this.state.confirmPasswordError!==undefined}
-                                    variant="filled"
-                                    labelText="Confirm Password"
-                                    type="password"
-                                    name="confirmPassword"
-                                    value = {confirmPassword}
-                                    onChange={this.change}
-                                    errorMsg={this.state.confirmPasswordError}
-                                    className={'confirm-password-style'}
-                                    onBlur={this.validatePasswordConfirm}
-                                />
-                            </div>
-                            <div className={'horizontal-flexbox2'}>
-                                <FormControl
-                                    component="fieldset"
-                                    style={accountTypeStyle}
-                                    error={this.state.accountTypeError!==undefined}
-                                >
-                                    <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
-                                    <RadioGroup row
-                                                aria-label="Account Type"
-                                                name="accountType"
-                                                onChange={this.change}
-                                                value={this.state.accountType}
-                                    >
-                                        <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
-                                        <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
-                                    </RadioGroup>
-                                    <FormHelperText>{this.state.accountTypeError}</FormHelperText>
-                                </FormControl>
-                            </div>
-                        </div>
-                        <div className={'left-flexbox'}>
-                            <div className={"horizontal-flexbox2"}>
-                                <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
-                            </div>
-                            <div className={"horizontal-flexbox3"}>
-                                <ItemsDropdown
-                                    initial_value={1}
-                                    ref={questionOneRef}
-                                    itemsList={securityQuestions}
-                                    validationFunc={this.validateQuestions}
-                                    label='Question 1'
-                                />
-                            </div>
-                            <div className={"horizontal-flexbox4"}>
-                                <Input
-                                    required
-                                    error = {this.state.answerOneError!==undefined}
-                                    variant="filled"
-                                    labelText="Answer 1"
-                                    errorMsg={this.state.answerOneError}
-                                    type="text"
-                                    name="answerOne"
-                                    value = {answerOne}
-                                    onChange={this.change}
-                                    className={"answer-one-style"}
-                                    onBlur={this.validateAnswerOne}
-                                />
-                            </div>
-                            <div className={"horizontal-flexbox3"}>
-                                <ItemsDropdown
-                                    initial_value={2}
-                                    ref={questionTwoRef}
-                                    itemsList={securityQuestions}
-                                    validationFunc={this.validateQuestions}
-                                    label='Question 2'
-                                />
-                            </div>
-                            <div className={"horizontal-flexbox4"}>
-                                <Input
-                                    required
-                                    error = {this.state.answerTwoError!==undefined}
-                                    variant="filled"
-                                    labelText="Answer 2"
-                                    errorMsg={this.state.answerTwoError}
-                                    type="text"
-                                    name="answerTwo"
-                                    value = {answerTwo}
-                                    onChange={this.change}
-                                    className={"answer-two-style"}
-                                    onBlur={this.validateAnswerTwo}
-                                />
-                            </div>
-                            <div className={"horizontal-flexbox5"}>
-                                <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        );
-    };
 }
 
+const accountTypeStyle = {
+    position: "absolute",
+    marginTop: "10px",
+    color: "#FFFFFF",
+};
+
+const securityQuestionTextStyle = {
+    position: "absolute",
+    color: "#FFFFFF",
+    marginLeft: "76.8px",
+
+};
+
+const formLabelStyle = {
+    color:"#FFFFFF"
+}
+
+const radioStyle = {
+    color:"#FFFFFF"
+}
 
 export default UserRegistrationPage;
