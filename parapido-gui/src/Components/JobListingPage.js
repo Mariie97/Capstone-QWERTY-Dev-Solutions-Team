@@ -18,6 +18,9 @@ class JobListingPage extends Component {
 
     constructor(props) {
         super(props);
+        const queryParams = getQueryParams(this.props.queryParams);
+        this.status = queryParams.get('status');
+        const userType = parseInt(localStorage.getItem('type'));
         this.state = {
             listings: [],
             rating: 1,
@@ -25,8 +28,8 @@ class JobListingPage extends Component {
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
-            userAccountType: parseInt(localStorage.getItem('type')),
-            user_id: parseInt(localStorage.getItem('user_id')),
+            userAccountType: userType === accountType.admin ? parseInt(queryParams.get('account')) : userType,
+            user_id: props.user_id,
             titleText: '',
             currJob: '',
             userToRate: '',
@@ -132,18 +135,18 @@ class JobListingPage extends Component {
     ];
 
     months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
+        'January',
+        'February',
+        'March',
+        'April',
         'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dic'
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
     ];
 
     hideAlert() {
@@ -222,10 +225,10 @@ class JobListingPage extends Component {
                             </Button>
                         </div>
 
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="algo ahi" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="algo ahi" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="algo ahi" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="algo ahi" />}
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
 
                     </div>
                 </div>

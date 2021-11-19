@@ -85,7 +85,7 @@ class NavBar extends Component {
                                     <Link to={"/admin/site"}>Administration</Link>
                                 </li>:
                                 <li>
-                                    <Link to={"/myjobs"}>My Jobs</Link>
+                                    <Link to={`/myjobs/${this.currentUser.id}`}>My Jobs</Link>
                                 </li>
                             }
                             <li>

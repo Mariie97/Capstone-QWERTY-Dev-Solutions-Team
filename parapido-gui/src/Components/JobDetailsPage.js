@@ -122,7 +122,7 @@ class JobDetailsPage extends Component {
         }).then(response => {
             if (response.status === 200) {
                 this.setState({
-                    redirect: '/myjobs',
+                    redirect: `/myjobs/${this.currentUser.id}`,
                     alert: {
                         msg: 'Request has been cancelled successfully!!! 👍🏼',
                          severity: 'success'
@@ -131,7 +131,7 @@ class JobDetailsPage extends Component {
             }
             else {
                 this.setState({
-                    redirect: '/myjobs',
+                    redirect: `/myjobs/${this.currentUser.id}`,
                     alert: {
                         msg: 'Unable to cancel the request at this moment, try again later.',
                         severity: 'error'
@@ -225,7 +225,7 @@ class JobDetailsPage extends Component {
                                         const success = setJobStatus(token, job_id, status);
                                         if(success) {
                                             this.setState({
-                                                redirect: '/myjobs',
+                                                redirect: `/myjobs/${this.currentUser.id}`,
                                                 alert: {
                                                     msg: 'The Job has been cancelled successfully!!! 👍',
                                                     severity: 'success'
@@ -234,7 +234,7 @@ class JobDetailsPage extends Component {
                                         }
                                         else {
                                             this.setState({
-                                                redirect: '/myjobs',
+                                                redirect: `/myjobs/${this.currentUser.id}`,
                                                 alert: {
                                                     msg: 'Can not cancel the job a this moment, please try again later.',
                                                     severity: 'error'

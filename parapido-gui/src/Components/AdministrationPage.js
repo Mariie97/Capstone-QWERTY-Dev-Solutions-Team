@@ -1,6 +1,6 @@
 import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType} from "../Utilities";
+import {categories, getJobStatus, mapAccount, verifyUserAuth, accountType, getQueryParams} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown";
 import {Box, CircularProgress} from "@material-ui/core";
 import ErrorPage from './ErrorPage';
@@ -55,7 +55,7 @@ class AdministrationPage extends Component {
         }
 
         if (Object.keys(filters).length>0) {
-            queryParams = `?${new URLSearchParams(filters)}`;
+            queryParams = `?${getQueryParams(filters)}`;
         }
 
         fetch(`/users/${queryParams}`, {

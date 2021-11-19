@@ -1,6 +1,6 @@
 import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import {accountType, cities, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
+import {accountType, cities, getQueryParams, verifyUserAuth, zipcodeFormatPR} from "../Utilities";
 import Input from "./Input";
 import ItemsDropdown from "./ItemsDropdown";
 import ProfileCard from "./ProfileCard";
@@ -12,6 +12,7 @@ class ProfilePage extends Component {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
     };
+    jobParams = '';
 
     constructor(props){
         super(props);
@@ -77,6 +78,9 @@ class ProfilePage extends Component {
         }).then(response => {
             if(response.status === 200) {
                 response.json().then(data => {
+                        if (this.currentUser.type === accountType.admin) {
+                            this.jobParams = `?${getQueryParams({account: data.type})}`;
+                        }
                         this.setState({ user: {
                                 first_name: data.first_name,
                                 last_name: data.last_name,
@@ -147,7 +151,7 @@ class ProfilePage extends Component {
                             {showButtons &&
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
-                                <Link to={"/myjobs"}>
+                                <Link to={`/myjobs/${user_id}` + this.jobParams}>
                                     <button className="custom-buttons" onClick={this.toggleEdit}>
                                         {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>

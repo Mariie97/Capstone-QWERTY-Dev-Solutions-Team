@@ -162,7 +162,7 @@ export class JobCreation extends Component {
                 {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
                 <React.Fragment>
                     {(alertMssg !== undefined && severity !== undefined) && <Redirect to={{
-                    pathname: '/myjobs',
+                    pathname: `/myjobs/${this.currentUser.id}`,
                     state: { alertMssg: alertMssg,
                             severity: severity}
                     }}/>}

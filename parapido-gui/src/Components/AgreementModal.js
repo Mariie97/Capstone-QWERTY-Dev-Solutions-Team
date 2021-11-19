@@ -129,11 +129,11 @@ class AgreementModal extends Component {
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={VirtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to={{
-                                        pathname: '/myjobs',
+                                        pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity }
                                     }}/>}
                                      {isclient && <Redirect to={{
-                                        pathname: '/myjobs',
+                                        pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity}
                                     }}/>}
                                     <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
