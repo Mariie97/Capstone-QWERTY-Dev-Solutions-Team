@@ -89,7 +89,7 @@ class JobDashboardPage extends Component {
         if(price !== '' && price !== '0'){
             if(filterResult.length === 1){
                 if(price === '1'){
-                    price = `maxPrice=20`;
+                    price = `maxPrice=19`;
                 }
                 else if(price === '2'){
                     price = `minPrice=20&maxPrice=40`;
@@ -192,29 +192,29 @@ class JobDashboardPage extends Component {
                         </h1>
 
                         <div className="first-flex-container-job-dashboard-page">
-                                <ItemsDropdown
-                                    cormorantlabel
-                                    lineheightstyle="2.5"
-                                    ref={change_category}
-                                    itemsList={categories}
-                                    label='Categories'
-                                />
-  
-                                <ItemsDropdown
-                                    cormorantlabel
-                                    lineheightstyle="2.5"
-                                    ref={change_price}
-                                    itemsList={prices}
-                                    label='Prices'
-                                />
-                        
-                                <ItemsDropdown
-                                    cormorantlabel
-                                    lineheightstyle="2.5"
-                                    ref={change_city}
-                                    itemsList={cities}
-                                    label='Cities'
-                                />
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_category}
+                                itemsList={categories}
+                                label='Categories'
+                            />
+
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_price}
+                                itemsList={prices}
+                                label='Prices'
+                            />
+
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_city}
+                                itemsList={cities}
+                                label='Cities'
+                            />
 
                             <button className="filter-button-job-dashboard" onClick={this.clickFilter}>
                                 <div className="text-button-job-dashboard">

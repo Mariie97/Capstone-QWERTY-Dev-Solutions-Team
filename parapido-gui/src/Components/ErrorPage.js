@@ -12,7 +12,6 @@ class ErrorPage extends Component {
 
     render() {
         const {errorNumber, errorType} = this.props;
-        document.body.style.backgroundColor = "#FFFFFF";
         return (
             <div className={"main-container-error-page"}>
                 <div className="body-container-error-page">

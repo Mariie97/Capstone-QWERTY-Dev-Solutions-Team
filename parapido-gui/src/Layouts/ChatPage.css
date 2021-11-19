@@ -11,7 +11,7 @@ body {
   box-shadow: 1px 1px 15px rgb(157, 150, 150);
   overflow: hidden;
   height: calc(100vh - 120px);
-  max-height: 72vh;
+  max-height: 67vh;
   min-width: 500px;
 }
 
@@ -21,7 +21,7 @@ body {
   padding: 20px 10px 0 10px;
   margin: 0;
   height: calc(100vh - 250px);
-  max-height: 58vh;
+  max-height: 55vh;
   overflow-y: auto;
 }
 
@@ -41,15 +41,11 @@ body {
 .messages .message.left .text_wrapper {
   background-color: #e1e1e1;
   margin-left: 20px;
-  width: fit-content;
-  max-width: fit-content;
-  height: 2vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: auto;
+  max-width: 60%;
   font-family: Jost;
   font-size: 14px;
-  font-weight: lighter;
+  border-radius: 10px;
 }
 
 .message.right.appeared{
@@ -59,25 +55,20 @@ body {
   color: #c48843;
 }
 
-
-
 .messages .message.right .avatar {
   background-color: #fdbf68;
   float: right;
 }
 
 .messages .message.right .text_wrapper {
-  background-color: green;
+  background-color: #3f51b5;
   margin-right: 20px;
   float: right;
   width: auto;
   max-width: 60%;
-  height: 2vh;
-  display: flex;
   font-family: Jost;
   font-size: 14px;
-  align-items: center;
-  font-weight: lighter;
+  border-radius: 10px;
 }
 
 .messages .message.right .text {
@@ -110,7 +101,6 @@ body {
   width: calc(100% - 85px);
   position: relative;
   max-width: 60%;
-  
 }
 
 .messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
@@ -139,23 +129,21 @@ body {
 }
 
 .bottom_wrapper {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
   padding: 7px 20px;
-  bottom: 0;
-}
-
-.bottom_wrapper .message_input_wrapper .message_input:focus{
-  background-color: #ffebcc;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 25px;
 }
 
 .bottom_wrapper .message_input_wrapper {
   display: inline-block;
-  height: 30px;
-  border: 2px solid green;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid #bcbdc0;
   width: calc(100% - 160px);
   position: relative;
+  padding: 0 20px;
 }
 
 .bottom_wrapper .message_input_wrapper .message_input {
@@ -178,10 +166,12 @@ body {
   border: 2px solid black;
   color: #fff;
   cursor: pointer;
+  transition: all 0.2s linear;
+  text-align: center;
   float: right;
   font-size: 20px;
   font-family: Jost;
-  font-weight: lighter;
+  font-weight: normal;
   letter-spacing: 1px;
   display: flex;
   justify-content: center;
@@ -218,7 +208,6 @@ body {
   flex-flow: row nowrap;
   align-items: center;
   justify-content: center;
-  height: 56vh;
 }
 
 .refresh-message-container {

@@ -32,7 +32,7 @@ class ItemsDropdown extends Component {
     }
 
     validate() {
-        const { validate, validationFunc} = this.props;
+        const { validate, validationFunc } = this.props;
         if(validationFunc)
             return validationFunc();
 

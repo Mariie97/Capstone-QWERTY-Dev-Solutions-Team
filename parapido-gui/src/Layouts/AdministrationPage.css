@@ -92,7 +92,6 @@
     padding-top: 10px;
 }
 
-
 .header-col-table{
     padding-top: 20px;
 }
@@ -102,11 +101,9 @@
     cursor: pointer;
 }
 
-
 .admin-table-row-link:hover {
     color: black !important;
 }
-
 
 .administration-filter-container {
     display: flex;
