@@ -1,195 +1,42 @@
-import React, {Component} from 'react';
-import {
-    Button,
-    FormControl,
-    FormControlLabel,
-    FormHelperText,
-    FormLabel,
-    Radio,
-    RadioGroup,
-    TextField
-} from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
-
-import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
+import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
-
-const titleStyle = {
-    position: "absolute",
-    width: "1847px",
-    height: "120px",
-    left: "162px",
-    top: "100px",
-    fontFamily: "Future BdCn BT",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: "100px",
-    lineHeight: "120px",
-    color: "#FFFFFF",
-};
-
-const firstNameStyle = {
-    position: "absolute",
-    width: "234px",
-    height: "52px",
-    left: "166px",
-    top: "340px",
-    background: "#FFFFFF",
-    color: "red",
-};
-
-const lastNameStyle = {
-    position: "absolute",
-    width: "234px",
-    height: "52px",
-    left: "485px",
-    top: "340px",
-
-    background: "#FFFFFF",
-};
-
-const emailStyle = {
-    position: "absolute",
-    width: "429px",
-    height: "52px",
-    left: "162px",
-    top: "437px",
-    //backgroundColor: "#FFFFFF",
-
-    background: "#FFFFFF",
-};
-
-const passwordStyle = {
-    position: "absolute",
-    width: "429px",
-    height: "52px",
-    left: "162px",
-    top: "579px",
-
-    background: "#FFFFFF",
-};
-
-const confirmPasswordStyle = {
-    position: "absolute",
-    width: "429px",
-    height: "52px",
-    left: "162px",
-    top: "735px",
-
-    background: "#FFFFFF",
-};
-
-const answerOneStyle = {
-    position: "absolute",
-    width: "636px",
-    height: "52px",
-    left: "1047px",
-    top: "501px",
-
-    background: "#FFFFFF",
-};
-
-const answerTwoStyle = {
-    position: "absolute",
-    width: "636px",
-    height: "52px",
-    left: "1047px",
-    top: "718px",
-
-    background: "#FFFFFF",
-};
-
-const questionOneStyle = {
-    position: "absolute",
-    width: "229px",
-    height: "52px",
-    left: "1047px",
-    top: "388px",
-
-    //background: "#FFFFFF",
-};
-
-const questionTwoStyle = {
-    position: "absolute",
-    width: "229px",
-    height: "52px",
-    left: "1047px",
-    top: "609px",
-
-    color: "#FFFFFF",
-};
+import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup} from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
+import Input from "./Input";
+import "../Layouts/UserRegistrationPage.css";
+import {securityQuestions} from "../Utilities";
+import ItemsDropdown from "./ItemsDropdown";
 
 const accountTypeStyle = {
     position: "absolute",
-    left: "162px",
-    top: "850px",
-    width: "500px",
-
-    /*            fontFamily: "Grand",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "24px",
-                lineHeight: "27px",*/
-
-
+    marginTop: "10px",
     color: "#FFFFFF",
 };
 
 const createButtonStyle = {
     position: "absolute",
-    width: "190px",
-    height: "80px",
-    left: "1493px",
-    top: "864px",
-
-    //background: "#FFFFFF",
+    width: "160px",
+    height: "70px",
+    left: "67%",
+    fontWeight: "bold",
+    fontSize: "24px",
+    border: "2px solid black",
+    borderRadius: "15px",
+    background: "#FFEBCC",
 };
 
 const securityQuestionTextStyle = {
     position: "absolute",
-    left: "1047px",
-    top: "304px",
-    width: "500px",
-
-    /*            fontFamily: "Grand",
-                fontStyle: "normal",
-                fontWeight: "normal",
-                fontSize: "24px",
-                lineHeight: "27px",*/
-
     color: "#FFFFFF",
 };
 
-const outerGridStyle= {
-    top: "-80px",
-    position: "absolute"
-
-}
-
-const formLabelStyle= {
+const formLabelStyle = {
     color:"#FFFFFF"
 }
 
 const radioStyle = {
     color:"#FFFFFF"
 }
-
-const errorStyle = {
-    position: "absolute",
-    width: "429px",
-    height: "52px",
-    left: "600px",
-    top: "800px",
-
-    //background: "#FFFFFF",
-};
-
-const questionErrorStyle = {
-    marginTop: '36vh',
-    marginLeft: '60vw',
-    fontSize: '13px',
-    color: '#f44336'
-};
 
 class UserRegistrationPage extends Component {
 
@@ -218,8 +65,10 @@ class UserRegistrationPage extends Component {
             accountTypeError: undefined,
             registerSuccess: false,
             questionError: undefined,
-            alertMssg: undefined,
-            severity: undefined
+            alert: {
+                alertMssg: undefined,
+                severity: undefined
+            }
         };
 
         this.validateFirstName = this.validateFirstName.bind(this)
@@ -233,7 +82,6 @@ class UserRegistrationPage extends Component {
         this.validateQuestions = this.validateQuestions.bind(this)
 
         this.onSubmit = this.onSubmit.bind(this)
-
     }
 
     componentDidMount() {
@@ -258,24 +106,40 @@ class UserRegistrationPage extends Component {
                 last_name: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
-                q_type1: this.state.questionOneRef?.current.state.question,
-                q_type2: this.state.questionTwoRef?.current.state.question,
+                q_type1: this.state.questionOneRef?.current.state.item,
+                q_type2: this.state.questionTwoRef?.current.state.item,
                 ans1: this.state.answerOne,
                 ans2: this.state.answerTwo,
                 type: this.state.accountType,
             })
         }).then(response => {
-                if(response.status === 201) {
-                    this.setState({
-                        alertMssg: "The account has been successfully created!!! 👍🏼", severity: "success"})
-                }
-                else{
-                    //poner la alerta
-                    this.setState({isFetchError: true})
-                }
+            if(response.status === 201) {
+                this.setState({
+                    registerSuccess: true,
+                    alert: {
+                        alertMssg: "The account has been successfully created!!! 👍🏼",
+                        severity: "success"}
+                })
             }
-        )
-
+            else if (response.status === 409) {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "Email address is already registered.",
+                        severity: "error"
+                    }
+                });
+            }
+            else {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "Sorry, we are unable to create your account at this moment. Please try again later!",
+                        severity: "error"
+                    }
+                });
+            }
+        })
     }
 
     onSubmit() {
@@ -288,6 +152,7 @@ class UserRegistrationPage extends Component {
         const val7 = this.validateAnswerTwo();
         const val8 = this.validateAccountType();
         const val9 = this.validateQuestions();
+
         if(!val1 || !val2 || !val3 || !val4 || !val5 || !val6 || !val7 || !val8 || !val9)
             return;
 
@@ -307,6 +172,7 @@ class UserRegistrationPage extends Component {
 
     validateLastName(){
         const { lastName } = this.state;
+
         if (lastName.length===0) {
             this.setState({ lastNameError: "This field is required" });
             return false;
@@ -413,18 +279,31 @@ class UserRegistrationPage extends Component {
     validateQuestions() {
         const { questionOneRef, questionTwoRef } = this.state;
 
-        if (questionOneRef?.current.state.question === questionTwoRef?.current.state.question) {
-            this.setState({questionError: 'Please select different questions'})
-            return false;
+        if(questionOneRef.current !== null && questionTwoRef.current !== null){
+            if (parseInt(questionOneRef?.current.state.item ) === parseInt(questionTwoRef?.current.state.item)) {
+                questionOneRef?.current.setState({itemError: 'Please select different questions'});
+                questionTwoRef?.current.setState({itemError: 'Please select different questions'});
+                return false;
+            }
 
+            questionOneRef?.current.setState({itemError: undefined});
+            questionTwoRef?.current.setState({itemError: undefined});
+            return true
         }
-        this.setState({questionError: undefined})
-        return true
+    }
+
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            isFetchError: false,
+            alert: {
+                alertMssg: undefined,
+                severity: undefined
+            }
+        })}, 3000);
     }
 
 
     render() {
-        //TODO: Needs CSS improvement
         const {
             firstName,
             lastName,
@@ -436,167 +315,180 @@ class UserRegistrationPage extends Component {
             answerOne,
             answerTwo,
             isFetchError,
-            questionError,
-            alertMssg,
-            severity
+            alert,
+            registerSuccess
         } = this.state;
 
         return (
             <div>
                 {isFetchError &&
-                <Alert severity="error" style={errorStyle}>Unexpected Error. Try Again</Alert>
-                }
-
-                { (alertMssg !== undefined && severity !== undefined) &&
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                    {alert.alertMssg}
+                </Alert>}
+                {registerSuccess &&
                 <div>
-                   <Redirect to={{
-                                pathname: '/',
-                                state: { alertMssg: alertMssg,
-                                         severity: severity}
-                                }}/>
+                    <Redirect to={{
+                        pathname: '/',
+                        state: {
+                            alertMssg: 'alert.alertMssg',
+                            severity: 'success'
+                        }
+                    }}/>
                 </div>
                 }
                 <form>
-                    <div style={outerGridStyle}>
-                        <h1 style={titleStyle}>
-                            Create Account
-                        </h1>
-                        <TextField
-                            required
-                            error = {this.state.firstNameError!==undefined}
-                            variant="filled"
-                            label="First Name"
-                            type="text"
-                            name="firstName"
-                            value = {firstName}
-                            onChange={this.change}
-                            helperText={this.state.firstNameError}
-                            style={firstNameStyle}
-                            onBlur={this.validateFirstName}
-                        />
-                        <TextField
-                            required
-                            error = {this.state.lastNameError!==undefined}
-                            variant="filled"
-                            label="Last Name"
-                            type="text"
-                            name="lastName"
-                            value = {lastName}
-                            onChange={this.change}
-                            helperText={this.state.lastNameError}
-                            style={lastNameStyle}
-                            onBlur={this.validateLastName}
-                        />
-                        <TextField
-                            required
-                            error = {this.state.emailError!==undefined}
-                            variant="filled"
-                            label="Email"
-                            type="text"
-                            name="email"
-                            value = {email}
-                            onChange={this.change}
-                            helperText={this.state.emailError}
-                            style={emailStyle}
-                            onBlur={this.validateEmail}
-                        />
-                        <TextField
-                            required
-                            error = {this.state.passwordError!==undefined}
-                            variant="filled"
-                            label="Password"
-                            type="password"
-                            name="password"
-                            value = {password}
-                            onChange={this.change}
-                            helperText={this.state.passwordError}
-                            style={passwordStyle}
-                            onBlur={this.validatePassword}
-                        />
-                        <TextField
-                            required
-                            error = {this.state.confirmPasswordError!==undefined}
-                            variant="filled"
-                            label="Confirm Password"
-                            type="password"
-                            name="confirmPassword"
-                            value = {confirmPassword}
-                            onChange={this.change}
-                            helperText={this.state.confirmPasswordError}
-                            style={confirmPasswordStyle}
-                            onBlur={this.validatePasswordConfirm}
-                        />
-                        <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
-
-                        <div className='security-questions-container' >
-                            <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
-                            {questionError!==undefined &&
-                            <p style={questionErrorStyle}>{questionError}</p>
-                            }
-
-
-                            <SecurityQuestionDropdown
-                                question={1}
-                                num={1}
-                                style_q={questionOneStyle}
-                                ref={questionOneRef}
-                                onClick={this.validateQuestions}
-                            />
-                            <TextField
-                                required
-                                error = {this.state.answerOneError!==undefined}
-                                variant="filled"
-                                label="Answer 1"
-                                helperText={this.state.answerOneError}
-                                type="text"
-                                name="answerOne"
-                                placeholder="Answer"
-                                value = {answerOne}
-                                onChange={this.change}
-                                style={answerOneStyle}
-                                onBlur={this.validateAnswerOne}
-                            />
-                            <SecurityQuestionDropdown
-                                question={2}
-                                num={2}
-                                style_q={questionTwoStyle}
-                                ref={questionTwoRef}
-                                onClick={this.validateQuestions}
-                            />
-
-                            <TextField
-                                required
-                                error = {this.state.answerTwoError!==undefined}
-                                variant="filled"
-                                label="Answer 2"
-                                helperText={this.state.answerTwoError}
-                                type="text"
-                                name="answerTwo"
-                                placeholder="Answer"
-                                value = {answerTwo}
-                                onChange={this.change}
-                                style={answerTwoStyle}
-                                onBlur={this.validateAnswerTwo}
-                            />
+                    <div className="page-header"> Create Account </div>
+                    <div className={"outer-flexbox"}>
+                        <div className={'right-flexbox'}>
+                            <div className={'horizontal-flexbox1'}>
+                                <Input
+                                    required
+                                    error = {this.state.firstNameError!==undefined}
+                                    variant="filled"
+                                    labelText="First Name"
+                                    type="text"
+                                    name="firstName"
+                                    value = {firstName}
+                                    onChange={this.change}
+                                    errorMsg={this.state.firstNameError}
+                                    className='first-name-style'
+                                    onBlur={this.validateFirstName}
+                                />
+                                <Input
+                                    required
+                                    error = {this.state.lastNameError!==undefined}
+                                    variant="filled"
+                                    labelText="Last Name"
+                                    type="text"
+                                    name="lastName"
+                                    value = {lastName}
+                                    onChange={this.change}
+                                    errorMsg={this.state.lastNameError}
+                                    className='last-name-style'
+                                    onBlur={this.validateLastName}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.emailError!==undefined}
+                                    variant="filled"
+                                    labelText="Email"
+                                    type="text"
+                                    name="email"
+                                    value = {email}
+                                    onChange={this.change}
+                                    errorMsg={this.state.emailError}
+                                    className={'email-style'}
+                                    onBlur={this.validateEmail}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.passwordError!==undefined}
+                                    variant="filled"
+                                    labelText="Password"
+                                    type="password"
+                                    name="password"
+                                    value = {password}
+                                    onChange={this.change}
+                                    errorMsg={this.state.passwordError}
+                                    className={'password-style'}
+                                    onBlur={this.validatePassword}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <Input
+                                    required
+                                    error = {this.state.confirmPasswordError!==undefined}
+                                    variant="filled"
+                                    labelText="Confirm Password"
+                                    type="password"
+                                    name="confirmPassword"
+                                    value = {confirmPassword}
+                                    onChange={this.change}
+                                    errorMsg={this.state.confirmPasswordError}
+                                    className={'confirm-password-style'}
+                                    onBlur={this.validatePasswordConfirm}
+                                />
+                            </div>
+                            <div className={'horizontal-flexbox2'}>
+                                <FormControl
+                                    component="fieldset"
+                                    style={accountTypeStyle}
+                                    error={this.state.accountTypeError!==undefined}
+                                >
+                                    <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
+                                    <RadioGroup row
+                                                aria-label="Account Type"
+                                                name="accountType"
+                                                onChange={this.change}
+                                                value={this.state.accountType}
+                                    >
+                                        <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
+                                        <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
+                                    </RadioGroup>
+                                    <FormHelperText>{this.state.accountTypeError}</FormHelperText>
+                                </FormControl>
+                            </div>
                         </div>
-
-                        <FormControl
-                            component="fieldset"
-                            style={accountTypeStyle}
-                            error={this.state.accountTypeError!==undefined}
-                        >
-                            <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
-                            <RadioGroup row
-                                        aria-label="Account Type"
-                                        name="accountType"
-                                        onChange={this.change}
-                                        value={this.state.accountType}
-                            >
-                                <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
-                                <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
-                            </RadioGroup>
-                            <FormHelperText>{this.state.accountTypeError}</FormHelperText>
-                        </FormControl>
+                        <div className={'left-flexbox'}>
+                            <div className={"horizontal-flexbox2"}>
+                                <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
+                            </div>
+                            <div className={"horizontal-flexbox3"}>
+                                <ItemsDropdown
+                                    initial_value={1}
+                                    ref={questionOneRef}
+                                    itemsList={securityQuestions}
+                                    validationFunc={this.validateQuestions}
+                                    label='Question 1'
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox4"}>
+                                <Input
+                                    required
+                                    error = {this.state.answerOneError!==undefined}
+                                    variant="filled"
+                                    labelText="Answer 1"
+                                    errorMsg={this.state.answerOneError}
+                                    type="text"
+                                    name="answerOne"
+                                    value = {answerOne}
+                                    onChange={this.change}
+                                    className={"answer-one-style"}
+                                    onBlur={this.validateAnswerOne}
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox3"}>
+                                <ItemsDropdown
+                                    initial_value={2}
+                                    ref={questionTwoRef}
+                                    itemsList={securityQuestions}
+                                    validationFunc={this.validateQuestions}
+                                    label='Question 2'
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox4"}>
+                                <Input
+                                    required
+                                    error = {this.state.answerTwoError!==undefined}
+                                    variant="filled"
+                                    labelText="Answer 2"
+                                    errorMsg={this.state.answerTwoError}
+                                    type="text"
+                                    name="answerTwo"
+                                    value = {answerTwo}
+                                    onChange={this.change}
+                                    className={"answer-two-style"}
+                                    onBlur={this.validateAnswerTwo}
+                                />
+                            </div>
+                            <div className={"horizontal-flexbox5"}>
+                                <Button variant="contained" style={createButtonStyle} onClick={this.onSubmit}>Create</Button>
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>

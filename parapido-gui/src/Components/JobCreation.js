@@ -1,14 +1,14 @@
-import React, {Component, createRef} from 'react';
+import React, {Component, createRef} from "react";
 import {Redirect} from "react-router-dom";
-import "../Layouts/JobCreation.css";
-import ErrorPage from './ErrorPage';
-import ItemsDropdown from "./ItemsDropdown.js";
-import AvailableDays from './AvailableDaysChips';
-import CurrencyTextField from "@unicef/material-ui-currency-textfield";
-import CreateIcon from '@material-ui/icons/Create';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import Alert from '@material-ui/lab/Alert';
 import {categories, cities, verifyUserAuth, zipcodeFormatPR, accountType} from "../Utilities";
+import Input from "./Input";
+import ItemsDropdown from "./ItemsDropdown";
+import ErrorPage from './ErrorPage';
+import AvailableDays from "./AvailableDaysChips";
+import CurrencyTextField from "@unicef/material-ui-currency-textfield";
+import CreateIcon from "@material-ui/icons/Create";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import Alert from "@material-ui/lab/Alert";
 
 export class JobCreation extends Component {
     currentUser = {
@@ -156,112 +156,104 @@ export class JobCreation extends Component {
             alertMssg,
             severity
         } = this.state
-        	    
-        return (
+        return (   
             <React.Fragment>
                 {!is_auth && <Redirect to='/' /> }
-                {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+                {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
                 <React.Fragment>
                     {(alertMssg !== undefined && severity !== undefined) && <Redirect to={{
                     pathname: `/myjobs/${this.currentUser.id}`,
                     state: { alertMssg: alertMssg,
-                             severity: severity}
+                            severity: severity}
                     }}/>}
+                    
                     {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
-                        Sorry can't create job right now 😔 please try again later!!!.
+                        Sorry can't create job right now 😔 please try again later!!!
                     </Alert>}
-                    <h1 className="job-creation-page-header"> Job Creation </h1>
+                    <h1 className="page-title-header"> Job Creation </h1>
 
                     <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                         <div className="left-body-container-1-job-creation">
-                            <label className="label-job-creation"> Title* </label>
-                            <input
-                                className="input-1-job-creation"
-                                type="text"
+                            <Input
+                                required
+                                cormorantlabel
+                                labelText='Title'
+                                className="input-title-job-creation"
                                 id="title"
                                 name="title"
                                 placeholder="Title"
                                 value={title}
                                 onChange={this.handleChange}
                                 onBlur={this.validateTitle}
+                                error={titleError!==undefined}
+                                errorMsg={titleError}
                             />
-                            {titleError !== undefined &&
-                            <div className="required-field-job-creation">
-                                <ReportProblemIcon style={report} />{titleError}
-                            </div>
-                            }
-
-                            <label className="label-job-creation"> Description* </label>
-                            <textarea
-                                className="input-2-job-creation"
+                            <Input
+                                required
+                                multiline
+                                cormorantlabel
+                                rows={6}
+                                labelText='Description'
+                                className={descriptionError !== undefined ? 'input-description-job-creation input-error' : 'input-description-job-creation'}
                                 id="description"
                                 name="description"
                                 value={description}
                                 placeholder="Description"
                                 onChange={this.handleChange}
                                 onBlur={this.validateDescription}
+                                error={descriptionError!==undefined}
+                                errorMsg={descriptionError}
                             />
-                            {descriptionError !== undefined &&
-                            <div className="required-field-job-creation">
-                                <ReportProblemIcon style={report} /> {descriptionError}
-                            </div>
-                            }
-
                         </div>
 
                         <div className="big-flexbox-for-3-flexbox-containers-job-creation">
-                            <label className="label-job-creation"> Street* </label>
-                            <input
-                                className="input-1-copy-job-creation"
-                                style={{ width:"138.6%"}}
-                                type="text"
+                            <Input
+                                required
+                                cormorantlabel
+                                labelText='Street'
+                                className="input-street-job-creation"
                                 id="street"
                                 name="street"
                                 value={street}
                                 placeholder="Street"
                                 onChange={this.handleChange}
                                 onBlur={this.validateStreet}
+                                error={streetError!==undefined}
+                                errorMsg={streetError}
                             />
-                            {streetError !== undefined &&
-                            <div className="required-field-job-creation">
-                                <ReportProblemIcon style={report} /> {streetError}
-                            </div>
-                            }
-
                             <div className="mini-flex-box-job-creation">
                                 <ItemsDropdown
+                                    required
+                                    cormorantlabel
                                     ref={change_city}
                                     validate={true}
                                     itemsList={cities}
-                                    label='City'
-                                    required
+                                    label='City'     
                                 />
-
-                                <div style={{width: "108%"}}>
-                                    <label className="label-job-creation"> Zipcode* </label>
-                                    <input
-                                        className="input-3-job-creation"
-                                        type="text"
-                                        id="zipcode"
-                                        name="zipcode"
-                                        value={zipcode}
-                                        placeholder="Zipcode"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateZipcode}
-                                    />
-                                    {zipcodeError !== undefined &&
-                                    <div className="required-field-2-job-creation">
-                                        <ReportProblemIcon style={report} /> {zipcodeError}
-                                    </div>
-                                    }
-                                </div>
+                                <Input
+                                    required
+                                    cormorantlabel
+                                    labelText="Zipcode"
+                                    className='input-zipcode-job-creation'
+                                    type="text"
+                                    id="zipcode"
+                                    name="zipcode"
+                                    value={zipcode}
+                                    placeholder="Zipcode"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateZipcode}
+                                    error={zipcodeError!==undefined}
+                                    errorMsg={zipcodeError}
+                                />
                             </div>
                         </div>
                     </div>
+
                     <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
                         <div className="price-miniflex-job-creation">
-                            <label className="label-job-creation" style={{paddingTop: 3.9}}> Price* </label>
+                            <label className="label-job-creation" style={labelstyle}> Price* </label>
                             <CurrencyTextField
+                                className={priceError !== undefined ? 'input-error' : "without-error"}
                                 currencySymbol="$"
                                 outputFormat="string"
                                 decimalCharacter="."
@@ -270,60 +262,54 @@ export class JobCreation extends Component {
                                 name = "price"
                                 onChange = {this.handleChange}
                                 onBlur  = {this.validatePrice}
-                                InputProps={{ disableUnderline: true }}          
+                                InputProps={{ disableUnderline: true }}
                             />
                             {priceError !== undefined &&
                             <div className="required-field-2-job-creation">
-                                {/* <hr className="price-error-job-creation" />
-                                <hr className="price-error-1-job-creation" />
-                                <hr className="price-error-2-job-creation" />
-                                <hr className="price-error-3-job-creation" /> */}
                                 <ReportProblemIcon style={report} />
                                 {priceError}
-                            </div>
-                            }
+                            </div>}
                         </div>
-                        <ItemsDropdown
-                            required
-                            label='Category'
-                            ref={change_category}
-                            validate={true}
-                            itemsList={categories}/>
-                        <div>
-                            <label className="label-job-creation" >
-                                Available days*
-                                <p className="job-creation-available-days-disclaimer">
-                                    (Please make sure that at least one day is available for job completion)</p>
-                            </label>
-                            <AvailableDays ref={availableDays_chips}/>
-                        </div>
-                    </div>
-
-                    <div style={{textAlign:"center"}}>
-                        <button className="button-job-creation" onClick={this.handleCreateClick}>
-                            <div className="text-button-job-creation">
-                                CREATE
-                                <CreateIcon style={editPencil}/>
+                            <ItemsDropdown
+                                required
+                                cormorantlabel
+                                label='Category'
+                                ref={change_category}
+                                validate={true}
+                                itemsList={categories}
+                            />
+                            <div>
+                                <label style={labelstyle} >
+                                    Available days*
+                                    <p className="job-creation-available-days-disclaimer">
+                                        (Please make sure that at least one day is available for job completion)</p>
+                                </label>
+                                <AvailableDays ref={availableDays_chips}/>
                             </div>
-                        </button>
-                    </div>
-                </React.Fragment>        
-
-                            }
+                        
+                        </div>
+                        <div style={{textAlign:"center"}}>
+                            <button className="button-job-creation" onClick={this.handleCreateClick}>
+                                <div className="text-button-job-creation">
+                                    CREATE
+                                    <CreateIcon style={editPencil}/>
+                                </div>
+                            </button>
+                        </div>
+                </React.Fragment>
+                }
             </React.Fragment>
-
         )
     }
 
     // validation methods
+
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({titleError: "This field is required" })
-            document.querySelector('.input-1-job-creation').style.cssText = 'border: 2px solid #cc3300; ';
             return false;
         }
 
-        document.querySelector('.input-1-job-creation').style.cssText = 'border: 3x solid black;';
         this.setState({titleError: undefined})
         return true;
     }
@@ -331,11 +317,9 @@ export class JobCreation extends Component {
     validateStreet(){
         if (this.state.street.length === 0) {
             this.setState({streetError: "This field is required"})
-            document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 2px solid #cc3300; position: relative; bottom: 1px';
             return false;
         }
 
-        document.querySelector('.input-1-copy-job-creation').style.cssText = 'border: 3x solid black;';
         this.setState({streetError: undefined})
         return true;
     }
@@ -343,11 +327,9 @@ export class JobCreation extends Component {
     validateDescription(){
         if (this.state.description.length === 0) {
             this.setState({descriptionError: "This field is required"})
-            document.querySelector('.input-2-job-creation').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
 
-        document.querySelector('.input-2-job-creation').style.cssText = 'border: 3x solid black;';
         this.setState({descriptionError: undefined})
         return true;
     }
@@ -355,23 +337,18 @@ export class JobCreation extends Component {
     validateZipcode(){
         if (this.state.zipcode.length === 0) {
             this.setState({zipcodeError: "This field is required"})
-            document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
         else if (!isNaN(this.state.zipcode) === false || (this.state.zipcode.length < 5) || this.state.zipcode.length >= 6){
             this.setState({zipcodeError: "zipcode format: #####" })
-
-            document.querySelector('.input-3-job-creation').style.cssText = 'border: 2px solid #cc3300;';
             return false;
         }
 
         if (!zipcodeFormatPR.test(this.state.zipcode)) {
-            this.setState({zipcodeError: 'Zipcode not from Puerto Rico'});
-
+            this.setState({zipcodeError: 'Zipcode not from PR'});
             return false;
         }
 
-        document.querySelector('.input-3-job-creation').style.cssText = 'border: 3x solid black;';
         this.setState({zipcodeError: undefined})
         return true;
     }
@@ -379,21 +356,9 @@ export class JobCreation extends Component {
     validatePrice(){
         if (this.state.price === '') {
             this.setState({priceError: "This field is required"})
-            if(this.state.change_category?.current.state.categoryError !== undefined){
-                document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px';
-            }
-            else{
-                document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 56px;';
-            }
-
             return false;
         }
-        if(this.state.change_category?.current.state.categoryError === undefined && this.state.price !== ''){
-            document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 50px;';
-        }
-        else{
-            document.querySelector('.price-miniflex-job-creation').style.cssText = 'margin-left: 66px;';
-        }
+
         this.setState({priceError: undefined})
         return true;
     }
@@ -411,6 +376,15 @@ const report = {
     color: "red",
     position: "relative",
     top: "4px"
+}
+
+const labelstyle = {
+    fontFamily: "Cormorant Garamond",
+	fontStyle: "italic",
+	fontWeight: "400",
+	fontSize: "15px",
+	color: "white",
+	letterSpacing: "1px",
 }
 
 export default JobCreation

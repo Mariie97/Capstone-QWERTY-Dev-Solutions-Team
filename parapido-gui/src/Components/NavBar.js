@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/NavBar.css";
-import logo from "../Static/Images/Pa_RapidoLogo.png";
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
-import CancelIcon from '@material-ui/icons/Cancel';
 import {accountType} from "../Utilities";
-
+import Logo from "../Static/Images/PaRapidoLogo.png";
+import MenuOpenIcon from "@material-ui/icons/MenuOpen";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 class NavBar extends Component {
     currentUser = {
@@ -71,7 +69,7 @@ class NavBar extends Component {
                 {logout_success && <Redirect to='/'/>}
                 <div className="nav">
                     <Link to={'/jobdashboard'}>
-                        <img className="logostyle" src={logo} alt="Logo" />
+                        <img className="logostyle" src={Logo} alt="Logo" />
                     </Link>
                     {isAuth &&
                     <React.Fragment>

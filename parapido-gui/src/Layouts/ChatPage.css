@@ -1,9 +1,3 @@
-@import "Header.css";
-
-* {
-  box-sizing: border-box;
-}
-
 body {
   background-color: #2F2D4A;
 }
@@ -17,7 +11,7 @@ body {
   box-shadow: 1px 1px 15px rgb(157, 150, 150);
   overflow: hidden;
   height: calc(100vh - 120px);
-  max-height: 72vh;
+  max-height: 67vh;
   min-width: 500px;
 }
 
@@ -27,7 +21,7 @@ body {
   padding: 20px 10px 0 10px;
   margin: 0;
   height: calc(100vh - 250px);
-  max-height: 58vh;
+  max-height: 55vh;
   overflow-y: auto;
 }
 
@@ -48,13 +42,15 @@ body {
   background-color: #e1e1e1;
   margin-left: 20px;
   width: auto;
-  max-width: 60%;}
-
-.messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
-  right: 100%;
-  border-right-color: #e1e1e1;
+  max-width: 60%;
+  font-family: Jost;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
+.message.right.appeared{
+  justify-content: right;
+}
 .messages .message.left .text {
   color: #c48843;
 }
@@ -70,11 +66,9 @@ body {
   float: right;
   width: auto;
   max-width: 60%;
-}
-
-.messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
-  left: 100%;
-  border-left-color: #3f51b5;
+  font-family: Jost;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
 .messages .message.right .text {
@@ -88,6 +82,9 @@ body {
 
 .messages .message.appeared {
   opacity: 1;
+  display: flex;
+  align-content: center;
+  align-items: center;
 }
 
 .messages .message .avatar {
@@ -127,16 +124,16 @@ body {
 }
 
 .messages .message .text_wrapper .text {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 300;
 }
 
 .bottom_wrapper {
-  position: relative;
-  width: 100%;
-  background-color: #fff;
   padding: 7px 20px;
-  bottom: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 25px;
 }
 
 .bottom_wrapper .message_input_wrapper {
@@ -153,29 +150,37 @@ body {
   border: none;
   height: 100%;
   box-sizing: border-box;
-  width: calc(100% - 40px);
-  position: absolute;
+  width: 100%;
   outline-width: 0;
   color: gray;
+  font-family: Jost;
+  font-size: 14px;
+  padding-left: 4px;
 }
 
 .bottom_wrapper .send_message {
   width: 140px;
-  height: 50px;
-  display: inline-block;
+  height: 30px;
   border-radius: 50px;
   background-color: #6cca51;
-  border: 1px solid #6cca51;
+  border: 2px solid black;
   color: #fff;
   cursor: pointer;
   transition: all 0.2s linear;
   text-align: center;
   float: right;
-  font-size: 18px;
+  font-size: 20px;
+  font-family: Jost;
+  font-weight: normal;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 .bottom_wrapper .send_message:hover {
-    border-color:white;
+  color:black;
 }
 
 .bottom_wrapper .send_message .text {
@@ -223,7 +228,7 @@ input:focus {
 
 .refresh-msg-icon:hover {
   cursor: pointer;
-  fill:limegreen
+  fill:limegreen;
 }
 
 

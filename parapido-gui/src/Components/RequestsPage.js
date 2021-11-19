@@ -1,16 +1,16 @@
-import '../Layouts/RequestsPage.css';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import {Box, CircularProgress} from "@material-ui/core";
-import {getQueryParams, verifyUserAuth, accountType} from "../Utilities";
-import AgreementModal from './AgreementModal';
+import {getQueryParams, verifyUserAuth,accountType} from "../Utilities";
+import AgreementModal from "./AgreementModal"
 import ErrorPage from './ErrorPage';
+import Avatar from "@mui/material/Avatar";
+import DefaultProfilePicture from "../Static/Images/DefaultProfilePicture.svg"
+import {Box, CircularProgress} from "@material-ui/core";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
 
 class RequestsPage extends Component {
     queryParams = undefined;
@@ -79,7 +79,7 @@ class RequestsPage extends Component {
                         <Avatar
                             className='avatar'
                             alt={`${request.first_name} ${request.last_name}`}
-                            src={request.image}
+                            src={request.image === null ? DefaultProfilePicture: request.image}
                             sx={{width: 200, height: 200}}
                         />
                     </div>
@@ -103,10 +103,10 @@ class RequestsPage extends Component {
         
         return (
             <React.Fragment>
-                {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found" inside/> :
+                {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
                     <div>
                         {!is_auth && <Redirect to='/' />}
-                        {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed" inside/>:
+                        {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
                         <React.Fragment>
                             {!requestLoaded ?
                                 <div className='loading-icon'>

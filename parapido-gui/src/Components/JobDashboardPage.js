@@ -1,11 +1,10 @@
-import {Component, createRef} from 'react';
+import {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/JobDashboard.css"
-import "../Layouts/JobDashboardCard.css";
 import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown.js";
-import FilterListIcon from '@material-ui/icons/FilterList';
-import JobDashboardCard from './JobDashboardCard';
+import JobDashboardCard from "./JobDashboardCard";
+import FilterListIcon from "@material-ui/icons/FilterList";
+
 import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
@@ -90,7 +89,7 @@ class JobDashboardPage extends Component {
         if(price !== '' && price !== '0'){
             if(filterResult.length === 1){
                 if(price === '1'){
-                    price = `maxPrice=20`;
+                    price = `maxPrice=19`;
                 }
                 else if(price === '2'){
                     price = `minPrice=20&maxPrice=40`;
@@ -102,7 +101,7 @@ class JobDashboardPage extends Component {
                     price = `minPrice=70&maxPrice=100`;
                 }
                 else if(price === '5'){
-                    price = `minPrice=100`;
+                    price = `minPrice=101`;
                 }
 
                 filterResult += price
@@ -121,7 +120,7 @@ class JobDashboardPage extends Component {
                     price = `&minPrice=70&maxPrice=100`;
                 }
                 else if(price === '5'){
-                    price = `&minPrice=100`;
+                    price = `&minPrice=101`;
                 }
 
                 filterResult += price
@@ -180,7 +179,7 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        <h1 className="job-dashboard-page-header">Job Dashboard
+                        <h1 className="page-title-header">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
                                 <button className="create-job-button-job-dashboard">
@@ -193,30 +192,29 @@ class JobDashboardPage extends Component {
                         </h1>
 
                         <div className="first-flex-container-job-dashboard-page">
-                            <div className = "label-job-dashboard">
-                                <ItemsDropdown
-                                    ref={change_category}
-                                    itemsList={categories}
-                                    label='Categories'
-                                />
-                            </div>
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_category}
+                                itemsList={categories}
+                                label='Categories'
+                            />
 
-                            <div className = "label-job-dashboard">
-                                <ItemsDropdown
-                                    ref={change_price}
-                                    itemsList={prices}
-                                    label='Prices'
-                                />
-                            </div>
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_price}
+                                itemsList={prices}
+                                label='Prices'
+                            />
 
-                            <div className = "label-job-dashboard">
-                                <ItemsDropdown
-                                    ref={change_city}
-                                    itemsList={cities}
-                                    label='Cities'
-                                />
-                            </div>
-
+                            <ItemsDropdown
+                                cormorantlabel
+                                lineheightstyle="2.5"
+                                ref={change_city}
+                                itemsList={cities}
+                                label='Cities'
+                            />
 
                             <button className="filter-button-job-dashboard" onClick={this.clickFilter}>
                                 <div className="text-button-job-dashboard">

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import MyJobsCard from './myJobsDashboardPageCard';
+import React, { Component } from "react";
 import {accountType, getQueryParams, jobStatus} from "../Utilities";
-import Alert from '@material-ui/lab/Alert';
+import MyJobsCard from "./myJobsDashboardPageCard";
+import Alert from "@material-ui/lab/Alert";
 import ErrorPage from "./ErrorPage";
 
 class myJobsDashboardPage extends Component {

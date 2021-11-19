@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import '../Layouts/myJobsDashboardCard.css';
+import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import jobsposted from "../Static/Images/JobPosted.svg";
 import jobsrequested from "../Static/Images/JobRequest.svg";
 import jobsinprogress from "../Static/Images/JobIn-Progress.svg";
 import jobscompleted from "../Static/Images/JobCompleted.svg";
 import {getQueryParams} from "../Utilities";
-
 
 class myJobsDashboardPageCard extends Component {
     queryParams = ''
