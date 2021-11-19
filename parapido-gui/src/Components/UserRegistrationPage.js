@@ -1,11 +1,18 @@
-import React, {Component} from 'react';
-import {Button, FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGroup} from "@material-ui/core";
-import "../Layouts/UserRegistrationPage.css";
-import Input from "./Input";
-import ItemsDropdown from "./ItemsDropdown";
-import {securityQuestions} from "../Utilities"
-import Alert from '@material-ui/lab/Alert';
+import React, {Component} from "react";
 import {Redirect} from "react-router-dom";
+import {
+    Button,
+    FormControl,
+    FormControlLabel,
+    FormHelperText,
+    FormLabel,
+    Radio,
+    RadioGroup,
+    TextField
+} from "@material-ui/core";
+import SecurityQuestionDropdown from "./SecurityQuestionDropdown";
+import Alert from '@material-ui/lab/Alert';
+import "../Layouts/UserRegistrationPage.css";
 
 const accountTypeStyle = {
     position: "absolute",

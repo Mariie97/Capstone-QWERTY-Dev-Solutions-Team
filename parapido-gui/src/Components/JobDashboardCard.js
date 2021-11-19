@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import '../Layouts/JobDashboardCard.css';
+import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import {cities} from "../Utilities";
 import ReactTooltip from 'react-tooltip';

@@ -1,7 +1,10 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import React from "react";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {withCookies} from "react-cookie";
-import LandingPage from "./Components/LandingPage"
+
+// Pages imports
+
+import LandingPage from "./Components/LandingPage";
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
 import NavBar from './Components/NavBar';
@@ -19,6 +22,28 @@ import ErrorPage from './Components/ErrorPage';
 import "./Layouts/ErrorPage.css";
 
 
+
+// CSS imports
+
+import "./Layouts/AdministrationPage.css";
+import "./Layouts/AgreementModal.css";
+import "./Layouts/JobCreation.css";
+import "./Layouts/ChatPage.css";
+import "./Layouts/InputField.css";
+import "./Layouts/JobCreation.css";
+import "./Layouts/ItemsDropdown.css";
+import "./Layouts/JobDashboard.css";
+import "./Layouts/JobDashboardCard.css";
+import "./Layouts/LandingPage.css";
+import "./Layouts/LoginModal.css";
+import "./Layouts/NavBar.css";
+import "./Layouts/myJobsDashboardCard.css";
+import "./Layouts/ProfileCard.css";
+import "./Layouts/ProfilePage.css";
+import "./Layouts/RequestsPage.css";
+import "./Layouts/SecurityQuestionsPage.css";
+import "./Layouts/Fonts.css";
+import "./Layouts/ReusableCode.css";
 
 class App extends React.Component {
 

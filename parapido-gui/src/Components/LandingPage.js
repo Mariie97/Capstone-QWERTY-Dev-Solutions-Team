@@ -1,12 +1,11 @@
 import React, {Component} from "react";
 import {Link, Redirect} from "react-router-dom";
-import "../Layouts/LandingPage.css";
 import {verifyUserAuth} from "../Utilities";
-import logo from "../Static/Images/Pa_RapidoLogo.png";
-import studentLandingPage from "../Static/Images/Student_LandingPage.png";
-import EmailIcon from '@material-ui/icons/Mail';
 import LoginModal from './LoginModal';
-import Alert from '@material-ui/lab/Alert';
+import Logo from "../Static/Images/PaRapidoLogo.png";
+import StudentLandingPage from "../Static/Images/StudentLandingPage.png";
+import EmailIcon from "@material-ui/icons/Mail";
+import Alert from "@material-ui/lab/Alert";
 
 class LandingPage extends Component {
 
@@ -66,14 +65,14 @@ class LandingPage extends Component {
 			<div>
 				{is_auth && <Redirect to='/jobdashboard' />}
 				{psswordChangedSuccesfully && <LoginModal isOpen={this.state.showLogin} toggle={this.showLoginModal} />}
-				<img src={studentLandingPage} alt="Landing page" style={studentimage} />
+				<img src={StudentLandingPage} alt="Landing page" style={studentimage} />
 				<div className="landing-nav">
-					<img className="logostyle" src={logo} alt="Logo" />
+					<img className="logostyle" src={Logo} alt="Logo" />
 					<ul className="landing-nav-links">
 						<li className="mini-flex-contactus">
 							<div style={contactuslink}>Contact Us</div>
 							<EmailIcon style={mail}/>
-							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="parapido-email"> parapidopr@gmail.com</a>
+							<a href="mailTo:parapidopr@gmail.com?subject=Contact Support&body=HI!! :) we will come back to you as soon as possible!!!!"  id="small-urls"> parapidopr@gmail.com</a>
 						</li>
 						<li>
 							<div id="link" onClick={this.showLoginModal} >Login</div>

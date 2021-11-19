@@ -1,21 +1,18 @@
-import React, {Component} from 'react';
-import '../Layouts/ProfileCard.css';
-import defaultPicture from '../Static/Images/defaultprofilepicture.svg';
-import school_bag from '../Static/Images/school_bag_transparentbg.png';
-import _employer from '../Static/Images/employer.png';
-import _admin from '../Static/Images/admin.png';
-import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
-import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
-import StarIcon from '@material-ui/icons/Star';
+import React, {Component} from "react";
 import {Link} from "react-router-dom";
 import {accountType, mapAccount} from "../Utilities";
-
+import DefaultProfilePicture from "../Static/Images/DefaultProfilePicture.svg";
+import SchoolBag from "../Static/Images/SchoolBag.png";
+import Employer from "../Static/Images/Employer.png";
+import Admin from "../Static/Images/Admin.png";
+import DeleteTwoTone from "@material-ui/icons/DeleteForeverTwoTone";
+import ThumbsUpDownIcon from "@material-ui/icons/ThumbsUpDown";
+import StarIcon from "@material-ui/icons/Star";
 
 class ProfileCard extends Component {
-
     render() {
         const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
-        const profile_pic = image!==null ? image : defaultPicture;
+        const profile_pic = image!==null ? image : DefaultProfilePicture;
 
         return (
             <div className='profile-card-container'>
@@ -38,9 +35,9 @@ class ProfileCard extends Component {
                             </li>
                             {type!==undefined &&
                             <div className= "top-profile-card-lettering">
-                                {type === accountType.student ? <img src= {school_bag} alt="school bag" style={student}/>
-                                    : type=== accountType.client ? <img src= {_employer} alt="client" style={client}/>
-                                        :<img src= {_admin} alt="admin" style={admin}/>}
+                                {type === accountType.student ? <img src= {SchoolBag} alt="school bag" style={student}/>
+                                    : type=== accountType.client ? <img src= {Employer} alt="client" style={client}/>
+                                        :<img src= {Admin} alt="admin" style={admin}/>}
                                 <p>{mapAccount[type]}</p>
                             </div>
                             }

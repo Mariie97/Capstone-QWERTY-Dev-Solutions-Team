@@ -3,15 +3,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: white;
-}
-
-.main-container-inside-error-page{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     height: 89vh;
     background-color: white;
     position: relative;
@@ -46,18 +37,6 @@
 }
 
 .footer-error-page{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: absolute;
-    bottom: 3vh;
-    left: 3vh;
-    font-family: Times New Roman;
-    font-size: 2vh;
-    font-weight: 400;
-}
-
-.footer-error-inside-page {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
