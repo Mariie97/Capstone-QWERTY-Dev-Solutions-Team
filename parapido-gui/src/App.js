@@ -83,7 +83,6 @@ class App extends React.Component {
                             </React.Fragment>
                         )}
                     />
-
                     <Route
                         exact
                         path='/listings'
@@ -139,7 +138,6 @@ class App extends React.Component {
                                     cookies= {this.props.cookies}
                                     queryParams={props.location.search}
                                 />
-
                             </React.Fragment>
                         )}
                     />

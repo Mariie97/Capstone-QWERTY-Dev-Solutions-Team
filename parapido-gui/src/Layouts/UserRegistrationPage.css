@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,500&display==swap");
+
+.right-flexbox{
+	display: flex;
+	width: 35%;
+	flex-direction: column;
+	align-content: space-between;
+	flex-wrap: wrap;
+	margin-left: 5%;
+}
+
+.left-flexbox{
+	display: flex;
+	width: 40%;
+	margin-left: 10%;
+	flex-direction: column;
+	align-content: space-between;
+	flex-wrap: wrap;
+}
+
+.horizontal-flexbox1{
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.horizontal-flexbox2{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	gap: 100px;
+}
+
+.horizontal-flexbox3{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-top: 30px;
+	gap: 100px;
+}
+
+.horizontal-flexbox4{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	margin-top: 10px;
+	gap: 100px;
+}
+
+.horizontal-flexbox5{
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.outer-flexbox{
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.first-name-style{
+	width: 100%;
+}
+
+.last-name-style{
+	width: 100%;
+}
+
+.email-style{
+	width: 50%;
+}
+
+.password-style{
+	width: 50%;
+}
+
+.confirm-password-style{
+	width: 50%;
+}
+
+.answer-one-style{
+	width: 50%;
+}
+
+.answer-two-style{
+	width: 50%;
+}
+
+.page-header {
+	font-family: "Jost";
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 60px;
+	text-align: left;
+	color: white;
+	border-bottom: 1px solid white;
+	width: 700px;
+	padding-bottom: 20px;
+	margin: 0 auto 20px 65px;
+}
