@@ -9,7 +9,7 @@
 	box-sizing: border-box;
 }
 
-/*small urls style */
+/* small urls style */
 
 #small-urls {
 	color: #ffebcc;
@@ -17,5 +17,19 @@
 }
 
 #small-urls:hover {
+	color: black;
+}
+
+/* empty list message */
+
+.empty-list-subheader {
+    font-family: "Jost";
+}
+
+.white {
+	color: white;
+}
+
+.black{
 	color: black;
 }

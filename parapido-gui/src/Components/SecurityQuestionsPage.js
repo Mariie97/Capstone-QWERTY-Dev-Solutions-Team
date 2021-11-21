@@ -242,7 +242,7 @@ class SecurityQuestionsPage extends Component {
                 <div className='header-flex-container'>
                     <h1 className="page-title-header white-title">Account Recovery</h1>
                 </div>
-                <h2 className='security-page-subheader'>Security Questions:</h2>
+                <h2 className='empty-list-subheader white' style={{marginBottom: "15px", textAlign:"center"}}>Security Questions:</h2>
 
                 <div className='security-body-flex-container'>
                     <Input
