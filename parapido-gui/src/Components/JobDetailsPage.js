@@ -302,7 +302,7 @@ class JobDetailsPage extends Component {
                                 </Link>
                                 }
                             </div>
-                            <h1 className="page-title-header">{job.title}</h1>
+                            <h1 className="page-title-header white-title">{job.title}</h1>
                         </div>
                         <div className = "parent-table-body-container">
                             <div className="child1-flex-body-container">

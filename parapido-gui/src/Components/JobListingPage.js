@@ -175,10 +175,10 @@ class JobListingPage extends Component {
 
                     <div className={"list-flexbox"}>
 
-                        {this.state.userAccountType === 1 && this.status === '1' && <div className="job-listing-page-header"> Jobs Requested </div>}
-                        {this.state.userAccountType === 2 && this.status === '1' && <div className="job-listing-page-header"> Jobs Posted </div>}
-                        {this.status === '2' && <div className="job-listing-page-header"> Jobs In-Progress </div>}
-                        {this.status === '3' && <div className="job-listing-page-header"> Jobs Completed </div>}
+                        {this.state.userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
+                        {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
+                        {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
+                        {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
                         {this.state.listIsEmpty && <h2 className="empty-list-msg"> No jobs available </h2>}
 
 

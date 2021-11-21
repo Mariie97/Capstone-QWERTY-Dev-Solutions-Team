@@ -1,18 +1,3 @@
-#listing-title {
-    width: 18%;
-    position: absolute;
-    margin-left: 0%;
-    color: aliceblue;
-    padding: 17px;
-    text-align: left;
-    vertical-align: middle;
-    height: 60px;
-    align-self: center;
-    align-content: center;
-    justify-content: center;
-
-}
-
 .titleLink {
   color: aliceblue;
 }

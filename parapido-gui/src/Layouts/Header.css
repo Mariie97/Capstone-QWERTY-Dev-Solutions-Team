@@ -9,12 +9,25 @@
     letter-spacing: 1px;
     font-size: 60px;
     text-align: center;
-    color: white;
-    border-bottom: 1px solid white;
     margin: 0 auto 25px;
     padding: 0 60px 5px 60px;
     width: fit-content;
     max-width: 95vw;
+    
+}
+
+.black-title{
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+.white-title{
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.left-position-title{
+    margin-left: 55px;
 }
 
 .button-flex-container {

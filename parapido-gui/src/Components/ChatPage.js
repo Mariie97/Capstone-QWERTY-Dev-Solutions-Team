@@ -209,7 +209,7 @@ class ChatApp extends Component {
                             View Job
                           </Link>
                         </div>
-                        <h1 className="page-title-header">Chat: {this.job_title} </h1>
+                        <h1 className="page-title-header white-title">Chat: {this.job_title} </h1>
                       </div>
                       <div className='chat-flex-container'>
                         <div className="chat-window">

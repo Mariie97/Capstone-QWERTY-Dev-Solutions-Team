@@ -240,7 +240,7 @@ class SecurityQuestionsPage extends Component {
                 }
 
                 <div className='header-flex-container'>
-                    <h1 className="page-title-header">Account Recovery</h1>
+                    <h1 className="page-title-header white-title">Account Recovery</h1>
                 </div>
                 <h2 className='security-page-subheader'>Security Questions:</h2>
 

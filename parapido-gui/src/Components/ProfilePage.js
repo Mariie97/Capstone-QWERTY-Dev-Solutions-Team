@@ -167,7 +167,7 @@ class ProfilePage extends Component {
                                 }
                             </div>
                             }
-                            <h1 className="page-title-header">{first_name} {last_name}</h1>
+                            <h1 className="page-title-header white-title">{first_name} {last_name}</h1>
                         </div>
                         <div className = "parent-table-body-container">
                             <div className="child1-flex-body-container">

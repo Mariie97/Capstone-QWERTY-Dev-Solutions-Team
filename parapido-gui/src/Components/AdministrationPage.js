@@ -211,7 +211,7 @@ class AdministrationPage extends Component {
                             {alert.msg}
                         </Alert>
                         }
-                        <h1 className="page-title-header">
+                        <h1 className="page-title-header white-title">
                             Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
                         </h1>
                         <div className = "administration-body-container">

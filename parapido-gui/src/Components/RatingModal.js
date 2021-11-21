@@ -36,11 +36,9 @@ class RatingModal extends Component {
                     onClose={this.props.handleClose}
                 >
                     <Backdrop open={this.props.open} style={backdropStyle}>
-
                         <div className={"modalTextStyle"}>
                             Rate this Job:
                         </div>
-
                         <ItemsDropdown
                             blackLabel
                             initial_value={''}
@@ -49,14 +47,9 @@ class RatingModal extends Component {
                             itemsList={this.ratings}
                             label='Rating'
                         />
-
-
                         <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>
-
                     </Backdrop>
-
                 </Modal>
-
             </div>
         )
     }

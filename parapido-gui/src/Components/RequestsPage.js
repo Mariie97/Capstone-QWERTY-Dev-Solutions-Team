@@ -116,7 +116,7 @@ class RequestsPage extends Component {
                                 </div>:
                                 <div>
                                     <div className='header-flex-container'>
-                                            <h1 className="page-title-header">Student's Requests</h1>
+                                            <h1 className="page-title-header white-title">Student's Requests</h1>
                                     </div>     
                                     <div className='student-requests-flex-container'>
                                             {requestsList.length === 0 ? <h2 className='request-page-subheader'>No requests available</h2> :

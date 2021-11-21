@@ -170,7 +170,7 @@ export class JobCreation extends Component {
                     {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
                         Sorry can't create job right now 😔 please try again later!!!
                     </Alert>}
-                    <h1 className="page-title-header"> Job Creation </h1>
+                    <h1 className="page-title-header white-title"> Job Creation </h1>
 
                     <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                         <div className="left-body-container-1-job-creation">
