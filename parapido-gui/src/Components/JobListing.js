@@ -18,21 +18,21 @@ const listing = (props) => {
                     <Link to = {"/job/" + props.job_id} className = "titleLink"><div> {props.price} </div></Link>
                     <Link to = {"/job/" + props.job_id} className = "titleLink"><Chip label = {props.category} style = {chipStyleJobDetails}/></Link>
                     <Link to = {"/job/" + props.job_id} className = "titleLink"><div> {props.date_posted} </div></Link>
-            { props.status === '2' &&
-            <div>
-                        <IconButton>
-                            <ThumbUpIcon
-                                sx={{ color: blue[100],
-                                    fontSize: 25,
-                                }}
-                                onClick={props.onClickRate}
-                            />
-                        </IconButton>
-                            </div>
-            }
-
-            { (props.status === '1' || props.status === '2') &&
+                    { props.status === '2' &&
                         <div>
+                                <IconButton>
+                                    <ThumbUpIcon
+                                        sx={{ color: blue[100],
+                                            fontSize: 25,
+                                        }}
+                                        onClick={props.onClickRate}
+                                    />
+                                </IconButton>
+                        </div>
+                    }
+
+                    { (props.status === '1' || props.status === '2') &&
+                            <div>
                                 <IconButton aria-label="delete" color="error">
                                     <DeleteIcon
                                         onClick={props.deleteListing}
@@ -43,11 +43,8 @@ const listing = (props) => {
                                     />
                                 </IconButton>
                             </div>
-                        }
+                    }
             </Box>
-            
-
-  
     )
 }
 

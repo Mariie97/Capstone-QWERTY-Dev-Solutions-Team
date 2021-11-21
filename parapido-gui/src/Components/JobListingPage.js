@@ -169,16 +169,14 @@ class JobListingPage extends Component {
                     ratingRef = {this.state.ratingRef}
                     cookies = {this.props.cookies}
                     setAlert={this.setAlert}
-                />
+                />      
+                {this.state.userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
+                {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
+                {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
+                {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
+                   
+                    <div>
 
-                <div className={"outer-div"}>
-
-                    <div className={"list-flexbox"}>
-
-                        {this.state.userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
-                        {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
-                        {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
-                        {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
                         {this.state.listIsEmpty && <h2 className="empty-list-msg"> No jobs available </h2>}
 
 
@@ -229,7 +227,7 @@ class JobListingPage extends Component {
                         {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
 
                     </div>
-                </div>
+           
             </div>
         );
     };
