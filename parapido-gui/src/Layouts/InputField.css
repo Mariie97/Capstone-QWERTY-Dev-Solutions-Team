@@ -19,6 +19,10 @@
     text-overflow: ellipsis;
 }
 
+.MuiFilledInput-root .MuiFilledInput-input:focus{
+    background-color:#FFEBCC;
+}
+
 .MuiFilledInput-root.MuiFilledInput-multiline,
 .MuiFilledInput-root.MuiFilledInput-multiline.Mui-focused {
     background-color: white;

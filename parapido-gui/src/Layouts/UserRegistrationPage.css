@@ -14,6 +14,7 @@
 	flex-direction: column;
 	align-content: space-between;
 	flex-wrap: wrap;
+	margin-top: 46.0px;
 }
 
 .horizontal-flexbox1{
@@ -40,7 +41,6 @@
 	flex-direction: column;
 	justify-content: flex-start;
 	flex-wrap: wrap;
-	margin-top: 30px;
 	gap: 100px;
 }
 
@@ -116,7 +116,7 @@
 	border: 2px solid black;
 	border-radius: 20px;
 	background: rgb(255, 235, 204) none repeat scroll 0% 0%;
-	font-family: "Times New Roman";
+	font-family: "Jost";
 	font-weight: lighter;
 	font-size: 20px;
 	letter-spacing: 1px;
@@ -133,3 +133,4 @@
 .create-button-style:active{
 	background-color: green;
 }
+

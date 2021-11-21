@@ -52,7 +52,8 @@ class myJobsDashboardPage extends Component {
         const is_admin = this.currentUser.type === accountType.admin;
         const {alertMssg, severity} = this.state
         const { user_id } = this.props;
-
+        console.log(Number(this.queryParams.get('account')) === accountType.client)
+    
         return (
             <div>
                 {is_admin && this.queryParams.get('account')===null ?
@@ -64,7 +65,7 @@ class myJobsDashboardPage extends Component {
                         </Alert>}
                         <div className="myjobs-card-general-style">
                             <div className="myjobs-card-container">
-                                {(is_client || (is_admin && this.queryParams.get('account')==accountType.client)) &&
+                                {(is_client || (is_admin && Number(this.queryParams.get('account')) === accountType.client)) &&
                                 <MyJobsCard
                                     title="Posted Jobs"
                                     imgtype="1"
@@ -73,7 +74,7 @@ class myJobsDashboardPage extends Component {
                                     user_id={user_id}
                                 />
                                 }
-                                {(is_student || (is_admin && this.queryParams.get('account')==accountType.student)) &&
+                                {(is_student || (is_admin && Number(this.queryParams.get('account')) === accountType.student)) &&
                                 <MyJobsCard
                                     title="Requested Jobs"
                                     imgtype="2"
