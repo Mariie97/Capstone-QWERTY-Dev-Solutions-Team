@@ -3,14 +3,19 @@
     flex-direction: row;
     gap: 20vh;
     height: 70vh;
-    background-color: blanchedalmond;
 }
 
-.filters-flexbox{
+.left-items-listings{
+    display: flex;
+    flex-direction: column;
+    gap: 20vh;
+    margin-left: 55px;
+}
+
+.filters-flex-listings{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%;
     justify-content:flex-start;
     column-gap: 50px;
 }
@@ -19,6 +24,7 @@
 #picture-style{
     width: 100px;
     height: 100px;
+    align-self: center;
 }
 
 

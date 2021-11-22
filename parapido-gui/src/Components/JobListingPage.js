@@ -1,13 +1,13 @@
 import React, {Component, createRef} from "react";
-import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
-import { Button} from "@material-ui/core";
+import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth, years, months} from "../Utilities";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import ItemsDropdown from "./ItemsDropdown";
+import {Button} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import JobCompleted_listings from "../Static/Images/JobCompletedBlue.svg"
-import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg"
-import JobPosted_listings from "../Static/Images/JobPostedBlue.svg"
+import JobCompleted_listings from "../Static/Images/JobCompletedBlue.svg";
+import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg";
+import JobPosted_listings from "../Static/Images/JobPostedBlue.svg";
 import JobRequested_listings from "../Static/Images/JobRequestedBlue.svg"
 
 class JobListingPage extends Component {
@@ -20,6 +20,7 @@ class JobListingPage extends Component {
         this.status = queryParams.get('status');
         const userType = parseInt(localStorage.getItem('type'));
         this.state = {
+            entitiesLoaded: false,
             listings: [],
             rating: 1,
             ratingRef: createRef(),
@@ -51,6 +52,9 @@ class JobListingPage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
         this.fetchList();
+        this.setState({
+            entitiesLoaded: true
+        })
     }
 
     token = this.props.cookies.get('csrf_access_token');
@@ -121,39 +125,13 @@ class JobListingPage extends Component {
         this.setState({open: false})
     }
 
-    years = [
-        '2021',
-        '2022',
-        '2023',
-        '2024',
-        '2025',
-        '2026',
-        '2027',
-        '2028'
-    ];
-
-    months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
-
     hideAlert() {
         setTimeout(() => {this.setState({
             alert: {msg: undefined}})}, 3000);
     }
 
     render(){
-        const { alert } = this.state;
+        const { alert} = this.state;
         return (
             <div>
                 {alert.msg !== undefined &&
@@ -174,52 +152,54 @@ class JobListingPage extends Component {
                 {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
                 {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
                 {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
-                {this.state.listIsEmpty && <h2 className="empty-list-subheader black"> No jobs available </h2>}
+                
                 <div className="main-listing-flex">
-                    <div>   
-                        {!this.state.listIsEmpty &&
-                        <div>
-                            {
-                                this.state.listings.map((listing, index) => {
-                                    let listingIndex = index
-                                    return <JobListing
-                                        price={listing.price} date_posted={listing.date_posted}
-                                        title={listing.title} category={listing.categories}
-                                        key={listing.id} job_id={listing.job_id} status={this.status}
-                                        deleteListing={this.deleteListing.bind(this, listingIndex)}
-                                        onClickRate={this.onClickRate.bind(this, listingIndex)}
-                                    />
-                                })
+                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px'}}> No jobs available </h2>:
+                    <React.Fragment>
+                         <div className={"left-items-listings"}>
+                            <div className={"filters-flex-listings"}>
+                                <ItemsDropdown
+                                    blackLabel
+                                    ref={this.state.yearRef}
+                                    validate={false}
+                                    itemsList={years}
+                                    label='Year'
+                                />
+                                <ItemsDropdown
+                                    blackLabel
+                                    ref={this.state.monthRef}
+                                    validate={false}
+                                    itemsList={months}
+                                    label='Month'
+                                />
+                                <Button onClick={this.fetchList}>
+                                    Filter
+                                </Button>       
+                            </div>
+                            {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
+                            {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
+                            {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
+                            {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
+                        </div>
+                        <div>   
+                            {!this.state.listIsEmpty &&
+                            <div>
+                                {
+                                    this.state.listings.map((listing, index) => {
+                                        let listingIndex = index
+                                        return <JobListing
+                                            price={listing.price} date_posted={listing.date_posted}
+                                            title={listing.title} category={listing.categories}
+                                            key={listing.id} job_id={listing.job_id} status={this.status}
+                                            deleteListing={this.deleteListing.bind(this, listingIndex)}
+                                            onClickRate={this.onClickRate.bind(this, listingIndex)}
+                                        />
+                                    })
+                                }
+                            </div>
                             }
                         </div>
-                        }
-                    </div>
-                    <div>
-                        <div className={"filters-flexbox"}>
-                            <ItemsDropdown
-                                blackLabel
-                                ref={this.state.yearRef}
-                                validate={false}
-                                itemsList={this.years}
-                                label='Year'
-                            />
-                            <ItemsDropdown
-                                blackLabel
-                                ref={this.state.monthRef}
-                                validate={false}
-                                itemsList={this.months}
-                                label='Month'
-                            />
-                            <Button onClick={this.fetchList}>
-                                Filter
-                            </Button>
-                            
-                        </div>
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
-                    </div>
+                    </React.Fragment>}
                 </div>
             </div>
         );
@@ -291,6 +271,5 @@ class JobListingPage extends Component {
         }
     }
 }
-
 
 export default JobListingPage;
