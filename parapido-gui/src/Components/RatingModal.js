@@ -15,10 +15,9 @@ class RatingModal extends Component {
 
         this.changeRating = this.changeRating.bind(this);
         this.handleRate = this.handleRate.bind(this);
-
     }
+    
     render() {
-
         return (
             <div>
                 <Modal

@@ -44,3 +44,12 @@
     background-color: #FFEBCC;
     border: 2px black solid;
 }
+
+#rate-button:hover{
+    color:white;
+}
+
+
+#rate-button:active{
+    background-color: green;
+}
