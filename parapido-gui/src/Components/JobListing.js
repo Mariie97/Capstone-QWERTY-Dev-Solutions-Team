@@ -5,6 +5,29 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import {Box, Chip, IconButton} from "@material-ui/core";
 
+const boxSX = {
+    overflow:'none',
+    display: 'flex',
+    alignItems: 'center',
+    alignContent:'center',
+    flexWrap: 'wrap',
+    height: "6vh",
+    backgroundColor: '#2F2D4A',
+    borderRadius: 20,
+    border: 2,
+    borderColor: 'black',
+    '&:hover': {
+        backgroundColor: '#2F2D8F',
+        opacity: [0.9, 0.8, 0.7],
+    },
+    justifyContent:'space-evenly',
+    gap:'2vh',
+    marginLeft: '52px',
+    width:'80vh',
+    fontFamily: 'Jost',
+    fontSize: '14px'
+}
+
 const listing = (props) => {
     return(        
                 <Box
@@ -47,29 +70,6 @@ const listing = (props) => {
     )
 }
 
-const boxSX = {
-    overflow:'none',
-    display: 'flex',
-    alignItems: 'center',
-    alignContent:'center',
-    flexWrap: 'wrap',
-    height: "6vh",
-    backgroundColor: '#2F2D4A',
-    borderRadius: 20,
-    border: 2,
-    borderColor: 'black',
-    '&:hover': {
-        backgroundColor: '#2F2D8F',
-        opacity: [0.9, 0.8, 0.7],
-    },
-    justifyContent:'space-evenly',
-    gap:'2vh',
-    marginLeft: '52px',
-    width:'80vh',
-    fontFamily: 'Jost',
-    fontSize: '14px'
-}
-
 const chipStyleJobDetails = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
@@ -80,5 +80,4 @@ const chipStyleJobDetails = {
     marginRight: '5px',
     cursor:"pointer"
 }
-
 export default listing;
