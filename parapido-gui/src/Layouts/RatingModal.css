@@ -1,39 +1,3 @@
-#rating-dropdown {
-    color: black;
-    background-color: white;
-    width: 15vh;
-    height: 2vh;
-    font-family: "Jost";
-    font-size: 25px;
-    text-align: center;
-    line-height: 25px;
-}
-
-.modalTextStyle {
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    font-family: Jost;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 32px;
-    line-height: 27px;
-    color: black;
-    align-self: flex-start;
-}
-
-.modalTextBackgroundStyle {
-    position: absolute;
-    width: 500px;
-    line-height: 27px;
-    background-color: #91eb8f;
-}
-
-.menuItemStyle{
-    text-align: center;
-    font-size: 15px;
-}
-
 #rate-button {
     width: 60px;
     height: 40px;
