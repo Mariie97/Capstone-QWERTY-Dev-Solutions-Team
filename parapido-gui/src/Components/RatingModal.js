@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {ratings} from "../Utilities";
 import {Backdrop, Modal} from "@material-ui/core";
-import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
 
 class RatingModal extends Component {
