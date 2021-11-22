@@ -10,6 +10,7 @@ import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg";
 import JobPosted_listings from "../Static/Images/JobPostedBlue.svg";
 import JobRequested_listings from "../Static/Images/JobRequestedBlue.svg"
 import {Box, CircularProgress} from "@material-ui/core";
+import {Redirect} from "react-router-dom";
 
 class JobListingPage extends Component {
     status = undefined;
@@ -21,6 +22,7 @@ class JobListingPage extends Component {
         this.status = queryParams.get('status');
         const userType = parseInt(localStorage.getItem('type'));
         this.state = {
+            is_auth: true,
             entitiesLoaded: false,
             listings: [],
             rating: 1,
@@ -129,9 +131,11 @@ class JobListingPage extends Component {
     }
 
     render(){
-        const { alert} = this.state;
+        const { alert, user_id, is_auth} = this.state;
+
         return (
             <div>
+                {!is_auth && <Redirect to='/' /> }
                 {alert.msg !== undefined &&
                 <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
                     {alert.msg}</Alert>

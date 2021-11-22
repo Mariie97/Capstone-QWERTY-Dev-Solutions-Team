@@ -116,6 +116,7 @@ class App extends React.Component {
                                 <NavBar  cookies={this.props.cookies} />
                                 <MyJobsPage
                                     {...props}
+                                    cookies={this.props.cookies}
                                     user_id={props.match.params.user_id}
                                     queryParams={props.location.search}
                                 />
