@@ -18,19 +18,14 @@
 	display: flex;
 	flex-direction: row;
 	color: white;
-
-	/* testing purposes*/
-	/* background-color: crimson; */
 }
 
 /* each item on the navbar except the logo*/
 
 .landing-nav-links {
 	display: block;
-
 	/* testing purposes */
 	/* background-color: turquoise; */
-
 	position: relative;
 	width: 100%;
 	display: flex;
@@ -95,7 +90,6 @@
 	font-family: "Times New Roman";
 	font-size: 16px;
 	width: 540px;
-
 	/* border: solid 1px #ccc; */
 	text-align: justify;
 	word-break: break-word;
@@ -106,33 +100,3 @@
 	line-height: 22px;
 }
 
-/* landing page button */
-
-.button-landing {
-	display: inline-block;
-	padding-right: 45px;
-	padding-left: 45px;
-	padding-top: 14px;
-	padding-bottom: 14px;
-	margin: 0.1em;
-	border: 0.2em solid black;
-	box-sizing: border-box;
-	text-decoration: none;
-	font-family: "Jost";
-	font-weight: bold;
-	font-size: 20px;
-	color: black;
-	background-color: #ffebcc;
-	text-align: center;
-	position: relative;
-	top: 540px;
-	left: 600px;
-}
-
-.button-landing:hover {
-	border-color: white;
-}
-
-.button-landing:active {
-	background-color: #2e856e;
-}

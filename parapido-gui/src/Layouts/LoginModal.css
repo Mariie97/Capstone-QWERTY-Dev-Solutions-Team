@@ -49,26 +49,6 @@
     width: 95%; 
 }
 
-/* button */
-
-.login-modal-continue-button{
-    width: 95%;
-    margin-top: 35px;
-    padding-bottom: 20px;
-    background-color: #FFEBCC;
-    border: 2px solid #FFEBCC;
-    border-radius: 10px;
-}
-
-.login-modal-continue-button:hover{
-    cursor: pointer;
-    border: 2px solid black;  
-}
-
-.login-modal-continue-button:active {
-	background-color: #2e856e;
-}
-
 .text-button-login-modal{
     float: left;
     position: relative;

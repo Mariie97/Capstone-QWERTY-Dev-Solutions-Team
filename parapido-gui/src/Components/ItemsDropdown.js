@@ -13,7 +13,7 @@ class ItemsDropdown extends Component {
             itemError: undefined,
         };
 
-        //event method - before render method
+        // event method - before render method
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
 
         // validation method - end of render method

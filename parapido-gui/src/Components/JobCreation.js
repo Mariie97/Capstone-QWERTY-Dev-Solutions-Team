@@ -303,7 +303,6 @@ export class JobCreation extends Component {
     }
 
     // validation methods
-
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({titleError: "This field is required" })

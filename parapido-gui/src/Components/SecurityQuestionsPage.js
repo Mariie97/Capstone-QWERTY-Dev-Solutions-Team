@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
 class SecurityQuestionsPage extends Component {
+
     constructor(props){
         super(props);
         this.state={
@@ -34,7 +35,6 @@ class SecurityQuestionsPage extends Component {
             serverDown: false
         };
     }
-
 
     componentDidMount() {
         document.body.style.backgroundColor = "#2F2D4A"

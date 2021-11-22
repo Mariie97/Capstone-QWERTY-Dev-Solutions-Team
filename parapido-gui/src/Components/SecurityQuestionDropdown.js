@@ -12,7 +12,6 @@ const textStyle = {
     color:"#FFFFFF",
 }
 
-
 class SecurityQuestionDropdown extends Component {
 
     constructor(props){

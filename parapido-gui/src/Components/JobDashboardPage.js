@@ -233,7 +233,6 @@ class JobDashboardPage extends Component {
                             </div>}
                     </div>}
             </div>
-
         )
     }
 }

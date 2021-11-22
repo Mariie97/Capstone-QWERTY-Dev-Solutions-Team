@@ -20,9 +20,6 @@ import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
 import ErrorPage from './Components/ErrorPage';
 
-
-
-
 // CSS imports
 import "./Layouts/NavBar.css";
 import "./Layouts/ErrorPage.css";

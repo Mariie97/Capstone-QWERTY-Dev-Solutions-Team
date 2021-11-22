@@ -5,7 +5,6 @@ import ProfileCard from "./ProfileCard";
 import AgreementModal from "./AgreementModal";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
 
-
 class JobDetailsPage extends Component {
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
@@ -153,7 +152,6 @@ class JobDetailsPage extends Component {
     }
 
     render() {
-        //TODO: This must be able to show all job without considering the status?
         const {is_auth, job, pageLoaded, redirect, showAgreement, alert } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');

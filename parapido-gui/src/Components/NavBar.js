@@ -21,7 +21,7 @@ class NavBar extends Component {
         this.handleLogOut = this.handleLogOut.bind(this);
     }
 
-    //method to handle logging out
+    //method to handle logging out  
     handleLogOut() {
         fetch('/logout', {
                 method: 'POST',
