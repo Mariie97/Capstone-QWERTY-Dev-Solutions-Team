@@ -3,7 +3,6 @@ import {ratings} from "../Utilities";
 import {Backdrop, Modal} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
-import Button from "@mui/material/Button";
 
 class RatingModal extends Component {
 
@@ -16,7 +15,6 @@ class RatingModal extends Component {
         this.changeRating = this.changeRating.bind(this);
         this.handleRate = this.handleRate.bind(this);
     }
-    
     render() {
         return (
             <div>
@@ -36,7 +34,7 @@ class RatingModal extends Component {
                             itemsList={ratings}
                             label='Rating'
                         />
-                        <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>
+                        <button className="custom-small-buttons" onClick={this.handleRate}> Rate </button>
                     </Backdrop>
                 </Modal>
             </div>
