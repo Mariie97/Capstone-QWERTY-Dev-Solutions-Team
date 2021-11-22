@@ -135,7 +135,7 @@ class JobListingPage extends Component {
         return (
             <div>
                 {alert.msg !== undefined &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
                     {alert.msg}</Alert>
                 }
                 <RatingModal

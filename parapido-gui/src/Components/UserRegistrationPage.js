@@ -157,7 +157,7 @@ class UserRegistrationPage extends Component {
         return (
             <div>
                 {isFetchError &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
                     {alert.alertMssg}
                 </Alert>}
                 {registerSuccess &&

@@ -102,3 +102,16 @@
 	align-items: center;
 	height: 100%;
 }
+
+/* server error positioning and styling */
+
+.server-error{
+	position: absolute;
+	width: 100%;
+	bottom: 89.2vh;
+	border-radius: 0vh;
+	height:4%;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+}

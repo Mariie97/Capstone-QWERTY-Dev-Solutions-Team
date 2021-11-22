@@ -167,7 +167,7 @@ export class JobCreation extends Component {
                             severity: severity}
                     }}/>}
                     
-                    {!serverProcessedRequest && <Alert severity="error" className="server-error-job-creation">
+                    {!serverProcessedRequest && <Alert severity="error" className="server-error">
                         Sorry can't create job right now 😔 please try again later!!!
                     </Alert>}
                     <h1 className="page-title-header white-title"> Job Creation </h1>
@@ -205,7 +205,6 @@ export class JobCreation extends Component {
                                 errorMsg={descriptionError}
                             />
                         </div>
-
                         <div className="big-flexbox-for-3-flexbox-containers-job-creation">
                             <Input
                                 required
@@ -265,7 +264,7 @@ export class JobCreation extends Component {
                                 InputProps={{ disableUnderline: true }}
                             />
                             {priceError !== undefined &&
-                            <div className="required-field-2-job-creation">
+                            <div className="required-field-price-job-creation">
                                 <ReportProblemIcon style={report} />
                                 {priceError}
                             </div>}

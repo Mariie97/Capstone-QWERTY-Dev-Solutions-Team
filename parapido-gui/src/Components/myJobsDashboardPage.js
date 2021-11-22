@@ -60,7 +60,7 @@ class myJobsDashboardPage extends Component {
                     <ErrorPage errorNumber="400" errorType="Bad request" inside/> :
                     <React.Fragment>
                         {(alertMssg !== undefined && severity !== undefined) &&
-                        <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation">
+                        <Alert onLoad={this.hideAlert()} severity={severity} className="server-error">
                             {alertMssg}
                         </Alert>}
                         <div className="myjobs-card-general-style">

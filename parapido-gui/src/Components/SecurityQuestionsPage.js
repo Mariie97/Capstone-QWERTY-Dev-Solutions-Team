@@ -235,7 +235,7 @@ class SecurityQuestionsPage extends Component {
             <div>
                 {fetchError &&
                 <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error" className="server-error-job-creation">An error has occurred 😔, Please try again later! </Alert>
+                    <Alert severity="error" className="server-error">An error has occurred 😔, Please try again later! </Alert>
                 </Stack>
                 }
 

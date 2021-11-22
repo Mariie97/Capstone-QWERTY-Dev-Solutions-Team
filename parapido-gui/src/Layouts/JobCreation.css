@@ -149,7 +149,7 @@
 	margin-left: 3px;
 }
 
-.required-field-2-job-creation {
+.required-field-price-job-creation {
 	font-family: "Times New Roman";
 	color: #cc3300;
 	position: relative;
@@ -165,26 +165,4 @@
 	color: lightpink;
 	line-height: 0px;
 	margin-bottom: 6px;
-}
-
-.server-error-job-creation{
-	position: absolute;
-	width: 100%;
-	bottom: 89.2vh;
-	border-radius: 0vh;
-	height:4%;
-	display:flex;
-	justify-content:center;
-	align-items: center;
-}
-
-.server-error-job-creation1{
-	position: absolute;
-	width: 50%;
-	bottom: 77vh;
-	margin-left: 15vh;
-	height: 4%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }

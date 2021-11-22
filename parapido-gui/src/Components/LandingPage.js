@@ -81,7 +81,7 @@ class LandingPage extends Component {
 						</li>
 					</ul>
 				</div>
-				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation1">
+				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-landing-page">
                 {alertMssg}</Alert>} 
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
