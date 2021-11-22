@@ -11,14 +11,17 @@
 	position: relative;
 	top: 35px;
 }
+
 .grid-edit-info-item1 {
 	grid-column-start: 1;
 	grid-row-start: 2;
 }
+
 .grid-edit-info-item2 {
 	grid-column-start: 1;
 	grid-row-start: 3
 }
+
 .grid-edit-info-item3 {
 	grid-column-start: 1;
 	grid-column-end: 2;

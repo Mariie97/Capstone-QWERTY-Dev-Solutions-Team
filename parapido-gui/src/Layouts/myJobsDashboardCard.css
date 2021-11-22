@@ -25,9 +25,7 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: #2F2D4A;
-    border-bottom-left-radius: 3vh;
-    
-    
+    border-bottom-left-radius: 3vh; 
 }
 
 .myjobs-card{
@@ -111,5 +109,3 @@
     transform: rotateZ(10deg);
     transition: 300ms ease;
 }
-
-
