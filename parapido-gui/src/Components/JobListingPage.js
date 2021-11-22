@@ -76,7 +76,7 @@ class JobListingPage extends Component {
             else {
                 const state = this.state.userAccountType === accountType.student ? jobStatus.posted : jobStatus.cancelled;
                 deleteSuccess = setJobStatus(this.token, job_id, state)
-                status = 'canceled';
+                status = 'cancelled';
             }
 
             if (deleteSuccess) {
@@ -174,51 +174,52 @@ class JobListingPage extends Component {
                 {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
                 {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
                 {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
-                   
-                <div>
-                    {this.state.listIsEmpty && <h2 className="empty-list-subheader black"> No jobs available </h2>}
-                    {!this.state.listIsEmpty &&
-                    <div>
-                        {
-                            this.state.listings.map((listing, index) => {
-                                let listingIndex = index
-                                return <JobListing
-                                    price={listing.price} date_posted={listing.date_posted}
-                                    title={listing.title} category={listing.categories}
-                                    key={listing.id} job_id={listing.job_id} status={this.status}
-                                    deleteListing={this.deleteListing.bind(this, listingIndex)}
-                                    onClickRate={this.onClickRate.bind(this, listingIndex)}
-                                />
-                            })
+                {this.state.listIsEmpty && <h2 className="empty-list-subheader black"> No jobs available </h2>}
+                <div className="main-listing-flex">
+                    <div>   
+                        {!this.state.listIsEmpty &&
+                        <div>
+                            {
+                                this.state.listings.map((listing, index) => {
+                                    let listingIndex = index
+                                    return <JobListing
+                                        price={listing.price} date_posted={listing.date_posted}
+                                        title={listing.title} category={listing.categories}
+                                        key={listing.id} job_id={listing.job_id} status={this.status}
+                                        deleteListing={this.deleteListing.bind(this, listingIndex)}
+                                        onClickRate={this.onClickRate.bind(this, listingIndex)}
+                                    />
+                                })
+                            }
+                        </div>
                         }
                     </div>
-                    }
-                </div>
-                <div className={"right-flexbox"}>
-                    <div className={"filters-flexbox"}>
-                        <ItemsDropdown
-                            blackLabel
-                            ref={this.state.yearRef}
-                            validate={false}
-                            itemsList={this.years}
-                            label='Year'
-                        />
-                        <ItemsDropdown
-                            blackLabel
-                            ref={this.state.monthRef}
-                            validate={false}
-                            itemsList={this.months}
-                            label='Month'
-                        />
-
-                        <Button id={"go-back-button"} onClick={this.fetchList}>
-                            Filter
-                        </Button>
+                    <div>
+                        <div className={"filters-flexbox"}>
+                            <ItemsDropdown
+                                blackLabel
+                                ref={this.state.yearRef}
+                                validate={false}
+                                itemsList={this.years}
+                                label='Year'
+                            />
+                            <ItemsDropdown
+                                blackLabel
+                                ref={this.state.monthRef}
+                                validate={false}
+                                itemsList={this.months}
+                                label='Month'
+                            />
+                            <Button onClick={this.fetchList}>
+                                Filter
+                            </Button>
+                            
+                        </div>
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
                     </div>
-                {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
-                {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
-                {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
-                {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
                 </div>
             </div>
         );

@@ -1,17 +1,9 @@
-
-.titleLink {
-  color: aliceblue;
-}
-
-.job-listing-page-header {
-    width: 50%;
-    font-weight: bold;
-	font-size: 60px;
-	text-align: left;
-	color: black;
-	border-bottom: 2px solid black;
-    padding-bottom: 20px;
-    margin: 65px;
+.main-listing-flex{
+    display: flex;
+    flex-direction: row;
+    gap: 20vh;
+    height: 70vh;
+    background-color: blanchedalmond;
 }
 
 #go-back-button {
@@ -47,58 +39,21 @@
     top: 115px;
 }
 
-.citi-field-error {
-	color: #f44336;
-	margin-right: 14px;
-	margin-left: 14px;
-	margin-top: 3px;
-	font-size: 0.75rem;
-	font-weight: 400;
-	line-height: 1.66;
-	letter-spacing: 0.03333em;
-}
-
-.empty-list-msg {
-	font-weight: bold;
-	color: black;
-    margin: 65px;
-    top: 100px;
-}
-
-.outer-div{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.list-flexbox{
-    display: flex;
-    flex-wrap: wrap;
-    width:50%
-}
-
 .filters-flexbox{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    height: 100px;
     justify-content:flex-start;
     column-gap: 50px;
 }
 
-.right-flexbox{
-    width: 30%;
-    justify-content: space-evenly;
-    margin-top: 3%;
-}
 
 #picture-style{
     width: 100px;
     height: 100px;
-    margin-left: 5%;
-    margin-top: 100px;
 }
+
+
 
 

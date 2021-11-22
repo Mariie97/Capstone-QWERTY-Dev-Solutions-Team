@@ -73,7 +73,7 @@ class LoginModal extends Component {
             } else {
                 this.setState({
                     loginError: response.status === 401 ?
-                        'Yikes!!! 😬 Incorrect Email or Password.' :
+                        'Yikes!!! 😬 Incorrect Email or Password' :
                         <div>Sorry can not login right now 😔<br/>Please try again later!!!</div>,
                         login_success: false,
                         login_failed: true

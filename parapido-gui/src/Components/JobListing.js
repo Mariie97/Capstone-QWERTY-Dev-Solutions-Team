@@ -14,35 +14,35 @@ const listing = (props) => {
                     sx = {boxSX}
                     marginTop={5}
                 >                   
-                    <Link to = {"/job/" + props.job_id} className = "titleLink"><div> {props.title} </div></Link>
-                    <Link to = {"/job/" + props.job_id} className = "titleLink"><div> {props.price} </div></Link>
-                    <Link to = {"/job/" + props.job_id} className = "titleLink"><Chip label = {props.category} style = {chipStyleJobDetails}/></Link>
-                    <Link to = {"/job/" + props.job_id} className = "titleLink"><div> {props.date_posted} </div></Link>
+                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.title} </div></Link>
+                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.price} </div></Link>
+                    <Link to = {"/job/" + props.job_id} id = "small-urls"><Chip label = {props.category} style = {chipStyleJobDetails}/></Link>
+                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.date_posted} </div></Link>
                     { props.status === '2' &&
                         <div>
-                                <IconButton>
-                                    <ThumbUpIcon
-                                        sx={{ color: blue[100],
-                                            fontSize: 25,
-                                        }}
-                                        onClick={props.onClickRate}
-                                    />
-                                </IconButton>
+                            <IconButton>
+                                <ThumbUpIcon
+                                    sx={{ color: blue[100],
+                                        fontSize: 25,
+                                    }}
+                                    onClick={props.onClickRate}
+                                />
+                            </IconButton>
                         </div>
                     }
 
                     { (props.status === '1' || props.status === '2') &&
-                            <div>
-                                <IconButton aria-label="delete" color="error">
-                                    <DeleteIcon
-                                        onClick={props.deleteListing}
-                                        sx={{ color: red[900],
-                                            fontSize: 25,
-                                        }}
+                        <div>
+                            <IconButton aria-label="delete" color="error">
+                                <DeleteIcon
+                                    onClick={props.deleteListing}
+                                    sx={{ color: red[900],
+                                        fontSize: 25,
+                                    }}
 
-                                    />
-                                </IconButton>
-                            </div>
+                                />
+                            </IconButton>
+                        </div>
                     }
             </Box>
     )
@@ -63,10 +63,12 @@ const boxSX = {
         backgroundColor: '#2F2D8F',
         opacity: [0.9, 0.8, 0.7],
     },
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     gap:'2vh',
     marginLeft: '52px',
-    width:'80vh'
+    width:'80vh',
+    fontFamily: 'Jost',
+    fontSize: '14px'
 }
 
 const chipStyleJobDetails = {
