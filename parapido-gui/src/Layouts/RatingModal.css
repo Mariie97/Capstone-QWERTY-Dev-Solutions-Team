@@ -35,11 +35,8 @@
 }
 
 #rate-button {
-    position: absolute;
     width: 60px;
     height: 40px;
-    top: 230px;
-    left: 215px;
     font-weight: bold;
     font-size: 18px;
     text-align: center;

@@ -20,15 +20,13 @@ class RatingModal extends Component {
     render() {
 
         return (
-
             <div>
-
                 <Modal
                     open={this.props.open}
                     onClose={this.props.handleClose}
                 >
                     <Backdrop open={this.props.open} style={backdropStyle}>
-                        <div className={"modalTextStyle"}>
+                        <div>
                             Rate this Job:
                         </div>
                         <ItemsDropdown
@@ -83,13 +81,15 @@ class RatingModal extends Component {
 
 const backdropStyle = {
     display: "flex",
+    flexDirection: "column",
+    gap: "4vh",
+    justifyContent: "center",
     left: "40%",
     top: "200px",
     width: "500px",
     height: "300px",
-    position: "absolute",
     backgroundColor: "#FFFFFF",
-    border: '3px solid black',
+    border: '2px solid black',
 }
 
 
