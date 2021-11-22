@@ -4,7 +4,6 @@ import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilit
 import ItemsDropdown from "./ItemsDropdown.js";
 import JobDashboardCard from "./JobDashboardCard";
 import FilterListIcon from "@material-ui/icons/FilterList";
-
 import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
@@ -215,7 +214,6 @@ class JobDashboardPage extends Component {
                                 itemsList={cities}
                                 label='Cities'
                             />
-
                             <button className="filter-button" onClick={this.clickFilter}>
                                 <div className="text-filter-button">
                                     <FilterListIcon/>Filter

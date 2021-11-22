@@ -3,7 +3,7 @@ import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, 
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
 import ItemsDropdown from "./ItemsDropdown";
-import {Button} from "@material-ui/core";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import Alert from "@material-ui/lab/Alert";
 import JobCompleted_listings from "../Static/Images/JobCompletedBlue.svg";
 import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg";
@@ -172,9 +172,11 @@ class JobListingPage extends Component {
                                     itemsList={months}
                                     label='Month'
                                 />
-                                <Button onClick={this.fetchList}>
-                                    Filter
-                                </Button>       
+                                <button className="filter-button" onClick={this.fetchList}>
+                                    <div className="text-filter-button">
+                                        <FilterListIcon/>Filter
+                                    </div>
+                                </button>      
                             </div>
                             {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
                             {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}

@@ -291,7 +291,7 @@ class SecurityQuestionsPage extends Component {
                                 className='security-page-input'
                             />
                             <button
-                                className='custom-buttons security-page-button'
+                                className='custom-small-buttons security-page-button'
                                 id='security-submit-button'
                                 onClick={e => this.onSubmit(e)}>Submit
                             </button>
@@ -352,7 +352,7 @@ class SecurityQuestionsPage extends Component {
                                 </Stack>
                                 }     
                                 <button
-                                    className='custom-buttons security-page-button'
+                                    className='custom-small-buttons security-page-button'
                                     id='security-change-pswd-button'
                                     onClick={e => this.onSubmitPassword(e)}>Change Password
                                 </button>
