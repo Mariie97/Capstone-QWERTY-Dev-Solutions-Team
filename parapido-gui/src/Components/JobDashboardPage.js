@@ -183,7 +183,7 @@ class JobDashboardPage extends Component {
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
                                 <button className="create-job-button-job-dashboard">
-                                    <div className="text1-button-job-dashboard">
+                                    <div className="text-button-job-dashboard">
                                         Create Job
                                     </div>
                                 </button>
@@ -216,14 +216,14 @@ class JobDashboardPage extends Component {
                                 label='Cities'
                             />
 
-                            <button className="filter-button-job-dashboard" onClick={this.clickFilter}>
-                                <div className="text-button-job-dashboard">
+                            <button className="filter-button" onClick={this.clickFilter}>
+                                <div className="text-filter-button">
                                     <FilterListIcon/>Filter
                                 </div>
                             </button>
                         </div>
                         {!filterLoaded ?
-                            <div className='loading-icon1'>
+                            <div className='loading-icon-job-dashboard'>
                                 <Box sx={{display: 'flex'}}>
                                     <CircularProgress style={{alignItems:"center"}}/>
                                 </Box>

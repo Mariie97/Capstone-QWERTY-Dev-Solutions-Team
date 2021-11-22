@@ -19,33 +19,33 @@ import AdministrationPage from "./Components/AdministrationPage";
 import MyJobsPage from "./Components/myJobsDashboardPage"
 import LoginModal from "./Components/LoginModal";
 import ErrorPage from './Components/ErrorPage';
-import "./Layouts/ErrorPage.css";
+
 
 
 
 // CSS imports
-
+import "./Layouts/NavBar.css";
+import "./Layouts/ErrorPage.css";
 import "./Layouts/AdministrationPage.css";
-import "./Layouts/AgreementModal.css";
-import "./Layouts/JobCreation.css";
-import "./Layouts/ChatPage.css";
-import "./Layouts/InputField.css";
-import "./Layouts/JobCreation.css";
-import "./Layouts/ItemsDropdown.css";
-import "./Layouts/JobDashboard.css";
-import "./Layouts/JobDashboardCard.css";
 import "./Layouts/LandingPage.css";
 import "./Layouts/LoginModal.css";
-import "./Layouts/NavBar.css";
-import "./Layouts/myJobsDashboardCard.css";
-import "./Layouts/ProfileCard.css";
-import "./Layouts/ProfilePage.css";
-import "./Layouts/RequestsPage.css";
 import "./Layouts/SecurityQuestionsPage.css";
-import "./Layouts/Fonts.css";
-import "./Layouts/ReusableCode.css";
 import "./Layouts/UserRegistrationPage.css";
+import "./Layouts/JobDashboard.css";
+import "./Layouts/JobCreation.css";
+import "./Layouts/RequestsPage.css";
+import "./Layouts/AgreementModal.css";
+import "./Layouts/ChatPage.css";
+import "./Layouts/ProfilePage.css";
 import "./Layouts/JobListing.css";
+import "./Layouts/myJobsDashboardCard.css";
+import "./Layouts/JobDashboardCard.css";
+import "./Layouts/ProfileCard.css";
+import "./Layouts/Fonts.css";
+import "./Layouts/Buttons.css";
+import "./Layouts/ReusableCode.css";
+import "./Layouts/InputField.css";
+import "./Layouts/ItemsDropdown.css";
 
 class App extends React.Component {
 

@@ -285,7 +285,7 @@ class AdministrationPage extends Component {
                                     }
                                     <div className="admin-filter-button-container">
                                         <button
-                                            className='custom-buttons filter admin-filter-button'
+                                            className='custom-small-buttons filter admin-filter-button'
                                             onClick={() => {
                                                 this.setState({entitiesLoaded: false});
                                                 if (currentEntity === this.entity.users)
@@ -295,7 +295,7 @@ class AdministrationPage extends Component {
                                             }}>Filter
                                         </button>
                                         <button
-                                            className='custom-buttons filter admin-filter-button'
+                                            className='custom-small-buttons filter admin-filter-button'
                                             onClick={this.clearFilters}>Clear Filters
                                         </button>
                                     </div>

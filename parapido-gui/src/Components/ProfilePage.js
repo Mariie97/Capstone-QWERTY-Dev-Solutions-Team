@@ -152,16 +152,16 @@ class ProfilePage extends Component {
                             <div className="button-flex-container">
                                 {user.type !== accountType.admin &&
                                 <Link to={`/myjobs/${user_id}` + this.jobParams}>
-                                    <button className="custom-buttons" onClick={this.toggleEdit}>
+                                    <button className="custom-small-buttons" onClick={this.toggleEdit}>
                                         {this.currentUser.type === accountType.admin ? 'User Jobs' : 'My Jobs'}
                                     </button>
                                 </Link>
                                 }
-                                <button className="custom-buttons" onClick={this.toggleEdit} >
+                                <button className="custom-small-buttons" onClick={this.toggleEdit} >
                                     {edit? 'Cancel Edit' : 'Edit Profile'}
                                 </button>
                                 {this.currentUser.type === accountType.admin &&
-                                <button className="custom-buttons delete-button" onClick={this.onClickDelete}>
+                                <button className="custom-small-buttons delete-button" onClick={this.onClickDelete}>
                                     Delete
                                 </button>
                                 }
@@ -331,7 +331,7 @@ class ProfilePage extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="custom-buttons save-change-button" onClick={this.saveChanges} >
+                                    <button className="custom-small-buttons save-change-button" onClick={this.saveChanges} >
                                         Save changes
                                     </button>
                                 </div>

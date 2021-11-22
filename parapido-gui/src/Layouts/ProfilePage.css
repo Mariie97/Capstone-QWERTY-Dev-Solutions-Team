@@ -59,11 +59,6 @@ h2.edit-subheaders {
 	bottom: 12px;
 }
 
-.save-change-button {
-	float: right;
-	top: 22px;
-}
-
 .loading-icon {
 	justify-content: center;
 	display: flex;
@@ -134,4 +129,5 @@ h2.edit-subheaders {
 	margin-bottom: 1vh;
 	color: white;
 	font-size: 12px;
+	font-family: 'Jost';
 }

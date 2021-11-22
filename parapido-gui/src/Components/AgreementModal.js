@@ -124,7 +124,7 @@ class AgreementModal extends Component {
                                 <div className="body-container-agreement-modal">
                                     <p className="long-text-agreement-modal"> 
                                     <label class="checkbox">
-                                    <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
+                                    <input type="checkbox" id="checkbox-small-size" style={{marginRight: "1vh"}} onChange={this.isChecked.bind(this)} />
                                     </label>
                                     Check to state that you have read and agree with the job information </p>
                                     <img style={virtual_contract_image_resize} src={VirtualContract} alt="continue arrow" />

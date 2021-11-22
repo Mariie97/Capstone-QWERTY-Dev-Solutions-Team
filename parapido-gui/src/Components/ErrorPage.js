@@ -46,6 +46,7 @@ class ErrorPage extends Component {
 }
 
 // small icons and elements css
+
 const mail = {
     color: "lightcoral",
     height: 20,

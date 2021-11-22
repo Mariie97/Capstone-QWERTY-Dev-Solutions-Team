@@ -305,7 +305,7 @@ class UserRegistrationPage extends Component {
                                     label='Question 2'
                                 />
                             </div>
-                            <div className={"horizontal-flexbox4"}>
+                            <div className={"horizontal-flexbox4"} style={{marginBottom:"2vh"}}>
                                 <Input
                                     required
                                     error = {this.state.answerTwoError!==undefined}

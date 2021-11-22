@@ -129,10 +129,6 @@
 	line-height: 0px;
 } 
 
-.MuiFormControl-root{
-	width: 65%;
-}
-
 .MuiInputBase-root:focus-within {
 	background-color: #FFEBCC;
 }
@@ -151,35 +147,6 @@
 .MuiTypography-root.MuiTypography-colorTextSecondary{
 	color:black;
 	margin-left: 3px;
-}
-
-/* job creation button */
-
-.button-job-creation{
-	width: 40%;
-	margin-top: 28px;
-	padding-bottom: 15px;
-	background-color: #91EB8F;
-	border: 2px solid #91EB8F;
-	border-radius: 10px;
-}
-
-.button-job-creation:hover{
-	cursor: pointer;
-	border: 2px solid black;
-}
-
-.text-button-job-creation{
-	position: relative;
-	top: 5px;
-	font-family: "Helvetica";
-	font-size: 15px;
-	color: black;
-	letter-spacing: 12px;
-}
-
-.text-button-job-creation:hover{
-	color:floralwhite;
 }
 
 .required-field-2-job-creation {

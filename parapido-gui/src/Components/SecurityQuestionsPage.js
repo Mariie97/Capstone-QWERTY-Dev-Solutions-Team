@@ -260,7 +260,7 @@ class SecurityQuestionsPage extends Component {
 
                     {!this.state.emailIsValid ?
                         <button
-                            className='custom-buttons security-page-button'
+                            className='custom-small-buttons security-page-button'
                             onClick={e => this.onSubmitEmail(e)}>Verify Email
                         </button> :
                         <div className='security-questions-input'>

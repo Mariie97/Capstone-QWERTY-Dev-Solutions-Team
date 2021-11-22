@@ -205,7 +205,7 @@ class JobDetailsPage extends Component {
                             <div className="button-flex-container">
                                 {showRequestButton &&
                                 <React.Fragment>
-                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                    <button onClick={this.onClickRequest} className="custom-small-buttons">
                                         Request Job
                                     </button>
                                     {showAgreement &&
@@ -243,27 +243,27 @@ class JobDetailsPage extends Component {
 
                                         }
                                     }}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >
                                     Cancel Job
                                 </button>
                                 }
                                 {showCancelRequestButton &&
-                                <button onClick={this.onClickCancelRequest} className="custom-buttons">
+                                <button onClick={this.onClickCancelRequest} className="custom-small-buttons">
                                     Cancel Request
                                 </button>
                                 }
                                 {showContractButton &&
                                 <a
                                     href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
-                                    className="custom-buttons">
+                                    className="custom-small-buttons">
                                     View Contract
                                 </a>
                                 }
                                 {showChatButton &&
                                 <Link
                                     to={`/chat?job_id=${job_id}`}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >Chat</Link>
                                 }
                                 {showDeleteButton &&
@@ -288,7 +288,7 @@ class JobDetailsPage extends Component {
                                             });
                                         }
                                     }}
-                                    className="custom-buttons delete-button"
+                                    className="custom-small-buttons delete-button"
                                 >
                                     Delete Job
                                 </button>
@@ -296,7 +296,7 @@ class JobDetailsPage extends Component {
                                 {showJobRequestsButton &&
                                 <Link
                                     to={`/job_requests?job_id=${job_id}`}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >
                                     View Requests
                                 </Link>

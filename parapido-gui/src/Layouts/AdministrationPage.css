@@ -114,12 +114,12 @@
     padding: 0 5px 10px 14px;
 }
 
-.admin-filter-button {
-    margin: 8px 0;
-}
-
 .admin-number-col{
     width: 55px;
+}
+
+.admin-filter-button {
+    margin: 8px 0;
 }
 
 .admin-filter-button-container {

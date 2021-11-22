@@ -22,21 +22,6 @@
     background: #FFFFFF;
 }
 
-.createButtonStyle {
-    position: absolute;
-    width: 190px;
-    height: 80px;
-    left: 850px;
-    top: 900px;
-    color: black;
-    border: 2px solid;
-    background: #FFEBCC;
-    font-weight: bold;
-    font-family: Jost;
-    font-size: 24px;
-    outline: 2px black;
-}
-
 .securityQuestionTextStyle {
     position: absolute;
     left: 643px;
@@ -128,11 +113,6 @@
     width: 100%;
 }
 
-.security-page-button{
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 25px;
-}
 #security-submit-button{
     margin: 25px 0;
 }
