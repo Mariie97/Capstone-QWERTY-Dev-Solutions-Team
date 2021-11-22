@@ -62,11 +62,9 @@ h2.edit-subheaders {
 	bottom: 12px;
 }
 
-.loading-icon {
-	justify-content: center;
-	display: flex;
-	align-items: center;
-	height: 100%;
+.save-change-button {
+	float: right;
+	top: 22px;
 }
 
 .label-about-profile-page{

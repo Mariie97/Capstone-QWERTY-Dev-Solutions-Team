@@ -108,12 +108,20 @@
     margin: 0 auto;
 }
 
+/* button movement */
+
 .security-page-input{
     width: 100%;
 }
 
 #security-submit-button{
     margin: 25px 0;
+}
+
+.security-page-button{
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 25px;
 }
 
 #security-change-pswd-button{

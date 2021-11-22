@@ -36,16 +36,6 @@
     background-color: #2e856e;
 }
 
-.save-change-button {
-	float: right;
-	top: 22px;
-}
-
-.security-page-button{
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 25px;
-}
 
 /* filter button */ 
 
@@ -97,6 +87,8 @@
 	top: 14vh;
 }
 
+/* job dashboard button */
+
 .create-job-button-job-dashboard:hover{
     cursor: pointer;
     border: 3px solid white;  
@@ -130,7 +122,7 @@
 	font-size: 20px;
 	letter-spacing: 1px;
 	cursor: pointer;
-	}
+}
 
 .create-button-style:hover{
 	border: 2px solid white;
@@ -224,7 +216,6 @@
 .button-error-page:hover{
 	cursor: pointer;
 	border: 2px solid black;
-
 }
 
 .text-button-error-page{

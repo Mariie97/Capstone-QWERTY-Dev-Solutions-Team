@@ -154,8 +154,6 @@ class JobListingPage extends Component {
                 {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
                 
                 <div className="main-listing-flex">
-                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px'}}> No jobs available </h2>:
-                    <React.Fragment>
                          <div className={"left-items-listings"}>
                             <div className={"filters-flex-listings"}>
                                 <ItemsDropdown
@@ -172,7 +170,7 @@ class JobListingPage extends Component {
                                     itemsList={months}
                                     label='Month'
                                 />
-                                <button className="filter-button" onClick={this.fetchList}>
+                                <button className="filter-button" style={{width:"15vh"}} onClick={this.fetchList}>
                                     <div className="text-filter-button">
                                         <FilterListIcon/>Filter
                                     </div>
@@ -183,7 +181,8 @@ class JobListingPage extends Component {
                             {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
                             {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
                         </div>
-                        <div>   
+                            {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px'}}> No jobs available </h2>:
+                        <div>                             
                             {!this.state.listIsEmpty &&
                             <div>
                                 {
@@ -200,8 +199,7 @@ class JobListingPage extends Component {
                                 }
                             </div>
                             }
-                        </div>
-                    </React.Fragment>}
+                        </div>}
                 </div>
             </div>
         );

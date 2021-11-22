@@ -304,8 +304,7 @@ class SecurityQuestionsPage extends Component {
                         onClose={this.handleClose}
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
-                    >
-                           
+                    >   
                         <Backdrop open={open} style={backdropStyle}>                            
                             <div>
                             <h2 className='modalTextStyle'>    
