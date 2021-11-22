@@ -6,39 +6,6 @@
     background-color: blanchedalmond;
 }
 
-#go-back-button {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 85%;
-    background-color: #FFEBCC;
-    border: 2px black solid;
-    margin-top: 35px;
-    margin-left: 100px;
-}
-
-#checkbox-style {
-    width: 3%;
-    position: absolute;
-    padding: 2px;
-    margin-left: 46%;
-    vertical-align: middle;
-    height: 60px;
-    margin-top: -59px;
-}
-
-.month-dropdown-style {
-    position: absolute;
-    left: 1382px;
-    top: 115px;
-}
-
-.year-dropdown-style {
-    position: absolute;
-    left: 1200px;
-    top: 115px;
-}
-
 .filters-flexbox{
     display: flex;
     flex-direction: row;
