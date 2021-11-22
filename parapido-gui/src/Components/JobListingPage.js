@@ -181,7 +181,7 @@ class JobListingPage extends Component {
                             {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
                             {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
                         </div>
-                            {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px'}}> No jobs available </h2>:
+                            {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
                         <div>                             
                             {!this.state.listIsEmpty &&
                             <div>
