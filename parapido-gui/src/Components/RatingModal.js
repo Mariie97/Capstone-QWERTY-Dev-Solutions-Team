@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {ratings} from "../Utilities";
 import {Backdrop, Modal} from "@material-ui/core";
 import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
@@ -16,15 +17,6 @@ class RatingModal extends Component {
         this.handleRate = this.handleRate.bind(this);
 
     }
-
-    ratings = [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-    ];
-
     render() {
 
         return (
@@ -44,7 +36,7 @@ class RatingModal extends Component {
                             initial_value={''}
                             ref={this.state.ratingRef}
                             validate={true}
-                            itemsList={this.ratings}
+                            itemsList={ratings}
                             label='Rating'
                         />
                         <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>

@@ -225,6 +225,13 @@ export const months = [
     'December'
 ];
 
+export const ratings = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;
 
