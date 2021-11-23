@@ -4,7 +4,7 @@ import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilit
 import ItemsDropdown from "./ItemsDropdown.js";
 import JobDashboardCard from "./JobDashboardCard";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import {Box, CircularProgress} from "@material-ui/core";
+import {Box, CircularProgress, Container} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
     currentUser = {
@@ -187,7 +187,7 @@ class JobDashboardPage extends Component {
                             }
                         </h1>
 
-                        <div className="first-flex-container-job-dashboard-page">
+                        <div style={firstflexcontainer}>
                             <ItemsDropdown
                                 cormorantlabel
                                 lineheightstyle="2.5"
@@ -218,7 +218,7 @@ class JobDashboardPage extends Component {
                             </button>
                         </div>
                         {!filterLoaded ?
-                            <div className='loading-icon-job-dashboard'>
+                            <div className='loading-icon' style={{height:"50vh"}}>
                                 <Box sx={{display: 'flex'}}>
                                     <CircularProgress style={{alignItems:"center"}}/>
                                 </Box>
@@ -231,5 +231,13 @@ class JobDashboardPage extends Component {
         )
     }
 }
+
+const firstflexcontainer = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    flexWrap: "wrap",
+	marginBottom: "auto"
+};
 
 export default JobDashboardPage;

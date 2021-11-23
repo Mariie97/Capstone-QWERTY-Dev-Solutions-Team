@@ -27,7 +27,6 @@ import "./Layouts/LandingPage.css";
 import "./Layouts/LoginModal.css";
 import "./Layouts/SecurityQuestionsPage.css";
 import "./Layouts/UserRegistrationPage.css";
-import "./Layouts/JobDashboard.css";
 import "./Layouts/JobCreation.css";
 import "./Layouts/RequestsPage.css";
 import "./Layouts/AgreementModal.css";
