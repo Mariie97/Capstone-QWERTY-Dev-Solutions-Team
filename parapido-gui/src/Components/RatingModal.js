@@ -14,6 +14,14 @@ class RatingModal extends Component {
         this.changeRating = this.changeRating.bind(this);
         this.handleRate = this.handleRate.bind(this);
     }
+
+    
+    changeRating(value) {
+        this.setState({
+            rating: value
+        });
+    }
+
     render() {
         return (
             <div>
@@ -22,9 +30,7 @@ class RatingModal extends Component {
                     onClose={this.props.handleClose}
                 >
                     <Backdrop open={this.props.open} style={backdropStyle}>
-                        <div>
-                            Rate this Job:
-                        </div>
+                        <div className="empty-list-subheader black">Rate this Job:</div>
                         <ItemsDropdown
                             blackLabel
                             initial_value={''}
@@ -38,12 +44,6 @@ class RatingModal extends Component {
                 </Modal>
             </div>
         )
-    }
-
-    changeRating(value) {
-        this.setState({
-            rating: value
-        });
     }
 
     handleRate(){
@@ -82,11 +82,10 @@ const backdropStyle = {
     justifyContent: "center",
     left: "40%",
     top: "200px",
-    width: "500px",
+    width: "300px",
     height: "300px",
     backgroundColor: "#FFFFFF",
     border: '2px solid black',
 }
-
 
 export default RatingModal;
