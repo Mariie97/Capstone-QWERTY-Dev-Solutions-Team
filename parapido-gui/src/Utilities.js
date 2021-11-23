@@ -163,7 +163,6 @@ export const securityQuestions = [
     "What was your favorite food as a child?",
 ]
 
-
 export const accountType = {
     student: 1,
     client: 2,

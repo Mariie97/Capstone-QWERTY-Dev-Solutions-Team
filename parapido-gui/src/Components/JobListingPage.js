@@ -62,10 +62,10 @@ class JobListingPage extends Component {
 
         let filters = '';
 
-        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
+        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '' && yearRef.current.state.item !== '0')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
 
-        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
+        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '' &&  monthRef.current.state.item !== '0')
             filters += "&month=" + monthRef.current.state.item
 
         if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
