@@ -5,10 +5,10 @@ import RatingModal from "./RatingModal";
 import ItemsDropdown from "./ItemsDropdown";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Alert from "@material-ui/lab/Alert";
-import JobCompleted_listings from "../Static/Images/JobCompletedBlue.svg";
-import JobInProgress_listings from "../Static/Images/JobInProgressBlue.svg";
-import JobPosted_listings from "../Static/Images/JobPostedBlue.svg";
-import JobRequested_listings from "../Static/Images/JobRequestedBlue.svg"
+import JobCompleted from "../Static/Images/JobCompletedBlue.svg";
+import JobInProgress from "../Static/Images/JobInProgressBlue.svg";
+import JobPosted from "../Static/Images/JobPostedBlue.svg";
+import JobRequested from "../Static/Images/JobRequestedBlue.svg"
 import {Box, CircularProgress} from "@material-ui/core";
 
 class JobListingPage extends Component {
@@ -242,10 +242,10 @@ class JobListingPage extends Component {
                                 </div>
                             </button>
                         </div>
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested} alt="jobrequested" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted} alt="jobposted" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress} alt="jobinprogress" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted} alt="jobcompleted" />}
                     </div>
                     {!this.state.entitiesLoaded ?
                                 <div className='loading-icon' style={{marginLeft: "20vw"}}>
@@ -260,9 +260,13 @@ class JobListingPage extends Component {
                                             this.state.listings.map((listing, index) => {
                                                 let listingIndex = index
                                                 return <JobListing
-                                                    price={listing.price} date_posted={listing.date_posted}
-                                                    title={listing.title} category={listing.categories}
-                                                    key={listing.id} job_id={listing.job_id} status={this.status}
+                                                    price={listing.price} 
+                                                    date_posted={listing.date_posted}
+                                                    title={listing.title} 
+                                                    category={listing.categories}
+                                                    key={listing.id} 
+                                                    job_id={listing.job_id} 
+                                                    status={this.status}
                                                     deleteListing={this.deleteListing.bind(this, listingIndex)}
                                                     onClickRate={this.onClickRate.bind(this, listingIndex)}
                                                 />

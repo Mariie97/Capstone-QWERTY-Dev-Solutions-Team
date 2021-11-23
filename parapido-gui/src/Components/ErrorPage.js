@@ -5,7 +5,6 @@ import Error from "../Static/Images/Error.png";
 import EmailIcon from '@material-ui/icons/Mail';
 
 class ErrorPage extends Component {
-
     componentDidMount() {
         document.body.style.backgroundColor = "#FFFFFF";
     }

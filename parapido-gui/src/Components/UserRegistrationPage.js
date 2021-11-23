@@ -7,7 +7,6 @@ import {FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGr
 import Alert from '@material-ui/lab/Alert';
 
 class UserRegistrationPage extends Component {
-
     constructor(props){
         super(props);
         this.state={

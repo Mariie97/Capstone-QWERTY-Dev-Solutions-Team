@@ -7,7 +7,6 @@ import {Alert} from "@material-ui/lab";
 import Stack from "@mui/material/Stack";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
-
 const backdrop = {
     left: "50%",
     top: "50%",
@@ -22,7 +21,6 @@ const backdrop = {
 }
 
 class SecurityQuestionsPage extends Component {
-
     constructor(props){
         super(props);
         this.state={

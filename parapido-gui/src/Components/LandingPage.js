@@ -8,7 +8,6 @@ import EmailIcon from "@material-ui/icons/Mail";
 import Alert from "@material-ui/lab/Alert";
 
 class LandingPage extends Component {
-
 	constructor(props){
 		super(props);
 		this.state = {
