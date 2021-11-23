@@ -51,7 +51,6 @@ class myJobsDashboardPage extends Component {
         const is_admin = this.currentUser.type === accountType.admin;
         const {alertMssg, severity} = this.state
         const { user_id } = this.props;
-        console.log(Number(this.queryParams.get('account')) === accountType.client)
     
         return (
             <div>
