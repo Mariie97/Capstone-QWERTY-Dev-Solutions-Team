@@ -5,8 +5,8 @@ import Error from "../Static/Images/Error.png";
 import EmailIcon from '@material-ui/icons/Mail';
 
 class ErrorPage extends Component {
+
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
     }
 
@@ -44,8 +44,6 @@ class ErrorPage extends Component {
         )
     }
 }
-
-// small icons and elements css
 
 const mail = {
     color: "lightcoral",

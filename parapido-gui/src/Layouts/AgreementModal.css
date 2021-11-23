@@ -1,9 +1,9 @@
 /* controlling the positioning of logo and the next starting div */
 
 .logo-flex-Agreement{
-width: 100%;
-display: flex;
-justify-content: flex-end;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .first-point-agreement-modal{

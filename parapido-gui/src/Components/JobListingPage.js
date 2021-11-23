@@ -247,30 +247,30 @@ class JobListingPage extends Component {
                         {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
                         {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
                     </div>
-                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
-                        <div>
-                            {!this.state.entitiesLoaded ?
+                    {!this.state.entitiesLoaded ?
                                 <div className='loading-icon' style={{marginLeft: "20vw"}}>
                                     <Box sx={{display: 'flex'}}>
                                         <CircularProgress />
                                     </Box>
                                 </div> :
                                 <div>
-                                    {
-                                        this.state.listings.map((listing, index) => {
-                                            let listingIndex = index
-                                            return <JobListing
-                                                price={listing.price} date_posted={listing.date_posted}
-                                                title={listing.title} category={listing.categories}
-                                                key={listing.id} job_id={listing.job_id} status={this.status}
-                                                deleteListing={this.deleteListing.bind(this, listingIndex)}
-                                                onClickRate={this.onClickRate.bind(this, listingIndex)}
-                                            />
-                                        })
-                                    }
+                                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
+                                    <div>
+                                        {
+                                            this.state.listings.map((listing, index) => {
+                                                let listingIndex = index
+                                                return <JobListing
+                                                    price={listing.price} date_posted={listing.date_posted}
+                                                    title={listing.title} category={listing.categories}
+                                                    key={listing.id} job_id={listing.job_id} status={this.status}
+                                                    deleteListing={this.deleteListing.bind(this, listingIndex)}
+                                                    onClickRate={this.onClickRate.bind(this, listingIndex)}
+                                                />
+                                            })
+                                        }
+                                    </div>}
                                 </div>
-                            }
-                        </div>}
+                    }
                 </div>
             </div>
         );

@@ -3,7 +3,6 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {withCookies} from "react-cookie";
 
 // Pages imports
-
 import LandingPage from "./Components/LandingPage";
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";

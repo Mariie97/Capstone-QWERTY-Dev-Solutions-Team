@@ -10,17 +10,16 @@
 ../.vscode/
 **/.idea/
 *.xml
+../.idea/
+../.vscode/
+*.vscode
+*./vscode/
 
 # testing
 /coverage
 
 # production
 /build
-
-../.idea/
-../.vscode/
-*.vscode
-*./vscode/
 
 # misc
 .DS_Store
