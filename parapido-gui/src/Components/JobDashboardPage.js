@@ -154,6 +154,7 @@ class JobDashboardPage extends Component {
         const cardArray = jobs.map(
             job => <JobDashboardCard
                 job_id = {job.job_id}
+                date_posted = {job.date_posted}
                 title = {job.title}
                 city = {job.city}
                 price = {job.price}
