@@ -7,7 +7,6 @@ import {Box, Modal} from "@material-ui/core";
 import ContinueArrow from "../Static/Images/ContinueArrow.png";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -71,7 +70,7 @@ class LoginModal extends Component {
                 )
             } else {
                 this.setState({
-                    loginError: response.status === 401 ?
+                    loginError: response.status !== 401 ?
                         'Yikes!!! 😬 Incorrect Email or Password' :
                         <div>Sorry can not login right now 😔<br/>Please try again later!!!</div>,
                         login_success: false,
@@ -154,9 +153,9 @@ class LoginModal extends Component {
                         <hr className="line-login-modal" />
                         <ul className="footer-flex-login-modal">
                             {adminLogin === undefined &&
-                            <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
+                            <Link to={"/signup"} style={{color:"green"}}> Create an Account? </Link>
                             }
-                            <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
+                            <Link to={"/security-questions"} style={{color:"green"}}> Forgot Password? </Link>
                         </ul>
                     </Box>
                 </Modal>                                         

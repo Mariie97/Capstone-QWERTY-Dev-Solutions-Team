@@ -4,7 +4,7 @@ import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilit
 import ItemsDropdown from "./ItemsDropdown.js";
 import JobDashboardCard from "./JobDashboardCard";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import {Box, CircularProgress, Container} from "@material-ui/core";
+import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
     currentUser = {
