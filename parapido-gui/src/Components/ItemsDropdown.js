@@ -113,7 +113,6 @@ class ItemsDropdown extends Component {
     }
 }
 
-//small icons & elements css
 const report = {
     color: "red",
     position: "relative",

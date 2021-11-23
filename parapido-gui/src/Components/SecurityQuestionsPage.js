@@ -312,7 +312,7 @@ class SecurityQuestionsPage extends Component {
                                 Enter your new password: </h2>     
                             </div>                                	
                             <div>
-                                <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
+                                <img alt='Logo' src={Logo} className={"modalLogoStyle"}/>
                             </div>
                             <div className='security-modal-container'>     
                                 <Input

@@ -29,7 +29,6 @@ class JobDashboardCard extends Component {
                     </div>
                 </Link>
             </div>
-
         )
     }
 }

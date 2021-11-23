@@ -132,7 +132,7 @@ class JobDetailsPage extends Component {
                 this.setState({
                     redirect: `/myjobs/${this.currentUser.id}`,
                     alert: {
-                        msg: 'Unable to cancel the request at this moment, try again later.',
+                        msg: 'Unable to cancel the request at this moment, try again later',
                         severity: 'error'
                     }
                 });
@@ -234,7 +234,7 @@ class JobDetailsPage extends Component {
                                             this.setState({
                                                 redirect: `/myjobs/${this.currentUser.id}`,
                                                 alert: {
-                                                    msg: 'Can not cancel the job a this moment, please try again later.',
+                                                    msg: 'Can not cancel the job a this moment, please try again later',
                                                     severity: 'error'
                                                 }
                                             });

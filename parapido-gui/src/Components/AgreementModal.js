@@ -18,8 +18,8 @@ const style = {
     boxShadow: 24,
     p: 4,
     padding: '9px',
-    borderRadius: "1vh",
-    paddingBottom: "2vh"
+    borderRadius: '1vh',
+    paddingBottom: '2vh'
 }
 
 class AgreementModal extends Component {
@@ -43,12 +43,6 @@ class AgreementModal extends Component {
         this.isChecked = this.isChecked.bind(this);
       }
   
-      isChecked(event){
-            this.setState({
-                checked: event.target.checked
-              })
-      }
-
       handleOnClick(){
           const {job_id, student_id, cookies} = this.props;
          
@@ -73,7 +67,11 @@ class AgreementModal extends Component {
                   })        
             }
             else{
-                alert('Failed' + response.status);
+                this.setState({
+                    isclient: true,
+                    alertMssg: "Sorry can't process right now 😔 please try again later!!!",
+                    severity: "error"
+                    }) 
             }
             })
           }
@@ -97,19 +95,28 @@ class AgreementModal extends Component {
                             }) 
                     }
                     else {
-                       console.log("TODO: Error alert")
+                        this.setState({
+                            isstudent: true,
+                            alertMssg: "Sorry can't request job right now 😔 please try again later!!!",
+                            severity: "error"
+                            }) 
                     }
                 })       
           }
       }
+
+    isChecked(event){
+        this.setState({
+            checked: event.target.checked
+          })
+    }     
 
     render() {
         const {checked, isclient, isstudent, alertMssg, severity} = this.state;
         const {isOpen, toggle} = this.props;
 
         return (
-            <StyledEngineProvider injectFirst>
-                
+            <StyledEngineProvider injectFirst>          
                     <div>
                         <Modal
                             open={isOpen}
@@ -133,7 +140,7 @@ class AgreementModal extends Component {
                                         pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity }
                                     }}/>}
-                                     {isclient && <Redirect to={{
+                                    {isclient && <Redirect to={{
                                         pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity}
                                     }}/>}

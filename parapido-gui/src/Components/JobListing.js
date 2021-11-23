@@ -29,6 +29,7 @@ const boxSX = {
 }
 
 const listing = (props) => {
+    const { job_id, title, price, category, date_posted, status, onClickRate, deleteListing} = props
     return(        
                 <Box
                     border = {2}
@@ -36,32 +37,30 @@ const listing = (props) => {
                     sx = {boxSX}
                     marginTop={5}
                 >                   
-                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.title} </div></Link>
-                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.price} </div></Link>
-                    <Link to = {"/job/" + props.job_id} id = "small-urls"><Chip label = {props.category} style = {chipStyleJobDetails}/></Link>
-                    <Link to = {"/job/" + props.job_id} id = "small-urls"><div> {props.date_posted} </div></Link>
-                    { props.status === '2' &&
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {title} </div></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {price} </div></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipStyleJobListing}/></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {date_posted} </div></Link>
+                    {status === '2' &&
                         <div>
                             <IconButton>
                                 <ThumbUpIcon
                                     sx={{ color: blue[100],
                                         fontSize: 25,
                                     }}
-                                    onClick={props.onClickRate}
+                                    onClick={onClickRate}
                                 />
                             </IconButton>
                         </div>
                     }
-
-                    { (props.status === '1' || props.status === '2') &&
+                    {(status === '1' || status === '2') &&
                         <div>
                             <IconButton aria-label="delete" color="error">
                                 <DeleteIcon
-                                    onClick={props.deleteListing}
+                                    onClick={deleteListing}
                                     sx={{ color: red[900],
                                         fontSize: 25,
                                     }}
-
                                 />
                             </IconButton>
                         </div>
@@ -70,7 +69,7 @@ const listing = (props) => {
     )
 }
 
-const chipStyleJobDetails = {
+const chipStyleJobListing = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
     fontSize : "18px",

@@ -29,12 +29,11 @@ class JobDashboardPage extends Component {
     }
 
     componentDidMount() {
+        document.body.style.backgroundColor = "#2F2D4A"
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-
-        // webpage background color
-        document.body.style.backgroundColor = "#2F2D4A";
+      ;
         this.getJobs();
     }
 
@@ -60,7 +59,6 @@ class JobDashboardPage extends Component {
         this.setState(
             {filterLoaded: false}
         )
-
         let category = this.state.change_category?.current.state.item;
         let city = this.state.change_city?.current.state.item;
         let filterResult = '?';
@@ -148,7 +146,6 @@ class JobDashboardPage extends Component {
                 )
             }
         })
-
     }
 
     render() {

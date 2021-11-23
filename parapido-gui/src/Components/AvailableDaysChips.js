@@ -21,7 +21,6 @@ class AvailableDaysChips extends Component {
             ],
         }
 
-        // event method - before render method
         this.handleAvailableDaysDelete = this.handleAvailableDaysDelete.bind(this);
     }
 
