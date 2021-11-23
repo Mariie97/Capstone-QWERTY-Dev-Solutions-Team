@@ -26,7 +26,6 @@ class myJobsDashboardPage extends Component {
     }
 
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
 
         if(this.props.history.action === 'POP') {
@@ -52,19 +51,19 @@ class myJobsDashboardPage extends Component {
         const is_admin = this.currentUser.type === accountType.admin;
         const {alertMssg, severity} = this.state
         const { user_id } = this.props;
-
+    
         return (
             <div>
                 {is_admin && this.queryParams.get('account')===null ?
                     <ErrorPage errorNumber="400" errorType="Bad request" inside/> :
                     <React.Fragment>
                         {(alertMssg !== undefined && severity !== undefined) &&
-                        <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation">
+                        <Alert onLoad={this.hideAlert()} severity={severity} className="server-error">
                             {alertMssg}
                         </Alert>}
                         <div className="myjobs-card-general-style">
                             <div className="myjobs-card-container">
-                                {(is_client || (is_admin && this.queryParams.get('account')==accountType.client)) &&
+                                {(is_client || (is_admin && Number(this.queryParams.get('account')) === accountType.client)) &&
                                 <MyJobsCard
                                     title="Posted Jobs"
                                     imgtype="1"
@@ -73,7 +72,7 @@ class myJobsDashboardPage extends Component {
                                     user_id={user_id}
                                 />
                                 }
-                                {(is_student || (is_admin && this.queryParams.get('account')==accountType.student)) &&
+                                {(is_student || (is_admin && Number(this.queryParams.get('account')) === accountType.student)) &&
                                 <MyJobsCard
                                     title="Requested Jobs"
                                     imgtype="2"

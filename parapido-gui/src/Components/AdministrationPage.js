@@ -198,7 +198,6 @@ class AdministrationPage extends Component {
             alert: {msg: undefined}})}, 3000);
     }
 
-
     render() {
         const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin, alert} = this.state;
         return (
@@ -207,11 +206,11 @@ class AdministrationPage extends Component {
                 {!is_admin ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/> :
                     <React.Fragment>
                         {alert.msg !== undefined &&
-                        <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                        <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
                             {alert.msg}
                         </Alert>
                         }
-                        <h1 className="page-title-header">
+                        <h1 className="page-title-header white-title">
                             Administration Site: {currentEntity===this.entity.users? 'Users' : 'Jobs'}
                         </h1>
                         <div className = "administration-body-container">
@@ -285,7 +284,7 @@ class AdministrationPage extends Component {
                                     }
                                     <div className="admin-filter-button-container">
                                         <button
-                                            className='custom-buttons filter admin-filter-button'
+                                            className='custom-small-buttons filter admin-filter-button'
                                             onClick={() => {
                                                 this.setState({entitiesLoaded: false});
                                                 if (currentEntity === this.entity.users)
@@ -295,7 +294,7 @@ class AdministrationPage extends Component {
                                             }}>Filter
                                         </button>
                                         <button
-                                            className='custom-buttons filter admin-filter-button'
+                                            className='custom-small-buttons filter admin-filter-button'
                                             onClick={this.clearFilters}>Clear Filters
                                         </button>
                                     </div>

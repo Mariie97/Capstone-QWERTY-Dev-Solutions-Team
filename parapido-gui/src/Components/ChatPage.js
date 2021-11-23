@@ -77,6 +77,7 @@ class ChatApp extends Component {
   };
 
   constructor(props){
+    document.body.style.backgroundColor = "#2F2D4A";
     super(props);
     this.queryParams = getQueryParams(props.queryParams);
     this.state = {
@@ -186,6 +187,7 @@ class ChatApp extends Component {
 
   render() {
     const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
+    
     return (
         <React.Fragment>
           {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
@@ -204,12 +206,12 @@ class ChatApp extends Component {
                       <div className='header-flex-container'>
                         <div className="button-flex-container">
                           <Link to={`/job/${this.queryParams.get('job_id')}`}
-                                className='custom-buttons'
+                                className='custom-small-buttons'
                                 id="view-job-button">
                             View Job
                           </Link>
                         </div>
-                        <h1 className="page-title-header">Chat: {this.job_title} </h1>
+                        <h1 className="page-title-header white-title">Chat: {this.job_title} </h1>
                       </div>
                       <div className='chat-flex-container'>
                         <div className="chat-window">

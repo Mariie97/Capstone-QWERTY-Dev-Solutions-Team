@@ -129,10 +129,6 @@
 	line-height: 0px;
 } 
 
-.MuiFormControl-root{
-	width: 65%;
-}
-
 .MuiInputBase-root:focus-within {
 	background-color: #FFEBCC;
 }
@@ -153,36 +149,7 @@
 	margin-left: 3px;
 }
 
-/* job creation button */
-
-.button-job-creation{
-	width: 40%;
-	margin-top: 28px;
-	padding-bottom: 15px;
-	background-color: #91EB8F;
-	border: 2px solid #91EB8F;
-	border-radius: 10px;
-}
-
-.button-job-creation:hover{
-	cursor: pointer;
-	border: 2px solid black;
-}
-
-.text-button-job-creation{
-	position: relative;
-	top: 5px;
-	font-family: "Helvetica";
-	font-size: 15px;
-	color: black;
-	letter-spacing: 12px;
-}
-
-.text-button-job-creation:hover{
-	color:floralwhite;
-}
-
-.required-field-2-job-creation {
+.required-field-price-job-creation {
 	font-family: "Times New Roman";
 	color: #cc3300;
 	position: relative;
@@ -199,30 +166,3 @@
 	line-height: 0px;
 	margin-bottom: 6px;
 }
-
-.server-error-job-creation{
-	position: absolute;
-	width: 100%;
-	bottom: 89.2vh;
-	border-radius: 0vh;
-	height:4%;
-	display:flex;
-	justify-content:center;
-	align-items: center;
-}
-
-.server-error-job-creation1{
-	position: absolute;
-	width: 50%;
-	bottom: 77vh;
-	margin-left: 15vh;
-	height: 4%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-
-
-
-

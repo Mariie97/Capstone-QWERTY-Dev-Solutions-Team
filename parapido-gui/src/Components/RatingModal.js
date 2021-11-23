@@ -1,11 +1,22 @@
 import React, {Component} from 'react'
+import {ratings} from "../Utilities";
 import {Backdrop, Modal} from "@material-ui/core";
-import "../Layouts/RatingModal.css"
 import ItemsDropdown from "./ItemsDropdown";
-import Button from "@mui/material/Button";
+
+const backdrop = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4vh",
+    justifyContent: "center",
+    left: "40%",
+    top: "200px",
+    width: "300px",
+    height: "300px",
+    backgroundColor: "#FFFFFF",
+    border: '2px solid black',
+}
 
 class RatingModal extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -14,57 +25,6 @@ class RatingModal extends Component {
 
         this.changeRating = this.changeRating.bind(this);
         this.handleRate = this.handleRate.bind(this);
-
-    }
-
-    ratings = [
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-    ];
-
-    render() {
-
-        return (
-
-            <div>
-
-                <Modal
-                    open={this.props.open}
-                    onClose={this.props.handleClose}
-                >
-                    <Backdrop open={this.props.open} style={backdropStyle}>
-
-                        <div className={"modalTextStyle"}>
-                            Rate this Job:
-                        </div>
-
-                        <ItemsDropdown
-                            blackLabel
-                            initial_value={''}
-                            ref={this.state.ratingRef}
-                            validate={true}
-                            itemsList={this.ratings}
-                            label='Rating'
-                        />
-
-
-                        <Button id={"rate-button"} onClick={this.handleRate}> Rate </Button>
-
-                    </Backdrop>
-
-                </Modal>
-
-            </div>
-        )
-    }
-
-    changeRating(value) {
-        this.setState({
-            rating: value
-        });
     }
 
     handleRate(){
@@ -94,18 +54,37 @@ class RatingModal extends Component {
             })
         }
     }
-}
 
-const backdropStyle = {
-    display: "flex",
-    left: "40%",
-    top: "200px",
-    width: "500px",
-    height: "300px",
-    position: "absolute",
-    backgroundColor: "#FFFFFF",
-    border: '3px solid black',
-}
+    changeRating(value) {
+        this.setState({
+            rating: value
+        });
+    }
 
+    render() {
+        const {open, handleClose} = this.props;
+        return (
+            <div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <Backdrop open={open} style={backdrop}>
+                        <div className="empty-list-subheader black">Rate this Job:</div>
+                        <ItemsDropdown
+                            blackLabel
+                            initial_value={''}
+                            ref={this.state.ratingRef}
+                            validate={true}
+                            itemsList={ratings}
+                            label='Rating'
+                        />
+                        <button className="custom-small-buttons" onClick={this.handleRate}> Rate </button>
+                    </Backdrop>
+                </Modal>
+            </div>
+        )
+    }
+}
 
 export default RatingModal;

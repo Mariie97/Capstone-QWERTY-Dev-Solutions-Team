@@ -8,7 +8,6 @@ import EmailIcon from "@material-ui/icons/Mail";
 import Alert from "@material-ui/lab/Alert";
 
 class LandingPage extends Component {
-
 	constructor(props){
 		super(props);
 		this.state = {
@@ -24,6 +23,7 @@ class LandingPage extends Component {
 	}
 
 	componentDidMount() {
+		document.body.style.backgroundColor = "#2F2D4A";
 		this.setState({
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
@@ -44,9 +44,6 @@ class LandingPage extends Component {
 				}
 			}
 		}
-		
-		// webpage background color
-		document.body.style.backgroundColor = "#2F2D4A";
 	}
 
 	showLoginModal(){
@@ -81,7 +78,7 @@ class LandingPage extends Component {
 						</li>
 					</ul>
 				</div>
-				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-job-creation1">
+				{(alertMssg !== undefined && severity !== undefined) && <Alert onLoad={this.hideAlert()} severity={severity} className="server-error-landing-page">
                 {alertMssg}</Alert>} 
 				<div className="first-point-landing">An easier way of finding and providing</div>
 				<p className="second-point-landing">Flexible Jobs.</p>
@@ -93,8 +90,6 @@ class LandingPage extends Component {
 		);
 	}
 }
-
-// small icons and elements css
 
 const mail = {
 	color: "#ffebcc",

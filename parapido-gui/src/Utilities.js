@@ -163,7 +163,6 @@ export const securityQuestions = [
     "What was your favorite food as a child?",
 ]
 
-
 export const accountType = {
     student: 1,
     client: 2,
@@ -197,6 +196,40 @@ export const prices = [
     '$50.00 to $60.00',
     '$70.00 to $100.00',
     'More than $100.00'
+];
+
+export const years = [
+    '2021',
+    '2022',
+    '2023',
+    '2024',
+    '2025',
+    '2026',
+    '2027',
+    '2028'
+];
+
+export const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+export const ratings = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
 ];
 
 export const zipcodeFormatPR = /^00[679]\d{2}$/;

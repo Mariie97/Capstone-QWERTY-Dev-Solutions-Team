@@ -4,7 +4,6 @@ import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 
 class Input extends Component {
-
     render() {
         const { errorMsg, labelText, required, multiline, blackLabel, loginmodallabel, cormorantlabel} = this.props;
         return (

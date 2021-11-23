@@ -5,7 +5,6 @@ import ProfileCard from "./ProfileCard";
 import AgreementModal from "./AgreementModal";
 import {Box, Chip, CircularProgress} from "@material-ui/core";
 
-
 class JobDetailsPage extends Component {
     currentUser = {
         id: parseInt(localStorage.getItem('user_id')),
@@ -133,7 +132,7 @@ class JobDetailsPage extends Component {
                 this.setState({
                     redirect: `/myjobs/${this.currentUser.id}`,
                     alert: {
-                        msg: 'Unable to cancel the request at this moment, try again later.',
+                        msg: 'Unable to cancel the request at this moment, try again later',
                         severity: 'error'
                     }
                 });
@@ -147,13 +146,12 @@ class JobDetailsPage extends Component {
             <Chip
                 key={`day-${index}`}
                 label={weekDays[day - 1]}
-                style={chipStyleJobDetails}
+                style={chipjobdetails}
             />
         )
     }
 
     render() {
-        //TODO: This must be able to show all job without considering the status?
         const {is_auth, job, pageLoaded, redirect, showAgreement, alert } = this.state;
         const { job_id } = this.props;
         const token = this.props.cookies.get('csrf_access_token');
@@ -205,7 +203,7 @@ class JobDetailsPage extends Component {
                             <div className="button-flex-container">
                                 {showRequestButton &&
                                 <React.Fragment>
-                                    <button onClick={this.onClickRequest} className="custom-buttons">
+                                    <button onClick={this.onClickRequest} className="custom-small-buttons">
                                         Request Job
                                     </button>
                                     {showAgreement &&
@@ -236,34 +234,34 @@ class JobDetailsPage extends Component {
                                             this.setState({
                                                 redirect: `/myjobs/${this.currentUser.id}`,
                                                 alert: {
-                                                    msg: 'Can not cancel the job a this moment, please try again later.',
+                                                    msg: 'Can not cancel the job a this moment, please try again later',
                                                     severity: 'error'
                                                 }
                                             });
 
                                         }
                                     }}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >
                                     Cancel Job
                                 </button>
                                 }
                                 {showCancelRequestButton &&
-                                <button onClick={this.onClickCancelRequest} className="custom-buttons">
+                                <button onClick={this.onClickCancelRequest} className="custom-small-buttons">
                                     Cancel Request
                                 </button>
                                 }
                                 {showContractButton &&
                                 <a
                                     href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
-                                    className="custom-buttons">
+                                    className="custom-small-buttons">
                                     View Contract
                                 </a>
                                 }
                                 {showChatButton &&
                                 <Link
                                     to={`/chat?job_id=${job_id}`}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >Chat</Link>
                                 }
                                 {showDeleteButton &&
@@ -288,7 +286,7 @@ class JobDetailsPage extends Component {
                                             });
                                         }
                                     }}
-                                    className="custom-buttons delete-button"
+                                    className="custom-small-buttons delete-button"
                                 >
                                     Delete Job
                                 </button>
@@ -296,13 +294,13 @@ class JobDetailsPage extends Component {
                                 {showJobRequestsButton &&
                                 <Link
                                     to={`/job_requests?job_id=${job_id}`}
-                                    className="custom-buttons"
+                                    className="custom-small-buttons"
                                 >
                                     View Requests
                                 </Link>
                                 }
                             </div>
-                            <h1 className="page-title-header">{job.title}</h1>
+                            <h1 className="page-title-header white-title">{job.title}</h1>
                         </div>
                         <div className = "parent-table-body-container">
                             <div className="child1-flex-body-container">
@@ -332,7 +330,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <td className='column-table-body col1'>Category:</td>
                                     <td className='column-table-body col2'>
-                                        <Chip label={job.categories} style = {chipStyleJobDetails}/>
+                                        <Chip label={job.categories} style = {chipjobdetails}/>
                                     </td>
                                 </tr>
                                 <tr className='row-table-body'>
@@ -362,7 +360,7 @@ class JobDetailsPage extends Component {
     }
 }
 
-const chipStyleJobDetails = {
+const chipjobdetails = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
     fontSize : "18px",

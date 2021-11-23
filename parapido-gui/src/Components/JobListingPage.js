@@ -1,16 +1,15 @@
 import React, {Component, createRef} from "react";
-import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth} from "../Utilities";
-import { Button} from "@material-ui/core";
+import {accountType, cancelJobRequest, getQueryParams, jobStatus, setJobStatus, verifyUserAuth, years, months} from "../Utilities";
 import JobListing from "./JobListing";
 import RatingModal from "./RatingModal";
-import "../Layouts/JobListing.css";
 import ItemsDropdown from "./ItemsDropdown";
-import JobCompleted_listings from "../Static/Images/JobCompleted_listings.svg"
-import JobInProgress_listings from "../Static/Images/JobInProgress_listings.svg"
-import JobPosted_listings from "../Static/Images/JobPosted_listings.svg"
-import JobRequested_listings from "../Static/Images/JobRequested_listings.svg"
+import FilterListIcon from "@material-ui/icons/FilterList";
 import Alert from "@material-ui/lab/Alert";
-
+import JobCompleted from "../Static/Images/JobCompletedBlue.svg";
+import JobInProgress from "../Static/Images/JobInProgressBlue.svg";
+import JobPosted from "../Static/Images/JobPostedBlue.svg";
+import JobRequested from "../Static/Images/JobRequestedBlue.svg"
+import {Box, CircularProgress} from "@material-ui/core";
 
 class JobListingPage extends Component {
     status = undefined;
@@ -22,6 +21,7 @@ class JobListingPage extends Component {
         this.status = queryParams.get('status');
         const userType = parseInt(localStorage.getItem('type'));
         this.state = {
+            entitiesLoaded: false,
             listings: [],
             rating: 1,
             ratingRef: createRef(),
@@ -47,8 +47,8 @@ class JobListingPage extends Component {
     }
 
     componentDidMount(){
+        document.body.style.backgroundColor = "#FFFFFF";
         this.status = getQueryParams(this.props.queryParams).get('status');
-        document.body.style.backgroundColor = "white";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
@@ -56,6 +56,71 @@ class JobListingPage extends Component {
     }
 
     token = this.props.cookies.get('csrf_access_token');
+    
+    fetchList() {
+        const {monthRef, yearRef} = this.state
+
+        let filters = '';
+
+        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '' && yearRef.current.state.item !== '0')
+            filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
+
+        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '' &&  monthRef.current.state.item !== '0')
+            filters += "&month=" + monthRef.current.state.item
+
+        if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
+        else this.idFilter = "?owner_id=" + this.state.user_id
+
+        if(this.status === '1' && this.state.userAccountType === 1){
+            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data
+                            })
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({listIsEmpty: true})
+                }
+            })
+        }
+        else{
+            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data,
+                                entitiesLoaded: true
+                            })
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({
+                        listIsEmpty: true,
+                        entitiesLoaded: true
+                    })
+                }
+            })
+        }
+    }
 
     deleteListing = (listingIndex) => {
         let deleteSuccess;
@@ -78,7 +143,7 @@ class JobListingPage extends Component {
             else {
                 const state = this.state.userAccountType === accountType.student ? jobStatus.posted : jobStatus.cancelled;
                 deleteSuccess = setJobStatus(this.token, job_id, state)
-                status = 'canceled';
+                status = 'cancelled';
             }
 
             if (deleteSuccess) {
@@ -123,43 +188,17 @@ class JobListingPage extends Component {
         this.setState({open: false})
     }
 
-    years = [
-        '2021',
-        '2022',
-        '2023',
-        '2024',
-        '2025',
-        '2026',
-        '2027',
-        '2028'
-    ];
-
-    months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
-
     hideAlert() {
         setTimeout(() => {this.setState({
             alert: {msg: undefined}})}, 3000);
     }
 
     render(){
-        const { alert } = this.state;
+        const { alert} = this.state;
         return (
             <div>
                 {alert.msg !== undefined &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error-job-creation">
+                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
                     {alert.msg}</Alert>
                 }
                 <RatingModal
@@ -172,136 +211,74 @@ class JobListingPage extends Component {
                     cookies = {this.props.cookies}
                     setAlert={this.setAlert}
                 />
+                {this.state.userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
+                {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
+                {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
+                {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
 
-                <div className={"outer-div"}>
-
-                    <div className={"list-flexbox"}>
-
-                        {this.state.userAccountType === 1 && this.status === '1' && <div className="job-listing-page-header"> Jobs Requested </div>}
-                        {this.state.userAccountType === 2 && this.status === '1' && <div className="job-listing-page-header"> Jobs Posted </div>}
-                        {this.status === '2' && <div className="job-listing-page-header"> Jobs In-Progress </div>}
-                        {this.status === '3' && <div className="job-listing-page-header"> Jobs Completed </div>}
-                        {this.state.listIsEmpty && <h2 className="empty-list-msg"> No jobs available </h2>}
-
-
-                        {!this.state.listIsEmpty &&
-                        <ul id="list-bullet-style">
-
-                            {
-
-                                this.state.listings.map((listing, index) => {
-                                    let listingIndex = index
-                                    return <JobListing
-                                        price={listing.price} date_posted={listing.date_posted}
-                                        title={listing.title} category={listing.categories}
-                                        key={listing.id} job_id={listing.job_id} status={this.status}
-                                        deleteListing={this.deleteListing.bind(this, listingIndex)}
-                                        onClickRate={this.onClickRate.bind(this, listingIndex)}
-                                    />
-                                })
-                            }
-                        </ul>
-                        }
-                    </div>
-                    <div className={"right-flexbox"}>
-                        <div className={"filters-flexbox"}>
+                <div className="main-listing-flex">
+                    <div className={"left-items-listings"}>
+                        <div className={"filters-flex-listings"}>
                             <ItemsDropdown
                                 blackLabel
                                 ref={this.state.yearRef}
                                 validate={false}
-                                itemsList={this.years}
+                                itemsList={years}
                                 label='Year'
                             />
                             <ItemsDropdown
                                 blackLabel
                                 ref={this.state.monthRef}
                                 validate={false}
-                                itemsList={this.months}
+                                itemsList={months}
                                 label='Month'
                             />
-
-                            <Button id={"go-back-button"} onClick={this.fetchList}>
-                                Filter
-                            </Button>
+                            <button className="filter-button" style={{width:"15vh"}} onClick={() => {
+                                this.setState({entitiesLoaded: false});
+                                this.fetchList();
+                            }}>
+                                <div className="text-filter-button">
+                                    <FilterListIcon/>Filter
+                                </div>
+                            </button>
                         </div>
-
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
-
+                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested} alt="jobrequested" />}
+                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted} alt="jobposted" />}
+                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress} alt="jobinprogress" />}
+                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted} alt="jobcompleted" />}
                     </div>
+                    {!this.state.entitiesLoaded ?
+                                <div className='loading-icon' style={{marginLeft: "20vw"}}>
+                                    <Box sx={{display: 'flex'}}>
+                                        <CircularProgress />
+                                    </Box>
+                                </div> :
+                                <div>
+                                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
+                                    <div>
+                                        {
+                                            this.state.listings.map((listing, index) => {
+                                                let listingIndex = index
+                                                return <JobListing
+                                                    price={listing.price} 
+                                                    date_posted={listing.date_posted}
+                                                    title={listing.title} 
+                                                    category={listing.categories}
+                                                    key={listing.id} 
+                                                    job_id={listing.job_id} 
+                                                    status={this.status}
+                                                    deleteListing={this.deleteListing.bind(this, listingIndex)}
+                                                    onClickRate={this.onClickRate.bind(this, listingIndex)}
+                                                />
+                                            })
+                                        }
+                                    </div>}
+                                </div>
+                    }
                 </div>
             </div>
         );
     };
-
-    fetchList() {
-        //Handle Filters
-        const {monthRef, yearRef} = this.state
-
-        let filters = '';
-
-        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
-            filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
-
-        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
-            filters += "&month=" + monthRef.current.state.item
-
-        if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
-        else this.idFilter = "?owner_id=" + this.state.user_id
-
-        if(this.status === '1' && this.state.userAccountType === 1){
-
-            //Fetch Requested Jobs
-            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                }
-            }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-                            this.setState({
-                                listIsEmpty: false,
-                                listings: data
-                            })
-                        }
-                    )
-                }
-                else if(response.status === 404){
-                    this.setState({listIsEmpty: true})
-                }
-            })
-        }
-
-        //Fetch In-Progress, Completed and Posted Jobs
-        else{
-            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                }
-            }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-                            this.setState({
-                                listIsEmpty: false,
-                                listings: data
-                            })
-                        }
-                    )
-                }
-                else if(response.status === 404){
-                    this.setState({listIsEmpty: true})
-                }
-            })
-        }
-    }
 }
-
 
 export default JobListingPage;

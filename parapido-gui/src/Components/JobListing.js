@@ -1,16 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "../Layouts/JobListing.css"
 import {blue, red} from "@material-ui/core/colors";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import {Box, IconButton} from "@material-ui/core";
+import {Box, Chip, IconButton} from "@material-ui/core";
 
-const boxSX = {
+const box = {
+    overflow:'none',
     display: 'flex',
+    alignItems: 'center',
+    alignContent:'center',
     flexWrap: 'wrap',
-    width: '80%',
-    height: 60,
+    height: "6vh",
     backgroundColor: '#2F2D4A',
     borderRadius: 20,
     border: 2,
@@ -19,82 +20,64 @@ const boxSX = {
         backgroundColor: '#2F2D8F',
         opacity: [0.9, 0.8, 0.7],
     },
+    justifyContent:'space-evenly',
+    gap:'2vh',
+    marginLeft: '52px',
+    width:'80vh',
+    fontFamily: 'Jost',
+    fontSize: '14px'
 }
-
-const categoryBoxSX = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    position: 'absolute',
-    marginLeft: '25%',
-    width: '7%',
-    height: 8,
-    verticalAlign: 'middle',
-    color: '#2F2D4A',
-    align: 'center',
-    textAlign: 'center',
-    fontWeight: 700,
-    backgroundColor: '#FFEBCC',
-    borderRadius: 50,
-    border: 2,
-    borderColor: 'black',
-    padding: 17,
-    alignSelf: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-}
-
 
 const listing = (props) => {
-    return(
-
-        <li list-style-type = "none">
-
-
-            <Link to = {"/job/" + props.job_id} className = "titleLink" >
+    const { job_id, title, price, category, date_posted, status, onClickRate, deleteListing} = props
+    return(        
                 <Box
                     border = {2}
                     borderColor = "black"
-                    sx = {boxSX}
+                    sx = {box}
                     marginTop={5}
-                >
-
-                    <span id={"listing-title"}> {props.title} </span>
-                    <span id={"listing-price"}> {props.price} </span>
-                    <Box component = "span" sx={categoryBoxSX}> {props.category} </Box>
-                    <span id={"listing-date"}> {props.date_posted} </span>
-
-                </Box>
-            </Link>
-            { props.status === '2' &&
-
-            <span id={"checkbox-style"}>
-                        <IconButton>
-                            <ThumbUpIcon
-                                sx={{ color: blue[100],
-                                    fontSize: 25,
-                                }}
-                                onClick={props.onClickRate}
-                            />
-                        </IconButton>
-                            </span>
-            }
-
-
-            { (props.status === '1' || props.status === '2') &&
-            <span id={"delete-button"}>
-                    <IconButton aria-label="delete" color="error">
-                        <DeleteIcon
-                            onClick={props.deleteListing}
-                            sx={{ color: red[900],
-                                fontSize: 25,
-                            }}
-
-                        />
-                    </IconButton>
-                </span>
-            }
-        </li>
+                >                   
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {title} </div></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {price} </div></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipjoblisting}/></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {date_posted} </div></Link>
+                    {status === '2' &&
+                        <div>
+                            <IconButton>
+                                <ThumbUpIcon
+                                    sx={{ color: blue[100],
+                                        fontSize: 25,
+                                    }}
+                                    onClick={onClickRate}
+                                />
+                            </IconButton>
+                        </div>
+                    }
+                    {(status === '1' || status === '2') &&
+                        <div>
+                            <IconButton aria-label="delete" color="error">
+                                <DeleteIcon
+                                    onClick={deleteListing}
+                                    sx={{ color: red[900],
+                                        fontSize: 25,
+                                    }}
+                                />
+                            </IconButton>
+                        </div>
+                    }
+            </Box>
     )
+}
+
+const chipjoblisting = {
+    backgroundColor : "#FFEBCC",
+    fontFamily : "Jost",
+    fontSize : "18px",
+    fontWeight: "400",
+    padding: '5px',
+    border: "1px solid black",
+    marginRight: '5px',
+    cursor:"pointer"
 }
 
 export default listing;

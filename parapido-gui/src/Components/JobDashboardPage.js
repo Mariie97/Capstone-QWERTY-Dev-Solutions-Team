@@ -4,7 +4,6 @@ import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilit
 import ItemsDropdown from "./ItemsDropdown.js";
 import JobDashboardCard from "./JobDashboardCard";
 import FilterListIcon from "@material-ui/icons/FilterList";
-
 import {Box, CircularProgress} from "@material-ui/core";
 
 class JobDashboardPage extends Component {
@@ -30,12 +29,11 @@ class JobDashboardPage extends Component {
     }
 
     componentDidMount() {
+        document.body.style.backgroundColor = "#2F2D4A"
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-
-        // webpage background color
-        document.body.style.backgroundColor = "#2F2D4A";
+      ;
         this.getJobs();
     }
 
@@ -61,7 +59,6 @@ class JobDashboardPage extends Component {
         this.setState(
             {filterLoaded: false}
         )
-
         let category = this.state.change_category?.current.state.item;
         let city = this.state.change_city?.current.state.item;
         let filterResult = '?';
@@ -149,7 +146,6 @@ class JobDashboardPage extends Component {
                 )
             }
         })
-
     }
 
     render() {
@@ -158,6 +154,7 @@ class JobDashboardPage extends Component {
         const cardArray = jobs.map(
             job => <JobDashboardCard
                 job_id = {job.job_id}
+                date_posted = {job.date_posted}
                 title = {job.title}
                 city = {job.city}
                 price = {job.price}
@@ -179,11 +176,11 @@ class JobDashboardPage extends Component {
                         </Box>
                     </div> :
                     <div>
-                        <h1 className="page-title-header">Job Dashboard
+                        <h1 className="page-title-header white-title">Job Dashboard
                             {showJobCreationButton &&
                             <Link to="/jobcreation">
                                 <button className="create-job-button-job-dashboard">
-                                    <div className="text1-button-job-dashboard">
+                                    <div className="text-button-job-dashboard">
                                         Create Job
                                     </div>
                                 </button>
@@ -191,7 +188,7 @@ class JobDashboardPage extends Component {
                             }
                         </h1>
 
-                        <div className="first-flex-container-job-dashboard-page">
+                        <div style={firstflexcontainer}>
                             <ItemsDropdown
                                 cormorantlabel
                                 lineheightstyle="2.5"
@@ -215,15 +212,14 @@ class JobDashboardPage extends Component {
                                 itemsList={cities}
                                 label='Cities'
                             />
-
-                            <button className="filter-button-job-dashboard" onClick={this.clickFilter}>
-                                <div className="text-button-job-dashboard">
+                            <button className="filter-button" onClick={this.clickFilter}>
+                                <div className="text-filter-button">
                                     <FilterListIcon/>Filter
                                 </div>
                             </button>
                         </div>
                         {!filterLoaded ?
-                            <div className='loading-icon1'>
+                            <div className='loading-icon' style={{height:"50vh"}}>
                                 <Box sx={{display: 'flex'}}>
                                     <CircularProgress style={{alignItems:"center"}}/>
                                 </Box>
@@ -233,9 +229,16 @@ class JobDashboardPage extends Component {
                             </div>}
                     </div>}
             </div>
-
         )
     }
 }
+
+const firstflexcontainer = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    flexWrap: "wrap",
+	marginBottom: "auto"
+};
 
 export default JobDashboardPage;

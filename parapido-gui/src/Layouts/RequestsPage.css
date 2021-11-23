@@ -31,16 +31,12 @@
     padding-top: 12px;
 }
 
-.request-page-subheader {
-    font-family: "Jost";
-    color: white;
-}
-
 .request-card-actions-container {
     border-top: 1px solid green;
 }
 
 /* mui cards css */
+
 .MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeSmall.MuiButton-textSizeSmall.MuiButtonBase-root.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
     color: green;
     font-family: 'Times New Roman';

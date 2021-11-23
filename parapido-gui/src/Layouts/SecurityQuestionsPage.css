@@ -22,21 +22,6 @@
     background: #FFFFFF;
 }
 
-.createButtonStyle {
-    position: absolute;
-    width: 190px;
-    height: 80px;
-    left: 850px;
-    top: 900px;
-    color: black;
-    border: 2px solid;
-    background: #FFEBCC;
-    font-weight: bold;
-    font-family: Jost;
-    font-size: 24px;
-    outline: 2px black;
-}
-
 .securityQuestionTextStyle {
     position: absolute;
     left: 643px;
@@ -118,19 +103,19 @@
     text-align: center;
 }
 
-
 .security-body-flex-container {
     width: 40%;
     margin: 0 auto;
 }
 
-.security-page-subheader {
-    text-align: center;
-    color: white;
-    margin-bottom: 15px;
-}
 .security-page-input{
     width: 100%;
+}
+
+/* button movement */
+
+#security-submit-button{
+    margin: 25px 0;
 }
 
 .security-page-button{
@@ -138,15 +123,8 @@
     transform: translate(-50%);
     margin-top: 25px;
 }
-#security-submit-button{
-    margin: 25px 0;
-}
 
 #security-change-pswd-button{
     width: 50%;
     margin: 10% 0;
-}
-
-.MuiFilledInput-root{
-    border-radius: 0vh;
 }

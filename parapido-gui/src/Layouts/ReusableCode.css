@@ -9,7 +9,7 @@
 	box-sizing: border-box;
 }
 
-/*small urls style */
+/* urls style */
 
 #small-urls {
 	color: #ffebcc;
@@ -18,4 +18,125 @@
 
 #small-urls:hover {
 	color: black;
+}
+
+#parapido-email-error-page{
+    color: lightcoral;
+	text-decoration: underline;
+}
+
+#parapido-email-error-page:hover {
+	color: black;
+}
+
+/* empty list message */
+
+.empty-list-subheader {
+    font-family: "Jost";
+}
+
+.white {
+	color: white;
+}
+
+.black{
+	color: black;
+}
+
+/* input file types*/
+
+.custom-file-upload {
+	padding: 10px;
+	background-color: #FFEBCC;
+	border: 2px solid black;
+	border-radius: 10px;
+	font-family: jost;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	margin-left: -1.8px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	gap: 4px;
+}
+
+.custom-file-upload:hover {
+	border-color: white;
+}
+
+.custom-file-upload:active {
+	background-color: #2e856e;
+}
+
+/* checkbox */
+
+#checkbox-small-size{
+    height: 2.5vh;
+    width: 2.5vh;
+    cursor: pointer;
+}
+
+.checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.checkbox > input {
+    height: 25px;
+    width: 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 2px solid #34495E;
+    border-radius: 4px;
+    outline: none;
+    transition-duration: 0.3s;
+    background-color: #41B883;
+    cursor: pointer;
+  }
+
+.checkbox > input:checked {
+    border: 2px solid #34495E;
+    background-color: #41B883;
+}
+
+.checkbox > input:checked::before {
+    content: '\2713';
+    color: white;
+    position: absolute; 
+    display: flex;
+    height: 2vh;
+    width: 2vh;
+    justify-content: center;
+    align-items: center; 
+}
+
+.checkbox > input:active {
+    border: 2px solid #34495E;
+}
+
+/* loading icon */
+
+.loading-icon {
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
+
+/* server error positioning and styling */
+
+.server-error{
+	position: absolute;
+	width: 100%;
+	bottom: 89.2vh;
+	border-radius: 0vh;
+	height:4%;
+	display:flex;
+	justify-content:center;
+	align-items: center;
 }

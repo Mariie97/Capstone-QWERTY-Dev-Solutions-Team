@@ -11,14 +11,17 @@
 	position: relative;
 	top: 35px;
 }
+
 .grid-edit-info-item1 {
 	grid-column-start: 1;
 	grid-row-start: 2;
 }
+
 .grid-edit-info-item2 {
 	grid-column-start: 1;
 	grid-row-start: 3
 }
+
 .grid-edit-info-item3 {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -59,53 +62,14 @@ h2.edit-subheaders {
 	bottom: 12px;
 }
 
+/* button positioning */
+
 .save-change-button {
 	float: right;
 	top: 22px;
 }
 
-.loading-icon {
-	justify-content: center;
-	display: flex;
-	align-items: center;
-	height: 100%;
-}
-
-.label-about-profile-page{
-	font-family: "Cormorant Garamond";
-	font-style: italic;
-	font-weight: 400;
-	font-size: 16px;
-	color: white;
-	letter-spacing: 1px;
-	line-height: 2;
-}
-
-.custom-file-upload-profile-page {
-	padding: 10px;
-	background-color: #FFEBCC;
-	border: 2px solid black;
-	border-radius: 10px;
-	font-family: jost;
-	font-size: 14px;
-	font-weight: 400;
-	cursor: pointer;
-	margin-left: -1.8px;
-	display: flex;
-	align-items: center;
-	align-content: center;
-	gap: 4px;
-}
-
-.custom-file-upload-profile-page:hover {
-	border-color: white;
-}
-
-.custom-file-upload-profile-page:active {
-	background-color: #2e856e;
-}
-	
-.change-about-style-profile-page{
+.change-about-profile-page{
 	font-family: "Jost";
 	font-size: 15px;
 	width: 100%;
@@ -115,7 +79,7 @@ h2.edit-subheaders {
 	resize: none;
 }
 
-.change-about-style-profile-page:focus{
+.change-about-profile-page:focus{
 	background-color: #ffebcc;
 	border: 3px solid black;
 	outline: none;
@@ -134,4 +98,5 @@ h2.edit-subheaders {
 	margin-bottom: 1vh;
 	color: white;
 	font-size: 12px;
+	font-family: 'Jost';
 }

@@ -1,0 +1,285 @@
+/* small buttons */
+
+.button-flex-container {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    margin-right: 5%;
+}
+
+.custom-small-buttons {
+    border: 1px solid black;
+    text-decoration: none;
+    font-family: "Jost";
+    font-weight: 400;
+    color: black;
+    background-color: #ffebcc;
+    text-align: center;
+    position: relative;
+    width: 110px;
+    font-size: 14px;
+    margin-left: 10px;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.custom-small-buttons.delete-button {
+    background-color: #ac1212;
+}
+
+.custom-small-buttons:hover {
+    border-color: white;
+    cursor: pointer;
+}
+
+.custom-small-buttons:active {
+    background-color: #2e856e;
+}
+
+
+/* filter button */ 
+
+.filter-button{
+	width: 10%;
+	border: 3px solid #FFEBCC;
+	background-color: #FFEBCC;
+	border-radius: 10px;
+	text-align: center;
+	position: relative;
+	bottom: 6px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	align-self: flex-end;
+	top: 0px;
+}
+
+.filter-button:hover{
+    cursor: pointer;
+    border: 3px solid white;  
+}
+
+.filter-button:active{
+    background-color: #2e856e;
+}
+
+.text-filter-button{
+    font-family: "Jost";
+	font-weight: lighter;
+	font-size: 32px;
+	color: #2F2D4A;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.create-job-button-job-dashboard{
+	width: 15%;
+	border: 3px solid #FFEBCC;
+	background-color: #FFEBCC;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	right: 10vh;
+	top: 14vh;
+}
+
+/* job dashboard button */
+
+.create-job-button-job-dashboard:hover{
+    cursor: pointer;
+    border: 3px solid white;  
+}
+
+.create-job-button-job-dashboard:active{
+    background-color: #2e856e;
+}
+
+.text-button-job-dashboard{
+    font-family: Jost;
+	font-weight: lighter;
+	font-size: 22px;
+	color: #2F2D4A;
+	display: flex;
+	grid-gap: 10px;
+	gap: 10px;
+	align-items: center;
+}
+
+/* user creation button */
+
+.create-button-style{
+	width: 310px;
+	height: 37px;
+	border: 2px solid black;
+	border-radius: 20px;
+	background: rgb(255, 235, 204) none repeat scroll 0% 0%;
+	font-family: "Jost";
+	font-weight: lighter;
+	font-size: 20px;
+	letter-spacing: 1px;
+	cursor: pointer;
+}
+
+.create-button-style:hover{
+	border: 2px solid white;
+}
+
+
+.create-button-style:active{
+	background-color: green;
+}
+
+/* job creation button */
+
+.button-job-creation{
+	width: 40%;
+	margin-top: 28px;
+	padding-bottom: 15px;
+	background-color: #91EB8F;
+	border: 2px solid #91EB8F;
+	border-radius: 10px;
+}
+
+.button-job-creation:hover{
+	cursor: pointer;
+	border: 2px solid black;
+}
+
+.text-button-job-creation{
+	position: relative;
+	top: 5px;
+	font-family: "Helvetica";
+	font-size: 15px;
+	color: black;
+	letter-spacing: 12px;
+}
+
+.text-button-job-creation:hover{
+	color:floralwhite;
+}
+
+/* agreement modal button */
+
+.agreement-modal-continue-button {
+    margin-top: 35px;
+    padding-bottom: 20px;
+    background-color: #FFEBCC;
+    border: 2px solid #FFEBCC;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.agreement-modal-continue-button:hover{
+    cursor: pointer;
+    border: 2px solid black;  
+}
+
+.agreement-modal-continue-button:active {
+	background-color: #2e856e;
+}
+
+.agreement-modal-continue-button:disabled{
+    background-color: #cccccc;
+    cursor:not-allowed;
+    border: 2px solid #666666;
+}
+
+.agreement-modal-continue-button:disabled .text-button-agreement-modal{
+    color:#666666;
+}
+
+.text-button-agreement-modal{
+    float: left;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    font-family: "Jost";
+    font-size:13px;
+    color: #2F2D4A;
+}
+
+/* error page button*/
+
+.button-error-page{
+	width: 45vh;
+	margin-top: 28px;
+	padding-bottom: 15px;
+	background-color: lightcoral;
+	border: 2px solid lightcoral;
+	border-radius: 10px;
+}
+
+.button-error-page:hover{
+	cursor: pointer;
+	border: 2px solid black;
+}
+
+.text-button-error-page{
+	position: relative;
+    top: 5px;
+    font-family: Jost;
+    font-size: 15px;
+    color: black;
+    letter-spacing: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+.text-button-error-page:hover{
+	color:floralwhite;
+}
+
+/* landing page button */
+
+.button-landing {
+	display: inline-block;
+	padding-right: 45px;
+	padding-left: 45px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	margin: 0.1em;
+	border: 0.2em solid black;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: "Jost";
+	font-weight: bold;
+	font-size: 20px;
+	color: black;
+	background-color: #ffebcc;
+	text-align: center;
+	position: relative;
+	top: 540px;
+	left: 600px;
+}
+
+.button-landing:hover {
+	border-color: white;
+}
+
+.button-landing:active {
+	background-color: #2e856e;
+}
+
+/* login modal button */
+
+.login-modal-continue-button{
+    width: 95%;
+    margin-top: 35px;
+    padding-bottom: 20px;
+    background-color: #FFEBCC;
+    border: 2px solid #FFEBCC;
+    border-radius: 10px;
+}
+
+.login-modal-continue-button:hover{
+    cursor: pointer;
+    border: 2px solid black;  
+}
+
+.login-modal-continue-button:active {
+	background-color: #2e856e;
+}

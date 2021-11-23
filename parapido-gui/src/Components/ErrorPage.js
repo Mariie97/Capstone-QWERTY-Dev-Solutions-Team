@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import errorpagecartoon from "../Static/Images/Error_Page_Cartoon.jpg";
-import error from "../Static/Images/Error.png";
+import ErrorPageCartoon from "../Static/Images/ErrorPageCartoon.jpg";
+import Error from "../Static/Images/Error.png";
 import EmailIcon from '@material-ui/icons/Mail';
 
 class ErrorPage extends Component {
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
     }
 
@@ -15,11 +14,11 @@ class ErrorPage extends Component {
         return (
             <div className={"main-container-error-page"}>
                 <div className="body-container-error-page">
-                    <img src= {errorpagecartoon}  alt="errorpagecartoon" style={{height:"90vh"}} />
+                    <img src= {ErrorPageCartoon}  alt="errorpagecartoon" style={{height:"90vh"}} />
                     <div className="main-text-container-error-page">
                         <div className="error-response-error-page">
                             {errorNumber}
-                            <img src= {error}  alt="error" style={{marginLeft:"2vh"}}/>
+                            <img src= {Error}  alt="error" style={{marginLeft:"2vh"}}/>
                         </div>
                         <div className="error-response-error-page1">
                             <div>Uh-OH!!!</div>
@@ -45,7 +44,6 @@ class ErrorPage extends Component {
     }
 }
 
-// small icons and elements css
 const mail = {
     color: "lightcoral",
     height: 20,

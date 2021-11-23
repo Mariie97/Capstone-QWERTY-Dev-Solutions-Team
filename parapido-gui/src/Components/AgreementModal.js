@@ -18,8 +18,8 @@ const style = {
     boxShadow: 24,
     p: 4,
     padding: '9px',
-    borderRadius: "1vh",
-    paddingBottom: "2vh"
+    borderRadius: '1vh',
+    paddingBottom: '2vh'
 }
 
 class AgreementModal extends Component {
@@ -43,12 +43,6 @@ class AgreementModal extends Component {
         this.isChecked = this.isChecked.bind(this);
       }
   
-      isChecked(event){
-            this.setState({
-                checked: event.target.checked
-              })
-      }
-
       handleOnClick(){
           const {job_id, student_id, cookies} = this.props;
          
@@ -73,7 +67,11 @@ class AgreementModal extends Component {
                   })        
             }
             else{
-                alert('Failed' + response.status);
+                this.setState({
+                    isclient: true,
+                    alertMssg: "Sorry can't process right now 😔 please try again later!!!",
+                    severity: "error"
+                    }) 
             }
             })
           }
@@ -97,19 +95,28 @@ class AgreementModal extends Component {
                             }) 
                     }
                     else {
-                       console.log("TODO: Error alert")
+                        this.setState({
+                            isstudent: true,
+                            alertMssg: "Sorry can't request job right now 😔 please try again later!!!",
+                            severity: "error"
+                            }) 
                     }
                 })       
           }
       }
+
+    isChecked(event){
+        this.setState({
+            checked: event.target.checked
+          })
+    }     
 
     render() {
         const {checked, isclient, isstudent, alertMssg, severity} = this.state;
         const {isOpen, toggle} = this.props;
 
         return (
-            <StyledEngineProvider injectFirst>
-                
+            <StyledEngineProvider injectFirst>          
                     <div>
                         <Modal
                             open={isOpen}
@@ -118,21 +125,22 @@ class AgreementModal extends Component {
                         >
                             <Box sx={style}>
                                 <div className="logo-flex-Agreement">
-                                    <img src={Logo} alt="login logo" style={login_logostyle}/>
+                                    <img src={Logo} alt="login logo" style={loginlogo}/>
                                 </div>
                                 <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>      
                                 <div className="body-container-agreement-modal">
                                     <p className="long-text-agreement-modal"> 
-                                    <label class="checkbox">
-                                    <input type="checkbox" id="agree" onChange={this.isChecked.bind(this)} />
-                                    </label>
-                                    Check to state that you have read and agree with the job information </p>
-                                    <img style={virtual_contract_image_resize} src={VirtualContract} alt="continue arrow" />
+                                        <label class="checkbox">
+                                            <input type="checkbox" id="checkbox-small-size" style={{marginRight: "1vh"}} onChange={this.isChecked.bind(this)} />
+                                        </label>
+                                        Check to state that you have read and agree with the job information
+                                    </p>
+                                    <img style={virtualcontract} src={VirtualContract} alt="continue arrow" />
                                     {isstudent && <Redirect to={{
                                         pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity }
                                     }}/>}
-                                     {isclient && <Redirect to={{
+                                    {isclient && <Redirect to={{
                                         pathname: `/myjobs/${this.currentUser.id}`,
                                         state: { alertMssg: alertMssg, severity: severity}
                                     }}/>}
@@ -140,7 +148,7 @@ class AgreementModal extends Component {
                                         <div className="text-button-agreement-modal">
                                             Agree & Continue
                                         </div>
-                                        <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
+                                        <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                                 </div>
                                 <hr className="line-login-modal" />
@@ -152,22 +160,20 @@ class AgreementModal extends Component {
     }
 }
 
-// small icons and elements css
-
-const login_logostyle = {
+const loginlogo = {
     width: 80,
     height: 80,
     float: "right",
 };
 
-const continue_arrow_image_resize = {
+const continuearrow = {
     height: "80px",
     width: "100px",
     position: "fixed",
     bottom: "-1.3vh",
 };
 
-const virtual_contract_image_resize = {
+const virtualcontract = {
     height: 80,
     width: 75,
     marginBottom: "1vh"
