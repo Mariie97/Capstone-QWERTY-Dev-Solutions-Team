@@ -57,55 +57,56 @@ class myJobsDashboardPage extends Component {
         const is_admin = this.currentUser.type === accountType.admin;
         const {alertMssg, severity, is_auth} = this.state
         const { user_id } = this.props;
-        console.log(Number(this.queryParams.get('account')) === accountType.client)
-    
+
         return (
             <div>
                 {!is_auth && <Redirect to='/' /> }
                 {is_admin && this.queryParams.get('account')===null ?
                     <ErrorPage errorNumber="400" errorType="Bad request" inside/> :
-                    <React.Fragment>
-                        {(alertMssg !== undefined && severity !== undefined) &&
-                        <Alert onLoad={this.hideAlert()} severity={severity} className="server-error">
-                            {alertMssg}
-                        </Alert>}
-                        <div className="myjobs-card-general-style">
-                            <div className="myjobs-card-container">
-                                {(is_client || (is_admin && Number(this.queryParams.get('account')) === accountType.client)) &&
-                                <MyJobsCard
-                                    title="Posted Jobs"
-                                    imgtype="1"
-                                    status={jobStatus.posted}
-                                    account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
-                                    user_id={user_id}
-                                />
-                                }
-                                {(is_student || (is_admin && Number(this.queryParams.get('account')) === accountType.student)) &&
-                                <MyJobsCard
-                                    title="Requested Jobs"
-                                    imgtype="2"
-                                    status={jobStatus.posted}
-                                    account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
-                                    user_id={user_id}
-                                />
-                                }
-                                <MyJobsCard
-                                    title="In-progress Jobs"
-                                    imgtype = "3"
-                                    status={jobStatus.in_process}
-                                    account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
-                                    user_id={user_id}
-                                />
-                                <MyJobsCard
-                                    title="Completed Jobs"
-                                    imgtype="4"
-                                    status={jobStatus.completed}
-                                    account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
-                                    user_id={user_id}
-                                />
+                    user_id!=this.currentUser.id && !is_admin ?
+                        <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/> :
+                        <React.Fragment>
+                            {(alertMssg !== undefined && severity !== undefined) &&
+                            <Alert onLoad={this.hideAlert()} severity={severity} className="server-error">
+                                {alertMssg}
+                            </Alert>}
+                            <div className="myjobs-card-general-style">
+                                <div className="myjobs-card-container">
+                                    {(is_client || (is_admin && Number(this.queryParams.get('account')) === accountType.client)) &&
+                                    <MyJobsCard
+                                        title="Posted Jobs"
+                                        imgtype="1"
+                                        status={jobStatus.posted}
+                                        account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                        user_id={user_id}
+                                    />
+                                    }
+                                    {(is_student || (is_admin && Number(this.queryParams.get('account')) === accountType.student)) &&
+                                    <MyJobsCard
+                                        title="Requested Jobs"
+                                        imgtype="2"
+                                        status={jobStatus.posted}
+                                        account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                        user_id={user_id}
+                                    />
+                                    }
+                                    <MyJobsCard
+                                        title="In-progress Jobs"
+                                        imgtype = "3"
+                                        status={jobStatus.in_process}
+                                        account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                        user_id={user_id}
+                                    />
+                                    <MyJobsCard
+                                        title="Completed Jobs"
+                                        imgtype="4"
+                                        status={jobStatus.completed}
+                                        account={this.queryParams.get('account')===null ? undefined : this.queryParams.get('account')}
+                                        user_id={user_id}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    </React.Fragment>
+                        </React.Fragment>
                 }
             </div>
         )

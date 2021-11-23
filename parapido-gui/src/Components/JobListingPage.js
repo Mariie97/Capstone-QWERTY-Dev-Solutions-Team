@@ -11,6 +11,7 @@ import JobPosted_listings from "../Static/Images/JobPostedBlue.svg";
 import JobRequested_listings from "../Static/Images/JobRequestedBlue.svg"
 import {Box, CircularProgress} from "@material-ui/core";
 import {Redirect} from "react-router-dom";
+import ErrorPage from "./ErrorPage";
 
 class JobListingPage extends Component {
     status = undefined;
@@ -30,7 +31,7 @@ class JobListingPage extends Component {
             open: false,
             monthRef: createRef(),
             yearRef: createRef(),
-            userAccountType: userType === accountType.admin ? parseInt(queryParams.get('account')) : userType,
+            userAccountType: queryParams.get('account') !== null? parseInt(queryParams.get('account')) : userType,
             user_id: props.user_id,
             titleText: '',
             currJob: '',
@@ -131,77 +132,84 @@ class JobListingPage extends Component {
     }
 
     render(){
-        const { alert, user_id, is_auth} = this.state;
-
+        const { alert, user_id, is_auth, userAccountType} = this.state;
+        const allowedAccess = user_id == localStorage.getItem('user_id') || localStorage.getItem('type') == accountType.admin;
         return (
             <div>
                 {!is_auth && <Redirect to='/' /> }
-                {alert.msg !== undefined &&
-                <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
-                    {alert.msg}</Alert>
-                }
-                <RatingModal
-                    open = {this.state.open}
-                    handleClose = {this.handleClose.bind(this)}
-                    job_id = {this.state.currJob}
-                    userToRate = {this.state.userToRate}
-                    filterJobs = {this.fetchList}
-                    ratingRef = {this.state.ratingRef}
-                    cookies = {this.props.cookies}
-                    setAlert={this.setAlert}
-                />
-                {this.state.userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
-                {this.state.userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
-                {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
-                {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
+                {!allowedAccess ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/> :
+                    <React.Fragment>
+                        {alert.msg !== undefined &&
+                        <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">
+                            {alert.msg}</Alert>
+                        }
+                        <RatingModal
+                            open = {this.state.open}
+                            handleClose = {this.handleClose.bind(this)}
+                            job_id = {this.state.currJob}
+                            userToRate = {this.state.userToRate}
+                            filterJobs = {this.fetchList}
+                            ratingRef = {this.state.ratingRef}
+                            cookies = {this.props.cookies}
+                            setAlert={this.setAlert}
+                        />
+                        {userAccountType === 1 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Requested </div>}
+                        {userAccountType === 2 && this.status === '1' && <div className="page-title-header black-title left-position-title"> Jobs Posted </div>}
+                        {this.status === '2' && <div className="page-title-header black-title left-position-title"> Jobs In-Progress </div>}
+                        {this.status === '3' && <div className="page-title-header black-title left-position-title"> Jobs Completed </div>}
 
-                <div className="main-listing-flex">
-                    <div className={"left-items-listings"}>
-                        <div className={"filters-flex-listings"}>
-                            <ItemsDropdown
-                                blackLabel
-                                ref={this.state.yearRef}
-                                validate={false}
-                                itemsList={years}
-                                label='Year'
-                            />
-                            <ItemsDropdown
-                                blackLabel
-                                ref={this.state.monthRef}
-                                validate={false}
-                                itemsList={months}
-                                label='Month'
-                            />
-                            <button className="filter-button" style={{width:"15vh"}} onClick={() => {
-                                this.setState({entitiesLoaded: false});
-                                this.fetchList();
-                            }}>
-                                <div className="text-filter-button">
-                                    <FilterListIcon/>Filter
+
+                        <div className="main-listing-flex">
+                            <div className={"left-items-listings"}>
+                                <div className={"filters-flex-listings"}>
+                                    <ItemsDropdown
+                                        blackLabel
+                                        ref={this.state.yearRef}
+                                        validate={false}
+                                        itemsList={years}
+                                        label='Year'
+                                    />
+                                    <ItemsDropdown
+                                        blackLabel
+                                        ref={this.state.monthRef}
+                                        validate={false}
+                                        itemsList={months}
+                                        label='Month'
+                                    />
+                                    <button className="filter-button" style={{width:"15vh"}} onClick={() => {
+                                        this.setState({entitiesLoaded: false});
+                                        this.fetchList();
+                                    }}>
+                                        <div className="text-filter-button">
+                                            <FilterListIcon/>Filter
+                                        </div>
+                                    </button>
                                 </div>
-                            </button>
-                        </div>
-                        {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
-                        {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
-                        {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
-                        {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
-                    </div>
-                    {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
-                        <div>
-                            {!this.state.entitiesLoaded ?
-                                <div className='loading-icon' style={{marginLeft: "20vw"}}>
-                                    <Box sx={{display: 'flex'}}>
-                                        <CircularProgress />
-                                    </Box>
-                                </div> :
-                                <div>
-                                    {
+                                {this.state.userAccountType === 1 && this.status === '1' && <img id={"picture-style"} src={JobRequested_listings} alt="requested_job_img" />}
+                                {this.state.userAccountType === 2 && this.status === '1' && <img id={"picture-style"} src={JobPosted_listings} alt="posted_job_img" />}
+                                {this.status === '2' && <img id={"picture-style"} src={JobInProgress_listings} alt="inprogress_job_img" />}
+                                {this.status === '3' && <img id={"picture-style"} src={JobCompleted_listings} alt="completed_job_img" />}
+                            </div>
+                            {this.state.listIsEmpty ? <h2 className="empty-list-subheader black" style={{marginLeft: '52px', marginTop:'46px'}}> No jobs available </h2>:
+                                <div className='job-listing-container'>
+                                    {!this.state.entitiesLoaded ?
+                                        <div className='loading-icon' style={{marginLeft: "20vw"}}>
+                                            <Box sx={{display: 'flex'}}>
+                                                <CircularProgress />
+                                            </Box>
+                                        </div> :
                                         this.state.listings.map((listing, index) => {
                                             let listingIndex = index
                                             return <JobListing
-                                                price={listing.price} date_posted={listing.date_posted}
-                                                title={listing.title} category={listing.categories}
-                                                key={listing.id} job_id={listing.job_id} status={this.status}
+                                                owner_id={listing.owner_id}
+                                                student_id={listing.student_id}
+                                                price={listing.price}
+                                                date_posted={listing.date_posted}
+                                                title={listing.title}
+                                                category={listing.categories}
+                                                key={listing.id}
+                                                job_id={listing.job_id}
+                                                status={this.status}
                                                 deleteListing={this.deleteListing.bind(this, listingIndex)}
                                                 onClickRate={this.onClickRate.bind(this, listingIndex)}
                                             />
@@ -209,8 +217,9 @@ class JobListingPage extends Component {
                                     }
                                 </div>
                             }
-                        </div>}
-                </div>
+                        </div>
+                    </React.Fragment>
+                }
             </div>
         );
     };
@@ -221,10 +230,10 @@ class JobListingPage extends Component {
 
         let filters = '';
 
-        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
+        if(yearRef.current?.state.item !== undefined && yearRef.current?.state.item !== '')
             filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
 
-        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
+        if(monthRef.current?.state.item !== undefined && monthRef.current?.state.item !== '')
             filters += "&month=" + monthRef.current.state.item
 
         if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
