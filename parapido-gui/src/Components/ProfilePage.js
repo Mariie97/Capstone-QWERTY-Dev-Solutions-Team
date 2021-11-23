@@ -348,7 +348,7 @@ class ProfilePage extends Component {
                                                 multiline
                                                 rows='6'
                                                 value={change_about}
-                                                className="change-about-style-profile-page"
+                                                className="change-about-profile-page"
                                                 onChange={(event) => {
                                                     if (event.target.value.length <= 250 ) {
                                                         this.setState({
@@ -412,7 +412,7 @@ class ProfilePage extends Component {
                                                         change_image.name
                                                     }
                                                 </div>
-                                                <label for="profile-pic" className="custom-file-upload-profile-page">
+                                                <label for="profile-pic" className="custom-file-upload">
                                                     <UploadIcon /> Upload picture
                                                 </label>
                                                 <input

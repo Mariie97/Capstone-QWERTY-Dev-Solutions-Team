@@ -43,6 +43,32 @@
 	color: black;
 }
 
+/* input file types*/
+
+.custom-file-upload {
+	padding: 10px;
+	background-color: #FFEBCC;
+	border: 2px solid black;
+	border-radius: 10px;
+	font-family: jost;
+	font-size: 14px;
+	font-weight: 400;
+	cursor: pointer;
+	margin-left: -1.8px;
+	display: flex;
+	align-items: center;
+	align-content: center;
+	gap: 4px;
+}
+
+.custom-file-upload:hover {
+	border-color: white;
+}
+
+.custom-file-upload:active {
+	background-color: #2e856e;
+}
+
 /* checkbox */
 
 #checkbox-small-size{
