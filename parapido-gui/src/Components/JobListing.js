@@ -5,7 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import {Box, Chip, IconButton} from "@material-ui/core";
 
-const boxSX = {
+const box = {
     overflow:'none',
     display: 'flex',
     alignItems: 'center',
@@ -34,12 +34,12 @@ const listing = (props) => {
                 <Box
                     border = {2}
                     borderColor = "black"
-                    sx = {boxSX}
+                    sx = {box}
                     marginTop={5}
                 >                   
                     <Link to = {"/job/" + job_id} id = "small-urls"><div> {title} </div></Link>
                     <Link to = {"/job/" + job_id} id = "small-urls"><div> {price} </div></Link>
-                    <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipStyleJobListing}/></Link>
+                    <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipjoblisting}/></Link>
                     <Link to = {"/job/" + job_id} id = "small-urls"><div> {date_posted} </div></Link>
                     {status === '2' &&
                         <div>
@@ -69,7 +69,7 @@ const listing = (props) => {
     )
 }
 
-const chipStyleJobListing = {
+const chipjoblisting = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
     fontSize : "18px",
@@ -79,4 +79,5 @@ const chipStyleJobListing = {
     marginRight: '5px',
     cursor:"pointer"
 }
+
 export default listing;

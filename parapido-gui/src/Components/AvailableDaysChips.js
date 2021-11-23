@@ -48,7 +48,7 @@ class AvailableDaysChips extends Component {
                         return (
                             <ListItem key={data.key}>
                                 <Chip
-                                    style = {chipStyleJobCreation}
+                                    style = {chipjobcreation}
                                     label={data.label}
                                     onDelete={() => this.handleAvailableDaysDelete(data)}
                                 />
@@ -61,8 +61,7 @@ class AvailableDaysChips extends Component {
     }
 }
 
-// each chip style
-const chipStyleJobCreation = {
+const chipjobcreation = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
     fontSize : 15,

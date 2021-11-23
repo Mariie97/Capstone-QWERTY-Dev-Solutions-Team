@@ -34,11 +34,9 @@ class LoginModal extends Component {
             redirectAdminLogin: false,
         };
 
-        // event methods - before render method
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
 
-        // validation methods - end of render method
         this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
     }
@@ -105,7 +103,7 @@ class LoginModal extends Component {
                             </Alert>
                         </div>
                         }
-                        <img src={Logo} alt="login logo" style={login_logostyle}/>
+                        <img src={Logo} alt="login logo" style={loginlogo}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                         <div className="second-point-login-modal">
                             <div className="first-text-login-modal">
@@ -147,7 +145,7 @@ class LoginModal extends Component {
                                         <div className="text-button-login-modal">
                                             CONTINUE
                                         </div>
-                                     <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
+                                     <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                         </div>
                         <hr className="line-login-modal" />
@@ -191,12 +189,12 @@ class LoginModal extends Component {
     }
 }
 
-const login_logostyle = {
+const loginlogo = {
     width: 80,
     height: 80,
 };
 
-const continue_arrow_image_resize = {
+const continuearrow = {
     height: 80,
     width: 100,
     position: "fixed",

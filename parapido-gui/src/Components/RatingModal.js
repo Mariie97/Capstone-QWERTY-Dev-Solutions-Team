@@ -3,8 +3,20 @@ import {ratings} from "../Utilities";
 import {Backdrop, Modal} from "@material-ui/core";
 import ItemsDropdown from "./ItemsDropdown";
 
-class RatingModal extends Component {
+const backdrop = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "4vh",
+    justifyContent: "center",
+    left: "40%",
+    top: "200px",
+    width: "300px",
+    height: "300px",
+    backgroundColor: "#FFFFFF",
+    border: '2px solid black',
+}
 
+class RatingModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -57,7 +69,7 @@ class RatingModal extends Component {
                     open={open}
                     onClose={handleClose}
                 >
-                    <Backdrop open={open} style={backdropStyle}>
+                    <Backdrop open={open} style={backdrop}>
                         <div className="empty-list-subheader black">Rate this Job:</div>
                         <ItemsDropdown
                             blackLabel
@@ -73,19 +85,6 @@ class RatingModal extends Component {
             </div>
         )
     }
-}
-
-const backdropStyle = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4vh",
-    justifyContent: "center",
-    left: "40%",
-    top: "200px",
-    width: "300px",
-    height: "300px",
-    backgroundColor: "#FFFFFF",
-    border: '2px solid black',
 }
 
 export default RatingModal;

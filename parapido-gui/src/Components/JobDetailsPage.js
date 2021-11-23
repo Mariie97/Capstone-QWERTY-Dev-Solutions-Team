@@ -146,7 +146,7 @@ class JobDetailsPage extends Component {
             <Chip
                 key={`day-${index}`}
                 label={weekDays[day - 1]}
-                style={chipStyleJobDetails}
+                style={chipjobdetails}
             />
         )
     }
@@ -330,7 +330,7 @@ class JobDetailsPage extends Component {
                                 <tr className='row-table-body'>
                                     <td className='column-table-body col1'>Category:</td>
                                     <td className='column-table-body col2'>
-                                        <Chip label={job.categories} style = {chipStyleJobDetails}/>
+                                        <Chip label={job.categories} style = {chipjobdetails}/>
                                     </td>
                                 </tr>
                                 <tr className='row-table-body'>
@@ -360,7 +360,7 @@ class JobDetailsPage extends Component {
     }
 }
 
-const chipStyleJobDetails = {
+const chipjobdetails = {
     backgroundColor : "#FFEBCC",
     fontFamily : "Jost",
     fontSize : "18px",

@@ -12,7 +12,7 @@ import StarIcon from "@material-ui/icons/Star";
 class ProfileCard extends Component {
     render() {
         const { user_id, first_name, last_name, rating_value, jobs_cancelled, type, image} = this.props
-        const profile_pic = image!==null ? image : DefaultProfilePicture;
+        const profilepic = image!==null ? image : DefaultProfilePicture;
 
         return (
             <div className='profile-card-container'>
@@ -20,7 +20,7 @@ class ProfileCard extends Component {
                     <div className = "profile-card">
                         <div className = "box-top-profile-card">
                             <Link to={`/profile/${user_id}`}>
-                                <img className = "profile-card-image" style={image_resize} src= {profile_pic} alt="profile" />
+                                <img className = "profile-card-image" style={imageresize} src= {profilepic} alt="profile" />
                             </Link>
                         </div>
                         <ul className = "header-list-profile-card">
@@ -75,7 +75,7 @@ const star = {
     left:2
 };
 
-const image_resize = {
+const imageresize = {
     height: 180,
     width: 180,
 };

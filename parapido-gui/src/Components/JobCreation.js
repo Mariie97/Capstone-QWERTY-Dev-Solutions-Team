@@ -40,11 +40,9 @@ export class JobCreation extends Component {
             severity: undefined
         };
 
-        // event methods - before render method
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind(this);
 
-        // validation methods - end of render method
         this.validateTitle = this.validateTitle.bind(this);
         this.validateStreet = this.validateStreet.bind(this);
         this.validateDescription = this.validateDescription.bind(this);
@@ -292,7 +290,7 @@ export class JobCreation extends Component {
                             <button className="button-job-creation" onClick={this.handleCreateClick}>
                                 <div className="text-button-job-creation">
                                     CREATE
-                                    <CreateIcon style={editPencil}/>
+                                    <CreateIcon style={editpencil}/>
                                 </div>
                             </button>
                         </div>
@@ -302,7 +300,6 @@ export class JobCreation extends Component {
         )
     }
 
-    // validation methods
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({titleError: "This field is required" })
@@ -363,7 +360,7 @@ export class JobCreation extends Component {
     }
 }
 
-const editPencil = {
+const editpencil = {
     paddingRight: 10,
     height: 20,
     position: "relative",

@@ -207,18 +207,18 @@ class UserRegistrationPage extends Component {
                             <div className={'horizontal-flexbox2'}>
                                 <FormControl
                                     component="fieldset"
-                                    style={accountTypeStyle}
+                                    style={accounttype}
                                     error={this.state.accountTypeError!==undefined}
                                 >
-                                    <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
+                                    <FormLabel component="legend" style={formlabel}>Account Type</FormLabel>
                                     <RadioGroup row
                                                 aria-label="Account Type"
                                                 name="accountType"
                                                 onChange={this.change}
                                                 value={this.state.accountType}
                                     >
-                                        <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
-                                        <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
+                                        <FormControlLabel value="1" control={<Radio style={radio}/>} label="Student" />
+                                        <FormControlLabel value="2" control={<Radio style={radio}/>} label="Client" />
                                     </RadioGroup>
                                     <FormHelperText>{this.state.accountTypeError}</FormHelperText>
                                 </FormControl>
@@ -465,17 +465,17 @@ class UserRegistrationPage extends Component {
     }
 }
 
-const accountTypeStyle = {
+const accounttype = {
     position: "absolute",
     marginTop: "10px",
     color: "#FFFFFF",
 };
 
-const formLabelStyle = {
+const formlabel= {
     color:"#FFFFFF"
 }
 
-const radioStyle = {
+const radio = {
     color:"#FFFFFF"
 }
 

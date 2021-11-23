@@ -7,6 +7,20 @@ import {Alert} from "@material-ui/lab";
 import Stack from "@mui/material/Stack";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
+
+const backdrop = {
+    left: "50%",
+    top: "50%",
+    transform: 'translate(-50%, -50%)',
+    width: "26vw",
+    height: "75vh",
+    position: "absolute",
+    display: "flex",
+    flexFlow: "column",
+    padding: '20px',
+    backgroundColor: "#FFFFFF",
+}
+
 class SecurityQuestionsPage extends Component {
 
     constructor(props){
@@ -209,7 +223,7 @@ class SecurityQuestionsPage extends Component {
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                     >   
-                        <Backdrop open={open} style={backdropStyle}>                            
+                        <Backdrop open={open} style={backdrop}>                            
                             <div>
                             <h2 className='modalTextStyle'>    
                             {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}                          
@@ -353,19 +367,6 @@ class SecurityQuestionsPage extends Component {
         })
         return false;    
     }
-}
-
-const backdropStyle = {
-    left: "50%",
-    top: "50%",
-    transform: 'translate(-50%, -50%)',
-    width: "26vw",
-    height: "75vh",
-    position: "absolute",
-    display: "flex",
-    flexFlow: "column",
-    padding: '20px',
-    backgroundColor: "#FFFFFF",
 }
 
 export default SecurityQuestionsPage;
