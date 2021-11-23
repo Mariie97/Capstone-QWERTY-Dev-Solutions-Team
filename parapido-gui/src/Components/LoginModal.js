@@ -153,9 +153,9 @@ class LoginModal extends Component {
                         <hr className="line-login-modal" />
                         <ul className="footer-flex-login-modal">
                             {adminLogin === undefined &&
-                            <Link to={"/signup"} style={{color:"green"}}> Create an Account? </Link>
+                            <Link to={"/signup"} style={{color:"blue"}}> Create an Account? </Link>
                             }
-                            <Link to={"/security-questions"} style={{color:"green"}}> Forgot Password? </Link>
+                            <Link to={"/security-questions"} style={{color:"blue"}}> Forgot Password? </Link>
                         </ul>
                     </Box>
                 </Modal>                                         
