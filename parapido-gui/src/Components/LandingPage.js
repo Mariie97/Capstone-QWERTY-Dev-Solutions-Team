@@ -24,6 +24,7 @@ class LandingPage extends Component {
 	}
 
 	componentDidMount() {
+		document.body.style.backgroundColor = "#2F2D4A";
 		this.setState({
 			is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
 		});
@@ -44,9 +45,6 @@ class LandingPage extends Component {
 				}
 			}
 		}
-		
-		// webpage background color
-		document.body.style.backgroundColor = "#2F2D4A";
 	}
 
 	showLoginModal(){
@@ -94,7 +92,6 @@ class LandingPage extends Component {
 	}
 }
 
-// small icons and elements css
 const mail = {
 	color: "#ffebcc",
 	paddingRight: 10,

@@ -53,8 +53,6 @@ class ProfileCard extends Component {
     }
 }
 
-// small icons & elements css
-
 const trashcan = {
     color: "red",
     position: "relative",

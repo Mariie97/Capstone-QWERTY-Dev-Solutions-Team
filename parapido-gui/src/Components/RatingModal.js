@@ -15,37 +15,6 @@ class RatingModal extends Component {
         this.handleRate = this.handleRate.bind(this);
     }
 
-    
-    changeRating(value) {
-        this.setState({
-            rating: value
-        });
-    }
-
-    render() {
-        return (
-            <div>
-                <Modal
-                    open={this.props.open}
-                    onClose={this.props.handleClose}
-                >
-                    <Backdrop open={this.props.open} style={backdropStyle}>
-                        <div className="empty-list-subheader black">Rate this Job:</div>
-                        <ItemsDropdown
-                            blackLabel
-                            initial_value={''}
-                            ref={this.state.ratingRef}
-                            validate={true}
-                            itemsList={ratings}
-                            label='Rating'
-                        />
-                        <button className="custom-small-buttons" onClick={this.handleRate}> Rate </button>
-                    </Backdrop>
-                </Modal>
-            </div>
-        )
-    }
-
     handleRate(){
         const { filterJobs, setAlert, handleClose } = this.props;
 
@@ -72,6 +41,37 @@ class RatingModal extends Component {
                 handleClose();
             })
         }
+    }
+
+    changeRating(value) {
+        this.setState({
+            rating: value
+        });
+    }
+
+    render() {
+        const {open, handleClose} = this.props;
+        return (
+            <div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <Backdrop open={open} style={backdropStyle}>
+                        <div className="empty-list-subheader black">Rate this Job:</div>
+                        <ItemsDropdown
+                            blackLabel
+                            initial_value={''}
+                            ref={this.state.ratingRef}
+                            validate={true}
+                            itemsList={ratings}
+                            label='Rating'
+                        />
+                        <button className="custom-small-buttons" onClick={this.handleRate}> Rate </button>
+                    </Backdrop>
+                </Modal>
+            </div>
+        )
     }
 }
 

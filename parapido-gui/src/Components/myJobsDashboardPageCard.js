@@ -19,7 +19,6 @@ class myJobsDashboardPageCard extends Component {
     }
 
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
     }
 

@@ -47,8 +47,8 @@ class JobListingPage extends Component {
     }
 
     componentDidMount(){
+        document.body.style.backgroundColor = "#FFFFFF";
         this.status = getQueryParams(this.props.queryParams).get('status');
-        document.body.style.backgroundColor = "white";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
@@ -56,6 +56,71 @@ class JobListingPage extends Component {
     }
 
     token = this.props.cookies.get('csrf_access_token');
+    
+    fetchList() {
+        const {monthRef, yearRef} = this.state
+
+        let filters = '';
+
+        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
+            filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
+
+        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
+            filters += "&month=" + monthRef.current.state.item
+
+        if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
+        else this.idFilter = "?owner_id=" + this.state.user_id
+
+        if(this.status === '1' && this.state.userAccountType === 1){
+            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data
+                            })
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({listIsEmpty: true})
+                }
+            })
+        }
+        else{
+            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+                }
+            }).then(response => {
+                if(response.status === 200) {
+                    response.json().then(data => {
+                            this.setState({
+                                listIsEmpty: false,
+                                listings: data,
+                                entitiesLoaded: true
+                            })
+                        }
+                    )
+                }
+                else if(response.status === 404){
+                    this.setState({
+                        listIsEmpty: true,
+                        entitiesLoaded: true
+                    })
+                }
+            })
+        }
+    }
 
     deleteListing = (listingIndex) => {
         let deleteSuccess;
@@ -210,76 +275,6 @@ class JobListingPage extends Component {
             </div>
         );
     };
-
-    fetchList() {
-        //Handle Filters
-        const {monthRef, yearRef} = this.state
-
-        let filters = '';
-
-        if(yearRef.current.state.item !== undefined && yearRef.current.state.item !== '')
-            filters += "&year=" + (parseInt(yearRef.current.state.item, 10) + 2020)
-
-        if(monthRef.current.state.item !== undefined && monthRef.current.state.item !== '')
-            filters += "&month=" + monthRef.current.state.item
-
-        if(this.state.userAccountType === 1) this.idFilter = "?student_id=" + this.state.user_id
-        else this.idFilter = "?owner_id=" + this.state.user_id
-
-        if(this.status === '1' && this.state.userAccountType === 1){
-
-            //Fetch Requested Jobs
-            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                }
-            }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-                            this.setState({
-                                listIsEmpty: false,
-                                listings: data
-                            })
-                        }
-                    )
-                }
-                else if(response.status === 404){
-                    this.setState({listIsEmpty: true})
-                }
-            })
-        }
-
-        //Fetch In-Progress, Completed and Posted Jobs
-        else{
-            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
-                method: 'GET',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-                }
-            }).then(response => {
-                if(response.status === 200) {
-                    response.json().then(data => {
-                            this.setState({
-                                listIsEmpty: false,
-                                listings: data,
-                                entitiesLoaded: true
-                            })
-                        }
-                    )
-                }
-                else if(response.status === 404){
-                    this.setState({
-                        listIsEmpty: true,
-                        entitiesLoaded: true
-                    })
-                }
-            })
-        }
-    }
 }
 
 export default JobListingPage;

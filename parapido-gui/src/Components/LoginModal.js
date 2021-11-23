@@ -192,7 +192,6 @@ class LoginModal extends Component {
     }
 }
 
-// small icons and elements css
 const login_logostyle = {
     width: 80,
     height: 80,
@@ -204,6 +203,5 @@ const continue_arrow_image_resize = {
     position: "fixed",
     bottom: 25,
 };
-
 
 export default LoginModal;

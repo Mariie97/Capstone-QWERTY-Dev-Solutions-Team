@@ -26,7 +26,6 @@ class myJobsDashboardPage extends Component {
     }
 
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
 
         if(this.props.history.action === 'POP') {

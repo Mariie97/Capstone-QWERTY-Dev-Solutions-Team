@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { InputLabel, MenuItem, Select } from "@material-ui/core";
 
-const dropDownStyle = {
+const dropdownStyle = {
     background:"#FFFFFF",
     height: "52px",
     top: "11px",
@@ -40,7 +40,6 @@ class SecurityQuestionDropdown extends Component {
     render () {
         const { question } = this.state;
         const { num, style_q, onClick} = this.props;
-
         return (
             <div >
                 <div style={style_q}>
@@ -50,7 +49,7 @@ class SecurityQuestionDropdown extends Component {
                         id={"question_" + num}
                         value={question}
                         onChange={this.onChangeQuestion}
-                        style={dropDownStyle}
+                        style={dropdownStyle}
                         onClick={onClick}
                     >
                         <MenuItem value={1}>In what city were you born? </MenuItem>
