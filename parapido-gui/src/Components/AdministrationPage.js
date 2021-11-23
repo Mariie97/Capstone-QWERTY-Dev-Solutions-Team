@@ -198,7 +198,6 @@ class AdministrationPage extends Component {
             alert: {msg: undefined}})}, 3000);
     }
 
-
     render() {
         const { is_auth, deletedRef, typeRef, entitiesLoaded, currentEntity, jobStatusRef, jobCategoryRef, is_admin, alert} = this.state;
         return (

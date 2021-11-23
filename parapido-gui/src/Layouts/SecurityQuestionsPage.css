@@ -108,11 +108,11 @@
     margin: 0 auto;
 }
 
-/* button movement */
-
 .security-page-input{
     width: 100%;
 }
+
+/* button movement */
 
 #security-submit-button{
     margin: 25px 0;
@@ -127,8 +127,4 @@
 #security-change-pswd-button{
     width: 50%;
     margin: 10% 0;
-}
-
-.MuiFilledInput-root{
-    border-radius: 0vh;
 }

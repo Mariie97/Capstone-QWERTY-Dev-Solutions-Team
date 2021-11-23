@@ -9,7 +9,7 @@ class JobDashboardCard extends Component {
     }
 
     render() {
-        const {job_id, title, price, category, city, owner_first, owner_last, street, zipcode} =  this.props
+        const {job_id, title, price, category, city, owner_first, owner_last, street, zipcode, date_posted} =  this.props
         return (
             <div className="card-body-wrapper">
                 <Link to={"/job/"+job_id}  className="none-display-for-link">
@@ -25,11 +25,13 @@ class JobDashboardCard extends Component {
                             <p className="card-location">{cities[city-1]} {street} {zipcode}</p>
                             <div className="card-price"> {price} </div>
                             <div style={{marginLeft:6, fontWeight: "bold", color: "green"}}> {category} </div>
+                            <div style= {{float: "right", paddingRight: "10px", fontFamily:"Times New Roman",fontSize: 10, fontWeight: "400"}}> 
+                                {date_posted} 
+                            </div>
                         </div>
                     </div>
                 </Link>
             </div>
-
         )
     }
 }

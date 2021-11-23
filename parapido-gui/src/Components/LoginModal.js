@@ -7,7 +7,6 @@ import {Box, Modal} from "@material-ui/core";
 import ContinueArrow from "../Static/Images/ContinueArrow.png";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -21,7 +20,6 @@ const style = {
 }
 
 class LoginModal extends Component {
-
     constructor(props){
         super(props);
         this.state = {
@@ -35,11 +33,9 @@ class LoginModal extends Component {
             redirectAdminLogin: false,
         };
 
-        // event methods - before render method
         this.handleChange = this.handleChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
 
-        // validation methods - end of render method
         this.validateEmail = this.validateEmail.bind(this);
         this.validatePassword = this.validatePassword.bind(this);
     }
@@ -71,7 +67,7 @@ class LoginModal extends Component {
                 )
             } else {
                 this.setState({
-                    loginError: response.status === 401 ?
+                    loginError: response.status !== 401 ?
                         'Yikes!!! 😬 Incorrect Email or Password' :
                         <div>Sorry can not login right now 😔<br/>Please try again later!!!</div>,
                         login_success: false,
@@ -106,7 +102,7 @@ class LoginModal extends Component {
                             </Alert>
                         </div>
                         }
-                        <img src={Logo} alt="login logo" style={login_logostyle}/>
+                        <img src={Logo} alt="login logo" style={loginlogo}/>
                         <div className="first-point-login-modal"> Hey! Good to see you again!</div>
                         <div className="second-point-login-modal">
                             <div className="first-text-login-modal">
@@ -148,15 +144,15 @@ class LoginModal extends Component {
                                         <div className="text-button-login-modal">
                                             CONTINUE
                                         </div>
-                                     <img style ={continue_arrow_image_resize} src={ContinueArrow} alt="continue arrow" />
+                                     <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
                                     </button>
                         </div>
                         <hr className="line-login-modal" />
                         <ul className="footer-flex-login-modal">
                             {adminLogin === undefined &&
-                            <Link to={"/signup"} id="visited-login-modal"> Create an Account? </Link>
+                            <Link to={"/signup"} style={{color:"blue"}}> Create an Account? </Link>
                             }
-                            <Link to={"/security-questions"} className="visited-login-modal" id="visited-login-modal"> Forgot Password? </Link>
+                            <Link to={"/security-questions"} style={{color:"blue"}}> Forgot Password? </Link>
                         </ul>
                     </Box>
                 </Modal>                                         
@@ -192,18 +188,16 @@ class LoginModal extends Component {
     }
 }
 
-// small icons and elements css
-const login_logostyle = {
+const loginlogo = {
     width: 80,
     height: 80,
 };
 
-const continue_arrow_image_resize = {
+const continuearrow = {
     height: 80,
     width: 100,
     position: "fixed",
     bottom: 25,
 };
-
 
 export default LoginModal;

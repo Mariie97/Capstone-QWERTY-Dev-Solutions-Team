@@ -77,6 +77,7 @@ class ChatApp extends Component {
   };
 
   constructor(props){
+    document.body.style.backgroundColor = "#2F2D4A";
     super(props);
     this.queryParams = getQueryParams(props.queryParams);
     this.state = {
@@ -186,6 +187,7 @@ class ChatApp extends Component {
 
   render() {
     const { is_auth, messages, current_message, refreshComplete, allowAccess, pageLoaded, pageNotFound } = this.state;
+    
     return (
         <React.Fragment>
           {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :

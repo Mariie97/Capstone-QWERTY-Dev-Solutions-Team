@@ -7,7 +7,6 @@ import {FormControl, FormControlLabel, FormHelperText, FormLabel, Radio, RadioGr
 import Alert from '@material-ui/lab/Alert';
 
 class UserRegistrationPage extends Component {
-
     constructor(props){
         super(props);
         this.state={
@@ -64,51 +63,6 @@ class UserRegistrationPage extends Component {
                 this.validateAccountType();
             }});
     };
-
-    validateFetch = () => {
-        fetch('/create_user',{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                first_name: this.state.firstName,
-                last_name: this.state.lastName,
-                email: this.state.email,
-                password: this.state.password,
-                q_type1: this.state.questionOneRef?.current.state.item,
-                q_type2: this.state.questionTwoRef?.current.state.item,
-                ans1: this.state.answerOne,
-                ans2: this.state.answerTwo,
-                type: this.state.accountType,
-            })
-        }).then(response => {
-            if(response.status === 201) {
-                this.setState({
-                    registerSuccess: true,
-                    alert: {
-                        alertMssg: "The account has been successfully created!!! 👍🏼",
-                        severity: "success"}
-                })
-            }
-            else if (response.status === 409) {
-                this.setState({
-                    isFetchError: true,
-                    alert: {
-                        alertMssg: "Email address is already registered.",
-                        severity: "error"
-                    }
-                });
-            }
-            else {
-                this.setState({
-                    isFetchError: true,
-                    alert: {
-                        alertMssg: "Sorry, we are unable to create your account at this moment. Please try again later!",
-                        severity: "error"
-                    }
-                });
-            }
-        })
-    }
 
     onSubmit() {
         const val1 = this.validateFirstName();
@@ -174,8 +128,8 @@ class UserRegistrationPage extends Component {
                 <form>
                     <div className="page-header"> Create Account </div>
                     <div className={"outer-flexbox"}>
-                        <h2 style={securityQuestionTextStyle}>Security Questions:</h2>
-                        <div className={'right-flexbox'}>
+                        
+                        <div className={'right-flexbox'}>                 
                             <div className={'horizontal-flexbox1'}>
                                 <Input
                                     required
@@ -252,25 +206,26 @@ class UserRegistrationPage extends Component {
                             <div className={'horizontal-flexbox2'}>
                                 <FormControl
                                     component="fieldset"
-                                    style={accountTypeStyle}
+                                    style={accounttype}
                                     error={this.state.accountTypeError!==undefined}
                                 >
-                                    <FormLabel component="legend" style={formLabelStyle}>Account Type</FormLabel>
+                                    <FormLabel component="legend" style={formlabel}>Account Type</FormLabel>
                                     <RadioGroup row
                                                 aria-label="Account Type"
                                                 name="accountType"
                                                 onChange={this.change}
                                                 value={this.state.accountType}
                                     >
-                                        <FormControlLabel value="1" control={<Radio style={radioStyle}/>} label="Student" />
-                                        <FormControlLabel value="2" control={<Radio style={radioStyle}/>} label="Client" />
+                                        <FormControlLabel value="1" control={<Radio style={radio}/>} label="Student" />
+                                        <FormControlLabel value="2" control={<Radio style={radio}/>} label="Client" />
                                     </RadioGroup>
                                     <FormHelperText>{this.state.accountTypeError}</FormHelperText>
                                 </FormControl>
                             </div>
                         </div>
-                        <div className={'left-flexbox'}>
-                            <div className={"horizontal-flexbox2"}>                               
+                        <div className={'left-flexbox'}>                          
+                            <div className={"horizontal-flexbox2"}> 
+                                <h2 className="empty-list-subheader white">Security Questions</h2>                              
                             </div>
                             <div className={"horizontal-flexbox3"}>
                                 <ItemsDropdown
@@ -462,26 +417,64 @@ class UserRegistrationPage extends Component {
             return true
         }
     }
+
+    validateFetch = () => {
+        fetch('/create_user',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                first_name: this.state.firstName,
+                last_name: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password,
+                q_type1: this.state.questionOneRef?.current.state.item,
+                q_type2: this.state.questionTwoRef?.current.state.item,
+                ans1: this.state.answerOne,
+                ans2: this.state.answerTwo,
+                type: this.state.accountType,
+            })
+        }).then(response => {
+            if(response.status === 201) {
+                this.setState({
+                    registerSuccess: true,
+                    alert: {
+                        alertMssg: "The account has been successfully created!!! 👍🏼",
+                        severity: "success"}
+                })
+            }
+            else if (response.status === 409) {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "Email address is already registered.",
+                        severity: "error"
+                    }
+                });
+            }
+            else {
+                this.setState({
+                    isFetchError: true,
+                    alert: {
+                        alertMssg: "Sorry, we are unable to create your account at this moment. Please try again later!",
+                        severity: "error"
+                    }
+                });
+            }
+        })
+    }
 }
 
-const accountTypeStyle = {
+const accounttype = {
     position: "absolute",
     marginTop: "10px",
     color: "#FFFFFF",
 };
 
-const securityQuestionTextStyle = {
-    position: "absolute",
-    color: "#FFFFFF",
-    marginLeft: "76.8px",
-
-};
-
-const formLabelStyle = {
+const formlabel= {
     color:"#FFFFFF"
 }
 
-const radioStyle = {
+const radio = {
     color:"#FFFFFF"
 }
 

@@ -63,11 +63,11 @@ class ProfilePage extends Component {
     }
 
     componentDidMount(){
+        document.body.style.backgroundColor = "#2F2D4A";
+
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-        // webpage background color
-        document.body.style.backgroundColor = "#2F2D4A"
 
         fetch('/user_info/' + this.props.user_id, {
             method: 'GET',
@@ -97,11 +97,110 @@ class ProfilePage extends Component {
                             pageLoaded: true,
                         });
                     }
-                ).catch((e) => {
-                    throw(e);
-                });
+                )
             }
         })
+    }
+
+    onClickDelete(){
+        fetch('/delete_user/' + this.props.user_id, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            }
+        }).then(response =>{
+            if (response.status!==200){
+                this.setState({
+                    alert: {
+                        msg: "Can not delete user at this moment",
+                        severity: "error"
+                    },
+                    redirect: '/admin/site'
+                })
+
+            }
+            else {
+                this.setState({
+                    alert: {
+                        msg: "User deleted successfully"},
+                    redirect: '/admin/site'
+                })
+            }
+        })
+    }
+
+    saveChanges() {
+        const val1= this.validateLastName();
+        const val2= this.validateFirstName();
+        const val3= this.validateStreet();
+        const val4= this.validateZipcode();
+        const val5= this.validateCity();
+        if (!val1 || !val2 || !val3 || !val4 || !val5) {
+            return false;
+        }
+
+        let city = '';
+        if(this.state.change_zipcode!=='' || this.state.change_street!=='') {
+            city = this.state.change_city?.current.state.item;
+        }
+
+        const data = new FormData();
+
+        data.append("first_name", this.state.change_first_name);
+        data.append("last_name", this.state.change_last_name);
+        data.append("image", this.state.change_image);
+        data.append("about", this.state.change_about);
+        data.append("street", this.state.change_street);
+        data.append("zipcode", this.state.change_zipcode);
+        data.append("city", city);
+
+        fetch('/edit_user/' + this.props.user_id, {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: {
+                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
+            },
+            body: data,
+        }).then(response => {
+            if (response.status!==200) {
+                alert("Sorry we can not edit your information at this moment. Try again later");
+            }
+            else {
+                window.location.reload();
+            }
+        });
+    }
+
+    toggleEdit() {
+        const {edit, change_city, user} = this.state;
+        if(!edit) {
+            change_city.current?.setState({item: user.city.toString()});
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    change_about: prevState.user.about!==null ? prevState.user.about: '',
+                    change_first_name: prevState.user.first_name,
+                    change_last_name: prevState.user.last_name,
+                    change_zipcode: prevState.user.zipcode!==null ? prevState.user.zipcode : '',
+                    change_street: prevState.user.street !== null ? prevState.user.street : '',
+                    edit: !prevState.edit
+                };
+            });
+        }
+        else {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    edit: !prevState.edit,
+                    firstNameError: undefined,
+                    lastNameError: undefined,
+                    streetError: undefined,
+                    zipcodeError: undefined,
+                    cityError: undefined,
+                };
+            });
+        }
     }
 
     render() {
@@ -249,7 +348,7 @@ class ProfilePage extends Component {
                                                 multiline
                                                 rows='6'
                                                 value={change_about}
-                                                className="change-about-style-profile-page"
+                                                className="change-about-profile-page"
                                                 onChange={(event) => {
                                                     if (event.target.value.length <= 250 ) {
                                                         this.setState({
@@ -313,7 +412,7 @@ class ProfilePage extends Component {
                                                         change_image.name
                                                     }
                                                 </div>
-                                                <label for="profile-pic" className="custom-file-upload-profile-page">
+                                                <label for="profile-pic" className="custom-file-upload">
                                                     <UploadIcon /> Upload picture
                                                 </label>
                                                 <input
@@ -341,65 +440,6 @@ class ProfilePage extends Component {
                 }
             </React.Fragment>
         )
-    }
-
-    onClickDelete(){
-        fetch('/delete_user/' + this.props.user_id, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            }
-        }).then(response =>{
-            if (response.status!==200){
-                this.setState({
-                    alert: {
-                        msg: "Can not delete user at this moment",
-                        severity: "error"
-                    },
-                    redirect: '/admin/site'
-                })
-
-            }
-            else {
-                this.setState({
-                    alert: {
-                        msg: "User deleted successfully"},
-                    redirect: '/admin/site'
-                })
-            }
-        })
-    }
-
-    toggleEdit() {
-        const {edit, change_city, user} = this.state;
-        if(!edit) {
-            change_city.current?.setState({item: user.city.toString()});
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    change_about: prevState.user.about!==null ? prevState.user.about: '',
-                    change_first_name: prevState.user.first_name,
-                    change_last_name: prevState.user.last_name,
-                    change_zipcode: prevState.user.zipcode!==null ? prevState.user.zipcode : '',
-                    change_street: prevState.user.street !== null ? prevState.user.street : '',
-                    edit: !prevState.edit
-                };
-            });
-        }
-        else {
-            this.setState(prevState => {
-                return {
-                    ...prevState,
-                    edit: !prevState.edit,
-                    firstNameError: undefined,
-                    lastNameError: undefined,
-                    streetError: undefined,
-                    zipcodeError: undefined,
-                    cityError: undefined,
-                };
-            });
-        }
     }
 
     validateFirstName(){
@@ -490,48 +530,6 @@ class ProfilePage extends Component {
         }
         change_city?.current.setState({itemError: undefined});
         return true;
-    }
-
-    saveChanges() {
-        const val1= this.validateLastName();
-        const val2= this.validateFirstName();
-        const val3= this.validateStreet();
-        const val4= this.validateZipcode();
-        const val5= this.validateCity();
-        if (!val1 || !val2 || !val3 || !val4 || !val5) {
-            return false;
-        }
-
-        let city = '';
-        if(this.state.change_zipcode!=='' || this.state.change_street!=='') {
-            city = this.state.change_city?.current.state.item;
-        }
-
-        const data = new FormData();
-
-        data.append("first_name", this.state.change_first_name);
-        data.append("last_name", this.state.change_last_name);
-        data.append("image", this.state.change_image);
-        data.append("about", this.state.change_about);
-        data.append("street", this.state.change_street);
-        data.append("zipcode", this.state.change_zipcode);
-        data.append("city", city);
-
-        fetch('/edit_user/' + this.props.user_id, {
-            method: 'PUT',
-            credentials: 'same-origin',
-            headers: {
-                'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
-            },
-            body: data,
-        }).then(response => {
-            if (response.status!==200) {
-                alert("Sorry we can not edit your information at this moment. Try again later");
-            }
-            else {
-                window.location.reload();
-            }
-        });
     }
 }
 

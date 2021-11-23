@@ -28,7 +28,6 @@ class myJobsDashboardPage extends Component {
     }
 
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#FFFFFF";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))

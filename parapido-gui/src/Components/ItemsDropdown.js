@@ -4,7 +4,6 @@ import StyledEngineProvider from "@material-ui/styles/StylesProvider";
 import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 
 class ItemsDropdown extends Component {
-
     constructor(props) {
         super(props);
 
@@ -13,10 +12,10 @@ class ItemsDropdown extends Component {
             itemError: undefined,
         };
 
-        // event method - before render method
+       
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
 
-        // validation method - end of render method
+  
         this.validateItem = this.validateItem.bind(this);
         this.validate = this.validate.bind(this);
 
@@ -113,7 +112,6 @@ class ItemsDropdown extends Component {
     }
 }
 
-//small icons & elements css
 const report = {
     color: "red",
     position: "relative",

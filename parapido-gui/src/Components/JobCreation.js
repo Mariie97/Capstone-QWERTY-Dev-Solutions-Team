@@ -40,11 +40,9 @@ export class JobCreation extends Component {
             severity: undefined
         };
 
-        // event methods - before render method
         this.handleChange = this.handleChange.bind(this);
         this.handleCreateClick = this.handleCreateClick.bind(this);
 
-        // validation methods - end of render method
         this.validateTitle = this.validateTitle.bind(this);
         this.validateStreet = this.validateStreet.bind(this);
         this.validateDescription = this.validateDescription.bind(this);
@@ -53,7 +51,6 @@ export class JobCreation extends Component {
     }
 
     componentDidMount() {
-        // webpage background color
         document.body.style.backgroundColor = "#2F2D4A";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
@@ -156,22 +153,24 @@ export class JobCreation extends Component {
             alertMssg,
             severity
         } = this.state
+
         return (   
             <React.Fragment>
                 {!is_auth && <Redirect to='/' /> }
                 {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
                 <React.Fragment>
-                    {(alertMssg !== undefined && severity !== undefined) && <Redirect to={{
-                    pathname: `/myjobs/${this.currentUser.id}`,
-                    state: { alertMssg: alertMssg,
-                            severity: severity}
-                    }}/>}
-                    
-                    {!serverProcessedRequest && <Alert severity="error" className="server-error">
-                        Sorry can't create job right now 😔 please try again later!!!
-                    </Alert>}
+                    {(alertMssg !== undefined && severity !== undefined) && 
+                        <Redirect to={{
+                        pathname: `/myjobs/${this.currentUser.id}`,
+                        state: { alertMssg: alertMssg , severity: severity}
+                        }}/>
+                    }
+                    {!serverProcessedRequest && 
+                        <Alert severity="error" className="server-error">
+                            Sorry can't create job right now 😔 please try again later!!!
+                        </Alert>
+                    }
                     <h1 className="page-title-header white-title"> Job Creation </h1>
-
                     <div className="big-flexbox-for-2-flexbox-containers-job-creation">
                         <div className="left-body-container-1-job-creation">
                             <Input
@@ -291,7 +290,7 @@ export class JobCreation extends Component {
                             <button className="button-job-creation" onClick={this.handleCreateClick}>
                                 <div className="text-button-job-creation">
                                     CREATE
-                                    <CreateIcon style={editPencil}/>
+                                    <CreateIcon style={editpencil}/>
                                 </div>
                             </button>
                         </div>
@@ -301,7 +300,6 @@ export class JobCreation extends Component {
         )
     }
 
-    // validation methods
     validateTitle(){
         if (this.state.title.length === 0) {
             this.setState({titleError: "This field is required" })
@@ -343,7 +341,7 @@ export class JobCreation extends Component {
         }
 
         if (!zipcodeFormatPR.test(this.state.zipcode)) {
-            this.setState({zipcodeError: 'Zipcode not from PR'});
+            this.setState({zipcodeError: 'Zipcode is not from PR'});
             return false;
         }
 
@@ -362,8 +360,7 @@ export class JobCreation extends Component {
     }
 }
 
-// small icons and elements css
-const editPencil = {
+const editpencil = {
     paddingRight: 10,
     height: 20,
     position: "relative",

@@ -3,7 +3,6 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {withCookies} from "react-cookie";
 
 // Pages imports
-
 import LandingPage from "./Components/LandingPage";
 import ProfilePage from "./Components/ProfilePage";
 import JobDashboardPage from "./Components/JobDashboardPage";
@@ -28,7 +27,6 @@ import "./Layouts/LandingPage.css";
 import "./Layouts/LoginModal.css";
 import "./Layouts/SecurityQuestionsPage.css";
 import "./Layouts/UserRegistrationPage.css";
-import "./Layouts/JobDashboard.css";
 import "./Layouts/JobCreation.css";
 import "./Layouts/RequestsPage.css";
 import "./Layouts/AgreementModal.css";

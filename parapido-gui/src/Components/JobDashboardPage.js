@@ -29,12 +29,11 @@ class JobDashboardPage extends Component {
     }
 
     componentDidMount() {
+        document.body.style.backgroundColor = "#2F2D4A"
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-
-        // webpage background color
-        document.body.style.backgroundColor = "#2F2D4A";
+      ;
         this.getJobs();
     }
 
@@ -60,7 +59,6 @@ class JobDashboardPage extends Component {
         this.setState(
             {filterLoaded: false}
         )
-
         let category = this.state.change_category?.current.state.item;
         let city = this.state.change_city?.current.state.item;
         let filterResult = '?';
@@ -148,7 +146,6 @@ class JobDashboardPage extends Component {
                 )
             }
         })
-
     }
 
     render() {
@@ -157,6 +154,7 @@ class JobDashboardPage extends Component {
         const cardArray = jobs.map(
             job => <JobDashboardCard
                 job_id = {job.job_id}
+                date_posted = {job.date_posted}
                 title = {job.title}
                 city = {job.city}
                 price = {job.price}
@@ -190,7 +188,7 @@ class JobDashboardPage extends Component {
                             }
                         </h1>
 
-                        <div className="first-flex-container-job-dashboard-page">
+                        <div style={firstflexcontainer}>
                             <ItemsDropdown
                                 cormorantlabel
                                 lineheightstyle="2.5"
@@ -221,7 +219,7 @@ class JobDashboardPage extends Component {
                             </button>
                         </div>
                         {!filterLoaded ?
-                            <div className='loading-icon-job-dashboard'>
+                            <div className='loading-icon' style={{height:"50vh"}}>
                                 <Box sx={{display: 'flex'}}>
                                     <CircularProgress style={{alignItems:"center"}}/>
                                 </Box>
@@ -234,5 +232,13 @@ class JobDashboardPage extends Component {
         )
     }
 }
+
+const firstflexcontainer = {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    flexWrap: "wrap",
+	marginBottom: "auto"
+};
 
 export default JobDashboardPage;

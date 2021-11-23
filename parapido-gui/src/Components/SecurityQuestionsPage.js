@@ -7,8 +7,20 @@ import {Alert} from "@material-ui/lab";
 import Stack from "@mui/material/Stack";
 import Logo from "../Static/Images/BackgroundPaRapidoLogo.png";
 
-class SecurityQuestionsPage extends Component {
+const backdrop = {
+    left: "50%",
+    top: "50%",
+    transform: 'translate(-50%, -50%)',
+    width: "26vw",
+    height: "75vh",
+    position: "absolute",
+    display: "flex",
+    flexFlow: "column",
+    padding: '20px',
+    backgroundColor: "#FFFFFF",
+}
 
+class SecurityQuestionsPage extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -47,95 +59,6 @@ class SecurityQuestionsPage extends Component {
     };
 
 
-    validateAnswerOne = () => {
-        if(this.state.answerOne === ""){
-            this.setState({answerOneError:"This field is required" });
-            return true;
-        }
-
-        if(this.state.answerOne !== this.state.questionOneAnswer){
-            this.setState({answerOneError:"Incorrect answer" });
-            return true;
-        }
-
-        this.setState({answerOneError: undefined});
-        return false
-    };
-
-    validateAnswerTwo = () => {
-        if(this.state.answerTwo === ""){
-            this.setState({answerTwoError:"This field is required" });
-            return true;
-        }
-
-        if(this.state.answerTwo !== this.state.questionTwoAnswer){
-            this.setState({answerTwoError:"Incorrect answer" });
-            return true;
-        }
-
-        this.setState({answerTwoError: undefined});
-        return false
-    };
-
-    validateEmail = () => {
-        if (this.state.email !== undefined) {
-            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-            if (!pattern.test(this.state.email)) {
-                this.setState({ emailError: "Please enter valid email address."})
-                return true;
-            }
-        }
-
-        this.setState({ emailError: undefined})
-        return false;
-    }
-    
-    validateFirstPassword = () => {
-        if(this.state.password.length === 0){
-            this.setState({
-                passwordError: "This Field is required",
-            });
-            return true;
-        }
-        this.setState({
-            passwordError: undefined
-        })
-        return false;       
-    }
-    
-    validateConfirmPassword = () => {
-        if(this.state.confirmPassword.length === 0){
-            this.setState({
-                confirmPasswordError: "This Field is required",
-            });
-            return true;
-        }
-        this.validatePassword()
-        if(this.validatePassword() !== true){
-        this.setState({
-            confirmPasswordError: undefined
-        })
-        return false;
-    }
-    }
-
-
-
-    validatePassword = () => {
-        if (this.state.password !== this.state.confirmPassword) {
-            this.setState({
-                passwordError: "Passwords do not match",
-                confirmPasswordError: "Passwords do not match",
-            });
-            return true;
-        }
-        this.setState({
-            passwordError: undefined,
-            confirmPasswordError: undefined
-        })
-        return false;    
-    }
-
     handleClose = () => {
             this.setState({open: false,
                 passwordError: undefined,
@@ -150,7 +73,6 @@ class SecurityQuestionsPage extends Component {
         e.preventDefault();
         const err = this.validateAnswerOne() || this.validateAnswerTwo()
         if(!err) {
-            //clear
             this.setState({
                 open: true,
                 correctAnswers: true
@@ -159,13 +81,11 @@ class SecurityQuestionsPage extends Component {
     };
 
     onSubmitEmail = (e) => {
-        //Make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validateEmail()
         if (!err) {
             fetch('/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
                 if(response.status === 200) {
-                    //Success get data
                     response.json().then(data => {
                         this.setState({
                             emailIsValid: true,
@@ -185,7 +105,6 @@ class SecurityQuestionsPage extends Component {
     };
 
     onSubmitPassword = (e) => {
-        //Here we make sure the email is valid and exists. Also fetch the questions and answers
         e.preventDefault();
         const err = this.validatePassword()
         if(err) return false
@@ -208,8 +127,6 @@ class SecurityQuestionsPage extends Component {
                     });
                 }
                 else {
-                    //fetch error
-                    //TODO: Change message to the correct text according to response's status code
                     if(response.status === 500){
                         this.setState({serverDown: true})
                     }
@@ -229,7 +146,6 @@ class SecurityQuestionsPage extends Component {
             psswordChangedSuccesfully,
             serverDown
         } = this.state;
-
 
         return (
             <div>
@@ -305,14 +221,14 @@ class SecurityQuestionsPage extends Component {
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                     >   
-                        <Backdrop open={open} style={backdropStyle}>                            
+                        <Backdrop open={open} style={backdrop}>                            
                             <div>
                             <h2 className='modalTextStyle'>    
                             {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}                          
                                 Enter your new password: </h2>     
                             </div>                                	
                             <div>
-                                <img alt='PaRapido Logo' src={Logo} className={"modalLogoStyle"}/>
+                                <img alt='Logo' src={Logo} className={"modalLogoStyle"}/>
                             </div>
                             <div className='security-modal-container'>     
                                 <Input
@@ -362,19 +278,93 @@ class SecurityQuestionsPage extends Component {
             </div>
         );
     };
-}
 
-const backdropStyle = {
-    left: "50%",
-    top: "50%",
-    transform: 'translate(-50%, -50%)',
-    width: "26vw",
-    height: "75vh",
-    position: "absolute",
-    display: "flex",
-    flexFlow: "column",
-    padding: '20px',
-    backgroundColor: "#FFFFFF",
+    validateAnswerOne = () => {
+        if(this.state.answerOne === ""){
+            this.setState({answerOneError:"This field is required" });
+            return true;
+        }
+
+        if(this.state.answerOne !== this.state.questionOneAnswer){
+            this.setState({answerOneError:"Incorrect answer" });
+            return true;
+        }
+
+        this.setState({answerOneError: undefined});
+        return false
+    };
+
+    validateAnswerTwo = () => {
+        if(this.state.answerTwo === ""){
+            this.setState({answerTwoError:"This field is required" });
+            return true;
+        }
+
+        if(this.state.answerTwo !== this.state.questionTwoAnswer){
+            this.setState({answerTwoError:"Incorrect answer" });
+            return true;
+        }
+
+        this.setState({answerTwoError: undefined});
+        return false
+    };
+
+    validateEmail = () => {
+        if (this.state.email !== undefined) {
+            const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(this.state.email)) {
+                this.setState({ emailError: "Please enter valid email address."})
+                return true;
+            }
+        }
+
+        this.setState({ emailError: undefined})
+        return false;
+    }
+    
+    validateFirstPassword = () => {
+        if(this.state.password.length === 0){
+            this.setState({
+                passwordError: "This Field is required",
+            });
+            return true;
+        }
+        this.setState({
+            passwordError: undefined
+        })
+        return false;       
+    }
+    
+    validateConfirmPassword = () => {
+        if(this.state.confirmPassword.length === 0){
+            this.setState({
+                confirmPasswordError: "This Field is required",
+            });
+            return true;
+        }
+        this.validatePassword()
+        if(this.validatePassword() !== true){
+        this.setState({
+            confirmPasswordError: undefined
+        })
+        return false;
+    }
+    }
+
+    validatePassword = () => {
+        if (this.state.password !== this.state.confirmPassword) {
+            this.setState({
+                passwordError: "Passwords do not match",
+                confirmPasswordError: "Passwords do not match",
+            });
+            return true;
+        }
+        this.setState({
+            passwordError: undefined,
+            confirmPasswordError: undefined
+        })
+        return false;    
+    }
 }
 
 export default SecurityQuestionsPage;

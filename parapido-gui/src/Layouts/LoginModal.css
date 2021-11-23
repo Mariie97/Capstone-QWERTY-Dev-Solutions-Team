@@ -49,6 +49,8 @@
     width: 95%; 
 }
 
+/* position and font of button */
+
 .text-button-login-modal{
     float: left;
     position: relative;
@@ -83,20 +85,4 @@
     width: 100%;
     position: inherit;
     right: 0;
-}
-
-/* make hyperlinks stay blue */
-
-#visited-login-modal:visited {
-    color: blue;
-}
-
-/* errors */
-
-.required-field-login-modal{
-	font-family: "Times New Roman";
-	color: #cc3300;
-	position: relative;
-	bottom: 8px;
-	left: -3px;
 }
