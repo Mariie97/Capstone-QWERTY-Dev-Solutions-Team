@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {cities} from "../Utilities";
 import ReactTooltip from 'react-tooltip';
 
-class JobDashboardCard extends Component {  
+class JobDashboardCard extends Component {
     componentDidMount(){
         document.body.style.backgroundColor = "#2F2D4A";
     }
@@ -25,8 +25,8 @@ class JobDashboardCard extends Component {
                             <p className="card-location">{cities[city-1]} {street} {zipcode}</p>
                             <div className="card-price"> {price} </div>
                             <div style={{marginLeft:6, fontWeight: "bold", color: "green"}}> {category} </div>
-                            <div style= {{float: "right", paddingRight: "10px", fontFamily:"Times New Roman",fontSize: 10, fontWeight: "400"}}> 
-                                {date_posted} 
+                            <div style= {{float: "right", paddingRight: "10px", fontFamily:"Times New Roman",fontSize: 10, fontWeight: "400"}}>
+                                {date_posted}
                             </div>
                         </div>
                     </div>

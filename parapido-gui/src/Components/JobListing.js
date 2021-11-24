@@ -30,43 +30,42 @@ const box = {
 }
 
 const listing = (props) => {
-    const { job_id, title, price, category, date_posted, status, onClickRate, deleteListing, owner_id, student_id } = props
-    const allowRate = status === '2' && (owner_id == localStorage.getItem('user_id') ||
-        student_id == localStorage.getItem('user_id'));
+    const { job_id, title, price, category, date_posted, status, onClickRate, deleteListing, owner_id, student_id } = props;
+    const allowRate = status === '2' && (owner_id == localStorage.getItem('user_id') || student_id == localStorage.getItem('user_id'));
     const allowDelete = (status === '1' || props.status === '2') && (owner_id == localStorage.getItem('user_id') ||
-        student_id == localStorage.getItem('user_id') || localStorage.getItem('type')==accountType.admin)
+        student_id == localStorage.getItem('user_id') || localStorage.getItem('type')==accountType.admin);
     return(
-                <Box
-                    border = {2}
-                    borderColor = "black"
-                    sx = {box}
-                    marginTop={5}
-                >
-                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {title} </div></Link>
-                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {price} </div></Link>
-                    <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipjoblisting}/></Link>
-                    <Link to = {"/job/" + job_id} id = "small-urls"><div> {date_posted} </div></Link>
-                    {allowRate &&
-                            <IconButton>
-                                <ThumbUpIcon
-                                    sx={{ color: blue[100],
-                                        fontSize: 25,
-                                    }}
-                                    onClick={onClickRate}
-                                />
-                            </IconButton>
-                    }
-                    {allowDelete &&
-                            <IconButton aria-label="delete" color="error">
-                                <DeleteIcon
-                                    onClick={deleteListing}
-                                    sx={{ color: red[900],
-                                        fontSize: 25,
-                                    }}
-                                />
-                            </IconButton>
-                    }
-            </Box>
+        <Box
+            border = {2}
+            borderColor = "black"
+            sx = {box}
+            marginTop={5}
+        >
+            <Link to = {"/job/" + job_id} id = "small-urls"><div> {title} </div></Link>
+            <Link to = {"/job/" + job_id} id = "small-urls"><div> {price} </div></Link>
+            <Link to = {"/job/" + job_id} id = "small-urls"><Chip label = {category} style = {chipjoblisting}/></Link>
+            <Link to = {"/job/" + job_id} id = "small-urls"><div> {date_posted} </div></Link>
+            {allowRate &&
+            <IconButton>
+                <ThumbUpIcon
+                    sx={{ color: blue[100],
+                        fontSize: 25,
+                    }}
+                    onClick={onClickRate}
+                />
+            </IconButton>
+            }
+            {allowDelete &&
+            <IconButton aria-label="delete" color="error">
+                <DeleteIcon
+                    onClick={deleteListing}
+                    sx={{ color: red[900],
+                        fontSize: 25,
+                    }}
+                />
+            </IconButton>
+            }
+        </Box>
     )
 }
 

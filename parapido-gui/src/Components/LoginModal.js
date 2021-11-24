@@ -67,11 +67,11 @@ class LoginModal extends Component {
                 )
             } else {
                 this.setState({
-                    loginError: response.status !== 401 ?
+                    loginError: response.status === 401 ?
                         'Yikes!!! 😬 Incorrect Email or Password' :
                         <div>Sorry can not login right now 😔<br/>Please try again later!!!</div>,
-                        login_success: false,
-                        login_failed: true
+                    login_success: false,
+                    login_failed: true
                 })
             }})
     }
@@ -110,42 +110,42 @@ class LoginModal extends Component {
                             </div>
                             <div className="second-text-login-modal">  {adminLogin===undefined ? 'FUN.' : '' } </div>
                         </div>
-                                <div className="body-container-login-modal">
-                                    <Input
-                                        required
-                                        loginmodallabel
-                                        labelText='Enter E-mail'
-                                        className="input-login-modal"
-                                        id="email"
-                                        name="email"
-                                        placeholder="Email"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validateEmail}
-                                        error={emailError!==undefined}
-                                        errorMsg={emailError}
-                                        style= {{border : emailError === undefined ? "1px solid black": "1px solid #cc3300"}}
-                                    />
-                                    <Input
-                                        required
-                                        loginmodallabel
-                                        labelText='Enter Password'
-                                        className="input-login-modal"
-                                        id="password"
-                                        name="password"
-                                        type='password'
-                                        placeholder="password"
-                                        onChange={this.handleChange}
-                                        onBlur={this.validatePassword}
-                                        error={passwordError!==undefined}
-                                        errorMsg={passwordError}
-                                        style= {{border : passwordError === undefined ? "1px solid black": "1px solid #cc3300"}}
-                                    />
-                                    <button onClick={this.handleOnClick} className="login-modal-continue-button">
-                                        <div className="text-button-login-modal">
-                                            CONTINUE
-                                        </div>
-                                     <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
-                                    </button>
+                        <div className="body-container-login-modal">
+                            <Input
+                                required
+                                loginmodallabel
+                                labelText='Enter E-mail'
+                                className="input-login-modal"
+                                id="email"
+                                name="email"
+                                placeholder="Email"
+                                onChange={this.handleChange}
+                                onBlur={this.validateEmail}
+                                error={emailError!==undefined}
+                                errorMsg={emailError}
+                                style= {{border : emailError === undefined ? "1px solid black": "1px solid #cc3300"}}
+                            />
+                            <Input
+                                required
+                                loginmodallabel
+                                labelText='Enter Password'
+                                className="input-login-modal"
+                                id="password"
+                                name="password"
+                                type='password'
+                                placeholder="password"
+                                onChange={this.handleChange}
+                                onBlur={this.validatePassword}
+                                error={passwordError!==undefined}
+                                errorMsg={passwordError}
+                                style= {{border : passwordError === undefined ? "1px solid black": "1px solid #cc3300"}}
+                            />
+                            <button onClick={this.handleOnClick} className="login-modal-continue-button">
+                                <div className="text-button-login-modal">
+                                    CONTINUE
+                                </div>
+                                <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
+                            </button>
                         </div>
                         <hr className="line-login-modal" />
                         <ul className="footer-flex-login-modal">
@@ -155,7 +155,7 @@ class LoginModal extends Component {
                             <Link to={"/security-questions"} style={{color:"blue"}}> Forgot Password? </Link>
                         </ul>
                     </Box>
-                </Modal>                                         
+                </Modal>
             </StyledEngineProvider>
         );
     }

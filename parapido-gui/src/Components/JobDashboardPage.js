@@ -29,11 +29,11 @@ class JobDashboardPage extends Component {
     }
 
     componentDidMount() {
-        document.body.style.backgroundColor = "#2F2D4A"
+        document.body.style.backgroundColor = "#2F2D4A";
         this.setState({
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
-      ;
+
         this.getJobs();
     }
 
@@ -238,7 +238,7 @@ const firstflexcontainer = {
     flexDirection: "row",
     justifyContent: "space-evenly",
     flexWrap: "wrap",
-	marginBottom: "auto"
+    marginBottom: "auto"
 };
 
 export default JobDashboardPage;

@@ -54,7 +54,7 @@ class myJobsDashboardPage extends Component {
         const is_client = this.currentUser.type === accountType.client
         const is_student = this.currentUser.type === accountType.student
         const is_admin = this.currentUser.type === accountType.admin;
-        const {alertMssg, severity, is_auth} = this.state
+        const {alertMssg, severity, is_auth } = this.state
         const { user_id } = this.props;
 
         return (

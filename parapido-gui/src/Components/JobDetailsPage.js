@@ -124,7 +124,7 @@ class JobDetailsPage extends Component {
                     redirect: `/myjobs/${this.currentUser.id}`,
                     alert: {
                         msg: 'Request has been cancelled successfully!!! 👍🏼',
-                         severity: 'success'
+                        severity: 'success'
                     }
                 });
             }
