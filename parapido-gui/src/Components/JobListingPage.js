@@ -86,13 +86,17 @@ class JobListingPage extends Component {
                     response.json().then(data => {
                             this.setState({
                                 listIsEmpty: false,
-                                listings: data
+                                listings: data,
+                                entitiesLoaded: true,
                             })
                         }
                     )
                 }
                 else if(response.status === 404){
-                    this.setState({listIsEmpty: true})
+                    this.setState({
+                        listIsEmpty: true,
+                        entitiesLoaded: true,
+                    })
                 }
             })
         }
