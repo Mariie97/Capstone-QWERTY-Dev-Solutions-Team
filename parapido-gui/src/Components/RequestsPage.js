@@ -18,7 +18,7 @@ class RequestsPage extends Component {
         id: parseInt(localStorage.getItem('user_id')),
         type: parseInt(localStorage.getItem('type'))
     };
-    
+
     constructor(props) {
         super(props);
         this.queryParams = getQueryParams(this.props.queryParams);
@@ -91,8 +91,15 @@ class RequestsPage extends Component {
                 </Link>
                 <CardActions className='request-card-actions-container'>
                     <Button size="small" onClick={this.onClickAccept}>Accept</Button>
-                    {showAgreement && <AgreementModal isOpen={showAgreement} toggle={this.onClickAccept} 
-                    job_id={this.queryParams.get('job_id')} student_id={request.user_id} cookies={token}/>}
+                    {showAgreement &&
+                    <AgreementModal
+                        isOpen={showAgreement}
+                        toggle={this.onClickAccept}
+                        job_id={this.queryParams.get('job_id')}
+                        student_id={request.user_id}
+                        cookies={token}
+                    />
+                    }
                 </CardActions>
             </Card>
         ) )
@@ -100,32 +107,32 @@ class RequestsPage extends Component {
 
     render() {
         const { is_auth, requestsList, requestLoaded, is_student, pageNotFound, allowAccess} = this.state;
-        
+
         return (
             <React.Fragment>
                 {pageNotFound ?  <ErrorPage errorNumber="404" errorType="Page Not Found"/> :
                     <div>
                         {!is_auth && <Redirect to='/' />}
                         {(is_student || !allowAccess) ? <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
-                        <React.Fragment>
-                            {!requestLoaded ?
-                                <div className='loading-icon'>
-                                    <Box sx={{display: 'flex'}}>
-                                        <CircularProgress />
-                                    </Box>
-                                </div>:
-                                <div>
-                                    <div className='header-flex-container'>
+                            <React.Fragment>
+                                {!requestLoaded ?
+                                    <div className='loading-icon'>
+                                        <Box sx={{display: 'flex'}}>
+                                            <CircularProgress />
+                                        </Box>
+                                    </div>:
+                                    <div>
+                                        <div className='header-flex-container'>
                                             <h1 className="page-title-header white-title">Student's Requests</h1>
-                                    </div>     
-                                    <div className='student-requests-flex-container'>
+                                        </div>
+                                        <div className='student-requests-flex-container'>
                                             {requestsList.length === 0 ? <h2 className='empty-list-subheader white'>No requests available</h2> :
                                                 this.renderCards()
                                             }
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                        </React.Fragment>}
+                                }
+                            </React.Fragment>}
                     </div>
                 }
             </React.Fragment>

@@ -39,9 +39,9 @@ class AvailableDaysChips extends Component {
         return (
             <React.Fragment>
                 {this.state.chipData.length === 0 &&
-                    <div>
-                        <AvailableDaysChips />
-                    </div>
+                <div>
+                    <AvailableDaysChips />
+                </div>
                 }
                 <div className="chip-flex-job-creation">
                     {this.state.chipData.map((data) => {

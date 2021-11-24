@@ -84,17 +84,17 @@ class App extends React.Component {
                         exact
                         path='/listings/:user_id'
                         render={(props) => (
-                                <React.Fragment>
-                                    <NavBar cookies= {this.props.cookies} />
-                                    <JobListingPage
-                                        {...props}
-                                        cookies={this.props.cookies}
-                                        user_id={props.match.params.user_id}
-                                        queryParams = {props.location.search}
-                                    />
-                                </React.Fragment>
-                            )}
-                        />
+                            <React.Fragment>
+                                <NavBar cookies= {this.props.cookies} />
+                                <JobListingPage
+                                    {...props}
+                                    cookies={this.props.cookies}
+                                    user_id={props.match.params.user_id}
+                                    queryParams = {props.location.search}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
 
                     <Route
                         exact
@@ -114,6 +114,7 @@ class App extends React.Component {
                                 <NavBar  cookies={this.props.cookies} />
                                 <MyJobsPage
                                     {...props}
+                                    cookies={this.props.cookies}
                                     user_id={props.match.params.user_id}
                                     queryParams={props.location.search}
                                 />

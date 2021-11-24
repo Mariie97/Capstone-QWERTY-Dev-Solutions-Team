@@ -40,12 +40,17 @@ class SecurityQuestionsPage extends Component {
             confirmPasswordError: undefined,
             correctAnswers: false,
             changeSuccess: false,
-            fetchError: false,
             questionOneAnswer: undefined,
             questionTwoAnswer: undefined,
             psswordChangedSuccesfully: false,
-            serverDown: false
+            serverDown: false,
+            alert: {
+                msg: undefined,
+                severity: undefined
+            }
         };
+
+        this.hideAlert = this.hideAlert.bind(this);
     }
 
     componentDidMount() {
@@ -60,12 +65,12 @@ class SecurityQuestionsPage extends Component {
 
 
     handleClose = () => {
-            this.setState({open: false,
-                passwordError: undefined,
-                confirmPasswordError: undefined,
-                password: '',
-                confirmPassword: ''
-            })
+        this.setState({open: false,
+            passwordError: undefined,
+            confirmPasswordError: undefined,
+            password: '',
+            confirmPassword: ''
+        })
     };
 
 
@@ -89,7 +94,6 @@ class SecurityQuestionsPage extends Component {
                     response.json().then(data => {
                         this.setState({
                             emailIsValid: true,
-                            fetchError: false,
                             questionOne: data["question_1"],
                             questionTwo: data["question_2"],
                             questionOneAnswer: data["answer_1"],
@@ -98,7 +102,21 @@ class SecurityQuestionsPage extends Component {
                     })
                 }
                 else{
-                    if(response.status === 500) this.setState({fetchError: true})
+                    if(response.status === 404)
+                        this.setState({
+                            alert: {
+                                msg: "The email provided does not exist on our record",
+                                severity: "error"
+                            }
+                        });
+                    else {
+                        this.setState({
+                            alert: {
+                                msg: "An error has occurred 😔, Please try again later! ",
+                                severity: "error"
+                            }
+                        });
+                    }
                 }
             })
         }
@@ -135,6 +153,15 @@ class SecurityQuestionsPage extends Component {
         }
     };
 
+    hideAlert() {
+        setTimeout(() => {this.setState({
+            alert: {
+                msg: undefined,
+                severity: undefined
+            }
+        })}, 3000);
+    }
+
     render(){
         const {
             email,
@@ -142,19 +169,18 @@ class SecurityQuestionsPage extends Component {
             password,
             confirmPassword,
             changeSuccess,
-            fetchError,
             psswordChangedSuccesfully,
-            serverDown
+            serverDown,
+            alert
         } = this.state;
 
         return (
             <div>
-                {fetchError &&
+                {alert.msg!==undefined &&
                 <Stack sx={{width: '100%'}} spacing={2}>
-                    <Alert severity="error" className="server-error">An error has occurred 😔, Please try again later! </Alert>
+                    <Alert onLoad={this.hideAlert()} severity={alert.severity} className="server-error">{alert.msg}</Alert>
                 </Stack>
                 }
-
                 <div className='header-flex-container'>
                     <h1 className="page-title-header white-title">Account Recovery</h1>
                 </div>
@@ -220,17 +246,17 @@ class SecurityQuestionsPage extends Component {
                         onClose={this.handleClose}
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
-                    >   
-                        <Backdrop open={open} style={backdrop}>                            
+                    >
+                        <Backdrop open={open} style={backdrop}>
                             <div>
-                            <h2 className='modalTextStyle'>    
-                            {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}                          
-                                Enter your new password: </h2>     
-                            </div>                                	
+                                <h2 className='modalTextStyle'>
+                                    {serverDown && <Alert severity="error">Sorry can't reset password right now 😔 please try again later!!!</Alert>}
+                                    Enter your new password: </h2>
+                            </div>
                             <div>
                                 <img alt='Logo' src={Logo} className={"modalLogoStyle"}/>
                             </div>
-                            <div className='security-modal-container'>     
+                            <div className='security-modal-container'>
                                 <Input
                                     required
                                     blackLabel
@@ -257,15 +283,15 @@ class SecurityQuestionsPage extends Component {
                                     errorMsg={this.state.confirmPasswordError}
                                     className='security-page-input'
                                 />
-                                
+
                                 {changeSuccess &&
-                                <Stack sx={{width: '100%'}} spacing={2}>               
-                                        <Redirect to={{
+                                <Stack sx={{width: '100%'}} spacing={2}>
+                                    <Redirect to={{
                                         pathname: '/',
                                         state: { psswordChangedSuccesfully: psswordChangedSuccesfully}
                                     }} />
                                 </Stack>
-                                }     
+                                }
                                 <button
                                     className='custom-small-buttons security-page-button'
                                     id='security-change-pswd-button'
@@ -321,7 +347,7 @@ class SecurityQuestionsPage extends Component {
         this.setState({ emailError: undefined})
         return false;
     }
-    
+
     validateFirstPassword = () => {
         if(this.state.password.length === 0){
             this.setState({
@@ -332,9 +358,9 @@ class SecurityQuestionsPage extends Component {
         this.setState({
             passwordError: undefined
         })
-        return false;       
+        return false;
     }
-    
+
     validateConfirmPassword = () => {
         if(this.state.confirmPassword.length === 0){
             this.setState({
@@ -344,11 +370,11 @@ class SecurityQuestionsPage extends Component {
         }
         this.validatePassword()
         if(this.validatePassword() !== true){
-        this.setState({
-            confirmPasswordError: undefined
-        })
-        return false;
-    }
+            this.setState({
+                confirmPasswordError: undefined
+            })
+            return false;
+        }
     }
 
     validatePassword = () => {
@@ -363,7 +389,7 @@ class SecurityQuestionsPage extends Component {
             passwordError: undefined,
             confirmPasswordError: undefined
         })
-        return false;    
+        return false;
     }
 }
 

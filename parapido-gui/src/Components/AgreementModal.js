@@ -30,131 +30,131 @@ class AgreementModal extends Component {
 
     constructor(props){
         super(props);
-  
+
         this.state = {
-          checked: false,
-          isclient: false,
-          isstudent: false,
-          studentIsChoosen: false,
-          alertMssg: undefined,
-          severity: undefined
+            checked: false,
+            isclient: false,
+            isstudent: false,
+            studentIsChoosen: false,
+            alertMssg: undefined,
+            severity: undefined
         }
         this.handleOnClick= this.handleOnClick.bind(this);
         this.isChecked = this.isChecked.bind(this);
-      }
-  
-      handleOnClick(){
-          const {job_id, student_id, cookies} = this.props;
-         
-          if(this.currentUser.type === accountType.client){
-               fetch('/assign_job',{
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': cookies
-                },
-                body: JSON.stringify({
-                    job_id: job_id,
-                    student_id: student_id
-                })
-            }
-            ).then(response => {
-            if(response.status === 200) {
-                this.setState({
-                    isclient: true,
-                    alertMssg: "The job has been successfully added to the In-progress status!!! 👍🏼",
-                    severity: "info"
-                  })        
-            }
-            else{
-                this.setState({
-                    isclient: true,
-                    alertMssg: "Sorry can't process right now 😔 please try again later!!!",
-                    severity: "error"
-                    }) 
-            }
-            })
-          }
-          else if(this.currentUser.type === accountType.student){           
-                fetch('/request_job', {
-                    method: 'POST',
+    }
+
+    handleOnClick(){
+        const {job_id, student_id, cookies} = this.props;
+
+        if(this.currentUser.type === accountType.client){
+            fetch('/assign_job',{
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': cookies
                     },
                     body: JSON.stringify({
                         job_id: job_id,
-                        student_id: this.currentUser.id,
+                        student_id: student_id
                     })
-                }).then(response => {
-                    if (response.status === 200) {      
-                        this.setState({
-                            isstudent: true,
-                            alertMssg: "The job has been requested succesfully!!! 👍🏼",
-                            severity: "success"
-                            }) 
-                    }
-                    else {
-                        this.setState({
-                            isstudent: true,
-                            alertMssg: "Sorry can't request job right now 😔 please try again later!!!",
-                            severity: "error"
-                            }) 
-                    }
-                })       
-          }
-      }
+                }
+            ).then(response => {
+                if(response.status === 200) {
+                    this.setState({
+                        isclient: true,
+                        alertMssg: "The job has been successfully added to the In-progress status!!! 👍🏼",
+                        severity: "info"
+                    })
+                }
+                else{
+                    this.setState({
+                        isclient: true,
+                        alertMssg: "Sorry can't process right now 😔 please try again later!!!",
+                        severity: "error"
+                    })
+                }
+            })
+        }
+        else if(this.currentUser.type === accountType.student){
+            fetch('/request_job', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': cookies
+                },
+                body: JSON.stringify({
+                    job_id: job_id,
+                    student_id: this.currentUser.id,
+                })
+            }).then(response => {
+                if (response.status === 200) {
+                    this.setState({
+                        isstudent: true,
+                        alertMssg: "The job has been requested succesfully!!! 👍🏼",
+                        severity: "success"
+                    })
+                }
+                else {
+                    this.setState({
+                        isstudent: true,
+                        alertMssg: "Sorry can't request job right now 😔 please try again later!!!",
+                        severity: "error"
+                    })
+                }
+            })
+        }
+    }
 
     isChecked(event){
         this.setState({
             checked: event.target.checked
-          })
-    }     
+        })
+    }
 
     render() {
         const {checked, isclient, isstudent, alertMssg, severity} = this.state;
         const {isOpen, toggle} = this.props;
 
         return (
-            <StyledEngineProvider injectFirst>          
-                    <div>
-                        <Modal
-                            open={isOpen}
-                            onClose={toggle}
-                            style={{textAlign:"center"}}
-                        >
-                            <Box sx={style}>
-                                <div className="logo-flex-Agreement">
-                                    <img src={Logo} alt="login logo" style={loginlogo}/>
-                                </div>
-                                <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>      
-                                <div className="body-container-agreement-modal">
-                                    <p className="long-text-agreement-modal"> 
-                                        <label class="checkbox">
-                                            <input type="checkbox" id="checkbox-small-size" style={{marginRight: "1vh"}} onChange={this.isChecked.bind(this)} />
-                                        </label>
-                                        Check to state that you have read and agree with the job information
-                                    </p>
-                                    <img style={virtualcontract} src={VirtualContract} alt="continue arrow" />
-                                    {isstudent && <Redirect to={{
-                                        pathname: `/myjobs/${this.currentUser.id}`,
-                                        state: { alertMssg: alertMssg, severity: severity }
-                                    }}/>}
-                                    {isclient && <Redirect to={{
-                                        pathname: `/myjobs/${this.currentUser.id}`,
-                                        state: { alertMssg: alertMssg, severity: severity}
-                                    }}/>}
-                                    <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
-                                        <div className="text-button-agreement-modal">
-                                            Agree & Continue
-                                        </div>
-                                        <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
-                                    </button>
-                                </div>
-                                <hr className="line-login-modal" />
-                            </Box>
-                        </Modal>
-                    </div>
+            <StyledEngineProvider injectFirst>
+                <div>
+                    <Modal
+                        open={isOpen}
+                        onClose={toggle}
+                        style={{textAlign:"center"}}
+                    >
+                        <Box sx={style}>
+                            <div className="logo-flex-Agreement">
+                                <img src={Logo} alt="login logo" style={loginlogo}/>
+                            </div>
+                            <div className="first-point-agreement-modal">Virtual Contract Agreement:</div>
+                            <div className="body-container-agreement-modal">
+                                <p className="long-text-agreement-modal">
+                                    <label class="checkbox">
+                                        <input type="checkbox" id="checkbox-small-size" style={{marginRight: "1vh"}} onChange={this.isChecked.bind(this)} />
+                                    </label>
+                                    Check to state that you have read and agree with the job information
+                                </p>
+                                <img style={virtualcontract} src={VirtualContract} alt="continue arrow" />
+                                {isstudent && <Redirect to={{
+                                    pathname: `/myjobs/${this.currentUser.id}`,
+                                    state: { alertMssg: alertMssg, severity: severity }
+                                }}/>}
+                                {isclient && <Redirect to={{
+                                    pathname: `/myjobs/${this.currentUser.id}`,
+                                    state: { alertMssg: alertMssg, severity: severity}
+                                }}/>}
+                                <button id="agreement" name="agreement" onClick={this.handleOnClick} className="agreement-modal-continue-button" disabled={!checked}>
+                                    <div className="text-button-agreement-modal">
+                                        Agree & Continue
+                                    </div>
+                                    <img style ={continuearrow} src={ContinueArrow} alt="continue arrow" />
+                                </button>
+                            </div>
+                            <hr className="line-login-modal" />
+                        </Box>
+                    </Modal>
+                </div>
             </StyledEngineProvider>
         );
     }

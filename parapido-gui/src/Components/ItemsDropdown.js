@@ -12,10 +12,10 @@ class ItemsDropdown extends Component {
             itemError: undefined,
         };
 
-       
+
         this.handleOnChangeCity = this.handleOnChangeCity.bind(this);
 
-  
+
         this.validateItem = this.validateItem.bind(this);
         this.validate = this.validate.bind(this);
 

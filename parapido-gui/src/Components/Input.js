@@ -9,8 +9,8 @@ class Input extends Component {
         return (
             <div className='input-field-container'>
                 <label className={`custom-input-label ${blackLabel!==undefined && 'black-label-text'} ${loginmodallabel !==undefined && 'login-modal-label-text'}
-                ${cormorantlabel !==undefined && 'cormorant-label-text'}`}> 
-                {labelText}{required && '*'}
+                ${cormorantlabel !==undefined && 'cormorant-label-text'}`}>
+                    {labelText}{required && '*'}
                 </label>
                 <br />
                 {multiline ?

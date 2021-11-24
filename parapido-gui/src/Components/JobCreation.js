@@ -18,7 +18,7 @@ export class JobCreation extends Component {
 
     constructor(props){
         super(props);
-        
+
         this.state = {
             title : '',
             street: '',
@@ -154,120 +154,120 @@ export class JobCreation extends Component {
             severity
         } = this.state
 
-        return (   
+        return (
             <React.Fragment>
                 {!is_auth && <Redirect to='/' /> }
                 {!is_client ?  <ErrorPage errorNumber="403" errorType="Forbidden/Access Not Allowed"/>:
-                <React.Fragment>
-                    {(alertMssg !== undefined && severity !== undefined) && 
+                    <React.Fragment>
+                        {(alertMssg !== undefined && severity !== undefined) &&
                         <Redirect to={{
-                        pathname: `/myjobs/${this.currentUser.id}`,
-                        state: { alertMssg: alertMssg , severity: severity}
+                            pathname: `/myjobs/${this.currentUser.id}`,
+                            state: { alertMssg: alertMssg , severity: severity}
                         }}/>
-                    }
-                    {!serverProcessedRequest && 
+                        }
+                        {!serverProcessedRequest &&
                         <Alert severity="error" className="server-error">
                             Sorry can't create job right now 😔 please try again later!!!
                         </Alert>
-                    }
-                    <h1 className="page-title-header white-title"> Job Creation </h1>
-                    <div className="big-flexbox-for-2-flexbox-containers-job-creation">
-                        <div className="left-body-container-1-job-creation">
-                            <Input
-                                required
-                                cormorantlabel
-                                labelText='Title'
-                                className="input-title-job-creation"
-                                id="title"
-                                name="title"
-                                placeholder="Title"
-                                value={title}
-                                onChange={this.handleChange}
-                                onBlur={this.validateTitle}
-                                error={titleError!==undefined}
-                                errorMsg={titleError}
-                            />
-                            <Input
-                                required
-                                multiline
-                                cormorantlabel
-                                rows={6}
-                                labelText='Description'
-                                className={descriptionError !== undefined ? 'input-description-job-creation input-error' : 'input-description-job-creation'}
-                                id="description"
-                                name="description"
-                                value={description}
-                                placeholder="Description"
-                                onChange={this.handleChange}
-                                onBlur={this.validateDescription}
-                                error={descriptionError!==undefined}
-                                errorMsg={descriptionError}
-                            />
-                        </div>
-                        <div className="big-flexbox-for-3-flexbox-containers-job-creation">
-                            <Input
-                                required
-                                cormorantlabel
-                                labelText='Street'
-                                className="input-street-job-creation"
-                                id="street"
-                                name="street"
-                                value={street}
-                                placeholder="Street"
-                                onChange={this.handleChange}
-                                onBlur={this.validateStreet}
-                                error={streetError!==undefined}
-                                errorMsg={streetError}
-                            />
-                            <div className="mini-flex-box-job-creation">
-                                <ItemsDropdown
-                                    required
-                                    cormorantlabel
-                                    ref={change_city}
-                                    validate={true}
-                                    itemsList={cities}
-                                    label='City'     
-                                />
+                        }
+                        <h1 className="page-title-header white-title"> Job Creation </h1>
+                        <div className="big-flexbox-for-2-flexbox-containers-job-creation">
+                            <div className="left-body-container-1-job-creation">
                                 <Input
                                     required
                                     cormorantlabel
-                                    labelText="Zipcode"
-                                    className='input-zipcode-job-creation'
-                                    type="text"
-                                    id="zipcode"
-                                    name="zipcode"
-                                    value={zipcode}
-                                    placeholder="Zipcode"
+                                    labelText='Title'
+                                    className="input-title-job-creation"
+                                    id="title"
+                                    name="title"
+                                    placeholder="Title"
+                                    value={title}
                                     onChange={this.handleChange}
-                                    onBlur={this.validateZipcode}
-                                    error={zipcodeError!==undefined}
-                                    errorMsg={zipcodeError}
+                                    onBlur={this.validateTitle}
+                                    error={titleError!==undefined}
+                                    errorMsg={titleError}
+                                />
+                                <Input
+                                    required
+                                    multiline
+                                    cormorantlabel
+                                    rows={6}
+                                    labelText='Description'
+                                    className={descriptionError !== undefined ? 'input-description-job-creation input-error' : 'input-description-job-creation'}
+                                    id="description"
+                                    name="description"
+                                    value={description}
+                                    placeholder="Description"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateDescription}
+                                    error={descriptionError!==undefined}
+                                    errorMsg={descriptionError}
                                 />
                             </div>
+                            <div className="big-flexbox-for-3-flexbox-containers-job-creation">
+                                <Input
+                                    required
+                                    cormorantlabel
+                                    labelText='Street'
+                                    className="input-street-job-creation"
+                                    id="street"
+                                    name="street"
+                                    value={street}
+                                    placeholder="Street"
+                                    onChange={this.handleChange}
+                                    onBlur={this.validateStreet}
+                                    error={streetError!==undefined}
+                                    errorMsg={streetError}
+                                />
+                                <div className="mini-flex-box-job-creation">
+                                    <ItemsDropdown
+                                        required
+                                        cormorantlabel
+                                        ref={change_city}
+                                        validate={true}
+                                        itemsList={cities}
+                                        label='City'
+                                    />
+                                    <Input
+                                        required
+                                        cormorantlabel
+                                        labelText="Zipcode"
+                                        className='input-zipcode-job-creation'
+                                        type="text"
+                                        id="zipcode"
+                                        name="zipcode"
+                                        value={zipcode}
+                                        placeholder="Zipcode"
+                                        onChange={this.handleChange}
+                                        onBlur={this.validateZipcode}
+                                        error={zipcodeError!==undefined}
+                                        errorMsg={zipcodeError}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
-                        <div className="price-miniflex-job-creation">
-                            <label className="label-job-creation" style={labelstyle}> Price* </label>
-                            <CurrencyTextField
-                                className={priceError !== undefined ? 'input-error' : "without-error"}
-                                currencySymbol="$"
-                                outputFormat="string"
-                                decimalCharacter="."
-                                digitGroupSeparator=","
-                                placeholder= "0.00"
-                                name = "price"
-                                onChange = {this.handleChange}
-                                onBlur  = {this.validatePrice}
-                                InputProps={{ disableUnderline: true }}
-                            />
-                            {priceError !== undefined &&
-                            <div className="required-field-price-job-creation">
-                                <ReportProblemIcon style={report} />
-                                {priceError}
-                            </div>}
-                        </div>
+                        <div className="big-flexbox-for-3-lower-flexbox-containers-job-creation">
+                            <div className="price-miniflex-job-creation">
+                                <label className="label-job-creation" style={labelstyle}> Price* </label>
+                                <CurrencyTextField
+                                    className={priceError !== undefined ? 'input-error' : "without-error"}
+                                    currencySymbol="$"
+                                    outputFormat="string"
+                                    decimalCharacter="."
+                                    digitGroupSeparator=","
+                                    placeholder= "0.00"
+                                    name = "price"
+                                    onChange = {this.handleChange}
+                                    onBlur  = {this.validatePrice}
+                                    InputProps={{ disableUnderline: true }}
+                                />
+                                {priceError !== undefined &&
+                                <div className="required-field-price-job-creation">
+                                    <ReportProblemIcon style={report} />
+                                    {priceError}
+                                </div>}
+                            </div>
                             <ItemsDropdown
                                 required
                                 cormorantlabel
@@ -284,7 +284,7 @@ export class JobCreation extends Component {
                                 </label>
                                 <AvailableDays ref={availableDays_chips}/>
                             </div>
-                        
+
                         </div>
                         <div style={{textAlign:"center"}}>
                             <button className="button-job-creation" onClick={this.handleCreateClick}>
@@ -294,7 +294,7 @@ export class JobCreation extends Component {
                                 </div>
                             </button>
                         </div>
-                </React.Fragment>
+                    </React.Fragment>
                 }
             </React.Fragment>
         )
@@ -375,11 +375,11 @@ const report = {
 
 const labelstyle = {
     fontFamily: "Cormorant Garamond",
-	fontStyle: "italic",
-	fontWeight: "400",
-	fontSize: "15px",
-	color: "white",
-	letterSpacing: "1px",
+    fontStyle: "italic",
+    fontWeight: "400",
+    fontSize: "15px",
+    color: "white",
+    letterSpacing: "1px",
 }
 
 export default JobCreation
