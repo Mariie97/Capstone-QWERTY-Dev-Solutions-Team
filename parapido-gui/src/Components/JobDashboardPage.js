@@ -43,7 +43,10 @@ class JobDashboardPage extends Component {
         }).then(response => {
             if (response.status === 200) {
                 response.json().then(data => {
-                    this.setState({ jobs : data,});
+                    this.setState({
+                        jobs : data,
+                        listEmpty: false,
+                    });
                 })
             }
             else {
@@ -51,8 +54,7 @@ class JobDashboardPage extends Component {
                     this.setState({ listEmpty : true});
                 }
             }
-            this.setState({pageLoaded : true}
-            )
+            this.setState({pageLoaded : true});
         })
     }
 
@@ -129,16 +131,22 @@ class JobDashboardPage extends Component {
             if(category=== '0' && cities === '0' && price === '0'){
                 this.getJobs();
             }
-            else if (response.status === 200) {
-                response.json().then(data => {
-                    this.setState({jobs : data});
-                })
-            }
             else {
-                this.setState({
-                    jobs : [],
-                    filterLoaded: true
-                });
+                if (response.status === 200) {
+                    response.json().then(data => {
+                        this.setState({
+                            jobs: data,
+                            listEmpty: false
+                        });
+                    })
+                }
+                else {
+                    this.setState({
+                        jobs : [],
+                        listEmpty: true
+                    });
+                }
+                 this.setState({pageLoaded: true});
             }
         })
     }
