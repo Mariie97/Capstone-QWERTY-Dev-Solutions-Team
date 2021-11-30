@@ -45,7 +45,7 @@ class RequestsPage extends Component {
     }
 
     getJobRequests(){
-        fetch(`/job_requests/${this.queryParams.get('job_id')}?state=1`,{
+        fetch(`/api/job_requests/${this.queryParams.get('job_id')}?state=1`,{
                 method: 'GET',
                 headers: {
                     'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')

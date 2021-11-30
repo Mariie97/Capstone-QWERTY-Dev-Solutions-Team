@@ -59,7 +59,7 @@ class JobDetailsPage extends Component {
         });
 
         const { job_id } =  this.props;
-        fetch(`/job_details/${job_id}`, {
+        fetch(`/api/job_details/${job_id}`, {
             method:'GET',
             headers: {
                 'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -107,7 +107,7 @@ class JobDetailsPage extends Component {
 
     onClickCancelRequest() {
         const { job_id } = this.props;
-        fetch('/cancel_request', {
+        fetch('/api/cancel_request', {
             method: 'PUT',
             credentials: 'same-origin',
             headers: {
@@ -253,7 +253,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showContractButton &&
                                 <a
-                                    href={`${process.env.REACT_APP_API_URL}/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    href={`http://54.224.234.178/api/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-small-buttons">
                                     View Contract
                                 </a>

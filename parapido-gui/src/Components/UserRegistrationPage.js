@@ -417,7 +417,7 @@ class UserRegistrationPage extends Component {
     }
 
     validateFetch() {
-        fetch('/create_user',{
+        fetch('/api/create_user',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

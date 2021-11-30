@@ -98,7 +98,7 @@ class ChatApp extends Component {
   }
 
   getChatMessages() {
-    fetch(`/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${this.currentUser.id}`, {
+    fetch(`/api/retrieve_messages/${this.queryParams.get('job_id')}?user_id=${this.currentUser.id}`, {
       method: 'GET',
       headers: {
         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -117,7 +117,7 @@ class ChatApp extends Component {
   }
 
   async verifyUserAccess() {
-    const response = await fetch(`/job_details/${this.queryParams.get('job_id')}`, {
+    const response = await fetch(`/api/job_details/${this.queryParams.get('job_id')}`, {
       method:'GET',
       headers: {
         'X-CSRF-TOKEN': this.props.cookies.get('csrf_access_token')
@@ -151,7 +151,7 @@ class ChatApp extends Component {
     };
 
     if (current_message && enter){
-      fetch("/add_message", {
+      fetch("/api/add_message", {
         method: 'POST',
         credentials: 'same-origin',
         headers: {

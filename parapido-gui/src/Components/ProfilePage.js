@@ -69,7 +69,7 @@ class ProfilePage extends Component {
             is_auth: verifyUserAuth(this.props.cookies.get('csrf_access_token'))
         });
 
-        fetch('/user_info/' + this.props.user_id, {
+        fetch('/api/user_info/' + this.props.user_id, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ class ProfilePage extends Component {
     }
 
     onClickDelete(){
-        fetch('/delete_user/' + this.props.user_id, {
+        fetch('/api/delete_user/' + this.props.user_id, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',
@@ -155,7 +155,7 @@ class ProfilePage extends Component {
         data.append("zipcode", this.state.change_zipcode);
         data.append("city", city);
 
-        fetch('/edit_user/' + this.props.user_id, {
+        fetch('/api/edit_user/' + this.props.user_id, {
             method: 'PUT',
             credentials: 'same-origin',
             headers: {

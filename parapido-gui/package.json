@@ -1,8 +1,8 @@
 {
+"homepage": "http://54.224.234.178/",
   "name": "parapido-gui",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:5000/api",
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",

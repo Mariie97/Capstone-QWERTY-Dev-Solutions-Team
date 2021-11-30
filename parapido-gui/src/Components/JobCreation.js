@@ -96,7 +96,7 @@ export class JobCreation extends Component {
         const friday    = chips.some(fri => fri.key === 5);
         const saturday  = chips.some(sat => sat.key === 6);
 
-        fetch('/create_job',{
+        fetch('/api/create_job',{
             method: 'POST',
             credentials: 'same-origin',
             headers: {'Content-Type': 'application/json',

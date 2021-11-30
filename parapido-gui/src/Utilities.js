@@ -2,7 +2,7 @@ export function verifyUserAuth(token) {
     if(token===undefined)
         return false;
 
-    return fetch('/is_valid_token', {
+    return fetch('/api/is_valid_token', {
         method: 'GET',
         credentials: 'same-origin',
         headers: {
@@ -24,7 +24,7 @@ export function buildURL(path, filters={}) {
 }
 
 export function setJobStatus(token, job_id, status) {
-    return fetch(`/job_status/${job_id}`, {
+    return fetch(`/api/job_status/${job_id}`, {
         method: 'PUT',
         credentials: 'same-origin',
         headers: {
@@ -40,7 +40,7 @@ export function setJobStatus(token, job_id, status) {
 }
 
 export function cancelJobRequest(token, job_id, student_id){
-    return fetch('/cancel_request', {
+    return fetch('/api/cancel_request', {
         method: 'PUT',
         credentials: 'same-origin',
         headers: {

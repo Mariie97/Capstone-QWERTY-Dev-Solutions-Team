@@ -22,7 +22,7 @@ class NavBar extends Component {
     }
 
     handleLogOut() {
-        fetch('/logout', {
+        fetch('/api/logout', {
                 method: 'POST',
                 credentials: 'same-origin',
                 headers:{

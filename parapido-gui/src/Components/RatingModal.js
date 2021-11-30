@@ -31,7 +31,7 @@ class RatingModal extends Component {
         const { filterJobs, setAlert, handleClose } = this.props;
 
         if(this.state.ratingRef.current?.validate()) {
-            fetch('/rate_job/' + this.props.job_id,{
+            fetch('/api/rate_job/' + this.props.job_id,{
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: {

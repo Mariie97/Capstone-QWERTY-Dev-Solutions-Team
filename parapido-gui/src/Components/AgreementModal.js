@@ -47,7 +47,7 @@ class AgreementModal extends Component {
         const {job_id, student_id, cookies} = this.props;
 
         if(this.currentUser.type === accountType.client){
-            fetch('/assign_job',{
+            fetch('/api/assign_job',{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ class AgreementModal extends Component {
             })
         }
         else if(this.currentUser.type === accountType.student){
-            fetch('/request_job', {
+            fetch('/api/request_job', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

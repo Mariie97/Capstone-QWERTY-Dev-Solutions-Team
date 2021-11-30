@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e92d633a.chunk.css",
+    "main.js": "/static/js/main.10fcc6d4.chunk.js",
+    "main.js.map": "/static/js/main.10fcc6d4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5d451b12.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5d451b12.js.map",
+    "static/js/2.d8113f7d.chunk.js": "/static/js/2.d8113f7d.chunk.js",
+    "static/js/2.d8113f7d.chunk.js.map": "/static/js/2.d8113f7d.chunk.js.map",
+    "static/js/3.99ade86a.chunk.js": "/static/js/3.99ade86a.chunk.js",
+    "static/js/3.99ade86a.chunk.js.map": "/static/js/3.99ade86a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.e92d633a.chunk.css.map": "/static/css/main.e92d633a.chunk.css.map",
+    "static/js/2.d8113f7d.chunk.js.LICENSE.txt": "/static/js/2.d8113f7d.chunk.js.LICENSE.txt",
+    "static/media/Admin.8cdadba3.png": "/static/media/Admin.8cdadba3.png",
+    "static/media/BackgroundPaRapidoLogo.6340b18d.png": "/static/media/BackgroundPaRapidoLogo.6340b18d.png",
+    "static/media/ContinueArrow.8173f5e6.png": "/static/media/ContinueArrow.8173f5e6.png",
+    "static/media/DefaultProfilePicture.0e17a42e.svg": "/static/media/DefaultProfilePicture.0e17a42e.svg",
+    "static/media/Employer.bd339df9.png": "/static/media/Employer.bd339df9.png",
+    "static/media/ErrorPageCartoon.fb3e2572.jpg": "/static/media/ErrorPageCartoon.fb3e2572.jpg",
+    "static/media/JobCompleted.6606978e.svg": "/static/media/JobCompleted.6606978e.svg",
+    "static/media/JobCompletedBlue.60ec588d.svg": "/static/media/JobCompletedBlue.60ec588d.svg",
+    "static/media/JobIn-Progress.2b20fc4d.svg": "/static/media/JobIn-Progress.2b20fc4d.svg",
+    "static/media/JobInProgressBlue.ea4074e9.svg": "/static/media/JobInProgressBlue.ea4074e9.svg",
+    "static/media/JobPosted.a1f392cb.svg": "/static/media/JobPosted.a1f392cb.svg",
+    "static/media/JobPostedBlue.ef555a1c.svg": "/static/media/JobPostedBlue.ef555a1c.svg",
+    "static/media/JobRequest.fd99ca50.svg": "/static/media/JobRequest.fd99ca50.svg",
+    "static/media/JobRequestedBlue.edad66c3.svg": "/static/media/JobRequestedBlue.edad66c3.svg",
+    "static/media/PaRapidoLogo.c3571839.png": "/static/media/PaRapidoLogo.c3571839.png",
+    "static/media/SchoolBag.9a2f9118.png": "/static/media/SchoolBag.9a2f9118.png",
+    "static/media/StudentLandingPage.cb12f0b8.png": "/static/media/StudentLandingPage.cb12f0b8.png",
+    "static/media/VirtualContract.77125dec.png": "/static/media/VirtualContract.77125dec.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5d451b12.js",
+    "static/js/2.d8113f7d.chunk.js",
+    "static/css/main.e92d633a.chunk.css",
+    "static/js/main.10fcc6d4.chunk.js"
+  ]
+}

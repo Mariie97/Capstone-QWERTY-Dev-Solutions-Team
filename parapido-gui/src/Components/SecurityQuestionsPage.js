@@ -89,7 +89,7 @@ class SecurityQuestionsPage extends Component {
         e.preventDefault();
         const err = this.validateEmail()
         if (!err) {
-            fetch('/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
+            fetch('/api/change_password?email=' + encodeURIComponent(this.state.email),).then(response => {
                 if(response.status === 200) {
                     response.json().then(data => {
                         this.setState({
@@ -131,7 +131,7 @@ class SecurityQuestionsPage extends Component {
         if(err1) return false
         else if (err2) return false
         if(!err){
-            fetch('/change_password',{
+            fetch('/api/change_password',{
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

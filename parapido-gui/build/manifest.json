@@ -1,0 +1,10 @@
+{
+  "author": "Qwerty Dev Solutions",
+  "name": "PaRapido App",
+  "version": "1.0",
+  "description":"Be an intemediary between students that want jobs and employers which needs a job done",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}

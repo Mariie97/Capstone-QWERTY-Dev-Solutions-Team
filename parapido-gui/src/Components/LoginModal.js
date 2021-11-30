@@ -46,7 +46,7 @@ class LoginModal extends Component {
         // const adminParam = adminLogin === undefined ? {} : {admin: 'true'};
         // const url = buildURL('/login', adminParam)
         const adminParam = adminLogin === undefined ? '' : '?admin=true';
-        await fetch(`/login${adminParam}`,{
+        await fetch(`/api/login${adminParam}`,{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             // headers: {'Content-Type': 'text/plain'},

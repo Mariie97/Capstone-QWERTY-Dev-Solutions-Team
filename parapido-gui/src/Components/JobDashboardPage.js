@@ -38,7 +38,7 @@ class JobDashboardPage extends Component {
     }
 
     getJobs() {
-        fetch("jobs_list/1", {
+        fetch("/api/jobs_list/1", {
             method: 'GET'
         }).then(response => {
             if (response.status === 200) {
@@ -124,7 +124,7 @@ class JobDashboardPage extends Component {
             }
         }
 
-        fetch(`jobs_list/1`+filterResult, {
+        fetch(`/api/jobs_list/1`+filterResult, {
             method: 'GET'
         }).then(response => {
             if(category=== '0' && cities === '0' && price === '0'){

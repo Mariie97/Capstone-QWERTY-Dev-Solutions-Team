@@ -75,7 +75,7 @@ class JobListingPage extends Component {
         else this.idFilter = "?owner_id=" + this.state.user_id
 
         if(this.status === '1' && this.state.userAccountType === 1){
-            fetch('/student_requests/' + this.state.user_id + this.idFilter + filters, {
+            fetch('/api/student_requests/' + this.state.user_id + this.idFilter + filters, {
                 method: 'GET',
                 credentials: 'same-origin',
                 headers: {'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ class JobListingPage extends Component {
             })
         }
         else{
-            fetch('/jobs_list/' + this.status + this.idFilter + filters, {
+            fetch('/api/jobs_list/' + this.status + this.idFilter + filters, {
                 method: 'GET',
                 credentials: 'same-origin',
                 headers: {

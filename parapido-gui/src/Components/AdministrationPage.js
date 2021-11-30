@@ -58,7 +58,7 @@ class AdministrationPage extends Component {
             queryParams = `?${getQueryParams(filters)}`;
         }
 
-        fetch(`/users/${queryParams}`, {
+        fetch(`/api/users${queryParams}`, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
@@ -100,7 +100,7 @@ class AdministrationPage extends Component {
             queryParams = `?${new URLSearchParams(filters)}`;
         }
 
-        fetch(`/jobs_list/${jobStatus+queryParams}`, {
+        fetch(`/api/jobs_list/${jobStatus+queryParams}`, {
             method: "GET",
             credentials: 'same-origin',
             headers: {
