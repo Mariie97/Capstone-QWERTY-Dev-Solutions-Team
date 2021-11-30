@@ -1,4 +1,4 @@
-import {Component, createRef} from "react";
+import React, {Component, createRef} from "react";
 import {Link, Redirect} from "react-router-dom";
 import {accountType, categories, cities, prices, verifyUserAuth} from "../Utilities";
 import ItemsDropdown from "./ItemsDropdown.js";
@@ -21,7 +21,7 @@ class JobDashboardPage extends Component {
             change_price: createRef(),
             is_auth: true,
             pageLoaded: false,
-            filterLoaded: false,
+            listEmpty: false
         };
 
         this.getJobs = this.getJobs.bind(this);
@@ -43,22 +43,21 @@ class JobDashboardPage extends Component {
         }).then(response => {
             if (response.status === 200) {
                 response.json().then(data => {
-                    this.setState(
-                        {jobs : data,
-                            pageLoaded : true,
-                            filterLoaded : true
-                        }
-                    )
+                    this.setState({ jobs : data,});
                 })
-
             }
+            else {
+                if(response.status === 404) {
+                    this.setState({ listEmpty : true});
+                }
+            }
+            this.setState({pageLoaded : true}
+            )
         })
     }
 
     clickFilter() {
-        this.setState(
-            {filterLoaded: false}
-        )
+        this.setState({pageLoaded: false});
         let category = this.state.change_category?.current.state.item;
         let city = this.state.change_city?.current.state.item;
         let filterResult = '?';
@@ -132,102 +131,95 @@ class JobDashboardPage extends Component {
             }
             else if (response.status === 200) {
                 response.json().then(data => {
-                    this.setState(
-                        {jobs : data,
-                            filterLoaded : true
-                        }
-                    )
+                    this.setState({jobs : data});
                 })
             }
-            else{
-                this.setState(
-                    {jobs : [],
-                        filterLoaded: true}
-                )
+            else {
+                this.setState({
+                    jobs : [],
+                    filterLoaded: true
+                });
             }
         })
     }
 
     render() {
-        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, filterLoaded} = this.state;
+        const { jobs, change_category, change_city, change_price, is_auth, pageLoaded, listEmpty} = this.state;
         const showJobCreationButton = this.currentUser.type === accountType.client;
-        const cardArray = jobs.map(
-            job => <JobDashboardCard
-                job_id = {job.job_id}
-                date_posted = {job.date_posted}
-                title = {job.title}
-                city = {job.city}
-                price = {job.price}
-                category = {job.categories}
-                owner_first  = {job.owner_first}
-                owner_last = {job.owner_last}
-                street = {job.street}
-                zipcode = {job.zipcode}
-            />
-        )
 
         return (
             <div>
                 {!is_auth && <Redirect to='/' />}
-                {!pageLoaded ?
-                    <div className='loading-icon'>
-                        <Box sx={{display: 'flex'}}>
-                            <CircularProgress/>
-                        </Box>
-                    </div> :
-                    <div>
-                        <h1 className="page-title-header white-title">Job Dashboard
-                            {showJobCreationButton &&
-                            <Link to="/jobcreation">
-                                <button className="create-job-button-job-dashboard">
-                                    <div className="text-button-job-dashboard">
-                                        Create Job
-                                    </div>
-                                </button>
-                            </Link>
-                            }
-                        </h1>
-
-                        <div style={firstflexcontainer}>
-                            <ItemsDropdown
-                                cormorantlabel
-                                lineheightstyle="2.5"
-                                ref={change_category}
-                                itemsList={categories}
-                                label='Categories'
-                            />
-
-                            <ItemsDropdown
-                                cormorantlabel
-                                lineheightstyle="2.5"
-                                ref={change_price}
-                                itemsList={prices}
-                                label='Prices'
-                            />
-
-                            <ItemsDropdown
-                                cormorantlabel
-                                lineheightstyle="2.5"
-                                ref={change_city}
-                                itemsList={cities}
-                                label='Cities'
-                            />
-                            <button className="filter-button" onClick={this.clickFilter}>
-                                <div className="text-filter-button">
-                                    <FilterListIcon/>Filter
+                <div>
+                    <h1 className="page-title-header white-title">Job Dashboard
+                        {showJobCreationButton &&
+                        <Link to="/jobcreation">
+                            <button className="create-job-button-job-dashboard">
+                                <div className="text-button-job-dashboard">
+                                    Create Job
                                 </div>
                             </button>
+                        </Link>
+                        }
+                    </h1>
+                    <div style={firstflexcontainer}>
+                        <ItemsDropdown
+                            cormorantlabel
+                            lineheightstyle="2.5"
+                            ref={change_category}
+                            itemsList={categories}
+                            label='Categories'
+                        />
+
+                        <ItemsDropdown
+                            cormorantlabel
+                            lineheightstyle="2.5"
+                            ref={change_price}
+                            itemsList={prices}
+                            label='Prices'
+                        />
+
+                        <ItemsDropdown
+                            cormorantlabel
+                            lineheightstyle="2.5"
+                            ref={change_city}
+                            itemsList={cities}
+                            label='Cities'
+                        />
+                        <button className="filter-button" onClick={this.clickFilter}>
+                            <div className="text-filter-button">
+                                <FilterListIcon/>Filter
+                            </div>
+                        </button>
+                    </div>
+                    {!pageLoaded ?
+                        <div className='loading-icon' style={{height:"50vh"}}>
+                            <Box sx={{display: 'flex'}}>
+                                <CircularProgress style={{alignItems:"center"}}/>
+                            </Box>
+                        </div> :
+                        <div className="card-wrapper">
+                            {listEmpty ?
+                                <h2 className='empty-list-subheader white'>No jobs available</h2>:
+                                jobs.map(job =>
+                                    <JobDashboardCard
+                                        key={`job-${job.job_id}`}
+                                        job_id = {job.job_id}
+                                        date_posted = {job.date_posted}
+                                        title = {job.title}
+                                        city = {job.city}
+                                        price = {job.price}
+                                        category = {job.categories}
+                                        owner_first  = {job.owner_first}
+                                        owner_last = {job.owner_last}
+                                        street = {job.street}
+                                        zipcode = {job.zipcode}
+                                    />
+                                )
+                            }
                         </div>
-                        {!filterLoaded ?
-                            <div className='loading-icon' style={{height:"50vh"}}>
-                                <Box sx={{display: 'flex'}}>
-                                    <CircularProgress style={{alignItems:"center"}}/>
-                                </Box>
-                            </div> :
-                            <div className="card-wrapper">
-                                {cardArray}
-                            </div>}
-                    </div>}
+                    }
+                </div>
             </div>
         )
     }

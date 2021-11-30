@@ -81,6 +81,10 @@ class LoginModal extends Component {
         this.setState({[name]:value});
     }
 
+    componentDidMount() {
+        document.body.style.backgroundColor = "#2F2D4A";
+    }
+
     render() {
         const { isOpen, toggle, adminLogin } = this.props;
         const { login_success, loginError, emailError, passwordError, redirectAdminLogin} = this.state;
