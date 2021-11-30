@@ -253,7 +253,7 @@ class JobDetailsPage extends Component {
                                 }
                                 {showContractButton &&
                                 <a
-                                    href={`http://54.224.234.178/api/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
+                                    href={`http://www.parapidopr.com/api/pdf/${job_id}?student_id=${job.student_id}&owner_id=${job.owner_id}`}
                                     className="custom-small-buttons">
                                     View Contract
                                 </a>
